@@ -1,0 +1,87 @@
+start = sdf-alt-schema
+
+;;; sdf-alt-schema: Alternative ODM SDF schema (work in progress 20200304)
+
+sdf-alt-schema = {
+ info: sdfinfo
+ ? namespace: named-text
+ ? defaultNamespace: text
+ ? odmObject: named-obj-props
+ ? odmThing: sdfthing
+ ? odmProperty: named-afford-props
+ ? odmAction: named-afford-props
+ ? odmEvent: named-afford-props
+}
+
+sdfinfo = {
+ title: text
+ version: text
+ copyright: text
+ license: text
+}
+
+
+named-text = {
+ * text => text
+}
+
+sdfthing = {
+ ? odmObject: named-obj-props
+ ? odmThing: sdfthing
+}
+
+named-obj-props = {
+ * text => obj-props
+}
+
+obj-props = {
+ ? description: text
+ ? name: text
+ ? odmRequired: [* sdf-pointer]
+ ? odmProperty: named-afford-props
+ ? odmAction: named-afford-props
+ ? odmEvent: named-afford-props
+}
+
+named-afford-props = {
+ * text => afford-props
+}
+
+afford-props = {
+ ? description: text
+ ? name: text
+ ? readable: bool
+ ? writable: bool
+ ? observable: bool
+ ? type: "number" / "string" / "boolean" / "integer" / "array" / "object"
+ ? subtype: "unixtime" / "bytestring"
+ ? enum: [+ any]
+ ? const: number / text / bool / [* any] / anymap / null
+ ? default: number / text / bool / [* any] / anymap / null
+ ? $comment: text
+ ? odmRef: sdf-pointer
+ ? minimum: number
+ ? maximum: number
+ ? exclusiveMinimum: bool
+ ? exclusiveMaximum: bool
+ ? minItems: number
+ ? maxItems: number
+ ? minLength: number
+ ? maxLength: number
+ ? uniqueItems: bool
+ ? units: text
+ ? items: {
+     ? type: text
+   }
+ ? pattern: text
+ ? format: "date-time" / "date" / "time" / "duration"
+           / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6"
+           / "uri" / "uri-reference" / "iri" / "iri-reference"
+           / "uuid" / "uri-template" / "json-pointer" / "relative-json-pointer" / "regex"
+}
+
+sdf-pointer = text .regexp uri-reference-regexp
+
+uri-reference-regexp = "TODO URI REF"
+
+anymap = { * any => any }
