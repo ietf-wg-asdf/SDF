@@ -51,7 +51,11 @@ normative:
 # [SenML unit]: https://www.iana.org/assignments/senml/senml.xhtml#senml-units
   I-D.handrews-json-schema-validation: jso
 # -02#section-7.3
+  RFC3986: uri
+  RFC6901: pointer
   RFC8610: cddl
+  W3C.NOTE-curie-20101216: curie
+  RFC0020: ascii
 informative:
 
 entity:
@@ -110,10 +114,10 @@ Conventions:
     "title": "Example file for ODM Simple JSON Definition Format",
     "version": "20190424",
     "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "http://example.com/license"
+    "license": "https://example.com/license"
   },
   "namespace": {
-    "st": "http://example.com/capability/odm"
+    "st": "https://example.com/capability/odm"
   },
   "defaultNamespace": "st",
   "odmObject": {
@@ -135,48 +139,73 @@ Conventions:
   }
 }
 ~~~
+{: #example1 title="A simple example of an SDF definition file"}
 
 # SDF structure
 
-A SDF definition file has two sections, the information block and the definitions section.
+SDF definitions are contained in SDF files.  One or more SDF files can
+work together to provide the definitions and declarations that are the
+payload of the SDF format.
+
+A SDF definition file contains a single JSON map (JSON object).
+This object has three sections: the information block, the namespaces section and the definitions section.
 
 ## Information block
+
 The information block contains generic meta data for the file itself and all included definitions.
 
-The keyword that defines an information block is "info". It contains a set of key-value pairs that represent qualities that apply to the included definition.
+The keyword (map key) that defines an information block is "info". Its
+value is a JSON map in turn, with a set of key-value pairs that represent qualities that apply to the included definition.
 
 Qualities of the information block are shown in {{infoblockqual}}.
 
-| Quality | Type | Required | Description |
-|---|---|---|---|
-|title|string| yes|A short summary to be displayed in search results, etc.|
-|version|string| yes|The incremental version of the definition, format TBD|
-|copyright|string|yes|Link to text or embedded text containing a copyright notice|
-|license|string|yes|Link to text or embedded text containing license terms|
+| Quality   | Type   | Required | Description                                                 |
+|-----------|--------|----------|-------------------------------------------------------------|
+| title     | string | yes      | A short summary to be displayed in search results, etc.     |
+| version   | string | yes      | The incremental version of the definition, format TBD       |
+| copyright | string | yes      | Link to text or embedded text containing a copyright notice |
+| license   | string | yes      | Link to text or embedded text containing license terms      |
 {: #infoblockqual title="Qualities of the Information Block"}
 
-## Definitions block
+## Namespaces section
 
-The Definitions block contains the namespace and default namespace declarations along with one or more type definitions according to the class name keywords for type definitions (object, property, action, event, data).
+The namespaces section contains the namespace map and the defaultnamespace setting.
 
-The namespace declaration is a map containing one or more definitions of short names for URIs.
+The namespace map is a map from short names for URIs to the namespace URIs
+themselves.
 
-The defaultnamespace declaration defines one of the short names in the namespace map to be the default namespace.
+The defaultnamespace setting selects one of the short names in the
+namespace map; the associated URI of which becomes the default
+namespace for the SDF definition file.
 
-| Quality | Type | Required | Description |
-|---|---|---|---|
-|namespace|map|no|Defines short names mapped to namespace URIs, to be used as identifier prefixes|
-|defaultnamespace|string|no|Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers|
+| Quality          | Type   | Required | Description                                                                                          |
+|------------------|--------|----------|------------------------------------------------------------------------------------------------------|
+| namespace        | map    | no       | Defines short names mapped to namespace URIs, to be used as identifier prefixes                      |
+| defaultnamespace | string | no       | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
+{: #nssec title="Namespaces Section"}
 
 The following example declares a set of namespaces and defines `st` as the default namespace.
 
 ~~~ json
 "namespace": {
-  "st": "http://example.com/capability/odm",
-  "zcl": "http://example.com/zcl/odm"
+  "st": "https://example.com/capability/odm",
+  "zcl": "https://example.com/zcl/odm"
 },
 "defaultnamespace": "st",
 ~~~
+
+If no defaultnamespace setting is given, the SDF definition file does not
+contribute to a global namespace.  As the defaultnamespace gives a
+namespace short name, its presence requires a namespace map contains a
+mapping for that namespace short name.
+
+If no namespace map is given, no short names for namespace URIs are
+set up, and no defaultnamespace can be given.
+
+
+## Definitions section
+
+The Definitions section contains one or more type definitions according to the class name keywords for type definitions (object, property, action, event, data).
 
 Each class may have zero or more type definitions associated with it. Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.
 
@@ -184,7 +213,7 @@ A definition consists of a map entry using the newly defined term as a JSON key,
 
 A definition may in turn contain other definitions. Each definition consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained type definitions.
 
-For example, an Object definition looks like this:
+An example for an Object definition is given in {{exobject}}:
 
 ~~~ json
 "odmObject": {
@@ -197,17 +226,114 @@ For example, an Object definition looks like this:
   }
 }
 ~~~
+{: #exobject title="Example Object definition"}
 
-An Object "foo" is defined in the default namespace, containing a property "foo.bar",  of type boolean.
+This example defines an Object "foo" is defined in the default namespace, containing a property "foo.bar",  of type boolean.
+<!-- XXX We are not using the foo.bar style, no? -->
 
-# Identifier name resolution
+# Names and namespaces
 
-## JSON Pointer and references to definitions
-References in SDF are resolved using JSON Pointer. That is, every reference includes a JSON Pointer reference. 
+SDF definition files may contribute to a global namespace, and may
+reference elements from that global namespace.
+(An SDF definition file that does not set a defaultnamespace does not
+contribute to the global namespace.)
 
-The keyword "odmRef" is used in a definition to copy all of the qualities of the referenced definition, indicated by the included JSON pointer, into the newly formed definition. This is similar to the processing of the "$ref" keyword in JSON Schema.
+## Structure
 
-For example, this reference :
+Global names look exactly like https:// URIs with attached fragment identifiers.
+
+There is no intention that these URIs can be dereferenced.
+(However, as future versions of SDF might find a use for dereferencing
+global names, the URI should be chosen in such a way that this may
+become possible in the future.)
+
+The absolute URI of a global name should be a URI as per Section 3 of
+{{-uri}}, with a scheme of "https" and a hier-part.
+For the present version of this specification, the query part should
+not be used (it might be used in later versions).
+
+The fragment identifier is constructed as per Section 6 of
+{{-pointer}}.
+
+## Contributing global names
+
+The fragment identifier part of a global name defined in an SDF
+definition file is constructed from a JSON pointer that selects the
+element defined for this name in the SDF definition file.
+
+The absolute URI part is a copy of the default namespace, i.e., the
+default namespace is always the target namespace for a name for which
+a definition is contributed.
+When emphasizing that name definitions are contributed to the default namespace,
+we therefore also call it the "target namespace".
+
+E.g., in {{example1}}, definitions for the following global names are contributed:
+
+* https://example.com/capability/odm#/odmObject/Switch
+* https://example.com/capability/odm#/odmObject/Switch/odmProperty/value
+* https://example.com/capability/odm#/odmObject/Switch/odmAction/on
+* https://example.com/capability/odm#/odmObject/Switch/odmAction/off
+
+Note the "#", which separates the base part from the fragment
+identifier part.
+
+## Referencing global names
+
+A name reference takes the form of the production `curie` in
+{{-curie}} (note that this excludes the production `safe-curie`),
+limiting the IRIs involved in that production to URIs as per {{-uri}}
+and the prefixes to ASCII characters {{-ascii}}.
+
+A name that is contributed by the current SDF definition file can be
+referenced by a Same-Document Reference as per section 4.4 of
+{{-uri}}.
+As there is little point in referencing the entire SDF definition
+file, this will be a "#" followed by a JSON pointer.
+This is the only kind of name reference that is possible in an SDF
+definition file that does not set a default namespace.
+
+Name references that point outside the current SDF definition file
+need to contain curie prefixes.  These then reference namespace
+declarations in the namespaces section.
+
+For example, if a namespace prefix is defined:
+
+~~~ json
+"namespace": {
+  "foo": "https://example.com/#"
+}
+~~~
+
+Then this reference to that namespace:
+
+~~~ json
+{ "odmRef": "foo:odmData/temperatureData" }
+~~~
+
+references the global name:
+
+~~~ json
+"https://example.com/#odmData/temperatureData"
+~~~
+
+Note that there is no way to provide a URI scheme name in a curie, so
+all references outside of the document need to go through the
+namespace map.
+
+Name references occur only in specific elements of the syntax of SDF:
+
+* copying elements via odmRef values
+* pointing to elements via odmRequired value elements
+
+
+## odmRef
+
+The keyword "odmRef" is used in a JSON map establishing a definition
+to copy all of the qualities of the referenced definition, indicated
+by the included name reference, into the newly formed definition.
+(This can be compared to the processing of the "$ref" keyword in JSON Schema.)
+
+For example, this reference:
 
 ~~~ json
 "temperatureProperty": {
@@ -217,39 +343,10 @@ For example, this reference :
 
 creates a new definition "temperatureProperty" that contains all of the qualities defined in the definition at /odmData/temperatureData.
 
-If a JSON Pointer is used without the "odmRef" tag, it points to an SDF element. See the sections on "odmRequired" for an example.
+## odmRequired
 
-## Namespace Prefix
-
-Compact URI, or CURI, notation may be used to refer to definitions in another namespace. Names are resolved by expanding the prefix using the value for that prefix which is defined in the "namespace" section. For example, if a namespace prefix is defined:
-
-~~~ json
-"namespace": {
-  "foo": "https://example.com/#"
-}
-~~~
-
-Then a reference to that namespace:
-
-~~~ json
-"foo:odmData/temperatureData"
-~~~
-
-Would be expanded into:
-
-~~~ json
-"https://example.com/#odmData/temperatureData"
-~~~
-
-## Target namespace
-
-The target namespace is the namespace into which the defined terms are added. The target namespace is defined by the default namespace, or by an explicit prefix on the identifier using a colon ":".
-
-For example if the default namespace in the example above is "foo", then you could use "temperatureData" to refer to the property defined at the URI:
-
-~~~
-https://example.com/#odmData/temperatureData
-~~~
+The value of "odmRequired" is an array of name references, each
+pointing to one declaration instantiation of which is declared mandatory.
 
 # Optionality using the keyword "odmRequired"
 
@@ -296,7 +393,7 @@ The following SDF keywords are used to create type definitions in the target nam
 
 ## odmObject
 
-The odmObject keyword denotes zero or more Object definitions. A object may contain or include definitions of events, actions, properties, and data types.
+The odmObject keyword denotes zero or more Object definitions. An odmObject may contain or include definitions of events, actions, properties, and data types.
 
 The qualities of odmObject are shown in {{odmobjqual}}.
 
@@ -462,10 +559,10 @@ odmData may define or contain the following ODM types:
     "title": "Example file for ODM Simple JSON Definition Format",
     "version": "20190424",
     "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "http://example.com/license"
+    "license": "https://example.com/license"
   },
   "namespace": {
-    "st": "http://example.com/capability/odm"
+    "st": "https://example.com/capability/odm"
   },
   "defaultNamespace": "st",
   "odmObject": {
@@ -514,6 +611,9 @@ Modular composition of definitions enables an existing definition (could be in t
 
 ### Use of the "odmRef" keyword to re-use a definition
 An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "odmRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.
+
+ISSUE: Can qualities from the source definition be overridden?
+The above only says "added".
 
 ## odmThing
 
@@ -586,3 +686,6 @@ TODO: Align with full framework syntax, as required.
 This strawman draft is based on `sdf.md` in the one-data-model
 `language` repository, as well as Ari Keranen's "alt-schema" from the
 Ericsson Research `ipso-odm` repository.
+
+<!--  LocalWords:  SDF
+ -->

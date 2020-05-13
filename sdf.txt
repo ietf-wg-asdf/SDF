@@ -71,30 +71,33 @@ Table of Contents
    3.  Example Definition: . . . . . . . . . . . . . . . . . . . . .   3
    4.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .   4
      4.1.  Information block . . . . . . . . . . . . . . . . . . . .   4
-     4.2.  Definitions block . . . . . . . . . . . . . . . . . . . .   5
-   5.  Identifier name resolution  . . . . . . . . . . . . . . . . .   6
-     5.1.  JSON Pointer and references to definitions  . . . . . . .   6
-     5.2.  Namespace Prefix  . . . . . . . . . . . . . . . . . . . .   7
-     5.3.  Target namespace  . . . . . . . . . . . . . . . . . . . .   7
-   6.  Optionality using the keyword "odmRequired" . . . . . . . . .   7
-   7.  Keywords for type definitions . . . . . . . . . . . . . . . .   8
-     7.1.  odmObject . . . . . . . . . . . . . . . . . . . . . . . .   9
-     7.2.  odmProperty . . . . . . . . . . . . . . . . . . . . . . .   9
-     7.3.  odmAction . . . . . . . . . . . . . . . . . . . . . . . .  11
-     7.4.  odmEvent  . . . . . . . . . . . . . . . . . . . . . . . .  13
-     7.5.  odmData . . . . . . . . . . . . . . . . . . . . . . . . .  14
-   8.  Example Simple Object Definition: . . . . . . . . . . . . . .  16
-   9.  High Level Composition  . . . . . . . . . . . . . . . . . . .  17
-     9.1.  Paths in the model namespaces . . . . . . . . . . . . . .  18
-     9.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  18
-       9.2.1.  Use of the "odmRef" keyword to re-use a definition  .  18
-     9.3.  odmThing  . . . . . . . . . . . . . . . . . . . . . . . .  19
-     9.4.  odmProduct  . . . . . . . . . . . . . . . . . . . . . . .  20
-   10. Normative References  . . . . . . . . . . . . . . . . . . . .  21
-   Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  21
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  23
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  23
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
+     4.2.  Namespaces section  . . . . . . . . . . . . . . . . . . .   5
+     4.3.  Definitions section . . . . . . . . . . . . . . . . . . .   6
+   5.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .   7
+     5.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .   7
+     5.2.  Contributing global names . . . . . . . . . . . . . . . .   8
+     5.3.  Referencing global names  . . . . . . . . . . . . . . . .   8
+     5.4.  odmRef  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     5.5.  odmRequired . . . . . . . . . . . . . . . . . . . . . . .   9
+   6.  Optionality using the keyword "odmRequired" . . . . . . . . .  10
+   7.  Keywords for type definitions . . . . . . . . . . . . . . . .  11
+     7.1.  odmObject . . . . . . . . . . . . . . . . . . . . . . . .  11
+     7.2.  odmProperty . . . . . . . . . . . . . . . . . . . . . . .  12
+     7.3.  odmAction . . . . . . . . . . . . . . . . . . . . . . . .  13
+     7.4.  odmEvent  . . . . . . . . . . . . . . . . . . . . . . . .  15
+     7.5.  odmData . . . . . . . . . . . . . . . . . . . . . . . . .  16
+   8.  Example Simple Object Definition: . . . . . . . . . . . . . .  18
+   9.  High Level Composition  . . . . . . . . . . . . . . . . . . .  19
+     9.1.  Paths in the model namespaces . . . . . . . . . . . . . .  20
+     9.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  20
+       9.2.1.  Use of the "odmRef" keyword to re-use a definition  .  20
+     9.3.  odmThing  . . . . . . . . . . . . . . . . . . . . . . . .  21
+     9.4.  odmProduct  . . . . . . . . . . . . . . . . . . . . . . .  22
+   10. Normative References  . . . . . . . . . . . . . . . . . . . .  23
+   Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  24
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  26
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  26
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
 1.  Introduction
 
@@ -104,15 +107,15 @@ Table of Contents
    OneDM tools convert this format to database formats and other
    serializations as needed.
 
-   This document describes definitions of OneDM Objects and their
-   associated Events, Actions, Properties, and Data types.
-
 
 
 Koster & Bormann        Expires 12 November 2020                [Page 2]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
+
+   This document describes definitions of OneDM Objects and their
+   associated Events, Actions, Properties, and Data types.
 
    The JSON format of an SDF definition is described in this document.
 
@@ -162,9 +165,6 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-
-
-
 Koster & Bormann        Expires 12 November 2020                [Page 3]
 
 Internet-Draft                  OneDM SDF                       May 2020
@@ -175,10 +175,10 @@ Internet-Draft                  OneDM SDF                       May 2020
        "title": "Example file for ODM Simple JSON Definition Format",
        "version": "20190424",
        "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-       "license": "http://example.com/license"
+       "license": "https://example.com/license"
      },
      "namespace": {
-       "st": "http://example.com/capability/odm"
+       "st": "https://example.com/capability/odm"
      },
      "defaultNamespace": "st",
      "odmObject": {
@@ -200,22 +200,22 @@ Internet-Draft                  OneDM SDF                       May 2020
      }
    }
 
+            Figure 1: A simple example of an SDF definition file
+
 4.  SDF structure
 
-   A SDF definition file has two sections, the information block and the
-   definitions section.
+   SDF definitions are contained in SDF files.  One or more SDF files
+   can work together to provide the definitions and declarations that
+   are the payload of the SDF format.
+
+   A SDF definition file contains a single JSON map (JSON object).  This
+   object has three sections: the information block, the namespaces
+   section and the definitions section.
 
 4.1.  Information block
 
    The information block contains generic meta data for the file itself
    and all included definitions.
-
-   The keyword that defines an information block is "info".  It contains
-   a set of key-value pairs that represent qualities that apply to the
-   included definition.
-
-   Qualities of the information block are shown in Table 1.
-
 
 
 
@@ -225,6 +225,12 @@ Koster & Bormann        Expires 12 November 2020                [Page 4]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
+
+   The keyword (map key) that defines an information block is "info".
+   Its value is a JSON map in turn, with a set of key-value pairs that
+   represent qualities that apply to the included definition.
+
+   Qualities of the information block are shown in Table 1.
 
     +-----------+--------+----------+---------------------------------+
     | Quality   | Type   | Required | Description                     |
@@ -244,18 +250,37 @@ Internet-Draft                  OneDM SDF                       May 2020
 
                 Table 1: Qualities of the Information Block
 
-4.2.  Definitions block
+4.2.  Namespaces section
 
-   The Definitions block contains the namespace and default namespace
-   declarations along with one or more type definitions according to the
-   class name keywords for type definitions (object, property, action,
-   event, data).
+   The namespaces section contains the namespace map and the
+   defaultnamespace setting.
 
-   The namespace declaration is a map containing one or more definitions
-   of short names for URIs.
+   The namespace map is a map from short names for URIs to the namespace
+   URIs themselves.
 
-   The defaultnamespace declaration defines one of the short names in
-   the namespace map to be the default namespace.
+   The defaultnamespace setting selects one of the short names in the
+   namespace map; the associated URI of which becomes the default
+   namespace for the SDF definition file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann        Expires 12 November 2020                [Page 5]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
 
      +------------------+--------+----------+-----------------------+
      | Quality          | Type   | Required | Description           |
@@ -272,24 +297,30 @@ Internet-Draft                  OneDM SDF                       May 2020
      |                  |        |          | resolving identifiers |
      +------------------+--------+----------+-----------------------+
 
-                                 Table 2
-
-
-
-
-Koster & Bormann        Expires 12 November 2020                [Page 5]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
+                       Table 2: Namespaces Section
 
    The following example declares a set of namespaces and defines "st"
    as the default namespace.
 
    "namespace": {
-     "st": "http://example.com/capability/odm",
-     "zcl": "http://example.com/zcl/odm"
+     "st": "https://example.com/capability/odm",
+     "zcl": "https://example.com/zcl/odm"
    },
    "defaultnamespace": "st",
+
+   If no defaultnamespace setting is given, the SDF definition file does
+   not contribute to a global namespace.  As the defaultnamespace gives
+   a namespace short name, its presence requires a namespace map
+   contains a mapping for that namespace short name.
+
+   If no namespace map is given, no short names for namespace URIs are
+   set up, and no defaultnamespace can be given.
+
+4.3.  Definitions section
+
+   The Definitions section contains one or more type definitions
+   according to the class name keywords for type definitions (object,
+   property, action, event, data).
 
    Each class may have zero or more type definitions associated with it.
    Each defined identifier creates a new type and term in the target
@@ -299,11 +330,19 @@ Internet-Draft                  OneDM SDF                       May 2020
    a JSON key, with a value consisting of a map of Qualities and their
    values.
 
+
+
+
+Koster & Bormann        Expires 12 November 2020                [Page 6]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
    A definition may in turn contain other definitions.  Each definition
    consists of the newly defined identifier and a set of key-value pairs
    that represent the defined qualities and contained type definitions.
 
-   For example, an Object definition looks like this:
+   An example for an Object definition is given in Figure 2:
 
    "odmObject": {
      "foo": {
@@ -315,30 +354,133 @@ Internet-Draft                  OneDM SDF                       May 2020
      }
    }
 
-   An Object "foo" is defined in the default namespace, containing a
-   property "foo.bar", of type boolean.
+                    Figure 2: Example Object definition
 
-5.  Identifier name resolution
+   This example defines an Object "foo" is defined in the default
+   namespace, containing a property "foo.bar", of type boolean.
 
-5.1.  JSON Pointer and references to definitions
+5.  Names and namespaces
 
-   References in SDF are resolved using JSON Pointer.  That is, every
-   reference includes a JSON Pointer reference.
+   SDF definition files may contribute to a global namespace, and may
+   reference elements from that global namespace.  (An SDF definition
+   file that does not set a defaultnamespace does not contribute to the
+   global namespace.)
 
-   The keyword "odmRef" is used in a definition to copy all of the
-   qualities of the referenced definition, indicated by the included
-   JSON pointer, into the newly formed definition.  This is similar to
-   the processing of the "$ref" keyword in JSON Schema.
+5.1.  Structure
+
+   Global names look exactly like https:// URIs with attached fragment
+   identifiers.
+
+   There is no intention that these URIs can be dereferenced.  (However,
+   as future versions of SDF might find a use for dereferencing global
+   names, the URI should be chosen in such a way that this may become
+   possible in the future.)
+
+   The absolute URI of a global name should be a URI as per Section 3 of
+   [RFC3986], with a scheme of "https" and a hier-part.  For the present
+   version of this specification, the query part should not be used (it
+   might be used in later versions).
+
+   The fragment identifier is constructed as per Section 6 of [RFC6901].
 
 
 
 
-Koster & Bormann        Expires 12 November 2020                [Page 6]
+
+
+
+Koster & Bormann        Expires 12 November 2020                [Page 7]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
 
-   For example, this reference :
+5.2.  Contributing global names
+
+   The fragment identifier part of a global name defined in an SDF
+   definition file is constructed from a JSON pointer that selects the
+   element defined for this name in the SDF definition file.
+
+   The absolute URI part is a copy of the default namespace, i.e., the
+   default namespace is always the target namespace for a name for which
+   a definition is contributed.  When emphasizing that name definitions
+   are contributed to the default namespace, we therefore also call it
+   the "target namespace".
+
+   E.g., in Figure 1, definitions for the following global names are
+   contributed:
+
+   *  https://example.com/capability/odm#/odmObject/Switch
+
+   *  https://example.com/capability/odm#/odmObject/Switch/odmProperty/
+      value
+
+   *  https://example.com/capability/odm#/odmObject/Switch/odmAction/on
+
+   *  https://example.com/capability/odm#/odmObject/Switch/odmAction/off
+
+   Note the "#", which separates the base part from the fragment
+   identifier part.
+
+5.3.  Referencing global names
+
+   A name reference takes the form of the production "curie" in
+   [W3C.NOTE-curie-20101216] (note that this excludes the production
+   "safe-curie"), limiting the IRIs involved in that production to URIs
+   as per [RFC3986] and the prefixes to ASCII characters [RFC0020].
+
+   A name that is contributed by the current SDF definition file can be
+   referenced by a Same-Document Reference as per section 4.4 of
+   [RFC3986].  As there is little point in referencing the entire SDF
+   definition file, this will be a "#" followed by a JSON pointer.  This
+   is the only kind of name reference that is possible in an SDF
+   definition file that does not set a default namespace.
+
+   Name references that point outside the current SDF definition file
+   need to contain curie prefixes.  These then reference namespace
+   declarations in the namespaces section.
+
+   For example, if a namespace prefix is defined:
+
+
+
+
+
+Koster & Bormann        Expires 12 November 2020                [Page 8]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+   "namespace": {
+     "foo": "https://example.com/#"
+   }
+
+   Then this reference to that namespace:
+
+   { "odmRef": "foo:odmData/temperatureData" }
+
+   references the global name:
+
+   "https://example.com/#odmData/temperatureData"
+
+   Note that there is no way to provide a URI scheme name in a curie, so
+   all references outside of the document need to go through the
+   namespace map.
+
+   Name references occur only in specific elements of the syntax of SDF:
+
+   *  copying elements via odmRef values
+
+   *  pointing to elements via odmRequired value elements
+
+5.4.  odmRef
+
+   The keyword "odmRef" is used in a JSON map establishing a definition
+   to copy all of the qualities of the referenced definition, indicated
+   by the included name reference, into the newly formed definition.
+   (This can be compared to the processing of the "$ref" keyword in JSON
+   Schema.)
+
+   For example, this reference:
 
    "temperatureProperty": {
      "odmRef": "#/odmData/temperatureData"
@@ -347,52 +489,28 @@ Internet-Draft                  OneDM SDF                       May 2020
    creates a new definition "temperatureProperty" that contains all of
    the qualities defined in the definition at /odmData/temperatureData.
 
-   If a JSON Pointer is used without the "odmRef" tag, it points to an
-   SDF element.  See the sections on "odmRequired" for an example.
+5.5.  odmRequired
 
-5.2.  Namespace Prefix
+   The value of "odmRequired" is an array of name references, each
+   pointing to one declaration instantiation of which is declared
+   mandatory.
 
-   Compact URI, or CURI, notation may be used to refer to definitions in
-   another namespace.  Names are resolved by expanding the prefix using
-   the value for that prefix which is defined in the "namespace"
-   section.  For example, if a namespace prefix is defined:
 
-   "namespace": {
-     "foo": "https://example.com/#"
-   }
 
-   Then a reference to that namespace:
 
-   "foo:odmData/temperatureData"
 
-   Would be expanded into:
 
-   "https://example.com/#odmData/temperatureData"
 
-5.3.  Target namespace
+Koster & Bormann        Expires 12 November 2020                [Page 9]
+
+Internet-Draft                  OneDM SDF                       May 2020
 
-   The target namespace is the namespace into which the defined terms
-   are added.  The target namespace is defined by the default namespace,
-   or by an explicit prefix on the identifier using a colon ":".
-
-   For example if the default namespace in the example above is "foo",
-   then you could use "temperatureData" to refer to the property defined
-   at the URI:
-
-   https://example.com/#odmData/temperatureData
 
 6.  Optionality using the keyword "odmRequired"
 
    The keyword "odmRequired" is provided to apply a constraint for which
    definitions are mandatory in an instance conforming to a particular
    definition in which the constraint appears.
-
-
-
-Koster & Bormann        Expires 12 November 2020                [Page 7]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
 
    The value of "odmRequired" is an array JSON pointers, each indicating
    one mandatory definition.
@@ -433,27 +551,26 @@ Internet-Draft                  OneDM SDF                       May 2020
      }
    }
 
+
+
+
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 10]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
 7.  Keywords for type definitions
 
    The following SDF keywords are used to create type definitions in the
    target namespace.
 
-
-
-
-
-
-
-
-Koster & Bormann        Expires 12 November 2020                [Page 8]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
-
 7.1.  odmObject
 
-   The odmObject keyword denotes zero or more Object definitions.  A
-   object may contain or include definitions of events, actions,
+   The odmObject keyword denotes zero or more Object definitions.  An
+   odmObject may contain or include definitions of events, actions,
    properties, and data types.
 
    The qualities of odmObject are shown in Table 3.
@@ -494,17 +611,16 @@ Internet-Draft                  OneDM SDF                       May 2020
 
    *  odmData
 
-7.2.  odmProperty
-
-   The odmProperty keyword denotes zero or more property definitions.
 
 
-
-
-Koster & Bormann        Expires 12 November 2020                [Page 9]
+Koster & Bormann        Expires 12 November 2020               [Page 11]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
+
+7.2.  odmProperty
+
+   The odmProperty keyword denotes zero or more property definitions.
 
    Properties are used to model elements of state.
 
@@ -550,18 +666,18 @@ Internet-Draft                  OneDM SDF                       May 2020
    +-------------+--------+--------+--------------------------------------+-------+
    |scaleMaximum | number | no     | upper limit of value in units        | N/A   |
    +-------------+--------+--------+--------------------------------------+-------+
-   | type        |string, | no     | JSON data type                       | N/A   |
-   |             | enum   |        |                                      |       |
-   +-------------+--------+--------+--------------------------------------+-------+
-   | minimum     | number | no     | lower limit of value in the          | N/A   |
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 10]
+Koster & Bormann        Expires 12 November 2020               [Page 12]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
 
+   | type        |string, | no     | JSON data type                       | N/A   |
+   |             | enum   |        |                                      |       |
+   +-------------+--------+--------+--------------------------------------+-------+
+   | minimum     | number | no     | lower limit of value in the          | N/A   |
    |             |        |        | representation format                |       |
    +-------------+--------+--------+--------------------------------------+-------+
    | maximum     | number | no     | upper limit of value in the          | N/A   |
@@ -609,11 +725,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-
-
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 11]
+Koster & Bormann        Expires 12 November 2020               [Page 13]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -669,7 +781,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 12]
+Koster & Bormann        Expires 12 November 2020               [Page 14]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -725,7 +837,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 13]
+Koster & Bormann        Expires 12 November 2020               [Page 15]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -781,7 +893,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 14]
+Koster & Bormann        Expires 12 November 2020               [Page 16]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -837,7 +949,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 15]
+Koster & Bormann        Expires 12 November 2020               [Page 17]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -893,7 +1005,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 16]
+Koster & Bormann        Expires 12 November 2020               [Page 18]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -903,10 +1015,10 @@ Internet-Draft                  OneDM SDF                       May 2020
        "title": "Example file for ODM Simple JSON Definition Format",
        "version": "20190424",
        "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-       "license": "http://example.com/license"
+       "license": "https://example.com/license"
      },
      "namespace": {
-       "st": "http://example.com/capability/odm"
+       "st": "https://example.com/capability/odm"
      },
      "defaultNamespace": "st",
      "odmObject": {
@@ -949,7 +1061,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 17]
+Koster & Bormann        Expires 12 November 2020               [Page 19]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -995,6 +1107,8 @@ Internet-Draft                  OneDM SDF                       May 2020
    new qualities may be added and values of optional qualities and
    quality values may be defined.
 
+   ISSUE: Can qualities from the source definition be overridden?  The
+   above only says "added".
 
 
 
@@ -1003,9 +1117,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 18]
+Koster & Bormann        Expires 12 November 2020               [Page 20]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -1061,7 +1173,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 19]
+Koster & Bormann        Expires 12 November 2020               [Page 21]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -1117,7 +1229,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 20]
+Koster & Bormann        Expires 12 November 2020               [Page 22]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
@@ -1136,10 +1248,24 @@ Internet-Draft                  OneDM SDF                       May 2020
               IANA, "Sensor Measurement Lists (SenML)",
               <http://www.iana.org/assignments/senml>.
 
+   [RFC0020]  Cerf, V.G., "ASCII format for network interchange",
+              STD 80, RFC 20, DOI 10.17487/RFC0020, October 1969,
+              <https://www.rfc-editor.org/info/rfc20>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, DOI 10.17487/RFC3986, January 2005,
+              <https://www.rfc-editor.org/info/rfc3986>.
+
+   [RFC6901]  Bryan, P., Ed., Zyp, K., and M. Nottingham, Ed.,
+              "JavaScript Object Notation (JSON) Pointer", RFC 6901,
+              DOI 10.17487/RFC6901, April 2013,
+              <https://www.rfc-editor.org/info/rfc6901>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -1150,6 +1276,19 @@ Internet-Draft                  OneDM SDF                       May 2020
               Express Concise Binary Object Representation (CBOR) and
               JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
               June 2019, <https://www.rfc-editor.org/info/rfc8610>.
+
+   [W3C.NOTE-curie-20101216]
+              Birbeck, M. and S. McCarron, "CURIE Syntax 1.0", World
+              Wide Web Consortium NOTE NOTE-curie-20101216, 16 December
+              2010, <http://www.w3.org/TR/2010/NOTE-curie-20101216>.
+
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 23]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
 
 Appendix A.  Formal Syntax of SDF
 
@@ -1170,14 +1309,6 @@ Appendix A.  Formal Syntax of SDF
     ? defaultNamespace: text
     ? odmObject: named-obj-props
     ? odmThing: sdfthing
-
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 21]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
-
     ? odmProperty: named-afford-props
     ? odmAction: named-afford-props
     ? odmEvent: named-afford-props
@@ -1207,6 +1338,14 @@ Internet-Draft                  OneDM SDF                       May 2020
    obj-props = {
     ? description: text
     ? name: text
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 24]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
     ? odmRequired: [* sdf-pointer]
     ? odmProperty: named-afford-props
     ? odmAction: named-afford-props
@@ -1226,14 +1365,6 @@ Internet-Draft                  OneDM SDF                       May 2020
     ? type: "number" / "string" / "boolean" / "integer" / "array" / "object"
     ? subtype: "unixtime" / "bytestring"
     ? enum: [+ any]
-
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 22]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
-
     ? const: number / text / bool / [* any] / anymap / null
     ? default: number / text / bool / [* any] / anymap / null
     ? $comment: text
@@ -1255,12 +1386,21 @@ Internet-Draft                  OneDM SDF                       May 2020
     ? format: "date-time" / "date" / "time" / "duration"
               / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6"
               / "uri" / "uri-reference" / "iri" / "iri-reference"
-              / "uuid" / "uri-template" / "json-pointer" / "relative-json-pointer" / "regex"
+              / "uuid" / "uri-template" / "json-pointer" / "relative-json-pointer"
+              / "regex"
    }
 
    sdf-pointer = text .regexp uri-reference-regexp
 
    uri-reference-regexp = "TODO URI REF"
+
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 25]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
 
    anymap = { * any => any }
 
@@ -1281,13 +1421,6 @@ Contributors
 
 
    Wouter van der Beek
-
-
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 23]
-
-Internet-Draft                  OneDM SDF                       May 2020
 
 
 Authors' Addresses
@@ -1320,25 +1453,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 24]
+Koster & Bormann        Expires 12 November 2020               [Page 26]
