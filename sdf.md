@@ -196,8 +196,8 @@ The following example declares a set of namespaces and defines `st` as the defau
 
 If no defaultnamespace setting is given, the SDF definition file does not
 contribute to a global namespace.  As the defaultnamespace gives a
-namespace short name, its presence requires a namespace map contains a
-mapping for that namespace short name.
+namespace short name, its presence requires a namespace map that contains a
+mapping For that namespace short name.
 
 If no namespace map is given, no short names for namespace URIs are
 set up, and no defaultnamespace can be given.
