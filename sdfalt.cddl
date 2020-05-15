@@ -53,7 +53,7 @@ afford-props = {
  ? readable: bool
  ? writable: bool
  ? observable: bool
- ? type: "number" / "string" / "boolean" / "integer" / "array" / "object"
+ ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
  ? subtype: "unixtime" / "bytestring"
  ? enum: [+ any]
  ? const: number / text / bool / [* any] / anymap / null
@@ -70,8 +70,23 @@ afford-props = {
  ? maxLength: number
  ? uniqueItems: bool
  ? units: text
- ? items: {
+ ? items: { ;;; ultimately, this will be mostly recursive, but, for now
+            ;;; let's find out what we actually need
+     ? name: text        ;??? needed for odmobject-printer_queue.sdf.json
      ? type: text
+     ? description: text ; needed for odmobject-lock_code.sdf.json
+     ? $comment: text
+     ? minimum: number   ; needed for odmobject-colour_chroma.sdf.json
+     ? maximum: number   ; needed for odmobject-colour_chroma.sdf.json
+     ? enum: [+ any]     ; needed for odmobject-powersource.sdf.json
+;     ? properties: any   ; needed for odmobject-mediasourcelist.sdf.json
+     ? format: text      ; needed for odmobject-printer_queue.sdf.json
+     ? minLength: number ; needed for odmobject-printer_queue.sdf.json
+     ? maxLength: number ; needed for odmobject-printer_queue.sdf.json
+;     ? writable: bool    ;??? needed for odmobject-printer_queue.sdf.json
+;     ? minItems: number         ;??? needed for odmobject-airflow.sdf.json
+;     ? maxItems: number         ;??? needed for odmobject-airflow.sdf.json
+;     ? uniqueItems: bool        ;??? needed for odmobject-airflow.sdf.json
    }
  ? pattern: text
  ? format: "date-time" / "date" / "time" / "duration"
@@ -83,6 +98,6 @@ afford-props = {
 
 sdf-pointer = text .regexp uri-reference-regexp
 
-uri-reference-regexp = "TODO URI REF"
+uri-reference-regexp = ".*"; TODO URI REF
 
 anymap = { * any => any }
