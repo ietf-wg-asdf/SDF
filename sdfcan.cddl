@@ -101,10 +101,13 @@ jsonschema = (
  ? $ref: sdf-pointer
  ? type: "number" / "string" / "boolean" / "integer" / "array" / "object"
  ? enum: [+ any]
- ? const: number / text / bool / [* any] / anymap ; @@@ object not well-defined @@@ / null
- ? default: number / text / bool / [* any] / anymap ; @@@ object not well-defined @@@ / null
+ ? const: number / text / bool / null / [* any] / anymap ; @@@ object not well-defined @@@
+ ? default: number / text / bool / null / [* any] / anymap ; @@@ object not well-defined @@@
  ? pattern: text
- ? format: "date-time" / "date" / "time" / "duration" / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6" / "uri" / "uri-reference" / "iri" / "iri-reference" / "uuid" / "uri-template" / "json-pointer" / "relative-json-pointer" / "regex"
+ ? format: "date-time" / "date" / "time" / "duration"
+         / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6"
+         / "uri" / "uri-reference" / "iri" / "iri-reference" / "uuid" / "uri-template"
+         / "json-pointer" / "relative-json-pointer" / "regex"
  ? minimum: number
  ? maximum: number
  ? exclusiveMinimum: bool
