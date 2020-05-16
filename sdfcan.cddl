@@ -1,0 +1,165 @@
+start = sdf-can-schema
+
+;;; sdf-can-schema.json: SDF Schema
+; *** $schema = http://json-schema.org/draft-07/schema#
+
+
+sdf-can-schema = {
+ ? info: sdfinfo
+ ? namespace: named-text
+ ? defaultnamespace: text
+ ? odmThing: named-thingqualities       ; Thing is a composition of objects that work together in some way
+ ? odmProduct: named-productqualities   ; Product is a composition of things and objects that can model a SKU-level instance of a product
+ ? odmObject: named-objectqualities     ; Object is a set of Properties, Actions, and Events that together perform a particular function
+ ? odmProperty: named-propertyqualities ; Property represents the state of an instance of an object
+ ? odmAction: named-actionqualities     ; Action is a directive to invoke an application layer verb associated with an object
+ ? odmEvent: named-eventqualities       ; Event represents an occurence of something associated with an object
+ ? odmData: named-dataqualities         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
+}
+
+
+sdfinfo = {
+ title: text
+ version: text
+ copyright: text
+ license: text
+}
+
+named-text = {
+ * text => text
+}
+
+named-thingqualities = {
+ * text => thingqualities
+}
+
+
+named-productqualities = {
+ * text => productqualities
+}
+
+
+named-objectqualities = {
+ * text => objectqualities
+}
+
+
+named-propertyqualities = {
+ * text => propertyqualities
+}
+
+
+named-actionqualities = {
+ * text => actionqualities
+}
+
+
+named-eventqualities = {
+ * text => eventqualities
+}
+
+
+named-dataqualities = {
+ * text => dataqualities
+}
+
+sdf-pointer = text .regexp uri-reference-regexp
+pointer-list = [* sdf-pointer]
+
+
+ref = {
+ ? $ref: text
+}
+
+commonqualities = (
+ ? description: text
+ ? $comment: text
+ ? title: text
+ ? name: text
+ ? odmRef: sdf-pointer
+ ? odmType: ref
+ ? odmRequired: pointer-list
+)
+
+thingqualities = {
+ commonqualities,
+ ? odmObject: named-objectqualities
+ ? odmThing: named-thingqualities
+}
+
+productqualities = {
+ commonqualities,
+ ? odmObject: named-objectqualities
+ ? odmThing: named-thingqualities
+}
+
+objectqualities = {
+ commonqualities,
+ ? odmObject: named-objectqualities
+ ? odmProperty: named-propertyqualities
+ ? odmAction: named-actionqualities
+ ? odmEvent: named-eventqualities
+ ? odmData: named-dataqualities
+}
+
+propertyqualities = dataqualities
+
+actionqualities = {
+ commonqualities,
+ ? odmInputData: pointer-list
+ ? odmRequiredInputData: pointer-list
+ ? odmOutputData: pointer-list
+}
+
+eventqualities = {
+ commonqualities
+ ? odmOutputData: pointer-list
+}
+
+dataqualities = {
+ commonqualities,
+ jsonschema,
+ ? units: text
+ ? scaleMinimum: number
+ ? scaleMaximum: number
+ ? observable: bool
+ ? readable: bool
+ ? writable: bool
+ ? nullable: bool
+ ? widthInBits: number
+ ? subtype: "bytestring" / "unixtime"
+ ? contentFormat: text
+}
+
+
+jsonschema = (
+ ? $comment: text
+ ? $ref: sdf-pointer
+ ? type: "number" / "string" / "boolean" / "integer" / "array" / "object"
+ ? enum: [+ any]
+ ? const: number / text / bool / [* any] / anymap ; @@@ object not well-defined @@@ / null
+ ? default: number / text / bool / [* any] / anymap ; @@@ object not well-defined @@@ / null
+ ? pattern: text
+ ? format: "date-time" / "date" / "time" / "duration" / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6" / "uri" / "uri-reference" / "iri" / "iri-reference" / "uuid" / "uri-template" / "json-pointer" / "relative-json-pointer" / "regex"
+ ? minimum: number
+ ? maximum: number
+ ? exclusiveMinimum: bool
+ ? exclusiveMaximum: bool
+ ? multipleOf: number
+ ? maxLength: number
+ ? minLength: number
+ ? oneOf: [+ any]
+ ? anyOf: [+ any]
+ ? allOf: [+ any]
+ ? items: [* any] / anymap ; @@@ object not well-defined @@@
+ ? contains: [* any] / anymap ; @@@ object not well-defined @@@
+ ? minItems: number
+ ? maxItems: number
+ ? uniqueItems: bool
+ ? properties: anymap ; @@@ object not well-defined @@@
+)
+
+
+uri-reference-regexp = ".*"; TODO URI REF
+
+anymap = { * any => any }
