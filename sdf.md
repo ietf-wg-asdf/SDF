@@ -197,7 +197,7 @@ The following example declares a set of namespaces and defines `st` as the defau
 If no defaultnamespace setting is given, the SDF definition file does not
 contribute to a global namespace.  As the defaultnamespace gives a
 namespace short name, its presence requires a namespace map that contains a
-mapping For that namespace short name.
+mapping for that namespace short name.
 
 If no namespace map is given, no short names for namespace URIs are
 set up, and no defaultnamespace can be given.
@@ -228,8 +228,9 @@ An example for an Object definition is given in {{exobject}}:
 ~~~
 {: #exobject title="Example Object definition"}
 
-This example defines an Object "foo" is defined in the default namespace, containing a property "foo.bar",  of type boolean.
-<!-- XXX We are not using the foo.bar style, no? -->
+This example defines an Object "foo" that is defined in the default namespace, containing a property
+`odm:/odmObject/foo/odmProperty/bar`, with data of type boolean.
+<!-- we could define a URN-style namespace that looks exactly that way -->
 
 # Names and namespaces
 
@@ -242,13 +243,14 @@ contribute to the global namespace.)
 
 Global names look exactly like https:// URIs with attached fragment identifiers.
 
-There is no intention that these URIs can be dereferenced.
+There is no intention to require that these URIs can be dereferenced.
+<!-- Looking things up there is a convenience -->
 (However, as future versions of SDF might find a use for dereferencing
 global names, the URI should be chosen in such a way that this may
 become possible in the future.)
 
 The absolute URI of a global name should be a URI as per Section 3 of
-{{-uri}}, with a scheme of "https" and a hier-part.
+{{-uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
 For the present version of this specification, the query part should
 not be used (it might be used in later versions).
 
@@ -323,7 +325,8 @@ namespace map.
 Name references occur only in specific elements of the syntax of SDF:
 
 * copying elements via odmRef values
-* pointing to elements via odmRequired value elements
+* pointing to elements via odmRequired value elements or as
+  odmOutputData and similar
 
 
 ## odmRef
@@ -614,6 +617,25 @@ An existing definition may be used as a template for a new definition, that is, 
 
 ISSUE: Can qualities from the source definition be overridden?
 The above only says "added".
+Yes, we do want to enable overriding, but need to warn specifiers not
+to use this in a way that changes the semantics.
+
+~~~
+ 
+"odmData": 
+  "length" : {
+    "type": "number",
+    "minimum": 0,
+    "units": "m"
+    "description": "There can be no negative lenghts"
+  }
+...
+  "cable-length" : {
+    "odmRef": "#/odmData/length"
+    "minimum": 0,05
+    "description": "cables must be at least 5 cm"
+  }
+~~~
 
 ## odmThing
 
