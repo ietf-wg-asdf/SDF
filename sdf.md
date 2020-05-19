@@ -5,7 +5,7 @@ title: >
   SDF: A Simple Definition Format for One Data Model definitions
 abbrev: OneDM SDF
 docname: draft-bormann-t2trg-sdf-latest
-date: 2020-05-11
+date: 2020-05-19
 category: info
 
 ipr: trust200902
@@ -330,7 +330,7 @@ Name references occur only in specific elements of the syntax of SDF:
 
 * copying elements via odmRef values
 * pointing to elements via odmRequired value elements or as
-  odmOutputData and similar
+  odmInput/OutputData etc.
 
 
 ## odmRef
@@ -710,7 +710,8 @@ TODO: Align with full framework syntax, as required.
 # json-schema.org Rendition of SDF Syntax
 
 This appendix describes the syntax of SDF defined in {{syntax}}, but
-using a version of the description techniques advertised on json-schema.org.
+using a version of the description techniques advertised on
+json-schema.org {{-jso}}.
 
 ~~~ jso.json
 {::include sdf.jso.json}
