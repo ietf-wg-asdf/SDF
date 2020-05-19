@@ -1,0 +1,126 @@
+start = sdf-syntax
+
+;;; sdf-can-schema.json: SDF Schema
+; *** $schema = http://json-schema.org/draft-07/schema#
+
+sdf-syntax = {
+ info: sdfinfo                  ; don't require this in flexible syntax, though
+ ? namespace: named<text>
+ ? defaultnamespace: text
+ ? odmThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
+ ? odmProduct: named<productqualities>   ; Product is a composition of things and objects that can model a SKU-level instance of a product
+ ? odmObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
+ ? odmProperty: named<propertyqualities> ; Property represents the state of an instance of an object
+ ? odmAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
+ ? odmEvent: named<eventqualities>       ; Event represents an occurence of something associated with an object
+ ? odmData: named<dataqualities>         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
+}
+
+sdfinfo = {
+ title: text
+ version: text
+ copyright: text
+ license: text
+}
+
+; Shortcut for a map that gives names to instances of X
+named<X> = { * text => X }
+
+sdf-pointer = text ; .regexp curie-regexp -- TO DO!
+pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for odmRequired in odmobject-multiple_axis_joystick.sdf.json
+
+commonqualities = (
+ ? description: text            ; long text (no constraints)
+ ? label: text                  ; short text (no constraints); default to key
+ ? $comment: text               ; source code comments only, no semantics
+ ? name: text                   ; DELETE ME (deprecated)
+ ? odmRef: sdf-pointer
+ ? odmRequired: pointer-list
+)
+
+; for building hierarchy
+thingqualities = {
+ commonqualities,
+ ? odmObject: named<objectqualities>
+ ? odmThing: named<thingqualities>
+}
+
+productqualities = thingqualities ; ISSUE: get rid of odmProduct?
+
+; for single objects
+objectqualities = {
+ commonqualities,
+ ? odmProperty: named<propertyqualities>
+ ? odmAction: named<actionqualities>
+ ? odmEvent: named<eventqualities>
+ ? odmData: named<dataqualities>
+}
+
+propertyqualities = dataqualities
+
+actionqualities = {
+ commonqualities,
+ ? odmInputData: pointer-list
+ ? odmRequiredInputData: pointer-list
+ ? odmOutputData: pointer-list
+}
+
+eventqualities = {
+ commonqualities
+ ? odmOutputData: pointer-list
+}
+
+dataqualities = {               ; also propertyqualities
+ commonqualities,
+ jsonschema,
+ ? units: text
+ ? scaleMinimum: number
+ ? scaleMaximum: number
+ ? observable: bool
+ ? readable: bool
+ ? writable: bool
+ ? nullable: bool
+ ? widthInBits: number
+ ? subtype: "bytestring" / "unixtime"
+ ? contentFormat: text
+}
+
+allowed-types = number / text / bool / null
+              / [* number] / [* text] / [* bool]
+
+jsonschema = (
+ ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
+ ? enum: [+ allowed-types]                                              ; should validate against type
+ ? const: allowed-types
+ ? default: allowed-types
+ ; number/integer constraints
+ ? minimum: number
+ ? maximum: number
+ ? exclusiveMinimum: bool / number      ; jso draft 4/7
+ ? exclusiveMaximum: bool / number      ; jso draft 4/7
+ ? multipleOf: number                   ; ISSUE: Do we need this?
+ ; text string constraints
+ ? minLength: number
+ ? maxLength: number
+ ? pattern: text                ; regexp
+ ? format: "date-time" / "date" / "time"
+           / "uri" / "uri-reference" / "uuid"
+           ; expand on demand
+ ; array constraints
+ ? minItems: number
+ ? maxItems: number
+ ? uniqueItems: bool
+ ? items: { ;;; ultimately, this will be mostly recursive, but, for now
+            ;;; let's find out what we actually need
+     ? description: text            ; long text (no constraints)
+     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need description
+     ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
+     ; jso subset
+     ? minimum: number
+     ? maximum: number
+     ? enum: [+ any]
+     ? format: text
+     ? minLength: number
+     ? maxLength: number
+   }
+)

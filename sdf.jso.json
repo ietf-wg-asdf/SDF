@@ -1,0 +1,431 @@
+{
+  "title": "sdfcan.cddl",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/sdf-syntax",
+  "definitions": {
+    "sdf-syntax": {
+      "type": "object",
+      "required": [
+        "info"
+      ],
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/sdfinfo"
+        },
+        "namespace": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultnamespace": {
+          "type": "string"
+        },
+        "odmThing": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/thingqualities"
+          }
+        },
+        "odmProduct": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/productqualities"
+          }
+        },
+        "odmObject": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/objectqualities"
+          }
+        },
+        "odmProperty": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/propertyqualities"
+          }
+        },
+        "odmAction": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/actionqualities"
+          }
+        },
+        "odmEvent": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/eventqualities"
+          }
+        },
+        "odmData": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/dataqualities"
+          }
+        }
+      }
+    },
+    "sdfinfo": {
+      "type": "object",
+      "required": [
+        "title",
+        "version",
+        "copyright",
+        "license"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "copyright": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        }
+      }
+    },
+    "thingqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "odmObject": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/objectqualities"
+              }
+            },
+            "odmThing": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/thingqualities"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "commonqualities": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "odmRef": {
+          "$ref": "#/definitions/sdf-pointer"
+        },
+        "odmRequired": {
+          "$ref": "#/definitions/pointer-list"
+        }
+      }
+    },
+    "sdf-pointer": {
+      "type": "string"
+    },
+    "pointer-list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/sdf-pointer"
+      }
+    },
+    "objectqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "odmProperty": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/propertyqualities"
+              }
+            },
+            "odmAction": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/actionqualities"
+              }
+            },
+            "odmEvent": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/eventqualities"
+              }
+            },
+            "odmData": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/dataqualities"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "propertyqualities": {
+      "$ref": "#/definitions/dataqualities"
+    },
+    "dataqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "$ref": "#/definitions/jsonschema"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "units": {
+              "type": "string"
+            },
+            "scaleMinimum": {
+              "type": "number"
+            },
+            "scaleMaximum": {
+              "type": "number"
+            },
+            "observable": {
+              "type": "boolean"
+            },
+            "readable": {
+              "type": "boolean"
+            },
+            "writable": {
+              "type": "boolean"
+            },
+            "nullable": {
+              "type": "boolean"
+            },
+            "widthInBits": {
+              "type": "number"
+            },
+            "subtype": {
+              "type": "string",
+              "enum": [
+                "bytestring",
+                "unixtime"
+              ]
+            },
+            "contentFormat": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "jsonschema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "number",
+            "string",
+            "boolean",
+            "integer",
+            "array"
+          ]
+        },
+        "enum": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/allowed-types"
+          },
+          "minItems": 1
+        },
+        "const": {
+          "$ref": "#/definitions/allowed-types"
+        },
+        "default": {
+          "$ref": "#/definitions/allowed-types"
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "exclusiveMinimum": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "exclusiveMaximum": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "multipleOf": {
+          "type": "number"
+        },
+        "minLength": {
+          "type": "number"
+        },
+        "maxLength": {
+          "type": "number"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "date-time",
+            "date",
+            "time",
+            "uri",
+            "uri-reference",
+            "uuid"
+          ]
+        },
+        "minItems": {
+          "type": "number"
+        },
+        "maxItems": {
+          "type": "number"
+        },
+        "uniqueItems": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "number",
+                "string",
+                "boolean",
+                "integer"
+              ]
+            },
+            "minimum": {
+              "type": "number"
+            },
+            "maximum": {
+              "type": "number"
+            },
+            "enum": {
+              "type": "array",
+              "minItems": 1
+            },
+            "format": {
+              "type": "string"
+            },
+            "minLength": {
+              "type": "number"
+            },
+            "maxLength": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "allowed-types": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        }
+      ]
+    },
+    "actionqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "odmInputData": {
+              "$ref": "#/definitions/pointer-list"
+            },
+            "odmRequiredInputData": {
+              "$ref": "#/definitions/pointer-list"
+            },
+            "odmOutputData": {
+              "$ref": "#/definitions/pointer-list"
+            }
+          }
+        }
+      ]
+    },
+    "eventqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "odmOutputData": {
+              "$ref": "#/definitions/pointer-list"
+            }
+          }
+        }
+      ]
+    },
+    "productqualities": {
+      "$ref": "#/definitions/thingqualities"
+    }
+  }
+}
