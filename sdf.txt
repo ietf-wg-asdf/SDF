@@ -25,6 +25,10 @@ Abstract
 
    The JSON format of an SDF definition is described in this document.
 
+Contributing
+
+   (point to github repo)
+
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
@@ -47,10 +51,6 @@ Copyright Notice
    Copyright (c) 2020 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents (https://trustee.ietf.org/
-   license-info) in effect on the date of publication of this document.
-
 
 
 Koster & Bormann        Expires 12 November 2020                [Page 1]
@@ -58,6 +58,9 @@ Koster & Bormann        Expires 12 November 2020                [Page 1]
 Internet-Draft                  OneDM SDF                       May 2020
 
 
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
    and restrictions with respect to this document.  Code Components
    extracted from this document must include Simplified BSD License text
@@ -66,7 +69,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Terminology and Conventions . . . . . . . . . . . . . . . . .   3
    3.  Example Definition: . . . . . . . . . . . . . . . . . . . . .   3
    4.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .   4
@@ -95,9 +98,21 @@ Table of Contents
      9.4.  odmProduct  . . . . . . . . . . . . . . . . . . . . . . .  22
    10. Normative References  . . . . . . . . . . . . . . . . . . . .  23
    Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  24
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  26
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  26
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
+   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  27
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  36
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  36
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  36
+
+
+
+
+
+
+
+Koster & Bormann        Expires 12 November 2020                [Page 2]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
 
 1.  Introduction
 
@@ -106,13 +121,6 @@ Table of Contents
 
    OneDM tools convert this format to database formats and other
    serializations as needed.
-
-
-
-Koster & Bormann        Expires 12 November 2020                [Page 2]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
 
    This document describes definitions of OneDM Objects and their
    associated Events, Actions, Properties, and Data types.
@@ -144,14 +152,6 @@ Internet-Draft                  OneDM SDF                       May 2020
    capitals, as shown here.
 
 3.  Example Definition:
-
-
-
-
-
-
-
-
 
 
 
@@ -310,7 +310,7 @@ Internet-Draft                  OneDM SDF                       May 2020
 
    If no defaultnamespace setting is given, the SDF definition file does
    not contribute to a global namespace.  As the defaultnamespace gives
-   a namespace short name, its presence requires a namespace map
+   a namespace short name, its presence requires a namespace map that
    contains a mapping for that namespace short name.
 
    If no namespace map is given, no short names for namespace URIs are
@@ -356,8 +356,9 @@ Internet-Draft                  OneDM SDF                       May 2020
 
                     Figure 2: Example Object definition
 
-   This example defines an Object "foo" is defined in the default
-   namespace, containing a property "foo.bar", of type boolean.
+   This example defines an Object "foo" that is defined in the default
+   namespace, containing a property "odm:/odmObject/foo/odmProperty/
+   bar", with data of type boolean.
 
 5.  Names and namespaces
 
@@ -371,18 +372,17 @@ Internet-Draft                  OneDM SDF                       May 2020
    Global names look exactly like https:// URIs with attached fragment
    identifiers.
 
-   There is no intention that these URIs can be dereferenced.  (However,
-   as future versions of SDF might find a use for dereferencing global
-   names, the URI should be chosen in such a way that this may become
-   possible in the future.)
+   There is no intention to require that these URIs can be dereferenced.
+   (However, as future versions of SDF might find a use for
+   dereferencing global names, the URI should be chosen in such a way
+   that this may become possible in the future.)
 
    The absolute URI of a global name should be a URI as per Section 3 of
-   [RFC3986], with a scheme of "https" and a hier-part.  For the present
-   version of this specification, the query part should not be used (it
-   might be used in later versions).
+   [RFC3986], with a scheme of "https" and a path ("hier-part" in
+   [RFC3986]).  For the present version of this specification, the query
+   part should not be used (it might be used in later versions).
 
    The fragment identifier is constructed as per Section 6 of [RFC6901].
-
 
 
 
@@ -470,7 +470,8 @@ Internet-Draft                  OneDM SDF                       May 2020
 
    *  copying elements via odmRef values
 
-   *  pointing to elements via odmRequired value elements
+   *  pointing to elements via odmRequired value elements or as
+      odmOutputData and similar
 
 5.4.  odmRef
 
@@ -494,7 +495,6 @@ Internet-Draft                  OneDM SDF                       May 2020
    The value of "odmRequired" is an array of name references, each
    pointing to one declaration instantiation of which is declared
    mandatory.
-
 
 
 
@@ -1108,9 +1108,9 @@ Internet-Draft                  OneDM SDF                       May 2020
    quality values may be defined.
 
    ISSUE: Can qualities from the source definition be overridden?  The
-   above only says "added".
-
-
+   above only says "added".  Yes, we do want to enable overriding, but
+   need to warn specifiers not to use this in a way that contradicts the
+   referenced semantics.
 
 
 
@@ -1121,6 +1121,20 @@ Koster & Bormann        Expires 12 November 2020               [Page 20]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
+
+   "odmData":
+     "length" : {
+       "type": "number",
+       "minimum": 0,
+       "units": "m"
+       "description": "There can be no negative lengths"
+     }
+   ...
+     "cable-length" : {
+       "odmRef": "#/odmData/length"
+       "minimum": 0.05,
+       "description": "cables must be at least 5 cm"
+     }
 
 9.3.  odmThing
 
@@ -1138,6 +1152,31 @@ Internet-Draft                  OneDM SDF                       May 2020
    An odmThing may be composed of odmObjects and other odmThings.
 
    The qualities of odmThing are shown in Table 8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 21]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
 
    +-------------+--------+----------+---------------------------+----+
    | Quality     | Type   | Required | Description               |    |
@@ -1170,14 +1209,6 @@ Internet-Draft                  OneDM SDF                       May 2020
 
    *  odmObject
 
-
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 21]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
-
 9.4.  odmProduct
 
    An odmProduct provides the level of abstraction for representing a
@@ -1195,6 +1226,13 @@ Internet-Draft                  OneDM SDF                       May 2020
    properties, or available parameters for Actions.
 
    The qualities of odmProduct are shown in Table 9.
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 22]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
 
    +-------------+--------+----------+---------------------------+----+
    | Quality     | Type   | Required | Description               |    |
@@ -1227,13 +1265,6 @@ Internet-Draft                  OneDM SDF                       May 2020
 
    *  odmObject
 
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 22]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
-
 10.  Normative References
 
    [I-D.handrews-json-schema-validation]
@@ -1251,6 +1282,13 @@ Internet-Draft                  OneDM SDF                       May 2020
    [RFC0020]  Cerf, V.G., "ASCII format for network interchange",
               STD 80, RFC 20, DOI 10.17487/RFC0020, October 1969,
               <https://www.rfc-editor.org/info/rfc20>.
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 23]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1282,36 +1320,39 @@ Internet-Draft                  OneDM SDF                       May 2020
               Wide Web Consortium NOTE NOTE-curie-20101216, 16 December
               2010, <http://www.w3.org/TR/2010/NOTE-curie-20101216>.
 
+Appendix A.  Formal Syntax of SDF
+
+   This appendix describes the syntax of SDF using CDDL [RFC8610].  Note
+   that this appendix was derived from Ari Keranen's "alt-schema" and
+   Michael Kosters "schema", with a view of covering the syntax that is
+   currently in use at the One Data Model "playground" repository.
+
+   TODO: Align with full framework syntax, as required.
+
+   start = sdf-syntax
+
+   ;;; sdf-can-schema.json: SDF Schema
+   ; *** $schema = http://json-schema.org/draft-07/schema#
+
+   sdf-syntax = {
+    info: sdfinfo                  ; don't require this in flexible syntax, though
+    ? namespace: named<text>
+    ? defaultnamespace: text
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 23]
+Koster & Bormann        Expires 12 November 2020               [Page 24]
 
 Internet-Draft                  OneDM SDF                       May 2020
 
 
-Appendix A.  Formal Syntax of SDF
-
-   This appendix describes the syntax of SDF using CDDL [RFC8610].  Note
-   that this appendix was derived from Ari Keranen's "alt-schema", so it
-   only contains the syntax that is currently in use at the One Data
-   Model "playground" repository.
-
-   TODO: Align with full framework syntax, as required.
-
-   start = sdf-alt-schema
-
-   ;;; sdf-alt-schema: Alternative ODM SDF schema (work in progress 20200304)
-
-   sdf-alt-schema = {
-    info: sdfinfo
-    ? namespace: named-text
-    ? defaultNamespace: text
-    ? odmObject: named-obj-props
-    ? odmThing: sdfthing
-    ? odmProperty: named-afford-props
-    ? odmAction: named-afford-props
-    ? odmEvent: named-afford-props
+    ? odmThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
+    ? odmProduct: named<productqualities>   ; Product is a composition of things and objects that can model a SKU-level instance of a product
+    ? odmObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
+    ? odmProperty: named<propertyqualities> ; Property represents the state of an instance of an object
+    ? odmAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
+    ? odmEvent: named<eventqualities>       ; Event represents an occurence of something associated with an object
+    ? odmData: named<dataqualities>         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
    }
 
    sdfinfo = {
@@ -1321,79 +1362,38 @@ Appendix A.  Formal Syntax of SDF
     license: text
    }
 
+   ; Shortcut for a map that gives names to instances of X
+   named<X> = { * text => X }
 
-   named-text = {
-    * text => text
-   }
+   sdf-pointer = text ; .regexp curie-regexp -- TO DO!
+   pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for odmRequired in odmobject-multiple_axis_joystick.sdf.json
 
-   sdfthing = {
-    ? odmObject: named-obj-props
-    ? odmThing: sdfthing
-   }
-
-   named-obj-props = {
-    * text => obj-props
-   }
-
-   obj-props = {
-    ? description: text
-    ? name: text
-
-
-
-Koster & Bormann        Expires 12 November 2020               [Page 24]
-
-Internet-Draft                  OneDM SDF                       May 2020
-
-
-    ? odmRequired: [* sdf-pointer]
-    ? odmProperty: named-afford-props
-    ? odmAction: named-afford-props
-    ? odmEvent: named-afford-props
-   }
-
-   named-afford-props = {
-    * text => afford-props
-   }
-
-   afford-props = {
-    ? description: text
-    ? name: text
-    ? readable: bool
-    ? writable: bool
-    ? observable: bool
-    ? type: "number" / "string" / "boolean" / "integer" / "array" / "object"
-    ? subtype: "unixtime" / "bytestring"
-    ? enum: [+ any]
-    ? const: number / text / bool / [* any] / anymap / null
-    ? default: number / text / bool / [* any] / anymap / null
-    ? $comment: text
+   commonqualities = (
+    ? description: text            ; long text (no constraints)
+    ? label: text                  ; short text (no constraints); default to key
+    ? $comment: text               ; source code comments only, no semantics
+    ? name: text                   ; DELETE ME (deprecated)
     ? odmRef: sdf-pointer
-    ? minimum: number
-    ? maximum: number
-    ? exclusiveMinimum: bool
-    ? exclusiveMaximum: bool
-    ? minItems: number
-    ? maxItems: number
-    ? minLength: number
-    ? maxLength: number
-    ? uniqueItems: bool
-    ? units: text
-    ? items: {
-        ? type: text
-      }
-    ? pattern: text
-    ? format: "date-time" / "date" / "time" / "duration"
-              / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6"
-              / "uri" / "uri-reference" / "iri" / "iri-reference"
-              / "uuid" / "uri-template" / "json-pointer" / "relative-json-pointer"
-              / "regex"
+    ? odmRequired: pointer-list
+   )
+
+   ; for building hierarchy
+   thingqualities = {
+    commonqualities,
+    ? odmObject: named<objectqualities>
+    ? odmThing: named<thingqualities>
    }
 
-   sdf-pointer = text .regexp uri-reference-regexp
+   productqualities = thingqualities ; ISSUE: get rid of odmProduct?
 
-   uri-reference-regexp = "TODO URI REF"
-
+   ; for single objects
+   objectqualities = {
+    commonqualities,
+    ? odmProperty: named<propertyqualities>
+    ? odmAction: named<actionqualities>
+    ? odmEvent: named<eventqualities>
+    ? odmData: named<dataqualities>
+   }
 
 
 
@@ -1402,13 +1402,598 @@ Koster & Bormann        Expires 12 November 2020               [Page 25]
 Internet-Draft                  OneDM SDF                       May 2020
 
 
-   anymap = { * any => any }
+   propertyqualities = dataqualities
+
+   actionqualities = {
+    commonqualities,
+    ? odmInputData: pointer-list
+    ? odmRequiredInputData: pointer-list
+    ? odmOutputData: pointer-list
+   }
+
+   eventqualities = {
+    commonqualities
+    ? odmOutputData: pointer-list
+   }
+
+   dataqualities = {               ; also propertyqualities
+    commonqualities,
+    jsonschema,
+    ? units: text
+    ? scaleMinimum: number
+    ? scaleMaximum: number
+    ? observable: bool
+    ? readable: bool
+    ? writable: bool
+    ? nullable: bool
+    ? widthInBits: number
+    ? subtype: "bytestring" / "unixtime"
+    ? contentFormat: text
+   }
+
+   allowed-types = number / text / bool / null
+                 / [* number] / [* text] / [* bool]
+
+   jsonschema = (
+    ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
+    ? enum: [+ allowed-types]                                              ; should validate against type
+    ? const: allowed-types
+    ? default: allowed-types
+    ; number/integer constraints
+    ? minimum: number
+    ? maximum: number
+    ? exclusiveMinimum: bool / number      ; jso draft 4/7
+    ? exclusiveMaximum: bool / number      ; jso draft 4/7
+    ? multipleOf: number                   ; ISSUE: Do we need this?
+    ; text string constraints
+    ? minLength: number
+    ? maxLength: number
+    ? pattern: text                ; regexp
+    ? format: "date-time" / "date" / "time"
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 26]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+              / "uri" / "uri-reference" / "uuid"
+              ; expand on demand
+    ; array constraints
+    ? minItems: number
+    ? maxItems: number
+    ? uniqueItems: bool
+    ? items: { ;;; ultimately, this will be mostly recursive, but, for now
+               ;;; let's find out what we actually need
+        ? description: text            ; long text (no constraints)
+        ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need description
+        ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
+        ; jso subset
+        ? minimum: number
+        ? maximum: number
+        ? enum: [+ any]
+        ? format: text
+        ? minLength: number
+        ? maxLength: number
+      }
+   )
+
+Appendix B.  json-schema.org Rendition of SDF Syntax
+
+   This appendix describes the syntax of SDF defined in Appendix A, but
+   using a version of the description techniques advertised on json-
+   schema.org.
+
+   {
+     "title": "sdfcan.cddl",
+     "$schema": "http://json-schema.org/draft-07/schema#",
+     "$ref": "#/definitions/sdf-syntax",
+     "definitions": {
+       "sdf-syntax": {
+         "type": "object",
+         "required": [
+           "info"
+         ],
+         "properties": {
+           "info": {
+             "$ref": "#/definitions/sdfinfo"
+           },
+           "namespace": {
+             "type": "object",
+             "additionalProperties": {
+               "type": "string"
+             }
+           },
+           "defaultnamespace": {
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 27]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+             "type": "string"
+           },
+           "odmThing": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/thingqualities"
+             }
+           },
+           "odmProduct": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/productqualities"
+             }
+           },
+           "odmObject": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/objectqualities"
+             }
+           },
+           "odmProperty": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/propertyqualities"
+             }
+           },
+           "odmAction": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/actionqualities"
+             }
+           },
+           "odmEvent": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/eventqualities"
+             }
+           },
+           "odmData": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/dataqualities"
+             }
+           }
+         }
+       },
+       "sdfinfo": {
+         "type": "object",
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 28]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+         "required": [
+           "title",
+           "version",
+           "copyright",
+           "license"
+         ],
+         "properties": {
+           "title": {
+             "type": "string"
+           },
+           "version": {
+             "type": "string"
+           },
+           "copyright": {
+             "type": "string"
+           },
+           "license": {
+             "type": "string"
+           }
+         }
+       },
+       "thingqualities": {
+         "allOf": [
+           {
+             "$ref": "#/definitions/commonqualities"
+           },
+           {
+             "type": "object",
+             "properties": {
+               "odmObject": {
+                 "type": "object",
+                 "additionalProperties": {
+                   "$ref": "#/definitions/objectqualities"
+                 }
+               },
+               "odmThing": {
+                 "type": "object",
+                 "additionalProperties": {
+                   "$ref": "#/definitions/thingqualities"
+                 }
+               }
+             }
+           }
+         ]
+       },
+       "commonqualities": {
+         "type": "object",
+         "properties": {
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 29]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+           "description": {
+             "type": "string"
+           },
+           "label": {
+             "type": "string"
+           },
+           "$comment": {
+             "type": "string"
+           },
+           "name": {
+             "type": "string"
+           },
+           "odmRef": {
+             "$ref": "#/definitions/sdf-pointer"
+           },
+           "odmRequired": {
+             "$ref": "#/definitions/pointer-list"
+           }
+         }
+       },
+       "sdf-pointer": {
+         "type": "string"
+       },
+       "pointer-list": {
+         "type": "array",
+         "items": {
+           "$ref": "#/definitions/sdf-pointer"
+         }
+       },
+       "objectqualities": {
+         "allOf": [
+           {
+             "$ref": "#/definitions/commonqualities"
+           },
+           {
+             "type": "object",
+             "properties": {
+               "odmProperty": {
+                 "type": "object",
+                 "additionalProperties": {
+                   "$ref": "#/definitions/propertyqualities"
+                 }
+               },
+               "odmAction": {
+                 "type": "object",
+                 "additionalProperties": {
+                   "$ref": "#/definitions/actionqualities"
+                 }
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 30]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+               },
+               "odmEvent": {
+                 "type": "object",
+                 "additionalProperties": {
+                   "$ref": "#/definitions/eventqualities"
+                 }
+               },
+               "odmData": {
+                 "type": "object",
+                 "additionalProperties": {
+                   "$ref": "#/definitions/dataqualities"
+                 }
+               }
+             }
+           }
+         ]
+       },
+       "propertyqualities": {
+         "$ref": "#/definitions/dataqualities"
+       },
+       "dataqualities": {
+         "allOf": [
+           {
+             "$ref": "#/definitions/commonqualities"
+           },
+           {
+             "$ref": "#/definitions/jsonschema"
+           },
+           {
+             "type": "object",
+             "properties": {
+               "units": {
+                 "type": "string"
+               },
+               "scaleMinimum": {
+                 "type": "number"
+               },
+               "scaleMaximum": {
+                 "type": "number"
+               },
+               "observable": {
+                 "type": "boolean"
+               },
+               "readable": {
+                 "type": "boolean"
+               },
+               "writable": {
+                 "type": "boolean"
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 31]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+               },
+               "nullable": {
+                 "type": "boolean"
+               },
+               "widthInBits": {
+                 "type": "number"
+               },
+               "subtype": {
+                 "type": "string",
+                 "enum": [
+                   "bytestring",
+                   "unixtime"
+                 ]
+               },
+               "contentFormat": {
+                 "type": "string"
+               }
+             }
+           }
+         ]
+       },
+       "jsonschema": {
+         "type": "object",
+         "properties": {
+           "type": {
+             "type": "string",
+             "enum": [
+               "number",
+               "string",
+               "boolean",
+               "integer",
+               "array"
+             ]
+           },
+           "enum": {
+             "type": "array",
+             "items": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minItems": 1
+           },
+           "const": {
+             "$ref": "#/definitions/allowed-types"
+           },
+           "default": {
+             "$ref": "#/definitions/allowed-types"
+           },
+           "minimum": {
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 32]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+             "type": "number"
+           },
+           "maximum": {
+             "type": "number"
+           },
+           "exclusiveMinimum": {
+             "anyOf": [
+               {
+                 "type": "boolean"
+               },
+               {
+                 "type": "number"
+               }
+             ]
+           },
+           "exclusiveMaximum": {
+             "anyOf": [
+               {
+                 "type": "boolean"
+               },
+               {
+                 "type": "number"
+               }
+             ]
+           },
+           "multipleOf": {
+             "type": "number"
+           },
+           "minLength": {
+             "type": "number"
+           },
+           "maxLength": {
+             "type": "number"
+           },
+           "pattern": {
+             "type": "string"
+           },
+           "format": {
+             "type": "string",
+             "enum": [
+               "date-time",
+               "date",
+               "time",
+               "uri",
+               "uri-reference",
+               "uuid"
+             ]
+           },
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 33]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+           "minItems": {
+             "type": "number"
+           },
+           "maxItems": {
+             "type": "number"
+           },
+           "uniqueItems": {
+             "type": "boolean"
+           },
+           "items": {
+             "type": "object",
+             "properties": {
+               "description": {
+                 "type": "string"
+               },
+               "type": {
+                 "type": "string",
+                 "enum": [
+                   "number",
+                   "string",
+                   "boolean",
+                   "integer"
+                 ]
+               },
+               "minimum": {
+                 "type": "number"
+               },
+               "maximum": {
+                 "type": "number"
+               },
+               "enum": {
+                 "type": "array",
+                 "minItems": 1
+               },
+               "format": {
+                 "type": "string"
+               },
+               "minLength": {
+                 "type": "number"
+               },
+               "maxLength": {
+                 "type": "number"
+               }
+             }
+           }
+         }
+       },
+       "allowed-types": {
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 34]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+         "anyOf": [
+           {
+             "type": "number"
+           },
+           {
+             "type": "string"
+           },
+           {
+             "type": "boolean"
+           },
+           {
+             "type": "null"
+           },
+           {
+             "type": "array",
+             "items": {
+               "type": "number"
+             }
+           },
+           {
+             "type": "array",
+             "items": {
+               "type": "string"
+             }
+           },
+           {
+             "type": "array",
+             "items": {
+               "type": "boolean"
+             }
+           }
+         ]
+       },
+       "actionqualities": {
+         "allOf": [
+           {
+             "$ref": "#/definitions/commonqualities"
+           },
+           {
+             "type": "object",
+             "properties": {
+               "odmInputData": {
+                 "$ref": "#/definitions/pointer-list"
+               },
+               "odmRequiredInputData": {
+                 "$ref": "#/definitions/pointer-list"
+               },
+               "odmOutputData": {
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 35]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
+
+                 "$ref": "#/definitions/pointer-list"
+               }
+             }
+           }
+         ]
+       },
+       "eventqualities": {
+         "allOf": [
+           {
+             "$ref": "#/definitions/commonqualities"
+           },
+           {
+             "type": "object",
+             "properties": {
+               "odmOutputData": {
+                 "$ref": "#/definitions/pointer-list"
+               }
+             }
+           }
+         ]
+       },
+       "productqualities": {
+         "$ref": "#/definitions/thingqualities"
+       }
+     }
+   }
 
 Acknowledgements
 
-   This strawman draft is based on "sdf.md" in the one-data-model
-   "language" repository, as well as Ari Keranen's "alt-schema" from the
-   Ericsson Research "ipso-odm" repository.
+   This strawman draft is based on "sdf.md" and "sdf-schema.json" in the
+   one-data-model "language" repository, as well as Ari Keranen's "alt-
+   schema" from the Ericsson Research "ipso-odm" repository.
 
 Contributors
 
@@ -1424,6 +2009,14 @@ Contributors
 
 
 Authors' Addresses
+
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 36]
+
+Internet-Draft                  OneDM SDF                       May 2020
+
 
    Michael Koster (editor)
    SmartThings
@@ -1453,4 +2046,27 @@ Authors' Addresses
 
 
 
-Koster & Bormann        Expires 12 November 2020               [Page 26]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann        Expires 12 November 2020               [Page 37]

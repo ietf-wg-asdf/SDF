@@ -693,25 +693,35 @@ odmProduct may define or include the following ODM types:
 
 --- back
 
-# Formal Syntax of SDF
+# Formal Syntax of SDF {#syntax}
 
-This appendix describes the syntax of SDF using CDDL {{-cddl}}.
-Note that this appendix was derived from Ari Keranen's "alt-schema",
-so it only contains the syntax that is currently in use at the One
-Data Model `playground` repository.
+This appendix describes the syntax of SDF using CDDL {{-cddl}}.  Note
+that this appendix was derived from Ari Keranen's "alt-schema" and
+Michael Kosters "schema", with a view of covering the syntax that is
+currently in use at the One Data Model `playground` repository.
 
 TODO: Align with full framework syntax, as required.
 
 ~~~ cddl
-{::include sdfalt.cddl}
+{::include sdf.cddl}
+~~~
+
+
+# json-schema.org Rendition of SDF Syntax
+
+This appendix describes the syntax of SDF defined in {{syntax}}, but
+using a version of the description techniques advertised on json-schema.org.
+
+~~~ jso.json
+{::include sdf.jso.json}
 ~~~
 
 # Acknowledgements
 {: numbered="no"}
 
-This strawman draft is based on `sdf.md` in the one-data-model
-`language` repository, as well as Ari Keranen's "alt-schema" from the
-Ericsson Research `ipso-odm` repository.
+This strawman draft is based on `sdf.md` and `sdf-schema.json` in the
+one-data-model `language` repository, as well as Ari Keranen's
+"alt-schema" from the Ericsson Research `ipso-odm` repository.
 
 <!--  LocalWords:  SDF
  -->

@@ -1097,6 +1097,12 @@ table {
 <p id="section-abstract-3">This document describes definitions of OneDM Objects and their associated Events, Actions, Properties, and Data types.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 <p id="section-abstract-4">The JSON format of an SDF definition is described in this document.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
 </section>
+<section class="note" id="section-note.1">
+      <h2 id="name-contributing">
+<a href="#name-contributing" class="section-name selfRef">Contributing</a>
+      </h2>
+<p id="section-note.1-1">(point to github repo)<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+</section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
         <h2 id="name-status-of-this-memo">
@@ -1243,13 +1249,16 @@ table {
             <p id="section-toc.1-1.11.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="xref">Formal Syntax of SDF</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-appendix.b" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="xref">json-schema.org Rendition of SDF Syntax</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.15.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </nav>
@@ -1459,7 +1468,7 @@ namespace for the SDF definition file.<a href="#section-4.2-3" class="pilcrow">�
 </div>
 <p id="section-4.2-7">If no defaultnamespace setting is given, the SDF definition file does not
 contribute to a global namespace.  As the defaultnamespace gives a
-namespace short name, its presence requires a namespace map contains a
+namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.<a href="#section-4.2-7" class="pilcrow">¶</a></p>
 <p id="section-4.2-8">If no namespace map is given, no short names for namespace URIs are
 set up, and no defaultnamespace can be given.<a href="#section-4.2-8" class="pilcrow">¶</a></p>
@@ -1494,7 +1503,8 @@ set up, and no defaultnamespace can be given.<a href="#section-4.2-8" class="pil
 <a href="#name-example-object-definition" class="selfRef">Example Object definition</a>
           </figcaption></figure>
 </div>
-<p id="section-4.3-7">This example defines an Object "foo" is defined in the default namespace, containing a property "foo.bar",  of type boolean.<a href="#section-4.3-7" class="pilcrow">¶</a></p>
+<p id="section-4.3-7">This example defines an Object "foo" that is defined in the default namespace, containing a property
+<code>odm:/odmObject/foo/odmProperty/bar</code>, with data of type boolean.<a href="#section-4.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1514,12 +1524,13 @@ contribute to the global namespace.)<a href="#section-5-1" class="pilcrow">¶</a
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-structure" class="section-name selfRef">Structure</a>
         </h3>
 <p id="section-5.1-1">Global names look exactly like https:// URIs with attached fragment identifiers.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">There is no intention that these URIs can be dereferenced.
+<p id="section-5.1-2">There is no intention to require that these URIs can be dereferenced.
+
 (However, as future versions of SDF might find a use for dereferencing
 global names, the URI should be chosen in such a way that this may
 become possible in the future.)<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">The absolute URI of a global name should be a URI as per Section 3 of
-<span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span>, with a scheme of "https" and a hier-part.
+<span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span>, with a scheme of "https" and a path (<code>hier-part</code> in <span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span>).
 For the present version of this specification, the query part should
 not be used (it might be used in later versions).<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.1-4">The fragment identifier is constructed as per Section 6 of
@@ -1600,7 +1611,8 @@ namespace map.<a href="#section-5.3-10" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-5.3-12.1">copying elements via odmRef values<a href="#section-5.3-12.1" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-12.2">pointing to elements via odmRequired value elements<a href="#section-5.3-12.2" class="pilcrow">¶</a>
+<li id="section-5.3-12.2">pointing to elements via odmRequired value elements or as
+odmOutputData and similar<a href="#section-5.3-12.2" class="pilcrow">¶</a>
 </li>
 </ul>
 </section>
@@ -2453,7 +2465,27 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
           </h4>
 <p id="section-9.2.1-1">An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "odmRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.<a href="#section-9.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.2.1-2">ISSUE: Can qualities from the source definition be overridden?
-The above only says "added".<a href="#section-9.2.1-2" class="pilcrow">¶</a></p>
+The above only says "added".
+Yes, we do want to enable overriding, but need to warn specifiers not
+to use this in a way that contradicts the referenced semantics.<a href="#section-9.2.1-2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-9.2.1-3">
+<pre>
+ 
+"odmData": 
+  "length" : {
+    "type": "number",
+    "minimum": 0,
+    "units": "m"
+    "description": "There can be no negative lengths"
+  }
+...
+  "cable-length" : {
+    "odmRef": "#/odmData/length"
+    "minimum": 0.05,
+    "description": "cables must be at least 5 cm"
+  }
+</pre><a href="#section-9.2.1-3" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 </section>
@@ -2652,31 +2684,34 @@ The above only says "added".<a href="#section-9.2.1-2" class="pilcrow">¶</a></p
 <span class="refAuthor">Birbeck, M.</span><span class="refAuthor"> and S. McCarron</span>, <span class="refTitle">"CURIE Syntax 1.0"</span>, <span class="seriesInfo">World Wide Web Consortium NOTE NOTE-curie-20101216</span>, <time datetime="2010-12-16">16 December 2010</time>, <span>&lt;<a href="http://www.w3.org/TR/2010/NOTE-curie-20101216">http://www.w3.org/TR/2010/NOTE-curie-20101216</a>&gt;</span>. </dd>
 </dl>
 </section>
-<div id="formal-syntax-of-sdf">
+<div id="syntax">
 <section id="section-appendix.a">
       <h2 id="name-formal-syntax-of-sdf">
 <a href="#section-appendix.a" class="section-number selfRef">Appendix A. </a><a href="#name-formal-syntax-of-sdf" class="section-name selfRef">Formal Syntax of SDF</a>
       </h2>
-<p id="section-appendix.a-1">This appendix describes the syntax of SDF using CDDL <span>[<a href="#RFC8610" class="xref">RFC8610</a>]</span>.
-Note that this appendix was derived from Ari Keranen's "alt-schema",
-so it only contains the syntax that is currently in use at the One
-Data Model <code>playground</code> repository.<a href="#section-appendix.a-1" class="pilcrow">¶</a></p>
+<p id="section-appendix.a-1">This appendix describes the syntax of SDF using CDDL <span>[<a href="#RFC8610" class="xref">RFC8610</a>]</span>.  Note
+that this appendix was derived from Ari Keranen's "alt-schema" and
+Michael Kosters "schema", with a view of covering the syntax that is
+currently in use at the One Data Model <code>playground</code> repository.<a href="#section-appendix.a-1" class="pilcrow">¶</a></p>
 <p id="section-appendix.a-2">TODO: Align with full framework syntax, as required.<a href="#section-appendix.a-2" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft art-cddl" id="section-appendix.a-3">
 <pre>
-start = sdf-alt-schema
+start = sdf-syntax
 
-;;; sdf-alt-schema: Alternative ODM SDF schema (work in progress 20200304)
+;;; sdf-can-schema.json: SDF Schema
+; *** $schema = http://json-schema.org/draft-07/schema#
 
-sdf-alt-schema = {
- info: sdfinfo
- ? namespace: named-text
- ? defaultNamespace: text
- ? odmObject: named-obj-props
- ? odmThing: sdfthing
- ? odmProperty: named-afford-props
- ? odmAction: named-afford-props
- ? odmEvent: named-afford-props
+sdf-syntax = {
+ info: sdfinfo                  ; don't require this in flexible syntax, though
+ ? namespace: named&lt;text&gt;
+ ? defaultnamespace: text
+ ? odmThing: named&lt;thingqualities&gt;       ; Thing is a composition of objects that work together in some way
+ ? odmProduct: named&lt;productqualities&gt;   ; Product is a composition of things and objects that can model a SKU-level instance of a product
+ ? odmObject: named&lt;objectqualities&gt;     ; Object is a set of Properties, Actions, and Events that together perform a particular function
+ ? odmProperty: named&lt;propertyqualities&gt; ; Property represents the state of an instance of an object
+ ? odmAction: named&lt;actionqualities&gt;     ; Action is a directive to invoke an application layer verb associated with an object
+ ? odmEvent: named&lt;eventqualities&gt;       ; Event represents an occurence of something associated with an object
+ ? odmData: named&lt;dataqualities&gt;         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
 }
 
 sdfinfo = {
@@ -2686,88 +2721,567 @@ sdfinfo = {
  license: text
 }
 
+; Shortcut for a map that gives names to instances of X
+named&lt;X&gt; = { * text =&gt; X }
 
-named-text = {
- * text =&gt; text
+sdf-pointer = text ; .regexp curie-regexp -- TO DO!
+pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for odmRequired in odmobject-multiple_axis_joystick.sdf.json
+
+commonqualities = (
+ ? description: text            ; long text (no constraints)
+ ? label: text                  ; short text (no constraints); default to key
+ ? $comment: text               ; source code comments only, no semantics
+ ? name: text                   ; DELETE ME (deprecated)
+ ? odmRef: sdf-pointer
+ ? odmRequired: pointer-list
+)
+
+; for building hierarchy
+thingqualities = {
+ commonqualities,
+ ? odmObject: named&lt;objectqualities&gt;
+ ? odmThing: named&lt;thingqualities&gt;
 }
 
-sdfthing = {
- ? odmObject: named-obj-props
- ? odmThing: sdfthing
+productqualities = thingqualities ; ISSUE: get rid of odmProduct?
+
+; for single objects
+objectqualities = {
+ commonqualities,
+ ? odmProperty: named&lt;propertyqualities&gt;
+ ? odmAction: named&lt;actionqualities&gt;
+ ? odmEvent: named&lt;eventqualities&gt;
+ ? odmData: named&lt;dataqualities&gt;
 }
 
-named-obj-props = {
- * text =&gt; obj-props
+propertyqualities = dataqualities
+
+actionqualities = {
+ commonqualities,
+ ? odmInputData: pointer-list
+ ? odmRequiredInputData: pointer-list
+ ? odmOutputData: pointer-list
 }
 
-obj-props = {
- ? description: text
- ? name: text
- ? odmRequired: [* sdf-pointer]
- ? odmProperty: named-afford-props
- ? odmAction: named-afford-props
- ? odmEvent: named-afford-props
+eventqualities = {
+ commonqualities
+ ? odmOutputData: pointer-list
 }
 
-named-afford-props = {
- * text =&gt; afford-props
-}
-
-afford-props = {
- ? description: text
- ? name: text
+dataqualities = {               ; also propertyqualities
+ commonqualities,
+ jsonschema,
+ ? units: text
+ ? scaleMinimum: number
+ ? scaleMaximum: number
+ ? observable: bool
  ? readable: bool
  ? writable: bool
- ? observable: bool
- ? type: "number" / "string" / "boolean" / "integer" / "array" / "object"
- ? subtype: "unixtime" / "bytestring"
- ? enum: [+ any]
- ? const: number / text / bool / [* any] / anymap / null
- ? default: number / text / bool / [* any] / anymap / null
- ? $comment: text
- ? odmRef: sdf-pointer
- ? minimum: number
- ? maximum: number
- ? exclusiveMinimum: bool
- ? exclusiveMaximum: bool
- ? minItems: number
- ? maxItems: number
- ? minLength: number
- ? maxLength: number
- ? uniqueItems: bool
- ? units: text
- ? items: {
-     ? type: text
-   }
- ? pattern: text
- ? format: "date-time" / "date" / "time" / "duration"
-           / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6"
-           / "uri" / "uri-reference" / "iri" / "iri-reference"
-           / "uuid" / "uri-template" / "json-pointer" / "relative-json-pointer"
-           / "regex"
+ ? nullable: bool
+ ? widthInBits: number
+ ? subtype: "bytestring" / "unixtime"
+ ? contentFormat: text
 }
 
-sdf-pointer = text .regexp uri-reference-regexp
+allowed-types = number / text / bool / null
+              / [* number] / [* text] / [* bool]
 
-uri-reference-regexp = "TODO URI REF"
-
-anymap = { * any =&gt; any }
+jsonschema = (
+ ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
+ ? enum: [+ allowed-types]                                              ; should validate against type
+ ? const: allowed-types
+ ? default: allowed-types
+ ; number/integer constraints
+ ? minimum: number
+ ? maximum: number
+ ? exclusiveMinimum: bool / number      ; jso draft 4/7
+ ? exclusiveMaximum: bool / number      ; jso draft 4/7
+ ? multipleOf: number                   ; ISSUE: Do we need this?
+ ; text string constraints
+ ? minLength: number
+ ? maxLength: number
+ ? pattern: text                ; regexp
+ ? format: "date-time" / "date" / "time"
+           / "uri" / "uri-reference" / "uuid"
+           ; expand on demand
+ ; array constraints
+ ? minItems: number
+ ? maxItems: number
+ ? uniqueItems: bool
+ ? items: { ;;; ultimately, this will be mostly recursive, but, for now
+            ;;; let's find out what we actually need
+     ? description: text            ; long text (no constraints)
+     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need description
+     ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
+     ; jso subset
+     ? minimum: number
+     ? maximum: number
+     ? enum: [+ any]
+     ? format: text
+     ? minLength: number
+     ? maxLength: number
+   }
+)
 </pre><a href="#section-appendix.a-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
-<div id="acknowledgements">
+<div id="json-schemaorg-rendition-of-sdf-syntax">
 <section id="section-appendix.b">
+      <h2 id="name-json-schemaorg-rendition-of">
+<a href="#section-appendix.b" class="section-number selfRef">Appendix B. </a><a href="#name-json-schemaorg-rendition-of" class="section-name selfRef">json-schema.org Rendition of SDF Syntax</a>
+      </h2>
+<p id="section-appendix.b-1">This appendix describes the syntax of SDF defined in <a href="#syntax" class="xref">Appendix A</a>, but
+using a version of the description techniques advertised on json-schema.org.<a href="#section-appendix.b-1" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft art-jso.json" id="section-appendix.b-2">
+<pre>
+{
+  "title": "sdfcan.cddl",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/sdf-syntax",
+  "definitions": {
+    "sdf-syntax": {
+      "type": "object",
+      "required": [
+        "info"
+      ],
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/sdfinfo"
+        },
+        "namespace": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultnamespace": {
+          "type": "string"
+        },
+        "odmThing": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/thingqualities"
+          }
+        },
+        "odmProduct": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/productqualities"
+          }
+        },
+        "odmObject": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/objectqualities"
+          }
+        },
+        "odmProperty": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/propertyqualities"
+          }
+        },
+        "odmAction": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/actionqualities"
+          }
+        },
+        "odmEvent": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/eventqualities"
+          }
+        },
+        "odmData": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/dataqualities"
+          }
+        }
+      }
+    },
+    "sdfinfo": {
+      "type": "object",
+      "required": [
+        "title",
+        "version",
+        "copyright",
+        "license"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "copyright": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        }
+      }
+    },
+    "thingqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "odmObject": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/objectqualities"
+              }
+            },
+            "odmThing": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/thingqualities"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "commonqualities": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "odmRef": {
+          "$ref": "#/definitions/sdf-pointer"
+        },
+        "odmRequired": {
+          "$ref": "#/definitions/pointer-list"
+        }
+      }
+    },
+    "sdf-pointer": {
+      "type": "string"
+    },
+    "pointer-list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/sdf-pointer"
+      }
+    },
+    "objectqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "odmProperty": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/propertyqualities"
+              }
+            },
+            "odmAction": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/actionqualities"
+              }
+            },
+            "odmEvent": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/eventqualities"
+              }
+            },
+            "odmData": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/dataqualities"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "propertyqualities": {
+      "$ref": "#/definitions/dataqualities"
+    },
+    "dataqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "$ref": "#/definitions/jsonschema"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "units": {
+              "type": "string"
+            },
+            "scaleMinimum": {
+              "type": "number"
+            },
+            "scaleMaximum": {
+              "type": "number"
+            },
+            "observable": {
+              "type": "boolean"
+            },
+            "readable": {
+              "type": "boolean"
+            },
+            "writable": {
+              "type": "boolean"
+            },
+            "nullable": {
+              "type": "boolean"
+            },
+            "widthInBits": {
+              "type": "number"
+            },
+            "subtype": {
+              "type": "string",
+              "enum": [
+                "bytestring",
+                "unixtime"
+              ]
+            },
+            "contentFormat": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "jsonschema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "number",
+            "string",
+            "boolean",
+            "integer",
+            "array"
+          ]
+        },
+        "enum": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/allowed-types"
+          },
+          "minItems": 1
+        },
+        "const": {
+          "$ref": "#/definitions/allowed-types"
+        },
+        "default": {
+          "$ref": "#/definitions/allowed-types"
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "exclusiveMinimum": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "exclusiveMaximum": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "multipleOf": {
+          "type": "number"
+        },
+        "minLength": {
+          "type": "number"
+        },
+        "maxLength": {
+          "type": "number"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "date-time",
+            "date",
+            "time",
+            "uri",
+            "uri-reference",
+            "uuid"
+          ]
+        },
+        "minItems": {
+          "type": "number"
+        },
+        "maxItems": {
+          "type": "number"
+        },
+        "uniqueItems": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "number",
+                "string",
+                "boolean",
+                "integer"
+              ]
+            },
+            "minimum": {
+              "type": "number"
+            },
+            "maximum": {
+              "type": "number"
+            },
+            "enum": {
+              "type": "array",
+              "minItems": 1
+            },
+            "format": {
+              "type": "string"
+            },
+            "minLength": {
+              "type": "number"
+            },
+            "maxLength": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "allowed-types": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        }
+      ]
+    },
+    "actionqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "odmInputData": {
+              "$ref": "#/definitions/pointer-list"
+            },
+            "odmRequiredInputData": {
+              "$ref": "#/definitions/pointer-list"
+            },
+            "odmOutputData": {
+              "$ref": "#/definitions/pointer-list"
+            }
+          }
+        }
+      ]
+    },
+    "eventqualities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/commonqualities"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "odmOutputData": {
+              "$ref": "#/definitions/pointer-list"
+            }
+          }
+        }
+      ]
+    },
+    "productqualities": {
+      "$ref": "#/definitions/thingqualities"
+    }
+  }
+}
+</pre><a href="#section-appendix.b-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="acknowledgements">
+<section id="section-appendix.c">
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="section-appendix.b-1">This strawman draft is based on <code>sdf.md</code> in the one-data-model
-<code>language</code> repository, as well as Ari Keranen's "alt-schema" from the
-Ericsson Research <code>ipso-odm</code> repository.<a href="#section-appendix.b-1" class="pilcrow">¶</a></p>
+<p id="section-appendix.c-1">This strawman draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the
+one-data-model <code>language</code> repository, as well as Ari Keranen's
+"alt-schema" from the Ericsson Research <code>ipso-odm</code> repository.<a href="#section-appendix.c-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
-<section id="section-appendix.c">
+<section id="section-appendix.d">
       <h2 id="name-contributors">
 <a href="#name-contributors" class="section-name selfRef">Contributors</a>
       </h2>
@@ -2789,7 +3303,7 @@ Ericsson Research <code>ipso-odm</code> repository.<a href="#section-appendix.b-
 </section>
 </div>
 <div id="authors-addresses">
-<section id="section-appendix.d">
+<section id="section-appendix.e">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
