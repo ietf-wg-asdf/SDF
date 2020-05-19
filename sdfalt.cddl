@@ -37,57 +37,71 @@ obj-props = {
  ? odmEvent: named<afford-props>
 }
 
-afford-props = {
- ? description: text
- ? name: text
- ? readable: bool
- ? writable: bool
- ? observable: bool
- ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
- ? subtype: "unixtime" / "bytestring"
- ? enum: [+ any]
- ? const: number / text / bool / [* any] / anymap / null
- ? default: number / text / bool / [* any] / anymap / null
+allowed-types = number / text / bool / null
+              / [* number] / [* text] / [* bool]
+
+commonqualities = (
+ ? description: text            ; long text (no constraints)
+ ? label: text                  ; short text (no constraints); default to key
  ? $comment: text
  ? odmRef: sdf-pointer
- ? minimum: number
- ? maximum: number
- ? exclusiveMinimum: bool
- ? exclusiveMaximum: bool
- ? minItems: number
- ? maxItems: number
- ? minLength: number
- ? maxLength: number
- ? uniqueItems: bool
+ ? odmRequired: [* sdf-pointer]
+)
+
+afford-props = dataqualities
+
+dataqualities = {               ; also propertyqualities
+ commonqualities,
+ jsonschema,
+ ? name: text                   ; DELETE ME
  ? units: text
- ? items: { ;;; ultimately, this will be mostly recursive, but, for now
-            ;;; let's find out what we actually need
-     ? name: text        ;??? needed for odmobject-printer_queue.sdf.json
-     ? type: text
-     ? description: text ; needed for odmobject-lock_code.sdf.json
-     ? $comment: text
-     ? minimum: number   ; needed for odmobject-colour_chroma.sdf.json
-     ? maximum: number   ; needed for odmobject-colour_chroma.sdf.json
-     ? enum: [+ any]     ; needed for odmobject-powersource.sdf.json
-;     ? properties: any   ; needed for odmobject-mediasourcelist.sdf.json
-     ? format: text      ; needed for odmobject-printer_queue.sdf.json
-     ? minLength: number ; needed for odmobject-printer_queue.sdf.json
-     ? maxLength: number ; needed for odmobject-printer_queue.sdf.json
-;     ? writable: bool    ;??? needed for odmobject-printer_queue.sdf.json
-;     ? minItems: number         ;??? needed for odmobject-airflow.sdf.json
-;     ? maxItems: number         ;??? needed for odmobject-airflow.sdf.json
-;     ? uniqueItems: bool        ;??? needed for odmobject-airflow.sdf.json
-   }
- ? pattern: text
- ? format: "date-time" / "date" / "time" / "duration"
-           / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6"
-           / "uri" / "uri-reference" / "iri" / "iri-reference"
-           / "uuid" / "uri-template" / "json-pointer" / "relative-json-pointer"
-           / "regex"
+ ? scaleMinimum: number
+ ? scaleMaximum: number
+ ? observable: bool
+ ? readable: bool
+ ? writable: bool
+ ? nullable: bool
+ ? widthInBits: number
+ ? subtype: "bytestring" / "unixtime"
+ ? contentFormat: text
 }
 
-sdf-pointer = text .regexp uri-reference-regexp
+jsonschema = (
+ ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
+ ? enum: [+ any]
+ ? const: allowed-types
+ ? default: allowed-types
+ ; number constraints
+ ? minimum: number
+ ? maximum: number
+ ? exclusiveMinimum: bool / number      ; jso draft 4/7
+ ? exclusiveMaximum: bool / number      ; jso draft 4/7
+ ; array constraints
+ ? minItems: number
+ ? maxItems: number
+ ? uniqueItems: bool
+ ; string constraints
+ ? minLength: number
+ ? maxLength: number
+ ? items: { ;;; ultimately, this will be mostly recursive, but, for now
+            ;;; let's find out what we actually need
+     ; commonqualities, -- leaving this out for non-complex data types
+     ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
+     ; jso subset
+     ? minimum: number
+     ? maximum: number
+     ? enum: [+ any]
+     ? format: text
+     ? minLength: number
+     ? maxLength: number
+   }
+ ? pattern: text                ; regexp
+ ? format: "date-time" / "date" / "time"
+           / "uri" / "uri-reference" / "uuid"
+           ; expand on demand
+)
 
-uri-reference-regexp = ".*"; TODO URI REF
+sdf-pointer = text .regexp curie
 
-anymap = { * any => any }
+curie = ".*"; TODO URI REF
+
