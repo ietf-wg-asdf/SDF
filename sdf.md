@@ -72,6 +72,10 @@ This document describes definitions of OneDM Objects and their associated Events
 
 The JSON format of an SDF definition is described in this document.
 
+--- note_Contributing
+
+(point to github repo)
+
 --- middle
 
 
@@ -618,7 +622,7 @@ An existing definition may be used as a template for a new definition, that is, 
 ISSUE: Can qualities from the source definition be overridden?
 The above only says "added".
 Yes, we do want to enable overriding, but need to warn specifiers not
-to use this in a way that changes the semantics.
+to use this in a way that contradicts the referenced semantics.
 
 ~~~
  
@@ -627,12 +631,12 @@ to use this in a way that changes the semantics.
     "type": "number",
     "minimum": 0,
     "units": "m"
-    "description": "There can be no negative lenghts"
+    "description": "There can be no negative lengths"
   }
 ...
   "cable-length" : {
     "odmRef": "#/odmData/length"
-    "minimum": 0,05
+    "minimum": 0.05,
     "description": "cables must be at least 5 cm"
   }
 ~~~
