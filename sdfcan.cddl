@@ -1,11 +1,10 @@
-start = sdf-can-schema
+start = sdf-syntax
 
 ;;; sdf-can-schema.json: SDF Schema
 ; *** $schema = http://json-schema.org/draft-07/schema#
 
-
-sdf-can-schema = {
- ? info: sdfinfo
+sdf-syntax = {
+ info: sdfinfo                  ; don't require this in flexible syntax, though
  ? namespace: named<text>
  ? defaultnamespace: text
  ? odmThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
@@ -27,39 +26,30 @@ sdfinfo = {
 ; Shortcut for a map that gives names to instances of X
 named<X> = { * text => X }
 
-sdf-pointer = text .regexp uri-reference-regexp
-pointer-list = [* sdf-pointer]
-
-
-ref = {
- ? $ref: text                   ; XXX why is this text and not sdf-pointer?
-}
+sdf-pointer = text ; .regexp curie-regexp -- TO DO!
+pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for odmRequired in odmobject-multiple_axis_joystick.sdf.json
 
 commonqualities = (
- ? description: text
- ? $comment: text
- ? title: text
- ? name: text
+ ? description: text            ; long text (no constraints)
+ ? label: text                  ; short text (no constraints); default to key
+ ? $comment: text               ; source code comments only, no semantics
+ ? name: text                   ; DELETE ME (deprecated)
  ? odmRef: sdf-pointer
- ? odmType: ref
  ? odmRequired: pointer-list
 )
 
+; for building hierarchy
 thingqualities = {
  commonqualities,
  ? odmObject: named<objectqualities>
  ? odmThing: named<thingqualities>
 }
 
-productqualities = {
- commonqualities,
- ? odmObject: named<objectqualities>
- ? odmThing: named<thingqualities>
-}
+productqualities = thingqualities ; ISSUE: get rid of odmProduct?
 
+; for single objects
 objectqualities = {
  commonqualities,
- ? odmObject: named<objectqualities>
  ? odmProperty: named<propertyqualities>
  ? odmAction: named<actionqualities>
  ? odmEvent: named<eventqualities>
@@ -80,7 +70,7 @@ eventqualities = {
  ? odmOutputData: pointer-list
 }
 
-dataqualities = {
+dataqualities = {               ; also propertyqualities
  commonqualities,
  jsonschema,
  ? units: text
@@ -95,38 +85,42 @@ dataqualities = {
  ? contentFormat: text
 }
 
+allowed-types = number / text / bool / null
+              / [* number] / [* text] / [* bool]
 
 jsonschema = (
- ? $comment: text
- ? $ref: sdf-pointer
- ? type: "number" / "string" / "boolean" / "integer" / "array" / "object"
- ? enum: [+ any]
- ? const: number / text / bool / null / [* any] / anymap ; @@@ object not well-defined @@@
- ? default: number / text / bool / null / [* any] / anymap ; @@@ object not well-defined @@@
- ? pattern: text
- ? format: "date-time" / "date" / "time" / "duration"
-         / "email" / "idn-email" / "hostname" / "idn-hostname" / "ipv4" / "ipv6"
-         / "uri" / "uri-reference" / "iri" / "iri-reference" / "uuid" / "uri-template"
-         / "json-pointer" / "relative-json-pointer" / "regex"
+ ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
+ ? enum: [+ allowed-types]                                              ; should validate against type
+ ? const: allowed-types
+ ? default: allowed-types
+ ; number/integer constraints
  ? minimum: number
  ? maximum: number
- ? exclusiveMinimum: bool
- ? exclusiveMaximum: bool
- ? multipleOf: number
- ? maxLength: number
+ ? exclusiveMinimum: bool / number      ; jso draft 4/7
+ ? exclusiveMaximum: bool / number      ; jso draft 4/7
+ ? multipleOf: number                   ; ISSUE: Do we need this?
+ ; text string constraints
  ? minLength: number
- ? oneOf: [+ any]
- ? anyOf: [+ any]
- ? allOf: [+ any]
- ? items: [* any] / anymap ; @@@ object not well-defined @@@
- ? contains: [* any] / anymap ; @@@ object not well-defined @@@
+ ? maxLength: number
+ ? pattern: text                ; regexp
+ ? format: "date-time" / "date" / "time"
+           / "uri" / "uri-reference" / "uuid"
+           ; expand on demand
+ ; array constraints
  ? minItems: number
  ? maxItems: number
  ? uniqueItems: bool
- ? properties: anymap ; @@@ object not well-defined @@@
+ ? items: { ;;; ultimately, this will be mostly recursive, but, for now
+            ;;; let's find out what we actually need
+     ? description: text            ; long text (no constraints)
+     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need description
+     ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
+     ; jso subset
+     ? minimum: number
+     ? maximum: number
+     ? enum: [+ any]
+     ? format: text
+     ? minLength: number
+     ? maxLength: number
+   }
 )
-
-
-uri-reference-regexp = ".*"; TODO URI REF
-
-anymap = { * any => any }
