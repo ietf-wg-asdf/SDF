@@ -1,10 +1,13 @@
 {
   "title": "sdfcan.cddl",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$ref": "#/definitions/sdf-can-schema",
+  "$ref": "#/definitions/sdf-syntax",
   "definitions": {
-    "sdf-can-schema": {
+    "sdf-syntax": {
       "type": "object",
+      "required": [
+        "info"
+      ],
       "properties": {
         "info": {
           "$ref": "#/definitions/sdfinfo"
@@ -115,10 +118,10 @@
         "description": {
           "type": "string"
         },
-        "$comment": {
+        "label": {
           "type": "string"
         },
-        "title": {
+        "$comment": {
           "type": "string"
         },
         "name": {
@@ -127,9 +130,6 @@
         "odmRef": {
           "$ref": "#/definitions/sdf-pointer"
         },
-        "odmType": {
-          "$ref": "#/definitions/ref"
-        },
         "odmRequired": {
           "$ref": "#/definitions/pointer-list"
         }
@@ -137,14 +137,6 @@
     },
     "sdf-pointer": {
       "type": "string"
-    },
-    "ref": {
-      "type": "object",
-      "properties": {
-        "$ref": {
-          "type": "string"
-        }
-      }
     },
     "pointer-list": {
       "type": "array",
@@ -160,12 +152,6 @@
         {
           "type": "object",
           "properties": {
-            "odmObject": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/objectqualities"
-              }
-            },
             "odmProperty": {
               "type": "object",
               "additionalProperties": {
@@ -249,12 +235,6 @@
     "jsonschema": {
       "type": "object",
       "properties": {
-        "$comment": {
-          "type": "string"
-        },
-        "$ref": {
-          "$ref": "#/definitions/sdf-pointer"
-        },
         "type": {
           "type": "string",
           "enum": [
@@ -262,57 +242,56 @@
             "string",
             "boolean",
             "integer",
-            "array",
-            "object"
+            "array"
           ]
         },
         "enum": {
           "type": "array",
+          "items": {
+            "$ref": "#/definitions/allowed-types"
+          },
           "minItems": 1
         },
         "const": {
+          "$ref": "#/definitions/allowed-types"
+        },
+        "default": {
+          "$ref": "#/definitions/allowed-types"
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "exclusiveMinimum": {
           "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            },
             {
               "type": "boolean"
             },
             {
-              "type": "null"
-            },
-            {
-              "type": "array"
-            },
-            {
-              "$ref": "#/definitions/anymap"
+              "type": "number"
             }
           ]
         },
-        "default": {
+        "exclusiveMaximum": {
           "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            },
             {
               "type": "boolean"
             },
             {
-              "type": "null"
-            },
-            {
-              "type": "array"
-            },
-            {
-              "$ref": "#/definitions/anymap"
+              "type": "number"
             }
           ]
+        },
+        "multipleOf": {
+          "type": "number"
+        },
+        "minLength": {
+          "type": "number"
+        },
+        "maxLength": {
+          "type": "number"
         },
         "pattern": {
           "type": "string"
@@ -323,75 +302,9 @@
             "date-time",
             "date",
             "time",
-            "duration",
-            "email",
-            "idn-email",
-            "hostname",
-            "idn-hostname",
-            "ipv4",
-            "ipv6",
             "uri",
             "uri-reference",
-            "iri",
-            "iri-reference",
-            "uuid",
-            "uri-template",
-            "json-pointer",
-            "relative-json-pointer",
-            "regex"
-          ]
-        },
-        "minimum": {
-          "type": "number"
-        },
-        "maximum": {
-          "type": "number"
-        },
-        "exclusiveMinimum": {
-          "type": "boolean"
-        },
-        "exclusiveMaximum": {
-          "type": "boolean"
-        },
-        "multipleOf": {
-          "type": "number"
-        },
-        "maxLength": {
-          "type": "number"
-        },
-        "minLength": {
-          "type": "number"
-        },
-        "oneOf": {
-          "type": "array",
-          "minItems": 1
-        },
-        "anyOf": {
-          "type": "array",
-          "minItems": 1
-        },
-        "allOf": {
-          "type": "array",
-          "minItems": 1
-        },
-        "items": {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "$ref": "#/definitions/anymap"
-            }
-          ]
-        },
-        "contains": {
-          "anyOf": [
-            {
-              "type": "array"
-            },
-            {
-              "$ref": "#/definitions/anymap"
-            }
+            "uuid"
           ]
         },
         "minItems": {
@@ -403,15 +316,77 @@
         "uniqueItems": {
           "type": "boolean"
         },
-        "properties": {
-          "$ref": "#/definitions/anymap"
+        "items": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "number",
+                "string",
+                "boolean",
+                "integer"
+              ]
+            },
+            "minimum": {
+              "type": "number"
+            },
+            "maximum": {
+              "type": "number"
+            },
+            "enum": {
+              "type": "array",
+              "minItems": 1
+            },
+            "format": {
+              "type": "string"
+            },
+            "minLength": {
+              "type": "number"
+            },
+            "maxLength": {
+              "type": "number"
+            }
+          }
         }
       }
     },
-    "anymap": {
-      "type": "object",
-      "additionalProperties": {
-      }
+    "allowed-types": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        }
+      ]
     },
     "actionqualities": {
       "allOf": [
@@ -450,28 +425,7 @@
       ]
     },
     "productqualities": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/commonqualities"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "odmObject": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/objectqualities"
-              }
-            },
-            "odmThing": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/thingqualities"
-              }
-            }
-          }
-        }
-      ]
+      "$ref": "#/definitions/thingqualities"
     }
   }
 }
