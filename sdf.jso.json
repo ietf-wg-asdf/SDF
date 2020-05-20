@@ -1,5 +1,5 @@
 {
-  "title": "sdfcan.cddl",
+  "title": "sdf.cddl",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/sdf-syntax",
   "definitions": {
@@ -215,9 +215,6 @@
             "nullable": {
               "type": "boolean"
             },
-            "widthInBits": {
-              "type": "number"
-            },
             "subtype": {
               "type": "string",
               "enum": [
@@ -319,7 +316,13 @@
         "items": {
           "type": "object",
           "properties": {
+            "odmRef": {
+              "$ref": "#/definitions/sdf-pointer"
+            },
             "description": {
+              "type": "string"
+            },
+            "$comment": {
               "type": "string"
             },
             "type": {

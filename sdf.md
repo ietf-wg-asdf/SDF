@@ -5,7 +5,7 @@ title: >
   SDF: A Simple Definition Format for One Data Model definitions
 abbrev: OneDM SDF
 docname: draft-bormann-t2trg-sdf-latest
-date: 2020-05-19
+date: 2020-05-20
 category: info
 
 ipr: trust200902

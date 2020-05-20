@@ -35,7 +35,7 @@ commonqualities = (
  ? $comment: text               ; source code comments only, no semantics
  ? name: text                   ; DELETE ME (deprecated)
  ? odmRef: sdf-pointer
- ? odmRequired: pointer-list
+ ? odmRequired: pointer-list    ; applies to qualities of properties, of data
 )
 
 ; for building hierarchy
@@ -56,18 +56,18 @@ objectqualities = {
  ? odmData: named<dataqualities>
 }
 
-propertyqualities = dataqualities
+propertyqualities = dataqualities ; the definitions in odmData are declarations in odmProperty
 
 actionqualities = {
  commonqualities,
- ? odmInputData: pointer-list
+ ? odmInputData: pointer-list   ; odmRequiredInputData applies here (a bit redundant)
  ? odmRequiredInputData: pointer-list
- ? odmOutputData: pointer-list
+ ? odmOutputData: pointer-list  ; odmRequired applies here
 }
 
 eventqualities = {
  commonqualities
- ? odmOutputData: pointer-list
+ ? odmOutputData: pointer-list  ; odmRequired applies here
 }
 
 dataqualities = {               ; also propertyqualities
@@ -80,7 +80,6 @@ dataqualities = {               ; also propertyqualities
  ? readable: bool
  ? writable: bool
  ? nullable: bool
- ? widthInBits: number
  ? subtype: "bytestring" / "unixtime"
  ? contentFormat: text
 }
@@ -112,8 +111,10 @@ jsonschema = (
  ? uniqueItems: bool
  ? items: { ;;; ultimately, this will be mostly recursive, but, for now
             ;;; let's find out what we actually need
+     ? odmRef: sdf-pointer          ; import limited to the subset that we allow here...
      ? description: text            ; long text (no constraints)
-     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need description
+     ? $comment: text               ; source code comments only, no semantics
+     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
      ; jso subset
      ? minimum: number

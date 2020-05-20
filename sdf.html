@@ -1055,7 +1055,7 @@ table {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 20 November 2020</td>
+<td class="center">Expires 21 November 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1068,12 @@ table {
 <dd class="internet-draft">draft-bormann-t2trg-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-05-19" class="published">19 May 2020</time>
+<time datetime="2020-05-20" class="published">20 May 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-11-20">20 November 2020</time></dd>
+<dd class="expires"><time datetime="2020-11-21">21 November 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ table {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2733,7 +2733,7 @@ commonqualities = (
  ? $comment: text               ; source code comments only, no semantics
  ? name: text                   ; DELETE ME (deprecated)
  ? odmRef: sdf-pointer
- ? odmRequired: pointer-list
+ ? odmRequired: pointer-list    ; applies to qualities of properties, of data
 )
 
 ; for building hierarchy
@@ -2754,18 +2754,18 @@ objectqualities = {
  ? odmData: named&lt;dataqualities&gt;
 }
 
-propertyqualities = dataqualities
+propertyqualities = dataqualities ; the definitions in odmData are declarations in odmProperty
 
 actionqualities = {
  commonqualities,
- ? odmInputData: pointer-list
+ ? odmInputData: pointer-list   ; odmRequiredInputData applies here (a bit redundant)
  ? odmRequiredInputData: pointer-list
- ? odmOutputData: pointer-list
+ ? odmOutputData: pointer-list  ; odmRequired applies here
 }
 
 eventqualities = {
  commonqualities
- ? odmOutputData: pointer-list
+ ? odmOutputData: pointer-list  ; odmRequired applies here
 }
 
 dataqualities = {               ; also propertyqualities
@@ -2778,7 +2778,6 @@ dataqualities = {               ; also propertyqualities
  ? readable: bool
  ? writable: bool
  ? nullable: bool
- ? widthInBits: number
  ? subtype: "bytestring" / "unixtime"
  ? contentFormat: text
 }
@@ -2810,8 +2809,10 @@ jsonschema = (
  ? uniqueItems: bool
  ? items: { ;;; ultimately, this will be mostly recursive, but, for now
             ;;; let's find out what we actually need
+     ? odmRef: sdf-pointer          ; import limited to the subset that we allow here...
      ? description: text            ; long text (no constraints)
-     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need description
+     ? $comment: text               ; source code comments only, no semantics
+     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
      ; jso subset
      ? minimum: number
@@ -2837,7 +2838,7 @@ json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation" class="xre
 <div class="artwork art-text alignLeft art-jso.json" id="section-appendix.b-2">
 <pre>
 {
-  "title": "sdfcan.cddl",
+  "title": "sdf.cddl",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/sdf-syntax",
   "definitions": {
@@ -3053,9 +3054,6 @@ json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation" class="xre
             "nullable": {
               "type": "boolean"
             },
-            "widthInBits": {
-              "type": "number"
-            },
             "subtype": {
               "type": "string",
               "enum": [
@@ -3157,7 +3155,13 @@ json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation" class="xre
         "items": {
           "type": "object",
           "properties": {
+            "odmRef": {
+              "$ref": "#/definitions/sdf-pointer"
+            },
             "description": {
+              "type": "string"
+            },
+            "$comment": {
               "type": "string"
             },
             "type": {
