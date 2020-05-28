@@ -10,7 +10,7 @@
 <meta content="
        The Simple Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions. 
        OneDM tools convert this format to database formats and other serializations as needed. 
-       This document describes definitions of OneDM Objects and their associated Events, Actions, Properties, and Data types. 
+       This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions. 
        The JSON format of an SDF definition is described in this document. 
     " name="description">
 <meta content="xml2rfc 2.39.0" name="generator">
@@ -1055,7 +1055,7 @@ table {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 21 November 2020</td>
+<td class="center">Expires 29 November 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1068,12 @@ table {
 <dd class="internet-draft">draft-bormann-t2trg-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-05-20" class="published">20 May 2020</time>
+<time datetime="2020-05-28" class="published">28 May 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-11-21">21 November 2020</time></dd>
+<dd class="expires"><time datetime="2020-11-29">29 November 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1094,14 +1094,19 @@ table {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">The Simple Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">OneDM tools convert this format to database formats and other serializations as needed.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
-<p id="section-abstract-3">This document describes definitions of OneDM Objects and their associated Events, Actions, Properties, and Data types.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+<p id="section-abstract-3">This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 <p id="section-abstract-4">The JSON format of an SDF definition is described in this document.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
 </section>
 <section class="note" id="section-note.1">
       <h2 id="name-contributing">
 <a href="#name-contributing" class="section-name selfRef">Contributing</a>
       </h2>
-<p id="section-note.1-1">(point to github repo)<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-1">Recent versions of this document are available at its github
+repository (TODO: point to github repo), which also provides an issue
+tracker as well as a way to supply "pull requests".<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">This document has not yet been submitted as an Internet-Draft; the
+plan is to do this in early June.
+(TODO: add "note well" type information)<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1122,7 +1127,7 @@ table {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1158,7 +1163,7 @@ table {
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-terminology-and-conventions" class="xref">Terminology and Conventions</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-example-definition" class="xref">Example Definition:</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-example-definition" class="xref">Example Definition</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-sdf-structure" class="xref">SDF structure</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
@@ -1191,74 +1196,79 @@ table {
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.5.2.5">
                 <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="xref">5.5</a>.  <a href="#name-odmrequired" class="xref">odmRequired</a><a href="#section-toc.1-1.5.2.5.1" class="pilcrow">¶</a></p>
+<ul class="toc ulEmpty">
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.5.2.1">
+                    <p id="section-toc.1-1.5.2.5.2.1.1"><a href="#section-5.5.1" class="xref">5.5.1</a>.  <a href="#name-optionality-using-the-keywo" class="xref">Optionality using the keyword "odmRequired"</a><a href="#section-toc.1-1.5.2.5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+</ul>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.5.2.6">
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="xref">5.6</a>.  <a href="#name-common-qualities" class="xref">Common Qualities</a><a href="#section-toc.1-1.5.2.6.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-optionality-using-the-keywo" class="xref">Optionality using the keyword "odmRequired"</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-keywords-for-type-definitio" class="xref">Keywords for type definitions</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
+<ul class="toc ulEmpty">
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-odmobject" class="xref">odmObject</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-odmproperty" class="xref">odmProperty</a><a href="#section-toc.1-1.6.2.2.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-odmaction" class="xref">odmAction</a><a href="#section-toc.1-1.6.2.3.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.4">
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="xref">6.4</a>.  <a href="#name-odmevent" class="xref">odmEvent</a><a href="#section-toc.1-1.6.2.4.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.5">
+                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="xref">6.5</a>.  <a href="#name-odmdata" class="xref">odmData</a><a href="#section-toc.1-1.6.2.5.1" class="pilcrow">¶</a></p>
+</li>
+</ul>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-keywords-for-type-definitio" class="xref">Keywords for type definitions</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-odmobject" class="xref">odmObject</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-odmproperty" class="xref">odmProperty</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="xref">7.3</a>.  <a href="#name-odmaction" class="xref">odmAction</a><a href="#section-toc.1-1.7.2.3.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.4">
-                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="xref">7.4</a>.  <a href="#name-odmevent" class="xref">odmEvent</a><a href="#section-toc.1-1.7.2.4.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.5">
-                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="xref">7.5</a>.  <a href="#name-odmdata" class="xref">odmData</a><a href="#section-toc.1-1.7.2.5.1" class="pilcrow">¶</a></p>
-</li>
-</ul>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-example-simple-object-defin" class="xref">Example Simple Object Definition:</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-example-simple-object-defin" class="xref">Example Simple Object Definition:</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-high-level-composition" class="xref">High Level Composition</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
+<ul class="toc ulEmpty">
+<li class="toc ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="xref">8.1</a>.  <a href="#name-paths-in-the-model-namespac" class="xref">Paths in the model namespaces</a><a href="#section-toc.1-1.8.2.1.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="xref">8.2</a>.  <a href="#name-modular-composition" class="xref">Modular Composition</a><a href="#section-toc.1-1.8.2.2.1" class="pilcrow">¶</a></p>
+<ul class="toc ulEmpty">
+<li class="toc ulEmpty" id="section-toc.1-1.8.2.2.2.1">
+                    <p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1" class="xref">8.2.1</a>.  <a href="#name-use-of-the-odmref-keyword-t" class="xref">Use of the "odmRef" keyword to re-use a definition</a><a href="#section-toc.1-1.8.2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+</ul>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="xref">8.3</a>.  <a href="#name-odmthing" class="xref">odmThing</a><a href="#section-toc.1-1.8.2.3.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.8.2.4">
+                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="xref">8.4</a>.  <a href="#name-odmproduct" class="xref">odmProduct</a><a href="#section-toc.1-1.8.2.4.1" class="pilcrow">¶</a></p>
+</li>
+</ul>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-high-level-composition" class="xref">High Level Composition</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-paths-in-the-model-namespac" class="xref">Paths in the model namespaces</a><a href="#section-toc.1-1.9.2.1.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-modular-composition" class="xref">Modular Composition</a><a href="#section-toc.1-1.9.2.2.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.9.2.2.2.1">
-                    <p id="section-toc.1-1.9.2.2.2.1.1"><a href="#section-9.2.1" class="xref">9.2.1</a>.  <a href="#name-use-of-the-odmref-keyword-t" class="xref">Use of the "odmRef" keyword to re-use a definition</a><a href="#section-toc.1-1.9.2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-</ul>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="xref">9.3</a>.  <a href="#name-odmthing" class="xref">odmThing</a><a href="#section-toc.1-1.9.2.3.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.9.2.4">
-                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="xref">9.4</a>.  <a href="#name-odmproduct" class="xref">odmProduct</a><a href="#section-toc.1-1.9.2.4.1" class="pilcrow">¶</a></p>
-</li>
-</ul>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="xref">Formal Syntax of SDF</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="xref">Formal Syntax of SDF</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="xref">json-schema.org Rendition of SDF Syntax</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="xref">json-schema.org Rendition of SDF Syntax</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.15.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </nav>
@@ -1271,7 +1281,7 @@ table {
       </h2>
 <p id="section-1-1">The Simple Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">OneDM tools convert this format to database formats and other serializations as needed.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This document describes definitions of OneDM Objects and their associated Events, Actions, Properties, and Data types.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-3">This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">The JSON format of an SDF definition is described in this document.<a href="#section-1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1296,7 +1306,7 @@ table {
 </dl>
 <p id="section-2-2">Conventions:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-2-3.1">The singular form is preferred for keywords.<a href="#section-2-3.1" class="pilcrow">¶</a>
+<li id="section-2-3.1">The singular form is chosen as the preferred one for the keywords defined here.<a href="#section-2-3.1" class="pilcrow">¶</a>
 </li>
 </ul>
 <p id="section-2-4">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
@@ -1309,11 +1319,12 @@ appear in all capitals, as shown here.<a href="#section-2-4" class="pilcrow">¶<
 <div id="example-definition">
 <section id="section-3">
       <h2 id="name-example-definition">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-example-definition" class="section-name selfRef">Example Definition:</a>
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-example-definition" class="section-name selfRef">Example Definition</a>
       </h2>
+<p id="section-3-1">We start with an example for the SDF definition of a simple object called "Switch" (<a href="#example1" class="xref">Figure 1</a>).<a href="#section-3-1" class="pilcrow">¶</a></p>
 <span id="name-a-simple-example-of-an-sdf-"></span><div id="example1">
 <figure id="figure-1">
-        <div class="artwork art-text alignLeft art-json" id="section-3-1.1">
+        <div class="artwork art-text alignLeft art-json" id="section-3-2.1">
 <pre>
 {
   "info": {
@@ -1323,9 +1334,9 @@ appear in all capitals, as shown here.<a href="#section-2-4" class="pilcrow">¶<
     "license": "https://example.com/license"
   },
   "namespace": {
-    "st": "https://example.com/capability/odm"
+    "cap": "https://example.com/capability/odm"
   },
-  "defaultNamespace": "st",
+  "defaultNamespace": "cap",
   "odmObject": {
     "Switch": {
       "odmProperty": {
@@ -1350,6 +1361,7 @@ appear in all capitals, as shown here.<a href="#section-2-4" class="pilcrow">¶<
 <a href="#name-a-simple-example-of-an-sdf-" class="selfRef">A simple example of an SDF definition file</a>
         </figcaption></figure>
 </div>
+<p id="section-3-3">TODO: Add explanation<a href="#section-3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdf-structure">
@@ -1456,18 +1468,18 @@ namespace for the SDF definition file.<a href="#section-4.2-3" class="pilcrow">�
           </tbody>
         </table>
 </div>
-<p id="section-4.2-5">The following example declares a set of namespaces and defines <code>st</code> as the default namespace.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<p id="section-4.2-5">The following example declares a set of namespaces and defines <code>cap</code> as the default namespace.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft art-json" id="section-4.2-6">
 <pre>
 "namespace": {
-  "st": "https://example.com/capability/odm",
+  "cap": "https://example.com/capability/odm",
   "zcl": "https://example.com/zcl/odm"
 },
-"defaultnamespace": "st",
+"defaultnamespace": "cap",
 </pre><a href="#section-4.2-6" class="pilcrow">¶</a>
 </div>
 <p id="section-4.2-7">If no defaultnamespace setting is given, the SDF definition file does not
-contribute to a global namespace.  As the defaultnamespace gives a
+contribute to a global namespace.  As the defaultnamespace is set by giving a
 namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.<a href="#section-4.2-7" class="pilcrow">¶</a></p>
 <p id="section-4.2-8">If no namespace map is given, no short names for namespace URIs are
@@ -1479,8 +1491,8 @@ set up, and no defaultnamespace can be given.<a href="#section-4.2-8" class="pil
         <h3 id="name-definitions-section">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-definitions-section" class="section-name selfRef">Definitions section</a>
         </h3>
-<p id="section-4.3-1">The Definitions section contains one or more type definitions according to the class name keywords for type definitions (object, property, action, event, data).<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">Each class may have zero or more type definitions associated with it. Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">The Definitions section contains one or more type definitions according to the class name keywords for type definitions (for object, property, action, event, data, as well as thing and product); the names for these type keywords are capitalized and prefixed with <code>odm</code>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">Each class defined may have zero or more type definitions associated with it. Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.3-3">A definition consists of a map entry using the newly defined term as a JSON key, with a value consisting of a map of Qualities and their values.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.3-4">A definition may in turn contain other definitions. Each definition consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained type definitions.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
 <p id="section-4.3-5">An example for an Object definition is given in <a href="#exobject" class="xref">Figure 2</a>:<a href="#section-4.3-5" class="pilcrow">¶</a></p>
@@ -1503,8 +1515,8 @@ set up, and no defaultnamespace can be given.<a href="#section-4.2-8" class="pil
 <a href="#name-example-object-definition" class="selfRef">Example Object definition</a>
           </figcaption></figure>
 </div>
-<p id="section-4.3-7">This example defines an Object "foo" that is defined in the default namespace, containing a property
-<code>odm:/odmObject/foo/odmProperty/bar</code>, with data of type boolean.<a href="#section-4.3-7" class="pilcrow">¶</a></p>
+<p id="section-4.3-7">This example defines an Object "foo" that is defined in the default namespace (full address: <code>#/odmObject/foo</code>), containing a property that can be addressed as
+<code>#/odmObject/foo/odmProperty/bar</code>, with data of type boolean.<a href="#section-4.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1517,7 +1529,7 @@ set up, and no defaultnamespace can be given.<a href="#section-4.2-8" class="pil
 <p id="section-5-1">SDF definition files may contribute to a global namespace, and may
 reference elements from that global namespace.
 (An SDF definition file that does not set a defaultnamespace does not
-contribute to the global namespace.)<a href="#section-5-1" class="pilcrow">¶</a></p>
+contribute to a global namespace.)<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="structure">
 <section id="section-5.1">
         <h3 id="name-structure">
@@ -1549,7 +1561,7 @@ element defined for this name in the SDF definition file.<a href="#section-5.2-1
 default namespace is always the target namespace for a name for which
 a definition is contributed.
 When emphasizing that name definitions are contributed to the default namespace,
-we therefore also call it the "target namespace".<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+we therefore also call it the "target namespace" of the SDF definition file.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3">E.g., in <a href="#example1" class="xref">Figure 1</a>, definitions for the following global names are contributed:<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-5.2-4.1">https://example.com/capability/odm#/odmObject/Switch<a href="#section-5.2-4.1" class="pilcrow">¶</a>
@@ -1595,13 +1607,13 @@ declarations in the namespaces section.<a href="#section-5.3-3" class="pilcrow">
 <p id="section-5.3-6">Then this reference to that namespace:<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft art-json" id="section-5.3-7">
 <pre>
-{ "odmRef": "foo:odmData/temperatureData" }
+{ "odmRef": "foo:/odmData/temperatureData" }
 </pre><a href="#section-5.3-7" class="pilcrow">¶</a>
 </div>
 <p id="section-5.3-8">references the global name:<a href="#section-5.3-8" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft art-json" id="section-5.3-9">
 <pre>
-"https://example.com/#odmData/temperatureData"
+"https://example.com/#/odmData/temperatureData"
 </pre><a href="#section-5.3-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.3-10">Note that there is no way to provide a URI scheme name in a curie, so
@@ -1622,7 +1634,7 @@ odmInput/OutputData etc.<a href="#section-5.3-12.2" class="pilcrow">¶</a>
         <h3 id="name-odmref">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-odmref" class="section-name selfRef">odmRef</a>
         </h3>
-<p id="section-5.4-1">The keyword "odmRef" is used in a JSON map establishing a definition
+<p id="section-5.4-1">In a JSON map establishing a definition, the keyword "odmRef" is used
 to copy all of the qualities of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
 (This can be compared to the processing of the "$ref" keyword in JSON Schema.)<a href="#section-5.4-1" class="pilcrow">¶</a></p>
@@ -1644,19 +1656,17 @@ by the included name reference, into the newly formed definition.
         </h3>
 <p id="section-5.5-1">The value of "odmRequired" is an array of name references, each
 pointing to one declaration instantiation of which is declared mandatory.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
 <div id="optionality-using-the-keyword-odmrequired">
-<section id="section-6">
-      <h2 id="name-optionality-using-the-keywo">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-optionality-using-the-keywo" class="section-name selfRef">Optionality using the keyword "odmRequired"</a>
-      </h2>
-<p id="section-6-1">The keyword "odmRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">The value of "odmRequired" is an array JSON pointers, each indicating one mandatory definition.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">The example in the figure below shows two required elements in the odmObject definition for "temperatureWithAlarm", the odmProperty "temperatureData", and the odmEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "odmRef" to use a pre-existing definition in this definition, for the "alarmType" data (odmOutputData) produced by the odmEvent "overTemperatureEvent".<a href="#section-6-3" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft art-json" id="section-6-4">
+<section id="section-5.5.1">
+          <h4 id="name-optionality-using-the-keywo">
+<a href="#section-5.5.1" class="section-number selfRef">5.5.1. </a><a href="#name-optionality-using-the-keywo" class="section-name selfRef">Optionality using the keyword "odmRequired"</a>
+          </h4>
+<p id="section-5.5.1-1">The keyword "odmRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.<a href="#section-5.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.5.1-2">The value of "odmRequired" is an array of JSON pointers, each indicating one mandatory definition.<a href="#section-5.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.5.1-3">The example in <a href="#example-req" class="xref">Figure 3</a> shows two required elements in the odmObject definition for "temperatureWithAlarm", the odmProperty "temperatureData", and the odmEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "odmRef" to use a pre-existing definition in this definition, for the "alarmType" data (odmOutputData) produced by the odmEvent "overTemperatureEvent".<a href="#section-5.5.1-3" class="pilcrow">¶</a></p>
+<span id="name-using-odmrequired"></span><div id="example-req">
+<figure id="figure-3">
+            <div class="artwork art-text alignLeft art-json" id="section-5.5.1-4.1">
 <pre>
 {
   "odmObject": {
@@ -1674,7 +1684,7 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
         "overTemperatureEvent": {
           "odmOutputData": {
             "alarmType": {
-              "odmRef": "odm:/#odmData/alarmTypes/quantityAlarms",
+              "odmRef": "odm:/odmData/alarmTypes/quantityAlarms",
               "const": "OverTemperatureAlarm"
             },
             "temperature": {
@@ -1686,429 +1696,368 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
     }
   }
 }
-</pre><a href="#section-6-4" class="pilcrow">¶</a>
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-using-odmrequired" class="selfRef">Using odmRequired</a>
+            </figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="common-qualities">
+<section id="section-5.6">
+        <h3 id="name-common-qualities">
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-common-qualities" class="section-name selfRef">Common Qualities</a>
+        </h3>
+<p id="section-5.6-1">Definitions in SDF share a number of qualities that provide metadata for
+them.  These are listed in <a href="#tbl-common-qualities" class="xref">Table 3</a>.  None of these
+qualities are required or have default values that are assumed if the
+quality is absent.
+If a label is required for an application and no label is given, the last part of the JSON pointer to the definition can be used.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+<span id="name-common-qualities-2"></span><div id="tbl-common-qualities">
+<table class="center" id="table-3">
+          <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-common-qualities-2" class="selfRef">Common Qualities</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Quality</th>
+              <th class="text-left" rowspan="1" colspan="1">Type</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">description</td>
+              <td class="text-left" rowspan="1" colspan="1">text</td>
+              <td class="text-left" rowspan="1" colspan="1">long text (no constraints)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">label</td>
+              <td class="text-left" rowspan="1" colspan="1">text</td>
+              <td class="text-left" rowspan="1" colspan="1">short text (no constraints)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">$comment</td>
+              <td class="text-left" rowspan="1" colspan="1">text</td>
+              <td class="text-left" rowspan="1" colspan="1">source code comments only, no semantics</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">name</td>
+              <td class="text-left" rowspan="1" colspan="1">text</td>
+              <td class="text-left" rowspan="1" colspan="1">DELETE ME (deprecated)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">odmRef</td>
+              <td class="text-left" rowspan="1" colspan="1">sdf-pointer</td>
+              <td class="text-left" rowspan="1" colspan="1">(see <a href="#odmref" class="xref">Section 5.4</a>)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">odmRequired</td>
+              <td class="text-left" rowspan="1" colspan="1">pointer-list</td>
+              <td class="text-left" rowspan="1" colspan="1">(see <a href="#odmrequired" class="xref">Section 5.5</a>, applies to qualities of properties, of data)</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
 </div>
 </section>
 </div>
 <div id="keywords-for-type-definitions">
-<section id="section-7">
+<section id="section-6">
       <h2 id="name-keywords-for-type-definitio">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-keywords-for-type-definitio" class="section-name selfRef">Keywords for type definitions</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-keywords-for-type-definitio" class="section-name selfRef">Keywords for type definitions</a>
       </h2>
-<p id="section-7-1">The following SDF keywords are used to create type definitions in the target namespace.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">The following SDF keywords are used to create type definitions in the target namespace.
+All these definitions share some common qualities as discussed in <a href="#common-qualities" class="xref">Section 5.6</a>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="odmobject">
-<section id="section-7.1">
+<section id="section-6.1">
         <h3 id="name-odmobject">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-odmobject" class="section-name selfRef">odmObject</a>
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-odmobject" class="section-name selfRef">odmObject</a>
         </h3>
-<p id="section-7.1-1">The odmObject keyword denotes zero or more Object definitions. An odmObject may contain or include definitions of events, actions, properties, and data types.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1-2">The qualities of odmObject are shown in <a href="#odmobjqual" class="xref">Table 3</a>.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">The odmObject keyword denotes zero or more Object definitions. An odmObject may contain or include definitions of events, actions, properties, and data types.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The qualities of an odmObject include the common qualities, additional qualities are shown in <a href="#odmobjqual" class="xref">Table 4</a>.
+None of these
+qualities are required or have default values that are assumed if the
+quality is absent.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-odmobject"></span><div id="odmobjqual">
-<table class="center" id="table-3">
+<table class="center" id="table-4">
           <caption>
-<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#table-4" class="selfRef">Table 4</a>:
 <a href="#name-qualities-of-odmobject" class="selfRef">Qualities of odmObject</a>
           </caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Quality</th>
               <th class="text-left" rowspan="1" colspan="1">Type</th>
-              <th class="text-left" rowspan="1" colspan="1">Required</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
-              <th class="text-left" rowspan="1" colspan="1">Default</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">name</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable name</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">description</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable description</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
               <td class="text-left" rowspan="1" colspan="1">title</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">human readable title to display</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">$comment</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">explanatory comments</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
+              <td class="text-left" rowspan="1" colspan="1">odmProperty</td>
+              <td class="text-left" rowspan="1" colspan="1">property</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named property definitions for this object</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRef</td>
-              <td class="text-left" rowspan="1" colspan="1">object</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">reference to a definition to be used as a template for a new definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
+              <td class="text-left" rowspan="1" colspan="1">odmAction</td>
+              <td class="text-left" rowspan="1" colspan="1">action</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named action definitions for this object</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRequired</td>
-              <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
+              <td class="text-left" rowspan="1" colspan="1">odmEvent</td>
+              <td class="text-left" rowspan="1" colspan="1">event</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named event definitions for this object</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">odmData</td>
+              <td class="text-left" rowspan="1" colspan="1">data</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named data type definitions that might be used in the above</td>
             </tr>
           </tbody>
         </table>
 </div>
-<p id="section-7.1-4">odmObject may define or include the following ODM types:<a href="#section-7.1-4" class="pilcrow">¶</a></p>
-<ul>
-<li id="section-7.1-5.1">odmProperty<a href="#section-7.1-5.1" class="pilcrow">¶</a>
-</li>
-<li id="section-7.1-5.2">odmAction<a href="#section-7.1-5.2" class="pilcrow">¶</a>
-</li>
-<li id="section-7.1-5.3">odmEvent<a href="#section-7.1-5.3" class="pilcrow">¶</a>
-</li>
-<li id="section-7.1-5.4">odmData<a href="#section-7.1-5.4" class="pilcrow">¶</a>
-</li>
-</ul>
 </section>
 </div>
 <div id="odmproperty">
-<section id="section-7.2">
+<section id="section-6.2">
         <h3 id="name-odmproperty">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-odmproperty" class="section-name selfRef">odmProperty</a>
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-odmproperty" class="section-name selfRef">odmProperty</a>
         </h3>
-<p id="section-7.2-1">The odmProperty keyword denotes zero or more property definitions.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2-2">Properties are used to model elements of state.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
-<p id="section-7.2-3">The qualities of odmProperty are shown in <a href="#odmpropqual" class="xref">Table 4</a>.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">The odmProperty keyword denotes zero or more property definitions.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">Properties are used to model elements of state.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">The qualities of odmProperty include the common qualities, additional qualities are shown in <a href="#odmpropqual" class="xref">Table 5</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-odmproperty"></span><div id="odmpropqual">
-<table class="center" id="table-4">
+<table class="center" id="table-5">
           <caption>
-<a href="#table-4" class="selfRef">Table 4</a>:
+<a href="#table-5" class="selfRef">Table 5</a>:
 <a href="#name-qualities-of-odmproperty" class="selfRef">Qualities of odmProperty</a>
           </caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Quality</th>
               <th class="text-left" rowspan="1" colspan="1">Type</th>
-              <th class="text-left" rowspan="1" colspan="1">Required</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
               <th class="text-left" rowspan="1" colspan="1">Default</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">name</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable name</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">description</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable description</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
               <td class="text-left" rowspan="1" colspan="1">title</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">human readable title to display</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">$comment</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">explanatory comments</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRequired</td>
-              <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRef</td>
-              <td class="text-left" rowspan="1" colspan="1">object</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">reference to a definition to be used as a template for a new definition</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">readable</td>
               <td class="text-left" rowspan="1" colspan="1">boolean</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">Reads are allowed</td>
               <td class="text-left" rowspan="1" colspan="1">true</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">writable</td>
               <td class="text-left" rowspan="1" colspan="1">boolean</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">Writes are allowed</td>
               <td class="text-left" rowspan="1" colspan="1">true</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">observable</td>
               <td class="text-left" rowspan="1" colspan="1">boolean</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">flag to indicate asynchronous notification is available</td>
               <td class="text-left" rowspan="1" colspan="1">true</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">contentFormat</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">IANA media type string</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">subtype</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">subtype enumeration</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">widthInBits</td>
               <td class="text-left" rowspan="1" colspan="1">integer</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">hint for protocol binding</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">units</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">SenML unit name as per <span>[<a href="#IANA.senml" class="xref">IANA.senml</a>]</span>, subregistry SenML Units</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">nullable</td>
               <td class="text-left" rowspan="1" colspan="1">boolean</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">indicates a null value is available for this type</td>
               <td class="text-left" rowspan="1" colspan="1">true</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">scaleMinimum</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">lower limit of value in units</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">scaleMaximum</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">upper limit of value in units</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">type</td>
               <td class="text-left" rowspan="1" colspan="1">string, enum</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">JSON data type</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">minimum</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">lower limit of value in the representation format</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">maximum</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">upper limit of value in the representation format</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">multipleOf</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">indicates the resolution of the number in representation format</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">enum</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">enumeration constraint</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">pattern</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">regular expression to constrain a string pattern</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">format</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">JSON Schema formats as per <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>, Section 7.3</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">minLength</td>
               <td class="text-left" rowspan="1" colspan="1">integer</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">shortest length string in octets</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">maxLength</td>
               <td class="text-left" rowspan="1" colspan="1">integer</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">longest length string in octets</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">default</td>
               <td class="text-left" rowspan="1" colspan="1">number, boolean, string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">specifies the default value for initialization</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">const</td>
               <td class="text-left" rowspan="1" colspan="1">number, boolean, string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">specifies a constant value for a data item or property</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
           </tbody>
         </table>
 </div>
-<p id="section-7.2-5">odmProperty may define or include the following ODM types:<a href="#section-7.2-5" class="pilcrow">¶</a></p>
-<ul>
-<li id="section-7.2-6.1">odmData<a href="#section-7.2-6.1" class="pilcrow">¶</a>
-</li>
-</ul>
+<p id="section-6.2-5">CHECK THIS: odmProperty may not define any other ODM types.<a href="#section-6.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="odmaction">
-<section id="section-7.3">
+<section id="section-6.3">
         <h3 id="name-odmaction">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-odmaction" class="section-name selfRef">odmAction</a>
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-odmaction" class="section-name selfRef">odmAction</a>
         </h3>
-<p id="section-7.3-1">The odmAction keyword denotes zero or more Action definitions.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.3-2">Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.3-3">The qualities of odmAction are shown in <a href="#odmactqual" class="xref">Table 5</a>.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">The odmAction keyword denotes zero or more Action definitions.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3-3">The qualities of odmAction include the common qualities, additional qualities are shown in <a href="#odmactqual" class="xref">Table 6</a>.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-odmaction"></span><div id="odmactqual">
-<table class="center" id="table-5">
+<table class="center" id="table-6">
           <caption>
-<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#table-6" class="selfRef">Table 6</a>:
 <a href="#name-qualities-of-odmaction" class="selfRef">Qualities of odmAction</a>
           </caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Quality</th>
               <th class="text-left" rowspan="1" colspan="1">Type</th>
-              <th class="text-left" rowspan="1" colspan="1">Required</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
               <th class="text-left" rowspan="1" colspan="1"> </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">name</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable name</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">description</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable description</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-            </tr>
-            <tr>
               <td class="text-left" rowspan="1" colspan="1">title</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">human readable title to display</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">$comment</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">explanatory comments</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRequired</td>
-              <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid action definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
               <td class="text-left" rowspan="1" colspan="1">odmInputData</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid action definition</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">odmRequiredInputData</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid action definition</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">odmOutputData</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid action definition</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRef</td>
-              <td class="text-left" rowspan="1" colspan="1">object</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">reference to a definition to be used as a template for a new definition</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
           </tbody>
         </table>
 </div>
-<p id="section-7.3-5">odmAction may define or include the following ODM types:<a href="#section-7.3-5" class="pilcrow">¶</a></p>
-<ul>
-<li id="section-7.3-6.1">odmData<a href="#section-7.3-6.1" class="pilcrow">¶</a>
-</li>
-</ul>
+<p id="section-6.3-5"><code>odmInputData</code> refined by <code>odmRequiredInputData</code> define the input data
+of the action.  <code>odmOutputData</code> refined <code>odmRequired</code> (a quality
+defined in <a href="#tbl-common-qualities" class="xref">Table 3</a>) define the output data of the
+action.<a href="#section-6.3-5" class="pilcrow">¶</a></p>
+<p id="section-6.3-6">CHECK THIS: odmProperty may not itself define any other ODM types; all types needed are referenced via SDF pointers.<a href="#section-6.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="odmevent">
-<section id="section-7.4">
+<section id="section-6.4">
         <h3 id="name-odmevent">
-<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-odmevent" class="section-name selfRef">odmEvent</a>
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-odmevent" class="section-name selfRef">odmEvent</a>
         </h3>
-<p id="section-7.4-1">The odmEvent keyword denotes zero or more Event definitions.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
-<p id="section-7.4-2">Events are used to model asynchronous occurrences that may be communicated proactively. Events have data elements which are communicated upon the occurrence of the event.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
-<p id="section-7.4-3">The qualities of odmEvent are shown in <a href="#odmevqual" class="xref">Table 6</a>.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">The odmEvent keyword denotes zero or more Event definitions.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-2">Events are used to model asynchronous occurrences that may be communicated proactively. Events have data elements which are communicated upon the occurrence of the event.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
+<p id="section-6.4-3">The qualities of odmEvent include the common qualities, additional qualities are shown in <a href="#odmevqual" class="xref">Table 7</a>.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-odmevent"></span><div id="odmevqual">
-<table class="center" id="table-6">
+<table class="center" id="table-7">
           <caption>
-<a href="#table-6" class="selfRef">Table 6</a>:
+<a href="#table-7" class="selfRef">Table 7</a>:
 <a href="#name-qualities-of-odmevent" class="selfRef">Qualities of odmEvent</a>
           </caption>
 <thead>
@@ -2117,82 +2066,43 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
               <th class="text-left" rowspan="1" colspan="1">Type</th>
               <th class="text-left" rowspan="1" colspan="1">Required</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
-              <th class="text-left" rowspan="1" colspan="1"> </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">name</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable name</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">description</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable description</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-            </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">title</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">human readable title to display</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">$comment</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">explanatory comments</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">odmOutputData</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
               <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to output items in a valid definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRequired</td>
-              <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRef</td>
-              <td class="text-left" rowspan="1" colspan="1">object</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">reference to a definition to be used as a template for a new definition</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
           </tbody>
         </table>
 </div>
-<p id="section-7.4-5">odmEvent may define or include the following ODM types:<a href="#section-7.4-5" class="pilcrow">¶</a></p>
-<ul>
-<li id="section-7.4-6.1">odmData<a href="#section-7.4-6.1" class="pilcrow">¶</a>
-</li>
-</ul>
+<p id="section-6.4-5"><code>odmOutputData</code> refined by <code>odmRequired</code> (a quality
+defined in <a href="#tbl-common-qualities" class="xref">Table 3</a>) define the output data of the
+action.<a href="#section-6.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="odmdata">
-<section id="section-7.5">
+<section id="section-6.5">
         <h3 id="name-odmdata">
-<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-odmdata" class="section-name selfRef">odmData</a>
+<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-odmdata" class="section-name selfRef">odmData</a>
         </h3>
-<p id="section-7.5-1">The odmData keyword denotes zero or more Data type definitions.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
-<p id="section-7.5-2">An odmData definition provides a semantic identifier for a data item and describes the constraints on the defined data item.<a href="#section-7.5-2" class="pilcrow">¶</a></p>
-<p id="section-7.5-3">odmData is used for Action parameters, for Event data, and for reusable constraints in property definitions<a href="#section-7.5-3" class="pilcrow">¶</a></p>
-<p id="section-7.5-4"><a href="#odmdataqual" class="xref">Table 7</a> lists the qualities of odmData.<a href="#section-7.5-4" class="pilcrow">¶</a></p>
+<p id="section-6.5-1">The odmData keyword denotes zero or more Data type definitions.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-2">An odmData definition provides a semantic identifier for a data item and describes the constraints on the defined data item.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
+<p id="section-6.5-3">odmData is used for Action parameters, for Event data, and for reusable constraints in property definitions<a href="#section-6.5-3" class="pilcrow">¶</a></p>
+<p id="section-6.5-4"><a href="#odmdataqual" class="xref">Table 8</a> lists the qualities of odmData.<a href="#section-6.5-4" class="pilcrow">¶</a></p>
+<p id="section-6.5-5">TODO: Clean this up to remove complete redundancy with odmProperty.<a href="#section-6.5-5" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-odmdata"></span><div id="odmdataqual">
-<table class="center" id="table-7">
+<table class="center" id="table-8">
           <caption>
-<a href="#table-7" class="selfRef">Table 7</a>:
+<a href="#table-8" class="selfRef">Table 8</a>:
 <a href="#name-qualities-of-odmdata" class="selfRef">Qualities of odmData</a>
           </caption>
 <thead>
@@ -2206,45 +2116,10 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
           </thead>
           <tbody>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">name</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable name</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">description</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">human readable description</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-            </tr>
-            <tr>
               <td class="text-left" rowspan="1" colspan="1">title</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">human readable title to display</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">$comment</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">explanatory comments</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">required</td>
-              <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">list of references to mandatory items in a valid definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">odmRef</td>
-              <td class="text-left" rowspan="1" colspan="1">object</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">reference to a definition to be used as a template for a new definition</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
             <tr>
@@ -2376,9 +2251,9 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
           </tbody>
         </table>
 </div>
-<p id="section-7.5-6">odmData may define or contain the following ODM types:<a href="#section-7.5-6" class="pilcrow">¶</a></p>
+<p id="section-6.5-7">odmData may define or contain the following ODM types:<a href="#section-6.5-7" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-7.5-7.1">JSON Schema Types with numeric constraint extensions<a href="#section-7.5-7.1" class="pilcrow">¶</a>
+<li id="section-6.5-8.1">JSON Schema Types with numeric constraint extensions<a href="#section-6.5-8.1" class="pilcrow">¶</a>
 </li>
 </ul>
 </section>
@@ -2386,11 +2261,11 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
 </section>
 </div>
 <div id="example-simple-object-definition">
-<section id="section-8">
+<section id="section-7">
       <h2 id="name-example-simple-object-defin">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-example-simple-object-defin" class="section-name selfRef">Example Simple Object Definition:</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-example-simple-object-defin" class="section-name selfRef">Example Simple Object Definition:</a>
       </h2>
-<div class="artwork art-text alignLeft art-json" id="section-8-1">
+<div class="artwork art-text alignLeft art-json" id="section-7-1">
 <pre>
 {
   "info": {
@@ -2400,9 +2275,9 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
     "license": "https://example.com/license"
   },
   "namespace": {
-    "st": "https://example.com/capability/odm"
+    "cap": "https://example.com/capability/odm"
   },
-  "defaultNamespace": "st",
+  "defaultNamespace": "cap",
   "odmObject": {
     "Switch": {
       "odmProperty": {
@@ -2421,54 +2296,54 @@ pointing to one declaration instantiation of which is declared mandatory.<a href
     }
   }
 }
-</pre><a href="#section-8-1" class="pilcrow">¶</a>
+</pre><a href="#section-7-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="high-level-composition">
-<section id="section-9">
+<section id="section-8">
       <h2 id="name-high-level-composition">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-high-level-composition" class="section-name selfRef">High Level Composition</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-high-level-composition" class="section-name selfRef">High Level Composition</a>
       </h2>
-<p id="section-9-1">The requirements for high level composition include the following:<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">The requirements for high level composition include the following:<a href="#section-8-1" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-9-2.1">The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.<a href="#section-9-2.1" class="pilcrow">¶</a>
+<li id="section-8-2.1">The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.<a href="#section-8-2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-9-2.2">The ability to compose a reusable definition block from objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.<a href="#section-9-2.2" class="pilcrow">¶</a>
+<li id="section-8-2.2">The ability to compose a reusable definition block from objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.<a href="#section-8-2.2" class="pilcrow">¶</a>
 </li>
-<li id="section-9-2.3">The ability to compose objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.<a href="#section-9-2.3" class="pilcrow">¶</a>
+<li id="section-8-2.3">The ability to compose objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.<a href="#section-8-2.3" class="pilcrow">¶</a>
 </li>
-<li id="section-9-2.4">The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.<a href="#section-9-2.4" class="pilcrow">¶</a>
+<li id="section-8-2.4">The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.<a href="#section-8-2.4" class="pilcrow">¶</a>
 </li>
-<li id="section-9-2.5">The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.<a href="#section-9-2.5" class="pilcrow">¶</a>
+<li id="section-8-2.5">The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.<a href="#section-8-2.5" class="pilcrow">¶</a>
 </li>
 </ul>
 <div id="paths-in-the-model-namespaces">
-<section id="section-9.1">
+<section id="section-8.1">
         <h3 id="name-paths-in-the-model-namespac">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-paths-in-the-model-namespac" class="section-name selfRef">Paths in the model namespaces</a>
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-paths-in-the-model-namespac" class="section-name selfRef">Paths in the model namespaces</a>
         </h3>
-<p id="section-9.1-1">The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expecred to be an ODM namespace for common ODM definitions.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.1-2">The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/odmObject/Switch/odmAction/on" where ns is the short name for the namespace prefix.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expecred to be an ODM namespace for common ODM definitions.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/odmObject/Switch/odmAction/on" where ns is the short name for the namespace prefix.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="modular-composition">
-<section id="section-9.2">
+<section id="section-8.2">
         <h3 id="name-modular-composition">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-modular-composition" class="section-name selfRef">Modular Composition</a>
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-modular-composition" class="section-name selfRef">Modular Composition</a>
         </h3>
-<p id="section-9.2-1">Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.2-1">Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 <div id="use-of-the-odmref-keyword-to-re-use-a-definition">
-<section id="section-9.2.1">
+<section id="section-8.2.1">
           <h4 id="name-use-of-the-odmref-keyword-t">
-<a href="#section-9.2.1" class="section-number selfRef">9.2.1. </a><a href="#name-use-of-the-odmref-keyword-t" class="section-name selfRef">Use of the "odmRef" keyword to re-use a definition</a>
+<a href="#section-8.2.1" class="section-number selfRef">8.2.1. </a><a href="#name-use-of-the-odmref-keyword-t" class="section-name selfRef">Use of the "odmRef" keyword to re-use a definition</a>
           </h4>
-<p id="section-9.2.1-1">An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "odmRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.<a href="#section-9.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.2.1-2">ISSUE: Can qualities from the source definition be overridden?
+<p id="section-8.2.1-1">An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "odmRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.<a href="#section-8.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.2.1-2">ISSUE: Can qualities from the source definition be overridden?
 The above only says "added".
 Yes, we do want to enable overriding, but need to warn specifiers not
-to use this in a way that contradicts the referenced semantics.<a href="#section-9.2.1-2" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-9.2.1-3">
+to use this in a way that contradicts the referenced semantics.<a href="#section-8.2.1-2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-8.2.1-3">
 <pre>
  
 "odmData": 
@@ -2484,25 +2359,25 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
     "minimum": 0.05,
     "description": "cables must be at least 5 cm"
   }
-</pre><a href="#section-9.2.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-8.2.1-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 </section>
 </div>
 <div id="odmthing">
-<section id="section-9.3">
+<section id="section-8.3">
         <h3 id="name-odmthing">
-<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-odmthing" class="section-name selfRef">odmThing</a>
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-odmthing" class="section-name selfRef">odmThing</a>
         </h3>
-<p id="section-9.3-1">An odmThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an odmThing, and the socket-thing itself could be used in a declaration in the odmThing definition for the outlet strip.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
-<p id="section-9.3-2">odmThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination referigerator-freezer product.<a href="#section-9.3-2" class="pilcrow">¶</a></p>
-<p id="section-9.3-3">An odmThing may be composed of odmObjects and other odmThings.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
-<p id="section-9.3-4">The qualities of odmThing are shown in <a href="#odmthingqual" class="xref">Table 8</a>.<a href="#section-9.3-4" class="pilcrow">¶</a></p>
+<p id="section-8.3-1">An odmThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an odmThing, and the socket-thing itself could be used in a declaration in the odmThing definition for the outlet strip.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-2">odmThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination referigerator-freezer product.<a href="#section-8.3-2" class="pilcrow">¶</a></p>
+<p id="section-8.3-3">An odmThing may be composed of odmObjects and other odmThings.<a href="#section-8.3-3" class="pilcrow">¶</a></p>
+<p id="section-8.3-4">The qualities of odmThing are shown in <a href="#odmthingqual" class="xref">Table 9</a>.<a href="#section-8.3-4" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-odmthing"></span><div id="odmthingqual">
-<table class="center" id="table-8">
+<table class="center" id="table-9">
           <caption>
-<a href="#table-8" class="selfRef">Table 8</a>:
+<a href="#table-9" class="selfRef">Table 9</a>:
 <a href="#name-qualities-of-odmthing" class="selfRef">Qualities of odmThing</a>
           </caption>
 <thead>
@@ -2560,28 +2435,28 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
           </tbody>
         </table>
 </div>
-<p id="section-9.3-6">odmThing may define or include the following ODM types:<a href="#section-9.3-6" class="pilcrow">¶</a></p>
+<p id="section-8.3-6">odmThing may define or include the following ODM types:<a href="#section-8.3-6" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-9.3-7.1">odmThing<a href="#section-9.3-7.1" class="pilcrow">¶</a>
+<li id="section-8.3-7.1">odmThing<a href="#section-8.3-7.1" class="pilcrow">¶</a>
 </li>
-<li id="section-9.3-7.2">odmObject<a href="#section-9.3-7.2" class="pilcrow">¶</a>
+<li id="section-8.3-7.2">odmObject<a href="#section-8.3-7.2" class="pilcrow">¶</a>
 </li>
 </ul>
 </section>
 </div>
 <div id="odmproduct">
-<section id="section-9.4">
+<section id="section-8.4">
         <h3 id="name-odmproduct">
-<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-odmproduct" class="section-name selfRef">odmProduct</a>
+<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-odmproduct" class="section-name selfRef">odmProduct</a>
         </h3>
-<p id="section-9.4-1">An odmProduct provides the level of abstraction for representing a unique product or a profile for a standardized type of product, for example a "device type" definition with required minimum functionality.<a href="#section-9.4-1" class="pilcrow">¶</a></p>
-<p id="section-9.4-2">Products may be composed of Objects and Things at the high level, and may include their own definitions of Properties, Actions, and Events that can be used to extend or complete the included Object definitions.<a href="#section-9.4-2" class="pilcrow">¶</a></p>
-<p id="section-9.4-3">Product definitions may set optional defaults and constant values for specific use cases, for example units, range, and scale settings for properties, or available parameters for Actions.<a href="#section-9.4-3" class="pilcrow">¶</a></p>
-<p id="section-9.4-4">The qualities of odmProduct are shown in <a href="#odmprodqual" class="xref">Table 9</a>.<a href="#section-9.4-4" class="pilcrow">¶</a></p>
+<p id="section-8.4-1">An odmProduct provides the level of abstraction for representing a unique product or a profile for a standardized type of product, for example a "device type" definition with required minimum functionality.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-2">Products may be composed of Objects and Things at the high level, and may include their own definitions of Properties, Actions, and Events that can be used to extend or complete the included Object definitions.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">Product definitions may set optional defaults and constant values for specific use cases, for example units, range, and scale settings for properties, or available parameters for Actions.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-4">The qualities of odmProduct are shown in <a href="#odmprodqual" class="xref">Table 10</a>.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-odmproduct"></span><div id="odmprodqual">
-<table class="center" id="table-9">
+<table class="center" id="table-10">
           <caption>
-<a href="#table-9" class="selfRef">Table 9</a>:
+<a href="#table-10" class="selfRef">Table 10</a>:
 <a href="#name-qualities-of-odmproduct" class="selfRef">Qualities of odmProduct</a>
           </caption>
 <thead>
@@ -2639,20 +2514,20 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
           </tbody>
         </table>
 </div>
-<p id="section-9.4-6">odmProduct may define or include the following ODM types:<a href="#section-9.4-6" class="pilcrow">¶</a></p>
+<p id="section-8.4-6">odmProduct may define or include the following ODM types:<a href="#section-8.4-6" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-9.4-7.1">odmThing<a href="#section-9.4-7.1" class="pilcrow">¶</a>
+<li id="section-8.4-7.1">odmThing<a href="#section-8.4-7.1" class="pilcrow">¶</a>
 </li>
-<li id="section-9.4-7.2">odmObject<a href="#section-9.4-7.2" class="pilcrow">¶</a>
+<li id="section-8.4-7.2">odmObject<a href="#section-8.4-7.2" class="pilcrow">¶</a>
 </li>
 </ul>
 </section>
 </div>
 </section>
 </div>
-<section id="section-10">
+<section id="section-9">
       <h2 id="name-normative-references">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
 <dt id="I-D.handrews-json-schema-validation">[I-D.handrews-json-schema-validation]</dt>

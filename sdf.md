@@ -5,7 +5,7 @@ title: >
   SDF: A Simple Definition Format for One Data Model definitions
 abbrev: OneDM SDF
 docname: draft-bormann-t2trg-sdf-latest
-date: 2020-05-20
+date: 2020-05-28
 category: info
 
 ipr: trust200902
@@ -68,13 +68,19 @@ The Simple Definition Format is a format for domain experts to use in the creati
 
 OneDM tools convert this format to database formats and other serializations as needed.
 
-This document describes definitions of OneDM Objects and their associated Events, Actions, Properties, and Data types.
+This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.
 
 The JSON format of an SDF definition is described in this document.
 
 --- note_Contributing
 
-(point to github repo)
+Recent versions of this document are available at its github
+repository (TODO: point to github repo), which also provides an issue
+tracker as well as a way to supply "pull requests".
+
+This document has not yet been submitted as an Internet-Draft; the
+plan is to do this in early June.
+(TODO: add "note well" type information)
 
 --- middle
 
@@ -85,7 +91,8 @@ The Simple Definition Format is a format for domain experts to use in the creati
 
 OneDM tools convert this format to database formats and other serializations as needed.
 
-This document describes definitions of OneDM Objects and their associated Events, Actions, Properties, and Data types.
+
+This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.
 
 The JSON format of an SDF definition is described in this document.
 
@@ -105,12 +112,13 @@ Declaration:
 
 Conventions:
 
-- The singular form is preferred for keywords.
-
+- The singular form is chosen as the preferred one for the keywords defined here.
 
 {::boilerplate bcp14}
 
-# Example Definition:
+# Example Definition
+
+We start with an example for the SDF definition of a simple object called "Switch" ({{example1}}).
 
 ~~~ json
 {
@@ -121,9 +129,9 @@ Conventions:
     "license": "https://example.com/license"
   },
   "namespace": {
-    "st": "https://example.com/capability/odm"
+    "cap": "https://example.com/capability/odm"
   },
-  "defaultNamespace": "st",
+  "defaultNamespace": "cap",
   "odmObject": {
     "Switch": {
       "odmProperty": {
@@ -144,6 +152,8 @@ Conventions:
 }
 ~~~
 {: #example1 title="A simple example of an SDF definition file"}
+
+TODO: Add explanation
 
 # SDF structure
 
@@ -188,18 +198,18 @@ namespace for the SDF definition file.
 | defaultnamespace | string | no       | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
 {: #nssec title="Namespaces Section"}
 
-The following example declares a set of namespaces and defines `st` as the default namespace.
+The following example declares a set of namespaces and defines `cap` as the default namespace.
 
 ~~~ json
 "namespace": {
-  "st": "https://example.com/capability/odm",
+  "cap": "https://example.com/capability/odm",
   "zcl": "https://example.com/zcl/odm"
 },
-"defaultnamespace": "st",
+"defaultnamespace": "cap",
 ~~~
 
 If no defaultnamespace setting is given, the SDF definition file does not
-contribute to a global namespace.  As the defaultnamespace gives a
+contribute to a global namespace.  As the defaultnamespace is set by giving a
 namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.
 
@@ -209,9 +219,9 @@ set up, and no defaultnamespace can be given.
 
 ## Definitions section
 
-The Definitions section contains one or more type definitions according to the class name keywords for type definitions (object, property, action, event, data).
+The Definitions section contains one or more type definitions according to the class name keywords for type definitions (for object, property, action, event, data, as well as thing and product); the names for these type keywords are capitalized and prefixed with `odm`.
 
-Each class may have zero or more type definitions associated with it. Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.
+Each class defined may have zero or more type definitions associated with it. Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.
 
 A definition consists of a map entry using the newly defined term as a JSON key, with a value consisting of a map of Qualities and their values.
 
@@ -232,8 +242,8 @@ An example for an Object definition is given in {{exobject}}:
 ~~~
 {: #exobject title="Example Object definition"}
 
-This example defines an Object "foo" that is defined in the default namespace, containing a property
-`odm:/odmObject/foo/odmProperty/bar`, with data of type boolean.
+This example defines an Object "foo" that is defined in the default namespace (full address: `#/odmObject/foo`), containing a property that can be addressed as
+`#/odmObject/foo/odmProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
 # Names and namespaces
@@ -241,7 +251,7 @@ This example defines an Object "foo" that is defined in the default namespace, c
 SDF definition files may contribute to a global namespace, and may
 reference elements from that global namespace.
 (An SDF definition file that does not set a defaultnamespace does not
-contribute to the global namespace.)
+contribute to a global namespace.)
 
 ## Structure
 
@@ -271,7 +281,7 @@ The absolute URI part is a copy of the default namespace, i.e., the
 default namespace is always the target namespace for a name for which
 a definition is contributed.
 When emphasizing that name definitions are contributed to the default namespace,
-we therefore also call it the "target namespace".
+we therefore also call it the "target namespace" of the SDF definition file.
 
 E.g., in {{example1}}, definitions for the following global names are contributed:
 
@@ -313,13 +323,13 @@ For example, if a namespace prefix is defined:
 Then this reference to that namespace:
 
 ~~~ json
-{ "odmRef": "foo:odmData/temperatureData" }
+{ "odmRef": "foo:/odmData/temperatureData" }
 ~~~
 
 references the global name:
 
 ~~~ json
-"https://example.com/#odmData/temperatureData"
+"https://example.com/#/odmData/temperatureData"
 ~~~
 
 Note that there is no way to provide a URI scheme name in a curie, so
@@ -335,7 +345,7 @@ Name references occur only in specific elements of the syntax of SDF:
 
 ## odmRef
 
-The keyword "odmRef" is used in a JSON map establishing a definition
+In a JSON map establishing a definition, the keyword "odmRef" is used
 to copy all of the qualities of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
 (This can be compared to the processing of the "$ref" keyword in JSON Schema.)
@@ -355,13 +365,13 @@ creates a new definition "temperatureProperty" that contains all of the qualitie
 The value of "odmRequired" is an array of name references, each
 pointing to one declaration instantiation of which is declared mandatory.
 
-# Optionality using the keyword "odmRequired"
+### Optionality using the keyword "odmRequired"
 
 The keyword "odmRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.
 
-The value of "odmRequired" is an array JSON pointers, each indicating one mandatory definition.
+The value of "odmRequired" is an array of JSON pointers, each indicating one mandatory definition.
 
-The example in the figure below shows two required elements in the odmObject definition for "temperatureWithAlarm", the odmProperty "temperatureData", and the odmEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "odmRef" to use a pre-existing definition in this definition, for the "alarmType" data (odmOutputData) produced by the odmEvent "overTemperatureEvent".
+The example in {{example-req}} shows two required elements in the odmObject definition for "temperatureWithAlarm", the odmProperty "temperatureData", and the odmEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "odmRef" to use a pre-existing definition in this definition, for the "alarmType" data (odmOutputData) produced by the odmEvent "overTemperatureEvent".
 
 ~~~ json
 {
@@ -380,7 +390,7 @@ The example in the figure below shows two required elements in the odmObject def
         "overTemperatureEvent": {
           "odmOutputData": {
             "alarmType": {
-              "odmRef": "odm:/#odmData/alarmTypes/quantityAlarms",
+              "odmRef": "odm:/odmData/alarmTypes/quantityAlarms",
               "const": "OverTemperatureAlarm"
             },
             "temperature": {
@@ -393,33 +403,49 @@ The example in the figure below shows two required elements in the odmObject def
   }
 }
 ~~~
+{: #example-req title="Using odmRequired"}
+
+## Common Qualities
+
+Definitions in SDF share a number of qualities that provide metadata for
+them.  These are listed in {{tbl-common-qualities}}.  None of these
+qualities are required or have default values that are assumed if the
+quality is absent.
+If a label is required for an application and no label is given, the last part of the JSON pointer to the definition can be used.
+
+| Quality     | Type         | Description                                                        |
+|-------------|--------------|--------------------------------------------------------------------|
+| description | text         | long text (no constraints)                                         |
+| label       | text         | short text (no constraints)                                        |
+| $comment    | text         | source code comments only, no semantics                            |
+| name        | text         | DELETE ME (deprecated)                                             |
+| odmRef      | sdf-pointer  | (see {{odmref}})                                                   |
+| odmRequired | pointer-list | (see {{odmrequired}}, applies to qualities of properties, of data) |
+{: #tbl-common-qualities title="Common Qualities"}
+
 
 # Keywords for type definitions
 
 The following SDF keywords are used to create type definitions in the target namespace.
+All these definitions share some common qualities as discussed in {{common-qualities}}.
 
 ## odmObject
 
 The odmObject keyword denotes zero or more Object definitions. An odmObject may contain or include definitions of events, actions, properties, and data types.
 
-The qualities of odmObject are shown in {{odmobjqual}}.
+The qualities of an odmObject include the common qualities, additional qualities are shown in {{odmobjqual}}.
+None of these
+qualities are required or have default values that are assumed if the
+quality is absent.
 
-| Quality | Type | Required | Description | Default |
-|---|---|---|---|---|
-|name|string|no|human readable name| N/A |
-|description|string|no|human readable description| N/A |
-|title|string|no|human readable title to display| N/A |
-|$comment|string|no|explanatory comments | N/A |
-|odmRef|object|no|reference to a definition to be used as a template for a new definition|N/A |
-|odmRequired|array|no|Array of JSON Pointers to mandatory items in a valid definition | N/A |
+| Quality     | Type     | Description                                                              |
+|-------------|----------|--------------------------------------------------------------------------|
+| title       | string   | human readable title to display                                          |
+| odmProperty | property | zero or more named property definitions for this object                  |
+| odmAction   | action   | zero or more named action definitions for this object                    |
+| odmEvent    | event    | zero or more named event definitions for this object                     |
+| odmData     | data     | zero or more named data type definitions that might be used in the above |
 {: #odmobjqual title="Qualities of odmObject"}
-
-odmObject may define or include the following ODM types:
-
-- odmProperty
-- odmAction
-- odmEvent
-- odmData
 
 
 ## odmProperty
@@ -428,42 +454,35 @@ The odmProperty keyword denotes zero or more property definitions.
 
 Properties are used to model elements of state.
 
-The qualities of odmProperty are shown in {{odmpropqual}}.
+The qualities of odmProperty include the common qualities, additional qualities are shown in {{odmpropqual}}.
 
-| Quality | Type | Required | Description | Default |
-|---|---|---|---|---|
-|name|string|no|human readable name| N/A |
-|description|string|no|human readable description| N/A |
-|title|string|no|human readable title to display| N/A |
-|$comment|string|no|explanatory comments | N/A |
-|odmRequired|array|no|Array of JSON Pointers to mandatory items in a valid definition | N/A |
-|odmRef|object|no|reference to a definition to be used as a template for a new definition| N/A |
-|readable|boolean|no|Reads are allowed| true |
-|writable|boolean|no|Writes are allowed| true |
-|observable|boolean|no| flag to indicate asynchronous notification is available| true |
-|contentFormat|string|no|IANA media type string| N/A |
-|subtype|string|no|subtype enumeration|N/A|
-|widthInBits|integer|no|hint for protocol binding| N/A|
-|units|string|no|SenML unit name as per {{-units}}, subregistry SenML Units  | N/A |
-|nullable|boolean|no|indicates a null value is available for this type| true |
-|scaleMinimum|number|no|lower limit of value in units| N/A |
-|scaleMaximum|number| no|upper limit of value in units| N/A |
-|type|string, enum|no|JSON data type| N/A |
-|minimum|number|no|lower limit of value in the representation format| N/A |
-|maximum|number|no|upper limit of value in the representation format| N/A |
-|multipleOf|number|no|indicates the resolution of the number in representation format| N/A |
-|enum|array|no|enumeration constraint| N/A |
-|pattern|string|no|regular expression to constrain a string pattern| N/A |
-|format|string|no|JSON Schema formats as per {{-jso}}, Section 7.3     | N/A|
-|minLength|integer|no|shortest length string in octets| N/A |
-|maxLength|integer|no|longest length string in octets| N/A |
-|default|number, boolean, string|no|specifies the default value for initialization| N/A |
-|const|number, boolean, string|no|specifies a constant value for a data item or property| N/A |
+| Quality       | Type                    | Description                                                     | Default |
+|---------------|-------------------------|-----------------------------------------------------------------|---------|
+| title         | string                  | human readable title to display                                 | N/A     |
+| readable      | boolean                 | Reads are allowed                                               | true    |
+| writable      | boolean                 | Writes are allowed                                              | true    |
+| observable    | boolean                 | flag to indicate asynchronous notification is available         | true    |
+| contentFormat | string                  | IANA media type string                                          | N/A     |
+| subtype       | string                  | subtype enumeration                                             | N/A     |
+| widthInBits   | integer                 | hint for protocol binding                                       | N/A     |
+| units         | string                  | SenML unit name as per {{-units}}, subregistry SenML Units      | N/A     |
+| nullable      | boolean                 | indicates a null value is available for this type               | true    |
+| scaleMinimum  | number                  | lower limit of value in units                                   | N/A     |
+| scaleMaximum  | number                  | upper limit of value in units                                   | N/A     |
+| type          | string, enum            | JSON data type                                                  | N/A     |
+| minimum       | number                  | lower limit of value in the representation format               | N/A     |
+| maximum       | number                  | upper limit of value in the representation format               | N/A     |
+| multipleOf    | number                  | indicates the resolution of the number in representation format | N/A     |
+| enum          | array                   | enumeration constraint                                          | N/A     |
+| pattern       | string                  | regular expression to constrain a string pattern                | N/A     |
+| format        | string                  | JSON Schema formats as per {{-jso}}, Section 7.3                | N/A     |
+| minLength     | integer                 | shortest length string in octets                                | N/A     |
+| maxLength     | integer                 | longest length string in octets                                 | N/A     |
+| default       | number, boolean, string | specifies the default value for initialization                  | N/A     |
+| const         | number, boolean, string | specifies a constant value for a data item or property          | N/A     |
 {: #odmpropqual title="Qualities of odmProperty"}
 
-odmProperty may define or include the following ODM types:
-
-- odmData
+CHECK THIS: odmProperty may not define any other ODM types.
 
 ## odmAction
 
@@ -471,25 +490,22 @@ The odmAction keyword denotes zero or more Action definitions.
 
 Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.
 
-The qualities of odmAction are shown in {{odmactqual}}.
+The qualities of odmAction include the common qualities, additional qualities are shown in {{odmactqual}}.
 
-| Quality | Type | Required | Description |
-|---|---|---|---|
-|name|string|no|human readable name|
-|description|string|no|human readable description|
-|title|string|no|human readable title to display|
-|$comment|string|no|explanatory comments | N/A |
-|odmRequired|array|no|Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-|odmInputData|array|no|Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-|odmRequiredInputData|array|no|Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-|odmOutputData|array|no|Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-|odmRef|object|no|reference to a definition to be used as a template for a new definition|
+| Quality              | Type   | Description                                                            |     |
+|----------------------|--------|------------------------------------------------------------------------|-----|
+| title                | string | human readable title to display                                        |     |
+| odmInputData         | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
+| odmRequiredInputData | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
+| odmOutputData        | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
 {: #odmactqual title="Qualities of odmAction"}
 
-odmAction may define or include the following ODM types:
+`odmInputData` refined by `odmRequiredInputData` define the input data
+of the action.  `odmOutputData` refined `odmRequired` (a quality
+defined in {{tbl-common-qualities}}) define the output data of the
+action.
 
-- odmData
-
+CHECK THIS: odmProperty may not itself define any other ODM types; all types needed are referenced via SDF pointers.
 
 ## odmEvent
 
@@ -497,23 +513,17 @@ The odmEvent keyword denotes zero or more Event definitions.
 
 Events are used to model asynchronous occurrences that may be communicated proactively. Events have data elements which are communicated upon the occurrence of the event.
 
-The qualities of odmEvent are shown in {{odmevqual}}.
+The qualities of odmEvent include the common qualities, additional qualities are shown in {{odmevqual}}.
 
-| Quality | Type | Required | Description |
-|---|---|---|---|
-|name|string|no|human readable name|
-|description|string|no|human readable description|
-|title|string|no|human readable title to display|
-|$comment|string|no|explanatory comments | N/A |
-|odmOutputData|array|no|Array of JSON Pointers to output items in a valid definition | N/A |
-|odmRequired|array|no|Array of JSON Pointers to mandatory items in a valid definition | N/A |
-|odmRef|object|no|reference to a definition to be used as a template for a new definition|
+| Quality       | Type   | Required | Description                                                  |
+|---------------|--------|----------|--------------------------------------------------------------|
+| title         | string | no       | human readable title to display                              |
+| odmOutputData | array  | no       | Array of JSON Pointers to output items in a valid definition |
 {: #odmevqual title="Qualities of odmEvent"}
 
-odmEvent may define or include the following ODM types:
-
-- odmData
-
+`odmOutputData` refined by `odmRequired` (a quality
+defined in {{tbl-common-qualities}}) define the output data of the
+action.
 
 ## odmData
 
@@ -525,32 +535,29 @@ odmData is used for Action parameters, for Event data, and for reusable constrai
 
 {{odmdataqual}} lists the qualities of odmData.
 
-| Quality | Type | Required | Description |
-|---|---|---|---|
-|name|string|no|human readable name|
-|description|string|no|human readable description|
-|title|string|no|human readable title to display|
-|$comment|string|no|explanatory comments | N/A |
-|required|array|no|list of references to mandatory items in a valid definition | N/A |
-|odmRef|object|no|reference to a definition to be used as a template for a new definition|
-|type|object|no|reference to a definition to be used as a template for a new definition|
-|subtype|string|no|subtype enumeration|N/A|
-|widthInBits|integer|no|hint for protocol binding| N/A|
-|units|string|no|SenML unit name as per {{-units}}, subregistry SenML Units  | N/A |
-|nullable|boolean|no|indicates a null value is available for this type|
-|scaleMinimum|number|no|lower limit of value in units|
-|scaleMaximum|number|no|upper limit of value in units|
-|type|string, enum|yes|JSON data type|
-|minimum|number|no|lower limit of value in the representation format|
-|maximum|number|no|upper limit of value in the representation format|
-|multipleOf|number|no|indicates the resolution of the number in representation format|
-|enum|array of any type|no|enumeration constraint|
-|pattern|string|no|regular expression to constrain a string pattern|
-|format|string|no|JSON Schema formats as per {{-jso}}, Section 7.3     | N/A|
-|minLength|integer|no|shortest length string in octets|
-|maxLength|integer|no|longest length string in octets|
-|default|number, boolean, string|no|specifies the default value for initialization|
-|const|number, boolean, string|no|specifies a constant value for a data item or property|
+TODO: Clean this up to remove complete redundancy with odmProperty.
+
+| Quality      | Type                    | Required | Description                                                             |     |
+|--------------|-------------------------|----------|-------------------------------------------------------------------------|-----|
+| title        | string                  | no       | human readable title to display                                         |     |
+| type         | object                  | no       | reference to a definition to be used as a template for a new definition |     |
+| subtype      | string                  | no       | subtype enumeration                                                     | N/A |
+| widthInBits  | integer                 | no       | hint for protocol binding                                               | N/A |
+| units        | string                  | no       | SenML unit name as per {{-units}}, subregistry SenML Units              | N/A |
+| nullable     | boolean                 | no       | indicates a null value is available for this type                       |     |
+| scaleMinimum | number                  | no       | lower limit of value in units                                           |     |
+| scaleMaximum | number                  | no       | upper limit of value in units                                           |     |
+| type         | string, enum            | yes      | JSON data type                                                          |     |
+| minimum      | number                  | no       | lower limit of value in the representation format                       |     |
+| maximum      | number                  | no       | upper limit of value in the representation format                       |     |
+| multipleOf   | number                  | no       | indicates the resolution of the number in representation format         |     |
+| enum         | array of any type       | no       | enumeration constraint                                                  |     |
+| pattern      | string                  | no       | regular expression to constrain a string pattern                        |     |
+| format       | string                  | no       | JSON Schema formats as per {{-jso}}, Section 7.3                        | N/A |
+| minLength    | integer                 | no       | shortest length string in octets                                        |     |
+| maxLength    | integer                 | no       | longest length string in octets                                         |     |
+| default      | number, boolean, string | no       | specifies the default value for initialization                          |     |
+| const        | number, boolean, string | no       | specifies a constant value for a data item or property                  |     |
 {: #odmdataqual title="Qualities of odmData"}
 
 odmData may define or contain the following ODM types:
@@ -569,9 +576,9 @@ odmData may define or contain the following ODM types:
     "license": "https://example.com/license"
   },
   "namespace": {
-    "st": "https://example.com/capability/odm"
+    "cap": "https://example.com/capability/odm"
   },
-  "defaultNamespace": "st",
+  "defaultNamespace": "cap",
   "odmObject": {
     "Switch": {
       "odmProperty": {
@@ -724,5 +731,5 @@ This strawman draft is based on `sdf.md` and `sdf-schema.json` in the
 one-data-model `language` repository, as well as Ari Keranen's
 "alt-schema" from the Ericsson Research `ipso-odm` repository.
 
-<!--  LocalWords:  SDF
+<!--  LocalWords:  SDF namespace defaultnamespace instantiation
  -->
