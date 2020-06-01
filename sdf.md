@@ -2,10 +2,10 @@
 coding: utf-8
 
 title: >
-  SDF: A Simple Definition Format for One Data Model definitions
+  SDF: Semantic Definition Format (SDF) for Things, their Data and Interactions
 abbrev: OneDM SDF
 docname: draft-bormann-t2trg-sdf-latest
-date: 2020-05-28
+date: 2020-06-01
 category: info
 
 ipr: trust200902
@@ -440,7 +440,6 @@ quality is absent.
 
 | Quality     | Type     | Description                                                              |
 |-------------|----------|--------------------------------------------------------------------------|
-| title       | string   | human readable title to display                                          |
 | odmProperty | property | zero or more named property definitions for this object                  |
 | odmAction   | action   | zero or more named action definitions for this object                    |
 | odmEvent    | event    | zero or more named event definitions for this object                     |
@@ -458,7 +457,6 @@ The qualities of odmProperty include the common qualities, additional qualities 
 
 | Quality       | Type                    | Description                                                     | Default |
 |---------------|-------------------------|-----------------------------------------------------------------|---------|
-| title         | string                  | human readable title to display                                 | N/A     |
 | readable      | boolean                 | Reads are allowed                                               | true    |
 | writable      | boolean                 | Writes are allowed                                              | true    |
 | observable    | boolean                 | flag to indicate asynchronous notification is available         | true    |
@@ -494,10 +492,10 @@ The qualities of odmAction include the common qualities, additional qualities ar
 
 | Quality              | Type   | Description                                                            |     |
 |----------------------|--------|------------------------------------------------------------------------|-----|
-| title                | string | human readable title to display                                        |     |
 | odmInputData         | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
 | odmRequiredInputData | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
 | odmOutputData        | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
+| odmData     | data     | zero or more named data type definitions that might be used in the above |
 {: #odmactqual title="Qualities of odmAction"}
 
 `odmInputData` refined by `odmRequiredInputData` define the input data
@@ -517,8 +515,8 @@ The qualities of odmEvent include the common qualities, additional qualities are
 
 | Quality       | Type   | Required | Description                                                  |
 |---------------|--------|----------|--------------------------------------------------------------|
-| title         | string | no       | human readable title to display                              |
 | odmOutputData | array  | no       | Array of JSON Pointers to output items in a valid definition |
+| odmData     | data     | zero or more named data type definitions that might be used in the above |
 {: #odmevqual title="Qualities of odmEvent"}
 
 `odmOutputData` refined by `odmRequired` (a quality
@@ -539,7 +537,6 @@ TODO: Clean this up to remove complete redundancy with odmProperty.
 
 | Quality      | Type                    | Required | Description                                                             |     |
 |--------------|-------------------------|----------|-------------------------------------------------------------------------|-----|
-| title        | string                  | no       | human readable title to display                                         |     |
 | type         | object                  | no       | reference to a definition to be used as a template for a new definition |     |
 | subtype      | string                  | no       | subtype enumeration                                                     | N/A |
 | widthInBits  | integer                 | no       | hint for protocol binding                                               | N/A |
@@ -658,15 +655,11 @@ An odmThing may be composed of odmObjects and other odmThings.
 
 The qualities of odmThing are shown in {{odmthingqual}}.
 
-| Quality | Type | Required | Description |
-|---|---|---|---|
-|name|string|no|human readable name|
-|description|string|no|human readable description|
-|title|string|no|human readable title to display|
-|$comment|string|no|explanatory comments | N/A |
-|odmRequired|array|no|Array of JSON Pointers to mandatory items in a valid definition | N/A |
-|odmRef|object|no|reference to a definition to be used as a template for a new definition|
-{: #odmthingqual title="Qualities of odmThing"}
+| Quality   | Type | Required | Description |
+|-----------|------|----------|-------------|
+| odmThing  |      |          |             |
+| odmObject |      |          |             |
+{: #odmthingqual title="Qualities of odmThing and odmProduct"}
 
 odmThing may define or include the following ODM types:
 
@@ -681,22 +674,7 @@ Products may be composed of Objects and Things at the high level, and may includ
 
 Product definitions may set optional defaults and constant values for specific use cases, for example units, range, and scale settings for properties, or available parameters for Actions.
 
-The qualities of odmProduct are shown in {{odmprodqual}}.
-
-| Quality | Type | Required | Description |
-|---|---|---|---|
-|name|string|no|human readable name|
-|description|string|no|human readable description|
-|title|string|no|human readable title to display|
-|$comment|string|no|explanatory comments | N/A |
-|odmRequired|array|no|Array of JSON Pointers to mandatory items in a valid definition  | N/A |
-|odmRef|object|no|reference to a definition to be used as a template for a new definition|
-{: #odmprodqual title="Qualities of odmProduct"}
-
-odmProduct may define or include the following ODM types:
-
-- odmThing
-- odmObject
+The qualities of odmProduct are the same as for odmThing and are shown in {{odmthingqual}}.
 
 --- back
 
