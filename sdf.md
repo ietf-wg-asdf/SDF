@@ -57,6 +57,7 @@ normative:
   W3C.NOTE-curie-20101216: curie
   RFC0020: ascii
 informative:
+  ZCL: DOI.10.1016/B978-0-7506-8597-9.00006-9
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -96,9 +97,25 @@ This document describes definitions of OneDM Objects and their associated intera
 
 The JSON format of an SDF definition is described in this document.
 
-# Terminology and Conventions
+## Terminology and Conventions
 
 <!-- Note: Should we use RFC 2119? -->
+
+Thing:
+: A physical device that is also made available in the Internet of
+  Things.  The term is used here for Things that are notable for their
+  interaction with the physical world beyond interaction with humand;
+  a temperature sensor or a light might be a Thing, but a router that
+  employs both temperature sensors and indicator lights might exhbit
+  less Thingness, as the effects of its functioning are mostly on the
+  digital side.
+
+Affordance:
+: An element of an interface offered for interaction, defining its
+  possible uses or making clear how it can or should be used.  The
+  term is used here for the digital interfaces of a Thing only; it
+  might also have physical affordances such as buttons, dials, and
+  displays.
 
 Quality:
 : a metadata item in a definition or declaration which says something about that definition or declaration. A quality is represented in SDF as a member in a JSON object that serves as a definition or declaration
@@ -116,7 +133,9 @@ Conventions:
 
 {::boilerplate bcp14}
 
-# Example Definition
+# Overview
+
+## Example Definition
 
 We start with an example for the SDF definition of a simple object called "Switch" ({{example1}}).
 
@@ -153,7 +172,220 @@ We start with an example for the SDF definition of a simple object called "Switc
 ~~~
 {: #example1 title="A simple example of an SDF definition file"}
 
-TODO: Add explanation
+TODO: Add explanation; 
+
+## Elements of an SDF model
+
+The SDF language uses seven predefined classes for modeling connected
+Things, six of which are illustrated in {{fig-class-1}} and {{fig-class-2}}[^1] (the seventh class `odmProduct` is exactly like `odmThing`).
+
+[^1]: \[Decide which of these figures we want]
+
+
+~~~ goat
+                +--------+
+                |odmThing|
+                |--------|
+                |--------|
+                +--------+
+                     |
+                     |
+               +---------+
+               |odmObject|
+               |---------|
+               |---------|
+               +---------+
+                     |
++-----------+  +---------+   +--------+
+|odmProperty|  |odmAction|   |odmEvent|
+|-----------|  |---------|   |--------|
+|-----------|  |---------|   |--------|
++-----------+  +---------+   +--------+
+
+
+                +-------+
+                |odmData|
+                |-------|
+                |-------|
+                +-------+
+~~~
+{: #fig-class-1 title="Main classes used in SDF models"}
+
+~~~ plantuml
+odmThing --> "0+" odmObject : hasObject
+odmThing --> "0+" odmThing : hasThing
+
+odmObject --> "0+" odmProperty : hasProperty
+odmObject --> "0+" odmAction : hasAction
+odmObject --> "0+" odmEvent : hasEvent
+
+odmAction --> "1+" odmData : hasInputData
+odmAction --> "0+" odmData : hasOutputData
+
+odmEvent --> "1+" odmData : hasOutputData
+
+odmProperty --> "1" odmData : isInstanceOf
+
+class odmThing {
+}
+
+class odmObject {
+}
+
+class odmProperty {
+}
+
+class odmAction {
+}
+
+class odmEvent {
+}
+
+class odmData {
+}
+~~~
+{: #fig-class-2 title="Main classes used in SDF models"}
+
+The six main classes are discussed below.
+
+### odmObject
+
+`odmObject` is the main "atom" of reusable semantics for model construction.
+It aligns in scope with common definition items from many IoT modeling
+systems, for example ZigBee Clusters {{ZCL}}, OMA LWM2M Objects, and
+OCF Resource Types.
+
+An `odmObject` contains a set of `odmProperty`, `odmAction`, and
+`odmEvent` definitions that describe the interaction affordances
+associated with some scope of functionality.
+
+For the granularity of definition, `odmObject` definitions are meant
+to be kept narrow enough in scope to enable broad reuse and
+interoperability.
+For example, defining a light bulb using separate `odmObject`
+definitions for on/off control, dimming, and color control affordances
+will enable interoperable functionality to be configured for diverse
+product types.
+An `odmObject` definition for a common on/off control may be used to
+control may different kinds of Things that require on/off control.
+
+### odmProperty
+
+`odmProperty` is used to model elements of state within `odmObject` instances.
+
+An instance of `odmProperty` may be associated with some protocol
+affordance to enable the application to obtain the state variable and,
+optionally, modify the state variable.
+Additionally, some protocols provide for in-time reporting of state
+changes.
+(These three aspects are described by the qualities `readable`,
+`writable`, and `observable` defined for an `odmProperty`.)
+
+An `odmProperty` definition looks like a single `odmData` definition.
+(Qualities beyond those of `odmData` could be defined for odmProperty
+but currently aren't; this means that even `odmProperty` qualities
+such as `readable` and `writable` can be associated with `odmData`
+definitions, as well.)
+
+For `odmProperty` and `odmData`, SDF provides qualities that can
+constrain the structure and values of data allowed in an instance of
+these data, as well as qualities that associate semantics to these
+data, for engineering units and unit scaling information.
+
+For the data definition within `odmProperty` or `odmData`, SDF borrows
+a number of elements proposed for the json-schema.org "JSON Schema"
+format {{-jso}}, enhanced by qualities that are specific to SDF.
+However, for the current version of SDF, data are constrained to be of
+simple types (number, string, boolean) and arrays of these types.
+Syntax extension points are provided that can be used to provide
+richer types in future versions of this specification (possibly more
+of which can be borrowed from json-schema.org).
+
+Note that `odmProperty` definitions (and `odmData` definitions in
+general) are not intended to constrain the formats of data used for
+communication over network interfaces.
+Where needed, data definitions for payloads of protocol messages are
+expected to be part of the protocol binding.
+
+### odmAction
+
+`odmAction` is provided to model affordances that, when triggered,
+have more effect than just reading, updating, or observing Thing
+state, often resulting in some outward physical effect (which, itself,
+cannot be modeled in SDF).  From a programmer's perspective, they
+might be considered to be roughly analogous to method calls.
+
+Actions may have multiple data parameters; these are modeled as input
+data and output data (using `odmData`, i.e., the same entries as for
+`odmProperty` definitions).
+Actions may be long-running, that is to say that the effects may not
+take place immediately as would be expected for an update to an
+`odmPoperty`; the effects may play out over time and emit action
+results.
+Actions may also not always complete and may result in application
+errors, such as an item blocking the closing of an automatic door.
+
+Actions may have (or lack) qualities of idempotency and side-effect safety.
+
+The current version of SDF only provides data constraint modeling and semantics for the input and output data of `odmAction` entries.
+Again, data definitions for payloads of protocol messages, and
+detailed protocol settings for invoking the action, are expected to be
+part of the protocol binding.
+
+### odmEvent
+
+`odmEvent` is provided to model "happenings" associated with an
+odmObject that may result in a signal being stored or emitted as a
+result.
+
+Note that there is a trivial overlap with odmProperty state changes,
+which may also be defined as events but are not generally required to
+be defined as such.
+However, `odmEvents` may exhibit certain ordering, consistency, and
+reliability requirements that are expected to be supported in various
+implementations of `odmEvent` that do distinguish odmEvent from
+odmProperty.
+For instance, while a state change may simply be superseded by another
+state change, some events are "precious" and need to be preserved even
+if further events follow.
+
+The current version of SDF only provides data constraint modeling and
+semantics for the output data of `odmEvent` entries.
+Again, data definitions for payloads of protocol messages, and
+detailed protocol settings for invoking the action, are expected to be
+part of the protocol binding.
+
+
+### odmData
+
+`odmData` is provided separate from `odmProperty` to enable common
+modeling patterns, data constraints, and semantic anchor concepts to
+be factored out for data items that make up `odmProperty` items and
+serve as input and output data for `odmAction` and `odmEvent` items.
+
+It is a common use case for such a data definition to be shared between an `odmProperty` item and input or output parameters
+of an `odmAction` or output data provided by an `odmEvent`.
+`odmData` definitions also enable factoring out extended application
+data types such as mode and machine state enumerations to be reused
+across multiple definitions that have similar basic characteristics
+and requirements.
+
+### odmThing
+
+Back at the top level, `odmThing` enables construction of models for
+complex devices that will use one or more `odmObject` definitions.
+
+An `odmThing` definition can refine the metadata of the definitions it
+is composed from: other odmThing definitions and odmObject definitions.
+
+### odmProduct
+
+`odmThing` has a derived class `odmProduct`, which can be used to
+indicate a top level inventory item with a SKU identifier and other
+particular metadata.  Structurally, there is no difference between the
+two; semantically, an `odmProduct` is intended to describe a class of
+complete Things.
+
 
 # SDF structure
 
@@ -220,8 +452,10 @@ set up, and no defaultnamespace can be given.
 ## Definitions section
 
 The Definitions section contains one or more type definitions according to the class name keywords for type definitions (for object, property, action, event, data, as well as thing and product); the names for these type keywords are capitalized and prefixed with `odm`.
+The keywords are used with JSON maps (objects), the keys of which serve for naming the individual entries and the values define or declare an individual entry.
 
-Each class defined may have zero or more type definitions associated with it. Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.
+Each class defined may have zero or more type definitions associated with it.
+Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.
 
 A definition consists of a map entry using the newly defined term as a JSON key, with a value consisting of a map of Qualities and their values.
 
@@ -245,6 +479,8 @@ An example for an Object definition is given in {{exobject}}:
 This example defines an Object "foo" that is defined in the default namespace (full address: `#/odmObject/foo`), containing a property that can be addressed as
 `#/odmObject/foo/odmProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
+
+Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `odmProperty`, `odmAction`, and `odmEvent`, within `odmObject` entries, are declarations.  Similarly, entries within an `odmThing` describe instances of `odmObject` (or nested `odmThing`) that form part of instances of the Thing.
 
 # Names and namespaces
 
@@ -709,5 +945,9 @@ This strawman draft is based on `sdf.md` and `sdf-schema.json` in the
 one-data-model `language` repository, as well as Ari Keranen's
 "alt-schema" from the Ericsson Research `ipso-odm` repository.
 
-<!--  LocalWords:  SDF namespace defaultnamespace instantiation
+<!--  LocalWords:  SDF namespace defaultnamespace instantiation OMA
+ -->
+<!--  LocalWords:  affordances ZigBee LWM OCF odmObject odmThing
+ -->
+<!--  LocalWords:  idempotency
  -->
