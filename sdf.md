@@ -104,9 +104,9 @@ The JSON format of an SDF definition is described in this document.
 Thing:
 : A physical device that is also made available in the Internet of
   Things.  The term is used here for Things that are notable for their
-  interaction with the physical world beyond interaction with humand;
+  interaction with the physical world beyond interaction with humans;
   a temperature sensor or a light might be a Thing, but a router that
-  employs both temperature sensors and indicator lights might exhbit
+  employs both temperature sensors and indicator lights might exhibit
   less Thingness, as the effects of its functioning are mostly on the
   digital side.
 
@@ -296,7 +296,7 @@ For the data definition within `odmProperty` or `odmData`, SDF borrows
 a number of elements proposed for the json-schema.org "JSON Schema"
 format {{-jso}}, enhanced by qualities that are specific to SDF.
 However, for the current version of SDF, data are constrained to be of
-simple types (number, string, boolean) and arrays of these types.
+simple types (number, string, Boolean) and arrays of these types.
 Syntax extension points are provided that can be used to provide
 richer types in future versions of this specification (possibly more
 of which can be borrowed from json-schema.org).
@@ -363,8 +363,9 @@ modeling patterns, data constraints, and semantic anchor concepts to
 be factored out for data items that make up `odmProperty` items and
 serve as input and output data for `odmAction` and `odmEvent` items.
 
-It is a common use case for such a data definition to be shared between an `odmProperty` item and input or output parameters
-of an `odmAction` or output data provided by an `odmEvent`.
+It is a common use case for such a data definition to be shared
+between an `odmProperty` item and input or output parameters of an
+`odmAction` or output data provided by an `odmEvent`.
 `odmData` definitions also enable factoring out extended application
 data types such as mode and machine state enumerations to be reused
 across multiple definitions that have similar basic characteristics
@@ -670,29 +671,29 @@ versions of the json-schema.org proposal there were imported from.
 present specification.
 
 The term "allowed types" stands for primitive JSON types as well as
-homogenuous arrays of numbers, text, or booleans.  (This list might be
+homogeneous arrays of numbers, text, or Booleans.  (This list might be
 extended in a future version of SDF.)  An "allowed value" is a value
 allowed for one of these types.
 
-| Quality          | Type                                                  | Description                                                               |
-|------------------|-------------------------------------------------------|---------------------------------------------------------------------------|
-| type             | "number" / "string" / "boolean" / "integer" / "array" | JSON data type                                                            |
-| enum             | array of allowed values                               | enumeration constraint                                                    |
-| const            | allowed value                                         | specifies a constant value for a data item or property                    |
-| default          | allowed value                                         | specifies the default value for initialization                            |
-| minimum          | number                                                | lower limit of value in the representation format                         |
-| maximum          | number                                                | upper limit of value in the representation format                         |
-| exclusiveMinimum | number or boolean (jso draft 7/4)                     | lower limit of value in the representation format                         |
-| exclusiveMaximum | number or boolean (jso draft 7/4)                     | lower limit of value in the representation format                         |
-| multipleOf       | number                                                | indicates the resolution of the number in representation format \[NEEDED?] |
-| minLength        | integer                                               | shortest length string in octets                                          |
-| maxLength        | integer                                               | longest length string in octets                                           |
-| pattern          | string                                                | regular expression to constrain a string pattern                          |
-| format           | string                                                | JSON Schema formats as per {{-jso}}, Section 7.3                          |
-| minItems         | number                                                | Minimum number of items in array                                          |
-| maxItems         | number                                                | Maximum number of items in array                                          |
-| uniqueItems      | boolean                                               | if true, requires items to be all different                               |
-| items            | (subset of common/data qualities; see {{syntax})      | constraints on array items                                                |
+| Quality          | Type                                                             | Description                                            |
+|------------------|------------------------------------------------------------------|--------------------------------------------------------|
+| type             | "number" / "string" / "boolean" / "integer" / "array"            | JSON data type                                         |
+| enum             | array of allowed values                                          | enumeration constraint                                 |
+| const            | allowed value                                                    | specifies a constant value for a data item or property |
+| default          | allowed value                                                    | specifies the default value for initialization         |
+| minimum          | number                                                           | lower limit of value                                   |
+| maximum          | number                                                           | upper limit of value                                   |
+| exclusiveMinimum | number or boolean (jso draft 7/4)                                | lower limit of value                                   |
+| exclusiveMaximum | number or boolean (jso draft 7/4)                                | lower limit of value                                   |
+| multipleOf       | number                                                           | resolution of the number \[NEEDED?]                    |
+| minLength        | integer                                                          | shortest length string in octets                       |
+| maxLength        | integer                                                          | longest length string in octets                        |
+| pattern          | string                                                           | regular expression to constrain a string pattern       |
+| format           | "date-time" / "date" / "time" / "uri" / "uri-reference" / "uuid" | JSON Schema formats as per {{-jso}}, Section 7.3       |
+| minItems         | number                                                           | Minimum number of items in array                       |
+| maxItems         | number                                                           | Maximum number of items in array                       |
+| uniqueItems      | boolean                                                          | if true, requires items to be all different            |
+| items            | (subset of common/data qualities; see {{syntax})                 | constraints on array items                             |
 {: #odmdataqual1 title="Qualities of odmProperty and odmData borrowed from json-schema.org"}
 
 | Quality       | Type                      | Description                                                     | Default |
@@ -850,7 +851,8 @@ The model namespace is organized according to terms that are defined in the defi
 The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/odmObject/Switch/odmAction/on" where ns is the short name for the namespace prefix.
 
 ## Modular Composition
-Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace. 
+
+Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.
 
 ### Use of the "odmRef" keyword to re-use a definition
 An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "odmRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.
@@ -861,8 +863,7 @@ Yes, we do want to enable overriding, but need to warn specifiers not
 to use this in a way that contradicts the referenced semantics.
 
 ~~~
- 
-"odmData": 
+"odmData":
   "length" : {
     "type": "number",
     "minimum": 0,
@@ -881,9 +882,9 @@ to use this in a way that contradicts the referenced semantics.
 
 An odmThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an odmThing, and the socket-thing itself could be used in a declaration in the odmThing definition for the outlet strip.
 
-odmThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination referigerator-freezer product.
+odmThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
 
-An odmThing may be composed of odmObjects and other odmThings. 
+An odmThing may be composed of odmObjects and other odmThings.
 
 The qualities of odmThing are shown in {{odmthingqual}}.
 
@@ -894,10 +895,6 @@ The qualities of odmThing are shown in {{odmthingqual}}.
 | odmObject |      |          |                      |
 {: #odmthingqual title="Qualities of odmThing and odmProduct"}
 
-odmThing may define or include the following ODM types:
-
-- odmThing
-- odmObject
 
 ## odmProduct
 
@@ -915,7 +912,7 @@ The qualities of odmProduct are the same as for odmThing and are shown in {{odmt
 
 This appendix describes the syntax of SDF using CDDL {{-cddl}}.  Note
 that this appendix was derived from Ari Keranen's "alt-schema" and
-Michael Kosters "schema", with a view of covering the syntax that is
+Michael Koster's "schema", with a view of covering the syntax that is
 currently in use at the One Data Model `playground` repository.
 
 TODO: Align with full framework syntax, as required.
@@ -946,5 +943,9 @@ one-data-model `language` repository, as well as Ari Keranen's
  -->
 <!--  LocalWords:  affordances ZigBee LWM OCF odmObject odmThing
  -->
-<!--  LocalWords:  idempotency
+<!--  LocalWords:  idempotency Thingness odmProperty odmEvent odmRef
+ -->
+<!--  LocalWords:  namespaces odmRequired Optionality odmAction
+ -->
+<!--  LocalWords:  odmProduct
  -->

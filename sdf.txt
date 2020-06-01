@@ -114,10 +114,10 @@ Koster & Bormann         Expires 3 December 2020                [Page 2]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   5.  Keywords for type definitions . . . . . . . . . . . . . . . .  21
+   5.  Keywords for type definitions . . . . . . . . . . . . . . . .  20
      5.1.  odmObject . . . . . . . . . . . . . . . . . . . . . . . .  21
      5.2.  odmProperty . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.3.  odmAction . . . . . . . . . . . . . . . . . . . . . . . .  22
+     5.3.  odmAction . . . . . . . . . . . . . . . . . . . . . . . .  21
      5.4.  odmEvent  . . . . . . . . . . . . . . . . . . . . . . . .  22
      5.5.  odmData . . . . . . . . . . . . . . . . . . . . . . . . .  23
    6.  Example Simple Object Definition: . . . . . . . . . . . . . .  23
@@ -155,10 +155,10 @@ Internet-Draft                  OneDM SDF                      June 2020
    Thing:  A physical device that is also made available in the Internet
       of Things.  The term is used here for Things that are notable for
       their interaction with the physical world beyond interaction with
-      humand; a temperature sensor or a light might be a Thing, but a
+      humans; a temperature sensor or a light might be a Thing, but a
       router that employs both temperature sensors and indicator lights
-      might exhbit less Thingness, as the effects of its functioning are
-      mostly on the digital side.
+      might exhibit less Thingness, as the effects of its functioning
+      are mostly on the digital side.
 
    Affordance:  An element of an interface offered for interaction,
 
@@ -431,7 +431,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    Schema" format [I-D.handrews-json-schema-validation], enhanced by
    qualities that are specific to SDF.  However, for the current version
    of SDF, data are constrained to be of simple types (number, string,
-   boolean) and arrays of these types.  Syntax extension points are
+   Boolean) and arrays of these types.  Syntax extension points are
    provided that can be used to provide richer types in future versions
    of this specification (possibly more of which can be borrowed from
    json-schema.org).
@@ -985,23 +985,23 @@ Internet-Draft                  OneDM SDF                      June 2020
    specification.
 
    The term "allowed types" stands for primitive JSON types as well as
-   homogenuous arrays of numbers, text, or booleans.  (This list might
+   homogeneous arrays of numbers, text, or Booleans.  (This list might
    be extended in a future version of SDF.)  An "allowed value" is a
    value allowed for one of these types.
 
-   +----------------+----------+---------------------------------------+
-   | Quality        | Type     | Description                           |
-   +================+==========+=======================================+
-   | type           |"number" /| JSON data type                        |
-   |                |"string" /|                                       |
-   |                |"boolean" |                                       |
-   |                | /        |                                       |
-   |                |"integer" |                                       |
-   |                |/ "array" |                                       |
-   +----------------+----------+---------------------------------------+
-   | enum           | array of | enumeration constraint                |
-   |                | allowed  |                                       |
-   |                | values   |                                       |
+   +----------------+---------------+--------------------------------------+
+   | Quality        | Type          | Description                          |
+   +================+===============+======================================+
+   | type           | "number" /    | JSON data type                       |
+   |                | "string" /    |                                      |
+   |                | "boolean" /   |                                      |
+   |                | "integer" /   |                                      |
+   |                | "array"       |                                      |
+   +----------------+---------------+--------------------------------------+
+   | enum           | array of      | enumeration constraint               |
+   |                |allowed values |                                      |
+   +----------------+---------------+--------------------------------------+
+   | const          | allowed value |specifies a constant value for a data |
 
 
 
@@ -1010,54 +1010,54 @@ Koster & Bormann         Expires 3 December 2020               [Page 18]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   +----------------+----------+---------------------------------------+
-   | const          | allowed  | specifies a constant value for a data |
-   |                | value    | item or property                      |
-   +----------------+----------+---------------------------------------+
-   | default        | allowed  | specifies the default value for       |
-   |                | value    | initialization                        |
-   +----------------+----------+---------------------------------------+
-   | minimum        | number   | lower limit of value in the           |
-   |                |          | representation format                 |
-   +----------------+----------+---------------------------------------+
-   | maximum        | number   | upper limit of value in the           |
-   |                |          | representation format                 |
-   +----------------+----------+---------------------------------------+
-   |exclusiveMinimum|number or | lower limit of value in the           |
-   |                | boolean  | representation format                 |
-   |                |(jso draft|                                       |
-   |                | 7/4)     |                                       |
-   +----------------+----------+---------------------------------------+
-   |exclusiveMaximum|number or | lower limit of value in the           |
-   |                | boolean  | representation format                 |
-   |                |(jso draft|                                       |
-   |                | 7/4)     |                                       |
-   +----------------+----------+---------------------------------------+
-   | multipleOf     | number   |indicates the resolution of the number |
-   |                |          | in representation format [NEEDED?]    |
-   +----------------+----------+---------------------------------------+
-   | minLength      | integer  | shortest length string in octets      |
-   +----------------+----------+---------------------------------------+
-   | maxLength      | integer  | longest length string in octets       |
-   +----------------+----------+---------------------------------------+
-   | pattern        | string   | regular expression to constrain a     |
-   |                |          | string pattern                        |
-   +----------------+----------+---------------------------------------+
-   | format         | string   | JSON Schema formats as per            |
-   |                |          |[I-D.handrews-json-schema-validation], |
-   |                |          | Section 7.3                           |
-   +----------------+----------+---------------------------------------+
-   | minItems       | number   | Minimum number of items in array      |
-   +----------------+----------+---------------------------------------+
-   | maxItems       | number   | Maximum number of items in array      |
-   +----------------+----------+---------------------------------------+
-   | uniqueItems    | boolean  | if true, requires items to be all     |
-   |                |          | different                             |
-   +----------------+----------+---------------------------------------+
-   | items          |(subset of| constraints on array items            |
-   |                | common/  |                                       |
-   |                | data     |                                       |
-   |                |qualities;|                                       |
+   |                |               | item or property                     |
+   +----------------+---------------+--------------------------------------+
+   | default        | allowed value | specifies the default value for      |
+   |                |               | initialization                       |
+   +----------------+---------------+--------------------------------------+
+   | minimum        | number        | lower limit of value                 |
+   +----------------+---------------+--------------------------------------+
+   | maximum        | number        | upper limit of value                 |
+   +----------------+---------------+--------------------------------------+
+   |exclusiveMinimum| number or     | lower limit of value                 |
+   |                | boolean (jso  |                                      |
+   |                | draft 7/4)    |                                      |
+   +----------------+---------------+--------------------------------------+
+   |exclusiveMaximum| number or     | lower limit of value                 |
+   |                | boolean (jso  |                                      |
+   |                | draft 7/4)    |                                      |
+   +----------------+---------------+--------------------------------------+
+   | multipleOf     | number        | resolution of the number [NEEDED?]   |
+   +----------------+---------------+--------------------------------------+
+   | minLength      | integer       | shortest length string in octets     |
+   +----------------+---------------+--------------------------------------+
+   | maxLength      | integer       | longest length string in octets      |
+   +----------------+---------------+--------------------------------------+
+   | pattern        | string        | regular expression to constrain a    |
+   |                |               | string pattern                       |
+   +----------------+---------------+--------------------------------------+
+   | format         | "date-time" / | JSON Schema formats as per           |
+   |                |"date" / "time"|[I-D.handrews-json-schema-validation],|
+   |                |/ "uri" / "uri-| Section 7.3                          |
+   |                | reference" /  |                                      |
+   |                | "uuid"        |                                      |
+   +----------------+---------------+--------------------------------------+
+   | minItems       | number        | Minimum number of items in array     |
+   +----------------+---------------+--------------------------------------+
+   | maxItems       | number        | Maximum number of items in array     |
+   +----------------+---------------+--------------------------------------+
+   | uniqueItems    | boolean       | if true, requires items to be all    |
+   |                |               | different                            |
+   +----------------+---------------+--------------------------------------+
+   | items          | (subset of    | constraints on array items           |
+   |                | common/data   |                                      |
+   |                |qualities; see |                                      |
+   |                | {{syntax})    |                                      |
+   +----------------+---------------+--------------------------------------+
+
+     Table 4: Qualities of odmProperty and odmData borrowed from json-
+                                 schema.org
+
 
 
 
@@ -1065,13 +1065,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 19]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
-
-   |                | see      |                                       |
-   |                |{{syntax})|                                       |
-   +----------------+----------+---------------------------------------+
-
-     Table 4: Qualities of odmProperty and odmData borrowed from json-
-                                 schema.org
 
    +---------------+--------------+-------------------------+---------+
    | Quality       | Type         | Description             | Default |
@@ -1111,6 +1104,13 @@ Internet-Draft                  OneDM SDF                      June 2020
 
         Table 5: SDF-defined Qualities of odmProperty and odmData
 
+5.  Keywords for type definitions
+
+   The following SDF keywords are used to create type definitions in the
+   target namespace.  All these definitions share some common qualities
+   as discussed in Section 4.6.
+
+
 
 
 
@@ -1121,12 +1121,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 20]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
-
-5.  Keywords for type definitions
-
-   The following SDF keywords are used to create type definitions in the
-   target namespace.  All these definitions share some common qualities
-   as discussed in Section 4.6.
 
 5.1.  odmObject
 
@@ -1169,6 +1163,12 @@ Internet-Draft                  OneDM SDF                      June 2020
    The qualities of odmProperty include the common qualities and the
    data qualities, see Section 4.7.
 
+5.3.  odmAction
+
+   The odmAction keyword denotes zero or more Action definitions.
+
+   Actions are used to model commands and methods which are invoked.
+   Actions have parameter data that are supplied upon invocation.
 
 
 
@@ -1177,13 +1177,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 21]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
-
-5.3.  odmAction
-
-   The odmAction keyword denotes zero or more Action definitions.
-
-   Actions are used to model commands and methods which are invoked.
-   Actions have parameter data that are supplied upon invocation.
 
    The qualities of odmAction include the common qualities, additional
    qualities are shown in Table 7.
@@ -1227,15 +1220,19 @@ Internet-Draft                  OneDM SDF                      June 2020
    communicated proactively.  Events have data elements which are
    communicated upon the occurrence of the event.
 
+   The qualities of odmEvent include the common qualities, additional
+   qualities are shown in Table 8.
+
+
+
+
+
 
 
 Koster & Bormann         Expires 3 December 2020               [Page 22]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
-
-   The qualities of odmEvent include the common qualities, additional
-   qualities are shown in Table 8.
 
    +---------------+-------+-----------------------+-------------------+
    | Quality       | Type  | Required              | Description       |
@@ -1273,6 +1270,9 @@ Internet-Draft                  OneDM SDF                      June 2020
    qualities, see Section 4.7.
 
 6.  Example Simple Object Definition:
+
+
+
 
 
 
@@ -1427,7 +1427,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    odmThing definitions carry semantic meaning, such as a defined
    refrigerator compartment and a defined freezer compartment, making up
-   a combination referigerator-freezer product.
+   a combination refrigerator-freezer product.
 
    An odmThing may be composed of odmObjects and other odmThings.
 
@@ -1445,11 +1445,11 @@ Internet-Draft                  OneDM SDF                      June 2020
 
                Table 9: Qualities of odmThing and odmProduct
 
-   odmThing may define or include the following ODM types:
 
-   *  odmThing
 
-   *  odmObject
+
+
+
 
 
 
@@ -1545,15 +1545,12 @@ Appendix A.  Formal Syntax of SDF
 
    This appendix describes the syntax of SDF using CDDL [RFC8610].  Note
    that this appendix was derived from Ari Keranen's "alt-schema" and
-   Michael Kosters "schema", with a view of covering the syntax that is
+   Michael Koster's "schema", with a view of covering the syntax that is
    currently in use at the One Data Model "playground" repository.
 
    TODO: Align with full framework syntax, as required.
 
    start = sdf-syntax
-
-   ;;; sdf-can-schema.json: SDF Schema
-   ; *** $schema = http://json-schema.org/draft-07/schema#
 
    sdf-syntax = {
     info: sdfinfo                  ; don't require this in flexible syntax, though
@@ -1562,6 +1559,9 @@ Appendix A.  Formal Syntax of SDF
     ? odmThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
     ? odmProduct: named<productqualities>   ; Product is a composition of things and objects that can model a SKU-level instance of a product
     ? odmObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
+    ? odmProperty: named<propertyqualities> ; Property represents the state of an instance of an object
+    ? odmAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
+    ? odmEvent: named<eventqualities>       ; Event represents an occurence of something associated with an object
 
 
 
@@ -1570,9 +1570,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 28]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-    ? odmProperty: named<propertyqualities> ; Property represents the state of an instance of an object
-    ? odmAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
-    ? odmEvent: named<eventqualities>       ; Event represents an occurence of something associated with an object
     ? odmData: named<dataqualities>         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
    }
 
@@ -1618,6 +1615,9 @@ Internet-Draft                  OneDM SDF                      June 2020
    propertyqualities = dataqualities ; the definitions in odmData are declarations in odmProperty
 
    actionqualities = {
+    commonqualities,
+    ? odmInputData: pointer-list   ; odmRequiredInputData applies here (a bit redundant)
+    ? odmRequiredInputData: pointer-list
 
 
 
@@ -1626,9 +1626,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 29]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-    commonqualities,
-    ? odmInputData: pointer-list   ; odmRequiredInputData applies here (a bit redundant)
-    ? odmRequiredInputData: pointer-list
     ? odmOutputData: pointer-list  ; odmRequired applies here
     ? odmData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
    }
@@ -1674,6 +1671,9 @@ Internet-Draft                  OneDM SDF                      June 2020
     ? format: "date-time" / "date" / "time"
               / "uri" / "uri-reference" / "uuid"
               ; expand on demand
+    ; array constraints
+    ? minItems: number
+    ? maxItems: number
 
 
 
@@ -1682,9 +1682,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 30]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-    ; array constraints
-    ? minItems: number
-    ? maxItems: number
     ? uniqueItems: bool
     ? items: { ;;; ultimately, this will be mostly recursive, but, for now
                ;;; let's find out what we actually need
@@ -1730,6 +1727,9 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
              }
            },
            "defaultnamespace": {
+             "type": "string"
+           },
+           "odmThing": {
 
 
 
@@ -1738,9 +1738,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 31]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-             "type": "string"
-           },
-           "odmThing": {
              "type": "object",
              "additionalProperties": {
                "$ref": "#/definitions/thingqualities"
@@ -1786,6 +1783,9 @@ Internet-Draft                  OneDM SDF                      June 2020
        },
        "sdfinfo": {
          "type": "object",
+         "required": [
+           "title",
+           "version",
 
 
 
@@ -1794,9 +1794,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 32]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-         "required": [
-           "title",
-           "version",
            "copyright",
            "license"
          ],
@@ -1842,6 +1839,9 @@ Internet-Draft                  OneDM SDF                      June 2020
        "commonqualities": {
          "type": "object",
          "properties": {
+           "description": {
+             "type": "string"
+           },
 
 
 
@@ -1850,9 +1850,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 33]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-           "description": {
-             "type": "string"
-           },
            "label": {
              "type": "string"
            },
@@ -1898,6 +1895,9 @@ Internet-Draft                  OneDM SDF                      June 2020
                },
                "odmEvent": {
                  "type": "object",
+                 "additionalProperties": {
+                   "$ref": "#/definitions/eventqualities"
+                 }
 
 
 
@@ -1906,9 +1906,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 34]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-                 "additionalProperties": {
-                   "$ref": "#/definitions/eventqualities"
-                 }
                },
                "odmData": {
                  "type": "object",
@@ -1954,6 +1951,9 @@ Internet-Draft                  OneDM SDF                      June 2020
                },
                "nullable": {
                  "type": "boolean"
+               },
+               "subtype": {
+                 "type": "string",
 
 
 
@@ -1962,9 +1962,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 35]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-               },
-               "subtype": {
-                 "type": "string",
                  "enum": [
                    "bytestring",
                    "unixtime"
@@ -2010,6 +2007,9 @@ Internet-Draft                  OneDM SDF                      June 2020
              "type": "number"
            },
            "exclusiveMinimum": {
+             "anyOf": [
+               {
+                 "type": "boolean"
 
 
 
@@ -2018,9 +2018,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 36]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-             "anyOf": [
-               {
-                 "type": "boolean"
                },
                {
                  "type": "number"
@@ -2066,6 +2063,9 @@ Internet-Draft                  OneDM SDF                      June 2020
            "maxItems": {
              "type": "number"
            },
+           "uniqueItems": {
+             "type": "boolean"
+           },
 
 
 
@@ -2074,9 +2074,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 37]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-           "uniqueItems": {
-             "type": "boolean"
-           },
            "items": {
              "type": "object",
              "properties": {
@@ -2122,6 +2119,9 @@ Internet-Draft                  OneDM SDF                      June 2020
          }
        },
        "allowed-types": {
+         "anyOf": [
+           {
+             "type": "number"
 
 
 
@@ -2130,9 +2130,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 38]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-         "anyOf": [
-           {
-             "type": "number"
            },
            {
              "type": "string"
@@ -2178,6 +2175,9 @@ Internet-Draft                  OneDM SDF                      June 2020
                  "$ref": "#/definitions/pointer-list"
                },
                "odmOutputData": {
+                 "$ref": "#/definitions/pointer-list"
+               },
+               "odmData": {
 
 
 
@@ -2186,9 +2186,6 @@ Koster & Bormann         Expires 3 December 2020               [Page 39]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-                 "$ref": "#/definitions/pointer-list"
-               },
-               "odmData": {
                  "type": "object",
                  "additionalProperties": {
                    "$ref": "#/definitions/dataqualities"
@@ -2232,6 +2229,9 @@ Acknowledgements
    schema" from the Ericsson Research "ipso-odm" repository.
 
 Contributors
+
+
+
 
 
 
