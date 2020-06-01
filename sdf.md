@@ -654,11 +654,60 @@ If a label is required for an application and no label is given, the last part o
 | description | text         | long text (no constraints)                                         |
 | label       | text         | short text (no constraints)                                        |
 | $comment    | text         | source code comments only, no semantics                            |
-| name        | text         | DELETE ME (deprecated)                                             |
 | odmRef      | sdf-pointer  | (see {{odmref}})                                                   |
 | odmRequired | pointer-list | (see {{odmrequired}}, applies to qualities of properties, of data) |
 {: #tbl-common-qualities title="Common Qualities"}
 
+## Data Qualities
+
+Data qualities are used in `odmData` and `odmProperty` definitions.
+
+{{odmdataqual1}} lists data qualities borrowed from {{-jso}}; the
+intention is that these qualities retain their semantics from the
+versions of the json-schema.org proposal there were imported from.
+
+{{odmdataqual2}} lists data qualities defined specifically for the
+present specification.
+
+The term "allowed types" stands for primitive JSON types as well as
+homogenuous arrays of numbers, text, or booleans.  (This list might be
+extended in a future version of SDF.)  An "allowed value" is a value
+allowed for one of these types.
+
+| Quality          | Type                                                  | Description                                                               |
+|------------------|-------------------------------------------------------|---------------------------------------------------------------------------|
+| type             | "number" / "string" / "boolean" / "integer" / "array" | JSON data type                                                            |
+| enum             | array of allowed values                               | enumeration constraint                                                    |
+| const            | allowed value                                         | specifies a constant value for a data item or property                    |
+| default          | allowed value                                         | specifies the default value for initialization                            |
+| minimum          | number                                                | lower limit of value in the representation format                         |
+| maximum          | number                                                | upper limit of value in the representation format                         |
+| exclusiveMinimum | number or boolean (jso draft 7/4)                     | lower limit of value in the representation format                         |
+| exclusiveMaximum | number or boolean (jso draft 7/4)                     | lower limit of value in the representation format                         |
+| multipleOf       | number                                                | indicates the resolution of the number in representation format \[NEEDED?] |
+| minLength        | integer                                               | shortest length string in octets                                          |
+| maxLength        | integer                                               | longest length string in octets                                           |
+| pattern          | string                                                | regular expression to constrain a string pattern                          |
+| format           | string                                                | JSON Schema formats as per {{-jso}}, Section 7.3                          |
+| minItems         | number                                                | Minimum number of items in array                                          |
+| maxItems         | number                                                | Maximum number of items in array                                          |
+| uniqueItems      | boolean                                               | if true, requires items to be all different                               |
+| items            | (subset of common/data qualities; see {{syntax})      | constraints on array items                                                |
+{: #odmdataqual1 title="Qualities of odmProperty and odmData borrowed from json-schema.org"}
+
+| Quality       | Type                      | Description                                                     | Default |
+|---------------|---------------------------|-----------------------------------------------------------------|---------|
+| (common)      |                           | {{common-qualities}}                                            |         |
+| units         | string                    | SenML unit name as per {{-units}}, subregistry SenML Units      | N/A     |
+| scaleMinimum  | number                    | lower limit of value in units                                   | N/A     |
+| scaleMaximum  | number                    | upper limit of value in units                                   | N/A     |
+| readable      | boolean                   | Reads are allowed                                               | true    |
+| writable      | boolean                   | Writes are allowed                                              | true    |
+| observable    | boolean                   | flag to indicate asynchronous notification is available         | true    |
+| nullable      | boolean                   | indicates a null value is available for this type               | true    |
+| contentFormat | string                    | content type (IANA media type string plus parameters), encoding | N/A     |
+| subtype       | "bytestring" / "unixtime" | subtype enumeration                                             | N/A     |
+{: #odmdataqual2 title="SDF-defined Qualities of odmProperty and odmData"}
 
 # Keywords for type definitions
 
@@ -676,6 +725,7 @@ quality is absent.
 
 | Quality     | Type     | Description                                                              |
 |-------------|----------|--------------------------------------------------------------------------|
+| (common)    |          | {{common-qualities}}                                                     |
 | odmProperty | property | zero or more named property definitions for this object                  |
 | odmAction   | action   | zero or more named action definitions for this object                    |
 | odmEvent    | event    | zero or more named event definitions for this object                     |
@@ -689,34 +739,7 @@ The odmProperty keyword denotes zero or more property definitions.
 
 Properties are used to model elements of state.
 
-The qualities of odmProperty include the common qualities, additional qualities are shown in {{odmpropqual}}.
-
-| Quality       | Type                    | Description                                                     | Default |
-|---------------|-------------------------|-----------------------------------------------------------------|---------|
-| readable      | boolean                 | Reads are allowed                                               | true    |
-| writable      | boolean                 | Writes are allowed                                              | true    |
-| observable    | boolean                 | flag to indicate asynchronous notification is available         | true    |
-| contentFormat | string                  | IANA media type string                                          | N/A     |
-| subtype       | string                  | subtype enumeration                                             | N/A     |
-| widthInBits   | integer                 | hint for protocol binding                                       | N/A     |
-| units         | string                  | SenML unit name as per {{-units}}, subregistry SenML Units      | N/A     |
-| nullable      | boolean                 | indicates a null value is available for this type               | true    |
-| scaleMinimum  | number                  | lower limit of value in units                                   | N/A     |
-| scaleMaximum  | number                  | upper limit of value in units                                   | N/A     |
-| type          | string, enum            | JSON data type                                                  | N/A     |
-| minimum       | number                  | lower limit of value in the representation format               | N/A     |
-| maximum       | number                  | upper limit of value in the representation format               | N/A     |
-| multipleOf    | number                  | indicates the resolution of the number in representation format | N/A     |
-| enum          | array                   | enumeration constraint                                          | N/A     |
-| pattern       | string                  | regular expression to constrain a string pattern                | N/A     |
-| format        | string                  | JSON Schema formats as per {{-jso}}, Section 7.3                | N/A     |
-| minLength     | integer                 | shortest length string in octets                                | N/A     |
-| maxLength     | integer                 | longest length string in octets                                 | N/A     |
-| default       | number, boolean, string | specifies the default value for initialization                  | N/A     |
-| const         | number, boolean, string | specifies a constant value for a data item or property          | N/A     |
-{: #odmpropqual title="Qualities of odmProperty"}
-
-CHECK THIS: odmProperty may not define any other ODM types.
+The qualities of odmProperty include the common qualities and the data qualities, see {{data-qualities}}.
 
 ## odmAction
 
@@ -728,6 +751,7 @@ The qualities of odmAction include the common qualities, additional qualities ar
 
 | Quality              | Type   | Description                                                            |     |
 |----------------------|--------|------------------------------------------------------------------------|-----|
+| (common)    |          | {{common-qualities}}                                                     |
 | odmInputData         | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
 | odmRequiredInputData | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
 | odmOutputData        | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
@@ -751,6 +775,7 @@ The qualities of odmEvent include the common qualities, additional qualities are
 
 | Quality       | Type   | Required | Description                                                  |
 |---------------|--------|----------|--------------------------------------------------------------|
+| (common)    |          | {{common-qualities}}                                                     |
 | odmOutputData | array  | no       | Array of JSON Pointers to output items in a valid definition |
 | odmData     | data     | zero or more named data type definitions that might be used in the above |
 {: #odmevqual title="Qualities of odmEvent"}
@@ -767,36 +792,7 @@ An odmData definition provides a semantic identifier for a data item and describ
 
 odmData is used for Action parameters, for Event data, and for reusable constraints in property definitions
 
-{{odmdataqual}} lists the qualities of odmData.
-
-TODO: Clean this up to remove complete redundancy with odmProperty.
-
-| Quality      | Type                    | Required | Description                                                             |     |
-|--------------|-------------------------|----------|-------------------------------------------------------------------------|-----|
-| type         | object                  | no       | reference to a definition to be used as a template for a new definition |     |
-| subtype      | string                  | no       | subtype enumeration                                                     | N/A |
-| widthInBits  | integer                 | no       | hint for protocol binding                                               | N/A |
-| units        | string                  | no       | SenML unit name as per {{-units}}, subregistry SenML Units              | N/A |
-| nullable     | boolean                 | no       | indicates a null value is available for this type                       |     |
-| scaleMinimum | number                  | no       | lower limit of value in units                                           |     |
-| scaleMaximum | number                  | no       | upper limit of value in units                                           |     |
-| type         | string, enum            | yes      | JSON data type                                                          |     |
-| minimum      | number                  | no       | lower limit of value in the representation format                       |     |
-| maximum      | number                  | no       | upper limit of value in the representation format                       |     |
-| multipleOf   | number                  | no       | indicates the resolution of the number in representation format         |     |
-| enum         | array of any type       | no       | enumeration constraint                                                  |     |
-| pattern      | string                  | no       | regular expression to constrain a string pattern                        |     |
-| format       | string                  | no       | JSON Schema formats as per {{-jso}}, Section 7.3                        | N/A |
-| minLength    | integer                 | no       | shortest length string in octets                                        |     |
-| maxLength    | integer                 | no       | longest length string in octets                                         |     |
-| default      | number, boolean, string | no       | specifies the default value for initialization                          |     |
-| const        | number, boolean, string | no       | specifies a constant value for a data item or property                  |     |
-{: #odmdataqual title="Qualities of odmData"}
-
-odmData may define or contain the following ODM types:
-
-- JSON Schema Types with numeric constraint extensions
-
+The qualities of odmData include the common qualities and the data qualities, see {{data-qualities}}.
 
 # Example Simple Object Definition:
 
@@ -891,10 +887,11 @@ An odmThing may be composed of odmObjects and other odmThings.
 
 The qualities of odmThing are shown in {{odmthingqual}}.
 
-| Quality   | Type | Required | Description |
-|-----------|------|----------|-------------|
-| odmThing  |      |          |             |
-| odmObject |      |          |             |
+| Quality   | Type | Required | Description          |
+|-----------|------|----------|----------------------|
+| (common)  |      |          | {{common-qualities}} |
+| odmThing  |      |          |                      |
+| odmObject |      |          |                      |
 {: #odmthingqual title="Qualities of odmThing and odmProduct"}
 
 odmThing may define or include the following ODM types:
