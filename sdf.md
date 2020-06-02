@@ -45,7 +45,14 @@ contributor:
     country: Finland
     email: ari.keranen@ericsson.com
   - name: Wouter van der Beek
-
+    org: Cisco Systems
+    street:
+    - Eastpoint Business Park
+    - Alfie Byrne Road
+    city: Dublin 3
+    country: Ireland
+    email: wovander@cisco.com
+ 
 normative:
   IANA.senml: units
 # [SenML unit]: https://www.iana.org/assignments/senml/senml.xhtml#senml-units
