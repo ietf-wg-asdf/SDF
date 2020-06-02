@@ -63,7 +63,8 @@
             "$ref": "#/definitions/dataqualities"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "sdfinfo": {
       "type": "object",
@@ -86,31 +87,41 @@
         "license": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "thingqualities": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/commonqualities"
-        },
-        {
+      "type": "object",
+      "properties": {
+        "odmObject": {
           "type": "object",
-          "properties": {
-            "odmObject": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/objectqualities"
-              }
-            },
-            "odmThing": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/thingqualities"
-              }
-            }
+          "additionalProperties": {
+            "$ref": "#/definitions/objectqualities"
           }
+        },
+        "odmThing": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/thingqualities"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "odmRef": {
+          "$ref": "#/definitions/sdf-pointer"
+        },
+        "odmRequired": {
+          "$ref": "#/definitions/pointer-list"
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "commonqualities": {
       "type": "object",
@@ -130,7 +141,8 @@
         "odmRequired": {
           "$ref": "#/definitions/pointer-list"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "sdf-pointer": {
       "type": "string"
@@ -142,89 +154,228 @@
       }
     },
     "objectqualities": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/commonqualities"
-        },
-        {
+      "type": "object",
+      "properties": {
+        "odmProperty": {
           "type": "object",
-          "properties": {
-            "odmProperty": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/propertyqualities"
-              }
-            },
-            "odmAction": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/actionqualities"
-              }
-            },
-            "odmEvent": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/eventqualities"
-              }
-            },
-            "odmData": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/dataqualities"
-              }
-            }
+          "additionalProperties": {
+            "$ref": "#/definitions/propertyqualities"
           }
+        },
+        "odmAction": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/actionqualities"
+          }
+        },
+        "odmEvent": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/eventqualities"
+          }
+        },
+        "odmData": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/dataqualities"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "odmRef": {
+          "$ref": "#/definitions/sdf-pointer"
+        },
+        "odmRequired": {
+          "$ref": "#/definitions/pointer-list"
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "propertyqualities": {
       "$ref": "#/definitions/dataqualities"
     },
     "dataqualities": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/commonqualities"
+      "type": "object",
+      "properties": {
+        "units": {
+          "type": "string"
         },
-        {
-          "$ref": "#/definitions/jsonschema"
+        "scaleMinimum": {
+          "type": "number"
         },
-        {
+        "scaleMaximum": {
+          "type": "number"
+        },
+        "observable": {
+          "type": "boolean"
+        },
+        "readable": {
+          "type": "boolean"
+        },
+        "writable": {
+          "type": "boolean"
+        },
+        "nullable": {
+          "type": "boolean"
+        },
+        "subtype": {
+          "type": "string",
+          "enum": [
+            "bytestring",
+            "unixtime"
+          ]
+        },
+        "contentFormat": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "number",
+            "string",
+            "boolean",
+            "integer",
+            "array"
+          ]
+        },
+        "enum": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/allowed-types"
+          },
+          "minItems": 1
+        },
+        "const": {
+          "$ref": "#/definitions/allowed-types"
+        },
+        "default": {
+          "$ref": "#/definitions/allowed-types"
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "exclusiveMinimum": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "exclusiveMaximum": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "multipleOf": {
+          "type": "number"
+        },
+        "minLength": {
+          "type": "number"
+        },
+        "maxLength": {
+          "type": "number"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "date-time",
+            "date",
+            "time",
+            "uri",
+            "uri-reference",
+            "uuid"
+          ]
+        },
+        "minItems": {
+          "type": "number"
+        },
+        "maxItems": {
+          "type": "number"
+        },
+        "uniqueItems": {
+          "type": "boolean"
+        },
+        "items": {
           "type": "object",
           "properties": {
-            "units": {
+            "odmRef": {
+              "$ref": "#/definitions/sdf-pointer"
+            },
+            "description": {
               "type": "string"
             },
-            "scaleMinimum": {
-              "type": "number"
+            "$comment": {
+              "type": "string"
             },
-            "scaleMaximum": {
-              "type": "number"
-            },
-            "observable": {
-              "type": "boolean"
-            },
-            "readable": {
-              "type": "boolean"
-            },
-            "writable": {
-              "type": "boolean"
-            },
-            "nullable": {
-              "type": "boolean"
-            },
-            "subtype": {
+            "type": {
               "type": "string",
               "enum": [
-                "bytestring",
-                "unixtime"
+                "number",
+                "string",
+                "boolean",
+                "integer"
               ]
             },
-            "contentFormat": {
+            "minimum": {
+              "type": "number"
+            },
+            "maximum": {
+              "type": "number"
+            },
+            "enum": {
+              "type": "array",
+              "minItems": 1
+            },
+            "format": {
               "type": "string"
+            },
+            "minLength": {
+              "type": "number"
+            },
+            "maxLength": {
+              "type": "number"
             }
-          }
+          },
+          "additionalProperties": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "odmRef": {
+          "$ref": "#/definitions/sdf-pointer"
+        },
+        "odmRequired": {
+          "$ref": "#/definitions/pointer-list"
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "jsonschema": {
       "type": "object",
@@ -350,9 +501,11 @@
             "maxLength": {
               "type": "number"
             }
-          }
+          },
+          "additionalProperties": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "allowed-types": {
       "anyOf": [
@@ -389,52 +542,70 @@
       ]
     },
     "actionqualities": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/commonqualities"
+      "type": "object",
+      "properties": {
+        "odmInputData": {
+          "$ref": "#/definitions/pointer-list"
         },
-        {
+        "odmRequiredInputData": {
+          "$ref": "#/definitions/pointer-list"
+        },
+        "odmOutputData": {
+          "$ref": "#/definitions/pointer-list"
+        },
+        "odmData": {
           "type": "object",
-          "properties": {
-            "odmInputData": {
-              "$ref": "#/definitions/pointer-list"
-            },
-            "odmRequiredInputData": {
-              "$ref": "#/definitions/pointer-list"
-            },
-            "odmOutputData": {
-              "$ref": "#/definitions/pointer-list"
-            },
-            "odmData": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/dataqualities"
-              }
-            }
+          "additionalProperties": {
+            "$ref": "#/definitions/dataqualities"
           }
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "odmRef": {
+          "$ref": "#/definitions/sdf-pointer"
+        },
+        "odmRequired": {
+          "$ref": "#/definitions/pointer-list"
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "eventqualities": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/commonqualities"
+      "type": "object",
+      "properties": {
+        "odmOutputData": {
+          "$ref": "#/definitions/pointer-list"
         },
-        {
+        "odmData": {
           "type": "object",
-          "properties": {
-            "odmOutputData": {
-              "$ref": "#/definitions/pointer-list"
-            },
-            "odmData": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/dataqualities"
-              }
-            }
+          "additionalProperties": {
+            "$ref": "#/definitions/dataqualities"
           }
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "odmRef": {
+          "$ref": "#/definitions/sdf-pointer"
+        },
+        "odmRequired": {
+          "$ref": "#/definitions/pointer-list"
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "productqualities": {
       "$ref": "#/definitions/thingqualities"
