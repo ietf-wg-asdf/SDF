@@ -5,8 +5,8 @@
 T2TRG                                                     M. Koster, Ed.
 Internet-Draft                                               SmartThings
 Intended status: Informational                           C. Bormann, Ed.
-Expires: 3 December 2020                          Universität Bremen TZI
-                                                             1 June 2020
+Expires: 4 December 2020                          Universität Bremen TZI
+                                                             2 June 2020
 
 
     SDF: Semantic Definition Format (SDF) for Things, their Data and
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 1]
+Koster & Bormann         Expires 4 December 2020                [Page 1]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -63,7 +63,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 December 2020.
+   This Internet-Draft will expire on 4 December 2020.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 2]
+Koster & Bormann         Expires 4 December 2020                [Page 2]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -165,7 +165,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 3]
+Koster & Bormann         Expires 4 December 2020                [Page 3]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -221,7 +221,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 4]
+Koster & Bormann         Expires 4 December 2020                [Page 4]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -255,15 +255,14 @@ Internet-Draft                  OneDM SDF                      June 2020
 
             Figure 1: A simple example of an SDF definition file
 
-   This is a representation of a switch.  The "odmProperty" value,
-   represented by a Boolean, will be true for "on" and will be false for
-   "off".  The actions "on" or "off" are redundant with setting the
-   "value" and are in the example to illustrate that there are often
-   different ways of achieving the same effect.  The action "toggle"
-   will invert the value of the odmProperty value, so that 2-way
-   switches can be created; having such action will avoid the need for
-   first retrieving the current value and then applying/setting the
-   inverted value.
+   This is a model of a switch.  The "odmProperty" value, represented by
+   a Boolean, will be true for "on" and will be false for "off".  The
+   actions "on" or "off" are redundant with setting the "value" and are
+   in the example to illustrate that there are often different ways of
+   achieving the same effect.  The action "toggle" will invert the value
+   of the odmProperty value, so that 2-way switches can be created;
+   having such action will avoid the need for first retrieving the
+   current value and then applying/setting the inverted value.
 
    The "odmObject" lists the affordances of instances of this object.
    "odmProperty" lists the property affordances described by the model;
@@ -274,15 +273,15 @@ Internet-Draft                  OneDM SDF                      June 2020
    not described.  Properties are often used with RESTful paradigms
    [I-D.irtf-t2trg-rest-iot], describing state.  The "odmAction" is the
    mechanism to describe interactions in terms of their names, input,
+   and output data (no data are used in the example), as in a POST
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 5]
+Koster & Bormann         Expires 4 December 2020                [Page 5]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   and output data (no data are used in the example), as in a POST
    method in REST or in a remote procedure call.  The example "toggle"
    is an action that changes the state based on the current state of the
    "odmProperty" named "value".  (The third type of affordance is
@@ -333,7 +332,8 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 6]
+
+Koster & Bormann         Expires 4 December 2020                [Page 6]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -389,7 +389,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 7]
+Koster & Bormann         Expires 4 December 2020                [Page 7]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -445,7 +445,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 8]
+Koster & Bormann         Expires 4 December 2020                [Page 8]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -501,7 +501,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020                [Page 9]
+Koster & Bormann         Expires 4 December 2020                [Page 9]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -533,10 +533,10 @@ Internet-Draft                  OneDM SDF                      June 2020
 2.2.7.  odmProduct
 
    "odmThing" has a derived class "odmProduct", which can be used to
-   indicate a top level inventory item with a SKU identifier and other
-   particular metadata.  Structurally, there is no difference between
-   the two; semantically, an "odmProduct" is intended to describe a
-   class of complete Things.
+   indicate a top level inventory item with a Stock-Keeping Unit (SKU)
+   identifier and other particular metadata.  Structurally, there is no
+   difference between the two; semantically, an "odmProduct" is intended
+   to describe a class of complete Things.
 
 3.  SDF structure
 
@@ -557,7 +557,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 10]
+Koster & Bormann         Expires 4 December 2020               [Page 10]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -613,7 +613,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 11]
+Koster & Bormann         Expires 4 December 2020               [Page 11]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -669,7 +669,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 12]
+Koster & Bormann         Expires 4 December 2020               [Page 12]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -725,7 +725,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 13]
+Koster & Bormann         Expires 4 December 2020               [Page 13]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -781,7 +781,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 14]
+Koster & Bormann         Expires 4 December 2020               [Page 14]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -837,7 +837,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 15]
+Koster & Bormann         Expires 4 December 2020               [Page 15]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -893,7 +893,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 16]
+Koster & Bormann         Expires 4 December 2020               [Page 16]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -949,7 +949,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 17]
+Koster & Bormann         Expires 4 December 2020               [Page 17]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1005,7 +1005,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 18]
+Koster & Bormann         Expires 4 December 2020               [Page 18]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1061,7 +1061,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 19]
+Koster & Bormann         Expires 4 December 2020               [Page 19]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1117,7 +1117,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 20]
+Koster & Bormann         Expires 4 December 2020               [Page 20]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1173,7 +1173,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 21]
+Koster & Bormann         Expires 4 December 2020               [Page 21]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1229,7 +1229,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 22]
+Koster & Bormann         Expires 4 December 2020               [Page 22]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1285,7 +1285,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 23]
+Koster & Bormann         Expires 4 December 2020               [Page 23]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1341,7 +1341,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 24]
+Koster & Bormann         Expires 4 December 2020               [Page 24]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1397,7 +1397,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 25]
+Koster & Bormann         Expires 4 December 2020               [Page 25]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1453,7 +1453,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 26]
+Koster & Bormann         Expires 4 December 2020               [Page 26]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1509,7 +1509,7 @@ Appendix A.  Formal Syntax of SDF
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 27]
+Koster & Bormann         Expires 4 December 2020               [Page 27]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1565,7 +1565,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 28]
+Koster & Bormann         Expires 4 December 2020               [Page 28]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1621,7 +1621,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 29]
+Koster & Bormann         Expires 4 December 2020               [Page 29]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1677,7 +1677,7 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 30]
+Koster & Bormann         Expires 4 December 2020               [Page 30]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1733,7 +1733,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 31]
+Koster & Bormann         Expires 4 December 2020               [Page 31]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1789,7 +1789,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 32]
+Koster & Bormann         Expires 4 December 2020               [Page 32]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1845,7 +1845,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 33]
+Koster & Bormann         Expires 4 December 2020               [Page 33]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1901,7 +1901,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 34]
+Koster & Bormann         Expires 4 December 2020               [Page 34]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1957,7 +1957,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 35]
+Koster & Bormann         Expires 4 December 2020               [Page 35]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2013,7 +2013,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 36]
+Koster & Bormann         Expires 4 December 2020               [Page 36]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2069,7 +2069,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 37]
+Koster & Bormann         Expires 4 December 2020               [Page 37]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2125,7 +2125,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 38]
+Koster & Bormann         Expires 4 December 2020               [Page 38]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2181,7 +2181,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 39]
+Koster & Bormann         Expires 4 December 2020               [Page 39]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2237,4 +2237,4 @@ Authors' Addresses
 
 
 
-Koster & Bormann         Expires 3 December 2020               [Page 40]
+Koster & Bormann         Expires 4 December 2020               [Page 40]

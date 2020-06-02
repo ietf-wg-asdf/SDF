@@ -5,7 +5,7 @@ title: >
   SDF: Semantic Definition Format (SDF) for Things, their Data and Interactions
 abbrev: OneDM SDF
 docname: draft-bormann-t2trg-sdf-latest
-date: 2020-06-01
+date: 2020-06-02
 category: info
 
 ipr: trust200902
@@ -138,7 +138,7 @@ Definition:
 
 Declaration:
 : A reference to and a use of a definition within an enclosing definition, intended to create component instances within that enclosing definition.
-
+<!-- XXX -->
 
 Conventions:
 
@@ -182,7 +182,7 @@ We start with an example for the SDF definition of a simple object called "Switc
 ~~~
 {: #example1 title="A simple example of an SDF definition file"}
 
-This is a representation of a switch.
+This is a model of a switch.
 The `odmProperty` value, represented by a Boolean, will be true for "on" and will be false for "off".
 The actions `on` or `off` are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action `toggle` will invert the value of the odmProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
@@ -405,8 +405,9 @@ is composed from: other odmThing definitions and odmObject definitions.
 ### odmProduct
 
 `odmThing` has a derived class `odmProduct`, which can be used to
-indicate a top level inventory item with a SKU identifier and other
-particular metadata.  Structurally, there is no difference between the
+indicate a top level inventory item with a Stock-Keeping Unit (SKU)
+identifier and other particular metadata.
+Structurally, there is no difference between the
 two; semantically, an `odmProduct` is intended to describe a class of
 complete Things.
 
