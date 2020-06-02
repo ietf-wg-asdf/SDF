@@ -8,7 +8,7 @@
 <meta content="Michael Koster" name="author">
 <meta content="Carsten Bormann" name="author">
 <meta content="
-       The Simple Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions. 
+       The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions. 
        OneDM tools convert this format to database formats and other serializations as needed. 
        This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions. 
        The JSON format of an SDF definition is described in this document. 
@@ -1146,7 +1146,7 @@ dd.break {
 <h1 id="title">SDF: Semantic Definition Format (SDF) for Things, their Data and Interactions</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The Simple Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">OneDM tools convert this format to database formats and other serializations as needed.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 <p id="section-abstract-3">This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 <p id="section-abstract-4">The JSON format of an SDF definition is described in this document.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
@@ -1155,8 +1155,8 @@ dd.break {
       <h2 id="name-contributing">
 <a href="#name-contributing" class="section-name selfRef">Contributing</a>
       </h2>
-<p id="section-note.1-1">Recent versions of this document are available at its github
-repository (TODO: point to github repo), which also provides an issue
+<p id="section-note.1-1">Recent versions of this document are available at its GitHub
+repository (TODO: point to GitHub repo), which also provides an issue
 tracker as well as a way to supply "pull requests".<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">This document has not yet been submitted as an Internet-Draft; the
 plan is to do this in early June.
@@ -1318,55 +1318,52 @@ plan is to do this in early June.
 </ul>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-example-simple-object-defin" class="xref">Example Simple Object Definition:</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-high-level-composition" class="xref">High Level Composition</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-high-level-composition" class="xref">High Level Composition</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-paths-in-the-model-namespac" class="xref">Paths in the model namespaces</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-paths-in-the-model-namespac" class="xref">Paths in the model namespaces</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-modular-composition" class="xref">Modular Composition</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-modular-composition" class="xref">Modular Composition</a><a href="#section-toc.1-1.6.2.2.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.2.2.1">
-                    <p id="section-toc.1-1.7.2.2.2.1.1"><a href="#section-7.2.1" class="xref">7.2.1</a>.  <a href="#name-use-of-the-odmref-keyword-t" class="xref">Use of the "odmRef" keyword to re-use a definition</a><a href="#section-toc.1-1.7.2.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.2.2.1">
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-use-of-the-odmref-keyword-t" class="xref">Use of the "odmRef" keyword to re-use a definition</a><a href="#section-toc.1-1.6.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="xref">7.3</a>.  <a href="#name-odmthing-2" class="xref">odmThing</a><a href="#section-toc.1-1.7.2.3.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-odmthing-2" class="xref">odmThing</a><a href="#section-toc.1-1.6.2.3.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.4">
-                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="xref">7.4</a>.  <a href="#name-odmproduct-2" class="xref">odmProduct</a><a href="#section-toc.1-1.7.2.4.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.6.2.4">
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="xref">6.4</a>.  <a href="#name-odmproduct-2" class="xref">odmProduct</a><a href="#section-toc.1-1.6.2.4.1" class="pilcrow">¶</a></p>
+</li>
+</ul>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
+<ul class="toc ulEmpty">
+<li class="toc ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="xref">8.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.8.2.1.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="xref">8.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.8.2.2.1" class="pilcrow">¶</a></p>
-</li>
-</ul>
+            <p id="section-toc.1-1.8.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="xref">Formal Syntax of SDF</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="xref">Formal Syntax of SDF</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="xref">json-schema.org Rendition of SDF Syntax</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="xref">json-schema.org Rendition of SDF Syntax</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
-</li>
-<li class="toc ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </nav>
@@ -1377,7 +1374,7 @@ plan is to do this in early June.
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Simple Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">OneDM tools convert this format to database formats and other serializations as needed.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">The JSON format of an SDF definition is described in this document.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1453,33 +1450,30 @@ appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">�
           <div class="artwork art-text alignLeft art-json" id="section-2.1-2.1">
 <pre>
 {
-  "info": {
-    "title": "Example file for ODM Simple JSON Definition Format",
-    "version": "20190424",
-    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "https://example.com/license"
-  },
-  "namespace": {
-    "cap": "https://example.com/capability/odm"
-  },
-  "defaultNamespace": "cap",
-  "odmObject": {
-    "Switch": {
-      "odmProperty": {
-        "value": {
-          "type": "string",
-          "enum": [
-            "on",
-            "off"
-          ]
+    "info": {
+        "title": "Example file for ODM Semantic Definition Format",
+        "version": "20190424",
+        "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+        "license": "https://example.com/license"
+    },
+    "namespace": {
+        "cap": "https://example.com/capability/odm"
+    },
+    "defaultNamespace": "cap",
+    "odmObject": {
+        "Switch": {
+            "odmProperty": {
+                "value": {
+                    "type": "boolean"
+                }
+            },
+            "odmAction": {
+                "on": {},
+                "off": {},
+                "toggle": {}
+            }
         }
-      },
-      "odmAction": {
-        "on": {},
-        "off": {}
-      }
     }
-  }
 }
 </pre>
 </div>
@@ -1487,7 +1481,19 @@ appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">�
 <a href="#name-a-simple-example-of-an-sdf-" class="selfRef">A simple example of an SDF definition file</a>
           </figcaption></figure>
 </div>
-<p id="section-2.1-3">TODO: Add explanation;<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">This is a representation of a switch.
+The <code>odmProperty</code> value, represented by a Boolean, will be true for "on" and will be false for "off".
+The actions <code>on</code> or <code>off</code> are redundant with setting the <code>value</code> and are in the example to illustrate that there are often different ways of achieving the same effect.
+The action <code>toggle</code> will invert the value of the odmProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-4">The <code>odmObject</code> lists the affordances of instances of this object.
+<code>odmProperty</code> lists the property affordances described by the model; these represent various perspectives on the state of the object.
+The properties can have additional qualities to describe the state more precisely.
+The properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
+Properties are often used with RESTful paradigms <span>[<a href="#I-D.irtf-t2trg-rest-iot" class="xref">I-D.irtf-t2trg-rest-iot</a>]</span>, describing state.
+The <code>odmAction</code> is the mechanism to describe interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
+The example <code>toggle</code> is an action that
+changes the state based on the current state of the <code>odmProperty</code> named <code>value</code>.
+(The third type of affordance is Events, which are not described in this example.)<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="elements-of-an-sdf-model">
@@ -1545,58 +1551,58 @@ Things, six of which are illustrated in <a href="#fig-class-1" class="xref">Figu
                   <path d="M 168,88 L 168,96" fill="none" stroke="black"></path>
                   <path d="M 168,112 L 168,120" fill="none" stroke="black"></path>
                   <path d="M 168,200 L 168,208" fill="none" stroke="black"></path>
-                  <text text-anchor="middle" font-family="monospace" x="152" y="148" fill="black" font-size="1em">O</text>
-                  <text text-anchor="middle" font-family="monospace" x="176" y="148" fill="black" font-size="1em">e</text>
-                  <text text-anchor="middle" font-family="monospace" x="24" y="244" fill="black" font-size="1em">m</text>
-                  <text text-anchor="middle" font-family="monospace" x="136" y="36" fill="black" font-size="1em">o</text>
-                  <text text-anchor="middle" font-family="monospace" x="144" y="36" fill="black" font-size="1em">d</text>
-                  <text text-anchor="middle" font-family="monospace" x="176" y="36" fill="black" font-size="1em">i</text>
-                  <text text-anchor="middle" font-family="monospace" x="184" y="36" fill="black" font-size="1em">n</text>
-                  <text text-anchor="middle" font-family="monospace" x="128" y="148" fill="black" font-size="1em">o</text>
+                  <text text-anchor="middle" font-family="monospace" x="168" y="36" fill="black" font-size="1em">h</text>
+                  <text text-anchor="middle" font-family="monospace" x="136" y="148" fill="black" font-size="1em">d</text>
                   <text text-anchor="middle" font-family="monospace" x="40" y="244" fill="black" font-size="1em">r</text>
-                  <text text-anchor="middle" font-family="monospace" x="136" y="244" fill="black" font-size="1em">d</text>
-                  <text text-anchor="middle" font-family="monospace" x="168" y="244" fill="black" font-size="1em">t</text>
-                  <text text-anchor="middle" font-family="monospace" x="176" y="244" fill="black" font-size="1em">i</text>
-                  <text text-anchor="middle" font-family="monospace" x="168" y="356" fill="black" font-size="1em">a</text>
-                  <text text-anchor="middle" font-family="monospace" x="160" y="36" fill="black" font-size="1em">T</text>
-                  <text text-anchor="middle" font-family="monospace" x="144" y="148" fill="black" font-size="1em">m</text>
-                  <text text-anchor="middle" font-family="monospace" x="88" y="244" fill="black" font-size="1em">y</text>
-                  <text text-anchor="middle" font-family="monospace" x="192" y="244" fill="black" font-size="1em">n</text>
-                  <text text-anchor="middle" font-family="monospace" x="272" y="244" fill="black" font-size="1em">v</text>
-                  <text text-anchor="middle" font-family="monospace" x="160" y="148" fill="black" font-size="1em">b</text>
-                  <text text-anchor="middle" font-family="monospace" x="288" y="244" fill="black" font-size="1em">n</text>
-                  <text text-anchor="middle" font-family="monospace" x="72" y="244" fill="black" font-size="1em">r</text>
-                  <text text-anchor="middle" font-family="monospace" x="184" y="244" fill="black" font-size="1em">o</text>
-                  <text text-anchor="middle" font-family="monospace" x="240" y="244" fill="black" font-size="1em">o</text>
-                  <text text-anchor="middle" font-family="monospace" x="136" y="356" fill="black" font-size="1em">o</text>
-                  <text text-anchor="middle" font-family="monospace" x="160" y="356" fill="black" font-size="1em">D</text>
-                  <text text-anchor="middle" font-family="monospace" x="296" y="244" fill="black" font-size="1em">t</text>
-                  <text text-anchor="middle" font-family="monospace" x="176" y="356" fill="black" font-size="1em">t</text>
+                  <text text-anchor="middle" font-family="monospace" x="64" y="244" fill="black" font-size="1em">e</text>
+                  <text text-anchor="middle" font-family="monospace" x="80" y="244" fill="black" font-size="1em">t</text>
+                  <text text-anchor="middle" font-family="monospace" x="248" y="244" fill="black" font-size="1em">d</text>
+                  <text text-anchor="middle" font-family="monospace" x="144" y="356" fill="black" font-size="1em">d</text>
+                  <text text-anchor="middle" font-family="monospace" x="144" y="36" fill="black" font-size="1em">d</text>
                   <text text-anchor="middle" font-family="monospace" x="8" y="244" fill="black" font-size="1em">o</text>
                   <text text-anchor="middle" font-family="monospace" x="32" y="244" fill="black" font-size="1em">P</text>
                   <text text-anchor="middle" font-family="monospace" x="56" y="244" fill="black" font-size="1em">p</text>
-                  <text text-anchor="middle" font-family="monospace" x="264" y="244" fill="black" font-size="1em">E</text>
+                  <text text-anchor="middle" font-family="monospace" x="128" y="244" fill="black" font-size="1em">o</text>
                   <text text-anchor="middle" font-family="monospace" x="280" y="244" fill="black" font-size="1em">e</text>
-                  <text text-anchor="middle" font-family="monospace" x="144" y="356" fill="black" font-size="1em">d</text>
+                  <text text-anchor="middle" font-family="monospace" x="160" y="356" fill="black" font-size="1em">D</text>
+                  <text text-anchor="middle" font-family="monospace" x="168" y="356" fill="black" font-size="1em">a</text>
+                  <text text-anchor="middle" font-family="monospace" x="136" y="36" fill="black" font-size="1em">o</text>
+                  <text text-anchor="middle" font-family="monospace" x="152" y="148" fill="black" font-size="1em">O</text>
+                  <text text-anchor="middle" font-family="monospace" x="192" y="148" fill="black" font-size="1em">t</text>
+                  <text text-anchor="middle" font-family="monospace" x="192" y="244" fill="black" font-size="1em">n</text>
+                  <text text-anchor="middle" font-family="monospace" x="240" y="244" fill="black" font-size="1em">o</text>
+                  <text text-anchor="middle" font-family="monospace" x="264" y="244" fill="black" font-size="1em">E</text>
+                  <text text-anchor="middle" font-family="monospace" x="272" y="244" fill="black" font-size="1em">v</text>
+                  <text text-anchor="middle" font-family="monospace" x="144" y="148" fill="black" font-size="1em">m</text>
+                  <text text-anchor="middle" font-family="monospace" x="128" y="148" fill="black" font-size="1em">o</text>
+                  <text text-anchor="middle" font-family="monospace" x="16" y="244" fill="black" font-size="1em">d</text>
+                  <text text-anchor="middle" font-family="monospace" x="144" y="244" fill="black" font-size="1em">m</text>
+                  <text text-anchor="middle" font-family="monospace" x="176" y="244" fill="black" font-size="1em">i</text>
+                  <text text-anchor="middle" font-family="monospace" x="296" y="244" fill="black" font-size="1em">t</text>
+                  <text text-anchor="middle" font-family="monospace" x="176" y="356" fill="black" font-size="1em">t</text>
+                  <text text-anchor="middle" font-family="monospace" x="152" y="36" fill="black" font-size="1em">m</text>
+                  <text text-anchor="middle" font-family="monospace" x="88" y="244" fill="black" font-size="1em">y</text>
+                  <text text-anchor="middle" font-family="monospace" x="152" y="244" fill="black" font-size="1em">A</text>
+                  <text text-anchor="middle" font-family="monospace" x="184" y="244" fill="black" font-size="1em">o</text>
+                  <text text-anchor="middle" font-family="monospace" x="152" y="356" fill="black" font-size="1em">m</text>
+                  <text text-anchor="middle" font-family="monospace" x="160" y="36" fill="black" font-size="1em">T</text>
+                  <text text-anchor="middle" font-family="monospace" x="176" y="148" fill="black" font-size="1em">e</text>
+                  <text text-anchor="middle" font-family="monospace" x="184" y="148" fill="black" font-size="1em">c</text>
+                  <text text-anchor="middle" font-family="monospace" x="48" y="244" fill="black" font-size="1em">o</text>
+                  <text text-anchor="middle" font-family="monospace" x="168" y="244" fill="black" font-size="1em">t</text>
+                  <text text-anchor="middle" font-family="monospace" x="136" y="356" fill="black" font-size="1em">o</text>
                   <text text-anchor="middle" font-family="monospace" x="184" y="356" fill="black" font-size="1em">a</text>
                   <text text-anchor="middle" font-family="monospace" x="168" y="148" fill="black" font-size="1em">j</text>
-                  <text text-anchor="middle" font-family="monospace" x="128" y="244" fill="black" font-size="1em">o</text>
-                  <text text-anchor="middle" font-family="monospace" x="160" y="244" fill="black" font-size="1em">c</text>
-                  <text text-anchor="middle" font-family="monospace" x="248" y="244" fill="black" font-size="1em">d</text>
+                  <text text-anchor="middle" font-family="monospace" x="160" y="148" fill="black" font-size="1em">b</text>
+                  <text text-anchor="middle" font-family="monospace" x="24" y="244" fill="black" font-size="1em">m</text>
                   <text text-anchor="middle" font-family="monospace" x="256" y="244" fill="black" font-size="1em">m</text>
-                  <text text-anchor="middle" font-family="monospace" x="48" y="244" fill="black" font-size="1em">o</text>
-                  <text text-anchor="middle" font-family="monospace" x="144" y="244" fill="black" font-size="1em">m</text>
-                  <text text-anchor="middle" font-family="monospace" x="152" y="36" fill="black" font-size="1em">m</text>
-                  <text text-anchor="middle" font-family="monospace" x="168" y="36" fill="black" font-size="1em">h</text>
                   <text text-anchor="middle" font-family="monospace" x="192" y="36" fill="black" font-size="1em">g</text>
-                  <text text-anchor="middle" font-family="monospace" x="192" y="148" fill="black" font-size="1em">t</text>
-                  <text text-anchor="middle" font-family="monospace" x="16" y="244" fill="black" font-size="1em">d</text>
-                  <text text-anchor="middle" font-family="monospace" x="152" y="356" fill="black" font-size="1em">m</text>
-                  <text text-anchor="middle" font-family="monospace" x="136" y="148" fill="black" font-size="1em">d</text>
-                  <text text-anchor="middle" font-family="monospace" x="184" y="148" fill="black" font-size="1em">c</text>
-                  <text text-anchor="middle" font-family="monospace" x="64" y="244" fill="black" font-size="1em">e</text>
-                  <text text-anchor="middle" font-family="monospace" x="80" y="244" fill="black" font-size="1em">t</text>
-                  <text text-anchor="middle" font-family="monospace" x="152" y="244" fill="black" font-size="1em">A</text>
+                  <text text-anchor="middle" font-family="monospace" x="184" y="36" fill="black" font-size="1em">n</text>
+                  <text text-anchor="middle" font-family="monospace" x="72" y="244" fill="black" font-size="1em">r</text>
+                  <text text-anchor="middle" font-family="monospace" x="136" y="244" fill="black" font-size="1em">d</text>
+                  <text text-anchor="middle" font-family="monospace" x="160" y="244" fill="black" font-size="1em">c</text>
+                  <text text-anchor="middle" font-family="monospace" x="288" y="244" fill="black" font-size="1em">n</text>
+                  <text text-anchor="middle" font-family="monospace" x="176" y="36" fill="black" font-size="1em">i</text>
                 </g>
               </svg><a href="#section-2.2-2.1.1" class="pilcrow">¶</a>
 </div>
@@ -1776,7 +1782,7 @@ Country: DE
 <p id="section-2.2.1-1"><code>odmObject</code> is the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters <span>[<a href="#ZCL" class="xref">ZCL</a>]</span>, OMA LWM2M Objects, and
-OCF Resource Types.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
+OCF Resource Types <span>[<a href="#OCF" class="xref">OCF</a>]</span>.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.1-2">An <code>odmObject</code> contains a set of <code>odmProperty</code>, <code>odmAction</code>, and
 <code>odmEvent</code> definitions that describe the interaction affordances
 associated with some scope of functionality.<a href="#section-2.2.1-2" class="pilcrow">¶</a></p>
@@ -2726,90 +2732,50 @@ action.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="example-simple-object-definition">
-<section id="section-6">
-      <h2 id="name-example-simple-object-defin">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-example-simple-object-defin" class="section-name selfRef">Example Simple Object Definition:</a>
-      </h2>
-<div class="artwork art-text alignLeft art-json" id="section-6-1">
-<pre>
-{
-  "info": {
-    "title": "Example file for ODM Simple JSON Definition Format",
-    "version": "20190424",
-    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "https://example.com/license"
-  },
-  "namespace": {
-    "cap": "https://example.com/capability/odm"
-  },
-  "defaultNamespace": "cap",
-  "odmObject": {
-    "Switch": {
-      "odmProperty": {
-        "value": {
-          "type": "string",
-          "enum": [
-            "on",
-            "off"
-          ]
-        }
-      },
-      "odmAction": {
-        "on": {},
-        "off": {}
-      }
-    }
-  }
-}
-</pre><a href="#section-6-1" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
 <div id="high-level-composition">
-<section id="section-7">
+<section id="section-6">
       <h2 id="name-high-level-composition">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-high-level-composition" class="section-name selfRef">High Level Composition</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-high-level-composition" class="section-name selfRef">High Level Composition</a>
       </h2>
-<p id="section-7-1">The requirements for high level composition include the following:<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">The requirements for high level composition include the following:<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-7-2.1">The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.<a href="#section-7-2.1" class="pilcrow">¶</a>
+<li id="section-6-2.1">The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.<a href="#section-6-2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-7-2.2">The ability to compose a reusable definition block from objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.<a href="#section-7-2.2" class="pilcrow">¶</a>
+<li id="section-6-2.2">The ability to compose a reusable definition block from objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.<a href="#section-6-2.2" class="pilcrow">¶</a>
 </li>
-<li id="section-7-2.3">The ability to compose objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.<a href="#section-7-2.3" class="pilcrow">¶</a>
+<li id="section-6-2.3">The ability to compose objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.<a href="#section-6-2.3" class="pilcrow">¶</a>
 </li>
-<li id="section-7-2.4">The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.<a href="#section-7-2.4" class="pilcrow">¶</a>
+<li id="section-6-2.4">The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.<a href="#section-6-2.4" class="pilcrow">¶</a>
 </li>
-<li id="section-7-2.5">The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.<a href="#section-7-2.5" class="pilcrow">¶</a>
+<li id="section-6-2.5">The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.<a href="#section-6-2.5" class="pilcrow">¶</a>
 </li>
 </ul>
 <div id="paths-in-the-model-namespaces">
-<section id="section-7.1">
+<section id="section-6.1">
         <h3 id="name-paths-in-the-model-namespac">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-paths-in-the-model-namespac" class="section-name selfRef">Paths in the model namespaces</a>
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-paths-in-the-model-namespac" class="section-name selfRef">Paths in the model namespaces</a>
         </h3>
-<p id="section-7.1-1">The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expecred to be an ODM namespace for common ODM definitions.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1-2">The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/odmObject/Switch/odmAction/on" where ns is the short name for the namespace prefix.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expecred to be an ODM namespace for common ODM definitions.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/odmObject/Switch/odmAction/on" where ns is the short name for the namespace prefix.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="modular-composition">
-<section id="section-7.2">
+<section id="section-6.2">
         <h3 id="name-modular-composition">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-modular-composition" class="section-name selfRef">Modular Composition</a>
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-modular-composition" class="section-name selfRef">Modular Composition</a>
         </h3>
-<p id="section-7.2-1">Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <div id="use-of-the-odmref-keyword-to-re-use-a-definition">
-<section id="section-7.2.1">
+<section id="section-6.2.1">
           <h4 id="name-use-of-the-odmref-keyword-t">
-<a href="#section-7.2.1" class="section-number selfRef">7.2.1. </a><a href="#name-use-of-the-odmref-keyword-t" class="section-name selfRef">Use of the "odmRef" keyword to re-use a definition</a>
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-use-of-the-odmref-keyword-t" class="section-name selfRef">Use of the "odmRef" keyword to re-use a definition</a>
           </h4>
-<p id="section-7.2.1-1">An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "odmRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.<a href="#section-7.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.2.1-2">ISSUE: Can qualities from the source definition be overridden?
+<p id="section-6.2.1-1">An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "odmRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-2">ISSUE: Can qualities from the source definition be overridden?
 The above only says "added".
 Yes, we do want to enable overriding, but need to warn specifiers not
-to use this in a way that contradicts the referenced semantics.<a href="#section-7.2.1-2" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-7.2.1-3">
+to use this in a way that contradicts the referenced semantics.<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-6.2.1-3">
 <pre>
 "odmData":
   "length" : {
@@ -2824,21 +2790,21 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
     "minimum": 0.05,
     "description": "cables must be at least 5 cm"
   }
-</pre><a href="#section-7.2.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.1-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 </section>
 </div>
 <div id="odmthing-1">
-<section id="section-7.3">
+<section id="section-6.3">
         <h3 id="name-odmthing-2">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-odmthing-2" class="section-name selfRef">odmThing</a>
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-odmthing-2" class="section-name selfRef">odmThing</a>
         </h3>
-<p id="section-7.3-1">An odmThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an odmThing, and the socket-thing itself could be used in a declaration in the odmThing definition for the outlet strip.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.3-2">odmThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.3-3">An odmThing may be composed of odmObjects and other odmThings.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
-<p id="section-7.3-4">The qualities of odmThing are shown in <a href="#odmthingqual" class="xref">Table 9</a>.<a href="#section-7.3-4" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">An odmThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an odmThing, and the socket-thing itself could be used in a declaration in the odmThing definition for the outlet strip.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">odmThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3-3">An odmThing may be composed of odmObjects and other odmThings.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.3-4">The qualities of odmThing are shown in <a href="#odmthingqual" class="xref">Table 9</a>.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-odmthing-and-o"></span><div id="odmthingqual">
 <table class="center" id="table-9">
           <caption>
@@ -2880,25 +2846,25 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
 </section>
 </div>
 <div id="odmproduct-1">
-<section id="section-7.4">
+<section id="section-6.4">
         <h3 id="name-odmproduct-2">
-<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-odmproduct-2" class="section-name selfRef">odmProduct</a>
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-odmproduct-2" class="section-name selfRef">odmProduct</a>
         </h3>
-<p id="section-7.4-1">An odmProduct provides the level of abstraction for representing a unique product or a profile for a standardized type of product, for example a "device type" definition with required minimum functionality.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
-<p id="section-7.4-2">Products may be composed of Objects and Things at the high level, and may include their own definitions of Properties, Actions, and Events that can be used to extend or complete the included Object definitions.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
-<p id="section-7.4-3">Product definitions may set optional defaults and constant values for specific use cases, for example units, range, and scale settings for properties, or available parameters for Actions.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
-<p id="section-7.4-4">The qualities of odmProduct are the same as for odmThing and are shown in <a href="#odmthingqual" class="xref">Table 9</a>.<a href="#section-7.4-4" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">An odmProduct provides the level of abstraction for representing a unique product or a profile for a standardized type of product, for example a "device type" definition with required minimum functionality.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-2">Products may be composed of Objects and Things at the high level, and may include their own definitions of Properties, Actions, and Events that can be used to extend or complete the included Object definitions.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
+<p id="section-6.4-3">Product definitions may set optional defaults and constant values for specific use cases, for example units, range, and scale settings for properties, or available parameters for Actions.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
+<p id="section-6.4-4">The qualities of odmProduct are the same as for odmThing and are shown in <a href="#odmthingqual" class="xref">Table 9</a>.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<section id="section-8">
+<section id="section-7">
       <h2 id="name-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
-<section id="section-8.1">
+<section id="section-7.1">
         <h3 id="name-normative-references">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="I-D.handrews-json-schema-validation">[I-D.handrews-json-schema-validation]</dt>
@@ -2939,11 +2905,19 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
 <dd class="break"></dd>
 </dl>
 </section>
-<section id="section-8.2">
+<section id="section-7.2">
         <h3 id="name-informative-references">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.irtf-t2trg-rest-iot">[I-D.irtf-t2trg-rest-iot]</dt>
+<dd>
+<span class="refAuthor">Keranen, A.</span><span class="refAuthor">, Kovatsch, M.</span><span class="refAuthor">, and K. Hartke</span>, <span class="refTitle">"RESTful Design for Internet of Things Systems"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-t2trg-rest-iot-06</span>, <time datetime="2020-05-11">11 May 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-irtf-t2trg-rest-iot-06.txt">http://www.ietf.org/internet-drafts/draft-irtf-t2trg-rest-iot-06.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OCF">[OCF]</dt>
+<dd>
+<span class="refTitle">"OCF Resource Type Specification"</span>, <time></time>, <span>&lt;<a href="https://openconnectivity.org/specs/OCF_Resource_Type_Specification.pdf">https://openconnectivity.org/specs/OCF_Resource_Type_Specification.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="ZCL">[ZCL]</dt>
 <dd>
 <span class="refTitle">"The ZigBee Cluster Library"</span>, <span class="seriesInfo">DOI 10.1016/b978-0-7506-8597-9.00006-9</span>, <span class="seriesInfo">Zigbee Wireless Networking pp. 239-271</span>, <time datetime="2008">2008</time>, <span>&lt;<a href="https://doi.org/10.1016/b978-0-7506-8597-9.00006-9">https://doi.org/10.1016/b978-0-7506-8597-9.00006-9</a>&gt;</span>. </dd>
