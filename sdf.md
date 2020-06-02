@@ -72,7 +72,7 @@ entity:
 --- abstract
 
 
-The Simple Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.
+The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.
 
 OneDM tools convert this format to database formats and other serializations as needed.
 
@@ -82,8 +82,8 @@ The JSON format of an SDF definition is described in this document.
 
 --- note_Contributing
 
-Recent versions of this document are available at its github
-repository (TODO: point to github repo), which also provides an issue
+Recent versions of this document are available at its GitHub 
+repository (TODO: point to GitHub repo), which also provides an issue
 tracker as well as a way to supply "pull requests".
 
 This document has not yet been submitted as an Internet-Draft; the
@@ -95,7 +95,7 @@ plan is to do this in early June.
 
 # Introduction
 
-The Simple Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.
+The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.
 
 OneDM tools convert this format to database formats and other serializations as needed.
 
@@ -149,7 +149,7 @@ We start with an example for the SDF definition of a simple object called "Switc
 ~~~ json
 {
   "info": {
-    "title": "Example file for ODM Simple JSON Definition Format",
+    "title": "Example file for ODM Semantic Definition Format",
     "version": "20190424",
     "copyright": "Copyright 2019 Example Corp. All rights reserved.",
     "license": "https://example.com/license"
@@ -801,41 +801,6 @@ An odmData definition provides a semantic identifier for a data item and describ
 odmData is used for Action parameters, for Event data, and for reusable constraints in property definitions
 
 The qualities of odmData include the common qualities and the data qualities, see {{data-qualities}}.
-
-# Example Simple Object Definition:
-
-~~~json
-{
-  "info": {
-    "title": "Example file for ODM Simple JSON Definition Format",
-    "version": "20190424",
-    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "https://example.com/license"
-  },
-  "namespace": {
-    "cap": "https://example.com/capability/odm"
-  },
-  "defaultNamespace": "cap",
-  "odmObject": {
-    "Switch": {
-      "odmProperty": {
-        "value": {
-          "type": "string",
-          "enum": [
-            "on",
-            "off"
-          ]
-        }
-      },
-      "odmAction": {
-        "on": {},
-        "off": {}
-      }
-    }
-  }
-}
-~~~
-
 
 # High Level Composition
 
