@@ -64,7 +64,13 @@ normative:
   W3C.NOTE-curie-20101216: curie
   RFC0020: ascii
 informative:
+  I-D.irtf-t2trg-rest-iot: rest-iot
   ZCL: DOI.10.1016/B978-0-7506-8597-9.00006-9
+  OCF:
+    title: OCF Resource Type Specification
+    date: false
+# VERSION 2.1.2 | April 2020
+    target: https://openconnectivity.org/specs/OCF_Resource_Type_Specification.pdf
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -82,7 +88,7 @@ The JSON format of an SDF definition is described in this document.
 
 --- note_Contributing
 
-Recent versions of this document are available at its GitHub 
+Recent versions of this document are available at its GitHub
 repository (TODO: point to GitHub repo), which also provides an issue
 tracker as well as a way to supply "pull requests".
 
@@ -148,38 +154,48 @@ We start with an example for the SDF definition of a simple object called "Switc
 
 ~~~ json
 {
-  "info": {
-    "title": "Example file for ODM Semantic Definition Format",
-    "version": "20190424",
-    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "https://example.com/license"
-  },
-  "namespace": {
-    "cap": "https://example.com/capability/odm"
-  },
-  "defaultNamespace": "cap",
-  "odmObject": {
-    "Switch": {
-      "odmProperty": {
-        "value": {
-          "type": "string",
-          "enum": [
-            "on",
-            "off"
-          ]
+    "info": {
+        "title": "Example file for ODM Semantic Definition Format",
+        "version": "20190424",
+        "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+        "license": "https://example.com/license"
+    },
+    "namespace": {
+        "cap": "https://example.com/capability/odm"
+    },
+    "defaultNamespace": "cap",
+    "odmObject": {
+        "Switch": {
+            "odmProperty": {
+                "value": {
+                    "type": "boolean"
+                }
+            },
+            "odmAction": {
+                "on": {},
+                "off": {},
+                "toggle": {}
+            }
         }
-      },
-      "odmAction": {
-        "on": {},
-        "off": {}
-      }
     }
-  }
 }
 ~~~
 {: #example1 title="A simple example of an SDF definition file"}
 
-TODO: Add explanation; 
+This is a representation of a switch.
+The `odmProperty` value, represented by a Boolean, will be true for "on" and will be false for "off".
+The actions `on` or `off` are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
+The action `toggle` will invert the value of the odmProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
+
+The `odmObject` lists the affordances of instances of this object.
+`odmProperty` lists the property affordances described by the model; these represent various perspectives on the state of the object.
+The properties can have additional qualities to describe the state more precisely.
+The properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
+Properties are often used with RESTful paradigms {{-rest-iot}}, describing state.
+The `odmAction` is the mechanism to describe interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
+The example `toggle` is an action that
+changes the state based on the current state of the `odmProperty` named `value`.
+(The third type of affordance is Events, which are not described in this example.)
 
 ## Elements of an SDF model
 
@@ -260,7 +276,7 @@ The six main classes are discussed below.
 `odmObject` is the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters {{ZCL}}, OMA LWM2M Objects, and
-OCF Resource Types.
+OCF Resource Types {{OCF}}.
 
 An `odmObject` contains a set of `odmProperty`, `odmAction`, and
 `odmEvent` definitions that describe the interaction affordances
