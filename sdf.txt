@@ -86,13 +86,13 @@ Table of Contents
    2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   4
      2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   4
      2.2.  Elements of an SDF model  . . . . . . . . . . . . . . . .   6
-       2.2.1.  odmObject . . . . . . . . . . . . . . . . . . . . . .   7
-       2.2.2.  odmProperty . . . . . . . . . . . . . . . . . . . . .   8
-       2.2.3.  odmAction . . . . . . . . . . . . . . . . . . . . . .   9
-       2.2.4.  odmEvent  . . . . . . . . . . . . . . . . . . . . . .   9
-       2.2.5.  odmData . . . . . . . . . . . . . . . . . . . . . . .  10
-       2.2.6.  odmThing  . . . . . . . . . . . . . . . . . . . . . .  10
-       2.2.7.  odmProduct  . . . . . . . . . . . . . . . . . . . . .  10
+       2.2.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . .   7
+       2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .   8
+       2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .   9
+       2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .   9
+       2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  10
+       2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  10
+       2.2.7.  sdfProduct  . . . . . . . . . . . . . . . . . . . . .  10
    3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  10
      3.1.  Information block . . . . . . . . . . . . . . . . . . . .  10
      3.2.  Namespaces section  . . . . . . . . . . . . . . . . . . .  11
@@ -101,9 +101,9 @@ Table of Contents
      4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  13
      4.2.  Contributing global names . . . . . . . . . . . . . . . .  14
      4.3.  Referencing global names  . . . . . . . . . . . . . . . .  14
-     4.4.  odmRef  . . . . . . . . . . . . . . . . . . . . . . . . .  15
-     4.5.  odmRequired . . . . . . . . . . . . . . . . . . . . . . .  16
-       4.5.1.  Optionality using the keyword "odmRequired" . . . . .  16
+     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  15
+     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  16
+       4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  16
      4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  17
      4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  18
 
@@ -115,25 +115,25 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
    5.  Keywords for type definitions . . . . . . . . . . . . . . . .  20
-     5.1.  odmObject . . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.2.  odmProperty . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.3.  odmAction . . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.4.  odmEvent  . . . . . . . . . . . . . . . . . . . . . . . .  22
-     5.5.  odmData . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  21
+     5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  21
+     5.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . . . .  21
+     5.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . . . .  22
+     5.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . . . .  23
    6.  High Level Composition  . . . . . . . . . . . . . . . . . . .  23
      6.1.  Paths in the model namespaces . . . . . . . . . . . . . .  24
      6.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  24
-       6.2.1.  Use of the "odmRef" keyword to re-use a definition  .  24
-     6.3.  odmThing  . . . . . . . . . . . . . . . . . . . . . . . .  25
-     6.4.  odmProduct  . . . . . . . . . . . . . . . . . . . . . . .  26
+       6.2.1.  Use of the "sdfRef" keyword to re-use a definition  .  24
+     6.3.  sdfThing  . . . . . . . . . . . . . . . . . . . . . . . .  25
+     6.4.  sdfProduct  . . . . . . . . . . . . . . . . . . . . . . .  26
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  26
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  27
    Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  27
    Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  30
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  40
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  40
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  40
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  43
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  43
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  44
 
 1.  Introduction
 
@@ -237,14 +237,14 @@ Internet-Draft                  OneDM SDF                      June 2020
            "cap": "https://example.com/capability/odm"
        },
        "defaultNamespace": "cap",
-       "odmObject": {
+       "sdfObject": {
            "Switch": {
-               "odmProperty": {
+               "sdfProperty": {
                    "value": {
                        "type": "boolean"
                    }
                },
-               "odmAction": {
+               "sdfAction": {
                    "on": {},
                    "off": {},
                    "toggle": {}
@@ -255,23 +255,23 @@ Internet-Draft                  OneDM SDF                      June 2020
 
             Figure 1: A simple example of an SDF definition file
 
-   This is a model of a switch.  The "odmProperty" value, represented by
+   This is a model of a switch.  The "sdfProperty" value, represented by
    a Boolean, will be true for "on" and will be false for "off".  The
    actions "on" or "off" are redundant with setting the "value" and are
    in the example to illustrate that there are often different ways of
    achieving the same effect.  The action "toggle" will invert the value
-   of the odmProperty value, so that 2-way switches can be created;
+   of the sdfProperty value, so that 2-way switches can be created;
    having such action will avoid the need for first retrieving the
    current value and then applying/setting the inverted value.
 
-   The "odmObject" lists the affordances of instances of this object.
-   "odmProperty" lists the property affordances described by the model;
+   The "sdfObject" lists the affordances of instances of this object.
+   "sdfProperty" lists the property affordances described by the model;
    these represent various perspectives on the state of the object.  The
    properties can have additional qualities to describe the state more
    precisely.  The properties can be annotated to be read, write or
    read/write; how this is done by the underlying transfer protocols is
    not described.  Properties are often used with RESTful paradigms
-   [I-D.irtf-t2trg-rest-iot], describing state.  The "odmAction" is the
+   [I-D.irtf-t2trg-rest-iot], describing state.  The "sdfAction" is the
    mechanism to describe interactions in terms of their names, input,
    and output data (no data are used in the example), as in a POST
 
@@ -284,38 +284,38 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    method in REST or in a remote procedure call.  The example "toggle"
    is an action that changes the state based on the current state of the
-   "odmProperty" named "value".  (The third type of affordance is
+   "sdfProperty" named "value".  (The third type of affordance is
    Events, which are not described in this example.)
 
 2.2.  Elements of an SDF model
 
    The SDF language uses seven predefined classes for modeling connected
    Things, six of which are illustrated in Figure 2 and Figure 3
-   // [Decide which of these figures we want]"odmProduct" is exactly
-   like "odmThing").
+   // [Decide which of these figures we want]"sdfProduct" is exactly
+   like "sdfThing").
 
                    +--------+
-                   |odmThing|
+                   |sdfThing|
                    |--------|
                    |--------|
                    +--------+
                         |
                         |
                   +---------+
-                  |odmObject|
+                  |sdfObject|
                   |---------|
                   |---------|
                   +---------+
                         |
    +-----------+  +---------+   +--------+
-   |odmProperty|  |odmAction|   |odmEvent|
+   |sdfProperty|  |sdfAction|   |sdfEvent|
    |-----------|  |---------|   |--------|
    |-----------|  |---------|   |--------|
    +-----------+  +---------+   +--------+
 
 
                    +-------+
-                   |odmData|
+                   |sdfData|
                    |-------|
                    |-------|
                    +-------+
@@ -338,51 +338,51 @@ Koster & Bormann         Expires 4 December 2020                [Page 6]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   odmThing --> "0+" odmObject : hasObject
-   odmThing --> "0+" odmThing : hasThing
+   sdfThing --> "0+" sdfObject : hasObject
+   sdfThing --> "0+" sdfThing : hasThing
 
-   odmObject --> "0+" odmProperty : hasProperty
-   odmObject --> "0+" odmAction : hasAction
-   odmObject --> "0+" odmEvent : hasEvent
+   sdfObject --> "0+" sdfProperty : hasProperty
+   sdfObject --> "0+" sdfAction : hasAction
+   sdfObject --> "0+" sdfEvent : hasEvent
 
-   odmAction --> "1+" odmData : hasInputData
-   odmAction --> "0+" odmData : hasOutputData
+   sdfAction --> "1+" sdfData : hasInputData
+   sdfAction --> "0+" sdfData : hasOutputData
 
-   odmEvent --> "1+" odmData : hasOutputData
+   sdfEvent --> "1+" sdfData : hasOutputData
 
-   odmProperty --> "1" odmData : isInstanceOf
+   sdfProperty --> "1" sdfData : isInstanceOf
 
-   class odmThing {
+   class sdfThing {
    }
 
-   class odmObject {
+   class sdfObject {
    }
 
-   class odmProperty {
+   class sdfProperty {
    }
 
-   class odmAction {
+   class sdfAction {
    }
 
-   class odmEvent {
+   class sdfEvent {
    }
 
-   class odmData {
+   class sdfData {
    }
 
                  Figure 3: Main classes used in SDF models
 
    The six main classes are discussed below.
 
-2.2.1.  odmObject
+2.2.1.  sdfObject
 
-   "odmObject" is the main "atom" of reusable semantics for model
+   "sdfObject" is the main "atom" of reusable semantics for model
    construction.  It aligns in scope with common definition items from
    many IoT modeling systems, for example ZigBee Clusters [ZCL], OMA
    LWM2M Objects, and OCF Resource Types [OCF].
 
-   An "odmObject" contains a set of "odmProperty", "odmAction", and
-   "odmEvent" definitions that describe the interaction affordances
+   An "sdfObject" contains a set of "sdfProperty", "sdfAction", and
+   "sdfEvent" definitions that describe the interaction affordances
    associated with some scope of functionality.
 
 
@@ -394,39 +394,39 @@ Koster & Bormann         Expires 4 December 2020                [Page 7]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   For the granularity of definition, "odmObject" definitions are meant
+   For the granularity of definition, "sdfObject" definitions are meant
    to be kept narrow enough in scope to enable broad reuse and
    interoperability.  For example, defining a light bulb using separate
-   "odmObject" definitions for on/off control, dimming, and color
+   "sdfObject" definitions for on/off control, dimming, and color
    control affordances will enable interoperable functionality to be
-   configured for diverse product types.  An "odmObject" definition for
+   configured for diverse product types.  An "sdfObject" definition for
    a common on/off control may be used to control may different kinds of
    Things that require on/off control.
 
-2.2.2.  odmProperty
+2.2.2.  sdfProperty
 
-   "odmProperty" is used to model elements of state within "odmObject"
+   "sdfProperty" is used to model elements of state within "sdfObject"
    instances.
 
-   An instance of "odmProperty" may be associated with some protocol
+   An instance of "sdfProperty" may be associated with some protocol
    affordance to enable the application to obtain the state variable
    and, optionally, modify the state variable.  Additionally, some
    protocols provide for in-time reporting of state changes.  (These
    three aspects are described by the qualities "readable", "writable",
-   and "observable" defined for an "odmProperty".)
+   and "observable" defined for an "sdfProperty".)
 
-   An "odmProperty" definition looks like a single "odmData" definition.
-   (Qualities beyond those of "odmData" could be defined for odmProperty
-   but currently aren't; this means that even "odmProperty" qualities
-   such as "readable" and "writable" can be associated with "odmData"
+   An "sdfProperty" definition looks like a single "sdfData" definition.
+   (Qualities beyond those of "sdfData" could be defined for sdfProperty
+   but currently aren't; this means that even "sdfProperty" qualities
+   such as "readable" and "writable" can be associated with "sdfData"
    definitions, as well.)
 
-   For "odmProperty" and "odmData", SDF provides qualities that can
+   For "sdfProperty" and "sdfData", SDF provides qualities that can
    constrain the structure and values of data allowed in an instance of
    these data, as well as qualities that associate semantics to these
    data, for engineering units and unit scaling information.
 
-   For the data definition within "odmProperty" or "odmData", SDF
+   For the data definition within "sdfProperty" or "sdfData", SDF
    borrows a number of elements proposed for the json-schema.org "JSON
    Schema" format [I-D.handrews-json-schema-validation], enhanced by
    qualities that are specific to SDF.  However, for the current version
@@ -436,7 +436,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    of this specification (possibly more of which can be borrowed from
    json-schema.org).
 
-   Note that "odmProperty" definitions (and "odmData" definitions in
+   Note that "sdfProperty" definitions (and "sdfData" definitions in
    general) are not intended to constrain the formats of data used for
    communication over network interfaces.  Where needed, data
    definitions for payloads of protocol messages are expected to be part
@@ -450,19 +450,19 @@ Koster & Bormann         Expires 4 December 2020                [Page 8]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-2.2.3.  odmAction
+2.2.3.  sdfAction
 
-   "odmAction" is provided to model affordances that, when triggered,
+   "sdfAction" is provided to model affordances that, when triggered,
    have more effect than just reading, updating, or observing Thing
    state, often resulting in some outward physical effect (which,
    itself, cannot be modeled in SDF).  From a programmer's perspective,
    they might be considered to be roughly analogous to method calls.
 
    Actions may have multiple data parameters; these are modeled as input
-   data and output data (using "odmData", i.e., the same entries as for
-   "odmProperty" definitions).  Actions may be long-running, that is to
+   data and output data (using "sdfData", i.e., the same entries as for
+   "sdfProperty" definitions).  Actions may be long-running, that is to
    say that the effects may not take place immediately as would be
-   expected for an update to an "odmPoperty"; the effects may play out
+   expected for an update to an "sdfPoperty"; the effects may play out
    over time and emit action results.  Actions may also not always
    complete and may result in application errors, such as an item
    blocking the closing of an automatic door.
@@ -471,29 +471,29 @@ Internet-Draft                  OneDM SDF                      June 2020
    safety.
 
    The current version of SDF only provides data constraint modeling and
-   semantics for the input and output data of "odmAction" entries.
+   semantics for the input and output data of "sdfAction" entries.
    Again, data definitions for payloads of protocol messages, and
    detailed protocol settings for invoking the action, are expected to
    be part of the protocol binding.
 
-2.2.4.  odmEvent
+2.2.4.  sdfEvent
 
-   "odmEvent" is provided to model "happenings" associated with an
-   odmObject that may result in a signal being stored or emitted as a
+   "sdfEvent" is provided to model "happenings" associated with an
+   sdfObject that may result in a signal being stored or emitted as a
    result.
 
-   Note that there is a trivial overlap with odmProperty state changes,
+   Note that there is a trivial overlap with sdfProperty state changes,
    which may also be defined as events but are not generally required to
-   be defined as such.  However, "odmEvents" may exhibit certain
+   be defined as such.  However, "sdfEvents" may exhibit certain
    ordering, consistency, and reliability requirements that are expected
-   to be supported in various implementations of "odmEvent" that do
-   distinguish odmEvent from odmProperty.  For instance, while a state
+   to be supported in various implementations of "sdfEvent" that do
+   distinguish sdfEvent from sdfProperty.  For instance, while a state
    change may simply be superseded by another state change, some events
    are "precious" and need to be preserved even if further events
    follow.
 
    The current version of SDF only provides data constraint modeling and
-   semantics for the output data of "odmEvent" entries.  Again, data
+   semantics for the output data of "sdfEvent" entries.  Again, data
    definitions for payloads of protocol messages, and detailed protocol
    settings for invoking the action, are expected to be part of the
    protocol binding.
@@ -506,36 +506,36 @@ Koster & Bormann         Expires 4 December 2020                [Page 9]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-2.2.5.  odmData
+2.2.5.  sdfData
 
-   "odmData" is provided separate from "odmProperty" to enable common
+   "sdfData" is provided separate from "sdfProperty" to enable common
    modeling patterns, data constraints, and semantic anchor concepts to
-   be factored out for data items that make up "odmProperty" items and
-   serve as input and output data for "odmAction" and "odmEvent" items.
+   be factored out for data items that make up "sdfProperty" items and
+   serve as input and output data for "sdfAction" and "sdfEvent" items.
 
    It is a common use case for such a data definition to be shared
-   between an "odmProperty" item and input or output parameters of an
-   "odmAction" or output data provided by an "odmEvent". "odmData"
+   between an "sdfProperty" item and input or output parameters of an
+   "sdfAction" or output data provided by an "sdfEvent". "sdfData"
    definitions also enable factoring out extended application data types
    such as mode and machine state enumerations to be reused across
    multiple definitions that have similar basic characteristics and
    requirements.
 
-2.2.6.  odmThing
+2.2.6.  sdfThing
 
-   Back at the top level, "odmThing" enables construction of models for
-   complex devices that will use one or more "odmObject" definitions.
+   Back at the top level, "sdfThing" enables construction of models for
+   complex devices that will use one or more "sdfObject" definitions.
 
-   An "odmThing" definition can refine the metadata of the definitions
-   it is composed from: other odmThing definitions and odmObject
+   An "sdfThing" definition can refine the metadata of the definitions
+   it is composed from: other sdfThing definitions and sdfObject
    definitions.
 
-2.2.7.  odmProduct
+2.2.7.  sdfProduct
 
-   "odmThing" has a derived class "odmProduct", which can be used to
+   "sdfThing" has a derived class "sdfProduct", which can be used to
    indicate a top level inventory item with a Stock-Keeping Unit (SKU)
    identifier and other particular metadata.  Structurally, there is no
-   difference between the two; semantically, an "odmProduct" is intended
+   difference between the two; semantically, an "sdfProduct" is intended
    to describe a class of complete Things.
 
 3.  SDF structure
@@ -658,7 +658,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    according to the class name keywords for type definitions (for
    object, property, action, event, data, as well as thing and product);
    the names for these type keywords are capitalized and prefixed with
-   "odm".  The keywords are used with JSON maps (objects), the keys of
+   "sdf".  The keywords are used with JSON maps (objects), the keys of
    which serve for naming the individual entries and the values define
    or declare an individual entry.
 
@@ -684,9 +684,9 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    An example for an Object definition is given in Figure 4:
 
-   "odmObject": {
+   "sdfObject": {
      "foo": {
-       "odmProperty": {
+       "sdfProperty": {
          "bar": {
            "type": "boolean"
          }
@@ -697,16 +697,16 @@ Internet-Draft                  OneDM SDF                      June 2020
                     Figure 4: Example Object definition
 
    This example defines an Object "foo" that is defined in the default
-   namespace (full address: "#/odmObject/foo"), containing a property
-   that can be addressed as "#/odmObject/foo/odmProperty/bar", with data
+   namespace (full address: "#/sdfObject/foo"), containing a property
+   that can be addressed as "#/sdfObject/foo/sdfProperty/bar", with data
    of type boolean.
 
    Some of the definitions are also declarations: the definition of the
    entry "bar" in the property "foo" means that each instance of a "foo"
    can have zero or one instance of a "bar".  Entries within
-   "odmProperty", "odmAction", and "odmEvent", within "odmObject"
-   entries, are declarations.  Similarly, entries within an "odmThing"
-   describe instances of "odmObject" (or nested "odmThing") that form
+   "sdfProperty", "sdfAction", and "sdfEvent", within "sdfObject"
+   entries, are declarations.  Similarly, entries within an "sdfThing"
+   describe instances of "sdfObject" (or nested "sdfThing") that form
    part of instances of the Thing.
 
 4.  Names and namespaces
@@ -757,14 +757,14 @@ Internet-Draft                  OneDM SDF                      June 2020
    E.g., in Figure 1, definitions for the following global names are
    contributed:
 
-   *  https://example.com/capability/odm#/odmObject/Switch
+   *  https://example.com/capability/odm#/sdfObject/Switch
 
-   *  https://example.com/capability/odm#/odmObject/Switch/odmProperty/
+   *  https://example.com/capability/odm#/sdfObject/Switch/sdfProperty/
       value
 
-   *  https://example.com/capability/odm#/odmObject/Switch/odmAction/on
+   *  https://example.com/capability/odm#/sdfObject/Switch/sdfAction/on
 
-   *  https://example.com/capability/odm#/odmObject/Switch/odmAction/off
+   *  https://example.com/capability/odm#/sdfObject/Switch/sdfAction/off
 
    Note the "#", which separates the base part from the fragment
    identifier part.
@@ -805,11 +805,11 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    Then this reference to that namespace:
 
-   { "odmRef": "foo:/odmData/temperatureData" }
+   { "sdfRef": "foo:/sdfData/temperatureData" }
 
    references the global name:
 
-   "https://example.com/#/odmData/temperatureData"
+   "https://example.com/#/sdfData/temperatureData"
 
    Note that there is no way to provide a URI scheme name in a curie, so
    all references outside of the document need to go through the
@@ -817,14 +817,14 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    Name references occur only in specific elements of the syntax of SDF:
 
-   *  copying elements via odmRef values
+   *  copying elements via sdfRef values
 
-   *  pointing to elements via odmRequired value elements or as
-      odmInput/OutputData etc.
+   *  pointing to elements via sdfRequired value elements or as
+      sdfInput/OutputData etc.
 
-4.4.  odmRef
+4.4.  sdfRef
 
-   In a JSON map establishing a definition, the keyword "odmRef" is used
+   In a JSON map establishing a definition, the keyword "sdfRef" is used
    to copy all of the qualities of the referenced definition, indicated
    by the included name reference, into the newly formed definition.
    (This can be compared to the processing of the "$ref" keyword in JSON
@@ -843,33 +843,33 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
    "temperatureProperty": {
-     "odmRef": "#/odmData/temperatureData"
+     "sdfRef": "#/sdfData/temperatureData"
    }
 
    creates a new definition "temperatureProperty" that contains all of
-   the qualities defined in the definition at /odmData/temperatureData.
+   the qualities defined in the definition at /sdfData/temperatureData.
 
-4.5.  odmRequired
+4.5.  sdfRequired
 
-   The value of "odmRequired" is an array of name references, each
+   The value of "sdfRequired" is an array of name references, each
    pointing to one declaration instantiation of which is declared
    mandatory.
 
-4.5.1.  Optionality using the keyword "odmRequired"
+4.5.1.  Optionality using the keyword "sdfRequired"
 
-   The keyword "odmRequired" is provided to apply a constraint for which
+   The keyword "sdfRequired" is provided to apply a constraint for which
    definitions are mandatory in an instance conforming to a particular
    definition in which the constraint appears.
 
-   The value of "odmRequired" is an array of JSON pointers, each
+   The value of "sdfRequired" is an array of JSON pointers, each
    indicating one mandatory definition.
 
-   The example in Figure 5 shows two required elements in the odmObject
-   definition for "temperatureWithAlarm", the odmProperty
-   "temperatureData", and the odmEvent "overTemperatureEvent".  The
-   example also shows the use of JSON pointer with "odmRef" to use a
+   The example in Figure 5 shows two required elements in the sdfObject
+   definition for "temperatureWithAlarm", the sdfProperty
+   "temperatureData", and the sdfEvent "overTemperatureEvent".  The
+   example also shows the use of JSON pointer with "sdfRef" to use a
    pre-existing definition in this definition, for the "alarmType" data
-   (odmOutputData) produced by the odmEvent "overTemperatureEvent".
+   (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
 
 
@@ -899,26 +899,26 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
    {
-     "odmObject": {
+     "sdfObject": {
        "temperatureWithAlarm": {
-         "odmRequired": [
-           "#/odmObject/temperatureWithAlarm/odmData/temperatureData",
-           "#/odmObject/temperatureWithAlarm/odmEvent/overTemperatureEvent"
+         "sdfRequired": [
+           "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData",
+           "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
          ],
-         "odmData":{
+         "sdfData":{
            "temperatureData": {
              "type": "number"
            }
          },
-         "odmEvent": {
+         "sdfEvent": {
            "overTemperatureEvent": {
-             "odmOutputData": {
+             "sdfOutputData": {
                "alarmType": {
-                 "odmRef": "odm:/odmData/alarmTypes/quantityAlarms",
+                 "sdfRef": "odm:/sdfData/alarmTypes/quantityAlarms",
                  "const": "OverTemperatureAlarm"
                },
                "temperature": {
-                 "odmRef": "#/odmObject/temperatureWithAlarm/odmData/temperatureData"
+                 "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
                }
              }
            }
@@ -927,7 +927,7 @@ Internet-Draft                  OneDM SDF                      June 2020
      }
    }
 
-                        Figure 5: Using odmRequired
+                        Figure 5: Using sdfRequired
 
 4.6.  Common Qualities
 
@@ -964,9 +964,9 @@ Internet-Draft                  OneDM SDF                      June 2020
     | $comment    | text         | source code comments only, no     |
     |             |              | semantics                         |
     +-------------+--------------+-----------------------------------+
-    | odmRef      | sdf-pointer  | (see Section 4.4)                 |
+    | sdfRef      | sdf-pointer  | (see Section 4.4)                 |
     +-------------+--------------+-----------------------------------+
-    | odmRequired | pointer-list | (see Section 4.5, applies to      |
+    | sdfRequired | pointer-list | (see Section 4.5, applies to      |
     |             |              | qualities of properties, of data) |
     +-------------+--------------+-----------------------------------+
 
@@ -974,7 +974,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 4.7.  Data Qualities
 
-   Data qualities are used in "odmData" and "odmProperty" definitions.
+   Data qualities are used in "sdfData" and "sdfProperty" definitions.
 
    Table 4 lists data qualities borrowed from
    [I-D.handrews-json-schema-validation]; the intention is that these
@@ -1055,7 +1055,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    |                | {{syntax})    |                                      |
    +----------------+---------------+--------------------------------------+
 
-     Table 4: Qualities of odmProperty and odmData borrowed from json-
+     Table 4: Qualities of sdfProperty and sdfData borrowed from json-
                                  schema.org
 
 
@@ -1102,7 +1102,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    |               | / "unixtime" |                         |         |
    +---------------+--------------+-------------------------+---------+
 
-        Table 5: SDF-defined Qualities of odmProperty and odmData
+        Table 5: SDF-defined Qualities of sdfProperty and sdfData
 
 5.  Keywords for type definitions
 
@@ -1122,13 +1122,13 @@ Koster & Bormann         Expires 4 December 2020               [Page 20]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-5.1.  odmObject
+5.1.  sdfObject
 
-   The odmObject keyword denotes zero or more Object definitions.  An
-   odmObject may contain or include definitions of events, actions,
+   The sdfObject keyword denotes zero or more Object definitions.  An
+   sdfObject may contain or include definitions of events, actions,
    properties, and data types.
 
-   The qualities of an odmObject include the common qualities,
+   The qualities of an sdfObject include the common qualities,
    additional qualities are shown in Table 6.  None of these qualities
    are required or have default values that are assumed if the quality
    is absent.
@@ -1138,34 +1138,34 @@ Internet-Draft                  OneDM SDF                      June 2020
    +=============+==========+==========================================+
    | (common)    |          | Section 4.6                              |
    +-------------+----------+------------------------------------------+
-   | odmProperty | property | zero or more named property              |
+   | sdfProperty | property | zero or more named property              |
    |             |          | definitions for this object              |
    +-------------+----------+------------------------------------------+
-   | odmAction   | action   | zero or more named action                |
+   | sdfAction   | action   | zero or more named action                |
    |             |          | definitions for this object              |
    +-------------+----------+------------------------------------------+
-   | odmEvent    | event    | zero or more named event                 |
+   | sdfEvent    | event    | zero or more named event                 |
    |             |          | definitions for this object              |
    +-------------+----------+------------------------------------------+
-   | odmData     | data     | zero or more named data                  |
+   | sdfData     | data     | zero or more named data                  |
    |             |          | type definitions that might              |
    |             |          | be used in the above                     |
    +-------------+----------+------------------------------------------+
 
-                      Table 6: Qualities of odmObject
+                      Table 6: Qualities of sdfObject
 
-5.2.  odmProperty
+5.2.  sdfProperty
 
-   The odmProperty keyword denotes zero or more property definitions.
+   The sdfProperty keyword denotes zero or more property definitions.
 
    Properties are used to model elements of state.
 
-   The qualities of odmProperty include the common qualities and the
+   The qualities of sdfProperty include the common qualities and the
    data qualities, see Section 4.7.
 
-5.3.  odmAction
+5.3.  sdfAction
 
-   The odmAction keyword denotes zero or more Action definitions.
+   The sdfAction keyword denotes zero or more Action definitions.
 
    Actions are used to model commands and methods which are invoked.
    Actions have parameter data that are supplied upon invocation.
@@ -1178,7 +1178,7 @@ Koster & Bormann         Expires 4 December 2020               [Page 21]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   The qualities of odmAction include the common qualities, additional
+   The qualities of sdfAction include the common qualities, additional
    qualities are shown in Table 7.
 
     +----------------------+-------+----------------------------+----+
@@ -1186,41 +1186,41 @@ Internet-Draft                  OneDM SDF                      June 2020
     +======================+=======+============================+====+
     | (common)             |       | Section 4.6                |    |
     +----------------------+-------+----------------------------+----+
-    | odmInputData         | array | Array of JSON Pointers to  | N/ |
+    | sdfInputData         | array | Array of JSON Pointers to  | N/ |
     |                      |       | mandatory items in a valid | A  |
     |                      |       | action definition          |    |
     +----------------------+-------+----------------------------+----+
-    | odmRequiredInputData | array | Array of JSON Pointers to  | N/ |
+    | sdfRequiredInputData | array | Array of JSON Pointers to  | N/ |
     |                      |       | mandatory items in a valid | A  |
     |                      |       | action definition          |    |
     +----------------------+-------+----------------------------+----+
-    | odmOutputData        | array | Array of JSON Pointers to  | N/ |
+    | sdfOutputData        | array | Array of JSON Pointers to  | N/ |
     |                      |       | mandatory items in a valid | A  |
     |                      |       | action definition          |    |
     +----------------------+-------+----------------------------+----+
-    | odmData              | data  | zero or more named data    |    |
+    | sdfData              | data  | zero or more named data    |    |
     |                      |       | type definitions that      |    |
     |                      |       | might be used in the above |    |
     +----------------------+-------+----------------------------+----+
 
-                     Table 7: Qualities of odmAction
+                     Table 7: Qualities of sdfAction
 
-   "odmInputData" refined by "odmRequiredInputData" define the input
-   data of the action.  "odmOutputData" refined "odmRequired" (a quality
+   "sdfInputData" refined by "sdfRequiredInputData" define the input
+   data of the action.  "sdfOutputData" refined "sdfRequired" (a quality
    defined in Table 3) define the output data of the action.
 
-   CHECK THIS: odmProperty may not itself define any other ODM types;
+   CHECK THIS: sdfProperty may not itself define any other SDF types;
    all types needed are referenced via SDF pointers.
 
-5.4.  odmEvent
+5.4.  sdfEvent
 
-   The odmEvent keyword denotes zero or more Event definitions.
+   The sdfEvent keyword denotes zero or more Event definitions.
 
    Events are used to model asynchronous occurrences that may be
    communicated proactively.  Events have data elements which are
    communicated upon the occurrence of the event.
 
-   The qualities of odmEvent include the common qualities, additional
+   The qualities of sdfEvent include the common qualities, additional
    qualities are shown in Table 8.
 
 
@@ -1239,34 +1239,34 @@ Internet-Draft                  OneDM SDF                      June 2020
    +===============+=======+=======================+===================+
    | (common)      |       | Section 4.6           |                   |
    +---------------+-------+-----------------------+-------------------+
-   | odmOutputData | array | no                    | Array of JSON     |
+   | sdfOutputData | array | no                    | Array of JSON     |
    |               |       |                       | Pointers to       |
    |               |       |                       | output items in a |
    |               |       |                       | valid definition  |
    +---------------+-------+-----------------------+-------------------+
-   | odmData       | data  | zero or more          |                   |
+   | sdfData       | data  | zero or more          |                   |
    |               |       | named data type       |                   |
    |               |       | definitions that      |                   |
    |               |       | might be used in      |                   |
    |               |       | the above             |                   |
    +---------------+-------+-----------------------+-------------------+
 
-                       Table 8: Qualities of odmEvent
+                       Table 8: Qualities of sdfEvent
 
-   "odmOutputData" refined by "odmRequired" (a quality defined in
+   "sdfOutputData" refined by "sdfRequired" (a quality defined in
    Table 3) define the output data of the action.
 
-5.5.  odmData
+5.5.  sdfData
 
-   The odmData keyword denotes zero or more Data type definitions.
+   The sdfData keyword denotes zero or more Data type definitions.
 
-   An odmData definition provides a semantic identifier for a data item
+   An sdfData definition provides a semantic identifier for a data item
    and describes the constraints on the defined data item.
 
-   odmData is used for Action parameters, for Event data, and for
+   sdfData is used for Action parameters, for Event data, and for
    reusable constraints in property definitions
 
-   The qualities of odmData include the common qualities and the data
+   The qualities of sdfData include the common qualities and the data
    qualities, see Section 4.7.
 
 6.  High Level Composition
@@ -1308,14 +1308,14 @@ Internet-Draft                  OneDM SDF                      June 2020
    in the definition files that are present in the namespace.  For
    example, definitions that originate from an organization or vendor
    are expected to be in a namespace that is specific to that
-   organization or vendor.  There is expecred to be an ODM namespace for
-   common ODM definitions.
+   organization or vendor.  There is expected to be an SDF namespace for
+   common SDF definitions used in OneDM.
 
    The structure of a path in a namespace is defined by the JSON
    Pointers to the definitions in the files in that namespace.  For
    example, if there is a file defining an object "Switch" with an
    action "on", then the reference to the action would be
-   "ns:/odmObject/Switch/odmAction/on" where ns is the short name for
+   "ns:/sdfObject/Switch/sdfAction/on" where ns is the short name for
    the namespace prefix.
 
 6.2.  Modular Composition
@@ -1325,12 +1325,12 @@ Internet-Draft                  OneDM SDF                      June 2020
    definition by including a reference to the existing definition within
    the model namespace.
 
-6.2.1.  Use of the "odmRef" keyword to re-use a definition
+6.2.1.  Use of the "sdfRef" keyword to re-use a definition
 
    An existing definition may be used as a template for a new
    definition, that is, a new definition is created in the target
    namespace which uses the defined qualities of some existing
-   definition.  This pattern will use the keyword "odmRef" as a quality
+   definition.  This pattern will use the keyword "sdfRef" as a quality
    of a new definition with a value consisting of a reference to the
    existing definition that is to be used as a template.  Optionally,
    new qualities may be added and values of optional qualities and
@@ -1351,7 +1351,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    need to warn specifiers not to use this in a way that contradicts the
    referenced semantics.
 
-   "odmData":
+   "sdfData":
      "length" : {
        "type": "number",
        "minimum": 0,
@@ -1360,39 +1360,39 @@ Internet-Draft                  OneDM SDF                      June 2020
      }
    ...
      "cable-length" : {
-       "odmRef": "#/odmData/length"
+       "sdfRef": "#/sdfData/length"
        "minimum": 0.05,
        "description": "cables must be at least 5 cm"
      }
 
-6.3.  odmThing
+6.3.  sdfThing
 
-   An odmThing is a set of declarations and qualities that may be part
+   An sdfThing is a set of declarations and qualities that may be part
    of a more complex model.  For example, the object declarations that
    make up the definition of a single socket of an outlet strip could be
-   encapsulated in an odmThing, and the socket-thing itself could be
-   used in a declaration in the odmThing definition for the outlet
+   encapsulated in an sdfThing, and the socket-thing itself could be
+   used in a declaration in the sdfThing definition for the outlet
    strip.
 
-   odmThing definitions carry semantic meaning, such as a defined
+   sdfThing definitions carry semantic meaning, such as a defined
    refrigerator compartment and a defined freezer compartment, making up
    a combination refrigerator-freezer product.
 
-   An odmThing may be composed of odmObjects and other odmThings.
+   An sdfThing may be composed of sdfObjects and other sdfThings.
 
-   The qualities of odmThing are shown in Table 9.
+   The qualities of sdfThing are shown in Table 9.
 
                +-----------+------+----------+-------------+
                | Quality   | Type | Required | Description |
                +===========+======+==========+=============+
                | (common)  |      |          | Section 4.6 |
                +-----------+------+----------+-------------+
-               | odmThing  |      |          |             |
+               | sdfThing  |      |          |             |
                +-----------+------+----------+-------------+
-               | odmObject |      |          |             |
+               | sdfObject |      |          |             |
                +-----------+------+----------+-------------+
 
-               Table 9: Qualities of odmThing and odmProduct
+               Table 9: Qualities of sdfThing and sdfProduct
 
 
 
@@ -1402,9 +1402,9 @@ Koster & Bormann         Expires 4 December 2020               [Page 25]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-6.4.  odmProduct
+6.4.  sdfProduct
 
-   An odmProduct provides the level of abstraction for representing a
+   An sdfProduct provides the level of abstraction for representing a
    unique product or a profile for a standardized type of product, for
    example a "device type" definition with required minimum
    functionality.
@@ -1418,7 +1418,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    specific use cases, for example units, range, and scale settings for
    properties, or available parameters for Actions.
 
-   The qualities of odmProduct are the same as for odmThing and are
+   The qualities of sdfProduct are the same as for sdfThing and are
    shown in Table 9.
 
 7.  References
@@ -1517,16 +1517,16 @@ Internet-Draft                  OneDM SDF                      June 2020
    start = sdf-syntax
 
    sdf-syntax = {
-    info: sdfinfo                  ; don't require this in flexible syntax, though
+    info: sdfinfo                  ; don't *require* this in flexible syntax, though
     ? namespace: named<text>
     ? defaultnamespace: text
-    ? odmThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
-    ? odmProduct: named<productqualities>   ; Product is a composition of things and objects that can model a SKU-level instance of a product
-    ? odmObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
-    ? odmProperty: named<propertyqualities> ; Property represents the state of an instance of an object
-    ? odmAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
-    ? odmEvent: named<eventqualities>       ; Event represents an occurence of something associated with an object
-    ? odmData: named<dataqualities>         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
+    ? sdfThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
+    ? sdfProduct: named<productqualities>   ; Product is a composition of things and objects that can model a SKU-level instance of a product
+    ? sdfObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
+    ? sdfProperty: named<propertyqualities> ; Property represents the state of an instance of an object
+    ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
+    ? sdfEvent: named<eventqualities>       ; Event represents an occurence of something associated with an object
+    ? sdfData: named<dataqualities>         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
    }
 
    sdfinfo = {
@@ -1540,24 +1540,24 @@ Internet-Draft                  OneDM SDF                      June 2020
    named<X> = { * text => X }
 
    sdf-pointer = text ; .regexp curie-regexp -- TO DO!
-   pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for odmRequired in odmobject-multiple_axis_joystick.sdf.json
+   pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
 
    commonqualities = (
     ? description: text            ; long text (no constraints)
     ? label: text                  ; short text (no constraints); default to key
     ? $comment: text               ; source code comments only, no semantics
-    ? odmRef: sdf-pointer
-    ? odmRequired: pointer-list    ; applies to qualities of properties, of data
+    ? sdfRef: sdf-pointer
+    ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
    )
 
    ; for building hierarchy
    thingqualities = {
     commonqualities,
-    ? odmObject: named<objectqualities>
-    ? odmThing: named<thingqualities>
+    ? sdfObject: named<objectqualities>
+    ? sdfThing: named<thingqualities>
    }
 
-   productqualities = thingqualities ; ISSUE: get rid of odmProduct?
+   productqualities = thingqualities ; ISSUE: get rid of sdfProduct?
 
    ; for single objects
    objectqualities = {
@@ -1570,26 +1570,26 @@ Koster & Bormann         Expires 4 December 2020               [Page 28]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-    ? odmProperty: named<propertyqualities>
-    ? odmAction: named<actionqualities>
-    ? odmEvent: named<eventqualities>
-    ? odmData: named<dataqualities>
+    ? sdfProperty: named<propertyqualities>
+    ? sdfAction: named<actionqualities>
+    ? sdfEvent: named<eventqualities>
+    ? sdfData: named<dataqualities>
    }
 
-   propertyqualities = dataqualities ; the definitions in odmData are declarations in odmProperty
+   propertyqualities = dataqualities ; the definitions in sdfData are declarations in sdfProperty
 
    actionqualities = {
     commonqualities,
-    ? odmInputData: pointer-list   ; odmRequiredInputData applies here (a bit redundant)
-    ? odmRequiredInputData: pointer-list
-    ? odmOutputData: pointer-list  ; odmRequired applies here
-    ? odmData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
+    ? sdfInputData: pointer-list   ; sdfRequiredInputData applies here (a bit redundant)
+    ? sdfRequiredInputData: pointer-list
+    ? sdfOutputData: pointer-list  ; sdfRequired applies here
+    ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
    }
 
    eventqualities = {
     commonqualities
-    ? odmOutputData: pointer-list  ; odmRequired applies here
-    ? odmData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
+    ? sdfOutputData: pointer-list  ; sdfRequired applies here
+    ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
    }
 
    dataqualities = {               ; also propertyqualities
@@ -1641,7 +1641,7 @@ Internet-Draft                  OneDM SDF                      June 2020
     ? uniqueItems: bool
     ? items: { ;;; ultimately, this will be mostly recursive, but, for now
                ;;; let's find out what we actually need
-        ? odmRef: sdf-pointer          ; import limited to the subset that we allow here...
+        ? sdfRef: sdf-pointer          ; import limited to the subset that we allow here...
         ? description: text            ; long text (no constraints)
         ? $comment: text               ; source code comments only, no semantics
         ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
@@ -1693,43 +1693,43 @@ Internet-Draft                  OneDM SDF                      June 2020
            "defaultnamespace": {
              "type": "string"
            },
-           "odmThing": {
+           "sdfThing": {
              "type": "object",
              "additionalProperties": {
                "$ref": "#/definitions/thingqualities"
              }
            },
-           "odmProduct": {
+           "sdfProduct": {
              "type": "object",
              "additionalProperties": {
                "$ref": "#/definitions/productqualities"
              }
            },
-           "odmObject": {
+           "sdfObject": {
              "type": "object",
              "additionalProperties": {
                "$ref": "#/definitions/objectqualities"
              }
            },
-           "odmProperty": {
+           "sdfProperty": {
              "type": "object",
              "additionalProperties": {
                "$ref": "#/definitions/propertyqualities"
              }
            },
-           "odmAction": {
+           "sdfAction": {
              "type": "object",
              "additionalProperties": {
                "$ref": "#/definitions/actionqualities"
              }
            },
-           "odmEvent": {
+           "sdfEvent": {
              "type": "object",
              "additionalProperties": {
                "$ref": "#/definitions/eventqualities"
              }
            },
-           "odmData": {
+           "sdfData": {
 
 
 
@@ -1743,7 +1743,8 @@ Internet-Draft                  OneDM SDF                      June 2020
                "$ref": "#/definitions/dataqualities"
              }
            }
-         }
+         },
+         "additionalProperties": false
        },
        "sdfinfo": {
          "type": "object",
@@ -1766,26 +1767,25 @@ Internet-Draft                  OneDM SDF                      June 2020
            "license": {
              "type": "string"
            }
-         }
+         },
+         "additionalProperties": false
        },
        "thingqualities": {
-         "allOf": [
-           {
-             "$ref": "#/definitions/commonqualities"
-           },
-           {
+         "type": "object",
+         "properties": {
+           "sdfObject": {
              "type": "object",
-             "properties": {
-               "odmObject": {
-                 "type": "object",
-                 "additionalProperties": {
-                   "$ref": "#/definitions/objectqualities"
-                 }
-               },
-               "odmThing": {
-                 "type": "object",
-                 "additionalProperties": {
-                   "$ref": "#/definitions/thingqualities"
+             "additionalProperties": {
+               "$ref": "#/definitions/objectqualities"
+             }
+           },
+           "sdfThing": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/thingqualities"
+             }
+           },
+           "description": {
 
 
 
@@ -1794,11 +1794,22 @@ Koster & Bormann         Expires 4 December 2020               [Page 32]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-                 }
-               }
-             }
+             "type": "string"
+           },
+           "label": {
+             "type": "string"
+           },
+           "$comment": {
+             "type": "string"
+           },
+           "sdfRef": {
+             "$ref": "#/definitions/sdf-pointer"
+           },
+           "sdfRequired": {
+             "$ref": "#/definitions/pointer-list"
            }
-         ]
+         },
+         "additionalProperties": false
        },
        "commonqualities": {
          "type": "object",
@@ -1812,13 +1823,14 @@ Internet-Draft                  OneDM SDF                      June 2020
            "$comment": {
              "type": "string"
            },
-           "odmRef": {
+           "sdfRef": {
              "$ref": "#/definitions/sdf-pointer"
            },
-           "odmRequired": {
+           "sdfRequired": {
              "$ref": "#/definitions/pointer-list"
            }
-         }
+         },
+         "additionalProperties": false
        },
        "sdf-pointer": {
          "type": "string"
@@ -1830,18 +1842,6 @@ Internet-Draft                  OneDM SDF                      June 2020
          }
        },
        "objectqualities": {
-         "allOf": [
-           {
-             "$ref": "#/definitions/commonqualities"
-           },
-           {
-             "type": "object",
-             "properties": {
-               "odmProperty": {
-                 "type": "object",
-                 "additionalProperties": {
-                   "$ref": "#/definitions/propertyqualities"
-                 }
 
 
 
@@ -1850,54 +1850,54 @@ Koster & Bormann         Expires 4 December 2020               [Page 33]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-               },
-               "odmAction": {
-                 "type": "object",
-                 "additionalProperties": {
-                   "$ref": "#/definitions/actionqualities"
-                 }
-               },
-               "odmEvent": {
-                 "type": "object",
-                 "additionalProperties": {
-                   "$ref": "#/definitions/eventqualities"
-                 }
-               },
-               "odmData": {
-                 "type": "object",
-                 "additionalProperties": {
-                   "$ref": "#/definitions/dataqualities"
-                 }
-               }
+         "type": "object",
+         "properties": {
+           "sdfProperty": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/propertyqualities"
              }
+           },
+           "sdfAction": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/actionqualities"
+             }
+           },
+           "sdfEvent": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/eventqualities"
+             }
+           },
+           "sdfData": {
+             "type": "object",
+             "additionalProperties": {
+               "$ref": "#/definitions/dataqualities"
+             }
+           },
+           "description": {
+             "type": "string"
+           },
+           "label": {
+             "type": "string"
+           },
+           "$comment": {
+             "type": "string"
+           },
+           "sdfRef": {
+             "$ref": "#/definitions/sdf-pointer"
+           },
+           "sdfRequired": {
+             "$ref": "#/definitions/pointer-list"
            }
-         ]
+         },
+         "additionalProperties": false
        },
        "propertyqualities": {
          "$ref": "#/definitions/dataqualities"
        },
        "dataqualities": {
-         "allOf": [
-           {
-             "$ref": "#/definitions/commonqualities"
-           },
-           {
-             "$ref": "#/definitions/jsonschema"
-           },
-           {
-             "type": "object",
-             "properties": {
-               "units": {
-                 "type": "string"
-               },
-               "scaleMinimum": {
-                 "type": "number"
-               },
-               "scaleMaximum": {
-                 "type": "number"
-               },
-               "observable": {
-                 "type": "boolean"
 
 
 
@@ -1906,33 +1906,39 @@ Koster & Bormann         Expires 4 December 2020               [Page 34]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-               },
-               "readable": {
-                 "type": "boolean"
-               },
-               "writable": {
-                 "type": "boolean"
-               },
-               "nullable": {
-                 "type": "boolean"
-               },
-               "subtype": {
-                 "type": "string",
-                 "enum": [
-                   "bytestring",
-                   "unixtime"
-                 ]
-               },
-               "contentFormat": {
-                 "type": "string"
-               }
-             }
-           }
-         ]
-       },
-       "jsonschema": {
          "type": "object",
          "properties": {
+           "units": {
+             "type": "string"
+           },
+           "scaleMinimum": {
+             "type": "number"
+           },
+           "scaleMaximum": {
+             "type": "number"
+           },
+           "observable": {
+             "type": "boolean"
+           },
+           "readable": {
+             "type": "boolean"
+           },
+           "writable": {
+             "type": "boolean"
+           },
+           "nullable": {
+             "type": "boolean"
+           },
+           "subtype": {
+             "type": "string",
+             "enum": [
+               "bytestring",
+               "unixtime"
+             ]
+           },
+           "contentFormat": {
+             "type": "string"
+           },
            "type": {
              "type": "string",
              "enum": [
@@ -1948,12 +1954,6 @@ Internet-Draft                  OneDM SDF                      June 2020
              "items": {
                "$ref": "#/definitions/allowed-types"
              },
-             "minItems": 1
-           },
-           "const": {
-             "$ref": "#/definitions/allowed-types"
-           },
-           "default": {
 
 
 
@@ -1962,6 +1962,12 @@ Koster & Bormann         Expires 4 December 2020               [Page 35]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
+             "minItems": 1
+           },
+           "const": {
+             "$ref": "#/definitions/allowed-types"
+           },
+           "default": {
              "$ref": "#/definitions/allowed-types"
            },
            "minimum": {
@@ -2004,12 +2010,6 @@ Internet-Draft                  OneDM SDF                      June 2020
            },
            "format": {
              "type": "string",
-             "enum": [
-               "date-time",
-               "date",
-               "time",
-               "uri",
-               "uri-reference",
 
 
 
@@ -2018,6 +2018,12 @@ Koster & Bormann         Expires 4 December 2020               [Page 36]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
+             "enum": [
+               "date-time",
+               "date",
+               "time",
+               "uri",
+               "uri-reference",
                "uuid"
              ]
            },
@@ -2033,7 +2039,7 @@ Internet-Draft                  OneDM SDF                      June 2020
            "items": {
              "type": "object",
              "properties": {
-               "odmRef": {
+               "sdfRef": {
                  "$ref": "#/definitions/sdf-pointer"
                },
                "description": {
@@ -2060,12 +2066,6 @@ Internet-Draft                  OneDM SDF                      June 2020
                "enum": {
                  "type": "array",
                  "minItems": 1
-               },
-               "format": {
-                 "type": "string"
-               },
-               "minLength": {
-                 "type": "number"
 
 
 
@@ -2075,12 +2075,189 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
                },
+               "format": {
+                 "type": "string"
+               },
+               "minLength": {
+                 "type": "number"
+               },
                "maxLength": {
                  "type": "number"
                }
-             }
+             },
+             "additionalProperties": false
+           },
+           "description": {
+             "type": "string"
+           },
+           "label": {
+             "type": "string"
+           },
+           "$comment": {
+             "type": "string"
+           },
+           "sdfRef": {
+             "$ref": "#/definitions/sdf-pointer"
+           },
+           "sdfRequired": {
+             "$ref": "#/definitions/pointer-list"
            }
-         }
+         },
+         "additionalProperties": false
+       },
+       "jsonschema": {
+         "type": "object",
+         "properties": {
+           "type": {
+             "type": "string",
+             "enum": [
+               "number",
+               "string",
+               "boolean",
+               "integer",
+               "array"
+             ]
+           },
+           "enum": {
+             "type": "array",
+             "items": {
+               "$ref": "#/definitions/allowed-types"
+
+
+
+Koster & Bormann         Expires 4 December 2020               [Page 38]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
+             },
+             "minItems": 1
+           },
+           "const": {
+             "$ref": "#/definitions/allowed-types"
+           },
+           "default": {
+             "$ref": "#/definitions/allowed-types"
+           },
+           "minimum": {
+             "type": "number"
+           },
+           "maximum": {
+             "type": "number"
+           },
+           "exclusiveMinimum": {
+             "anyOf": [
+               {
+                 "type": "boolean"
+               },
+               {
+                 "type": "number"
+               }
+             ]
+           },
+           "exclusiveMaximum": {
+             "anyOf": [
+               {
+                 "type": "boolean"
+               },
+               {
+                 "type": "number"
+               }
+             ]
+           },
+           "multipleOf": {
+             "type": "number"
+           },
+           "minLength": {
+             "type": "number"
+           },
+           "maxLength": {
+             "type": "number"
+           },
+           "pattern": {
+             "type": "string"
+           },
+           "format": {
+
+
+
+Koster & Bormann         Expires 4 December 2020               [Page 39]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
+             "type": "string",
+             "enum": [
+               "date-time",
+               "date",
+               "time",
+               "uri",
+               "uri-reference",
+               "uuid"
+             ]
+           },
+           "minItems": {
+             "type": "number"
+           },
+           "maxItems": {
+             "type": "number"
+           },
+           "uniqueItems": {
+             "type": "boolean"
+           },
+           "items": {
+             "type": "object",
+             "properties": {
+               "sdfRef": {
+                 "$ref": "#/definitions/sdf-pointer"
+               },
+               "description": {
+                 "type": "string"
+               },
+               "$comment": {
+                 "type": "string"
+               },
+               "type": {
+                 "type": "string",
+                 "enum": [
+                   "number",
+                   "string",
+                   "boolean",
+                   "integer"
+                 ]
+               },
+               "minimum": {
+                 "type": "number"
+               },
+               "maximum": {
+                 "type": "number"
+               },
+               "enum": {
+                 "type": "array",
+
+
+
+Koster & Bormann         Expires 4 December 2020               [Page 40]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
+                 "minItems": 1
+               },
+               "format": {
+                 "type": "string"
+               },
+               "minLength": {
+                 "type": "number"
+               },
+               "maxLength": {
+                 "type": "number"
+               }
+             },
+             "additionalProperties": false
+           }
+         },
+         "additionalProperties": false
        },
        "allowed-types": {
          "anyOf": [
@@ -2113,78 +2290,96 @@ Internet-Draft                  OneDM SDF                      June 2020
              "items": {
                "type": "boolean"
              }
-           }
-         ]
-       },
-       "actionqualities": {
-         "allOf": [
-           {
-             "$ref": "#/definitions/commonqualities"
-           },
-           {
 
 
 
-Koster & Bormann         Expires 4 December 2020               [Page 38]
+Koster & Bormann         Expires 4 December 2020               [Page 41]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-             "type": "object",
-             "properties": {
-               "odmInputData": {
-                 "$ref": "#/definitions/pointer-list"
-               },
-               "odmRequiredInputData": {
-                 "$ref": "#/definitions/pointer-list"
-               },
-               "odmOutputData": {
-                 "$ref": "#/definitions/pointer-list"
-               },
-               "odmData": {
-                 "type": "object",
-                 "additionalProperties": {
-                   "$ref": "#/definitions/dataqualities"
-                 }
-               }
-             }
            }
          ]
        },
-       "eventqualities": {
-         "allOf": [
-           {
-             "$ref": "#/definitions/commonqualities"
+       "actionqualities": {
+         "type": "object",
+         "properties": {
+           "sdfInputData": {
+             "$ref": "#/definitions/pointer-list"
            },
-           {
+           "sdfRequiredInputData": {
+             "$ref": "#/definitions/pointer-list"
+           },
+           "sdfOutputData": {
+             "$ref": "#/definitions/pointer-list"
+           },
+           "sdfData": {
              "type": "object",
-             "properties": {
-               "odmOutputData": {
-                 "$ref": "#/definitions/pointer-list"
-               },
-               "odmData": {
-                 "type": "object",
-                 "additionalProperties": {
-                   "$ref": "#/definitions/dataqualities"
-                 }
-               }
+             "additionalProperties": {
+               "$ref": "#/definitions/dataqualities"
              }
+           },
+           "description": {
+             "type": "string"
+           },
+           "label": {
+             "type": "string"
+           },
+           "$comment": {
+             "type": "string"
+           },
+           "sdfRef": {
+             "$ref": "#/definitions/sdf-pointer"
+           },
+           "sdfRequired": {
+             "$ref": "#/definitions/pointer-list"
            }
-         ]
+         },
+         "additionalProperties": false
+       },
+       "eventqualities": {
+         "type": "object",
+         "properties": {
+           "sdfOutputData": {
+             "$ref": "#/definitions/pointer-list"
+           },
+           "sdfData": {
+             "type": "object",
+             "additionalProperties": {
+
+
+
+Koster & Bormann         Expires 4 December 2020               [Page 42]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
+               "$ref": "#/definitions/dataqualities"
+             }
+           },
+           "description": {
+             "type": "string"
+           },
+           "label": {
+             "type": "string"
+           },
+           "$comment": {
+             "type": "string"
+           },
+           "sdfRef": {
+             "$ref": "#/definitions/sdf-pointer"
+           },
+           "sdfRequired": {
+             "$ref": "#/definitions/pointer-list"
+           }
+         },
+         "additionalProperties": false
        },
        "productqualities": {
          "$ref": "#/definitions/thingqualities"
        }
      }
    }
-
-
-
-
-Koster & Bormann         Expires 4 December 2020               [Page 39]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
 Acknowledgements
 
@@ -2200,6 +2395,19 @@ Contributors
    Finland
 
    Email: ari.keranen@ericsson.com
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 4 December 2020               [Page 43]
+
+Internet-Draft                  OneDM SDF                      June 2020
 
 
    Wouter van der Beek
@@ -2237,4 +2445,20 @@ Authors' Addresses
 
 
 
-Koster & Bormann         Expires 4 December 2020               [Page 40]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 4 December 2020               [Page 44]

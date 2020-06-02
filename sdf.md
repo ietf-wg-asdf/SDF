@@ -164,14 +164,14 @@ We start with an example for the SDF definition of a simple object called "Switc
         "cap": "https://example.com/capability/odm"
     },
     "defaultNamespace": "cap",
-    "odmObject": {
+    "sdfObject": {
         "Switch": {
-            "odmProperty": {
+            "sdfProperty": {
                 "value": {
                     "type": "boolean"
                 }
             },
-            "odmAction": {
+            "sdfAction": {
                 "on": {},
                 "off": {},
                 "toggle": {}
@@ -183,51 +183,51 @@ We start with an example for the SDF definition of a simple object called "Switc
 {: #example1 title="A simple example of an SDF definition file"}
 
 This is a model of a switch.
-The `odmProperty` value, represented by a Boolean, will be true for "on" and will be false for "off".
+The `sdfProperty` value, represented by a Boolean, will be true for "on" and will be false for "off".
 The actions `on` or `off` are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
-The action `toggle` will invert the value of the odmProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
+The action `toggle` will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
 
-The `odmObject` lists the affordances of instances of this object.
-`odmProperty` lists the property affordances described by the model; these represent various perspectives on the state of the object.
+The `sdfObject` lists the affordances of instances of this object.
+`sdfProperty` lists the property affordances described by the model; these represent various perspectives on the state of the object.
 The properties can have additional qualities to describe the state more precisely.
 The properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
 Properties are often used with RESTful paradigms {{-rest-iot}}, describing state.
-The `odmAction` is the mechanism to describe interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
+The `sdfAction` is the mechanism to describe interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
 The example `toggle` is an action that
-changes the state based on the current state of the `odmProperty` named `value`.
+changes the state based on the current state of the `sdfProperty` named `value`.
 (The third type of affordance is Events, which are not described in this example.)
 
 ## Elements of an SDF model
 
 The SDF language uses seven predefined classes for modeling connected
-Things, six of which are illustrated in {{fig-class-1}} and {{fig-class-2}}[^1] (the seventh class `odmProduct` is exactly like `odmThing`).
+Things, six of which are illustrated in {{fig-class-1}} and {{fig-class-2}}[^1] (the seventh class `sdfProduct` is exactly like `sdfThing`).
 
 [^1]: \[Decide which of these figures we want]
 
 
 ~~~ goat
                 +--------+
-                |odmThing|
+                |sdfThing|
                 |--------|
                 |--------|
                 +--------+
                      |
                      |
                +---------+
-               |odmObject|
+               |sdfObject|
                |---------|
                |---------|
                +---------+
                      |
 +-----------+  +---------+   +--------+
-|odmProperty|  |odmAction|   |odmEvent|
+|sdfProperty|  |sdfAction|   |sdfEvent|
 |-----------|  |---------|   |--------|
 |-----------|  |---------|   |--------|
 +-----------+  +---------+   +--------+
 
 
                 +-------+
-                |odmData|
+                |sdfData|
                 |-------|
                 |-------|
                 +-------+
@@ -235,87 +235,87 @@ Things, six of which are illustrated in {{fig-class-1}} and {{fig-class-2}}[^1] 
 {: #fig-class-1 title="Main classes used in SDF models"}
 
 ~~~ plantuml
-odmThing --> "0+" odmObject : hasObject
-odmThing --> "0+" odmThing : hasThing
+sdfThing --> "0+" sdfObject : hasObject
+sdfThing --> "0+" sdfThing : hasThing
 
-odmObject --> "0+" odmProperty : hasProperty
-odmObject --> "0+" odmAction : hasAction
-odmObject --> "0+" odmEvent : hasEvent
+sdfObject --> "0+" sdfProperty : hasProperty
+sdfObject --> "0+" sdfAction : hasAction
+sdfObject --> "0+" sdfEvent : hasEvent
 
-odmAction --> "1+" odmData : hasInputData
-odmAction --> "0+" odmData : hasOutputData
+sdfAction --> "1+" sdfData : hasInputData
+sdfAction --> "0+" sdfData : hasOutputData
 
-odmEvent --> "1+" odmData : hasOutputData
+sdfEvent --> "1+" sdfData : hasOutputData
 
-odmProperty --> "1" odmData : isInstanceOf
+sdfProperty --> "1" sdfData : isInstanceOf
 
-class odmThing {
+class sdfThing {
 }
 
-class odmObject {
+class sdfObject {
 }
 
-class odmProperty {
+class sdfProperty {
 }
 
-class odmAction {
+class sdfAction {
 }
 
-class odmEvent {
+class sdfEvent {
 }
 
-class odmData {
+class sdfData {
 }
 ~~~
 {: #fig-class-2 title="Main classes used in SDF models"}
 
 The six main classes are discussed below.
 
-### odmObject
+### sdfObject
 
-`odmObject` is the main "atom" of reusable semantics for model construction.
+`sdfObject` is the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters {{ZCL}}, OMA LWM2M Objects, and
 OCF Resource Types {{OCF}}.
 
-An `odmObject` contains a set of `odmProperty`, `odmAction`, and
-`odmEvent` definitions that describe the interaction affordances
+An `sdfObject` contains a set of `sdfProperty`, `sdfAction`, and
+`sdfEvent` definitions that describe the interaction affordances
 associated with some scope of functionality.
 
-For the granularity of definition, `odmObject` definitions are meant
+For the granularity of definition, `sdfObject` definitions are meant
 to be kept narrow enough in scope to enable broad reuse and
 interoperability.
-For example, defining a light bulb using separate `odmObject`
+For example, defining a light bulb using separate `sdfObject`
 definitions for on/off control, dimming, and color control affordances
 will enable interoperable functionality to be configured for diverse
 product types.
-An `odmObject` definition for a common on/off control may be used to
+An `sdfObject` definition for a common on/off control may be used to
 control may different kinds of Things that require on/off control.
 
-### odmProperty
+### sdfProperty
 
-`odmProperty` is used to model elements of state within `odmObject` instances.
+`sdfProperty` is used to model elements of state within `sdfObject` instances.
 
-An instance of `odmProperty` may be associated with some protocol
+An instance of `sdfProperty` may be associated with some protocol
 affordance to enable the application to obtain the state variable and,
 optionally, modify the state variable.
 Additionally, some protocols provide for in-time reporting of state
 changes.
 (These three aspects are described by the qualities `readable`,
-`writable`, and `observable` defined for an `odmProperty`.)
+`writable`, and `observable` defined for an `sdfProperty`.)
 
-An `odmProperty` definition looks like a single `odmData` definition.
-(Qualities beyond those of `odmData` could be defined for odmProperty
-but currently aren't; this means that even `odmProperty` qualities
-such as `readable` and `writable` can be associated with `odmData`
+An `sdfProperty` definition looks like a single `sdfData` definition.
+(Qualities beyond those of `sdfData` could be defined for sdfProperty
+but currently aren't; this means that even `sdfProperty` qualities
+such as `readable` and `writable` can be associated with `sdfData`
 definitions, as well.)
 
-For `odmProperty` and `odmData`, SDF provides qualities that can
+For `sdfProperty` and `sdfData`, SDF provides qualities that can
 constrain the structure and values of data allowed in an instance of
 these data, as well as qualities that associate semantics to these
 data, for engineering units and unit scaling information.
 
-For the data definition within `odmProperty` or `odmData`, SDF borrows
+For the data definition within `sdfProperty` or `sdfData`, SDF borrows
 a number of elements proposed for the json-schema.org "JSON Schema"
 format {{-jso}}, enhanced by qualities that are specific to SDF.
 However, for the current version of SDF, data are constrained to be of
@@ -324,91 +324,91 @@ Syntax extension points are provided that can be used to provide
 richer types in future versions of this specification (possibly more
 of which can be borrowed from json-schema.org).
 
-Note that `odmProperty` definitions (and `odmData` definitions in
+Note that `sdfProperty` definitions (and `sdfData` definitions in
 general) are not intended to constrain the formats of data used for
 communication over network interfaces.
 Where needed, data definitions for payloads of protocol messages are
 expected to be part of the protocol binding.
 
-### odmAction
+### sdfAction
 
-`odmAction` is provided to model affordances that, when triggered,
+`sdfAction` is provided to model affordances that, when triggered,
 have more effect than just reading, updating, or observing Thing
 state, often resulting in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.
 
 Actions may have multiple data parameters; these are modeled as input
-data and output data (using `odmData`, i.e., the same entries as for
-`odmProperty` definitions).
+data and output data (using `sdfData`, i.e., the same entries as for
+`sdfProperty` definitions).
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
-`odmPoperty`; the effects may play out over time and emit action
+`sdfPoperty`; the effects may play out over time and emit action
 results.
 Actions may also not always complete and may result in application
 errors, such as an item blocking the closing of an automatic door.
 
 Actions may have (or lack) qualities of idempotency and side-effect safety.
 
-The current version of SDF only provides data constraint modeling and semantics for the input and output data of `odmAction` entries.
+The current version of SDF only provides data constraint modeling and semantics for the input and output data of `sdfAction` entries.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
 part of the protocol binding.
 
-### odmEvent
+### sdfEvent
 
-`odmEvent` is provided to model "happenings" associated with an
-odmObject that may result in a signal being stored or emitted as a
+`sdfEvent` is provided to model "happenings" associated with an
+sdfObject that may result in a signal being stored or emitted as a
 result.
 
-Note that there is a trivial overlap with odmProperty state changes,
+Note that there is a trivial overlap with sdfProperty state changes,
 which may also be defined as events but are not generally required to
 be defined as such.
-However, `odmEvents` may exhibit certain ordering, consistency, and
+However, `sdfEvents` may exhibit certain ordering, consistency, and
 reliability requirements that are expected to be supported in various
-implementations of `odmEvent` that do distinguish odmEvent from
-odmProperty.
+implementations of `sdfEvent` that do distinguish sdfEvent from
+sdfProperty.
 For instance, while a state change may simply be superseded by another
 state change, some events are "precious" and need to be preserved even
 if further events follow.
 
 The current version of SDF only provides data constraint modeling and
-semantics for the output data of `odmEvent` entries.
+semantics for the output data of `sdfEvent` entries.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
 part of the protocol binding.
 
 
-### odmData
+### sdfData
 
-`odmData` is provided separate from `odmProperty` to enable common
+`sdfData` is provided separate from `sdfProperty` to enable common
 modeling patterns, data constraints, and semantic anchor concepts to
-be factored out for data items that make up `odmProperty` items and
-serve as input and output data for `odmAction` and `odmEvent` items.
+be factored out for data items that make up `sdfProperty` items and
+serve as input and output data for `sdfAction` and `sdfEvent` items.
 
 It is a common use case for such a data definition to be shared
-between an `odmProperty` item and input or output parameters of an
-`odmAction` or output data provided by an `odmEvent`.
-`odmData` definitions also enable factoring out extended application
+between an `sdfProperty` item and input or output parameters of an
+`sdfAction` or output data provided by an `sdfEvent`.
+`sdfData` definitions also enable factoring out extended application
 data types such as mode and machine state enumerations to be reused
 across multiple definitions that have similar basic characteristics
 and requirements.
 
-### odmThing
+### sdfThing
 
-Back at the top level, `odmThing` enables construction of models for
-complex devices that will use one or more `odmObject` definitions.
+Back at the top level, `sdfThing` enables construction of models for
+complex devices that will use one or more `sdfObject` definitions.
 
-An `odmThing` definition can refine the metadata of the definitions it
-is composed from: other odmThing definitions and odmObject definitions.
+An `sdfThing` definition can refine the metadata of the definitions it
+is composed from: other sdfThing definitions and sdfObject definitions.
 
-### odmProduct
+### sdfProduct
 
-`odmThing` has a derived class `odmProduct`, which can be used to
+`sdfThing` has a derived class `sdfProduct`, which can be used to
 indicate a top level inventory item with a Stock-Keeping Unit (SKU)
 identifier and other particular metadata.
 Structurally, there is no difference between the
-two; semantically, an `odmProduct` is intended to describe a class of
+two; semantically, an `sdfProduct` is intended to describe a class of
 complete Things.
 
 
@@ -476,7 +476,7 @@ set up, and no defaultnamespace can be given.
 
 ## Definitions section
 
-The Definitions section contains one or more type definitions according to the class name keywords for type definitions (for object, property, action, event, data, as well as thing and product); the names for these type keywords are capitalized and prefixed with `odm`.
+The Definitions section contains one or more type definitions according to the class name keywords for type definitions (for object, property, action, event, data, as well as thing and product); the names for these type keywords are capitalized and prefixed with `sdf`.
 The keywords are used with JSON maps (objects), the keys of which serve for naming the individual entries and the values define or declare an individual entry.
 
 Each class defined may have zero or more type definitions associated with it.
@@ -489,9 +489,9 @@ A definition may in turn contain other definitions. Each definition consists of 
 An example for an Object definition is given in {{exobject}}:
 
 ~~~ json
-"odmObject": {
+"sdfObject": {
   "foo": {
-    "odmProperty": {
+    "sdfProperty": {
       "bar": {
         "type": "boolean"
       }
@@ -501,11 +501,11 @@ An example for an Object definition is given in {{exobject}}:
 ~~~
 {: #exobject title="Example Object definition"}
 
-This example defines an Object "foo" that is defined in the default namespace (full address: `#/odmObject/foo`), containing a property that can be addressed as
-`#/odmObject/foo/odmProperty/bar`, with data of type boolean.
+This example defines an Object "foo" that is defined in the default namespace (full address: `#/sdfObject/foo`), containing a property that can be addressed as
+`#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
-Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `odmProperty`, `odmAction`, and `odmEvent`, within `odmObject` entries, are declarations.  Similarly, entries within an `odmThing` describe instances of `odmObject` (or nested `odmThing`) that form part of instances of the Thing.
+Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfObject` entries, are declarations.  Similarly, entries within an `sdfThing` describe instances of `sdfObject` (or nested `sdfThing`) that form part of instances of the Thing.
 
 # Names and namespaces
 
@@ -546,10 +546,10 @@ we therefore also call it the "target namespace" of the SDF definition file.
 
 E.g., in {{example1}}, definitions for the following global names are contributed:
 
-* https://example.com/capability/odm#/odmObject/Switch
-* https://example.com/capability/odm#/odmObject/Switch/odmProperty/value
-* https://example.com/capability/odm#/odmObject/Switch/odmAction/on
-* https://example.com/capability/odm#/odmObject/Switch/odmAction/off
+* https://example.com/capability/odm#/sdfObject/Switch
+* https://example.com/capability/odm#/sdfObject/Switch/sdfProperty/value
+* https://example.com/capability/odm#/sdfObject/Switch/sdfAction/on
+* https://example.com/capability/odm#/sdfObject/Switch/sdfAction/off
 
 Note the "#", which separates the base part from the fragment
 identifier part.
@@ -584,13 +584,13 @@ For example, if a namespace prefix is defined:
 Then this reference to that namespace:
 
 ~~~ json
-{ "odmRef": "foo:/odmData/temperatureData" }
+{ "sdfRef": "foo:/sdfData/temperatureData" }
 ~~~
 
 references the global name:
 
 ~~~ json
-"https://example.com/#/odmData/temperatureData"
+"https://example.com/#/sdfData/temperatureData"
 ~~~
 
 Note that there is no way to provide a URI scheme name in a curie, so
@@ -599,14 +599,14 @@ namespace map.
 
 Name references occur only in specific elements of the syntax of SDF:
 
-* copying elements via odmRef values
-* pointing to elements via odmRequired value elements or as
-  odmInput/OutputData etc.
+* copying elements via sdfRef values
+* pointing to elements via sdfRequired value elements or as
+  sdfInput/OutputData etc.
 
 
-## odmRef
+## sdfRef
 
-In a JSON map establishing a definition, the keyword "odmRef" is used
+In a JSON map establishing a definition, the keyword "sdfRef" is used
 to copy all of the qualities of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
 (This can be compared to the processing of the "$ref" keyword in JSON Schema.)
@@ -615,47 +615,47 @@ For example, this reference:
 
 ~~~ json
 "temperatureProperty": {
-  "odmRef": "#/odmData/temperatureData"
+  "sdfRef": "#/sdfData/temperatureData"
 }
 ~~~
 
-creates a new definition "temperatureProperty" that contains all of the qualities defined in the definition at /odmData/temperatureData.
+creates a new definition "temperatureProperty" that contains all of the qualities defined in the definition at /sdfData/temperatureData.
 
-## odmRequired
+## sdfRequired
 
-The value of "odmRequired" is an array of name references, each
+The value of "sdfRequired" is an array of name references, each
 pointing to one declaration instantiation of which is declared mandatory.
 
-### Optionality using the keyword "odmRequired"
+### Optionality using the keyword "sdfRequired"
 
-The keyword "odmRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.
+The keyword "sdfRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.
 
-The value of "odmRequired" is an array of JSON pointers, each indicating one mandatory definition.
+The value of "sdfRequired" is an array of JSON pointers, each indicating one mandatory definition.
 
-The example in {{example-req}} shows two required elements in the odmObject definition for "temperatureWithAlarm", the odmProperty "temperatureData", and the odmEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "odmRef" to use a pre-existing definition in this definition, for the "alarmType" data (odmOutputData) produced by the odmEvent "overTemperatureEvent".
+The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "temperatureData", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
 ~~~ json
 {
-  "odmObject": {
+  "sdfObject": {
     "temperatureWithAlarm": {
-      "odmRequired": [
-        "#/odmObject/temperatureWithAlarm/odmData/temperatureData",
-        "#/odmObject/temperatureWithAlarm/odmEvent/overTemperatureEvent"
+      "sdfRequired": [
+        "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData",
+        "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
       ],
-      "odmData":{
+      "sdfData":{
         "temperatureData": {
           "type": "number"
         }
       },
-      "odmEvent": {
+      "sdfEvent": {
         "overTemperatureEvent": {
-          "odmOutputData": {
+          "sdfOutputData": {
             "alarmType": {
-              "odmRef": "odm:/odmData/alarmTypes/quantityAlarms",
+              "sdfRef": "odm:/sdfData/alarmTypes/quantityAlarms",
               "const": "OverTemperatureAlarm"
             },
             "temperature": {
-              "odmRef": "#/odmObject/temperatureWithAlarm/odmData/temperatureData"
+              "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
             }
           }
         }
@@ -664,7 +664,7 @@ The example in {{example-req}} shows two required elements in the odmObject defi
   }
 }
 ~~~
-{: #example-req title="Using odmRequired"}
+{: #example-req title="Using sdfRequired"}
 
 ## Common Qualities
 
@@ -679,19 +679,19 @@ If a label is required for an application and no label is given, the last part o
 | description | text         | long text (no constraints)                                         |
 | label       | text         | short text (no constraints)                                        |
 | $comment    | text         | source code comments only, no semantics                            |
-| odmRef      | sdf-pointer  | (see {{odmref}})                                                   |
-| odmRequired | pointer-list | (see {{odmrequired}}, applies to qualities of properties, of data) |
+| sdfRef      | sdf-pointer  | (see {{sdfref}})                                                   |
+| sdfRequired | pointer-list | (see {{sdfrequired}}, applies to qualities of properties, of data) |
 {: #tbl-common-qualities title="Common Qualities"}
 
 ## Data Qualities
 
-Data qualities are used in `odmData` and `odmProperty` definitions.
+Data qualities are used in `sdfData` and `sdfProperty` definitions.
 
-{{odmdataqual1}} lists data qualities borrowed from {{-jso}}; the
+{{sdfdataqual1}} lists data qualities borrowed from {{-jso}}; the
 intention is that these qualities retain their semantics from the
 versions of the json-schema.org proposal there were imported from.
 
-{{odmdataqual2}} lists data qualities defined specifically for the
+{{sdfdataqual2}} lists data qualities defined specifically for the
 present specification.
 
 The term "allowed types" stands for primitive JSON types as well as
@@ -718,7 +718,7 @@ allowed for one of these types.
 | maxItems         | number                                                           | Maximum number of items in array                       |
 | uniqueItems      | boolean                                                          | if true, requires items to be all different            |
 | items            | (subset of common/data qualities; see {{syntax})                 | constraints on array items                             |
-{: #odmdataqual1 title="Qualities of odmProperty and odmData borrowed from json-schema.org"}
+{: #sdfdataqual1 title="Qualities of sdfProperty and sdfData borrowed from json-schema.org"}
 
 | Quality       | Type                      | Description                                                     | Default |
 |---------------|---------------------------|-----------------------------------------------------------------|---------|
@@ -732,18 +732,18 @@ allowed for one of these types.
 | nullable      | boolean                   | indicates a null value is available for this type               | true    |
 | contentFormat | string                    | content type (IANA media type string plus parameters), encoding | N/A     |
 | subtype       | "bytestring" / "unixtime" | subtype enumeration                                             | N/A     |
-{: #odmdataqual2 title="SDF-defined Qualities of odmProperty and odmData"}
+{: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
 # Keywords for type definitions
 
 The following SDF keywords are used to create type definitions in the target namespace.
 All these definitions share some common qualities as discussed in {{common-qualities}}.
 
-## odmObject
+## sdfObject
 
-The odmObject keyword denotes zero or more Object definitions. An odmObject may contain or include definitions of events, actions, properties, and data types.
+The sdfObject keyword denotes zero or more Object definitions. An sdfObject may contain or include definitions of events, actions, properties, and data types.
 
-The qualities of an odmObject include the common qualities, additional qualities are shown in {{odmobjqual}}.
+The qualities of an sdfObject include the common qualities, additional qualities are shown in {{sdfobjqual}}.
 None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
@@ -751,73 +751,73 @@ quality is absent.
 | Quality     | Type     | Description                                                              |
 |-------------|----------|--------------------------------------------------------------------------|
 | (common)    |          | {{common-qualities}}                                                     |
-| odmProperty | property | zero or more named property definitions for this object                  |
-| odmAction   | action   | zero or more named action definitions for this object                    |
-| odmEvent    | event    | zero or more named event definitions for this object                     |
-| odmData     | data     | zero or more named data type definitions that might be used in the above |
-{: #odmobjqual title="Qualities of odmObject"}
+| sdfProperty | property | zero or more named property definitions for this object                  |
+| sdfAction   | action   | zero or more named action definitions for this object                    |
+| sdfEvent    | event    | zero or more named event definitions for this object                     |
+| sdfData     | data     | zero or more named data type definitions that might be used in the above |
+{: #sdfobjqual title="Qualities of sdfObject"}
 
 
-## odmProperty
+## sdfProperty
 
-The odmProperty keyword denotes zero or more property definitions.
+The sdfProperty keyword denotes zero or more property definitions.
 
 Properties are used to model elements of state.
 
-The qualities of odmProperty include the common qualities and the data qualities, see {{data-qualities}}.
+The qualities of sdfProperty include the common qualities and the data qualities, see {{data-qualities}}.
 
-## odmAction
+## sdfAction
 
-The odmAction keyword denotes zero or more Action definitions.
+The sdfAction keyword denotes zero or more Action definitions.
 
 Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.
 
-The qualities of odmAction include the common qualities, additional qualities are shown in {{odmactqual}}.
+The qualities of sdfAction include the common qualities, additional qualities are shown in {{sdfactqual}}.
 
 | Quality              | Type   | Description                                                            |     |
 |----------------------|--------|------------------------------------------------------------------------|-----|
 | (common)    |          | {{common-qualities}}                                                     |
-| odmInputData         | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-| odmRequiredInputData | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-| odmOutputData        | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-| odmData     | data     | zero or more named data type definitions that might be used in the above |
-{: #odmactqual title="Qualities of odmAction"}
+| sdfInputData         | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
+| sdfRequiredInputData | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
+| sdfOutputData        | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
+| sdfData     | data     | zero or more named data type definitions that might be used in the above |
+{: #sdfactqual title="Qualities of sdfAction"}
 
-`odmInputData` refined by `odmRequiredInputData` define the input data
-of the action.  `odmOutputData` refined `odmRequired` (a quality
+`sdfInputData` refined by `sdfRequiredInputData` define the input data
+of the action.  `sdfOutputData` refined `sdfRequired` (a quality
 defined in {{tbl-common-qualities}}) define the output data of the
 action.
 
-CHECK THIS: odmProperty may not itself define any other ODM types; all types needed are referenced via SDF pointers.
+CHECK THIS: sdfProperty may not itself define any other SDF types; all types needed are referenced via SDF pointers.
 
-## odmEvent
+## sdfEvent
 
-The odmEvent keyword denotes zero or more Event definitions.
+The sdfEvent keyword denotes zero or more Event definitions.
 
 Events are used to model asynchronous occurrences that may be communicated proactively. Events have data elements which are communicated upon the occurrence of the event.
 
-The qualities of odmEvent include the common qualities, additional qualities are shown in {{odmevqual}}.
+The qualities of sdfEvent include the common qualities, additional qualities are shown in {{sdfevqual}}.
 
 | Quality       | Type   | Required | Description                                                  |
 |---------------|--------|----------|--------------------------------------------------------------|
 | (common)    |          | {{common-qualities}}                                                     |
-| odmOutputData | array  | no       | Array of JSON Pointers to output items in a valid definition |
-| odmData     | data     | zero or more named data type definitions that might be used in the above |
-{: #odmevqual title="Qualities of odmEvent"}
+| sdfOutputData | array  | no       | Array of JSON Pointers to output items in a valid definition |
+| sdfData     | data     | zero or more named data type definitions that might be used in the above |
+{: #sdfevqual title="Qualities of sdfEvent"}
 
-`odmOutputData` refined by `odmRequired` (a quality
+`sdfOutputData` refined by `sdfRequired` (a quality
 defined in {{tbl-common-qualities}}) define the output data of the
 action.
 
-## odmData
+## sdfData
 
-The odmData keyword denotes zero or more Data type definitions.
+The sdfData keyword denotes zero or more Data type definitions.
 
-An odmData definition provides a semantic identifier for a data item and describes the constraints on the defined data item.
+An sdfData definition provides a semantic identifier for a data item and describes the constraints on the defined data item.
 
-odmData is used for Action parameters, for Event data, and for reusable constraints in property definitions
+sdfData is used for Action parameters, for Event data, and for reusable constraints in property definitions
 
-The qualities of odmData include the common qualities and the data qualities, see {{data-qualities}}.
+The qualities of sdfData include the common qualities and the data qualities, see {{data-qualities}}.
 
 # High Level Composition
 
@@ -835,16 +835,16 @@ The requirements for high level composition include the following:
 
 ## Paths in the model namespaces
 
-The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expecred to be an ODM namespace for common ODM definitions.
+The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.
 
-The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/odmObject/Switch/odmAction/on" where ns is the short name for the namespace prefix.
+The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where ns is the short name for the namespace prefix.
 
 ## Modular Composition
 
 Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.
 
-### Use of the "odmRef" keyword to re-use a definition
-An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "odmRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.
+### Use of the "sdfRef" keyword to re-use a definition
+An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.
 
 ISSUE: Can qualities from the source definition be overridden?
 The above only says "added".
@@ -852,7 +852,7 @@ Yes, we do want to enable overriding, but need to warn specifiers not
 to use this in a way that contradicts the referenced semantics.
 
 ~~~
-"odmData":
+"sdfData":
   "length" : {
     "type": "number",
     "minimum": 0,
@@ -861,39 +861,39 @@ to use this in a way that contradicts the referenced semantics.
   }
 ...
   "cable-length" : {
-    "odmRef": "#/odmData/length"
+    "sdfRef": "#/sdfData/length"
     "minimum": 0.05,
     "description": "cables must be at least 5 cm"
   }
 ~~~
 
-## odmThing
+## sdfThing
 
-An odmThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an odmThing, and the socket-thing itself could be used in a declaration in the odmThing definition for the outlet strip.
+An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip.
 
-odmThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
+sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
 
-An odmThing may be composed of odmObjects and other odmThings.
+An sdfThing may be composed of sdfObjects and other sdfThings.
 
-The qualities of odmThing are shown in {{odmthingqual}}.
+The qualities of sdfThing are shown in {{sdfthingqual}}.
 
 | Quality   | Type | Required | Description          |
 |-----------|------|----------|----------------------|
 | (common)  |      |          | {{common-qualities}} |
-| odmThing  |      |          |                      |
-| odmObject |      |          |                      |
-{: #odmthingqual title="Qualities of odmThing and odmProduct"}
+| sdfThing  |      |          |                      |
+| sdfObject |      |          |                      |
+{: #sdfthingqual title="Qualities of sdfThing and sdfProduct"}
 
 
-## odmProduct
+## sdfProduct
 
-An odmProduct provides the level of abstraction for representing a unique product or a profile for a standardized type of product, for example a "device type" definition with required minimum functionality.
+An sdfProduct provides the level of abstraction for representing a unique product or a profile for a standardized type of product, for example a "device type" definition with required minimum functionality.
 
 Products may be composed of Objects and Things at the high level, and may include their own definitions of Properties, Actions, and Events that can be used to extend or complete the included Object definitions.
 
 Product definitions may set optional defaults and constant values for specific use cases, for example units, range, and scale settings for properties, or available parameters for Actions.
 
-The qualities of odmProduct are the same as for odmThing and are shown in {{odmthingqual}}.
+The qualities of sdfProduct are the same as for sdfThing and are shown in {{sdfthingqual}}.
 
 --- back
 
@@ -930,11 +930,11 @@ one-data-model `language` repository, as well as Ari Keranen's
 
 <!--  LocalWords:  SDF namespace defaultnamespace instantiation OMA
  -->
-<!--  LocalWords:  affordances ZigBee LWM OCF odmObject odmThing
+<!--  LocalWords:  affordances ZigBee LWM OCF sdfObject sdfThing
  -->
-<!--  LocalWords:  idempotency Thingness odmProperty odmEvent odmRef
+<!--  LocalWords:  idempotency Thingness sdfProperty sdfEvent sdfRef
  -->
-<!--  LocalWords:  namespaces odmRequired Optionality odmAction
+<!--  LocalWords:  namespaces sdfRequired Optionality sdfAction
  -->
-<!--  LocalWords:  odmProduct
+<!--  LocalWords:  sdfProduct
  -->
