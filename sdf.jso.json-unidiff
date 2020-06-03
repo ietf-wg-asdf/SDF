@@ -6,8 +6,6 @@
    "definitions": {
      "sdf-syntax": {
        "type": "object",
-+      "additionalProperties": {
-+      },
        "required": [
          "info"
        ],
@@ -66,14 +64,13 @@
              "$ref": "#/definitions/dataqualities"
            }
          }
--      },
+       },
 -      "additionalProperties": false
++      "additionalProperties": {
 +      }
      },
      "sdfinfo": {
        "type": "object",
-+      "additionalProperties": {
-+      },
        "required": [
          "title",
          "version",
@@ -93,8 +90,9 @@
          "license": {
            "type": "string"
          }
--      },
+       },
 -      "additionalProperties": false
++      "additionalProperties": {
 +      }
 +    },
 +    "EXTENSION-POINT": {
@@ -398,8 +396,6 @@
          },
          "items": {
            "type": "object",
-+          "additionalProperties": {
-+          },
            "properties": {
              "sdfRef": {
                "$ref": "#/definitions/sdf-pointer"
@@ -458,8 +454,9 @@
              "maxLength": {
                "type": "number"
              }
--          },
+           },
 -          "additionalProperties": false
++          "additionalProperties": {
 +          }
          },
          "description": {
@@ -620,8 +617,6 @@
          },
          "items": {
            "type": "object",
-+          "additionalProperties": {
-+          },
            "properties": {
              "sdfRef": {
                "$ref": "#/definitions/sdf-pointer"
@@ -680,8 +675,9 @@
              "maxLength": {
                "type": "number"
              }
--          },
+           },
 -          "additionalProperties": false
++          "additionalProperties": {
 +          }
          }
        },

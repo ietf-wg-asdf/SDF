@@ -5,7 +5,7 @@ title: >
   SDF: Semantic Definition Format (SDF) for Things, their Data and Interactions
 abbrev: OneDM SDF
 docname: draft-bormann-t2trg-sdf-latest
-date: 2020-06-02
+date: 2020-06-03
 category: info
 
 ipr: trust200902
@@ -904,10 +904,16 @@ that this appendix was derived from Ari Keranen's "alt-schema" and
 Michael Koster's "schema", with a view of covering the syntax that is
 currently in use at the One Data Model `playground` repository.
 
-TODO: Align with full framework syntax, as required.
+This appendix shows the framework syntax only, i.e., a syntax with liberal extension points.
+Since this syntax is nearly useless in finding typos in an SDF
+specification, a second syntax, the validation syntax, is defined that
+does not include the extension points.
+The validation syntax can be generated from the framework syntax by
+leaving out all lines containing the string `EXTENSION-POINT`; as this
+is trivial, the result is not shown here.
 
 ~~~ cddl
-{::include sdf.cddl}
+{::include sdf-framework.cddl}
 ~~~
 
 
@@ -917,8 +923,12 @@ This appendix describes the syntax of SDF defined in {{syntax}}, but
 using a version of the description techniques advertised on
 json-schema.org {{-jso}}.
 
+The appendix shows both the validation and the framework syntax.
+Since most of the lines are the same between these two files, those lines are shown only once, with a leading space, in the form of a unified diff.
+Lines leading with a `-` are part of the validation syntax, and lines leading with a `+` are part of the framework syntax.
+
 ~~~ jso.json
-{::include sdf.jso.json}
+{::include sdf.jso.json-unidiff}
 ~~~
 
 # Acknowledgements

@@ -1109,7 +1109,7 @@ dd.break {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 4 December 2020</td>
+<td class="center">Expires 5 December 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1122,12 +1122,12 @@ dd.break {
 <dd class="internet-draft">draft-bormann-t2trg-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-06-02" class="published">2 June 2020</time>
+<time datetime="2020-06-03" class="published">3 June 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-12-04">4 December 2020</time></dd>
+<dd class="expires"><time datetime="2020-12-05">5 December 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1181,7 +1181,7 @@ plan is to do this in early June.
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2935,7 +2935,13 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
 that this appendix was derived from Ari Keranen's "alt-schema" and
 Michael Koster's "schema", with a view of covering the syntax that is
 currently in use at the One Data Model <code>playground</code> repository.<a href="#section-appendix.a-1" class="pilcrow">¶</a></p>
-<p id="section-appendix.a-2">TODO: Align with full framework syntax, as required.<a href="#section-appendix.a-2" class="pilcrow">¶</a></p>
+<p id="section-appendix.a-2">This appendix shows the framework syntax only, i.e., a syntax with liberal extension points.
+Since this syntax is nearly useless in finding typos in an SDF
+specification, a second syntax, the validation syntax, is defined that
+does not include the extension points.
+The validation syntax can be generated from the framework syntax by
+leaving out all lines containing the string <code>EXTENSION-POINT</code>; as this
+is trivial, the result is not shown here.<a href="#section-appendix.a-2" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft art-cddl" id="section-appendix.a-3">
 <pre>
 start = sdf-syntax
@@ -2943,7 +2949,7 @@ start = sdf-syntax
 sdf-syntax = {
  info: sdfinfo                  ; don't *require* this in flexible syntax, though
  ? namespace: named&lt;text&gt;
- ? defaultnamespace: text
+ ? defaultNamespace: text
  ? sdfThing: named&lt;thingqualities&gt;       ; Thing is a composition of objects that work together in some way
  ? sdfProduct: named&lt;productqualities&gt;   ; Product is a composition of things and objects that can model a SKU-level instance of a product
  ? sdfObject: named&lt;objectqualities&gt;     ; Object is a set of Properties, Actions, and Events that together perform a particular function
@@ -2951,6 +2957,7 @@ sdf-syntax = {
  ? sdfAction: named&lt;actionqualities&gt;     ; Action is a directive to invoke an application layer verb associated with an object
  ? sdfEvent: named&lt;eventqualities&gt;       ; Event represents an occurence of something associated with an object
  ? sdfData: named&lt;dataqualities&gt;         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
+ EXTENSION-POINT
 }
 
 sdfinfo = {
@@ -2958,10 +2965,13 @@ sdfinfo = {
  version: text
  copyright: text
  license: text
+ EXTENSION-POINT
 }
 
-; Shortcut for a map that gives names to instances of X
+; Shortcut for a map that gives names to instances of X (has text keys and values of type X)
 named&lt;X&gt; = { * text =&gt; X }
+
+EXTENSION-POINT = ( * text =&gt; any ) ; only used in framework syntax
 
 sdf-pointer = text ; .regexp curie-regexp -- TO DO!
 pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
@@ -2979,6 +2989,7 @@ thingqualities = {
  commonqualities,
  ? sdfObject: named&lt;objectqualities&gt;
  ? sdfThing: named&lt;thingqualities&gt;
+ EXTENSION-POINT
 }
 
 productqualities = thingqualities ; ISSUE: get rid of sdfProduct?
@@ -2990,6 +3001,7 @@ objectqualities = {
  ? sdfAction: named&lt;actionqualities&gt;
  ? sdfEvent: named&lt;eventqualities&gt;
  ? sdfData: named&lt;dataqualities&gt;
+ EXTENSION-POINT
 }
 
 propertyqualities = dataqualities ; the definitions in sdfData are declarations in sdfProperty
@@ -3000,12 +3012,14 @@ actionqualities = {
  ? sdfRequiredInputData: pointer-list
  ? sdfOutputData: pointer-list  ; sdfRequired applies here
  ? sdfData: named&lt;dataqualities&gt;         ; zero or more named data type definitions that might be used in the above
+ EXTENSION-POINT
 }
 
 eventqualities = {
  commonqualities
  ? sdfOutputData: pointer-list  ; sdfRequired applies here
  ? sdfData: named&lt;dataqualities&gt;         ; zero or more named data type definitions that might be used in the above
+ EXTENSION-POINT
 }
 
 dataqualities = {               ; also propertyqualities
@@ -3018,15 +3032,19 @@ dataqualities = {               ; also propertyqualities
  ? readable: bool
  ? writable: bool
  ? nullable: bool
- ? subtype: "bytestring" / "unixtime"
+ ? subType: "byte-string" / "unix-time"
+           / text                       ; EXTENSION-POINT
  ? contentFormat: text
+ EXTENSION-POINT
 }
 
 allowed-types = number / text / bool / null
               / [* number] / [* text] / [* bool]
+              / any                     ; EXTENSION-POINT
 
 jsonschema = (
  ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
+           / text                       ; EXTENSION-POINT
  ? enum: [+ allowed-types]                                              ; should validate against type
  ? const: allowed-types
  ? default: allowed-types
@@ -3042,6 +3060,7 @@ jsonschema = (
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
+           / text                       ; EXTENSION-POINT
            ; expand on demand
  ; array constraints
  ? minItems: number
@@ -3054,6 +3073,7 @@ jsonschema = (
      ? $comment: text               ; source code comments only, no semantics
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
+           / text                       ; EXTENSION-POINT
      ; jso subset
      ? minimum: number
      ? maximum: number
@@ -3061,6 +3081,7 @@ jsonschema = (
      ? format: text
      ? minLength: number
      ? maxLength: number
+     EXTENSION-POINT
    }
 )
 </pre><a href="#section-appendix.a-3" class="pilcrow">¶</a>
@@ -3075,623 +3096,808 @@ jsonschema = (
 <p id="section-appendix.b-1">This appendix describes the syntax of SDF defined in <a href="#syntax" class="xref">Appendix A</a>, but
 using a version of the description techniques advertised on
 json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>.<a href="#section-appendix.b-1" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft art-jso.json" id="section-appendix.b-2">
+<p id="section-appendix.b-2">The appendix shows both the validation and the framework syntax.
+Since most of the lines are the same between these two files, those lines are shown only once, with a leading space, in the form of a unified diff.
+Lines leading with a <code>-</code> are part of the validation syntax, and lines leading with a <code>+</code> are part of the framework syntax.<a href="#section-appendix.b-2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft art-jso.json" id="section-appendix.b-3">
 <pre>
-{
-  "title": "sdf.cddl",
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$ref": "#/definitions/sdf-syntax",
-  "definitions": {
-    "sdf-syntax": {
-      "type": "object",
-      "required": [
-        "info"
-      ],
-      "properties": {
-        "info": {
-          "$ref": "#/definitions/sdfinfo"
-        },
-        "namespace": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "defaultnamespace": {
-          "type": "string"
-        },
-        "sdfThing": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/thingqualities"
-          }
-        },
-        "sdfProduct": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/productqualities"
-          }
-        },
-        "sdfObject": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/objectqualities"
-          }
-        },
-        "sdfProperty": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/propertyqualities"
-          }
-        },
-        "sdfAction": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/actionqualities"
-          }
-        },
-        "sdfEvent": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/eventqualities"
-          }
-        },
-        "sdfData": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/dataqualities"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "sdfinfo": {
-      "type": "object",
-      "required": [
-        "title",
-        "version",
-        "copyright",
-        "license"
-      ],
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "copyright": {
-          "type": "string"
-        },
-        "license": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "thingqualities": {
-      "type": "object",
-      "properties": {
-        "sdfObject": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/objectqualities"
-          }
-        },
-        "sdfThing": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/thingqualities"
-          }
-        },
-        "description": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "$comment": {
-          "type": "string"
-        },
-        "sdfRef": {
-          "$ref": "#/definitions/sdf-pointer"
-        },
-        "sdfRequired": {
-          "$ref": "#/definitions/pointer-list"
-        }
-      },
-      "additionalProperties": false
-    },
-    "commonqualities": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "$comment": {
-          "type": "string"
-        },
-        "sdfRef": {
-          "$ref": "#/definitions/sdf-pointer"
-        },
-        "sdfRequired": {
-          "$ref": "#/definitions/pointer-list"
-        }
-      },
-      "additionalProperties": false
-    },
-    "sdf-pointer": {
-      "type": "string"
-    },
-    "pointer-list": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/sdf-pointer"
-      }
-    },
-    "objectqualities": {
-      "type": "object",
-      "properties": {
-        "sdfProperty": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/propertyqualities"
-          }
-        },
-        "sdfAction": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/actionqualities"
-          }
-        },
-        "sdfEvent": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/eventqualities"
-          }
-        },
-        "sdfData": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/dataqualities"
-          }
-        },
-        "description": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "$comment": {
-          "type": "string"
-        },
-        "sdfRef": {
-          "$ref": "#/definitions/sdf-pointer"
-        },
-        "sdfRequired": {
-          "$ref": "#/definitions/pointer-list"
-        }
-      },
-      "additionalProperties": false
-    },
-    "propertyqualities": {
-      "$ref": "#/definitions/dataqualities"
-    },
-    "dataqualities": {
-      "type": "object",
-      "properties": {
-        "units": {
-          "type": "string"
-        },
-        "scaleMinimum": {
-          "type": "number"
-        },
-        "scaleMaximum": {
-          "type": "number"
-        },
-        "observable": {
-          "type": "boolean"
-        },
-        "readable": {
-          "type": "boolean"
-        },
-        "writable": {
-          "type": "boolean"
-        },
-        "nullable": {
-          "type": "boolean"
-        },
-        "subtype": {
-          "type": "string",
-          "enum": [
-            "bytestring",
-            "unixtime"
-          ]
-        },
-        "contentFormat": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "number",
-            "string",
-            "boolean",
-            "integer",
-            "array"
-          ]
-        },
-        "enum": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/allowed-types"
-          },
-          "minItems": 1
-        },
-        "const": {
-          "$ref": "#/definitions/allowed-types"
-        },
-        "default": {
-          "$ref": "#/definitions/allowed-types"
-        },
-        "minimum": {
-          "type": "number"
-        },
-        "maximum": {
-          "type": "number"
-        },
-        "exclusiveMinimum": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "exclusiveMaximum": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "multipleOf": {
-          "type": "number"
-        },
-        "minLength": {
-          "type": "number"
-        },
-        "maxLength": {
-          "type": "number"
-        },
-        "pattern": {
-          "type": "string"
-        },
-        "format": {
-          "type": "string",
-          "enum": [
-            "date-time",
-            "date",
-            "time",
-            "uri",
-            "uri-reference",
-            "uuid"
-          ]
-        },
-        "minItems": {
-          "type": "number"
-        },
-        "maxItems": {
-          "type": "number"
-        },
-        "uniqueItems": {
-          "type": "boolean"
-        },
-        "items": {
-          "type": "object",
-          "properties": {
-            "sdfRef": {
-              "$ref": "#/definitions/sdf-pointer"
-            },
-            "description": {
-              "type": "string"
-            },
-            "$comment": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "number",
-                "string",
-                "boolean",
-                "integer"
-              ]
-            },
-            "minimum": {
-              "type": "number"
-            },
-            "maximum": {
-              "type": "number"
-            },
-            "enum": {
-              "type": "array",
-              "minItems": 1
-            },
-            "format": {
-              "type": "string"
-            },
-            "minLength": {
-              "type": "number"
-            },
-            "maxLength": {
-              "type": "number"
-            }
-          },
-          "additionalProperties": false
-        },
-        "description": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "$comment": {
-          "type": "string"
-        },
-        "sdfRef": {
-          "$ref": "#/definitions/sdf-pointer"
-        },
-        "sdfRequired": {
-          "$ref": "#/definitions/pointer-list"
-        }
-      },
-      "additionalProperties": false
-    },
-    "jsonschema": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "number",
-            "string",
-            "boolean",
-            "integer",
-            "array"
-          ]
-        },
-        "enum": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/allowed-types"
-          },
-          "minItems": 1
-        },
-        "const": {
-          "$ref": "#/definitions/allowed-types"
-        },
-        "default": {
-          "$ref": "#/definitions/allowed-types"
-        },
-        "minimum": {
-          "type": "number"
-        },
-        "maximum": {
-          "type": "number"
-        },
-        "exclusiveMinimum": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "exclusiveMaximum": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "number"
-            }
-          ]
-        },
-        "multipleOf": {
-          "type": "number"
-        },
-        "minLength": {
-          "type": "number"
-        },
-        "maxLength": {
-          "type": "number"
-        },
-        "pattern": {
-          "type": "string"
-        },
-        "format": {
-          "type": "string",
-          "enum": [
-            "date-time",
-            "date",
-            "time",
-            "uri",
-            "uri-reference",
-            "uuid"
-          ]
-        },
-        "minItems": {
-          "type": "number"
-        },
-        "maxItems": {
-          "type": "number"
-        },
-        "uniqueItems": {
-          "type": "boolean"
-        },
-        "items": {
-          "type": "object",
-          "properties": {
-            "sdfRef": {
-              "$ref": "#/definitions/sdf-pointer"
-            },
-            "description": {
-              "type": "string"
-            },
-            "$comment": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "number",
-                "string",
-                "boolean",
-                "integer"
-              ]
-            },
-            "minimum": {
-              "type": "number"
-            },
-            "maximum": {
-              "type": "number"
-            },
-            "enum": {
-              "type": "array",
-              "minItems": 1
-            },
-            "format": {
-              "type": "string"
-            },
-            "minLength": {
-              "type": "number"
-            },
-            "maxLength": {
-              "type": "number"
-            }
-          },
-          "additionalProperties": false
-        }
-      },
-      "additionalProperties": false
-    },
-    "allowed-types": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "string"
-        },
-        {
-          "type": "boolean"
-        },
-        {
-          "type": "null"
-        },
-        {
-          "type": "array",
-          "items": {
-            "type": "number"
-          }
-        },
-        {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        {
-          "type": "array",
-          "items": {
-            "type": "boolean"
-          }
-        }
-      ]
-    },
-    "actionqualities": {
-      "type": "object",
-      "properties": {
-        "sdfInputData": {
-          "$ref": "#/definitions/pointer-list"
-        },
-        "sdfRequiredInputData": {
-          "$ref": "#/definitions/pointer-list"
-        },
-        "sdfOutputData": {
-          "$ref": "#/definitions/pointer-list"
-        },
-        "sdfData": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/dataqualities"
-          }
-        },
-        "description": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "$comment": {
-          "type": "string"
-        },
-        "sdfRef": {
-          "$ref": "#/definitions/sdf-pointer"
-        },
-        "sdfRequired": {
-          "$ref": "#/definitions/pointer-list"
-        }
-      },
-      "additionalProperties": false
-    },
-    "eventqualities": {
-      "type": "object",
-      "properties": {
-        "sdfOutputData": {
-          "$ref": "#/definitions/pointer-list"
-        },
-        "sdfData": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/dataqualities"
-          }
-        },
-        "description": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "$comment": {
-          "type": "string"
-        },
-        "sdfRef": {
-          "$ref": "#/definitions/sdf-pointer"
-        },
-        "sdfRequired": {
-          "$ref": "#/definitions/pointer-list"
-        }
-      },
-      "additionalProperties": false
-    },
-    "productqualities": {
-      "$ref": "#/definitions/thingqualities"
-    }
-  }
-}
-</pre><a href="#section-appendix.b-2" class="pilcrow">¶</a>
+ {
+-  "title": "sdf-validation.cddl",
++  "title": "sdf-framework.cddl",
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "$ref": "#/definitions/sdf-syntax",
+   "definitions": {
+     "sdf-syntax": {
+       "type": "object",
+       "required": [
+         "info"
+       ],
+       "properties": {
+         "info": {
+           "$ref": "#/definitions/sdfinfo"
+         },
+         "namespace": {
+           "type": "object",
+           "additionalProperties": {
+             "type": "string"
+           }
+         },
+         "defaultNamespace": {
+           "type": "string"
+         },
+         "sdfThing": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/thingqualities"
+           }
+         },
+         "sdfProduct": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/productqualities"
+           }
+         },
+         "sdfObject": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/objectqualities"
+           }
+         },
+         "sdfProperty": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/propertyqualities"
+           }
+         },
+         "sdfAction": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/actionqualities"
+           }
+         },
+         "sdfEvent": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/eventqualities"
+           }
+         },
+         "sdfData": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/dataqualities"
+           }
+         }
+       },
+-      "additionalProperties": false
++      "additionalProperties": {
++      }
+     },
+     "sdfinfo": {
+       "type": "object",
+       "required": [
+         "title",
+         "version",
+         "copyright",
+         "license"
+       ],
+       "properties": {
+         "title": {
+           "type": "string"
+         },
+         "version": {
+           "type": "string"
+         },
+         "copyright": {
+           "type": "string"
+         },
+         "license": {
+           "type": "string"
+         }
+       },
+-      "additionalProperties": false
++      "additionalProperties": {
++      }
++    },
++    "EXTENSION-POINT": {
++      "type": "object",
++      "additionalProperties": {
++      }
+     },
+     "thingqualities": {
+       "type": "object",
+       "properties": {
+         "sdfObject": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/objectqualities"
+           }
+         },
+         "sdfThing": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/thingqualities"
+           }
+         },
+         "description": {
+           "type": "string"
+         },
+         "label": {
+           "type": "string"
+         },
+         "$comment": {
+           "type": "string"
+         },
+         "sdfRef": {
+           "$ref": "#/definitions/sdf-pointer"
+         },
+         "sdfRequired": {
+           "$ref": "#/definitions/pointer-list"
+         }
+       },
+-      "additionalProperties": false
++      "additionalProperties": {
++      }
+     },
+     "commonqualities": {
+       "type": "object",
+       "properties": {
+         "description": {
+           "type": "string"
+         },
+         "label": {
+           "type": "string"
+         },
+         "$comment": {
+           "type": "string"
+         },
+         "sdfRef": {
+           "$ref": "#/definitions/sdf-pointer"
+         },
+         "sdfRequired": {
+           "$ref": "#/definitions/pointer-list"
+         }
+       },
+       "additionalProperties": false
+     },
+     "sdf-pointer": {
+       "type": "string"
+     },
+     "pointer-list": {
+       "type": "array",
+       "items": {
+         "$ref": "#/definitions/sdf-pointer"
+       }
+     },
+     "objectqualities": {
+       "type": "object",
+       "properties": {
+         "sdfProperty": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/propertyqualities"
+           }
+         },
+         "sdfAction": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/actionqualities"
+           }
+         },
+         "sdfEvent": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/eventqualities"
+           }
+         },
+         "sdfData": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/dataqualities"
+           }
+         },
+         "description": {
+           "type": "string"
+         },
+         "label": {
+           "type": "string"
+         },
+         "$comment": {
+           "type": "string"
+         },
+         "sdfRef": {
+           "$ref": "#/definitions/sdf-pointer"
+         },
+         "sdfRequired": {
+           "$ref": "#/definitions/pointer-list"
+         }
+       },
+-      "additionalProperties": false
++      "additionalProperties": {
++      }
+     },
+     "propertyqualities": {
+       "$ref": "#/definitions/dataqualities"
+     },
+     "dataqualities": {
+       "type": "object",
+       "properties": {
+         "units": {
+           "type": "string"
+         },
+         "scaleMinimum": {
+           "type": "number"
+         },
+         "scaleMaximum": {
+           "type": "number"
+         },
+         "observable": {
+           "type": "boolean"
+         },
+         "readable": {
+           "type": "boolean"
+         },
+         "writable": {
+           "type": "boolean"
+         },
+         "nullable": {
+           "type": "boolean"
+         },
+         "subType": {
+-          "type": "string",
+-          "enum": [
+-            "byte-string",
+-            "unix-time"
++          "anyOf": [
++            {
++              "type": "string",
++              "const": "byte-string"
++            },
++            {
++              "type": "string",
++              "const": "unix-time"
++            },
++            {
++              "type": "string"
++            }
+           ]
+         },
+         "contentFormat": {
+           "type": "string"
+         },
+         "type": {
+-          "type": "string",
+-          "enum": [
+-            "number",
+-            "string",
+-            "boolean",
+-            "integer",
+-            "array"
++          "anyOf": [
++            {
++              "type": "string",
++              "const": "number"
++            },
++            {
++              "type": "string",
++              "const": "string"
++            },
++            {
++              "type": "string",
++              "const": "boolean"
++            },
++            {
++              "type": "string",
++              "const": "integer"
++            },
++            {
++              "type": "string",
++              "const": "array"
++            },
++            {
++              "type": "string"
++            }
+           ]
+         },
+         "enum": {
+           "type": "array",
+           "items": {
+             "$ref": "#/definitions/allowed-types"
+           },
+           "minItems": 1
+         },
+         "const": {
+           "$ref": "#/definitions/allowed-types"
+         },
+         "default": {
+           "$ref": "#/definitions/allowed-types"
+         },
+         "minimum": {
+           "type": "number"
+         },
+         "maximum": {
+           "type": "number"
+         },
+         "exclusiveMinimum": {
+           "anyOf": [
+             {
+               "type": "boolean"
+             },
+             {
+               "type": "number"
+             }
+           ]
+         },
+         "exclusiveMaximum": {
+           "anyOf": [
+             {
+               "type": "boolean"
+             },
+             {
+               "type": "number"
+             }
+           ]
+         },
+         "multipleOf": {
+           "type": "number"
+         },
+         "minLength": {
+           "type": "number"
+         },
+         "maxLength": {
+           "type": "number"
+         },
+         "pattern": {
+           "type": "string"
+         },
+         "format": {
+-          "type": "string",
+-          "enum": [
+-            "date-time",
+-            "date",
+-            "time",
+-            "uri",
+-            "uri-reference",
+-            "uuid"
++          "anyOf": [
++            {
++              "type": "string",
++              "const": "date-time"
++            },
++            {
++              "type": "string",
++              "const": "date"
++            },
++            {
++              "type": "string",
++              "const": "time"
++            },
++            {
++              "type": "string",
++              "const": "uri"
++            },
++            {
++              "type": "string",
++              "const": "uri-reference"
++            },
++            {
++              "type": "string",
++              "const": "uuid"
++            },
++            {
++              "type": "string"
++            }
+           ]
+         },
+         "minItems": {
+           "type": "number"
+         },
+         "maxItems": {
+           "type": "number"
+         },
+         "uniqueItems": {
+           "type": "boolean"
+         },
+         "items": {
+           "type": "object",
+           "properties": {
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "description": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "type": {
+-              "type": "string",
+-              "enum": [
+-                "number",
+-                "string",
+-                "boolean",
+-                "integer"
++              "anyOf": [
++                {
++                  "type": "string",
++                  "const": "number"
++                },
++                {
++                  "type": "string",
++                  "const": "string"
++                },
++                {
++                  "type": "string",
++                  "const": "boolean"
++                },
++                {
++                  "type": "string",
++                  "const": "integer"
++                },
++                {
++                  "type": "string"
++                }
+               ]
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "enum": {
+               "type": "array",
+               "minItems": 1
+             },
+             "format": {
+               "type": "string"
+             },
+             "minLength": {
+               "type": "number"
+             },
+             "maxLength": {
+               "type": "number"
+             }
+           },
+-          "additionalProperties": false
++          "additionalProperties": {
++          }
+         },
+         "description": {
+           "type": "string"
+         },
+         "label": {
+           "type": "string"
+         },
+         "$comment": {
+           "type": "string"
+         },
+         "sdfRef": {
+           "$ref": "#/definitions/sdf-pointer"
+         },
+         "sdfRequired": {
+           "$ref": "#/definitions/pointer-list"
+         }
+       },
+-      "additionalProperties": false
++      "additionalProperties": {
++      }
+     },
+     "jsonschema": {
+       "type": "object",
+       "properties": {
+         "type": {
+-          "type": "string",
+-          "enum": [
+-            "number",
+-            "string",
+-            "boolean",
+-            "integer",
+-            "array"
++          "anyOf": [
++            {
++              "type": "string",
++              "const": "number"
++            },
++            {
++              "type": "string",
++              "const": "string"
++            },
++            {
++              "type": "string",
++              "const": "boolean"
++            },
++            {
++              "type": "string",
++              "const": "integer"
++            },
++            {
++              "type": "string",
++              "const": "array"
++            },
++            {
++              "type": "string"
++            }
+           ]
+         },
+         "enum": {
+           "type": "array",
+           "items": {
+             "$ref": "#/definitions/allowed-types"
+           },
+           "minItems": 1
+         },
+         "const": {
+           "$ref": "#/definitions/allowed-types"
+         },
+         "default": {
+           "$ref": "#/definitions/allowed-types"
+         },
+         "minimum": {
+           "type": "number"
+         },
+         "maximum": {
+           "type": "number"
+         },
+         "exclusiveMinimum": {
+           "anyOf": [
+             {
+               "type": "boolean"
+             },
+             {
+               "type": "number"
+             }
+           ]
+         },
+         "exclusiveMaximum": {
+           "anyOf": [
+             {
+               "type": "boolean"
+             },
+             {
+               "type": "number"
+             }
+           ]
+         },
+         "multipleOf": {
+           "type": "number"
+         },
+         "minLength": {
+           "type": "number"
+         },
+         "maxLength": {
+           "type": "number"
+         },
+         "pattern": {
+           "type": "string"
+         },
+         "format": {
+-          "type": "string",
+-          "enum": [
+-            "date-time",
+-            "date",
+-            "time",
+-            "uri",
+-            "uri-reference",
+-            "uuid"
++          "anyOf": [
++            {
++              "type": "string",
++              "const": "date-time"
++            },
++            {
++              "type": "string",
++              "const": "date"
++            },
++            {
++              "type": "string",
++              "const": "time"
++            },
++            {
++              "type": "string",
++              "const": "uri"
++            },
++            {
++              "type": "string",
++              "const": "uri-reference"
++            },
++            {
++              "type": "string",
++              "const": "uuid"
++            },
++            {
++              "type": "string"
++            }
+           ]
+         },
+         "minItems": {
+           "type": "number"
+         },
+         "maxItems": {
+           "type": "number"
+         },
+         "uniqueItems": {
+           "type": "boolean"
+         },
+         "items": {
+           "type": "object",
+           "properties": {
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "description": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "type": {
+-              "type": "string",
+-              "enum": [
+-                "number",
+-                "string",
+-                "boolean",
+-                "integer"
++              "anyOf": [
++                {
++                  "type": "string",
++                  "const": "number"
++                },
++                {
++                  "type": "string",
++                  "const": "string"
++                },
++                {
++                  "type": "string",
++                  "const": "boolean"
++                },
++                {
++                  "type": "string",
++                  "const": "integer"
++                },
++                {
++                  "type": "string"
++                }
+               ]
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "enum": {
+               "type": "array",
+               "minItems": 1
+             },
+             "format": {
+               "type": "string"
+             },
+             "minLength": {
+               "type": "number"
+             },
+             "maxLength": {
+               "type": "number"
+             }
+           },
+-          "additionalProperties": false
++          "additionalProperties": {
++          }
+         }
+       },
+       "additionalProperties": false
+     },
+     "allowed-types": {
+       "anyOf": [
+         {
+           "type": "number"
+         },
+         {
+           "type": "string"
+         },
+         {
+           "type": "boolean"
+         },
+         {
+           "type": "null"
+         },
+         {
+           "type": "array",
+           "items": {
+             "type": "number"
+           }
+         },
+         {
+           "type": "array",
+           "items": {
+             "type": "string"
+           }
+         },
+         {
+           "type": "array",
+           "items": {
+             "type": "boolean"
+           }
++        },
++        {
+         }
+       ]
+     },
+     "actionqualities": {
+       "type": "object",
+       "properties": {
+         "sdfInputData": {
+           "$ref": "#/definitions/pointer-list"
+         },
+         "sdfRequiredInputData": {
+           "$ref": "#/definitions/pointer-list"
+         },
+         "sdfOutputData": {
+           "$ref": "#/definitions/pointer-list"
+         },
+         "sdfData": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/dataqualities"
+           }
+         },
+         "description": {
+           "type": "string"
+         },
+         "label": {
+           "type": "string"
+         },
+         "$comment": {
+           "type": "string"
+         },
+         "sdfRef": {
+           "$ref": "#/definitions/sdf-pointer"
+         },
+         "sdfRequired": {
+           "$ref": "#/definitions/pointer-list"
+         }
+       },
+-      "additionalProperties": false
++      "additionalProperties": {
++      }
+     },
+     "eventqualities": {
+       "type": "object",
+       "properties": {
+         "sdfOutputData": {
+           "$ref": "#/definitions/pointer-list"
+         },
+         "sdfData": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/dataqualities"
+           }
+         },
+         "description": {
+           "type": "string"
+         },
+         "label": {
+           "type": "string"
+         },
+         "$comment": {
+           "type": "string"
+         },
+         "sdfRef": {
+           "$ref": "#/definitions/sdf-pointer"
+         },
+         "sdfRequired": {
+           "$ref": "#/definitions/pointer-list"
+         }
+       },
+-      "additionalProperties": false
++      "additionalProperties": {
++      }
+     },
+     "productqualities": {
+       "$ref": "#/definitions/thingqualities"
+     }
+   }
+ }
+</pre><a href="#section-appendix.b-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
