@@ -934,7 +934,7 @@ Lines leading with a `-` are part of the validation syntax, and lines leading wi
 # Acknowledgements
 {: numbered="no"}
 
-This strawman draft is based on `sdf.md` and `sdf-schema.json` in the
+This draft is based on `sdf.md` and `sdf-schema.json` in the
 one-data-model `language` repository, as well as Ari Keranen's
 "alt-schema" from the Ericsson Research `ipso-odm` repository.
 
