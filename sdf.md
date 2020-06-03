@@ -63,6 +63,10 @@ normative:
   RFC8610: cddl
   W3C.NOTE-curie-20101216: curie
   RFC0020: ascii
+  SPDX:
+    title: SPDX License List
+    target: https://spdx.org/licenses/
+    date: false
 informative:
   I-D.irtf-t2trg-rest-iot: rest-iot
   ZCL: DOI.10.1016/B978-0-7506-8597-9.00006-9
@@ -156,7 +160,7 @@ We start with an example for the SDF definition of a simple object called "Switc
 {
     "info": {
         "title": "Example file for ODM Semantic Definition Format",
-        "version": "20190424",
+        "version": "2019-04-24",
         "copyright": "Copyright 2019 Example Corp. All rights reserved.",
         "license": "https://example.com/license"
     },
@@ -437,6 +441,12 @@ Qualities of the information block are shown in {{infoblockqual}}.
 | copyright | string | yes      | Link to text or embedded text containing a copyright notice |
 | license   | string | yes      | Link to text or embedded text containing license terms      |
 {: #infoblockqual title="Qualities of the Information Block"}
+
+While the format of the version string is marked as TBD, it is intended to be lexicographically increasing over the life of a model: a newer model always has a version string that string-compares higher than all previous versions.
+This is easily achieved by following the convention to start the version with an {{?RFC3339}} `date-time` or, if new versions are generated less frequently than once a day, just the `full-date` (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see {{example1}} for an example).
+
+The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an {{SPDX}} license identifier.
+(For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)
 
 ## Namespaces section
 

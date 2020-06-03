@@ -1452,7 +1452,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">�
 {
     "info": {
         "title": "Example file for ODM Semantic Definition Format",
-        "version": "20190424",
+        "version": "2019-04-24",
         "copyright": "Copyright 2019 Example Corp. All rights reserved.",
         "license": "https://example.com/license"
     },
@@ -1992,6 +1992,10 @@ value is a JSON map in turn, with a set of key-value pairs that represent qualit
           </tbody>
         </table>
 </div>
+<p id="section-3.1-5">While the format of the version string is marked as TBD, it is intended to be lexicographically increasing over the life of a model: a newer model always has a version string that string-compares higher than all previous versions.
+This is easily achieved by following the convention to start the version with an <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span> <code>date-time</code> or, if new versions are generated less frequently than once a day, just the <code>full-date</code> (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see <a href="#example1" class="xref">Figure 1</a> for an example).<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1-6">The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an <span>[<a href="#SPDX" class="xref">SPDX</a>]</span> license identifier.
+(For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)<a href="#section-3.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="namespaces-section">
@@ -2900,6 +2904,10 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
 <dd>
 <span class="refAuthor">Birkholz, H.</span><span class="refAuthor">, Vigano, C.</span><span class="refAuthor">, and C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8610">https://www.rfc-editor.org/info/rfc8610</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="SPDX">[SPDX]</dt>
+<dd>
+<span class="refTitle">"SPDX License List"</span>, <time></time>, <span>&lt;<a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="W3C.NOTE-curie-20101216">[W3C.NOTE-curie-20101216]</dt>
 <dd>
 <span class="refAuthor">Birbeck, M.</span><span class="refAuthor"> and S. McCarron</span>, <span class="refTitle">"CURIE Syntax 1.0"</span>, <span class="seriesInfo">World Wide Web Consortium NOTE NOTE-curie-20101216</span>, <time datetime="2010-12-16">16 December 2010</time>, <span>&lt;<a href="http://www.w3.org/TR/2010/NOTE-curie-20101216">http://www.w3.org/TR/2010/NOTE-curie-20101216</a>&gt;</span>. </dd>
@@ -2918,6 +2926,10 @@ to use this in a way that contradicts the referenced semantics.<a href="#section
 <dt id="OCF">[OCF]</dt>
 <dd>
 <span class="refTitle">"OCF Resource Type Specification"</span>, <time></time>, <span>&lt;<a href="https://openconnectivity.org/specs/OCF_Resource_Type_Specification.pdf">https://openconnectivity.org/specs/OCF_Resource_Type_Specification.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3339">[RFC3339]</dt>
+<dd>
+<span class="refAuthor">Klyne, G.</span><span class="refAuthor"> and C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339">https://www.rfc-editor.org/info/rfc3339</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ZCL">[ZCL]</dt>
 <dd>
@@ -3906,7 +3918,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="section-appendix.c-1">This strawman draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the
+<p id="section-appendix.c-1">This draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the
 one-data-model <code>language</code> repository, as well as Ari Keranen's
 "alt-schema" from the Ericsson Research <code>ipso-odm</code> repository.<a href="#section-appendix.c-1" class="pilcrow">¶</a></p>
 </section>
