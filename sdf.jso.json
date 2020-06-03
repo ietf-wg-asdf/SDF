@@ -5,6 +5,8 @@
   "definitions": {
     "sdf-syntax": {
       "type": "object",
+      "additionalProperties": {
+      },
       "required": [
         "info"
       ],
@@ -18,7 +20,7 @@
             "type": "string"
           }
         },
-        "defaultnamespace": {
+        "defaultNamespace": {
           "type": "string"
         },
         "sdfThing": {
@@ -63,11 +65,12 @@
             "$ref": "#/definitions/dataqualities"
           }
         }
-      },
-      "additionalProperties": false
+      }
     },
     "sdfinfo": {
       "type": "object",
+      "additionalProperties": {
+      },
       "required": [
         "title",
         "version",
@@ -87,8 +90,12 @@
         "license": {
           "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
+    },
+    "EXTENSION-POINT": {
+      "type": "object",
+      "additionalProperties": {
+      }
     },
     "thingqualities": {
       "type": "object",
@@ -121,7 +128,8 @@
           "$ref": "#/definitions/pointer-list"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": {
+      }
     },
     "commonqualities": {
       "type": "object",
@@ -196,7 +204,8 @@
           "$ref": "#/definitions/pointer-list"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": {
+      }
     },
     "propertyqualities": {
       "$ref": "#/definitions/dataqualities"
@@ -225,24 +234,49 @@
         "nullable": {
           "type": "boolean"
         },
-        "subtype": {
-          "type": "string",
-          "enum": [
-            "bytestring",
-            "unixtime"
+        "subType": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "byte-string"
+            },
+            {
+              "type": "string",
+              "const": "unix-time"
+            },
+            {
+              "type": "string"
+            }
           ]
         },
         "contentFormat": {
           "type": "string"
         },
         "type": {
-          "type": "string",
-          "enum": [
-            "number",
-            "string",
-            "boolean",
-            "integer",
-            "array"
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "number"
+            },
+            {
+              "type": "string",
+              "const": "string"
+            },
+            {
+              "type": "string",
+              "const": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "integer"
+            },
+            {
+              "type": "string",
+              "const": "array"
+            },
+            {
+              "type": "string"
+            }
           ]
         },
         "enum": {
@@ -297,14 +331,34 @@
           "type": "string"
         },
         "format": {
-          "type": "string",
-          "enum": [
-            "date-time",
-            "date",
-            "time",
-            "uri",
-            "uri-reference",
-            "uuid"
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "date-time"
+            },
+            {
+              "type": "string",
+              "const": "date"
+            },
+            {
+              "type": "string",
+              "const": "time"
+            },
+            {
+              "type": "string",
+              "const": "uri"
+            },
+            {
+              "type": "string",
+              "const": "uri-reference"
+            },
+            {
+              "type": "string",
+              "const": "uuid"
+            },
+            {
+              "type": "string"
+            }
           ]
         },
         "minItems": {
@@ -318,6 +372,8 @@
         },
         "items": {
           "type": "object",
+          "additionalProperties": {
+          },
           "properties": {
             "sdfRef": {
               "$ref": "#/definitions/sdf-pointer"
@@ -329,12 +385,26 @@
               "type": "string"
             },
             "type": {
-              "type": "string",
-              "enum": [
-                "number",
-                "string",
-                "boolean",
-                "integer"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "number"
+                },
+                {
+                  "type": "string",
+                  "const": "string"
+                },
+                {
+                  "type": "string",
+                  "const": "boolean"
+                },
+                {
+                  "type": "string",
+                  "const": "integer"
+                },
+                {
+                  "type": "string"
+                }
               ]
             },
             "minimum": {
@@ -356,8 +426,7 @@
             "maxLength": {
               "type": "number"
             }
-          },
-          "additionalProperties": false
+          }
         },
         "description": {
           "type": "string"
@@ -375,19 +444,37 @@
           "$ref": "#/definitions/pointer-list"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": {
+      }
     },
     "jsonschema": {
       "type": "object",
       "properties": {
         "type": {
-          "type": "string",
-          "enum": [
-            "number",
-            "string",
-            "boolean",
-            "integer",
-            "array"
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "number"
+            },
+            {
+              "type": "string",
+              "const": "string"
+            },
+            {
+              "type": "string",
+              "const": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "integer"
+            },
+            {
+              "type": "string",
+              "const": "array"
+            },
+            {
+              "type": "string"
+            }
           ]
         },
         "enum": {
@@ -442,14 +529,34 @@
           "type": "string"
         },
         "format": {
-          "type": "string",
-          "enum": [
-            "date-time",
-            "date",
-            "time",
-            "uri",
-            "uri-reference",
-            "uuid"
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "date-time"
+            },
+            {
+              "type": "string",
+              "const": "date"
+            },
+            {
+              "type": "string",
+              "const": "time"
+            },
+            {
+              "type": "string",
+              "const": "uri"
+            },
+            {
+              "type": "string",
+              "const": "uri-reference"
+            },
+            {
+              "type": "string",
+              "const": "uuid"
+            },
+            {
+              "type": "string"
+            }
           ]
         },
         "minItems": {
@@ -463,6 +570,8 @@
         },
         "items": {
           "type": "object",
+          "additionalProperties": {
+          },
           "properties": {
             "sdfRef": {
               "$ref": "#/definitions/sdf-pointer"
@@ -474,12 +583,26 @@
               "type": "string"
             },
             "type": {
-              "type": "string",
-              "enum": [
-                "number",
-                "string",
-                "boolean",
-                "integer"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "number"
+                },
+                {
+                  "type": "string",
+                  "const": "string"
+                },
+                {
+                  "type": "string",
+                  "const": "boolean"
+                },
+                {
+                  "type": "string",
+                  "const": "integer"
+                },
+                {
+                  "type": "string"
+                }
               ]
             },
             "minimum": {
@@ -501,8 +624,7 @@
             "maxLength": {
               "type": "number"
             }
-          },
-          "additionalProperties": false
+          }
         }
       },
       "additionalProperties": false
@@ -538,6 +660,8 @@
           "items": {
             "type": "boolean"
           }
+        },
+        {
         }
       ]
     },
@@ -575,7 +699,8 @@
           "$ref": "#/definitions/pointer-list"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": {
+      }
     },
     "eventqualities": {
       "type": "object",
@@ -605,7 +730,8 @@
           "$ref": "#/definitions/pointer-list"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": {
+      }
     },
     "productqualities": {
       "$ref": "#/definitions/thingqualities"

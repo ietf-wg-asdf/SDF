@@ -3,7 +3,7 @@ start = sdf-syntax
 sdf-syntax = {
  info: sdfinfo                  ; don't *require* this in flexible syntax, though
  ? namespace: named<text>
- ? defaultnamespace: text
+ ? defaultNamespace: text
  ? sdfThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
  ? sdfProduct: named<productqualities>   ; Product is a composition of things and objects that can model a SKU-level instance of a product
  ? sdfObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
@@ -11,6 +11,7 @@ sdf-syntax = {
  ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
  ? sdfEvent: named<eventqualities>       ; Event represents an occurence of something associated with an object
  ? sdfData: named<dataqualities>         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
+ EXTENSION-POINT
 }
 
 sdfinfo = {
@@ -18,10 +19,13 @@ sdfinfo = {
  version: text
  copyright: text
  license: text
+ EXTENSION-POINT
 }
 
 ; Shortcut for a map that gives names to instances of X
 named<X> = { * text => X }
+
+EXTENSION-POINT = ( * text => any ) ; only used in framework syntax
 
 sdf-pointer = text ; .regexp curie-regexp -- TO DO!
 pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
@@ -39,6 +43,7 @@ thingqualities = {
  commonqualities,
  ? sdfObject: named<objectqualities>
  ? sdfThing: named<thingqualities>
+ EXTENSION-POINT
 }
 
 productqualities = thingqualities ; ISSUE: get rid of sdfProduct?
@@ -50,6 +55,7 @@ objectqualities = {
  ? sdfAction: named<actionqualities>
  ? sdfEvent: named<eventqualities>
  ? sdfData: named<dataqualities>
+ EXTENSION-POINT
 }
 
 propertyqualities = dataqualities ; the definitions in sdfData are declarations in sdfProperty
@@ -60,12 +66,14 @@ actionqualities = {
  ? sdfRequiredInputData: pointer-list
  ? sdfOutputData: pointer-list  ; sdfRequired applies here
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
+ EXTENSION-POINT
 }
 
 eventqualities = {
  commonqualities
  ? sdfOutputData: pointer-list  ; sdfRequired applies here
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
+ EXTENSION-POINT
 }
 
 dataqualities = {               ; also propertyqualities
@@ -78,15 +86,19 @@ dataqualities = {               ; also propertyqualities
  ? readable: bool
  ? writable: bool
  ? nullable: bool
- ? subtype: "bytestring" / "unixtime"
+ ? subType: "byte-string" / "unix-time"
+           / text                       ; EXTENSION-POINT
  ? contentFormat: text
+ EXTENSION-POINT
 }
 
 allowed-types = number / text / bool / null
               / [* number] / [* text] / [* bool]
+              / any                     ; EXTENSION-POINT
 
 jsonschema = (
  ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
+           / text                       ; EXTENSION-POINT
  ? enum: [+ allowed-types]                                              ; should validate against type
  ? const: allowed-types
  ? default: allowed-types
@@ -102,6 +114,7 @@ jsonschema = (
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
+           / text                       ; EXTENSION-POINT
            ; expand on demand
  ; array constraints
  ? minItems: number
@@ -114,6 +127,7 @@ jsonschema = (
      ? $comment: text               ; source code comments only, no semantics
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
+           / text                       ; EXTENSION-POINT
      ; jso subset
      ? minimum: number
      ? maximum: number
@@ -121,5 +135,6 @@ jsonschema = (
      ? format: text
      ? minLength: number
      ? maxLength: number
+     EXTENSION-POINT
    }
 )
