@@ -89,7 +89,7 @@ Table of Contents
        2.2.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . .   8
        2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .   9
        2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .  10
-       2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .  10
+       2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .  11
        2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  11
        2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  11
        2.2.7.  sdfProduct  . . . . . . . . . . . . . . . . . . . . .  12
@@ -297,13 +297,20 @@ Internet-Draft                  OneDM SDF                      June 2020
            "Switch": {
                "sdfProperty": {
                    "value": {
+                       "description": "The state of the switch; false for off and true for on"
                        "type": "boolean"
                    }
                },
                "sdfAction": {
-                   "on": {},
-                   "off": {},
-                   "toggle": {}
+                   "on": {
+                       "description": "Turn the switch on; equivalent to setting value to true"
+                   },
+                   "off": {
+                       "description": "Turn the switch on; equivalent to setting value to false"
+                   },
+                   "toggle": {
+                       "description": "Toggle the switch; equivalent to setting value to its complement"
+                   }
                }
            }
        }
@@ -321,6 +328,16 @@ Internet-Draft                  OneDM SDF                      June 2020
    having such action will avoid the need for first retrieving the
    current value and then applying/setting the inverted value.
 
+
+
+
+
+
+Koster & Bormann         Expires 6 December 2020                [Page 6]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    The "sdfObject" group lists the affordances of instances of this
    object.  The "sdfProperty" group lists the property affordances
    described by the model; these represent various perspectives on the
@@ -330,14 +347,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    transfer protocols is not described.  Properties are often used with
    RESTful paradigms [I-D.irtf-t2trg-rest-iot], describing state.  The
    "sdfAction" group is the mechanism to describe other interactions in
-
-
-
-Koster & Bormann         Expires 6 December 2020                [Page 6]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
-
    terms of their names, input, and output data (no data are used in the
    example), as in a POST method in REST or in a remote procedure call.
    The example "toggle" is an Action that changes the state based on the
@@ -378,21 +387,14 @@ Internet-Draft                  OneDM SDF                      June 2020
                    |-------|
                    +-------+
 
-                 Figure 2: Main classes used in SDF models
-
-
-
-
-
-
-
-
 
 
 Koster & Bormann         Expires 6 December 2020                [Page 7]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
+
+                 Figure 2: Main classes used in SDF models
 
    sdfThing --> "0+" sdfObject : hasObject
    sdfThing --> "0+" sdfThing : hasThing
@@ -438,9 +440,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    for example ZigBee Clusters [ZCL], OMA LWM2M Objects, and OCF
    Resource Types [OCF].
 
-   An "sdfObject" contains a set of "sdfProperty", "sdfAction", and
-   "sdfEvent" definitions that describe the interaction affordances
-   associated with some scope of functionality.
+
 
 
 
@@ -449,6 +449,10 @@ Koster & Bormann         Expires 6 December 2020                [Page 8]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
+
+   An "sdfObject" contains a set of "sdfProperty", "sdfAction", and
+   "sdfEvent" definitions that describe the interaction affordances
+   associated with some scope of functionality.
 
    For the granularity of definition, "sdfObject" definitions are meant
    to be kept narrow enough in scope to enable broad reuse and
@@ -485,16 +489,12 @@ Internet-Draft                  OneDM SDF                      June 2020
    semantics to these data, for engineering units and unit scaling
    information.
 
-   For the data definition within "sdfProperty" or "sdfData", SDF
-   borrows a number of elements proposed for the drafts 4 and 7 of the
-   json-schema.org "JSON Schema" format
-   [I-D.handrews-json-schema-validation], enhanced by qualities that are
-   specific to SDF.  However, for the current version of SDF, data are
-   constrained to be of simple types (number, string, Boolean) and
-   arrays of these types.  Syntax extension points are provided that can
-   be used to provide richer types in future versions of this
-   specification (possibly more of which can be borrowed from json-
-   schema.org).
+
+
+
+
+
+
 
 
 
@@ -505,6 +505,17 @@ Koster & Bormann         Expires 6 December 2020                [Page 9]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
+
+   For the data definition within "sdfProperty" or "sdfData", SDF
+   borrows a number of elements proposed for the drafts 4 and 7 of the
+   json-schema.org "JSON Schema" format
+   [I-D.handrews-json-schema-validation], enhanced by qualities that are
+   specific to SDF.  However, for the current version of SDF, data are
+   constrained to be of simple types (number, string, Boolean) and
+   arrays of these types.  Syntax extension points are provided that can
+   be used to provide richer types in future versions of this
+   specification (possibly more of which can be borrowed from json-
+   schema.org).
 
    Note that "sdfProperty" definitions (and "sdfData" definitions in
    general) are not intended to constrain the formats of data used for
@@ -539,17 +550,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    and detailed protocol settings for invoking the action, are expected
    to be part of the protocol binding.
 
-2.2.4.  sdfEvent
-
-   The "sdfEvent" group contains declarations of Events, which can model
-   affordances that inform about "happenings" associated with an
-   instance of an Object; these may result in a signal being stored or
-   emitted as a result.
-
-
-
-
-
 
 
 
@@ -561,6 +561,13 @@ Koster & Bormann         Expires 6 December 2020               [Page 10]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
+
+2.2.4.  sdfEvent
+
+   The "sdfEvent" group contains declarations of Events, which can model
+   affordances that inform about "happenings" associated with an
+   instance of an Object; these may result in a signal being stored or
+   emitted as a result.
 
    Note that there is a trivial overlap with sdfProperty state changes,
    which may also be defined as events but are not generally required to
@@ -603,13 +610,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    An definition in an "sdfThing" group can refine the metadata of the
    definitions it is composed from: other definitions in "sdfThing"
    groups definitions in "sdfObject" groups.
-
-
-
-
-
-
-
 
 
 
