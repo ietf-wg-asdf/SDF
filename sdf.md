@@ -159,7 +159,8 @@ Class Name Keyword:
   capitalized and prefixed with `sdf`.
 
 Class:
-: Abstract term for the information that is contained in  groups identified by a Class Name Keyword.
+: Abstract term for the information that is contained in groups
+  identified by a Class Name Keyword.
 
 Property:
 : An affordance that can potentially be used to read, write, and/or
@@ -235,19 +236,19 @@ We start with an example for the SDF definition of a simple Object called "Switc
         "Switch": {
             "sdfProperty": {
                 "value": {
-                    "description": "The state of the switch; false for off and true for on"
+                    "description": "The state of the switch; false for off and true for on."
                     "type": "boolean"
                 }
             },
             "sdfAction": {
                 "on": {
-                    "description": "Turn the switch on; equivalent to setting value to true"
+                    "description": "Turn the switch on; equivalent to setting value to true."
                 },
                 "off": {
-                    "description": "Turn the switch on; equivalent to setting value to false"
+                    "description": "Turn the switch on; equivalent to setting value to false."
                 },
                 "toggle": {
-                    "description": "Toggle the switch; equivalent to setting value to its complement"
+                    "description": "Toggle the switch; equivalent to setting value to its complement."
                 }
             }
         }
