@@ -5,7 +5,7 @@ title: >
   SDF: Semantic Definition Format (SDF) for Things, their Data and Interactions
 abbrev: OneDM SDF
 docname: draft-bormann-t2trg-sdf-latest
-date: 2020-06-03
+date: 2020-06-04
 category: info
 
 ipr: trust200902
