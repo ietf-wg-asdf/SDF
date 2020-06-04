@@ -83,29 +83,29 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Terminology and Conventions . . . . . . . . . . . . . . .   3
-   2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   4
-     2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   4
-     2.2.  Elements of an SDF model  . . . . . . . . . . . . . . . .   6
-       2.2.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . .   7
-       2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .   8
-       2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .   9
-       2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .   9
-       2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  10
-       2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  10
-       2.2.7.  sdfProduct  . . . . . . . . . . . . . . . . . . . . .  10
-   3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  10
-     3.1.  Information block . . . . . . . . . . . . . . . . . . . .  10
-     3.2.  Namespaces section  . . . . . . . . . . . . . . . . . . .  11
-     3.3.  Definitions section . . . . . . . . . . . . . . . . . . .  12
-   4.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .  13
-     4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  14
-     4.2.  Contributing global names . . . . . . . . . . . . . . . .  14
-     4.3.  Referencing global names  . . . . . . . . . . . . . . . .  15
-     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  16
-       4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  16
-     4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  17
-     4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  18
+   2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   5
+     2.2.  Elements of an SDF model  . . . . . . . . . . . . . . . .   7
+       2.2.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . .   8
+       2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .   9
+       2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .  10
+       2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .  10
+       2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  11
+       2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  11
+       2.2.7.  sdfProduct  . . . . . . . . . . . . . . . . . . . . .  12
+   3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  12
+     3.1.  Information block . . . . . . . . . . . . . . . . . . . .  12
+     3.2.  Namespaces section  . . . . . . . . . . . . . . . . . . .  13
+     3.3.  Definitions section . . . . . . . . . . . . . . . . . . .  14
+   4.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .  15
+     4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  15
+     4.2.  Contributing global names . . . . . . . . . . . . . . . .  15
+     4.3.  Referencing global names  . . . . . . . . . . . . . . . .  16
+     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  17
+     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  17
+       4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  17
+     4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  18
+     4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  19
 
 
 
@@ -114,26 +114,26 @@ Koster & Bormann         Expires 5 December 2020                [Page 2]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   5.  Keywords for type definitions . . . . . . . . . . . . . . . .  20
-     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . . . .  22
-     5.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . . . .  23
-   6.  High Level Composition  . . . . . . . . . . . . . . . . . . .  23
-     6.1.  Paths in the model namespaces . . . . . . . . . . . . . .  24
-     6.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  24
-       6.2.1.  Use of the "sdfRef" keyword to re-use a definition  .  24
-     6.3.  sdfThing  . . . . . . . . . . . . . . . . . . . . . . . .  25
-     6.4.  sdfProduct  . . . . . . . . . . . . . . . . . . . . . . .  26
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  26
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  27
-   Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  28
-   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  31
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  48
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  48
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  48
+   5.  Keywords for definition groups  . . . . . . . . . . . . . . .  21
+     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  22
+     5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  22
+     5.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . . . .  22
+     5.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . . . .  23
+     5.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . . . .  24
+   6.  High Level Composition  . . . . . . . . . . . . . . . . . . .  24
+     6.1.  Paths in the model namespaces . . . . . . . . . . . . . .  25
+     6.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  25
+       6.2.1.  Use of the "sdfRef" keyword to re-use a definition  .  25
+     6.3.  sdfThing  . . . . . . . . . . . . . . . . . . . . . . . .  26
+     6.4.  sdfProduct  . . . . . . . . . . . . . . . . . . . . . . .  27
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  27
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  28
+   Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  29
+   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  32
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  49
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  49
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  49
 
 1.  Introduction
 
@@ -177,15 +177,70 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    Quality:  a metadata item in a definition or declaration which says
       something about that definition or declaration.  A quality is
-      represented in SDF as a member in a JSON object that serves as a
-      definition or declaration
+      represented in SDF as an entry in a JSON map (object) that serves
+      as a definition or declaration.
+
+   Entry:  A key-value pair in a map.  (In JSON maps, sometimes also
+      called "member".)
+
+   Block:  One or more entries in a JSON map that is part of an SDF
+      specification; these entries together serve a specific function.
+
+   Group:  An entry in the main SDF map and in certain nested
+      definitions that either has a class name keyword as its key and a
+      map of definition entries or a parameter name keyword as its key
+      and an array of SDF pointers as a value.
+
+   Class Name Keyword:  One of sdfThing, sdfProduct, sdfObject,
+      sdfProperty, sdfAction, sdfEvent, or sdfData; the Classes for
+      these type keywords are capitalized and prefixed with "sdf".
+
+   Class:  Abstract term for the information that is contained in groups
+      identified by a Class Name Keyword.
+
+   Property:  An affordance that can potentially be used to read, write,
+      and/or observe state on an Object.  (Note that Entries are often
+      called properties in other environments; in this document, the
+      term Property is specifically reserved for affordances, even if
+      the map key "properties" might be imported from a data definition
+      language with the other semantics.)
+
+   Action:  An affordance that can potentially be used to perform a
+      named operation on an Object.
+
+   Event:  An affordance that can potentially be used to obtain
+      information about what happened to an Object.
+
+   Object:  A grouping of Property, Action, and Event definitions; the
+      main "atom" of reusable semantics for model construction.  (Note
+      that JSON maps are often called JSON objects due to JSON's
+      JavaScript heritage; properties in other environments; in this
+      document, the term Object is specifically reserved for the above
+      grouping, even if the type name "object" might be imported from a
+      data definition language with the other semantics.)
+
+
+
+Koster & Bormann         Expires 5 December 2020                [Page 4]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
+   Parameter name keyword:  One of sdfInputData, sdfOutputData,
+      sdfRequiredInputData, or sdfRequired.
+
+   Element:  A part or an aspect of something abstract; used here in its
+      usual English definition.  (Occasionally, also used specifically
+      for the elements of JSON arrays.)
 
    Definition:  Creates a new semantic term for use in SDF models and
-      associates it with a set of qualities
+      associates it with a set of qualities.  A definition is
+      represented as an entry in a JSON object that serves as a group.
 
    Declaration:  A reference to and a use of a definition within an
       enclosing definition, intended to create component instances
-      within that enclosing definition.
+      within that enclosing definition.  Every declaration can also be
+      used as a definition for reference in a different place.
 
    Conventions:
 
@@ -202,7 +257,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 2.1.  Example Definition
 
-   We start with an example for the SDF definition of a simple object
+   We start with an example for the SDF definition of a simple Object
    called "Switch" (Figure 1).
 
 
@@ -221,7 +276,8 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020                [Page 4]
+
+Koster & Bormann         Expires 5 December 2020                [Page 5]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -255,42 +311,44 @@ Internet-Draft                  OneDM SDF                      June 2020
 
             Figure 1: A simple example of an SDF definition file
 
-   This is a model of a switch.  The "sdfProperty" value, represented by
-   a Boolean, will be true for "on" and will be false for "off".  The
-   actions "on" or "off" are redundant with setting the "value" and are
+   This is a model of a switch.  The state "value" declared in the
+   "sdfProperty" group, represented by a Boolean, will be true for "on"
+   and will be false for "off".  The actions "on" or "off" declared in
+   the "sdfAction" group are redundant with setting the "value" and are
    in the example to illustrate that there are often different ways of
    achieving the same effect.  The action "toggle" will invert the value
    of the sdfProperty value, so that 2-way switches can be created;
    having such action will avoid the need for first retrieving the
    current value and then applying/setting the inverted value.
 
-   The "sdfObject" lists the affordances of instances of this object.
-   "sdfProperty" lists the property affordances described by the model;
-   these represent various perspectives on the state of the object.  The
-   properties can have additional qualities to describe the state more
-   precisely.  The properties can be annotated to be read, write or
-   read/write; how this is done by the underlying transfer protocols is
-   not described.  Properties are often used with RESTful paradigms
-   [I-D.irtf-t2trg-rest-iot], describing state.  The "sdfAction" is the
-   mechanism to describe interactions in terms of their names, input,
-   and output data (no data are used in the example), as in a POST
+   The "sdfObject" group lists the affordances of instances of this
+   object.  The "sdfProperty" group lists the property affordances
+   described by the model; these represent various perspectives on the
+   state of the object.  Properties can have additional qualities to
+   describe the state more precisely.  Properties can be annotated to be
+   read, write or read/write; how this is done by the underlying
+   transfer protocols is not described.  Properties are often used with
+   RESTful paradigms [I-D.irtf-t2trg-rest-iot], describing state.  The
+   "sdfAction" group is the mechanism to describe other interactions in
 
 
 
-Koster & Bormann         Expires 5 December 2020                [Page 5]
+Koster & Bormann         Expires 5 December 2020                [Page 6]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   method in REST or in a remote procedure call.  The example "toggle"
-   is an action that changes the state based on the current state of the
-   "sdfProperty" named "value".  (The third type of affordance is
-   Events, which are not described in this example.)
+   terms of their names, input, and output data (no data are used in the
+   example), as in a POST method in REST or in a remote procedure call.
+   The example "toggle" is an Action that changes the state based on the
+   current state of the Property named "value".  (The third type of
+   affordance is Events, which are not described in this example.)
 
 2.2.  Elements of an SDF model
 
-   The SDF language uses seven predefined classes for modeling connected
-   Things, six of which are illustrated in Figure 2 and Figure 3
+   The SDF language uses seven predefined Class Name Keywords for
+   modeling connected Things, six of which are illustrated in Figure 2
+   and Figure 3
    // [Decide which of these figures we want]"sdfProduct" is exactly
    like "sdfThing").
 
@@ -331,9 +389,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-
-
-Koster & Bormann         Expires 5 December 2020                [Page 6]
+Koster & Bormann         Expires 5 December 2020                [Page 7]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -372,14 +428,15 @@ Internet-Draft                  OneDM SDF                      June 2020
 
                  Figure 3: Main classes used in SDF models
 
-   The six main classes are discussed below.
+   The seven main Class Name Keywords are discussed below.
 
 2.2.1.  sdfObject
 
-   "sdfObject" is the main "atom" of reusable semantics for model
-   construction.  It aligns in scope with common definition items from
-   many IoT modeling systems, for example ZigBee Clusters [ZCL], OMA
-   LWM2M Objects, and OCF Resource Types [OCF].
+   Objects, the items listed in an "sdfObject" group, are the main
+   "atom" of reusable semantics for model construction.  It aligns in
+   scope with common definition items from many IoT modeling systems,
+   for example ZigBee Clusters [ZCL], OMA LWM2M Objects, and OCF
+   Resource Types [OCF].
 
    An "sdfObject" contains a set of "sdfProperty", "sdfAction", and
    "sdfEvent" definitions that describe the interaction affordances
@@ -388,8 +445,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-
-Koster & Bormann         Expires 5 December 2020                [Page 7]
+Koster & Bormann         Expires 5 December 2020                [Page 8]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -415,88 +471,32 @@ Internet-Draft                  OneDM SDF                      June 2020
    three aspects are described by the qualities "readable", "writable",
    and "observable" defined for an "sdfProperty".)
 
-   An "sdfProperty" definition looks like a single "sdfData" definition.
-   (Qualities beyond those of "sdfData" could be defined for sdfProperty
-   but currently aren't; this means that even "sdfProperty" qualities
-   such as "readable" and "writable" can be associated with "sdfData"
-   definitions, as well.)
+   Definitions in "sdfProperty" groups look like definitions in
+   "sdfData" groups, however, they actually also declare a Property with
+   the given qualities to be potentially present in the containing
+   Object.  (Qualities beyond those of "sdfData" definitions could be
+   defined for "sdfProperty" declarations but currently aren't; this
+   means that even Property qualities such as "readable" and "writable"
+   can be associated with definitions in "sdfData" groups, as well.)
 
-   For "sdfProperty" and "sdfData", SDF provides qualities that can
-   constrain the structure and values of data allowed in an instance of
-   these data, as well as qualities that associate semantics to these
-   data, for engineering units and unit scaling information.
+   For definitions in "sdfProperty" and "sdfData", SDF provides
+   qualities that can constrain the structure and values of data allowed
+   in an instance of these data, as well as qualities that associate
+   semantics to these data, for engineering units and unit scaling
+   information.
 
    For the data definition within "sdfProperty" or "sdfData", SDF
-   borrows a number of elements proposed for the json-schema.org "JSON
-   Schema" format [I-D.handrews-json-schema-validation], enhanced by
-   qualities that are specific to SDF.  However, for the current version
-   of SDF, data are constrained to be of simple types (number, string,
-   Boolean) and arrays of these types.  Syntax extension points are
-   provided that can be used to provide richer types in future versions
-   of this specification (possibly more of which can be borrowed from
-   json-schema.org).
-
-   Note that "sdfProperty" definitions (and "sdfData" definitions in
-   general) are not intended to constrain the formats of data used for
-   communication over network interfaces.  Where needed, data
-   definitions for payloads of protocol messages are expected to be part
-   of the protocol binding.
+   borrows a number of elements proposed for the drafts 4 and 7 of the
+   json-schema.org "JSON Schema" format
+   [I-D.handrews-json-schema-validation], enhanced by qualities that are
+   specific to SDF.  However, for the current version of SDF, data are
+   constrained to be of simple types (number, string, Boolean) and
+   arrays of these types.  Syntax extension points are provided that can
+   be used to provide richer types in future versions of this
+   specification (possibly more of which can be borrowed from json-
+   schema.org).
 
 
-
-
-Koster & Bormann         Expires 5 December 2020                [Page 8]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
-
-2.2.3.  sdfAction
-
-   "sdfAction" is provided to model affordances that, when triggered,
-   have more effect than just reading, updating, or observing Thing
-   state, often resulting in some outward physical effect (which,
-   itself, cannot be modeled in SDF).  From a programmer's perspective,
-   they might be considered to be roughly analogous to method calls.
-
-   Actions may have multiple data parameters; these are modeled as input
-   data and output data (using "sdfData", i.e., the same entries as for
-   "sdfProperty" definitions).  Actions may be long-running, that is to
-   say that the effects may not take place immediately as would be
-   expected for an update to an "sdfPoperty"; the effects may play out
-   over time and emit action results.  Actions may also not always
-   complete and may result in application errors, such as an item
-   blocking the closing of an automatic door.
-
-   Actions may have (or lack) qualities of idempotency and side-effect
-   safety.
-
-   The current version of SDF only provides data constraint modeling and
-   semantics for the input and output data of "sdfAction" entries.
-   Again, data definitions for payloads of protocol messages, and
-   detailed protocol settings for invoking the action, are expected to
-   be part of the protocol binding.
-
-2.2.4.  sdfEvent
-
-   "sdfEvent" is provided to model "happenings" associated with an
-   sdfObject that may result in a signal being stored or emitted as a
-   result.
-
-   Note that there is a trivial overlap with sdfProperty state changes,
-   which may also be defined as events but are not generally required to
-   be defined as such.  However, "sdfEvents" may exhibit certain
-   ordering, consistency, and reliability requirements that are expected
-   to be supported in various implementations of "sdfEvent" that do
-   distinguish sdfEvent from sdfProperty.  For instance, while a state
-   change may simply be superseded by another state change, some events
-   are "precious" and need to be preserved even if further events
-   follow.
-
-   The current version of SDF only provides data constraint modeling and
-   semantics for the output data of "sdfEvent" entries.  Again, data
-   definitions for payloads of protocol messages, and detailed protocol
-   settings for invoking the action, are expected to be part of the
-   protocol binding.
 
 
 
@@ -506,12 +506,85 @@ Koster & Bormann         Expires 5 December 2020                [Page 9]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
+   Note that "sdfProperty" definitions (and "sdfData" definitions in
+   general) are not intended to constrain the formats of data used for
+   communication over network interfaces.  Where needed, data
+   definitions for payloads of protocol messages are expected to be part
+   of the protocol binding.
+
+2.2.3.  sdfAction
+
+   The "sdfAction" group contains declarations of Actions, model
+   affordances that, when triggered, have more effect than just reading,
+   updating, or observing Thing state, often resulting in some outward
+   physical effect (which, itself, cannot be modeled in SDF).  From a
+   programmer's perspective, they might be considered to be roughly
+   analogous to method calls.
+
+   Actions may have multiple data parameters; these are modeled as input
+   data and output data (using "sdfData" definitions, i.e., the same
+   entries as for "sdfProperty" declarations).  Actions may be long-
+   running, that is to say that the effects may not take place
+   immediately as would be expected for an update to an "sdfPoperty";
+   the effects may play out over time and emit action results.  Actions
+   may also not always complete and may result in application errors,
+   such as an item blocking the closing of an automatic door.
+
+   Actions may have (or lack) qualities of idempotency and side-effect
+   safety.
+
+   The current version of SDF only provides data constraint modeling and
+   semantics for the input and output data of definitions in "sdfAction"
+   groups.  Again, data definitions for payloads of protocol messages,
+   and detailed protocol settings for invoking the action, are expected
+   to be part of the protocol binding.
+
+2.2.4.  sdfEvent
+
+   The "sdfEvent" group contains declarations of Events, which can model
+   affordances that inform about "happenings" associated with an
+   instance of an Object; these may result in a signal being stored or
+   emitted as a result.
+
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 10]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
+   Note that there is a trivial overlap with sdfProperty state changes,
+   which may also be defined as events but are not generally required to
+   be defined as such.  However, Events may exhibit certain ordering,
+   consistency, and reliability requirements that are expected to be
+   supported in various implementations of "sdfEvent" that do
+   distinguish sdfEvent from sdfProperty.  For instance, while a state
+   change may simply be superseded by another state change, some events
+   are "precious" and need to be preserved even if further events
+   follow.
+
+   The current version of SDF only provides data constraint modeling and
+   semantics for the output data of Event affordances.  Again, data
+   definitions for payloads of protocol messages, and detailed protocol
+   settings for invoking the action, are expected to be part of the
+   protocol binding.
+
 2.2.5.  sdfData
 
-   "sdfData" is provided separate from "sdfProperty" to enable common
-   modeling patterns, data constraints, and semantic anchor concepts to
-   be factored out for data items that make up "sdfProperty" items and
-   serve as input and output data for "sdfAction" and "sdfEvent" items.
+   Definitions in "sdfData" groups are provided separately from those in
+   "sdfProperty" groups to enable common modeling patterns, data
+   constraints, and semantic anchor concepts to be factored out for data
+   items that make up "sdfProperty" items and serve as input and output
+   data for "sdfAction" and "sdfEvent" items.
 
    It is a common use case for such a data definition to be shared
    between an "sdfProperty" item and input or output parameters of an
@@ -523,20 +596,36 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 2.2.6.  sdfThing
 
-   Back at the top level, "sdfThing" enables construction of models for
-   complex devices that will use one or more "sdfObject" definitions.
-
-   An "sdfThing" definition can refine the metadata of the definitions
-   it is composed from: other sdfThing definitions and sdfObject
+   Back at the top level, the "sdfThing" groups enables definition of
+   models for complex devices that will use one or more "sdfObject"
    definitions.
+
+   An definition in an "sdfThing" group can refine the metadata of the
+   definitions it is composed from: other definitions in "sdfThing"
+   groups definitions in "sdfObject" groups.
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 11]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
 
 2.2.7.  sdfProduct
 
    "sdfThing" has a derived class "sdfProduct", which can be used to
    indicate a top level inventory item with a Stock-Keeping Unit (SKU)
    identifier and other particular metadata.  Structurally, there is no
-   difference between the two; semantically, an "sdfProduct" is intended
-   to describe a class of complete Things.
+   difference between definitions in either group; semantically, a
+   definition in an "sdfProduct" group is intended to describe a class
+   of complete Things.
 
 3.  SDF structure
 
@@ -553,18 +642,9 @@ Internet-Draft                  OneDM SDF                      June 2020
    The information block contains generic meta data for the file itself
    and all included definitions.
 
-
-
-
-
-Koster & Bormann         Expires 5 December 2020               [Page 10]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
-
    The keyword (map key) that defines an information block is "info".
-   Its value is a JSON map in turn, with a set of key-value pairs that
-   represent qualities that apply to the included definition.
+   Its value is a JSON map in turn, with a set of entries that represent
+   qualities that apply to the included definition.
 
    Qualities of the information block are shown in Table 1.
 
@@ -585,6 +665,14 @@ Internet-Draft                  OneDM SDF                      June 2020
     +-----------+--------+----------+---------------------------------+
 
                 Table 1: Qualities of the Information Block
+
+
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 12]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
 
    While the format of the version string is marked as TBD, it is
    intended to be lexicographically increasing over the life of a model:
@@ -608,19 +696,10 @@ Internet-Draft                  OneDM SDF                      June 2020
    The namespace map is a map from short names for URIs to the namespace
    URIs themselves.
 
-
-
-
-
-
-Koster & Bormann         Expires 5 December 2020               [Page 11]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
-
-   The defaultnamespace setting selects one of the short names in the
-   namespace map; the associated URI of which becomes the default
-   namespace for the SDF definition file.
+   The defaultnamespace setting selects one of the entries in the
+   namespace map by giving its short name.  The associated URI (value of
+   this entry) becomes the default namespace for the SDF definition
+   file.
 
      +------------------+--------+----------+-----------------------+
      | Quality          | Type   | Required | Description           |
@@ -642,6 +721,15 @@ Internet-Draft                  OneDM SDF                      June 2020
    The following example declares a set of namespaces and defines "cap"
    as the default namespace.
 
+
+
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 13]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    "namespace": {
      "cap": "https://example.com/capability/odm",
      "zcl": "https://example.com/zcl/odm"
@@ -658,33 +746,21 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 3.3.  Definitions section
 
-   The Definitions section contains one or more type definitions
-   according to the class name keywords for type definitions (for
-   object, property, action, event, data, as well as thing and product);
-   the names for these type keywords are capitalized and prefixed with
-   "sdf".  The keywords are used with JSON maps (objects), the keys of
-   which serve for naming the individual entries and the values define
-   or declare an individual entry.
+   The Definitions section contains one or more groups, each identified
+   by a Class Name Keyword (there can only be one group per keyword; the
+   actual grouping is just a shortcut and does not carry any specific
+   semantics).  The value of each group is a JSON map (object), the keys
+   of which serve for naming the individual definitions in this group,
+   and the corresponding values provide the qualities (name-value pairs)
+   for the individual definition.
 
-
-
-
-Koster & Bormann         Expires 5 December 2020               [Page 12]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
-
-   Each class defined may have zero or more type definitions associated
-   with it.  Each defined identifier creates a new type and term in the
-   target namespace, and has a scope of the current definition block.
-
-   A definition consists of a map entry using the newly defined term as
-   a JSON key, with a value consisting of a map of Qualities and their
-   values.
+   Each group may contain zero or more definitions.  Each identifier
+   defined creates a new type and term in the target namespace.
+   Declarations have a scope of the current definition block.
 
    A definition may in turn contain other definitions.  Each definition
    consists of the newly defined identifier and a set of key-value pairs
-   that represent the defined qualities and contained type definitions.
+   that represent the defined qualities and contained definitions.
 
    An example for an Object definition is given in Figure 4:
 
@@ -699,6 +775,16 @@ Internet-Draft                  OneDM SDF                      June 2020
    }
 
                     Figure 4: Example Object definition
+
+
+
+
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 14]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
 
    This example defines an Object "foo" that is defined in the default
    namespace (full address: "#/sdfObject/foo"), containing a property
@@ -719,16 +805,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    reference elements from that global namespace.  (An SDF definition
    file that does not set a defaultnamespace does not contribute to a
    global namespace.)
-
-
-
-
-
-
-Koster & Bormann         Expires 5 December 2020               [Page 13]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
 4.1.  Structure
 
@@ -759,6 +835,13 @@ Internet-Draft                  OneDM SDF                      June 2020
    are contributed to the default namespace, we therefore also call it
    the "target namespace" of the SDF definition file.
 
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 15]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    E.g., in Figure 1, definitions for the following global names are
    contributed:
 
@@ -774,24 +857,13 @@ Internet-Draft                  OneDM SDF                      June 2020
    Note the "#", which separates the base part from the fragment
    identifier part.
 
-
-
-
-
-
-
-
-Koster & Bormann         Expires 5 December 2020               [Page 14]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
-
 4.3.  Referencing global names
 
    A name reference takes the form of the production "curie" in
    [W3C.NOTE-curie-20101216] (note that this excludes the production
-   "safe-curie"), limiting the IRIs involved in that production to URIs
-   as per [RFC3986] and the prefixes to ASCII characters [RFC0020].
+   "safe-curie"), but also limiting the IRIs involved in that production
+   to URIs as per [RFC3986] and the prefixes to ASCII characters
+   [RFC0020].
 
    A name that is contributed by the current SDF definition file can be
    referenced by a Same-Document Reference as per section 4.4 of
@@ -818,6 +890,14 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    "https://example.com/#/sdfData/temperatureData"
 
+
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 16]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    Note that there is no way to provide a URI scheme name in a curie, so
    all references outside of the document need to go through the
    namespace map.
@@ -829,26 +909,13 @@ Internet-Draft                  OneDM SDF                      June 2020
    *  pointing to elements via sdfRequired value elements or as
       sdfInput/OutputData etc.
 
-
-
-
-
-
-
-
-
-Koster & Bormann         Expires 5 December 2020               [Page 15]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
-
 4.4.  sdfRef
 
    In a JSON map establishing a definition, the keyword "sdfRef" is used
    to copy all of the qualities of the referenced definition, indicated
    by the included name reference, into the newly formed definition.
-   (This can be compared to the processing of the "$ref" keyword in JSON
-   Schema.)
+   (This can be compared to the processing of the "$ref" keyword in
+   [I-D.handrews-json-schema-validation].)
 
    For example, this reference:
 
@@ -862,7 +929,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 4.5.  sdfRequired
 
    The value of "sdfRequired" is an array of name references, each
-   pointing to one declaration instantiation of which is declared
+   pointing to one declaration the instantiation of which is declared
    mandatory.
 
 4.5.1.  Optionality using the keyword "sdfRequired"
@@ -872,7 +939,20 @@ Internet-Draft                  OneDM SDF                      June 2020
    definition in which the constraint appears.
 
    The value of "sdfRequired" is an array of JSON pointers, each
-   indicating one mandatory definition.
+   indicating one definition that is mandatory to be present.
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 17]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
 
    The example in Figure 5 shows two required elements in the sdfObject
    definition for "temperatureWithAlarm", the sdfProperty
@@ -880,23 +960,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    example also shows the use of JSON pointer with "sdfRef" to use a
    pre-existing definition in this definition, for the "alarmType" data
    (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann         Expires 5 December 2020               [Page 16]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
    {
      "sdfObject": {
@@ -942,14 +1005,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-
-
-
-
-
-
-
-Koster & Bormann         Expires 5 December 2020               [Page 17]
+Koster & Bormann         Expires 5 December 2020               [Page 18]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1005,7 +1061,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 18]
+Koster & Bormann         Expires 5 December 2020               [Page 19]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1061,7 +1117,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 19]
+Koster & Bormann         Expires 5 December 2020               [Page 20]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1104,29 +1160,30 @@ Internet-Draft                  OneDM SDF                      June 2020
 
         Table 5: SDF-defined Qualities of sdfProperty and sdfData
 
-5.  Keywords for type definitions
+5.  Keywords for definition groups
 
-   The following SDF keywords are used to create type definitions in the
-   target namespace.  All these definitions share some common qualities
-   as discussed in Section 4.6.
-
-
+   The following SDF keywords are used to create definition groups in
+   the target namespace.  All these definitions share some common
+   qualities as discussed in Section 4.6.
 
 
 
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 20]
+
+
+Koster & Bormann         Expires 5 December 2020               [Page 21]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
 
 5.1.  sdfObject
 
-   The sdfObject keyword denotes zero or more Object definitions.  An
-   sdfObject may contain or include definitions of events, actions,
-   properties, and data types.
+   The sdfObject keyword denotes a group of zero or more Object
+   definitions.  Object definitions may contain or include definitions
+   of Properties, Actions, Events declared for the object, as well as
+   data types (sdfData group) to be used in this or other Objects.
 
    The qualities of an sdfObject include the common qualities,
    additional qualities are shown in Table 6.  None of these qualities
@@ -1156,30 +1213,32 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 5.2.  sdfProperty
 
-   The sdfProperty keyword denotes zero or more property definitions.
+   The sdfProperty keyword denotes a group of zero or more Property
+   definitions.
 
    Properties are used to model elements of state.
 
-   The qualities of sdfProperty include the common qualities and the
-   data qualities, see Section 4.7.
+   The qualities of a Property definition include the common qualities
+   and the data qualities, see Section 4.7.
 
 5.3.  sdfAction
 
-   The sdfAction keyword denotes zero or more Action definitions.
-
-   Actions are used to model commands and methods which are invoked.
-   Actions have parameter data that are supplied upon invocation.
+   The sdfAction keyword denotes a group of zero or more Action
+   definitions.
 
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 21]
+Koster & Bormann         Expires 5 December 2020               [Page 22]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   The qualities of sdfAction include the common qualities, additional
-   qualities are shown in Table 7.
+   Actions are used to model commands and methods which are invoked.
+   Actions have parameter data that are supplied upon invocation.
+
+   The qualities of an Action definition include the common qualities,
+   additional qualities are shown in Table 7.
 
     +----------------------+-------+----------------------------+----+
     | Quality              | Type  | Description                |    |
@@ -1205,12 +1264,10 @@ Internet-Draft                  OneDM SDF                      June 2020
 
                      Table 7: Qualities of sdfAction
 
-   "sdfInputData" refined by "sdfRequiredInputData" define the input
-   data of the action.  "sdfOutputData" refined "sdfRequired" (a quality
-   defined in Table 3) define the output data of the action.
-
-   CHECK THIS: sdfProperty may not itself define any other SDF types;
-   all types needed are referenced via SDF pointers.
+   "sdfInputData", as refined by "sdfRequiredInputData", define the
+   input data of the action.  "sdfOutputData", as refined by
+   "sdfRequired," (a quality defined in Table 3) define the output data
+   of the action.
 
 5.4.  sdfEvent
 
@@ -1228,8 +1285,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-
-Koster & Bormann         Expires 5 December 2020               [Page 22]
+Koster & Bormann         Expires 5 December 2020               [Page 23]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1253,18 +1309,19 @@ Internet-Draft                  OneDM SDF                      June 2020
 
                        Table 8: Qualities of sdfEvent
 
-   "sdfOutputData" refined by "sdfRequired" (a quality defined in
-   Table 3) define the output data of the action.
+   "sdfOutputData", as refined by "sdfRequired" (a quality defined in
+   Table 3), define the output data of the action.
 
 5.5.  sdfData
 
-   The sdfData keyword denotes zero or more Data type definitions.
+   The sdfData keyword denotes a group of zero or more Data type
+   definitions.
 
    An sdfData definition provides a semantic identifier for a data item
    and describes the constraints on the defined data item.
 
-   sdfData is used for Action parameters, for Event data, and for
-   reusable constraints in property definitions
+   sdfData is used for Action parameters, for Event output data, and for
+   reusable constraints in Property definitions.
 
    The qualities of sdfData include the common qualities and the data
    qualities, see Section 4.7.
@@ -1276,7 +1333,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    *  The ability to represent products, standardized product types, and
       modular products while maintaining the atomicity of Objects.
 
-   *  The ability to compose a reusable definition block from objects,
+   *  The ability to compose a reusable definition block from Objects,
       for example a single plug unit of an outlet strip with on/off
       control, energy monitor, and optional dimmer objects, while
       retaining the atomicity of the individual objects.
@@ -1284,13 +1341,12 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-
-Koster & Bormann         Expires 5 December 2020               [Page 23]
+Koster & Bormann         Expires 5 December 2020               [Page 24]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   *  The ability to compose objects and other definition blocks into a
+   *  The ability to compose Objects and other definition blocks into a
       higher level thing that represents a product, while retaining the
       atomicity of objects.
 
@@ -1341,7 +1397,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 24]
+Koster & Bormann         Expires 5 December 2020               [Page 25]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1397,7 +1453,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 25]
+Koster & Bormann         Expires 5 December 2020               [Page 26]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1453,7 +1509,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 26]
+Koster & Bormann         Expires 5 December 2020               [Page 27]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1509,7 +1565,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 27]
+Koster & Bormann         Expires 5 December 2020               [Page 28]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1565,7 +1621,7 @@ Appendix A.  Formal Syntax of SDF
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 28]
+Koster & Bormann         Expires 5 December 2020               [Page 29]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1621,7 +1677,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 29]
+Koster & Bormann         Expires 5 December 2020               [Page 30]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1677,7 +1733,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 30]
+Koster & Bormann         Expires 5 December 2020               [Page 31]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1733,7 +1789,7 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 31]
+Koster & Bormann         Expires 5 December 2020               [Page 32]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1789,7 +1845,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 32]
+Koster & Bormann         Expires 5 December 2020               [Page 33]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1845,7 +1901,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 33]
+Koster & Bormann         Expires 5 December 2020               [Page 34]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1901,7 +1957,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 34]
+Koster & Bormann         Expires 5 December 2020               [Page 35]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -1957,7 +2013,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 35]
+Koster & Bormann         Expires 5 December 2020               [Page 36]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2013,7 +2069,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 36]
+Koster & Bormann         Expires 5 December 2020               [Page 37]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2069,7 +2125,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 37]
+Koster & Bormann         Expires 5 December 2020               [Page 38]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2125,7 +2181,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 38]
+Koster & Bormann         Expires 5 December 2020               [Page 39]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2181,7 +2237,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 39]
+Koster & Bormann         Expires 5 December 2020               [Page 40]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2237,7 +2293,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 40]
+Koster & Bormann         Expires 5 December 2020               [Page 41]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2293,7 +2349,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 41]
+Koster & Bormann         Expires 5 December 2020               [Page 42]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2349,7 +2405,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 42]
+Koster & Bormann         Expires 5 December 2020               [Page 43]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2405,7 +2461,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 43]
+Koster & Bormann         Expires 5 December 2020               [Page 44]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2461,7 +2517,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 44]
+Koster & Bormann         Expires 5 December 2020               [Page 45]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2517,7 +2573,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 45]
+Koster & Bormann         Expires 5 December 2020               [Page 46]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2573,7 +2629,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 46]
+Koster & Bormann         Expires 5 December 2020               [Page 47]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2629,7 +2685,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 47]
+Koster & Bormann         Expires 5 December 2020               [Page 48]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2685,7 +2741,7 @@ Authors' Addresses
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 48]
+Koster & Bormann         Expires 5 December 2020               [Page 49]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
@@ -2741,4 +2797,4 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-Koster & Bormann         Expires 5 December 2020               [Page 49]
+Koster & Bormann         Expires 5 December 2020               [Page 50]

@@ -135,13 +135,76 @@ Affordance:
   displays.
 
 Quality:
-: a metadata item in a definition or declaration which says something about that definition or declaration. A quality is represented in SDF as a member in a JSON object that serves as a definition or declaration
+: a metadata item in a definition or declaration which says something
+  about that definition or declaration.  A quality is represented in
+  SDF as an entry in a JSON map (object) that serves as a definition
+  or declaration.
+
+Entry:
+: A key-value pair in a map. (In JSON maps, sometimes also called "member".)
+
+Block:
+: One or more entries in a JSON map that is part of an SDF
+  specification; these entries together serve a specific function.
+
+Group:
+: An entry in the main SDF map and in certain nested definitions that
+  either has a class name keyword as its key and a map of definition
+  entries or a parameter name keyword as its key and an array of SDF
+  pointers as a value.
+
+Class Name Keyword:
+: One of sdfThing, sdfProduct, sdfObject, sdfProperty, sdfAction,
+  sdfEvent, or sdfData; the Classes for these type keywords are
+  capitalized and prefixed with `sdf`.
+
+Class:
+: Abstract term for the information that is contained in  groups identified by a Class Name Keyword.
+
+Property:
+: An affordance that can potentially be used to read, write, and/or
+  observe state on an Object.  (Note that Entries are often called
+  properties in other environments; in this document, the term
+  Property is specifically reserved for affordances, even if the map
+  key "properties" might be imported from a data definition language
+  with the other semantics.)
+
+Action:
+: An affordance that can potentially be used to perform a named operation on an Object.
+
+Event:
+: An affordance that can potentially be used to obtain information about what happened to an Object.
+
+Object:
+: A grouping of Property, Action, and Event definitions; the main
+  "atom" of reusable semantics for model construction.  (Note that
+  JSON maps are often called JSON objects due to JSON's JavaScript
+  heritage; properties in other environments; in this document, the
+  term Object is specifically reserved for the above grouping, even if
+  the type name "object" might be imported from a data definition
+  language with the other semantics.)
+
+Parameter name keyword:
+: One of sdfInputData, sdfOutputData, sdfRequiredInputData, or
+  sdfRequired.
+
+Element:
+: A part or an aspect of something abstract; used here in its usual English definition.
+  (Occasionally, also used specifically for the elements of JSON arrays.)
 
 Definition:
-: Creates a new semantic term for use in SDF models and associates it with a set of qualities
+: Creates a new semantic term for use in SDF models and associates it
+  with a set of qualities.  A definition is represented as an entry in
+  a JSON object that serves as a group.
 
 Declaration:
-: A reference to and a use of a definition within an enclosing definition, intended to create component instances within that enclosing definition.
+: A reference to and a use of a definition within an enclosing
+  definition, intended to create component instances within that
+  enclosing definition.  Every declaration can also be used as a
+  definition for reference in a different place.
+
+
+
 <!-- XXX -->
 
 Conventions:
@@ -154,7 +217,7 @@ Conventions:
 
 ## Example Definition
 
-We start with an example for the SDF definition of a simple object called "Switch" ({{example1}}).
+We start with an example for the SDF definition of a simple Object called "Switch" ({{example1}}).
 
 ~~~ json
 {
@@ -187,23 +250,23 @@ We start with an example for the SDF definition of a simple object called "Switc
 {: #example1 title="A simple example of an SDF definition file"}
 
 This is a model of a switch.
-The `sdfProperty` value, represented by a Boolean, will be true for "on" and will be false for "off".
-The actions `on` or `off` are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
+The state `value` declared in the `sdfProperty` group, represented by a Boolean, will be true for "on" and will be false for "off".
+The actions `on` or `off` declared in the `sdfAction` group are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action `toggle` will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
 
-The `sdfObject` lists the affordances of instances of this object.
-`sdfProperty` lists the property affordances described by the model; these represent various perspectives on the state of the object.
-The properties can have additional qualities to describe the state more precisely.
-The properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
+The `sdfObject` group lists the affordances of instances of this object.
+The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the object.
+Properties can have additional qualities to describe the state more precisely.
+Properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
 Properties are often used with RESTful paradigms {{-rest-iot}}, describing state.
-The `sdfAction` is the mechanism to describe interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
-The example `toggle` is an action that
-changes the state based on the current state of the `sdfProperty` named `value`.
+The `sdfAction` group is the mechanism to describe other interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
+The example `toggle` is an Action that
+changes the state based on the current state of the Property named `value`.
 (The third type of affordance is Events, which are not described in this example.)
 
 ## Elements of an SDF model
 
-The SDF language uses seven predefined classes for modeling connected
+The SDF language uses seven predefined Class Name Keywords for modeling connected
 Things, six of which are illustrated in {{fig-class-1}} and {{fig-class-2}}[^1] (the seventh class `sdfProduct` is exactly like `sdfThing`).
 
 [^1]: \[Decide which of these figures we want]
@@ -273,11 +336,11 @@ class sdfData {
 ~~~
 {: #fig-class-2 title="Main classes used in SDF models"}
 
-The six main classes are discussed below.
+The seven main Class Name Keywords are discussed below.
 
 ### sdfObject
 
-`sdfObject` is the main "atom" of reusable semantics for model construction.
+Objects, the items listed in an `sdfObject` group, are the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters {{ZCL}}, OMA LWM2M Objects, and
 OCF Resource Types {{OCF}}.
@@ -308,19 +371,18 @@ changes.
 (These three aspects are described by the qualities `readable`,
 `writable`, and `observable` defined for an `sdfProperty`.)
 
-An `sdfProperty` definition looks like a single `sdfData` definition.
-(Qualities beyond those of `sdfData` could be defined for sdfProperty
-but currently aren't; this means that even `sdfProperty` qualities
-such as `readable` and `writable` can be associated with `sdfData`
-definitions, as well.)
+Definitions in `sdfProperty` groups look like definitions in `sdfData` groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing Object.
+(Qualities beyond those of `sdfData` definitions could be defined for `sdfProperty` declarations
+but currently aren't; this means that even Property qualities
+such as `readable` and `writable` can be associated with definitions in `sdfData` groups, as well.)
 
-For `sdfProperty` and `sdfData`, SDF provides qualities that can
+For definitions in `sdfProperty` and `sdfData`, SDF provides qualities that can
 constrain the structure and values of data allowed in an instance of
 these data, as well as qualities that associate semantics to these
 data, for engineering units and unit scaling information.
 
 For the data definition within `sdfProperty` or `sdfData`, SDF borrows
-a number of elements proposed for the json-schema.org "JSON Schema"
+a number of elements proposed for the drafts 4 and 7 of the json-schema.org "JSON Schema"
 format {{-jso}}, enhanced by qualities that are specific to SDF.
 However, for the current version of SDF, data are constrained to be of
 simple types (number, string, Boolean) and arrays of these types.
@@ -336,15 +398,15 @@ expected to be part of the protocol binding.
 
 ### sdfAction
 
-`sdfAction` is provided to model affordances that, when triggered,
+The `sdfAction` group contains declarations of Actions, model affordances that, when triggered,
 have more effect than just reading, updating, or observing Thing
 state, often resulting in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.
 
 Actions may have multiple data parameters; these are modeled as input
-data and output data (using `sdfData`, i.e., the same entries as for
-`sdfProperty` definitions).
+data and output data (using `sdfData` definitions, i.e., the same entries as for
+`sdfProperty` declarations).
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
 `sdfPoperty`; the effects may play out over time and emit action
@@ -354,21 +416,22 @@ errors, such as an item blocking the closing of an automatic door.
 
 Actions may have (or lack) qualities of idempotency and side-effect safety.
 
-The current version of SDF only provides data constraint modeling and semantics for the input and output data of `sdfAction` entries.
+The current version of SDF only provides data constraint modeling and semantics for the input and output data of definitions in `sdfAction` groups.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
 part of the protocol binding.
 
 ### sdfEvent
 
-`sdfEvent` is provided to model "happenings" associated with an
-sdfObject that may result in a signal being stored or emitted as a
-result.
+The `sdfEvent` group contains declarations of Events, which can model
+affordances that inform about "happenings" associated with an instance
+of an Object; these may result in a signal being stored or emitted as
+a result.
 
 Note that there is a trivial overlap with sdfProperty state changes,
 which may also be defined as events but are not generally required to
 be defined as such.
-However, `sdfEvents` may exhibit certain ordering, consistency, and
+However, Events may exhibit certain ordering, consistency, and
 reliability requirements that are expected to be supported in various
 implementations of `sdfEvent` that do distinguish sdfEvent from
 sdfProperty.
@@ -377,7 +440,7 @@ state change, some events are "precious" and need to be preserved even
 if further events follow.
 
 The current version of SDF only provides data constraint modeling and
-semantics for the output data of `sdfEvent` entries.
+semantics for the output data of Event affordances.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
 part of the protocol binding.
@@ -385,7 +448,8 @@ part of the protocol binding.
 
 ### sdfData
 
-`sdfData` is provided separate from `sdfProperty` to enable common
+Definitions in `sdfData` groups are provided separately from those in
+`sdfProperty` groups to enable common
 modeling patterns, data constraints, and semantic anchor concepts to
 be factored out for data items that make up `sdfProperty` items and
 serve as input and output data for `sdfAction` and `sdfEvent` items.
@@ -400,20 +464,20 @@ and requirements.
 
 ### sdfThing
 
-Back at the top level, `sdfThing` enables construction of models for
+Back at the top level, the `sdfThing` groups enables definition of models for
 complex devices that will use one or more `sdfObject` definitions.
 
-An `sdfThing` definition can refine the metadata of the definitions it
-is composed from: other sdfThing definitions and sdfObject definitions.
+An definition in an `sdfThing` group can refine the metadata of the definitions it
+is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
 
 ### sdfProduct
 
 `sdfThing` has a derived class `sdfProduct`, which can be used to
 indicate a top level inventory item with a Stock-Keeping Unit (SKU)
 identifier and other particular metadata.
-Structurally, there is no difference between the
-two; semantically, an `sdfProduct` is intended to describe a class of
-complete Things.
+Structurally, there is no difference between definitions in either
+group; semantically, a definition in an `sdfProduct` group is intended
+to describe a class of complete Things.
 
 
 # SDF structure
@@ -430,7 +494,7 @@ This object has three sections: the information block, the namespaces section an
 The information block contains generic meta data for the file itself and all included definitions.
 
 The keyword (map key) that defines an information block is "info". Its
-value is a JSON map in turn, with a set of key-value pairs that represent qualities that apply to the included definition.
+value is a JSON map in turn, with a set of entries that represent qualities that apply to the included definition.
 
 Qualities of the information block are shown in {{infoblockqual}}.
 
@@ -455,9 +519,9 @@ The namespaces section contains the namespace map and the defaultnamespace setti
 The namespace map is a map from short names for URIs to the namespace URIs
 themselves.
 
-The defaultnamespace setting selects one of the short names in the
-namespace map; the associated URI of which becomes the default
-namespace for the SDF definition file.
+The defaultnamespace setting selects one of the entries in the
+namespace map by giving its short name.  The associated URI (value of
+this entry) becomes the default namespace for the SDF definition file.
 
 | Quality          | Type   | Required | Description                                                                                          |
 |------------------|--------|----------|------------------------------------------------------------------------------------------------------|
@@ -486,15 +550,14 @@ set up, and no defaultnamespace can be given.
 
 ## Definitions section
 
-The Definitions section contains one or more type definitions according to the class name keywords for type definitions (for object, property, action, event, data, as well as thing and product); the names for these type keywords are capitalized and prefixed with `sdf`.
-The keywords are used with JSON maps (objects), the keys of which serve for naming the individual entries and the values define or declare an individual entry.
+The Definitions section contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
+The value of each group is a JSON map (object), the keys of which serve for naming the individual definitions in this group, and the corresponding values provide the qualities (name-value pairs) for the individual definition.
 
-Each class defined may have zero or more type definitions associated with it.
-Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.
+Each group may contain zero or more definitions.
+Each identifier defined creates a new type and term in the target namespace.
+Declarations have a scope of the current definition block.
 
-A definition consists of a map entry using the newly defined term as a JSON key, with a value consisting of a map of Qualities and their values.
-
-A definition may in turn contain other definitions. Each definition consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained type definitions.
+A definition may in turn contain other definitions. Each definition consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained definitions.
 
 An example for an Object definition is given in {{exobject}}:
 
@@ -568,7 +631,7 @@ identifier part.
 
 A name reference takes the form of the production `curie` in
 {{-curie}} (note that this excludes the production `safe-curie`),
-limiting the IRIs involved in that production to URIs as per {{-uri}}
+but also limiting the IRIs involved in that production to URIs as per {{-uri}}
 and the prefixes to ASCII characters {{-ascii}}.
 
 A name that is contributed by the current SDF definition file can be
@@ -619,7 +682,7 @@ Name references occur only in specific elements of the syntax of SDF:
 In a JSON map establishing a definition, the keyword "sdfRef" is used
 to copy all of the qualities of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
-(This can be compared to the processing of the "$ref" keyword in JSON Schema.)
+(This can be compared to the processing of the "$ref" keyword in {{-jso}}.)
 
 For example, this reference:
 
@@ -634,13 +697,14 @@ creates a new definition "temperatureProperty" that contains all of the qualitie
 ## sdfRequired
 
 The value of "sdfRequired" is an array of name references, each
-pointing to one declaration instantiation of which is declared mandatory.
+pointing to one declaration the instantiation of which is declared mandatory.
 
 ### Optionality using the keyword "sdfRequired"
 
 The keyword "sdfRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.
 
-The value of "sdfRequired" is an array of JSON pointers, each indicating one mandatory definition.
+The value of "sdfRequired" is an array of JSON pointers, each
+indicating one definition that is mandatory to be present.
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "temperatureData", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
@@ -744,14 +808,15 @@ allowed for one of these types.
 | subtype       | "bytestring" / "unixtime" | subtype enumeration                                             | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
-# Keywords for type definitions
+# Keywords for definition groups
 
-The following SDF keywords are used to create type definitions in the target namespace.
+The following SDF keywords are used to create definition groups in the target namespace.
 All these definitions share some common qualities as discussed in {{common-qualities}}.
 
 ## sdfObject
 
-The sdfObject keyword denotes zero or more Object definitions. An sdfObject may contain or include definitions of events, actions, properties, and data types.
+The sdfObject keyword denotes a group of zero or more Object definitions.
+Object definitions may contain or include definitions of Properties, Actions, Events declared for the object, as well as data types (sdfData group) to be used in this or other Objects.
 
 The qualities of an sdfObject include the common qualities, additional qualities are shown in {{sdfobjqual}}.
 None of these
@@ -770,19 +835,19 @@ quality is absent.
 
 ## sdfProperty
 
-The sdfProperty keyword denotes zero or more property definitions.
+The sdfProperty keyword denotes a group of zero or more Property definitions.
 
 Properties are used to model elements of state.
 
-The qualities of sdfProperty include the common qualities and the data qualities, see {{data-qualities}}.
+The qualities of a Property definition include the common qualities and the data qualities, see {{data-qualities}}.
 
 ## sdfAction
 
-The sdfAction keyword denotes zero or more Action definitions.
+The sdfAction keyword denotes a group of zero or more Action definitions.
 
 Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.
 
-The qualities of sdfAction include the common qualities, additional qualities are shown in {{sdfactqual}}.
+The qualities of an Action definition include the common qualities, additional qualities are shown in {{sdfactqual}}.
 
 | Quality              | Type   | Description                                                            |     |
 |----------------------|--------|------------------------------------------------------------------------|-----|
@@ -793,12 +858,10 @@ The qualities of sdfAction include the common qualities, additional qualities ar
 | sdfData     | data     | zero or more named data type definitions that might be used in the above |
 {: #sdfactqual title="Qualities of sdfAction"}
 
-`sdfInputData` refined by `sdfRequiredInputData` define the input data
-of the action.  `sdfOutputData` refined `sdfRequired` (a quality
+`sdfInputData`, as refined by `sdfRequiredInputData`, define the input data
+of the action.  `sdfOutputData`, as refined by `sdfRequired,` (a quality
 defined in {{tbl-common-qualities}}) define the output data of the
 action.
-
-CHECK THIS: sdfProperty may not itself define any other SDF types; all types needed are referenced via SDF pointers.
 
 ## sdfEvent
 
@@ -815,17 +878,18 @@ The qualities of sdfEvent include the common qualities, additional qualities are
 | sdfData     | data     | zero or more named data type definitions that might be used in the above |
 {: #sdfevqual title="Qualities of sdfEvent"}
 
-`sdfOutputData` refined by `sdfRequired` (a quality
-defined in {{tbl-common-qualities}}) define the output data of the
+`sdfOutputData`, as refined by `sdfRequired` (a quality
+defined in {{tbl-common-qualities}}), define the output data of the
 action.
 
 ## sdfData
 
-The sdfData keyword denotes zero or more Data type definitions.
+The sdfData keyword denotes a group of zero or more Data type definitions.
 
 An sdfData definition provides a semantic identifier for a data item and describes the constraints on the defined data item.
 
-sdfData is used for Action parameters, for Event data, and for reusable constraints in property definitions
+sdfData is used for Action parameters, for Event output data, and for
+reusable constraints in Property definitions.
 
 The qualities of sdfData include the common qualities and the data qualities, see {{data-qualities}}.
 
@@ -835,9 +899,9 @@ The requirements for high level composition include the following:
 
 - The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.
 
-- The ability to compose a reusable definition block from objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.
+- The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.
 
-- The ability to compose objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.
+- The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.
 
 - The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.
 

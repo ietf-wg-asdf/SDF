@@ -1298,7 +1298,7 @@ plan is to do this in early June.
 </ul>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-keywords-for-type-definitio" class="xref">Keywords for type definitions</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-keywords-for-definition-gro" class="xref">Keywords for definition groups</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-sdfobject-2" class="xref">sdfObject</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
@@ -1406,17 +1406,99 @@ displays.<a href="#section-1.1-1.4" class="pilcrow">¶</a>
 <dd class="break"></dd>
 <dt id="section-1.1-1.5">Quality:</dt>
 <dd id="section-1.1-1.6">
-  a metadata item in a definition or declaration which says something about that definition or declaration. A quality is represented in SDF as a member in a JSON object that serves as a definition or declaration<a href="#section-1.1-1.6" class="pilcrow">¶</a>
+  a metadata item in a definition or declaration which says something
+about that definition or declaration.  A quality is represented in
+SDF as an entry in a JSON map (object) that serves as a definition
+or declaration.<a href="#section-1.1-1.6" class="pilcrow">¶</a>
 </dd>
 <dd class="break"></dd>
-<dt id="section-1.1-1.7">Definition:</dt>
+<dt id="section-1.1-1.7">Entry:</dt>
 <dd id="section-1.1-1.8">
-  Creates a new semantic term for use in SDF models and associates it with a set of qualities<a href="#section-1.1-1.8" class="pilcrow">¶</a>
+  A key-value pair in a map. (In JSON maps, sometimes also called "member".)<a href="#section-1.1-1.8" class="pilcrow">¶</a>
 </dd>
 <dd class="break"></dd>
-<dt id="section-1.1-1.9">Declaration:</dt>
+<dt id="section-1.1-1.9">Block:</dt>
 <dd id="section-1.1-1.10">
-  A reference to and a use of a definition within an enclosing definition, intended to create component instances within that enclosing definition.<a href="#section-1.1-1.10" class="pilcrow">¶</a>
+  One or more entries in a JSON map that is part of an SDF
+specification; these entries together serve a specific function.<a href="#section-1.1-1.10" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.11">Group:</dt>
+<dd id="section-1.1-1.12">
+  An entry in the main SDF map and in certain nested definitions that
+either has a class name keyword as its key and a map of definition
+entries or a parameter name keyword as its key and an array of SDF
+pointers as a value.<a href="#section-1.1-1.12" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.13">Class Name Keyword:</dt>
+<dd id="section-1.1-1.14">
+  One of sdfThing, sdfProduct, sdfObject, sdfProperty, sdfAction,
+sdfEvent, or sdfData; the Classes for these type keywords are
+capitalized and prefixed with <code>sdf</code>.<a href="#section-1.1-1.14" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.15">Class:</dt>
+<dd id="section-1.1-1.16">
+  Abstract term for the information that is contained in  groups identified by a Class Name Keyword.<a href="#section-1.1-1.16" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.17">Property:</dt>
+<dd id="section-1.1-1.18">
+  An affordance that can potentially be used to read, write, and/or
+observe state on an Object.  (Note that Entries are often called
+properties in other environments; in this document, the term
+Property is specifically reserved for affordances, even if the map
+key "properties" might be imported from a data definition language
+with the other semantics.)<a href="#section-1.1-1.18" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.19">Action:</dt>
+<dd id="section-1.1-1.20">
+  An affordance that can potentially be used to perform a named operation on an Object.<a href="#section-1.1-1.20" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.21">Event:</dt>
+<dd id="section-1.1-1.22">
+  An affordance that can potentially be used to obtain information about what happened to an Object.<a href="#section-1.1-1.22" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.23">Object:</dt>
+<dd id="section-1.1-1.24">
+  A grouping of Property, Action, and Event definitions; the main
+"atom" of reusable semantics for model construction.  (Note that
+JSON maps are often called JSON objects due to JSON's JavaScript
+heritage; properties in other environments; in this document, the
+term Object is specifically reserved for the above grouping, even if
+the type name "object" might be imported from a data definition
+language with the other semantics.)<a href="#section-1.1-1.24" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.25">Parameter name keyword:</dt>
+<dd id="section-1.1-1.26">
+  One of sdfInputData, sdfOutputData, sdfRequiredInputData, or
+sdfRequired.<a href="#section-1.1-1.26" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.27">Element:</dt>
+<dd id="section-1.1-1.28">
+  A part or an aspect of something abstract; used here in its usual English definition.
+(Occasionally, also used specifically for the elements of JSON arrays.)<a href="#section-1.1-1.28" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.29">Definition:</dt>
+<dd id="section-1.1-1.30">
+  Creates a new semantic term for use in SDF models and associates it
+with a set of qualities.  A definition is represented as an entry in
+a JSON object that serves as a group.<a href="#section-1.1-1.30" class="pilcrow">¶</a>
+</dd>
+<dd class="break"></dd>
+<dt id="section-1.1-1.31">Declaration:</dt>
+<dd id="section-1.1-1.32">
+  A reference to and a use of a definition within an enclosing
+definition, intended to create component instances within that
+enclosing definition.  Every declaration can also be used as a
+definition for reference in a different place.<a href="#section-1.1-1.32" class="pilcrow">¶</a>
 </dd>
 <dd class="break"></dd>
 </dl>
@@ -1444,7 +1526,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">�
         <h3 id="name-example-definition">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-example-definition" class="section-name selfRef">Example Definition</a>
         </h3>
-<p id="section-2.1-1">We start with an example for the SDF definition of a simple object called "Switch" (<a href="#example1" class="xref">Figure 1</a>).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">We start with an example for the SDF definition of a simple Object called "Switch" (<a href="#example1" class="xref">Figure 1</a>).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <span id="name-a-simple-example-of-an-sdf-"></span><div id="example1">
 <figure id="figure-1">
           <div class="artwork art-text alignLeft art-json" id="section-2.1-2.1">
@@ -1482,17 +1564,17 @@ appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">�
           </figcaption></figure>
 </div>
 <p id="section-2.1-3">This is a model of a switch.
-The <code>sdfProperty</code> value, represented by a Boolean, will be true for "on" and will be false for "off".
-The actions <code>on</code> or <code>off</code> are redundant with setting the <code>value</code> and are in the example to illustrate that there are often different ways of achieving the same effect.
+The state <code>value</code> declared in the <code>sdfProperty</code> group, represented by a Boolean, will be true for "on" and will be false for "off".
+The actions <code>on</code> or <code>off</code> declared in the <code>sdfAction</code> group are redundant with setting the <code>value</code> and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action <code>toggle</code> will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.1-4">The <code>sdfObject</code> lists the affordances of instances of this object.
-<code>sdfProperty</code> lists the property affordances described by the model; these represent various perspectives on the state of the object.
-The properties can have additional qualities to describe the state more precisely.
-The properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
+<p id="section-2.1-4">The <code>sdfObject</code> group lists the affordances of instances of this object.
+The <code>sdfProperty</code> group lists the property affordances described by the model; these represent various perspectives on the state of the object.
+Properties can have additional qualities to describe the state more precisely.
+Properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
 Properties are often used with RESTful paradigms <span>[<a href="#I-D.irtf-t2trg-rest-iot" class="xref">I-D.irtf-t2trg-rest-iot</a>]</span>, describing state.
-The <code>sdfAction</code> is the mechanism to describe interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
-The example <code>toggle</code> is an action that
-changes the state based on the current state of the <code>sdfProperty</code> named <code>value</code>.
+The <code>sdfAction</code> group is the mechanism to describe other interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
+The example <code>toggle</code> is an Action that
+changes the state based on the current state of the Property named <code>value</code>.
 (The third type of affordance is Events, which are not described in this example.)<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1501,7 +1583,7 @@ changes the state based on the current state of the <code>sdfProperty</code> nam
         <h3 id="name-elements-of-an-sdf-model">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-elements-of-an-sdf-model" class="section-name selfRef">Elements of an SDF model</a>
         </h3>
-<p id="section-2.2-1">The SDF language uses seven predefined classes for modeling connected
+<p id="section-2.2-1">The SDF language uses seven predefined Class Name Keywords for modeling connected
 Things, six of which are illustrated in <a href="#fig-class-1" class="xref">Figure 2</a> and <a href="#fig-class-2" class="xref">Figure 3</a>
           <span class="cref" id="_1">[Decide which of these figures we want]</span> (the seventh class <code>sdfProduct</code> is exactly like <code>sdfThing</code>).<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <span id="name-main-classes-used-in-sdf-mo"></span><div id="fig-class-1">
@@ -1773,13 +1855,13 @@ Country: DE
 <a href="#name-main-classes-used-in-sdf-mod" class="selfRef">Main classes used in SDF models</a>
           </figcaption></figure>
 </div>
-<p id="section-2.2-4">The six main classes are discussed below.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">The seven main Class Name Keywords are discussed below.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 <div id="sdfobject">
 <section id="section-2.2.1">
           <h4 id="name-sdfobject">
 <a href="#section-2.2.1" class="section-number selfRef">2.2.1. </a><a href="#name-sdfobject" class="section-name selfRef">sdfObject</a>
           </h4>
-<p id="section-2.2.1-1"><code>sdfObject</code> is the main "atom" of reusable semantics for model construction.
+<p id="section-2.2.1-1">Objects, the items listed in an <code>sdfObject</code> group, are the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters <span>[<a href="#ZCL" class="xref">ZCL</a>]</span>, OMA LWM2M Objects, and
 OCF Resource Types <span>[<a href="#OCF" class="xref">OCF</a>]</span>.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
@@ -1810,17 +1892,16 @@ Additionally, some protocols provide for in-time reporting of state
 changes.
 (These three aspects are described by the qualities <code>readable</code>,
 <code>writable</code>, and <code>observable</code> defined for an <code>sdfProperty</code>.)<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-3">An <code>sdfProperty</code> definition looks like a single <code>sdfData</code> definition.
-(Qualities beyond those of <code>sdfData</code> could be defined for sdfProperty
-but currently aren't; this means that even <code>sdfProperty</code> qualities
-such as <code>readable</code> and <code>writable</code> can be associated with <code>sdfData</code>
-definitions, as well.)<a href="#section-2.2.2-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-4">For <code>sdfProperty</code> and <code>sdfData</code>, SDF provides qualities that can
+<p id="section-2.2.2-3">Definitions in <code>sdfProperty</code> groups look like definitions in <code>sdfData</code> groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing Object.
+(Qualities beyond those of <code>sdfData</code> definitions could be defined for <code>sdfProperty</code> declarations
+but currently aren't; this means that even Property qualities
+such as <code>readable</code> and <code>writable</code> can be associated with definitions in <code>sdfData</code> groups, as well.)<a href="#section-2.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-4">For definitions in <code>sdfProperty</code> and <code>sdfData</code>, SDF provides qualities that can
 constrain the structure and values of data allowed in an instance of
 these data, as well as qualities that associate semantics to these
 data, for engineering units and unit scaling information.<a href="#section-2.2.2-4" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-5">For the data definition within <code>sdfProperty</code> or <code>sdfData</code>, SDF borrows
-a number of elements proposed for the json-schema.org "JSON Schema"
+a number of elements proposed for the drafts 4 and 7 of the json-schema.org "JSON Schema"
 format <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>, enhanced by qualities that are specific to SDF.
 However, for the current version of SDF, data are constrained to be of
 simple types (number, string, Boolean) and arrays of these types.
@@ -1839,14 +1920,14 @@ expected to be part of the protocol binding.<a href="#section-2.2.2-6" class="pi
           <h4 id="name-sdfaction">
 <a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-sdfaction" class="section-name selfRef">sdfAction</a>
           </h4>
-<p id="section-2.2.3-1"><code>sdfAction</code> is provided to model affordances that, when triggered,
+<p id="section-2.2.3-1">The <code>sdfAction</code> group contains declarations of Actions, model affordances that, when triggered,
 have more effect than just reading, updating, or observing Thing
 state, often resulting in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.3-2">Actions may have multiple data parameters; these are modeled as input
-data and output data (using <code>sdfData</code>, i.e., the same entries as for
-<code>sdfProperty</code> definitions).
+data and output data (using <code>sdfData</code> definitions, i.e., the same entries as for
+<code>sdfProperty</code> declarations).
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
 <code>sdfPoperty</code>; the effects may play out over time and emit action
@@ -1854,7 +1935,7 @@ results.
 Actions may also not always complete and may result in application
 errors, such as an item blocking the closing of an automatic door.<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.3-3">Actions may have (or lack) qualities of idempotency and side-effect safety.<a href="#section-2.2.3-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-4">The current version of SDF only provides data constraint modeling and semantics for the input and output data of <code>sdfAction</code> entries.
+<p id="section-2.2.3-4">The current version of SDF only provides data constraint modeling and semantics for the input and output data of definitions in <code>sdfAction</code> groups.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
 part of the protocol binding.<a href="#section-2.2.3-4" class="pilcrow">¶</a></p>
@@ -1865,13 +1946,14 @@ part of the protocol binding.<a href="#section-2.2.3-4" class="pilcrow">¶</a></
           <h4 id="name-sdfevent">
 <a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-sdfevent" class="section-name selfRef">sdfEvent</a>
           </h4>
-<p id="section-2.2.4-1"><code>sdfEvent</code> is provided to model "happenings" associated with an
-sdfObject that may result in a signal being stored or emitted as a
-result.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.4-1">The <code>sdfEvent</code> group contains declarations of Events, which can model
+affordances that inform about "happenings" associated with an instance
+of an Object; these may result in a signal being stored or emitted as
+a result.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.4-2">Note that there is a trivial overlap with sdfProperty state changes,
 which may also be defined as events but are not generally required to
 be defined as such.
-However, <code>sdfEvents</code> may exhibit certain ordering, consistency, and
+However, Events may exhibit certain ordering, consistency, and
 reliability requirements that are expected to be supported in various
 implementations of <code>sdfEvent</code> that do distinguish sdfEvent from
 sdfProperty.
@@ -1879,7 +1961,7 @@ For instance, while a state change may simply be superseded by another
 state change, some events are "precious" and need to be preserved even
 if further events follow.<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.4-3">The current version of SDF only provides data constraint modeling and
-semantics for the output data of <code>sdfEvent</code> entries.
+semantics for the output data of Event affordances.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
 part of the protocol binding.<a href="#section-2.2.4-3" class="pilcrow">¶</a></p>
@@ -1890,7 +1972,8 @@ part of the protocol binding.<a href="#section-2.2.4-3" class="pilcrow">¶</a></
           <h4 id="name-sdfdata">
 <a href="#section-2.2.5" class="section-number selfRef">2.2.5. </a><a href="#name-sdfdata" class="section-name selfRef">sdfData</a>
           </h4>
-<p id="section-2.2.5-1"><code>sdfData</code> is provided separate from <code>sdfProperty</code> to enable common
+<p id="section-2.2.5-1">Definitions in <code>sdfData</code> groups are provided separately from those in
+<code>sdfProperty</code> groups to enable common
 modeling patterns, data constraints, and semantic anchor concepts to
 be factored out for data items that make up <code>sdfProperty</code> items and
 serve as input and output data for <code>sdfAction</code> and <code>sdfEvent</code> items.<a href="#section-2.2.5-1" class="pilcrow">¶</a></p>
@@ -1908,10 +1991,10 @@ and requirements.<a href="#section-2.2.5-2" class="pilcrow">¶</a></p>
           <h4 id="name-sdfthing">
 <a href="#section-2.2.6" class="section-number selfRef">2.2.6. </a><a href="#name-sdfthing" class="section-name selfRef">sdfThing</a>
           </h4>
-<p id="section-2.2.6-1">Back at the top level, <code>sdfThing</code> enables construction of models for
+<p id="section-2.2.6-1">Back at the top level, the <code>sdfThing</code> groups enables definition of models for
 complex devices that will use one or more <code>sdfObject</code> definitions.<a href="#section-2.2.6-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.6-2">An <code>sdfThing</code> definition can refine the metadata of the definitions it
-is composed from: other sdfThing definitions and sdfObject definitions.<a href="#section-2.2.6-2" class="pilcrow">¶</a></p>
+<p id="section-2.2.6-2">An definition in an <code>sdfThing</code> group can refine the metadata of the definitions it
+is composed from: other definitions in <code>sdfThing</code> groups definitions in <code>sdfObject</code> groups.<a href="#section-2.2.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdfproduct">
@@ -1922,9 +2005,9 @@ is composed from: other sdfThing definitions and sdfObject definitions.<a href="
 <p id="section-2.2.7-1"><code>sdfThing</code> has a derived class <code>sdfProduct</code>, which can be used to
 indicate a top level inventory item with a Stock-Keeping Unit (SKU)
 identifier and other particular metadata.
-Structurally, there is no difference between the
-two; semantically, an <code>sdfProduct</code> is intended to describe a class of
-complete Things.<a href="#section-2.2.7-1" class="pilcrow">¶</a></p>
+Structurally, there is no difference between definitions in either
+group; semantically, a definition in an <code>sdfProduct</code> group is intended
+to describe a class of complete Things.<a href="#section-2.2.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1948,7 +2031,7 @@ This object has three sections: the information block, the namespaces section an
         </h3>
 <p id="section-3.1-1">The information block contains generic meta data for the file itself and all included definitions.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The keyword (map key) that defines an information block is "info". Its
-value is a JSON map in turn, with a set of key-value pairs that represent qualities that apply to the included definition.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+value is a JSON map in turn, with a set of entries that represent qualities that apply to the included definition.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">Qualities of the information block are shown in <a href="#infoblockqual" class="xref">Table 1</a>.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-the-informatio"></span><div id="infoblockqual">
 <table class="center" id="table-1">
@@ -2006,9 +2089,9 @@ This is easily achieved by following the convention to start the version with an
 <p id="section-3.2-1">The namespaces section contains the namespace map and the defaultnamespace setting.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The namespace map is a map from short names for URIs to the namespace URIs
 themselves.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">The defaultnamespace setting selects one of the short names in the
-namespace map; the associated URI of which becomes the default
-namespace for the SDF definition file.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">The defaultnamespace setting selects one of the entries in the
+namespace map by giving its short name.  The associated URI (value of
+this entry) becomes the default namespace for the SDF definition file.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <span id="name-namespaces-section-2"></span><div id="nssec">
 <table class="center" id="table-2">
           <caption>
@@ -2062,16 +2145,16 @@ set up, and no defaultnamespace can be given.<a href="#section-3.2-8" class="pil
         <h3 id="name-definitions-section">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-definitions-section" class="section-name selfRef">Definitions section</a>
         </h3>
-<p id="section-3.3-1">The Definitions section contains one or more type definitions according to the class name keywords for type definitions (for object, property, action, event, data, as well as thing and product); the names for these type keywords are capitalized and prefixed with <code>sdf</code>.
-The keywords are used with JSON maps (objects), the keys of which serve for naming the individual entries and the values define or declare an individual entry.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">Each class defined may have zero or more type definitions associated with it.
-Each defined identifier creates a new type and term in the target namespace, and has a scope of the current definition block.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">A definition consists of a map entry using the newly defined term as a JSON key, with a value consisting of a map of Qualities and their values.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">A definition may in turn contain other definitions. Each definition consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained type definitions.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">An example for an Object definition is given in <a href="#exobject" class="xref">Figure 4</a>:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">The Definitions section contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
+The value of each group is a JSON map (object), the keys of which serve for naming the individual definitions in this group, and the corresponding values provide the qualities (name-value pairs) for the individual definition.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Each group may contain zero or more definitions.
+Each identifier defined creates a new type and term in the target namespace.
+Declarations have a scope of the current definition block.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">A definition may in turn contain other definitions. Each definition consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained definitions.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.3-4">An example for an Object definition is given in <a href="#exobject" class="xref">Figure 4</a>:<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <span id="name-example-object-definition"></span><div id="exobject">
 <figure id="figure-4">
-          <div class="artwork art-text alignLeft art-json" id="section-3.3-6.1">
+          <div class="artwork art-text alignLeft art-json" id="section-3.3-5.1">
 <pre>
 "sdfObject": {
   "foo": {
@@ -2088,9 +2171,9 @@ Each defined identifier creates a new type and term in the target namespace, and
 <a href="#name-example-object-definition" class="selfRef">Example Object definition</a>
           </figcaption></figure>
 </div>
-<p id="section-3.3-7">This example defines an Object "foo" that is defined in the default namespace (full address: <code>#/sdfObject/foo</code>), containing a property that can be addressed as
-<code>#/sdfObject/foo/sdfProperty/bar</code>, with data of type boolean.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
-<p id="section-3.3-8">Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within <code>sdfProperty</code>, <code>sdfAction</code>, and <code>sdfEvent</code>, within <code>sdfObject</code> entries, are declarations.  Similarly, entries within an <code>sdfThing</code> describe instances of <code>sdfObject</code> (or nested <code>sdfThing</code>) that form part of instances of the Thing.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">This example defines an Object "foo" that is defined in the default namespace (full address: <code>#/sdfObject/foo</code>), containing a property that can be addressed as
+<code>#/sdfObject/foo/sdfProperty/bar</code>, with data of type boolean.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within <code>sdfProperty</code>, <code>sdfAction</code>, and <code>sdfEvent</code>, within <code>sdfObject</code> entries, are declarations.  Similarly, entries within an <code>sdfThing</code> describe instances of <code>sdfObject</code> (or nested <code>sdfThing</code>) that form part of instances of the Thing.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2158,7 +2241,7 @@ identifier part.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-4.3-1">A name reference takes the form of the production <code>curie</code> in
 <span>[<a href="#W3C.NOTE-curie-20101216" class="xref">W3C.NOTE-curie-20101216</a>]</span> (note that this excludes the production <code>safe-curie</code>),
-limiting the IRIs involved in that production to URIs as per <span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span>
+but also limiting the IRIs involved in that production to URIs as per <span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span>
 and the prefixes to ASCII characters <span>[<a href="#RFC0020" class="xref">RFC0020</a>]</span>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">A name that is contributed by the current SDF definition file can be
 referenced by a Same-Document Reference as per section 4.4 of
@@ -2211,7 +2294,7 @@ sdfInput/OutputData etc.<a href="#section-4.3-12.2" class="pilcrow">¶</a>
 <p id="section-4.4-1">In a JSON map establishing a definition, the keyword "sdfRef" is used
 to copy all of the qualities of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
-(This can be compared to the processing of the "$ref" keyword in JSON Schema.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+(This can be compared to the processing of the "$ref" keyword in <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4-2">For example, this reference:<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft art-json" id="section-4.4-3">
 <pre>
@@ -2229,14 +2312,15 @@ by the included name reference, into the newly formed definition.
 <a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-sdfrequired" class="section-name selfRef">sdfRequired</a>
         </h3>
 <p id="section-4.5-1">The value of "sdfRequired" is an array of name references, each
-pointing to one declaration instantiation of which is declared mandatory.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+pointing to one declaration the instantiation of which is declared mandatory.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
 <div id="optionality-using-the-keyword-sdfrequired">
 <section id="section-4.5.1">
           <h4 id="name-optionality-using-the-keywo">
 <a href="#section-4.5.1" class="section-number selfRef">4.5.1. </a><a href="#name-optionality-using-the-keywo" class="section-name selfRef">Optionality using the keyword "sdfRequired"</a>
           </h4>
 <p id="section-4.5.1-1">The keyword "sdfRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.5.1-2">The value of "sdfRequired" is an array of JSON pointers, each indicating one mandatory definition.<a href="#section-4.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.5.1-2">The value of "sdfRequired" is an array of JSON pointers, each
+indicating one definition that is mandatory to be present.<a href="#section-4.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.5.1-3">The example in <a href="#example-req" class="xref">Figure 5</a> shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "temperatureData", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".<a href="#section-4.5.1-3" class="pilcrow">¶</a></p>
 <span id="name-using-sdfrequired"></span><div id="example-req">
 <figure id="figure-5">
@@ -2535,19 +2619,20 @@ allowed for one of these types.<a href="#section-4.7-4" class="pilcrow">¶</a></
 </div>
 </section>
 </div>
-<div id="keywords-for-type-definitions">
+<div id="keywords-for-definition-groups">
 <section id="section-5">
-      <h2 id="name-keywords-for-type-definitio">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-keywords-for-type-definitio" class="section-name selfRef">Keywords for type definitions</a>
+      <h2 id="name-keywords-for-definition-gro">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-keywords-for-definition-gro" class="section-name selfRef">Keywords for definition groups</a>
       </h2>
-<p id="section-5-1">The following SDF keywords are used to create type definitions in the target namespace.
+<p id="section-5-1">The following SDF keywords are used to create definition groups in the target namespace.
 All these definitions share some common qualities as discussed in <a href="#common-qualities" class="xref">Section 4.6</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="sdfobject-1">
 <section id="section-5.1">
         <h3 id="name-sdfobject-2">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-sdfobject-2" class="section-name selfRef">sdfObject</a>
         </h3>
-<p id="section-5.1-1">The sdfObject keyword denotes zero or more Object definitions. An sdfObject may contain or include definitions of events, actions, properties, and data types.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">The sdfObject keyword denotes a group of zero or more Object definitions.
+Object definitions may contain or include definitions of Properties, Actions, Events declared for the object, as well as data types (sdfData group) to be used in this or other Objects.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2">The qualities of an sdfObject include the common qualities, additional qualities are shown in <a href="#sdfobjqual" class="xref">Table 6</a>.
 None of these
 qualities are required or have default values that are assumed if the
@@ -2603,9 +2688,9 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
         <h3 id="name-sdfproperty-2">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-sdfproperty-2" class="section-name selfRef">sdfProperty</a>
         </h3>
-<p id="section-5.2-1">The sdfProperty keyword denotes zero or more property definitions.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">The sdfProperty keyword denotes a group of zero or more Property definitions.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">Properties are used to model elements of state.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">The qualities of sdfProperty include the common qualities and the data qualities, see <a href="#data-qualities" class="xref">Section 4.7</a>.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">The qualities of a Property definition include the common qualities and the data qualities, see <a href="#data-qualities" class="xref">Section 4.7</a>.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdfaction-1">
@@ -2613,9 +2698,9 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
         <h3 id="name-sdfaction-2">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-sdfaction-2" class="section-name selfRef">sdfAction</a>
         </h3>
-<p id="section-5.3-1">The sdfAction keyword denotes zero or more Action definitions.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-1">The sdfAction keyword denotes a group of zero or more Action definitions.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">The qualities of sdfAction include the common qualities, additional qualities are shown in <a href="#sdfactqual" class="xref">Table 7</a>.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">The qualities of an Action definition include the common qualities, additional qualities are shown in <a href="#sdfactqual" class="xref">Table 7</a>.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-sdfaction"></span><div id="sdfactqual">
 <table class="center" id="table-7">
           <caption>
@@ -2666,11 +2751,10 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
           </tbody>
         </table>
 </div>
-<p id="section-5.3-5"><code>sdfInputData</code> refined by <code>sdfRequiredInputData</code> define the input data
-of the action.  <code>sdfOutputData</code> refined <code>sdfRequired</code> (a quality
+<p id="section-5.3-5"><code>sdfInputData</code>, as refined by <code>sdfRequiredInputData</code>, define the input data
+of the action.  <code>sdfOutputData</code>, as refined by <code>sdfRequired,</code> (a quality
 defined in <a href="#tbl-common-qualities" class="xref">Table 3</a>) define the output data of the
 action.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.3-6">CHECK THIS: sdfProperty may not itself define any other SDF types; all types needed are referenced via SDF pointers.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdfevent-1">
@@ -2719,8 +2803,8 @@ action.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
           </tbody>
         </table>
 </div>
-<p id="section-5.4-5"><code>sdfOutputData</code> refined by <code>sdfRequired</code> (a quality
-defined in <a href="#tbl-common-qualities" class="xref">Table 3</a>) define the output data of the
+<p id="section-5.4-5"><code>sdfOutputData</code>, as refined by <code>sdfRequired</code> (a quality
+defined in <a href="#tbl-common-qualities" class="xref">Table 3</a>), define the output data of the
 action.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2729,9 +2813,10 @@ action.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
         <h3 id="name-sdfdata-2">
 <a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-sdfdata-2" class="section-name selfRef">sdfData</a>
         </h3>
-<p id="section-5.5-1">The sdfData keyword denotes zero or more Data type definitions.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.5-1">The sdfData keyword denotes a group of zero or more Data type definitions.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.5-2">An sdfData definition provides a semantic identifier for a data item and describes the constraints on the defined data item.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
-<p id="section-5.5-3">sdfData is used for Action parameters, for Event data, and for reusable constraints in property definitions<a href="#section-5.5-3" class="pilcrow">¶</a></p>
+<p id="section-5.5-3">sdfData is used for Action parameters, for Event output data, and for
+reusable constraints in Property definitions.<a href="#section-5.5-3" class="pilcrow">¶</a></p>
 <p id="section-5.5-4">The qualities of sdfData include the common qualities and the data qualities, see <a href="#data-qualities" class="xref">Section 4.7</a>.<a href="#section-5.5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2746,9 +2831,9 @@ action.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-6-2.1">The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.<a href="#section-6-2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-6-2.2">The ability to compose a reusable definition block from objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.<a href="#section-6-2.2" class="pilcrow">¶</a>
+<li id="section-6-2.2">The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.<a href="#section-6-2.2" class="pilcrow">¶</a>
 </li>
-<li id="section-6-2.3">The ability to compose objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.<a href="#section-6-2.3" class="pilcrow">¶</a>
+<li id="section-6-2.3">The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.<a href="#section-6-2.3" class="pilcrow">¶</a>
 </li>
 <li id="section-6-2.4">The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.<a href="#section-6-2.4" class="pilcrow">¶</a>
 </li>
