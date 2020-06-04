@@ -9,43 +9,43 @@ Expires: 6 December 2020                          Universität Bremen TZI
                                                              4 June 2020
 
 
-    SDF: Semantic Definition Format (SDF) for Things, their Data and
-                              Interactions
-                     draft-bormann-t2trg-sdf-latest
+  Semantic Definition Format (SDF) for Data and Interactions of Things
+                      draft-onedm-t2trg-sdf-latest
 
 Abstract
 
-   The Semantic Definition Format is a format for domain experts to use
-   in the creation and maintenance of OneDM definitions.
+   The Semantic Definition Format (SDF) is a format for domain experts
+   to use in the creation and maintenance of data and interaction models
+   in the Internet of Things.  It was created as a common language for
+   use in the development of the One Data Model liaison organization
+   (OneDM) definitions.  Tools convert this format to database formats
+   and other serializations as needed.
 
-   OneDM tools convert this format to database formats and other
-   serializations as needed.
-
-   This document describes definitions of OneDM Objects and their
+   An SDF specification describes definitions of SDF Objects and their
    associated interactions (Events, Actions, Properties), as well as the
    Data types for the information exchanged in those interactions.
 
-   The JSON format of an SDF definition is described in this document.
+   A JSON format representation of SDF 1.0 is defined in this document.
 
 Contributing
 
    Recent versions of this document are available at its GitHub
-   repository (TODO: point to GitHub repo), which also provides an issue
-   tracker as well as a way to supply "pull requests".
+   repository https://github.com/one-data-model/sdf (https://github.com/
+   one-data-model/sdf) -- this also provides an issue tracker as well as
+   a way to supply "pull requests".
 
-   This document has not yet been submitted as an Internet-Draft; the
-   plan is to do this in early June.  (TODO: add "note well" type
-   information)
+   General discussion of this SDF Internet-Draft for now will be on the
+   mailing list of the Thing-to-Thing Research group, t2trg@irtf.org
+   (subscribe at https://www.irtf.org/mailman/listinfo/t2trg
+   (https://www.irtf.org/mailman/listinfo/t2trg)).
+
+   The IRTF Note Well applies (https://www.ietf.org/about/note-well/
+   (https://www.ietf.org/about/note-well/)).
 
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
-
-   Internet-Drafts are working documents of the Internet Engineering
-   Task Force (IETF).  Note that other groups may also distribute
-   working documents as Internet-Drafts.  The list of current Internet-
-   Drafts is at https://datatracker.ietf.org/drafts/current/.
 
 
 
@@ -57,6 +57,11 @@ Koster & Bormann         Expires 6 December 2020                [Page 1]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
@@ -101,11 +106,6 @@ Table of Contents
      4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  15
      4.2.  Contributing global names . . . . . . . . . . . . . . . .  15
      4.3.  Referencing global names  . . . . . . . . . . . . . . . .  16
-     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  17
-     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  17
-       4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  17
-     4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  18
-     4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  19
 
 
 
@@ -114,6 +114,11 @@ Koster & Bormann         Expires 6 December 2020                [Page 2]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
+     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  17
+     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  17
+       4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  17
+     4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  18
+     4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  19
    5.  Keywords for definition groups  . . . . . . . . . . . . . . .  21
      5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  22
      5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  22
@@ -137,29 +142,24 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 1.  Introduction
 
-   The Semantic Definition Format is a format for domain experts to use
-   in the creation and maintenance of OneDM definitions.
+   The Semantic Definition Format (SDF) is a format for domain experts
+   to use in the creation and maintenance of data and interaction models
+   in the Internet of Things.  It was created as a common language for
+   use in the development of the One Data Model liaison organization
+   (OneDM) definitions.  Tools convert this format to database formats
+   and other serializations as needed.
 
-   OneDM tools convert this format to database formats and other
-   serializations as needed.
-
-   This document describes definitions of OneDM Objects and their
+   An SDF specification describes definitions of SDF Objects and their
    associated interactions (Events, Actions, Properties), as well as the
    Data types for the information exchanged in those interactions.
 
-   The JSON format of an SDF definition is described in this document.
+   A JSON format representation of SDF 1.0 is defined in this document.
 
 1.1.  Terminology and Conventions
 
    Thing:  A physical device that is also made available in the Internet
-      of Things.  The term is used here for Things that are notable for
-      their interaction with the physical world beyond interaction with
-      humans; a temperature sensor or a light might be a Thing, but a
-      router that employs both temperature sensors and indicator lights
-      might exhibit less Thingness, as the effects of its functioning
-      are mostly on the digital side.
 
-   Affordance:  An element of an interface offered for interaction,
+
 
 
 
@@ -170,6 +170,14 @@ Koster & Bormann         Expires 6 December 2020                [Page 3]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
+      of Things.  The term is used here for Things that are notable for
+      their interaction with the physical world beyond interaction with
+      humans; a temperature sensor or a light might be a Thing, but a
+      router that employs both temperature sensors and indicator lights
+      might exhibit less Thingness, as the effects of its functioning
+      are mostly on the digital side.
+
+   Affordance:  An element of an interface offered for interaction,
       defining its possible uses or making clear how it can or should be
       used.  The term is used here for the digital interfaces of a Thing
       only; it might also have physical affordances such as buttons,
@@ -210,14 +218,6 @@ Internet-Draft                  OneDM SDF                      June 2020
       named operation on an Object.
 
    Event:  An affordance that can potentially be used to obtain
-      information about what happened to an Object.
-
-   Object:  A grouping of Property, Action, and Event definitions; the
-
-
-
-
-
 
 
 
@@ -226,6 +226,9 @@ Koster & Bormann         Expires 6 December 2020                [Page 4]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
+      information about what happened to an Object.
+
+   Object:  A grouping of Property, Action, and Event definitions; the
       main "atom" of reusable semantics for model construction.  (Note
       that JSON maps are often called JSON objects due to JSON's
       JavaScript heritage; properties in other environments; in this
@@ -274,9 +277,6 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-
-
-
 Koster & Bormann         Expires 6 December 2020                [Page 5]
 
 Internet-Draft                  OneDM SDF                      June 2020
@@ -284,13 +284,13 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    {
        "info": {
-           "title": "Example file for ODM Semantic Definition Format",
+           "title": "Example file for OneDM Semantic Definition Format",
            "version": "2019-04-24",
            "copyright": "Copyright 2019 Example Corp. All rights reserved.",
            "license": "https://example.com/license"
        },
        "namespace": {
-           "cap": "https://example.com/capability/odm"
+           "cap": "https://example.com/capability/cap"
        },
        "defaultNamespace": "cap",
        "sdfObject": {
@@ -343,8 +343,9 @@ Internet-Draft                  OneDM SDF                      June 2020
    described by the model; these represent various perspectives on the
    state of the object.  Properties can have additional qualities to
    describe the state more precisely.  Properties can be annotated to be
-   read, write or read/write; how this is done by the underlying
-   transfer protocols is not described.  Properties are often used with
+   read, write or read/write; how this is actually done by the
+   underlying transfer protocols is not described in the SDF model but
+   left to companion protocol bindings.  Properties are often used with
    RESTful paradigms [I-D.irtf-t2trg-rest-iot], describing state.  The
    "sdfAction" group is the mechanism to describe other interactions in
    terms of their names, input, and output data (no data are used in the
@@ -357,9 +358,8 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    The SDF language uses seven predefined Class Name Keywords for
    modeling connected Things, six of which are illustrated in Figure 2
-   and Figure 3
-   // [Decide which of these figures we want]"sdfProduct" is exactly
-   like "sdfThing").
+   and Figure 3 (the seventh class "sdfProduct" is exactly like
+   "sdfThing").
 
                    +--------+
                    |sdfThing|
@@ -691,12 +691,12 @@ Internet-Draft                  OneDM SDF                      June 2020
 3.2.  Namespaces section
 
    The namespaces section contains the namespace map and the
-   defaultnamespace setting.
+   defaultNamespace setting.
 
    The namespace map is a map from short names for URIs to the namespace
    URIs themselves.
 
-   The defaultnamespace setting selects one of the entries in the
+   The defaultNamespace setting selects one of the entries in the
    namespace map by giving its short name.  The associated URI (value of
    this entry) becomes the default namespace for the SDF definition
    file.
@@ -709,7 +709,7 @@ Internet-Draft                  OneDM SDF                      June 2020
      |                  |        |          | URIs, to be used as   |
      |                  |        |          | identifier prefixes   |
      +------------------+--------+----------+-----------------------+
-     | defaultnamespace | string | no       | Identifies one of the |
+     | defaultNamespace | string | no       | Identifies one of the |
      |                  |        |          | prefixes in the       |
      |                  |        |          | namespace map to be   |
      |                  |        |          | used as a default in  |
@@ -731,18 +731,18 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
    "namespace": {
-     "cap": "https://example.com/capability/odm",
-     "zcl": "https://example.com/zcl/odm"
+     "cap": "https://example.com/capability/cap",
+     "zcl": "https://zcl.example.com/sdf"
    },
-   "defaultnamespace": "cap",
+   "defaultNamespace": "cap",
 
-   If no defaultnamespace setting is given, the SDF definition file does
-   not contribute to a global namespace.  As the defaultnamespace is set
+   If no defaultNamespace setting is given, the SDF definition file does
+   not contribute to a global namespace.  As the defaultNamespace is set
    by giving a namespace short name, its presence requires a namespace
    map that contains a mapping for that namespace short name.
 
    If no namespace map is given, no short names for namespace URIs are
-   set up, and no defaultnamespace can be given.
+   set up, and no defaultNamespace can be given.
 
 3.3.  Definitions section
 
@@ -803,7 +803,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    SDF definition files may contribute to a global namespace, and may
    reference elements from that global namespace.  (An SDF definition
-   file that does not set a defaultnamespace does not contribute to a
+   file that does not set a defaultNamespace does not contribute to a
    global namespace.)
 
 4.1.  Structure
@@ -845,14 +845,14 @@ Internet-Draft                  OneDM SDF                      June 2020
    E.g., in Figure 1, definitions for the following global names are
    contributed:
 
-   *  https://example.com/capability/odm#/sdfObject/Switch
+   *  https://example.com/capability/cap#/sdfObject/Switch
 
-   *  https://example.com/capability/odm#/sdfObject/Switch/sdfProperty/
+   *  https://example.com/capability/cap#/sdfObject/Switch/sdfProperty/
       value
 
-   *  https://example.com/capability/odm#/sdfObject/Switch/sdfAction/on
+   *  https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on
 
-   *  https://example.com/capability/odm#/sdfObject/Switch/sdfAction/off
+   *  https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
    Note the "#", which separates the base part from the fragment
    identifier part.
@@ -977,7 +977,7 @@ Internet-Draft                  OneDM SDF                      June 2020
            "overTemperatureEvent": {
              "sdfOutputData": {
                "alarmType": {
-                 "sdfRef": "odm:/sdfData/alarmTypes/quantityAlarms",
+                 "sdfRef": "cap:/sdfData/alarmTypes/quantityAlarms",
                  "const": "OverTemperatureAlarm"
                },
                "temperature": {

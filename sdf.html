@@ -4,18 +4,24 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>SDF: Semantic Definition Format (SDF) for Things, their Data and Interactions</title>
+<title>Semantic Definition Format (SDF) for Data and Interactions of Things</title>
 <meta content="Michael Koster" name="author">
 <meta content="Carsten Bormann" name="author">
 <meta content="
-       The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions. 
-       OneDM tools convert this format to database formats and other serializations as needed. 
-       This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions. 
-       The JSON format of an SDF definition is described in this document. 
+       The Semantic Definition Format (SDF) is a format for domain experts to
+use in the creation and maintenance of data and interaction models in
+the Internet of Things.  It was created as a common language for use
+in the development of the One Data Model liaison organization (OneDM)
+definitions.  Tools convert this format to database formats and other
+serializations as needed. 
+       An SDF specification describes definitions of SDF Objects and their
+associated interactions (Events, Actions, Properties), as well as the
+Data types for the information exchanged in those interactions. 
+       A JSON format representation of SDF 1.0 is defined in this document. 
     " name="description">
 <meta content="xml2rfc 2.45.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
-<meta content="draft-bormann-t2trg-sdf-latest" name="ietf.draft">
+<meta content="draft-onedm-t2trg-sdf-latest" name="ietf.draft">
 <link href="sdf.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">/*
@@ -1119,7 +1125,7 @@ dd.break {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">T2TRG</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-bormann-t2trg-sdf-latest</dd>
+<dd class="internet-draft">draft-onedm-t2trg-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2020-06-04" class="published">4 June 2020</time>
@@ -1143,24 +1149,29 @@ dd.break {
 </dd>
 </dl>
 </div>
-<h1 id="title">SDF: Semantic Definition Format (SDF) for Things, their Data and Interactions</h1>
+<h1 id="title">Semantic Definition Format (SDF) for Data and Interactions of Things</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">OneDM tools convert this format to database formats and other serializations as needed.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
-<p id="section-abstract-3">This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
-<p id="section-abstract-4">The JSON format of an SDF definition is described in this document.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The Semantic Definition Format (SDF) is a format for domain experts to
+use in the creation and maintenance of data and interaction models in
+the Internet of Things.  It was created as a common language for use
+in the development of the One Data Model liaison organization (OneDM)
+definitions.  Tools convert this format to database formats and other
+serializations as needed.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">An SDF specification describes definitions of SDF Objects and their
+associated interactions (Events, Actions, Properties), as well as the
+Data types for the information exchanged in those interactions.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-3">A JSON format representation of SDF 1.0 is defined in this document.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </section>
 <section class="note" id="section-note.1">
       <h2 id="name-contributing">
 <a href="#name-contributing" class="section-name selfRef">Contributing</a>
       </h2>
 <p id="section-note.1-1">Recent versions of this document are available at its GitHub
-repository (TODO: point to GitHub repo), which also provides an issue
+repository <a href="https://github.com/one-data-model/sdf">https://github.com/one-data-model/sdf</a> -- this also provides an issue
 tracker as well as a way to supply "pull requests".<a href="#section-note.1-1" class="pilcrow">¶</a></p>
-<p id="section-note.1-2">This document has not yet been submitted as an Internet-Draft; the
-plan is to do this in early June.
-(TODO: add "note well" type information)<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">General discussion of this SDF Internet-Draft for now will be on the mailing list of the Thing-to-Thing Research group, t2trg@irtf.org (subscribe at <a href="https://www.irtf.org/mailman/listinfo/t2trg">https://www.irtf.org/mailman/listinfo/t2trg</a>).<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">The IRTF Note Well applies (<a href="https://www.ietf.org/about/note-well/">https://www.ietf.org/about/note-well/</a>).<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1374,10 +1385,16 @@ plan is to do this in early June.
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">OneDM tools convert this format to database formats and other serializations as needed.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">The JSON format of an SDF definition is described in this document.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-1">The Semantic Definition Format (SDF) is a format for domain experts to
+use in the creation and maintenance of data and interaction models in
+the Internet of Things.  It was created as a common language for use
+in the development of the One Data Model liaison organization (OneDM)
+definitions.  Tools convert this format to database formats and other
+serializations as needed.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">An SDF specification describes definitions of SDF Objects and their
+associated interactions (Events, Actions, Properties), as well as the
+Data types for the information exchanged in those interactions.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">A JSON format representation of SDF 1.0 is defined in this document.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="terminology-and-conventions">
 <section id="section-1.1">
         <h3 id="name-terminology-and-conventions">
@@ -1534,13 +1551,13 @@ appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">�
 <pre>
 {
     "info": {
-        "title": "Example file for ODM Semantic Definition Format",
+        "title": "Example file for OneDM Semantic Definition Format",
         "version": "2019-04-24",
         "copyright": "Copyright 2019 Example Corp. All rights reserved.",
         "license": "https://example.com/license"
     },
     "namespace": {
-        "cap": "https://example.com/capability/odm"
+        "cap": "https://example.com/capability/cap"
     },
     "defaultNamespace": "cap",
     "sdfObject": {
@@ -1578,7 +1595,7 @@ The action <code>toggle</code> will invert the value of the sdfProperty value, s
 <p id="section-2.1-4">The <code>sdfObject</code> group lists the affordances of instances of this object.
 The <code>sdfProperty</code> group lists the property affordances described by the model; these represent various perspectives on the state of the object.
 Properties can have additional qualities to describe the state more precisely.
-Properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
+Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
 Properties are often used with RESTful paradigms <span>[<a href="#I-D.irtf-t2trg-rest-iot" class="xref">I-D.irtf-t2trg-rest-iot</a>]</span>, describing state.
 The <code>sdfAction</code> group is the mechanism to describe other interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
 The example <code>toggle</code> is an Action that
@@ -1592,8 +1609,7 @@ changes the state based on the current state of the Property named <code>value</
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-elements-of-an-sdf-model" class="section-name selfRef">Elements of an SDF model</a>
         </h3>
 <p id="section-2.2-1">The SDF language uses seven predefined Class Name Keywords for modeling connected
-Things, six of which are illustrated in <a href="#fig-class-1" class="xref">Figure 2</a> and <a href="#fig-class-2" class="xref">Figure 3</a>
-          <span class="cref" id="_1">[Decide which of these figures we want]</span> (the seventh class <code>sdfProduct</code> is exactly like <code>sdfThing</code>).<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+Things, six of which are illustrated in <a href="#fig-class-1" class="xref">Figure 2</a> and <a href="#fig-class-2" class="xref">Figure 3</a> (the seventh class <code>sdfProduct</code> is exactly like <code>sdfThing</code>).<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <span id="name-main-classes-used-in-sdf-mo"></span><div id="fig-class-1">
 <figure id="figure-2">
           <div id="section-2.2-2.1">
@@ -2094,10 +2110,10 @@ This is easily achieved by following the convention to start the version with an
         <h3 id="name-namespaces-section">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-namespaces-section" class="section-name selfRef">Namespaces section</a>
         </h3>
-<p id="section-3.2-1">The namespaces section contains the namespace map and the defaultnamespace setting.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">The namespaces section contains the namespace map and the defaultNamespace setting.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The namespace map is a map from short names for URIs to the namespace URIs
 themselves.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">The defaultnamespace setting selects one of the entries in the
+<p id="section-3.2-3">The defaultNamespace setting selects one of the entries in the
 namespace map by giving its short name.  The associated URI (value of
 this entry) becomes the default namespace for the SDF definition file.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <span id="name-namespaces-section-2"></span><div id="nssec">
@@ -2122,7 +2138,7 @@ this entry) becomes the default namespace for the SDF definition file.<a href="#
               <td class="text-left" rowspan="1" colspan="1">Defines short names mapped to namespace URIs, to be used as identifier prefixes</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">defaultnamespace</td>
+              <td class="text-left" rowspan="1" colspan="1">defaultNamespace</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers</td>
@@ -2134,18 +2150,18 @@ this entry) becomes the default namespace for the SDF definition file.<a href="#
 <div class="artwork art-text alignLeft art-json" id="section-3.2-6">
 <pre>
 "namespace": {
-  "cap": "https://example.com/capability/odm",
-  "zcl": "https://example.com/zcl/odm"
+  "cap": "https://example.com/capability/cap",
+  "zcl": "https://zcl.example.com/sdf"
 },
-"defaultnamespace": "cap",
+"defaultNamespace": "cap",
 </pre><a href="#section-3.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-7">If no defaultnamespace setting is given, the SDF definition file does not
-contribute to a global namespace.  As the defaultnamespace is set by giving a
+<p id="section-3.2-7">If no defaultNamespace setting is given, the SDF definition file does not
+contribute to a global namespace.  As the defaultNamespace is set by giving a
 namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.<a href="#section-3.2-7" class="pilcrow">¶</a></p>
 <p id="section-3.2-8">If no namespace map is given, no short names for namespace URIs are
-set up, and no defaultnamespace can be given.<a href="#section-3.2-8" class="pilcrow">¶</a></p>
+set up, and no defaultNamespace can be given.<a href="#section-3.2-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="definitions-section">
@@ -2193,7 +2209,7 @@ Declarations have a scope of the current definition block.<a href="#section-3.3-
       </h2>
 <p id="section-4-1">SDF definition files may contribute to a global namespace, and may
 reference elements from that global namespace.
-(An SDF definition file that does not set a defaultnamespace does not
+(An SDF definition file that does not set a defaultNamespace does not
 contribute to a global namespace.)<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="structure">
 <section id="section-4.1">
@@ -2229,13 +2245,13 @@ When emphasizing that name definitions are contributed to the default namespace,
 we therefore also call it the "target namespace" of the SDF definition file.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2-3">E.g., in <a href="#example1" class="xref">Figure 1</a>, definitions for the following global names are contributed:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-4.2-4.1">https://example.com/capability/odm#/sdfObject/Switch<a href="#section-4.2-4.1" class="pilcrow">¶</a>
+<li id="section-4.2-4.1">https://example.com/capability/cap#/sdfObject/Switch<a href="#section-4.2-4.1" class="pilcrow">¶</a>
 </li>
-<li id="section-4.2-4.2">https://example.com/capability/odm#/sdfObject/Switch/sdfProperty/value<a href="#section-4.2-4.2" class="pilcrow">¶</a>
+<li id="section-4.2-4.2">https://example.com/capability/cap#/sdfObject/Switch/sdfProperty/value<a href="#section-4.2-4.2" class="pilcrow">¶</a>
 </li>
-<li id="section-4.2-4.3">https://example.com/capability/odm#/sdfObject/Switch/sdfAction/on<a href="#section-4.2-4.3" class="pilcrow">¶</a>
+<li id="section-4.2-4.3">https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on<a href="#section-4.2-4.3" class="pilcrow">¶</a>
 </li>
-<li id="section-4.2-4.4">https://example.com/capability/odm#/sdfObject/Switch/sdfAction/off<a href="#section-4.2-4.4" class="pilcrow">¶</a>
+<li id="section-4.2-4.4">https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off<a href="#section-4.2-4.4" class="pilcrow">¶</a>
 </li>
 </ul>
 <p id="section-4.2-5">Note the "#", which separates the base part from the fragment
@@ -2350,7 +2366,7 @@ indicating one definition that is mandatory to be present.<a href="#section-4.5.
         "overTemperatureEvent": {
           "sdfOutputData": {
             "alarmType": {
-              "sdfRef": "odm:/sdfData/alarmTypes/quantityAlarms",
+              "sdfRef": "cap:/sdfData/alarmTypes/quantityAlarms",
               "const": "OverTemperatureAlarm"
             },
             "temperature": {

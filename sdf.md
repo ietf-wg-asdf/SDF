@@ -2,9 +2,9 @@
 coding: utf-8
 
 title: >
-  SDF: Semantic Definition Format (SDF) for Things, their Data and Interactions
+  Semantic Definition Format (SDF) for Data and Interactions of Things
 abbrev: OneDM SDF
-docname: draft-bormann-t2trg-sdf-latest
+docname: draft-onedm-t2trg-sdf-latest
 date: 2020-06-04
 category: info
 
@@ -82,37 +82,47 @@ entity:
 --- abstract
 
 
-The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.
+The Semantic Definition Format (SDF) is a format for domain experts to
+use in the creation and maintenance of data and interaction models in
+the Internet of Things.  It was created as a common language for use
+in the development of the One Data Model liaison organization (OneDM)
+definitions.  Tools convert this format to database formats and other
+serializations as needed.
 
-OneDM tools convert this format to database formats and other serializations as needed.
+An SDF specification describes definitions of SDF Objects and their
+associated interactions (Events, Actions, Properties), as well as the
+Data types for the information exchanged in those interactions.
 
-This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.
-
-The JSON format of an SDF definition is described in this document.
+A JSON format representation of SDF 1.0 is defined in this document.
 
 --- note_Contributing
 
 Recent versions of this document are available at its GitHub
-repository (TODO: point to GitHub repo), which also provides an issue
+repository <https://github.com/one-data-model/sdf> — this also provides an issue
 tracker as well as a way to supply "pull requests".
 
-This document has not yet been submitted as an Internet-Draft; the
-plan is to do this in early June.
-(TODO: add "note well" type information)
+General discussion of this SDF Internet-Draft for now will be on the mailing list of the Thing-to-Thing Research group, t2trg@irtf.org (subscribe at <https://www.irtf.org/mailman/listinfo/t2trg>).
+
+The IRTF Note Well applies (<https://www.ietf.org/about/note-well/>).
 
 --- middle
 
 
 # Introduction
 
-The Semantic Definition Format is a format for domain experts to use in the creation and maintenance of OneDM definitions.
 
-OneDM tools convert this format to database formats and other serializations as needed.
+The Semantic Definition Format (SDF) is a format for domain experts to
+use in the creation and maintenance of data and interaction models in
+the Internet of Things.  It was created as a common language for use
+in the development of the One Data Model liaison organization (OneDM)
+definitions.  Tools convert this format to database formats and other
+serializations as needed.
 
+An SDF specification describes definitions of SDF Objects and their
+associated interactions (Events, Actions, Properties), as well as the
+Data types for the information exchanged in those interactions.
 
-This document describes definitions of OneDM Objects and their associated interactions (Events, Actions, Properties), as well as the Data types for the information exchanged in those interactions.
-
-The JSON format of an SDF definition is described in this document.
+A JSON format representation of SDF 1.0 is defined in this document.
 
 ## Terminology and Conventions
 
@@ -223,13 +233,13 @@ We start with an example for the SDF definition of a simple Object called "Switc
 ~~~ json
 {
     "info": {
-        "title": "Example file for ODM Semantic Definition Format",
+        "title": "Example file for OneDM Semantic Definition Format",
         "version": "2019-04-24",
         "copyright": "Copyright 2019 Example Corp. All rights reserved.",
         "license": "https://example.com/license"
     },
     "namespace": {
-        "cap": "https://example.com/capability/odm"
+        "cap": "https://example.com/capability/cap"
     },
     "defaultNamespace": "cap",
     "sdfObject": {
@@ -265,7 +275,7 @@ The action `toggle` will invert the value of the sdfProperty value, so that 2-wa
 The `sdfObject` group lists the affordances of instances of this object.
 The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the object.
 Properties can have additional qualities to describe the state more precisely.
-Properties can be annotated to be read, write or read/write; how this is done by the underlying transfer protocols is not described.
+Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
 Properties are often used with RESTful paradigms {{-rest-iot}}, describing state.
 The `sdfAction` group is the mechanism to describe other interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
 The example `toggle` is an Action that
@@ -275,9 +285,9 @@ changes the state based on the current state of the Property named `value`.
 ## Elements of an SDF model
 
 The SDF language uses seven predefined Class Name Keywords for modeling connected
-Things, six of which are illustrated in {{fig-class-1}} and {{fig-class-2}}[^1] (the seventh class `sdfProduct` is exactly like `sdfThing`).
+Things, six of which are illustrated in {{fig-class-1}} and {{fig-class-2}} (the seventh class `sdfProduct` is exactly like `sdfThing`).
 
-[^1]: \[Decide which of these figures we want]
+<!-- [^1]: \[Decide which of these figures we want] -->
 
 
 ~~~ goat
@@ -522,38 +532,38 @@ The license string is preferably either a URI that points to a web page with an 
 
 ## Namespaces section
 
-The namespaces section contains the namespace map and the defaultnamespace setting.
+The namespaces section contains the namespace map and the defaultNamespace setting.
 
 The namespace map is a map from short names for URIs to the namespace URIs
 themselves.
 
-The defaultnamespace setting selects one of the entries in the
+The defaultNamespace setting selects one of the entries in the
 namespace map by giving its short name.  The associated URI (value of
 this entry) becomes the default namespace for the SDF definition file.
 
 | Quality          | Type   | Required | Description                                                                                          |
 |------------------|--------|----------|------------------------------------------------------------------------------------------------------|
 | namespace        | map    | no       | Defines short names mapped to namespace URIs, to be used as identifier prefixes                      |
-| defaultnamespace | string | no       | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
+| defaultNamespace | string | no       | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
 {: #nssec title="Namespaces Section"}
 
 The following example declares a set of namespaces and defines `cap` as the default namespace.
 
 ~~~ json
 "namespace": {
-  "cap": "https://example.com/capability/odm",
-  "zcl": "https://example.com/zcl/odm"
+  "cap": "https://example.com/capability/cap",
+  "zcl": "https://zcl.example.com/sdf"
 },
-"defaultnamespace": "cap",
+"defaultNamespace": "cap",
 ~~~
 
-If no defaultnamespace setting is given, the SDF definition file does not
-contribute to a global namespace.  As the defaultnamespace is set by giving a
+If no defaultNamespace setting is given, the SDF definition file does not
+contribute to a global namespace.  As the defaultNamespace is set by giving a
 namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.
 
 If no namespace map is given, no short names for namespace URIs are
-set up, and no defaultnamespace can be given.
+set up, and no defaultNamespace can be given.
 
 
 ## Definitions section
@@ -592,7 +602,7 @@ Some of the definitions are also declarations: the definition of the entry "bar"
 
 SDF definition files may contribute to a global namespace, and may
 reference elements from that global namespace.
-(An SDF definition file that does not set a defaultnamespace does not
+(An SDF definition file that does not set a defaultNamespace does not
 contribute to a global namespace.)
 
 ## Structure
@@ -627,10 +637,10 @@ we therefore also call it the "target namespace" of the SDF definition file.
 
 E.g., in {{example1}}, definitions for the following global names are contributed:
 
-* https://example.com/capability/odm#/sdfObject/Switch
-* https://example.com/capability/odm#/sdfObject/Switch/sdfProperty/value
-* https://example.com/capability/odm#/sdfObject/Switch/sdfAction/on
-* https://example.com/capability/odm#/sdfObject/Switch/sdfAction/off
+* https://example.com/capability/cap#/sdfObject/Switch
+* https://example.com/capability/cap#/sdfObject/Switch/sdfProperty/value
+* https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on
+* https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
 Note the "#", which separates the base part from the fragment
 identifier part.
@@ -733,7 +743,7 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
         "overTemperatureEvent": {
           "sdfOutputData": {
             "alarmType": {
-              "sdfRef": "odm:/sdfData/alarmTypes/quantityAlarms",
+              "sdfRef": "cap:/sdfData/alarmTypes/quantityAlarms",
               "const": "OverTemperatureAlarm"
             },
             "temperature": {
@@ -1020,7 +1030,7 @@ This draft is based on `sdf.md` and `sdf-schema.json` in the
 one-data-model `language` repository, as well as Ari Keranen's
 "alt-schema" from the Ericsson Research `ipso-odm` repository.
 
-<!--  LocalWords:  SDF namespace defaultnamespace instantiation OMA
+<!--  LocalWords:  SDF namespace defaultNamespace instantiation OMA
  -->
 <!--  LocalWords:  affordances ZigBee LWM OCF sdfObject sdfThing
  -->
