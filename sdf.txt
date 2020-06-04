@@ -175,7 +175,7 @@ Internet-Draft                  OneDM SDF                      June 2020
       only; it might also have physical affordances such as buttons,
       dials, and displays.
 
-   Quality:  a metadata item in a definition or declaration which says
+   Quality:  A metadata item in a definition or declaration which says
       something about that definition or declaration.  A quality is
       represented in SDF as an entry in a JSON map (object) that serves
       as a definition or declaration.
@@ -187,9 +187,10 @@ Internet-Draft                  OneDM SDF                      June 2020
       specification; these entries together serve a specific function.
 
    Group:  An entry in the main SDF map and in certain nested
-      definitions that either has a class name keyword as its key and a
-      map of definition entries or a parameter name keyword as its key
-      and an array of SDF pointers as a value.
+      definitions that either has a Class Name Keyword as its key and a
+      map of definition entries (Definition Group) or a Parameter Name
+      Keyword as its key and an array of SDF pointers as a value
+      (Parameter Group).
 
    Class Name Keyword:  One of sdfThing, sdfProduct, sdfObject,
       sdfProperty, sdfAction, sdfEvent, or sdfData; the Classes for
@@ -212,12 +213,11 @@ Internet-Draft                  OneDM SDF                      June 2020
       information about what happened to an Object.
 
    Object:  A grouping of Property, Action, and Event definitions; the
-      main "atom" of reusable semantics for model construction.  (Note
-      that JSON maps are often called JSON objects due to JSON's
-      JavaScript heritage; properties in other environments; in this
-      document, the term Object is specifically reserved for the above
-      grouping, even if the type name "object" might be imported from a
-      data definition language with the other semantics.)
+
+
+
+
+
 
 
 
@@ -226,6 +226,13 @@ Koster & Bormann         Expires 6 December 2020                [Page 4]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
+      main "atom" of reusable semantics for model construction.  (Note
+      that JSON maps are often called JSON objects due to JSON's
+      JavaScript heritage; properties in other environments; in this
+      document, the term Object is specifically reserved for the above
+      grouping, even if the type name "object" might be imported from a
+      data definition language with the other semantics.)
+
    Parameter name keyword:  One of sdfInputData, sdfOutputData,
       sdfRequiredInputData, or sdfRequired.
 
@@ -233,9 +240,9 @@ Internet-Draft                  OneDM SDF                      June 2020
       usual English definition.  (Occasionally, also used specifically
       for the elements of JSON arrays.)
 
-   Definition:  Creates a new semantic term for use in SDF models and
-      associates it with a set of qualities.  A definition is
-      represented as an entry in a JSON object that serves as a group.
+   Definition:  An entry in a Definition Group; the entry creates a new
+      semantic term for use in SDF models and associates it with a set
+      of qualities.
 
    Declaration:  A reference to and a use of a definition within an
       enclosing definition, intended to create component instances
@@ -259,13 +266,6 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    We start with an example for the SDF definition of a simple Object
    called "Switch" (Figure 1).
-
-
-
-
-
-
-
 
 
 

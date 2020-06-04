@@ -135,7 +135,7 @@ Affordance:
   displays.
 
 Quality:
-: a metadata item in a definition or declaration which says something
+: A metadata item in a definition or declaration which says something
   about that definition or declaration.  A quality is represented in
   SDF as an entry in a JSON map (object) that serves as a definition
   or declaration.
@@ -149,9 +149,9 @@ Block:
 
 Group:
 : An entry in the main SDF map and in certain nested definitions that
-  either has a class name keyword as its key and a map of definition
-  entries or a parameter name keyword as its key and an array of SDF
-  pointers as a value.
+  either has a Class Name Keyword as its key and a map of definition
+  entries (Definition Group) or a Parameter Name Keyword as its key
+  and an array of SDF pointers as a value (Parameter Group).
 
 Class Name Keyword:
 : One of sdfThing, sdfProduct, sdfObject, sdfProperty, sdfAction,
@@ -193,9 +193,9 @@ Element:
   (Occasionally, also used specifically for the elements of JSON arrays.)
 
 Definition:
-: Creates a new semantic term for use in SDF models and associates it
-  with a set of qualities.  A definition is represented as an entry in
-  a JSON object that serves as a group.
+: An entry in a Definition Group; the entry creates a new semantic
+  term for use in SDF models and associates it with a set of
+  qualities.
 
 Declaration:
 : A reference to and a use of a definition within an enclosing
