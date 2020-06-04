@@ -214,7 +214,11 @@ Declaration:
   enclosing definition.  Every declaration can also be used as a
   definition for reference in a different place.
 
-
+Protocol Binding:
+: A companion document to an SDF specification that defines how to map
+  the abstract concepts in the specification into the protocols in use
+  in a specific ecosystem.  Might supply URL components, numeric IDs,
+  and similar details.
 
 <!-- XXX -->
 
