@@ -70,6 +70,10 @@ normative:
 informative:
   I-D.irtf-t2trg-rest-iot: rest-iot
   ZCL: DOI.10.1016/B978-0-7506-8597-9.00006-9
+  OMA:
+    title: OMA LightweightM2M (LwM2M) Object and Resource Registry
+    date: false
+    target: http://www.openmobilealliance.org/wp/omna/lwm2m/lwm2mregistry.html
   OCF:
     title: OCF Resource Type Specification
     date: false
@@ -356,7 +360,7 @@ class sdfEvent {
 class sdfData {
 }
 ~~~
-{: #fig-class-2 title="Main classes used in SDF models"}
+{: #fig-class-2 title="Main classes used in SDF models and their relations"}
 
 The seven main Class Name Keywords are discussed below.
 
@@ -364,7 +368,8 @@ The seven main Class Name Keywords are discussed below.
 
 Objects, the items listed in an `sdfObject` group, are the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
-systems, for example ZigBee Clusters {{ZCL}}, OMA LWM2M Objects, and
+systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks LwM2M
+Objects {{OMA}}, and
 OCF Resource Types {{OCF}}.
 
 An `sdfObject` contains a set of `sdfProperty`, `sdfAction`, and
