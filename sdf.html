@@ -1115,7 +1115,7 @@ dd.break {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 6 December 2020</td>
+<td class="center">Expires 7 December 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1128,12 +1128,12 @@ dd.break {
 <dd class="internet-draft">draft-onedm-t2trg-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-06-04" class="published">4 June 2020</time>
+<time datetime="2020-06-05" class="published">5 June 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-12-06">6 December 2020</time></dd>
+<dd class="expires"><time datetime="2020-12-07">7 December 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1192,7 +1192,7 @@ tracker as well as a way to supply "pull requests".<a href="#section-note.1-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2878,7 +2878,7 @@ reusable constraints in Property definitions.<a href="#section-5.5-3" class="pil
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-paths-in-the-model-namespac" class="section-name selfRef">Paths in the model namespaces</a>
         </h3>
 <p id="section-6.1-1">The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where ns is the short name for the namespace prefix.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where ns is the namespace prefix (short name for the namespace).<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="modular-composition">
@@ -2893,10 +2893,10 @@ reusable constraints in Property definitions.<a href="#section-5.5-3" class="pil
 <a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-use-of-the-sdfref-keyword-t" class="section-name selfRef">Use of the "sdfRef" keyword to re-use a definition</a>
           </h4>
 <p id="section-6.2.1-1">An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.1-2">ISSUE: Can qualities from the source definition be overridden?
+<p id="section-6.2.1-2">ISSUE: Do we want to enable qualities from the source definition to be overridden in future versions?
 The above only says "added".
-Yes, we do want to enable overriding, but need to warn specifiers not
-to use this in a way that contradicts the referenced semantics.<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
+(Yes, we do want to enable overriding, but need to warn specifiers not
+to use this in a way that contradicts the referenced semantics.)<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft" id="section-6.2.1-3">
 <pre>
 "sdfData":
@@ -4035,9 +4035,11 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="section-appendix.c-1">This draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the
+<p id="section-appendix.c-1">This draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the old
 one-data-model <code>language</code> repository, as well as Ari Keranen's
-"alt-schema" from the Ericsson Research <code>ipso-odm</code> repository.<a href="#section-appendix.c-1" class="pilcrow">¶</a></p>
+"alt-schema" from the Ericsson Research <code>ipso-odm</code> repository (which
+is now under subdirectory <code>sdflint</code> in the one-data model <code>tools</code>
+repository).<a href="#section-appendix.c-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">

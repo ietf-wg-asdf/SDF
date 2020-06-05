@@ -5,7 +5,7 @@ title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
 abbrev: OneDM SDF
 docname: draft-onedm-t2trg-sdf-latest
-date: 2020-06-04
+date: 2020-06-05
 category: info
 
 ipr: trust200902
@@ -933,7 +933,7 @@ The requirements for high level composition include the following:
 
 The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.
 
-The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where ns is the short name for the namespace prefix.
+The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where ns is the namespace prefix (short name for the namespace).
 
 ## Modular Composition
 
@@ -942,10 +942,10 @@ Modular composition of definitions enables an existing definition (could be in t
 ### Use of the "sdfRef" keyword to re-use a definition
 An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.
 
-ISSUE: Can qualities from the source definition be overridden?
+ISSUE: Do we want to enable qualities from the source definition to be overridden in future versions?
 The above only says "added".
-Yes, we do want to enable overriding, but need to warn specifiers not
-to use this in a way that contradicts the referenced semantics.
+(Yes, we do want to enable overriding, but need to warn specifiers not
+to use this in a way that contradicts the referenced semantics.)
 
 ~~~
 "sdfData":
@@ -1030,9 +1030,11 @@ Lines leading with a `-` are part of the validation syntax, and lines leading wi
 # Acknowledgements
 {: numbered="no"}
 
-This draft is based on `sdf.md` and `sdf-schema.json` in the
+This draft is based on `sdf.md` and `sdf-schema.json` in the old
 one-data-model `language` repository, as well as Ari Keranen's
-"alt-schema" from the Ericsson Research `ipso-odm` repository.
+"alt-schema" from the Ericsson Research `ipso-odm` repository (which
+is now under subdirectory `sdflint` in the one-data model `tools`
+repository).
 
 <!--  LocalWords:  SDF namespace defaultNamespace instantiation OMA
  -->
@@ -1042,5 +1044,5 @@ one-data-model `language` repository, as well as Ari Keranen's
  -->
 <!--  LocalWords:  namespaces sdfRequired Optionality sdfAction
  -->
-<!--  LocalWords:  sdfProduct
+<!--  LocalWords:  sdfProduct dereferenced dereferencing atomicity
  -->
