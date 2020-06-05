@@ -607,7 +607,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    models for complex devices that will use one or more "sdfObject"
    definitions.
 
-   An definition in an "sdfThing" group can refine the metadata of the
+   A definition in an "sdfThing" group can refine the metadata of the
    definitions it is composed from: other definitions in "sdfThing"
    groups definitions in "sdfObject" groups.
 
@@ -635,7 +635,7 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    A SDF definition file contains a single JSON map (JSON object).  This
    object has three sections: the information block, the namespaces
-   section and the definitions section.
+   section, and the definitions section.
 
 3.1.  Information block
 
@@ -934,12 +934,12 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 4.5.1.  Optionality using the keyword "sdfRequired"
 
-   The keyword "sdfRequired" is provided to apply a constraint for which
-   definitions are mandatory in an instance conforming to a particular
-   definition in which the constraint appears.
+   The keyword "sdfRequired" is provided to apply a constraint that
+   defines for which declarations corresponding data are mandatory in an
+   instance conforming the current definition.
 
    The value of "sdfRequired" is an array of JSON pointers, each
-   indicating one definition that is mandatory to be present.
+   indicating one declaration that is mandatory to be represented.
 
 
 
@@ -998,8 +998,8 @@ Internet-Draft                  OneDM SDF                      June 2020
    for them.  These are listed in Table 3.  None of these qualities are
    required or have default values that are assumed if the quality is
    absent.  If a label is required for an application and no label is
-   given, the last part of the JSON pointer to the definition can be
-   used.
+   given, the last part ("reference-token", Section 3 of [RFC6901]) of
+   the JSON pointer to the definition can be used.
 
 
 
@@ -1035,7 +1035,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    Table 4 lists data qualities borrowed from
    [I-D.handrews-json-schema-validation]; the intention is that these
    qualities retain their semantics from the versions of the json-
-   schema.org proposal there were imported from.
+   schema.org proposal they were imported from.
 
    Table 5 lists data qualities defined specifically for the present
    specification.
@@ -1108,7 +1108,7 @@ Internet-Draft                  OneDM SDF                      June 2020
    | items          | (subset of    | constraints on array items           |
    |                | common/data   |                                      |
    |                |qualities; see |                                      |
-   |                | {{syntax})    |                                      |
+   |                | Appendix A    |                                      |
    +----------------+---------------+--------------------------------------+
 
      Table 4: Qualities of sdfProperty and sdfData borrowed from json-
@@ -1122,51 +1122,51 @@ Koster & Bormann         Expires 7 December 2020               [Page 20]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   +---------------+--------------+-------------------------+---------+
-   | Quality       | Type         | Description             | Default |
-   +===============+==============+=========================+=========+
-   | (common)      |              | Section 4.6             |         |
-   +---------------+--------------+-------------------------+---------+
-   | units         | string       | SenML unit name as per  | N/A     |
-   |               |              | [IANA.senml],           |         |
-   |               |              | subregistry SenML Units |         |
-   +---------------+--------------+-------------------------+---------+
-   | scaleMinimum  | number       | lower limit of value in | N/A     |
-   |               |              | units                   |         |
-   +---------------+--------------+-------------------------+---------+
-   | scaleMaximum  | number       | upper limit of value in | N/A     |
-   |               |              | units                   |         |
-   +---------------+--------------+-------------------------+---------+
-   | readable      | boolean      | Reads are allowed       | true    |
-   +---------------+--------------+-------------------------+---------+
-   | writable      | boolean      | Writes are allowed      | true    |
-   +---------------+--------------+-------------------------+---------+
-   | observable    | boolean      | flag to indicate        | true    |
-   |               |              | asynchronous            |         |
-   |               |              | notification is         |         |
-   |               |              | available               |         |
-   +---------------+--------------+-------------------------+---------+
-   | nullable      | boolean      | indicates a null value  | true    |
-   |               |              | is available for this   |         |
-   |               |              | type                    |         |
-   +---------------+--------------+-------------------------+---------+
-   | contentFormat | string       | content type (IANA      | N/A     |
-   |               |              | media type string plus  |         |
-   |               |              | parameters), encoding   |         |
-   +---------------+--------------+-------------------------+---------+
-   | subtype       | "bytestring" | subtype enumeration     | N/A     |
-   |               | / "unixtime" |                         |         |
-   +---------------+--------------+-------------------------+---------+
+   +---------------+---------------+-------------------------+---------+
+   | Quality       | Type          | Description             | Default |
+   +===============+===============+=========================+=========+
+   | (common)      |               | Section 4.6             |         |
+   +---------------+---------------+-------------------------+---------+
+   | units         | string        | SenML unit name as      | N/A     |
+   |               |               | per [IANA.senml],       |         |
+   |               |               | subregistry SenML       |         |
+   |               |               | Units                   |         |
+   +---------------+---------------+-------------------------+---------+
+   | scaleMinimum  | number        | lower limit of          | N/A     |
+   |               |               | value in units          |         |
+   +---------------+---------------+-------------------------+---------+
+   | scaleMaximum  | number        | upper limit of          | N/A     |
+   |               |               | value in units          |         |
+   +---------------+---------------+-------------------------+---------+
+   | readable      | boolean       | Reads are allowed       | true    |
+   +---------------+---------------+-------------------------+---------+
+   | writable      | boolean       | Writes are allowed      | true    |
+   +---------------+---------------+-------------------------+---------+
+   | observable    | boolean       | flag to indicate        | true    |
+   |               |               | asynchronous            |         |
+   |               |               | notification is         |         |
+   |               |               | available               |         |
+   +---------------+---------------+-------------------------+---------+
+   | nullable      | boolean       | indicates a null        | true    |
+   |               |               | value is available      |         |
+   |               |               | for this type           |         |
+   +---------------+---------------+-------------------------+---------+
+   | contentFormat | string        | content type (IANA      | N/A     |
+   |               |               | media type string       |         |
+   |               |               | plus parameters),       |         |
+   |               |               | encoding                |         |
+   +---------------+---------------+-------------------------+---------+
+   | subtype       | "byte-string" | subtype                 | N/A     |
+   |               | / "unix-time" | enumeration             |         |
+   +---------------+---------------+-------------------------+---------+
 
-        Table 5: SDF-defined Qualities of sdfProperty and sdfData
+         Table 5: SDF-defined Qualities of sdfProperty and sdfData
 
 5.  Keywords for definition groups
 
    The following SDF keywords are used to create definition groups in
    the target namespace.  All these definitions share some common
    qualities as discussed in Section 4.6.
-
-
 
 
 
@@ -1240,29 +1240,30 @@ Internet-Draft                  OneDM SDF                      June 2020
    The qualities of an Action definition include the common qualities,
    additional qualities are shown in Table 7.
 
-    +----------------------+-------+----------------------------+----+
-    | Quality              | Type  | Description                |    |
-    +======================+=======+============================+====+
-    | (common)             |       | Section 4.6                |    |
-    +----------------------+-------+----------------------------+----+
-    | sdfInputData         | array | Array of JSON Pointers to  | N/ |
-    |                      |       | mandatory items in a valid | A  |
-    |                      |       | action definition          |    |
-    +----------------------+-------+----------------------------+----+
-    | sdfRequiredInputData | array | Array of JSON Pointers to  | N/ |
-    |                      |       | mandatory items in a valid | A  |
-    |                      |       | action definition          |    |
-    +----------------------+-------+----------------------------+----+
-    | sdfOutputData        | array | Array of JSON Pointers to  | N/ |
-    |                      |       | mandatory items in a valid | A  |
-    |                      |       | action definition          |    |
-    +----------------------+-------+----------------------------+----+
-    | sdfData              | data  | zero or more named data    |    |
-    |                      |       | type definitions that      |    |
-    |                      |       | might be used in the above |    |
-    +----------------------+-------+----------------------------+----+
+     +----------------------+-------+--------------------------------+
+     | Quality              | Type  | Description                    |
+     +======================+=======+================================+
+     | (common)             |       | Section 4.6                    |
+     +----------------------+-------+--------------------------------+
+     | sdfInputData         | array | Array of JSON Pointers to Data |
+     |                      |       | items in the input data for an |
+     |                      |       | Action                         |
+     +----------------------+-------+--------------------------------+
+     | sdfRequiredInputData | array | Array of JSON Pointers to      |
+     |                      |       | mandatory Data items in the    |
+     |                      |       | input data for an Action       |
+     +----------------------+-------+--------------------------------+
+     | sdfOutputData        | array | Array of JSON Pointers to Data |
+     |                      |       | items in the Output data for   |
+     |                      |       | an Action (mandatory items are |
+     |                      |       | listed under sdfRequired)      |
+     +----------------------+-------+--------------------------------+
+     | sdfData              | data  | zero or more named data type   |
+     |                      |       | definitions that might be used |
+     |                      |       | in the above                   |
+     +----------------------+-------+--------------------------------+
 
-                     Table 7: Qualities of sdfAction
+                      Table 7: Qualities of sdfAction
 
    "sdfInputData", as refined by "sdfRequiredInputData", define the
    input data of the action.  "sdfOutputData", as refined by
@@ -1284,30 +1285,25 @@ Internet-Draft                  OneDM SDF                      June 2020
 
 
 
-
 Koster & Bormann         Expires 7 December 2020               [Page 23]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   +---------------+-------+-----------------------+-------------------+
-   | Quality       | Type  | Required              | Description       |
-   +===============+=======+=======================+===================+
-   | (common)      |       | Section 4.6           |                   |
-   +---------------+-------+-----------------------+-------------------+
-   | sdfOutputData | array | no                    | Array of JSON     |
-   |               |       |                       | Pointers to       |
-   |               |       |                       | output items in a |
-   |               |       |                       | valid definition  |
-   +---------------+-------+-----------------------+-------------------+
-   | sdfData       | data  | zero or more          |                   |
-   |               |       | named data type       |                   |
-   |               |       | definitions that      |                   |
-   |               |       | might be used in      |                   |
-   |               |       | the above             |                   |
-   +---------------+-------+-----------------------+-------------------+
+   +---------------+-------+------------------------------------------+
+   | Quality       | Type  | Description                              |
+   +===============+=======+==========================================+
+   | (common)      |       | Section 4.6                              |
+   +---------------+-------+------------------------------------------+
+   | sdfOutputData | array | Array of JSON Pointers to Data items in  |
+   |               |       | the Output data for an Action (mandatory |
+   |               |       | items are listed under sdfRequired)      |
+   +---------------+-------+------------------------------------------+
+   | sdfData       | data  | zero or more named data type definitions |
+   |               |       | that might be used in the above          |
+   +---------------+-------+------------------------------------------+
 
-                       Table 8: Qualities of sdfEvent
+                      Table 8: Qualities of sdfEvent
 
    "sdfOutputData", as refined by "sdfRequired" (a quality defined in
    Table 3), define the output data of the action.
@@ -1338,6 +1334,10 @@ Internet-Draft                  OneDM SDF                      June 2020
       control, energy monitor, and optional dimmer objects, while
       retaining the atomicity of the individual objects.
 
+   *  The ability to compose Objects and other definition blocks into a
+      higher level thing that represents a product, while retaining the
+      atomicity of objects.
+
 
 
 
@@ -1345,10 +1345,6 @@ Koster & Bormann         Expires 7 December 2020               [Page 24]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
-
-   *  The ability to compose Objects and other definition blocks into a
-      higher level thing that represents a product, while retaining the
-      atomicity of objects.
 
    *  The ability to enrich and refine a base definition to have
       product-specific qualities and quality values, e.g. unit, range,
@@ -1392,6 +1388,10 @@ Internet-Draft                  OneDM SDF                      June 2020
    new qualities may be added and values of optional qualities and
    quality values may be defined.
 
+   ISSUE: Do we want to enable qualities from the source definition to
+   be overridden in future versions?  The above only says "added".
+   (Yes, we do want to enable overriding, but need to warn specifiers
+   not to use this in a way that contradicts the referenced semantics.)
 
 
 
@@ -1402,23 +1402,18 @@ Koster & Bormann         Expires 7 December 2020               [Page 25]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-   ISSUE: Do we want to enable qualities from the source definition to
-   be overridden in future versions?  The above only says "added".
-   (Yes, we do want to enable overriding, but need to warn specifiers
-   not to use this in a way that contradicts the referenced semantics.)
-
    "sdfData":
      "length" : {
        "type": "number",
        "minimum": 0,
        "units": "m"
-       "description": "There can be no negative lengths"
+       "description": "There can be no negative lengths."
      }
    ...
      "cable-length" : {
        "sdfRef": "#/sdfData/length"
        "minimum": 0.05,
-       "description": "cables must be at least 5 cm"
+       "description": "Cables must be at least 5 cm."
      }
 
 6.3.  sdfThing
@@ -1438,17 +1433,22 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    The qualities of sdfThing are shown in Table 9.
 
-               +-----------+------+----------+-------------+
-               | Quality   | Type | Required | Description |
-               +===========+======+==========+=============+
-               | (common)  |      |          | Section 4.6 |
-               +-----------+------+----------+-------------+
-               | sdfThing  |      |          |             |
-               +-----------+------+----------+-------------+
-               | sdfObject |      |          |             |
-               +-----------+------+----------+-------------+
+                   +-----------+--------+-------------+
+                   | Quality   | Type   | Description |
+                   +===========+========+=============+
+                   | (common)  |        | Section 4.6 |
+                   +-----------+--------+-------------+
+                   | sdfThing  | thing  |             |
+                   +-----------+--------+-------------+
+                   | sdfObject | object |             |
+                   +-----------+--------+-------------+
 
-               Table 9: Qualities of sdfThing and sdfProduct
+                      Table 9: Qualities of sdfThing
+                              and sdfProduct
+
+
+
+
 
 
 

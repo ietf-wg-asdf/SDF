@@ -494,7 +494,7 @@ and requirements.
 Back at the top level, the `sdfThing` groups enables definition of models for
 complex devices that will use one or more `sdfObject` definitions.
 
-An definition in an `sdfThing` group can refine the metadata of the definitions it
+A definition in an `sdfThing` group can refine the metadata of the definitions it
 is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
 
 ### sdfProduct
@@ -514,7 +514,7 @@ work together to provide the definitions and declarations that are the
 payload of the SDF format.
 
 A SDF definition file contains a single JSON map (JSON object).
-This object has three sections: the information block, the namespaces section and the definitions section.
+This object has three sections: the information block, the namespaces section, and the definitions section.
 
 ## Information block
 
@@ -728,10 +728,12 @@ pointing to one declaration the instantiation of which is declared mandatory.
 
 ### Optionality using the keyword "sdfRequired"
 
-The keyword "sdfRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.
+The keyword "sdfRequired" is provided to apply a constraint that
+defines for which declarations corresponding data are mandatory in an
+instance conforming the current definition.
 
 The value of "sdfRequired" is an array of JSON pointers, each
-indicating one definition that is mandatory to be present.
+indicating one declaration that is mandatory to be represented.
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "temperatureData", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
@@ -773,7 +775,9 @@ Definitions in SDF share a number of qualities that provide metadata for
 them.  These are listed in {{tbl-common-qualities}}.  None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
-If a label is required for an application and no label is given, the last part of the JSON pointer to the definition can be used.
+If a label is required for an application and no label is given, the
+last part (`reference-token`, Section 3 of {{-pointer}}) of the JSON
+pointer to the definition can be used.
 
 | Quality     | Type         | Description                                                        |
 |-------------|--------------|--------------------------------------------------------------------|
@@ -790,7 +794,7 @@ Data qualities are used in `sdfData` and `sdfProperty` definitions.
 
 {{sdfdataqual1}} lists data qualities borrowed from {{-jso}}; the
 intention is that these qualities retain their semantics from the
-versions of the json-schema.org proposal there were imported from.
+versions of the json-schema.org proposal they were imported from.
 
 {{sdfdataqual2}} lists data qualities defined specifically for the
 present specification.
@@ -818,21 +822,21 @@ allowed for one of these types.
 | minItems         | number                                                           | Minimum number of items in array                       |
 | maxItems         | number                                                           | Maximum number of items in array                       |
 | uniqueItems      | boolean                                                          | if true, requires items to be all different            |
-| items            | (subset of common/data qualities; see {{syntax})                 | constraints on array items                             |
+| items            | (subset of common/data qualities; see {{syntax}}                 | constraints on array items                             |
 {: #sdfdataqual1 title="Qualities of sdfProperty and sdfData borrowed from json-schema.org"}
 
-| Quality       | Type                      | Description                                                     | Default |
-|---------------|---------------------------|-----------------------------------------------------------------|---------|
-| (common)      |                           | {{common-qualities}}                                            |         |
-| units         | string                    | SenML unit name as per {{-units}}, subregistry SenML Units      | N/A     |
-| scaleMinimum  | number                    | lower limit of value in units                                   | N/A     |
-| scaleMaximum  | number                    | upper limit of value in units                                   | N/A     |
-| readable      | boolean                   | Reads are allowed                                               | true    |
-| writable      | boolean                   | Writes are allowed                                              | true    |
-| observable    | boolean                   | flag to indicate asynchronous notification is available         | true    |
-| nullable      | boolean                   | indicates a null value is available for this type               | true    |
-| contentFormat | string                    | content type (IANA media type string plus parameters), encoding | N/A     |
-| subtype       | "bytestring" / "unixtime" | subtype enumeration                                             | N/A     |
+| Quality       | Type                        | Description                                                     | Default |
+|---------------|-----------------------------|-----------------------------------------------------------------|---------|
+| (common)      |                             | {{common-qualities}}                                            |         |
+| units         | string                      | SenML unit name as per {{-units}}, subregistry SenML Units      | N/A     |
+| scaleMinimum  | number                      | lower limit of value in units                                   | N/A     |
+| scaleMaximum  | number                      | upper limit of value in units                                   | N/A     |
+| readable      | boolean                     | Reads are allowed                                               | true    |
+| writable      | boolean                     | Writes are allowed                                              | true    |
+| observable    | boolean                     | flag to indicate asynchronous notification is available         | true    |
+| nullable      | boolean                     | indicates a null value is available for this type               | true    |
+| contentFormat | string                      | content type (IANA media type string plus parameters), encoding | N/A     |
+| subtype       | "byte-string" / "unix-time" | subtype enumeration                                             | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
 # Keywords for definition groups
@@ -876,13 +880,13 @@ Actions are used to model commands and methods which are invoked. Actions have p
 
 The qualities of an Action definition include the common qualities, additional qualities are shown in {{sdfactqual}}.
 
-| Quality              | Type   | Description                                                            |     |
-|----------------------|--------|------------------------------------------------------------------------|-----|
-| (common)    |          | {{common-qualities}}                                                     |
-| sdfInputData         | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-| sdfRequiredInputData | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-| sdfOutputData        | array  | Array of JSON Pointers to mandatory items in a valid action definition | N/A |
-| sdfData     | data     | zero or more named data type definitions that might be used in the above |
+| Quality              | Type  | Description                                                                    |
+|----------------------|-------|--------------------------------------------------------------------------------|
+| (common)             |       | {{common-qualities}}                                                           |
+| sdfInputData         | array | Array of JSON Pointers to Data items in the input data for an Action           |
+| sdfRequiredInputData | array | Array of JSON Pointers to mandatory Data items in the input data for an Action |
+| sdfOutputData        | array | Array of JSON Pointers to Data items in the Output data for an Action (mandatory items are listed under sdfRequired) |
+| sdfData              | data  | zero or more named data type definitions that might be used in the above       |
 {: #sdfactqual title="Qualities of sdfAction"}
 
 `sdfInputData`, as refined by `sdfRequiredInputData`, define the input data
@@ -898,11 +902,11 @@ Events are used to model asynchronous occurrences that may be communicated proac
 
 The qualities of sdfEvent include the common qualities, additional qualities are shown in {{sdfevqual}}.
 
-| Quality       | Type   | Required | Description                                                  |
-|---------------|--------|----------|--------------------------------------------------------------|
-| (common)    |          | {{common-qualities}}                                                     |
-| sdfOutputData | array  | no       | Array of JSON Pointers to output items in a valid definition |
-| sdfData     | data     | zero or more named data type definitions that might be used in the above |
+| Quality       | Type  | Description                                                                                                          |
+|---------------|-------|----------------------------------------------------------------------------------------------------------------------|
+| (common)      |       | {{common-qualities}}                                                                                                 |
+| sdfOutputData | array | Array of JSON Pointers to Data items in the Output data for an Action (mandatory items are listed under sdfRequired) |
+| sdfData       | data  | zero or more named data type definitions that might be used in the above                                             |
 {: #sdfevqual title="Qualities of sdfEvent"}
 
 `sdfOutputData`, as refined by `sdfRequired` (a quality
@@ -958,13 +962,13 @@ to use this in a way that contradicts the referenced semantics.)
     "type": "number",
     "minimum": 0,
     "units": "m"
-    "description": "There can be no negative lengths"
+    "description": "There can be no negative lengths."
   }
 ...
   "cable-length" : {
     "sdfRef": "#/sdfData/length"
     "minimum": 0.05,
-    "description": "cables must be at least 5 cm"
+    "description": "Cables must be at least 5 cm."
   }
 ~~~
 
@@ -978,11 +982,11 @@ An sdfThing may be composed of sdfObjects and other sdfThings.
 
 The qualities of sdfThing are shown in {{sdfthingqual}}.
 
-| Quality   | Type | Required | Description          |
-|-----------|------|----------|----------------------|
-| (common)  |      |          | {{common-qualities}} |
-| sdfThing  |      |          |                      |
-| sdfObject |      |          |                      |
+| Quality   | Type   | Description          |
+|-----------|--------|----------------------|
+| (common)  |        | {{common-qualities}} |
+| sdfThing  | thing  |                      |
+| sdfObject | object |                      |
 {: #sdfthingqual title="Qualities of sdfThing and sdfProduct"}
 
 

@@ -2026,7 +2026,7 @@ and requirements.<a href="#section-2.2.5-2" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-2.2.6-1">Back at the top level, the <code>sdfThing</code> groups enables definition of models for
 complex devices that will use one or more <code>sdfObject</code> definitions.<a href="#section-2.2.6-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.6-2">An definition in an <code>sdfThing</code> group can refine the metadata of the definitions it
+<p id="section-2.2.6-2">A definition in an <code>sdfThing</code> group can refine the metadata of the definitions it
 is composed from: other definitions in <code>sdfThing</code> groups definitions in <code>sdfObject</code> groups.<a href="#section-2.2.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2056,7 +2056,7 @@ to describe a class of complete Things.<a href="#section-2.2.7-1" class="pilcrow
 work together to provide the definitions and declarations that are the
 payload of the SDF format.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A SDF definition file contains a single JSON map (JSON object).
-This object has three sections: the information block, the namespaces section and the definitions section.<a href="#section-3-2" class="pilcrow">¶</a></p>
+This object has three sections: the information block, the namespaces section, and the definitions section.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="information-block">
 <section id="section-3.1">
         <h3 id="name-information-block">
@@ -2351,9 +2351,11 @@ pointing to one declaration the instantiation of which is declared mandatory.<a 
           <h4 id="name-optionality-using-the-keywo">
 <a href="#section-4.5.1" class="section-number selfRef">4.5.1. </a><a href="#name-optionality-using-the-keywo" class="section-name selfRef">Optionality using the keyword "sdfRequired"</a>
           </h4>
-<p id="section-4.5.1-1">The keyword "sdfRequired" is provided to apply a constraint for which definitions are mandatory in an instance conforming to a particular definition in which the constraint appears.<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.5.1-1">The keyword "sdfRequired" is provided to apply a constraint that
+defines for which declarations corresponding data are mandatory in an
+instance conforming the current definition.<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.5.1-2">The value of "sdfRequired" is an array of JSON pointers, each
-indicating one definition that is mandatory to be present.<a href="#section-4.5.1-2" class="pilcrow">¶</a></p>
+indicating one declaration that is mandatory to be represented.<a href="#section-4.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.5.1-3">The example in <a href="#example-req" class="xref">Figure 5</a> shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "temperatureData", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".<a href="#section-4.5.1-3" class="pilcrow">¶</a></p>
 <span id="name-using-sdfrequired"></span><div id="example-req">
 <figure id="figure-5">
@@ -2406,7 +2408,9 @@ indicating one definition that is mandatory to be present.<a href="#section-4.5.
 them.  These are listed in <a href="#tbl-common-qualities" class="xref">Table 3</a>.  None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
-If a label is required for an application and no label is given, the last part of the JSON pointer to the definition can be used.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
+If a label is required for an application and no label is given, the
+last part (<code>reference-token</code>, Section 3 of <span>[<a href="#RFC6901" class="xref">RFC6901</a>]</span>) of the JSON
+pointer to the definition can be used.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
 <span id="name-common-qualities-2"></span><div id="tbl-common-qualities">
 <table class="center" id="table-3">
           <caption>
@@ -2459,7 +2463,7 @@ If a label is required for an application and no label is given, the last part o
 <p id="section-4.7-1">Data qualities are used in <code>sdfData</code> and <code>sdfProperty</code> definitions.<a href="#section-4.7-1" class="pilcrow">¶</a></p>
 <p id="section-4.7-2"><a href="#sdfdataqual1" class="xref">Table 4</a> lists data qualities borrowed from <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>; the
 intention is that these qualities retain their semantics from the
-versions of the json-schema.org proposal there were imported from.<a href="#section-4.7-2" class="pilcrow">¶</a></p>
+versions of the json-schema.org proposal they were imported from.<a href="#section-4.7-2" class="pilcrow">¶</a></p>
 <p id="section-4.7-3"><a href="#sdfdataqual2" class="xref">Table 5</a> lists data qualities defined specifically for the
 present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
 <p id="section-4.7-4">The term "allowed types" stands for primitive JSON types as well as
@@ -2562,7 +2566,8 @@ allowed for one of these types.<a href="#section-4.7-4" class="pilcrow">¶</a></
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">items</td>
-              <td class="text-left" rowspan="1" colspan="1">(subset of common/data qualities; see {{syntax})</td>
+              <td class="text-left" rowspan="1" colspan="1">(subset of common/data qualities; see <a href="#syntax" class="xref">Appendix A</a>
+</td>
               <td class="text-left" rowspan="1" colspan="1">constraints on array items</td>
             </tr>
           </tbody>
@@ -2641,7 +2646,7 @@ allowed for one of these types.<a href="#section-4.7-4" class="pilcrow">¶</a></
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">subtype</td>
-              <td class="text-left" rowspan="1" colspan="1">"bytestring" / "unixtime"</td>
+              <td class="text-left" rowspan="1" colspan="1">"byte-string" / "unix-time"</td>
               <td class="text-left" rowspan="1" colspan="1">subtype enumeration</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
@@ -2745,7 +2750,6 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
               <th class="text-left" rowspan="1" colspan="1">Quality</th>
               <th class="text-left" rowspan="1" colspan="1">Type</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
-              <th class="text-left" rowspan="1" colspan="1"> </th>
             </tr>
           </thead>
           <tbody>
@@ -2755,31 +2759,26 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
               <td class="text-left" rowspan="1" colspan="1">
                 <a href="#common-qualities" class="xref">Section 4.6</a>
 </td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfInputData</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid action definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
+              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to Data items in the input data for an Action</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfRequiredInputData</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid action definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
+              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory Data items in the input data for an Action</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfOutputData</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to mandatory items in a valid action definition</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
+              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to Data items in the Output data for an Action (mandatory items are listed under sdfRequired)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfData</td>
               <td class="text-left" rowspan="1" colspan="1">data</td>
               <td class="text-left" rowspan="1" colspan="1">zero or more named data type definitions that might be used in the above</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
           </tbody>
         </table>
@@ -2808,7 +2807,6 @@ action.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Quality</th>
               <th class="text-left" rowspan="1" colspan="1">Type</th>
-              <th class="text-left" rowspan="1" colspan="1">Required</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
             </tr>
           </thead>
@@ -2819,19 +2817,16 @@ action.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
               <td class="text-left" rowspan="1" colspan="1">
                 <a href="#common-qualities" class="xref">Section 4.6</a>
 </td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfOutputData</td>
               <td class="text-left" rowspan="1" colspan="1">array</td>
-              <td class="text-left" rowspan="1" colspan="1">no</td>
-              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to output items in a valid definition</td>
+              <td class="text-left" rowspan="1" colspan="1">Array of JSON Pointers to Data items in the Output data for an Action (mandatory items are listed under sdfRequired)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfData</td>
               <td class="text-left" rowspan="1" colspan="1">data</td>
               <td class="text-left" rowspan="1" colspan="1">zero or more named data type definitions that might be used in the above</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
           </tbody>
         </table>
@@ -2905,13 +2900,13 @@ to use this in a way that contradicts the referenced semantics.)<a href="#sectio
     "type": "number",
     "minimum": 0,
     "units": "m"
-    "description": "There can be no negative lengths"
+    "description": "There can be no negative lengths."
   }
 ...
   "cable-length" : {
     "sdfRef": "#/sdfData/length"
     "minimum": 0.05,
-    "description": "cables must be at least 5 cm"
+    "description": "Cables must be at least 5 cm."
   }
 </pre><a href="#section-6.2.1-3" class="pilcrow">¶</a>
 </div>
@@ -2938,7 +2933,6 @@ to use this in a way that contradicts the referenced semantics.)<a href="#sectio
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Quality</th>
               <th class="text-left" rowspan="1" colspan="1">Type</th>
-              <th class="text-left" rowspan="1" colspan="1">Required</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
             </tr>
           </thead>
@@ -2946,21 +2940,18 @@ to use this in a way that contradicts the referenced semantics.)<a href="#sectio
             <tr>
               <td class="text-left" rowspan="1" colspan="1">(common)</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
               <td class="text-left" rowspan="1" colspan="1">
                 <a href="#common-qualities" class="xref">Section 4.6</a>
 </td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfThing</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
+              <td class="text-left" rowspan="1" colspan="1">thing</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfObject</td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
-              <td class="text-left" rowspan="1" colspan="1"> </td>
+              <td class="text-left" rowspan="1" colspan="1">object</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
           </tbody>
