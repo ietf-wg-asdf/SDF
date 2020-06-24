@@ -293,41 +293,9 @@ changes the state based on the current state of the Property named `value`.
 ## Elements of an SDF model
 
 The SDF language uses seven predefined Class Name Keywords for modeling connected
-Things, six of which are illustrated in {{fig-class-1}} and {{fig-class-2}} (the seventh class `sdfProduct` is exactly like `sdfThing`).
+Things, six of which are illustrated in {{fig-class-2}} (the seventh class `sdfProduct` is exactly like `sdfThing`).
 
-<!-- [^1]: \[Decide which of these figures we want] -->
-
-
-~~~ goat
-                +--------+
-                |sdfThing|
-                |--------|
-                |--------|
-                +--------+
-                     |
-                     |
-               +---------+
-               |sdfObject|
-               |---------|
-               |---------|
-               +---------+
-                     |
-+-----------+  +---------+   +--------+
-|sdfProperty|  |sdfAction|   |sdfEvent|
-|-----------|  |---------|   |--------|
-|-----------|  |---------|   |--------|
-+-----------+  +---------+   +--------+
-
-
-                +-------+
-                |sdfData|
-                |-------|
-                |-------|
-                +-------+
-~~~
-{: #fig-class-1 title="Main classes used in SDF models"}
-
-~~~ plantuml
+~~~ plantuml-utxt
 sdfThing --> "0+" sdfObject : hasObject
 sdfThing --> "0+" sdfThing : hasThing
 
@@ -360,7 +328,7 @@ class sdfEvent {
 class sdfData {
 }
 ~~~
-{: #fig-class-2 title="Main classes used in SDF models and their relations"}
+{: #fig-class-2 title="Main classes used in SDF models"}
 
 The seven main Class Name Keywords are discussed below.
 

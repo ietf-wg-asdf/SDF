@@ -92,20 +92,20 @@ Table of Contents
      2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   5
      2.2.  Elements of an SDF model  . . . . . . . . . . . . . . . .   7
        2.2.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . .   8
-       2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .   9
-       2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .  10
-       2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .  11
-       2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  11
+       2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .   8
+       2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .   9
+       2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .  10
+       2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  10
        2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  11
-       2.2.7.  sdfProduct  . . . . . . . . . . . . . . . . . . . . .  12
-   3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  12
-     3.1.  Information block . . . . . . . . . . . . . . . . . . . .  12
-     3.2.  Namespaces section  . . . . . . . . . . . . . . . . . . .  13
-     3.3.  Definitions section . . . . . . . . . . . . . . . . . . .  14
-   4.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .  15
-     4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  15
+       2.2.7.  sdfProduct  . . . . . . . . . . . . . . . . . . . . .  11
+   3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  11
+     3.1.  Information block . . . . . . . . . . . . . . . . . . . .  11
+     3.2.  Namespaces section  . . . . . . . . . . . . . . . . . . .  12
+     3.3.  Definitions section . . . . . . . . . . . . . . . . . . .  13
+   4.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .  14
+     4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  14
      4.2.  Contributing global names . . . . . . . . . . . . . . . .  15
-     4.3.  Referencing global names  . . . . . . . . . . . . . . . .  16
+     4.3.  Referencing global names  . . . . . . . . . . . . . . . .  15
 
 
 
@@ -114,7 +114,7 @@ Koster & Bormann         Expires 7 December 2020                [Page 2]
 Internet-Draft                  OneDM SDF                      June 2020
 
 
-     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  17
+     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  16
      4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  17
        4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  17
      4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  18
@@ -358,34 +358,34 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    The SDF language uses seven predefined Class Name Keywords for
    modeling connected Things, six of which are illustrated in Figure 2
-   and Figure 3 (the seventh class "sdfProduct" is exactly like
-   "sdfThing").
+   (the seventh class "sdfProduct" is exactly like "sdfThing").
 
-                   +--------+
+                   ,--------.
                    |sdfThing|
                    |--------|
                    |--------|
-                   +--------+
+                   `--------'
                         |
                         |
-                  +---------+
+                  ,---------.
                   |sdfObject|
                   |---------|
                   |---------|
-                  +---------+
+                  `---------'
                         |
-   +-----------+  +---------+   +--------+
+   ,-----------.  ,---------.   ,--------.
    |sdfProperty|  |sdfAction|   |sdfEvent|
    |-----------|  |---------|   |--------|
    |-----------|  |---------|   |--------|
-   +-----------+  +---------+   +--------+
+   `-----------'  `---------'   `--------'
 
 
-                   +-------+
+                   ,-------.
                    |sdfData|
                    |-------|
                    |-------|
-                   +-------+
+                   `-------'
+
 
 
 
@@ -396,40 +396,6 @@ Internet-Draft                  OneDM SDF                      June 2020
 
                  Figure 2: Main classes used in SDF models
 
-   sdfThing --> "0+" sdfObject : hasObject
-   sdfThing --> "0+" sdfThing : hasThing
-
-   sdfObject --> "0+" sdfProperty : hasProperty
-   sdfObject --> "0+" sdfAction : hasAction
-   sdfObject --> "0+" sdfEvent : hasEvent
-
-   sdfAction --> "1+" sdfData : hasInputData
-   sdfAction --> "0+" sdfData : hasOutputData
-
-   sdfEvent --> "1+" sdfData : hasOutputData
-
-   sdfProperty --> "1" sdfData : isInstanceOf
-
-   class sdfThing {
-   }
-
-   class sdfObject {
-   }
-
-   class sdfProperty {
-   }
-
-   class sdfAction {
-   }
-
-   class sdfEvent {
-   }
-
-   class sdfData {
-   }
-
-       Figure 3: Main classes used in SDF models and their relations
-
    The seven main Class Name Keywords are discussed below.
 
 2.2.1.  sdfObject
@@ -439,16 +405,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    scope with common definition items from many IoT modeling systems,
    for example ZigBee Clusters [ZCL], OMA SpecWorks LwM2M Objects [OMA],
    and OCF Resource Types [OCF].
-
-
-
-
-
-
-Koster & Bormann         Expires 7 December 2020                [Page 8]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
    An "sdfObject" contains a set of "sdfProperty", "sdfAction", and
    "sdfEvent" definitions that describe the interaction affordances
@@ -483,28 +439,22 @@ Internet-Draft                  OneDM SDF                      June 2020
    means that even Property qualities such as "readable" and "writable"
    can be associated with definitions in "sdfData" groups, as well.)
 
+
+
+
+
+
+
+Koster & Bormann         Expires 7 December 2020                [Page 8]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    For definitions in "sdfProperty" and "sdfData", SDF provides
    qualities that can constrain the structure and values of data allowed
    in an instance of these data, as well as qualities that associate
    semantics to these data, for engineering units and unit scaling
    information.
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann         Expires 7 December 2020                [Page 9]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
    For the data definition within "sdfProperty" or "sdfData", SDF
    borrows a number of elements proposed for the drafts 4 and 7 of the
@@ -544,23 +494,23 @@ Internet-Draft                  OneDM SDF                      June 2020
    Actions may have (or lack) qualities of idempotency and side-effect
    safety.
 
+
+
+
+
+
+
+
+Koster & Bormann         Expires 7 December 2020                [Page 9]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    The current version of SDF only provides data constraint modeling and
    semantics for the input and output data of definitions in "sdfAction"
    groups.  Again, data definitions for payloads of protocol messages,
    and detailed protocol settings for invoking the action, are expected
    to be part of the protocol binding.
-
-
-
-
-
-
-
-
-Koster & Bormann         Expires 7 December 2020               [Page 10]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
 2.2.4.  sdfEvent
 
@@ -601,6 +551,17 @@ Internet-Draft                  OneDM SDF                      June 2020
    multiple definitions that have similar basic characteristics and
    requirements.
 
+
+
+
+
+
+
+Koster & Bormann         Expires 7 December 2020               [Page 10]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
 2.2.6.  sdfThing
 
    Back at the top level, the "sdfThing" groups enables definition of
@@ -610,13 +571,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    A definition in an "sdfThing" group can refine the metadata of the
    definitions it is composed from: other definitions in "sdfThing"
    groups definitions in "sdfObject" groups.
-
-
-
-Koster & Bormann         Expires 7 December 2020               [Page 11]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
 2.2.7.  sdfProduct
 
@@ -648,6 +602,22 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    Qualities of the information block are shown in Table 1.
 
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 7 December 2020               [Page 11]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
     +-----------+--------+----------+---------------------------------+
     | Quality   | Type   | Required | Description                     |
     +===========+========+==========+=================================+
@@ -665,14 +635,6 @@ Internet-Draft                  OneDM SDF                      June 2020
     +-----------+--------+----------+---------------------------------+
 
                 Table 1: Qualities of the Information Block
-
-
-
-
-Koster & Bormann         Expires 7 December 2020               [Page 12]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
    While the format of the version string is marked as TBD, it is
    intended to be lexicographically increasing over the life of a model:
@@ -701,6 +663,17 @@ Internet-Draft                  OneDM SDF                      June 2020
    this entry) becomes the default namespace for the SDF definition
    file.
 
+
+
+
+
+
+
+Koster & Bormann         Expires 7 December 2020               [Page 12]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
      +------------------+--------+----------+-----------------------+
      | Quality          | Type   | Required | Description           |
      +==================+========+==========+=======================+
@@ -720,15 +693,6 @@ Internet-Draft                  OneDM SDF                      June 2020
 
    The following example declares a set of namespaces and defines "cap"
    as the default namespace.
-
-
-
-
-
-Koster & Bormann         Expires 7 December 2020               [Page 13]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
    "namespace": {
      "cap": "https://example.com/capability/cap",
@@ -758,11 +722,19 @@ Internet-Draft                  OneDM SDF                      June 2020
    defined creates a new type and term in the target namespace.
    Declarations have a scope of the current definition block.
 
+
+
+
+Koster & Bormann         Expires 7 December 2020               [Page 13]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    A definition may in turn contain other definitions.  Each definition
    consists of the newly defined identifier and a set of key-value pairs
    that represent the defined qualities and contained definitions.
 
-   An example for an Object definition is given in Figure 4:
+   An example for an Object definition is given in Figure 3:
 
    "sdfObject": {
      "foo": {
@@ -774,17 +746,7 @@ Internet-Draft                  OneDM SDF                      June 2020
      }
    }
 
-                    Figure 4: Example Object definition
-
-
-
-
-
-
-Koster & Bormann         Expires 7 December 2020               [Page 14]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
+                    Figure 3: Example Object definition
 
    This example defines an Object "foo" that is defined in the default
    namespace (full address: "#/sdfObject/foo"), containing a property
@@ -816,6 +778,14 @@ Internet-Draft                  OneDM SDF                      June 2020
    dereferencing global names, the URI should be chosen in such a way
    that this may become possible in the future.)
 
+
+
+
+Koster & Bormann         Expires 7 December 2020               [Page 14]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    The absolute URI of a global name should be a URI as per Section 3 of
    [RFC3986], with a scheme of "https" and a path ("hier-part" in
    [RFC3986]).  For the present version of this specification, the query
@@ -834,13 +804,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    a definition is contributed.  When emphasizing that name definitions
    are contributed to the default namespace, we therefore also call it
    the "target namespace" of the SDF definition file.
-
-
-
-Koster & Bormann         Expires 7 December 2020               [Page 15]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
    E.g., in Figure 1, definitions for the following global names are
    contributed:
@@ -872,6 +835,13 @@ Internet-Draft                  OneDM SDF                      June 2020
    is the only kind of name reference that is possible in an SDF
    definition file that does not set a default namespace.
 
+
+
+Koster & Bormann         Expires 7 December 2020               [Page 15]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
    Name references that point outside the current SDF definition file
    need to contain curie prefixes.  These then reference namespace
    declarations in the namespaces section.
@@ -889,14 +859,6 @@ Internet-Draft                  OneDM SDF                      June 2020
    references the global name:
 
    "https://example.com/#/sdfData/temperatureData"
-
-
-
-
-Koster & Bormann         Expires 7 December 2020               [Page 16]
-
-Internet-Draft                  OneDM SDF                      June 2020
-
 
    Note that there is no way to provide a URI scheme name in a curie, so
    all references outside of the document need to go through the
@@ -926,6 +888,16 @@ Internet-Draft                  OneDM SDF                      June 2020
    creates a new definition "temperatureProperty" that contains all of
    the qualities defined in the definition at /sdfData/temperatureData.
 
+
+
+
+
+
+Koster & Bormann         Expires 7 December 2020               [Page 16]
+
+Internet-Draft                  OneDM SDF                      June 2020
+
+
 4.5.  sdfRequired
 
    The value of "sdfRequired" is an array of name references, each
@@ -941,6 +913,34 @@ Internet-Draft                  OneDM SDF                      June 2020
    The value of "sdfRequired" is an array of JSON pointers, each
    indicating one declaration that is mandatory to be represented.
 
+   The example in Figure 4 shows two required elements in the sdfObject
+   definition for "temperatureWithAlarm", the sdfProperty
+   "temperatureData", and the sdfEvent "overTemperatureEvent".  The
+   example also shows the use of JSON pointer with "sdfRef" to use a
+   pre-existing definition in this definition, for the "alarmType" data
+   (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -953,13 +953,6 @@ Koster & Bormann         Expires 7 December 2020               [Page 17]
 
 Internet-Draft                  OneDM SDF                      June 2020
 
-
-   The example in Figure 5 shows two required elements in the sdfObject
-   definition for "temperatureWithAlarm", the sdfProperty
-   "temperatureData", and the sdfEvent "overTemperatureEvent".  The
-   example also shows the use of JSON pointer with "sdfRef" to use a
-   pre-existing definition in this definition, for the "alarmType" data
-   (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
    {
      "sdfObject": {
@@ -990,7 +983,7 @@ Internet-Draft                  OneDM SDF                      June 2020
      }
    }
 
-                        Figure 5: Using sdfRequired
+                        Figure 4: Using sdfRequired
 
 4.6.  Common Qualities
 
@@ -1000,6 +993,13 @@ Internet-Draft                  OneDM SDF                      June 2020
    absent.  If a label is required for an application and no label is
    given, the last part ("reference-token", Section 3 of [RFC6901]) of
    the JSON pointer to the definition can be used.
+
+
+
+
+
+
+
 
 
 
