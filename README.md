@@ -5,5 +5,5 @@ Internet-Draft for the One Data Model Simple Definition Format (SDF)
 
 [Find the Internet-Draft for SDF 1.0][I-D]
 
-[sdf.html]: https://raw.githack.com/one-data-model/sdf/master/sdf.html
+[sdf.html]: https://onedm.org/SDF/sdf.html
 [I-D]: https://www.ietf.org/id/draft-onedm-t2trg-sdf-00.html
