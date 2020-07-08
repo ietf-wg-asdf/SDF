@@ -263,7 +263,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
                     "description": "Turn the switch on; equivalent to setting value to true."
                 },
                 "off": {
-                    "description": "Turn the switch on; equivalent to setting value to false."
+                    "description": "Turn the switch off; equivalent to setting value to false."
                 },
                 "toggle": {
                     "description": "Toggle the switch; equivalent to setting value to its complement."
