@@ -4,8 +4,8 @@ coding: utf-8
 title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
 abbrev: OneDM SDF
-docname: draft-onedm-t2trg-sdf-latest
-date: 2020-06-05
+docname: draft-ietf-asdf-sdf-latest
+date: 2020-11-15
 category: info
 
 ipr: trust200902
@@ -99,15 +99,21 @@ Data types for the information exchanged in those interactions.
 
 A JSON format representation of SDF 1.0 is defined in this document.
 
+(This is a republication of draft-onedm-t2trg-sdf-00 as an IETF ASDF
+Working Group document, with no technical changes, a superfluous
+figure removed, and some tool version induced reformatting.)
+
 --- note_Contributing
 
 Recent versions of this document are available at its GitHub
-repository <https://github.com/one-data-model/sdf> — this also provides an issue
-tracker as well as a way to supply "pull requests".
+repository <https://github.com/ietf-wg-asdf/SDF> — this also provides
+an issue tracker as well as a way to supply "pull requests".
 
-General discussion of this SDF Internet-Draft for now will be on the mailing list of the Thing-to-Thing Research group, t2trg@irtf.org (subscribe at <https://www.irtf.org/mailman/listinfo/t2trg>).
+General discussion of this SDF Internet-Draft happens on the mailing
+list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
+<https://www.ietf.org/mailman/listinfo/asdf>).
 
-The IRTF Note Well applies (<https://www.ietf.org/about/note-well/>).
+The IETF Note Well applies (<https://www.ietf.org/about/note-well/>).
 
 --- middle
 
