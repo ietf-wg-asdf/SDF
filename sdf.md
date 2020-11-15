@@ -805,9 +805,9 @@ allowed for one of these types.
 | Quality       | Type                        | Description                                                     | Default |
 |---------------|-----------------------------|-----------------------------------------------------------------|---------|
 | (common)      |                             | {{common-qualities}}                                            |         |
-| units         | string                      | SenML unit name as per {{-units}}, subregistry SenML Units      | N/A     |
-| scaleMinimum  | number                      | lower limit of value in units                                   | N/A     |
-| scaleMaximum  | number                      | upper limit of value in units                                   | N/A     |
+| unit          | string                      | SenML unit name as per {{-units}}, subregistry SenML Units      | N/A     |
+| scaleMinimum  | number                      | lower limit of value in units given by unit                     | N/A     |
+| scaleMaximum  | number                      | upper limit of value in units given by unit                     | N/A     |
 | readable      | boolean                     | Reads are allowed                                               | true    |
 | writable      | boolean                     | Writes are allowed                                              | true    |
 | observable    | boolean                     | flag to indicate asynchronous notification is available         | true    |
@@ -815,6 +815,8 @@ allowed for one of these types.
 | contentFormat | string                      | content type (IANA media type string plus parameters), encoding | N/A     |
 | subtype       | "byte-string" / "unix-time" | subtype enumeration                                             | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
+
+Note that the quality `unit` was called `units` in SDF 1.0.
 
 # Keywords for definition groups
 
@@ -938,7 +940,7 @@ to use this in a way that contradicts the referenced semantics.)
   "length" : {
     "type": "number",
     "minimum": 0,
-    "units": "m"
+    "unit": "m"
     "description": "There can be no negative lengths."
   }
 ...
