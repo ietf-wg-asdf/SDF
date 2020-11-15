@@ -203,7 +203,7 @@ Object:
 : A grouping of Property, Action, and Event definitions; the main
   "atom" of reusable semantics for model construction.  (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
-  heritage; properties in other environments; in this document, the
+  heritage; in this document, the
   term Object is specifically reserved for the above grouping, even if
   the type name "object" might be imported from a data definition
   language with the other semantics.)
