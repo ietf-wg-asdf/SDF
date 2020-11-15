@@ -533,7 +533,11 @@ this entry) becomes the default namespace for the SDF definition file.
 | defaultNamespace | string | no       | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
 {: #nssec title="Namespaces Section"}
 
-The following example declares a set of namespaces and defines `cap` as the default namespace.
+The following example declares a set of namespaces and defines `cap`
+as the default namespace.
+By convention, the values in the namespace map contain full URIs
+without a fragment identifier, and the fragment identifier is then
+added, if needed, where the namespace entry is used.
 
 ~~~ json
 "namespace": {
