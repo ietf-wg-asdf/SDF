@@ -131,7 +131,11 @@ An SDF specification describes definitions of SDF Objects and their
 associated interactions (Events, Actions, Properties), as well as the
 Data types for the information exchanged in those interactions.
 
-A JSON format representation of SDF 1.0 is defined in this document.
+A JSON format representation of SDF 1.0 was defined in the previous
+(-00) version of this document.  SDF 1.1 is expected to be defined in
+a future version; the present document represents a draft on the way
+from 1.0 to 1.1.  Hence, this is not an implementation draft.
+
 
 ## Terminology and Conventions
 
