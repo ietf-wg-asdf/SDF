@@ -594,7 +594,7 @@ contribute to a global namespace.)
 
 ## Structure
 
-Global names look exactly like https:// URIs with attached fragment identifiers.
+Global names look exactly like `https://` URIs with attached fragment identifiers.
 
 There is no intention to require that these URIs can be dereferenced.
 <!-- Looking things up there is a convenience -->
@@ -629,8 +629,8 @@ E.g., in {{example1}}, definitions for the following global names are contribute
 * https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on
 * https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
-Note the "#", which separates the base part from the fragment
-identifier part.
+Note the `#`, which separates the absolute-URI part (Section 4.3 of
+{{-uri}}) from the fragment identifier part.
 
 ## Referencing global names
 
@@ -643,8 +643,8 @@ A name that is contributed by the current SDF definition file can be
 referenced by a Same-Document Reference as per section 4.4 of
 {{-uri}}.
 As there is little point in referencing the entire SDF definition
-file, this will be a "#" followed by a JSON pointer.
-This is the only kind of name reference that is possible in an SDF
+file, this will be a `#` followed by a JSON pointer.
+This is the only kind of name reference to itself that is possible in an SDF
 definition file that does not set a default namespace.
 
 Name references that point outside the current SDF definition file
@@ -655,14 +655,14 @@ For example, if a namespace prefix is defined:
 
 ~~~ json
 "namespace": {
-  "foo": "https://example.com/#"
+  "foo": "https://example.com/"
 }
 ~~~
 
 Then this reference to that namespace:
 
 ~~~ json
-{ "sdfRef": "foo:/sdfData/temperatureData" }
+{ "sdfRef": "foo:#/sdfData/temperatureData" }
 ~~~
 
 references the global name:
