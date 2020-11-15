@@ -397,7 +397,7 @@ communication over network interfaces.
 Where needed, data definitions for payloads of protocol messages are
 expected to be part of the protocol binding.
 
-### sdfAction
+### sdfAction {#sdfaction-overview}
 
 The `sdfAction` group contains declarations of Actions, model affordances that, when triggered,
 have more effect than just reading, updating, or observing Thing
@@ -423,7 +423,7 @@ Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
 part of the protocol binding.
 
-### sdfEvent
+### sdfEvent {#sdfevent-overview}
 
 The `sdfEvent` group contains declarations of Events, which can model
 affordances that inform about "happenings" associated with an instance
@@ -557,13 +557,14 @@ set up, and no defaultNamespace can be given.
 ## Definitions section
 
 The Definitions section contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
-The value of each group is a JSON map (object), the keys of which serve for naming the individual definitions in this group, and the corresponding values provide the qualities (name-value pairs) for the individual definition.
+The value of each group is a JSON map (object), the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
+(In short, we speak of the map entries as "named sets of qualities".)
 
 Each group may contain zero or more definitions.
 Each identifier defined creates a new type and term in the target namespace.
-Declarations have a scope of the current definition block.
+Declarations have a scope of the current definition block. <!-- what exactly does this mean? -->
 
-A definition may in turn contain other definitions. Each definition consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained definitions.
+A definition may in turn contain other definitions. Each definition is a named set of qualities, i.e., it consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained definitions.
 
 An example for an Object definition is given in {{exobject}}:
 
@@ -756,7 +757,7 @@ Definitions in SDF share a number of qualities that provide metadata for
 them.  These are listed in {{tbl-common-qualities}}.  None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
-If a label is required for an application and no label is given, the
+If a label is required for an application and no label is given in the SDF model, the
 last part (`reference-token`, Section 3 of {{-pointer}}) of the JSON
 pointer to the definition can be used.
 
@@ -847,13 +848,13 @@ None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
 
-| Quality     | Type     | Description                                                              |
-|-------------|----------|--------------------------------------------------------------------------|
-| (common)    |          | {{common-qualities}}                                                     |
-| sdfProperty | property | zero or more named property definitions for this object                  |
-| sdfAction   | action   | zero or more named action definitions for this object                    |
-| sdfEvent    | event    | zero or more named event definitions for this object                     |
-| sdfData     | data     | zero or more named data type definitions that might be used in the above |
+| Quality     | Type      | Description                                                              |
+|-------------+-----------+--------------------------------------------------------------------------|
+| (common)    |           | {{common-qualities}}                                                     |
+| sdfProperty | property  | zero or more named property definitions for this object                  |
+| sdfAction   | action    | zero or more named action definitions for this object                    |
+| sdfEvent    | event     | zero or more named event definitions for this object                     |
+| sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
 {: #sdfobjqual title="Qualities of sdfObject"}
 
 
@@ -863,7 +864,8 @@ The sdfProperty keyword denotes a group of zero or more Property definitions.
 
 Properties are used to model elements of state.
 
-The qualities of a Property definition include the common qualities and the data qualities, see {{data-qualities}}.
+The qualities of a Property definition include the data qualities (and
+thus the common qualities), see {{data-qualities}}.
 
 ## sdfAction
 
@@ -937,7 +939,7 @@ The requirements for high level composition include the following:
 
 The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.
 
-The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where ns is the namespace prefix (short name for the namespace).
+The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where `ns` is the namespace prefix (short name for the namespace).
 
 ## Modular Composition
 
