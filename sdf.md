@@ -384,8 +384,9 @@ data, for engineering units and unit scaling information.
 For the data definition within `sdfProperty` or `sdfData`, SDF borrows
 a number of elements proposed for the drafts 4 and 7 of the json-schema.org "JSON Schema"
 format {{-jso}}, enhanced by qualities that are specific to SDF.
-However, for the current version of SDF, data are constrained to be of
-simple types (number, string, Boolean) and arrays of these types.
+For the current version of SDF, data are constrained to be of
+simple types (number, string, Boolean),
+JSON maps composed of named data ("objects"), and arrays of these types.
 Syntax extension points are provided that can be used to provide
 richer types in future versions of this specification (possibly more
 of which can be borrowed from json-schema.org).
@@ -730,12 +731,15 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
       "sdfEvent": {
         "overTemperatureEvent": {
           "sdfOutputData": {
-            "alarmType": {
-              "sdfRef": "cap:/sdfData/alarmTypes/quantityAlarms",
-              "const": "OverTemperatureAlarm"
-            },
-            "temperature": {
-              "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+            "type": "object",
+            "properties": {
+              "alarmType": {
+                "sdfRef": "cap:/sdfData/alarmTypes/quantityAlarms",
+                "const": "OverTemperatureAlarm"
+              },
+              "temperature": {
+                "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+              }
             }
           }
         }
@@ -767,56 +771,66 @@ pointer to the definition can be used.
 
 ## Data Qualities
 
-Data qualities are used in `sdfData` and `sdfProperty` definitions.
+Data qualities are used in `sdfData` and `sdfProperty` definitions,
+which are named sets of data qualities (abbreviated as `named-sdq`).
 
 {{sdfdataqual1}} lists data qualities borrowed from {{-jso}}; the
 intention is that these qualities retain their semantics from the
 versions of the json-schema.org proposal they were imported from.
+A description that starts with a parenthesized term means the quality
+is only applicable when `type` has the value of the term.
 
 {{sdfdataqual2}} lists data qualities defined specifically for the
 present specification.
 
-The term "allowed types" stands for primitive JSON types as well as
-homogeneous arrays of numbers, text, or Booleans.  (This list might be
+The term "allowed types" stands for primitive JSON types, JSON maps ("objects")" as well as
+homogeneous arrays of numbers, text, Booleans, or maps.  (This list might be
 extended in a future version of SDF.)  An "allowed value" is a value
 allowed for one of these types.
 
-| Quality          | Type                                                             | Description                                            |
-|------------------|------------------------------------------------------------------|--------------------------------------------------------|
-| type             | "number" / "string" / "boolean" / "integer" / "array"            | JSON data type                                         |
-| enum             | array of allowed values                                          | enumeration constraint                                 |
-| const            | allowed value                                                    | specifies a constant value for a data item or property |
-| default          | allowed value                                                    | specifies the default value for initialization         |
-| minimum          | number                                                           | lower limit of value                                   |
-| maximum          | number                                                           | upper limit of value                                   |
-| exclusiveMinimum | number or boolean (jso draft 7/4)                                | lower limit of value                                   |
-| exclusiveMaximum | number or boolean (jso draft 7/4)                                | lower limit of value                                   |
-| multipleOf       | number                                                           | resolution of the number \[NEEDED?]                    |
-| minLength        | integer                                                          | shortest length string in octets                       |
-| maxLength        | integer                                                          | longest length string in octets                        |
-| pattern          | string                                                           | regular expression to constrain a string pattern       |
-| format           | "date-time" / "date" / "time" / "uri" / "uri-reference" / "uuid" | JSON Schema formats as per {{-jso}}, Section 7.3       |
-| minItems         | number                                                           | Minimum number of items in array                       |
-| maxItems         | number                                                           | Maximum number of items in array                       |
-| uniqueItems      | boolean                                                          | if true, requires items to be all different            |
-| items            | (subset of common/data qualities; see {{syntax}}                 | constraints on array items                             |
+| Quality          | Type                                                             | Description                                                        |
+|------------------+------------------------------------------------------------------+--------------------------------------------------------------------|
+| type             | "number" / "string" / "boolean" / "integer" / "array" / "object" | JSON data type (note 1)                                             |
+| enum             | array of allowed values                                          | enumeration constraint                                             |
+| const            | allowed value                                                    | specifies a constant value for a data item or property             |
+| default          | allowed value                                                    | specifies the default value for initialization                     |
+| minimum          | number                                                           | (number) lower limit of value                                      |
+| maximum          | number                                                           | (number) upper limit of value                                      |
+| exclusiveMinimum | number or boolean (jso draft 7/4)                                | (number) lower limit of value                                      |
+| exclusiveMaximum | number or boolean (jso draft 7/4)                                | (number) lower limit of value                                      |
+| multipleOf       | number                                                           | (number) resolution of the number \[NEEDED?]                       |
+| minLength        | integer                                                          | (string) shortest length string in octets                          |
+| maxLength        | integer                                                          | (string) longest length string in octets                           |
+| pattern          | string                                                           | (string) regular expression to constrain a string pattern          |
+| format           | "date-time" / "date" / "time" / "uri" / "uri-reference" / "uuid" | (string) JSON Schema formats as per {{-jso}}, Section 7.3          |
+| minItems         | number                                                           | (array) Minimum number of items in array                            |
+| maxItems         | number                                                           | (array) Maximum number of items in array                           |
+| uniqueItems      | boolean                                                          | (array) if true, requires items to be all different                |
+| items            | (subset of common/data qualities; see {{syntax}}                 | (array) constraints on array items                                  |
+| required         | array of strings                                                 | (object) names of properties (note 2) that are required in the JSON map ("object") |
+| properties       | named set of data qualities                                      | (object) entries allowed for the JSON map ("object")                  |
 {: #sdfdataqual1 title="Qualities of sdfProperty and sdfData borrowed from json-schema.org"}
 
-| Quality       | Type                        | Description                                                     | Default |
-|---------------|-----------------------------|-----------------------------------------------------------------|---------|
-| (common)      |                             | {{common-qualities}}                                            |         |
-| unit          | string                      | SenML unit name as per {{-units}}, subregistry SenML Units      | N/A     |
-| scaleMinimum  | number                      | lower limit of value in units given by unit                     | N/A     |
-| scaleMaximum  | number                      | upper limit of value in units given by unit                     | N/A     |
-| readable      | boolean                     | Reads are allowed                                               | true    |
-| writable      | boolean                     | Writes are allowed                                              | true    |
-| observable    | boolean                     | flag to indicate asynchronous notification is available         | true    |
-| nullable      | boolean                     | indicates a null value is available for this type               | true    |
-| contentFormat | string                      | content type (IANA media type string plus parameters), encoding | N/A     |
-| subtype       | "byte-string" / "unix-time" | subtype enumeration                                             | N/A     |
+(1) A type value of `integer` means that only integral values of JSON
+numbers can be used.
+
+(2) Note that the term "properties" as used for map entries in {{-jso}} is unrelated to sdfProperty.
+
+| Quality       | Type                        | Description                                                         | Default |
+|---------------+-----------------------------+---------------------------------------------------------------------+---------|
+| (common)      |                             | {{common-qualities}}                                                |         |
+| unit          | string                      | SenML unit name as per {{-units}}, subregistry SenML Units (note 3) | N/A     |
+| scaleMinimum  | number                      | lower limit of value in units given by unit                         | N/A     |
+| scaleMaximum  | number                      | upper limit of value in units given by unit                         | N/A     |
+| readable      | boolean                     | Reads are allowed                                                   | true    |
+| writable      | boolean                     | Writes are allowed                                                  | true    |
+| observable    | boolean                     | flag to indicate asynchronous notification is available             | true    |
+| nullable      | boolean                     | indicates a null value is available for this type                   | true    |
+| contentFormat | string                      | content type (IANA media type string plus parameters), encoding     | N/A     |
+| subtype       | "byte-string" / "unix-time" | subtype enumeration                                                 | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
-Note that the quality `unit` was called `units` in SDF 1.0.
+(3) note that the quality `unit` was called `units` in SDF 1.0.
 
 # Keywords for definition groups
 
