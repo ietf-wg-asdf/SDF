@@ -55,24 +55,29 @@ objectqualities = {
 
 propertyqualities = dataqualities ; the definitions in sdfData are declarations in sdfProperty
 
+parameter-list =
+  pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
+  dataqualities .feature (["1.1", "dataqualities-as-parameter"])
+
 actionqualities = {
  commonqualities,
- ? sdfInputData: pointer-list   ; sdfRequiredInputData applies here (a bit redundant)
+ ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
  ? sdfRequiredInputData: pointer-list
- ? sdfOutputData: pointer-list  ; sdfRequired applies here
+ ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
 }
 
 eventqualities = {
  commonqualities
- ? sdfOutputData: pointer-list  ; sdfRequired applies here
+ ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
 }
 
 dataqualities = {               ; also propertyqualities
  commonqualities,
  jsonschema,
- ? units: text
+ ? ("units" .feature "1.0") => text
+ ? ("unit" .feature "1.1") => text
  ? scaleMinimum: number
  ? scaleMaximum: number
  ? observable: bool
@@ -85,9 +90,18 @@ dataqualities = {               ; also propertyqualities
 
 allowed-types = number / text / bool / null
               / [* number] / [* text] / [* bool]
+              / {* text => any}
+
+compound-type = (
+  "type" => ("object" .feature "1.1"),
+  ? required: [+text],
+  ? properties: named<dataqualities>,
+)
 
 jsonschema = (
- ? type: "number" / "string" / "boolean" / "integer" / "array" ; / "object"
+ ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
+    // compound-type
+   )
  ? enum: [+ allowed-types]                                              ; should validate against type
  ? const: allowed-types
  ? default: allowed-types
@@ -103,7 +117,6 @@ jsonschema = (
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
-           ; expand on demand
  ; array constraints
  ? minItems: number
  ? maxItems: number
@@ -114,7 +127,9 @@ jsonschema = (
      ? description: text            ; long text (no constraints)
      ? $comment: text               ; source code comments only, no semantics
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
-     ? type: "number" / "string" / "boolean" / "integer" ; no "array" / "object"
+     ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
+        // compound-type
+       )
      ; jso subset
      ? minimum: number
      ? maximum: number
