@@ -173,9 +173,8 @@ Block:
 
 Group:
 : An entry in the main SDF map and in certain nested definitions that
-  either has a Class Name Keyword as its key and a map of definition
-  entries (Definition Group) or a Parameter Name Keyword as its key
-  and an array of SDF pointers as a value (Parameter Group).
+  has a Class Name Keyword as its key and a map of definition
+  entries (Definition Group) as a value.
 
 Class Name Keyword:
 : One of sdfThing, sdfProduct, sdfObject, sdfProperty, sdfAction,
@@ -208,10 +207,6 @@ Object:
   term Object is specifically reserved for the above grouping, even if
   the type name "object" might be imported from a data definition
   language with the other semantics.)
-
-Parameter name keyword:
-: One of sdfInputData, sdfOutputData, sdfRequiredInputData, or
-  sdfRequired.
 
 Element:
 : A part or an aspect of something abstract; used here in its usual English definition.
@@ -409,9 +404,10 @@ state, often resulting in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.
 
-Actions may have multiple data parameters; these are modeled as input
-data and output data (using `sdfData` definitions, i.e., the same entries as for
-`sdfProperty` declarations).
+Actions may have data parameters; these are modeled as a single item of input
+data and output data, each.  (Where multiple parameters need to be
+modeled, an "object" type can be used to combine these parameters into one.)
+<!-- (using `sdfData` definitions, i.e., the same entries as for `sdfProperty` declarations). -->
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
 `sdfPoperty`; the effects may play out over time and emit action
@@ -682,8 +678,7 @@ namespace map.
 Name references occur only in specific elements of the syntax of SDF:
 
 * copying elements via sdfRef values
-* pointing to elements via sdfRequired value elements or as
-  sdfInput/OutputData etc.
+* pointing to elements via sdfRequired value elements
 
 
 ## sdfRef
@@ -864,19 +859,19 @@ Actions are used to model commands and methods which are invoked. Actions have p
 
 The qualities of an Action definition include the common qualities, additional qualities are shown in {{sdfactqual}}.
 
-| Quality              | Type  | Description                                                                    |
-|----------------------|-------|--------------------------------------------------------------------------------|
-| (common)             |       | {{common-qualities}}                                                           |
-| sdfInputData         | array | Array of JSON Pointers to Data items in the input data for an Action           |
-| sdfRequiredInputData | array | Array of JSON Pointers to mandatory Data items in the input data for an Action |
-| sdfOutputData        | array | Array of JSON Pointers to Data items in the Output data for an Action (mandatory items are listed under sdfRequired) |
-| sdfData              | data  | zero or more named data type definitions that might be used in the above       |
+| Quality       | Type      | Description                                                              |
+|---------------+-----------+--------------------------------------------------------------------------|
+| (common)      |           | {{common-qualities}}                                                     |
+| sdfInputData  | map       | data qualities of the input data for an Action                           |
+| sdfOutputData | map       | data qualities of the output data for an Action                          |
+| sdfData       | named-sdq | zero or more named data type definitions that might be used in the above |
 {: #sdfactqual title="Qualities of sdfAction"}
 
-`sdfInputData`, as refined by `sdfRequiredInputData`, define the input data
-of the action.  `sdfOutputData`, as refined by `sdfRequired,` (a quality
-defined in {{tbl-common-qualities}}) define the output data of the
-action.
+`sdfInputData` defines the input data of the action.  `sdfOutputData`
+defines the output data of the action.
+As discussed in {{sdfaction-overview}}, a set of data qualities with
+type "object" can be used to substructure either data item, with
+optionality indicated by the data quality `required`.
 
 ## sdfEvent
 
@@ -886,27 +881,29 @@ Events are used to model asynchronous occurrences that may be communicated proac
 
 The qualities of sdfEvent include the common qualities, additional qualities are shown in {{sdfevqual}}.
 
-| Quality       | Type  | Description                                                                                                          |
-|---------------|-------|----------------------------------------------------------------------------------------------------------------------|
-| (common)      |       | {{common-qualities}}                                                                                                 |
-| sdfOutputData | array | Array of JSON Pointers to Data items in the Output data for an Action (mandatory items are listed under sdfRequired) |
-| sdfData       | data  | zero or more named data type definitions that might be used in the above                                             |
+| Quality       | Type      | Description                                                              |
+|---------------+-----------+--------------------------------------------------------------------------|
+| (common)      |           | {{common-qualities}}                                                     |
+| sdfOutputData | map       | data qualities of the output data for an Event                           |
+| sdfData       | named-sdq | zero or more named data type definitions that might be used in the above |
 {: #sdfevqual title="Qualities of sdfEvent"}
 
-`sdfOutputData`, as refined by `sdfRequired` (a quality
-defined in {{tbl-common-qualities}}), define the output data of the
-action.
+`sdfOutputData` defines the output data of the action.
+As discussed in {{sdfevent-overview}}, a set of data qualities with
+type "object" can be used to substructure the output data item, with
+optionality indicated by the data quality `required`.
 
 ## sdfData
 
-The sdfData keyword denotes a group of zero or more Data type definitions.
+The sdfData keyword denotes a group of zero or more named data type
+definitions (named-sdq).
 
-An sdfData definition provides a semantic identifier for a data item and describes the constraints on the defined data item.
+An sdfData definition provides a reusable semantic identifier for a
+type of data item and describes the constraints on the defined type.
+It is not itself a declaration, i.e., it does not cause any of these
+data items to be included in an affordance definition.
 
-sdfData is used for Action parameters, for Event output data, and for
-reusable constraints in Property definitions.
-
-The qualities of sdfData include the common qualities and the data qualities, see {{data-qualities}}.
+The qualities of sdfData include the data qualities (and thus the common qualities), see {{data-qualities}}.
 
 # High Level Composition
 
