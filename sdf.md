@@ -67,6 +67,7 @@ normative:
     title: SPDX License List
     target: https://spdx.org/licenses/
     date: false
+  I-D.ietf-cbor-cddl-control: control
 informative:
   I-D.irtf-t2trg-rest-iot: rest-iot
   ZCL: DOI.10.1016/B978-0-7506-8597-9.00006-9
@@ -999,6 +1000,13 @@ does not include the extension points.
 The validation syntax can be generated from the framework syntax by
 leaving out all lines containing the string `EXTENSION-POINT`; as this
 is trivial, the result is not shown here.
+
+This appendix makes use of CDDL "features" as defined in Section 4 of {{-control}}.
+A feature named "1.0" is used to indicate parts of the syntax being
+deprecated towards SDF 1.1, and a feature named "1.1" is used to
+indicate new syntax intended for SDF 1.1.
+Features whose names end in "-ext" indicate extension points for
+further evolution.
 
 ~~~ cddl
 {::include sdf-framework.cddl}
