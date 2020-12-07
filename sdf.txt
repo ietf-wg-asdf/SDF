@@ -1248,13 +1248,15 @@ Internet-Draft                  OneDM SDF                  December 2020
 
      What would have been
 
-     ~~~ json "enum": ["foo", "bar", "baz"] ~~~
+     "enum": ["foo", "bar", "baz"]
 
      in SDF 1.0, is represented as:
 
-     ~~~ json "sdfChoice": { "foo": { "description": "This is a
-     foonly"}, "bar": { "description": "As defined in the second world
-     congress"}, "baz": { "description": "From zigbee foobaz"} } ~~~
+  "sdfChoice": {
+    "foo": { "description": "This is a foonly"},
+    "bar": { "description": "As defined in the second world congress"},
+    "baz": { "description": "From zigbee foobaz"}
+  }
 
      This allows the placement of other dataqualities such as
      "description" in the example.
@@ -1262,17 +1264,31 @@ Internet-Draft                  OneDM SDF                  December 2020
      If an enum needs to use a data type different from text string,
      e.g. what would have been
 
-     ~~~ json "type": "number", "enum": [1, 2, 3] ~~~
+     "type": "number",
+     "enum": [1, 2, 3]
 
      in SDF 1.0, is represented as:
 
-     ~~~ json "type": "number", "sdfChoice": { "a-better-name-for-
-     alternative-1": { "const": 1 }, "alternative-2"": { "const": 2 },
-     "the-third-alternative": { "const": 3 } } ~~~
+     "type": "number",
+     "sdfChoice": {
+       "a-better-name-for-alternative-1": { "const": 1 },
+       "alternative-2": { "const": 2 },
+       "the-third-alternative": { "const": 3 }
+     }
 
      where the string names obviously would be chosen in a way that is
      descriptive for what these numbers actually stand for; sdfChoice
      also makes it easy to add number ranges into the mix.
+
+
+
+
+
+
+Koster & Bormann          Expires 10 June 2021                 [Page 23]
+
+Internet-Draft                  OneDM SDF                  December 2020
+
 
      (Note that "const" can also be used for strings as in the previous
      example, e.g., if the actual string value is indeed a crucial
@@ -1282,13 +1298,6 @@ Internet-Draft                  OneDM SDF                  December 2020
 
      [I-D.handrews-json-schema-validation] provides a type union called
      "anyOf", which provides a choice between anonymous alternatives.
-
-
-
-Koster & Bormann          Expires 10 June 2021                 [Page 23]
-
-Internet-Draft                  OneDM SDF                  December 2020
-
 
      What could have been
 
@@ -1326,15 +1335,6 @@ Internet-Draft                  OneDM SDF                  December 2020
    of Properties, Actions, Events declared for the object, as well as
    data types (sdfData group) to be used in this or other Objects.
 
-   The qualities of an sdfObject include the common qualities,
-   additional qualities are shown in Table 6.  None of these qualities
-   are required or have default values that are assumed if the quality
-   is absent.
-
-
-
-
-
 
 
 
@@ -1345,6 +1345,11 @@ Koster & Bormann          Expires 10 June 2021                 [Page 24]
 
 Internet-Draft                  OneDM SDF                  December 2020
 
+
+   The qualities of an sdfObject include the common qualities,
+   additional qualities are shown in Table 6.  None of these qualities
+   are required or have default values that are assumed if the quality
+   is absent.
 
          +=============+===========+=============================+
          | Quality     | Type      | Description                 |
@@ -1387,11 +1392,6 @@ Internet-Draft                  OneDM SDF                  December 2020
 
    The qualities of an Action definition include the common qualities,
    additional qualities are shown in Table 7.
-
-
-
-
-
 
 
 

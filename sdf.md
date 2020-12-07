@@ -844,51 +844,51 @@ sdfChoice replaces two constructs found in {{-jso}}:
 
 * `enum`
 
-   What would have been
+  What would have been
 
-   ~~~ json
-   "enum": ["foo", "bar", "baz"]
-   ~~~
+  ~~~ json
+  "enum": ["foo", "bar", "baz"]
+  ~~~
 
-   in SDF 1.0, is represented as:
+  in SDF 1.0, is represented as:
 
-   ~~~ json
-   "sdfChoice": {
-     "foo": { "description": "This is a foonly"},
-     "bar": { "description": "As defined in the second world congress"},
-     "baz": { "description": "From zigbee foobaz"}
-   }
-   ~~~
+  ~~~ json
+  "sdfChoice": {
+    "foo": { "description": "This is a foonly"},
+    "bar": { "description": "As defined in the second world congress"},
+    "baz": { "description": "From zigbee foobaz"}
+  }
+  ~~~
 
-   This allows the placement of other dataqualities such as
-   `description` in the example.
+  This allows the placement of other dataqualities such as
+  `description` in the example.
 
-   If an enum needs to use a data type different from text string,
-   e.g. what would have been
+  If an enum needs to use a data type different from text string,
+  e.g. what would have been
 
-   ~~~ json
-   "type": "number",
-   "enum": [1, 2, 3]
-   ~~~
+  ~~~ json
+  "type": "number",
+  "enum": [1, 2, 3]
+  ~~~
 
-   in SDF 1.0, is represented as:
+  in SDF 1.0, is represented as:
 
-   ~~~ json
-   "type": "number",
-   "sdfChoice": {
-     "a-better-name-for-alternative-1": { "const": 1 },
-     "alternative-2"": { "const": 2 },
-     "the-third-alternative": { "const": 3 }
-   }
-   ~~~
+  ~~~ json
+  "type": "number",
+  "sdfChoice": {
+    "a-better-name-for-alternative-1": { "const": 1 },
+    "alternative-2": { "const": 2 },
+    "the-third-alternative": { "const": 3 }
+  }
+  ~~~
 
-   where the string names obviously would be chosen in a way that is
-   descriptive for what these numbers actually stand for; sdfChoice
-   also makes it easy to add number ranges into the mix.
+  where the string names obviously would be chosen in a way that is
+  descriptive for what these numbers actually stand for; sdfChoice
+  also makes it easy to add number ranges into the mix.
 
-   (Note that `const` can also be used for strings as in the previous
-   example, e.g., if the actual string value is indeed a crucial
-   element for the data model.)
+  (Note that `const` can also be used for strings as in the previous
+  example, e.g., if the actual string value is indeed a crucial
+  element for the data model.)
 
 * anyOf
 
