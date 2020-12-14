@@ -946,12 +946,25 @@ The structure of a path in a namespace is defined by the JSON Pointers to the de
 Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.
 
 ### Use of the "sdfRef" keyword to re-use a definition
-An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. Optionally, new qualities may be added and values of optional qualities and quality values may be defined.
 
-ISSUE: Do we want to enable qualities from the source definition to be overridden in future versions?
-The above only says "added".
-(Yes, we do want to enable overriding, but need to warn specifiers not
-to use this in a way that contradicts the referenced semantics.)
+An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. 
+
+In the same definition that uses "sdfRef", new qualities may be added
+and existing qualities from the referenced definition may be
+overridden.  (Note that JSON maps (objects) do not have a defined
+order, so the processor may see these overrides before seeing the
+`sdfRef`.)
+
+As a convention, overrides are intended to be used only for further restricting
+the set of data values, as shown in {{exa-sdfref}}:  any value for a
+`cable-length` also is a valid value for a `length`, with the
+additional restriction that the length cannot be smaller than 5 cm.
+(This is labeled as a convention as it cannot be checked in the
+general case; a quality of implementation consideration for a tool
+might be to provide at least some form of checking.)
+Note that a description is provided that overrides the description of
+the referenced definition; as this quality is intended for human
+consumption there is no conflict with the intended goal.
 
 ~~~
 "sdfData":
@@ -968,6 +981,7 @@ to use this in a way that contradicts the referenced semantics.)
     "description": "Cables must be at least 5 cm."
   }
 ~~~
+{: #exa-sdfref}
 
 ## sdfThing
 
