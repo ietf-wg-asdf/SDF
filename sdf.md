@@ -829,6 +829,7 @@ numbers can be used.
 | contentFormat | string                      | content type (IANA media type string plus parameters), encoding     | N/A     |
 | subtype       | "byte-string" / "unix-time" | subtype enumeration                                                 | N/A     |
 | sdfChoice     | named set of data qualities | named alternatives                                                  | N/A     |
+| enum          | array of strings            | abbreviation for string-valued named alternatives                   | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
 (3) note that the quality `unit` was called `units` in SDF 1.0.
@@ -840,7 +841,7 @@ Each alternative is identified by a name (string, key in the JSON
 object used to represent the choice) and a set of dataqualities
 (object, the value in the JSON object used to represent the choice).
 
-sdfChoice replaces two constructs found in {{-jso}}:
+sdfChoice merges the functions of two constructs found in {{-jso}}:
 
 * `enum`
 
@@ -850,7 +851,7 @@ sdfChoice replaces two constructs found in {{-jso}}:
   "enum": ["foo", "bar", "baz"]
   ~~~
 
-  in SDF 1.0, is represented as:
+  in SDF 1.0, is often best represented as:
 
   ~~~ json
   "sdfChoice": {
@@ -920,6 +921,23 @@ sdfChoice replaces two constructs found in {{-jso}}:
 Note that there is no need in SDF for the type intersection construct
 `allOf` or the peculiar type-xor construct `oneOf` found in {{-jso}}.
 
+As a simplification for readers of SDF specifications accustomed to
+the {{-jso}} enum keyword, this is retained, but limited to a choice
+of text string values, such that
+
+~~~ json
+"enum": ["foo", "bar", "baz"]
+~~~
+
+is syntactic sugar for
+
+~~~ json
+"sdfChoice": {
+  "foo": { "const": "foo"},
+  "bar": { "const": "bar"},
+  "baz": { "const": "baz"}
+}
+~~~
 
 # Keywords for definition groups
 
