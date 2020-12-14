@@ -119,7 +119,7 @@ Internet-Draft                  OneDM SDF                  December 2020
        4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  17
      4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  18
      4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  19
-       4.7.1.  sdfChoice . . . . . . . . . . . . . . . . . . . . . .  23
+       4.7.1.  sdfChoice . . . . . . . . . . . . . . . . . . . . . .  22
    5.  Keywords for definition groups  . . . . . . . . . . . . . . .  24
      5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  24
      5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  25
@@ -136,10 +136,10 @@ Internet-Draft                  OneDM SDF                  December 2020
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  30
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  31
    Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  32
-   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  35
+   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  36
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  36
    Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  36
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  36
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  37
 
 1.  Introduction
 
@@ -1151,33 +1151,6 @@ Internet-Draft                  OneDM SDF                  December 2020
    (2) Note that the term "properties" as used for map entries in
    [I-D.handrews-json-schema-validation] is unrelated to sdfProperty.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann          Expires 10 June 2021                 [Page 21]
-
-Internet-Draft                  OneDM SDF                  December 2020
-
-
      +===============+===============+====================+=========+
      | Quality       | Type          | Description        | Default |
      +===============+===============+====================+=========+
@@ -1197,6 +1170,14 @@ Internet-Draft                  OneDM SDF                  December 2020
      |               |               | given by unit      |         |
      +---------------+---------------+--------------------+---------+
      | readable      | boolean       | Reads are allowed  | true    |
+
+
+
+Koster & Bormann          Expires 10 June 2021                 [Page 21]
+
+Internet-Draft                  OneDM SDF                  December 2020
+
+
      +---------------+---------------+--------------------+---------+
      | writable      | boolean       | Writes are allowed | true    |
      +---------------+---------------+--------------------+---------+
@@ -1221,18 +1202,14 @@ Internet-Draft                  OneDM SDF                  December 2020
      |               | data          |                    |         |
      |               | qualities     |                    |         |
      +---------------+---------------+--------------------+---------+
+     | enum          | array of      | abbreviation for   | N/A     |
+     |               | strings       | string-valued      |         |
+     |               |               | named alternatives |         |
+     +---------------+---------------+--------------------+---------+
 
         Table 5: SDF-defined Qualities of sdfProperty and sdfData
 
    (3) note that the quality "unit" was called "units" in SDF 1.0.
-
-
-
-
-Koster & Bormann          Expires 10 June 2021                 [Page 22]
-
-Internet-Draft                  OneDM SDF                  December 2020
-
 
 4.7.1.  sdfChoice
 
@@ -1241,7 +1218,7 @@ Internet-Draft                  OneDM SDF                  December 2020
    used to represent the choice) and a set of dataqualities (object, the
    value in the JSON object used to represent the choice).
 
-   sdfChoice replaces two constructs found in
+   sdfChoice merges the functions of two constructs found in
    [I-D.handrews-json-schema-validation]:
 
   *  "enum"
@@ -1250,7 +1227,14 @@ Internet-Draft                  OneDM SDF                  December 2020
 
      "enum": ["foo", "bar", "baz"]
 
-     in SDF 1.0, is represented as:
+
+
+Koster & Bormann          Expires 10 June 2021                 [Page 22]
+
+Internet-Draft                  OneDM SDF                  December 2020
+
+
+     in SDF 1.0, is often best represented as:
 
   "sdfChoice": {
     "foo": { "description": "This is a foonly"},
@@ -1280,16 +1264,6 @@ Internet-Draft                  OneDM SDF                  December 2020
      descriptive for what these numbers actually stand for; sdfChoice
      also makes it easy to add number ranges into the mix.
 
-
-
-
-
-
-Koster & Bormann          Expires 10 June 2021                 [Page 23]
-
-Internet-Draft                  OneDM SDF                  December 2020
-
-
      (Note that "const" can also be used for strings as in the previous
      example, e.g., if the actual string value is indeed a crucial
      element for the data model.)
@@ -1308,6 +1282,14 @@ Internet-Draft                  OneDM SDF                  December 2020
           "sdRef": "cmykVal"}}
      ]
 
+
+
+
+Koster & Bormann          Expires 10 June 2021                 [Page 23]
+
+Internet-Draft                  OneDM SDF                  December 2020
+
+
      in [I-D.handrews-json-schema-validation] can be more descriptively
      notated in SDF as:
 
@@ -1322,6 +1304,20 @@ Internet-Draft                  OneDM SDF                  December 2020
    "allOf" or the peculiar type-xor construct "oneOf" found in
    [I-D.handrews-json-schema-validation].
 
+   As a simplification for readers of SDF specifications accustomed to
+   the [I-D.handrews-json-schema-validation] enum keyword, this is
+   retained, but limited to a choice of text string values, such that
+
+   "enum": ["foo", "bar", "baz"]
+
+   is syntactic sugar for
+
+   "sdfChoice": {
+     "foo": { "const": "foo"},
+     "bar": { "const": "bar"},
+     "baz": { "const": "baz"}
+   }
+
 5.  Keywords for definition groups
 
    The following SDF keywords are used to create definition groups in
@@ -1335,6 +1331,10 @@ Internet-Draft                  OneDM SDF                  December 2020
    of Properties, Actions, Events declared for the object, as well as
    data types (sdfData group) to be used in this or other Objects.
 
+   The qualities of an sdfObject include the common qualities,
+   additional qualities are shown in Table 6.  None of these qualities
+   are required or have default values that are assumed if the quality
+   is absent.
 
 
 
@@ -1345,11 +1345,6 @@ Koster & Bormann          Expires 10 June 2021                 [Page 24]
 
 Internet-Draft                  OneDM SDF                  December 2020
 
-
-   The qualities of an sdfObject include the common qualities,
-   additional qualities are shown in Table 6.  None of these qualities
-   are required or have default values that are assumed if the quality
-   is absent.
 
          +=============+===========+=============================+
          | Quality     | Type      | Description                 |
@@ -1392,6 +1387,11 @@ Internet-Draft                  OneDM SDF                  December 2020
 
    The qualities of an Action definition include the common qualities,
    additional qualities are shown in Table 7.
+
+
+
+
+
 
 
 
@@ -1853,7 +1853,7 @@ Internet-Draft                  OneDM SDF                  December 2020
 actionqualities = {
  commonqualities,
  ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
- ? sdfRequiredInputData: pointer-list
+ ? ("sdfRequiredInputData" .feature "1.0") => pointer-list
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
  EXTENSION-POINT<"action-ext">
@@ -1894,10 +1894,10 @@ compound-type = (
   ? properties: named<dataqualities>,
 )
 
-jsonschema = (
- ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
-    // compound-type
-    // (type: text .feature "type-ext")                       ; EXTENSION-POINT
+choice-type = (
+  ("sdfChoice" .feature "1.1") => named<dataqualities>
+)
+
 
 
 
@@ -1906,10 +1906,16 @@ Koster & Bormann          Expires 10 June 2021                 [Page 34]
 Internet-Draft                  OneDM SDF                  December 2020
 
 
+jsonschema = (
+ ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
+    // compound-type
+    // choice-type
+    // (type: text .feature "type-ext")                       ; EXTENSION-POINT
    )
- ? enum: [+ allowed-types]                                              ; should validate against type
- ? const: allowed-types
- ? default: allowed-types
+ ? "enum" => [+ text]               ; limited to text strings in SDF 1.1
+ ? ("enum" .feature "1.0") => [+ allowed-types]    ; should validate against type
+ ? const: allowed-types                            ; should validate against type
+ ? default: allowed-types                          ; should validate against type
  ; number/integer constraints
  ? minimum: number
  ? maximum: number
@@ -1935,25 +1941,19 @@ Internet-Draft                  OneDM SDF                  December 2020
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type
+        // choice-type              ; do we really need arrays of choices?
         // (type: text .feature "itemtype-ext")                       ; EXTENSION-POINT
        )
      ; jso subset
      ? minimum: number
      ? maximum: number
-     ? enum: [+ any]
+     ? "enum" => [+ text] ; limited to text strings in SDF 1.1
+     ? ("enum" .feature "1.0") => [+ any]
      ? format: text
      ? minLength: number
      ? maxLength: number
      EXTENSION-POINT<"items-ext">
    }
-)
-
-Appendix B.  json-schema.org Rendition of SDF Syntax
-
-   This appendix describes the syntax of SDF defined in Appendix A, but
-   using a version of the description techniques advertised on json-
-   schema.org [I-D.handrews-json-schema-validation].
-
 
 
 
@@ -1961,6 +1961,14 @@ Koster & Bormann          Expires 10 June 2021                 [Page 35]
 
 Internet-Draft                  OneDM SDF                  December 2020
 
+
+)
+
+Appendix B.  json-schema.org Rendition of SDF Syntax
+
+   This appendix describes the syntax of SDF defined in Appendix A, but
+   using a version of the description techniques advertised on json-
+   schema.org [I-D.handrews-json-schema-validation].
 
    The appendix shows both the validation and the framework syntax.
    Since most of the lines are the same between these two files, those
@@ -2001,6 +2009,15 @@ Contributors
    Email: wovander@cisco.com
 
 
+
+
+
+
+Koster & Bormann          Expires 10 June 2021                 [Page 36]
+
+Internet-Draft                  OneDM SDF                  December 2020
+
+
 Authors' Addresses
 
    Michael Koster (editor)
@@ -2010,14 +2027,6 @@ Authors' Addresses
    United States of America
 
    Phone: +1-707-502-5136
-
-
-
-Koster & Bormann          Expires 10 June 2021                 [Page 36]
-
-Internet-Draft                  OneDM SDF                  December 2020
-
-
    Email: Michael.Koster@smartthings.com
 
 
@@ -2029,15 +2038,6 @@ Internet-Draft                  OneDM SDF                  December 2020
 
    Phone: +49-421-218-63921
    Email: cabo@tzi.org
-
-
-
-
-
-
-
-
-
 
 
 
