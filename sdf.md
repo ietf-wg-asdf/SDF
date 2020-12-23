@@ -949,10 +949,10 @@ Modular composition of definitions enables an existing definition (could be in t
 
 An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. 
 
-In the same definition that uses "sdfRef", new qualities may be added
+In the definition that uses "sdfRef", new qualities may be added
 and existing qualities from the referenced definition may be
 overridden.  (Note that JSON maps (objects) do not have a defined
-order, so the processor may see these overrides before seeing the
+order, so the SDF processor may see these overrides before seeing the
 `sdfRef`.)
 
 As a convention, overrides are intended to be used only for further restricting
