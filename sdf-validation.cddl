@@ -56,13 +56,11 @@ objectqualities = {
 propertyqualities = dataqualities ; the definitions in sdfData are declarations in sdfProperty
 
 parameter-list =
-  pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
   dataqualities .feature (["1.1", "dataqualities-as-parameter"])
 
 actionqualities = {
  commonqualities,
  ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
- ? sdfRequiredInputData: pointer-list
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
 }
@@ -76,7 +74,6 @@ eventqualities = {
 dataqualities = {               ; also propertyqualities
  commonqualities,
  jsonschema,
- ? ("units" .feature "1.0") => text
  ? ("unit" .feature "1.1") => text
  ? scaleMinimum: number
  ? scaleMaximum: number
