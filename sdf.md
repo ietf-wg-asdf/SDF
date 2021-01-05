@@ -1142,15 +1142,9 @@ The appendix shows both the validation and the framework syntax.
 Since most of the lines are the same between these two files, those lines are shown only once, with a leading space, in the form of a unified diff.
 Lines leading with a `-` are part of the validation syntax, and lines leading with a `+` are part of the framework syntax.
 
-(The json-schema.org descriptions need to be regenerated after the
-converter has been upgraded to handle the group choices introduced in
-the latest CDDL.)
-
-<!-- 
 ~~~ jso.json
-{: :include sdf.jso.json-unidiff}
+{::include sdf.jso.json-unidiff}
 ~~~
- -->
  
 # Acknowledgements
 {: numbered="no"}

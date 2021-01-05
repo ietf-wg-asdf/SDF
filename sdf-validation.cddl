@@ -56,13 +56,11 @@ objectqualities = {
 propertyqualities = dataqualities ; the definitions in sdfData are declarations in sdfProperty
 
 parameter-list =
-  pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
   dataqualities .feature (["1.1", "dataqualities-as-parameter"])
 
 actionqualities = {
  commonqualities,
  ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
- ? ("sdfRequiredInputData" .feature "1.0") => pointer-list
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
 }
@@ -76,7 +74,6 @@ eventqualities = {
 dataqualities = {               ; also propertyqualities
  commonqualities,
  jsonschema,
- ? ("units" .feature "1.0") => text
  ? ("unit" .feature "1.1") => text
  ? scaleMinimum: number
  ? scaleMaximum: number
@@ -93,7 +90,7 @@ allowed-types = number / text / bool / null
               / {* text => any}
 
 compound-type = (
-  "type" => ("object" .feature "1.1"),
+  "type" => "object",
   ? required: [+text],
   ? properties: named<dataqualities>,
 )
@@ -108,7 +105,6 @@ jsonschema = (
     // choice-type
    )
  ? "enum" => [+ text]               ; limited to text strings in SDF 1.1
- ? ("enum" .feature "1.0") => [+ allowed-types]    ; should validate against type
  ? const: allowed-types                            ; should validate against type
  ? default: allowed-types                          ; should validate against type
  ; number/integer constraints
@@ -141,7 +137,6 @@ jsonschema = (
      ? minimum: number
      ? maximum: number
      ? "enum" => [+ text] ; limited to text strings in SDF 1.1
-     ? ("enum" .feature "1.0") => [+ any]
      ? format: text
      ? minLength: number
      ? maxLength: number
