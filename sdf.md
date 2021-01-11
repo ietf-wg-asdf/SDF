@@ -900,9 +900,9 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "anyOf": [
     {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-       "sdRef": "rgbVal"}}
+       "sdfRef": "rgbVal"}}
     {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-       "sdRef": "cmykVal"}}
+       "sdfRef": "cmykVal"}}
   ]
   ~~~
 
@@ -911,9 +911,9 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "sdfChoice": {
     "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-              "sdRef": "rgbVal"}}
+              "sdfRef": "rgbVal"}}
     "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-              "sdRef": "cmykVal"}}
+              "sdfRef": "cmykVal"}}
   ]
   ~~~
 
