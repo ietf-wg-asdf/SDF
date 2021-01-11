@@ -5,7 +5,7 @@ title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
 abbrev: OneDM SDF
 docname: draft-ietf-asdf-sdf-latest
-date: 2020-11-15
+date: 2020-12-12
 category: info
 
 ipr: trust200902
@@ -100,8 +100,10 @@ Data types for the information exchanged in those interactions.
 
 A JSON format representation of SDF 1.0 was defined in the previous
 (-00) version of this document.  SDF 1.1 is expected to be defined in
-a future version; the present document represents a draft on the way
-from 1.0 to 1.1.  Hence, this is not an implementation draft.
+a future version; the present document is a *candidate implementation
+draft* for SDF 1.1.  If the ASDF WG reaches consensus on this
+candidate, the next version will be SDF 1.1, an SDF implementation
+draft.
 
 --- note_Contributing
 
