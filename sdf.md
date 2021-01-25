@@ -793,7 +793,6 @@ allowed for one of these types.
 | Quality          | Type                                                             | Description                                                        |
 |------------------+------------------------------------------------------------------+--------------------------------------------------------------------|
 | type             | "number" / "string" / "boolean" / "integer" / "array" / "object" | JSON data type (note 1)                                             |
-| enum             | array of allowed values                                          | enumeration constraint                                             |
 | const            | allowed value                                                    | specifies a constant value for a data item or property             |
 | default          | allowed value                                                    | specifies the default value for initialization                     |
 | minimum          | number                                                           | (number) lower limit of value                                      |
@@ -830,9 +829,116 @@ numbers can be used.
 | nullable      | boolean                     | indicates a null value is available for this type                   | true    |
 | contentFormat | string                      | content type (IANA media type string plus parameters), encoding     | N/A     |
 | subtype       | "byte-string" / "unix-time" | subtype enumeration                                                 | N/A     |
+| sdfChoice     | named set of data qualities | named alternatives                                                  | N/A     |
+| enum          | array of strings            | abbreviation for string-valued named alternatives                   | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
 (3) note that the quality `unit` was called `units` in SDF 1.0.
+
+### sdfChoice
+
+Data can be a choice of named alternatives, called `sdfChoice`.
+Each alternative is identified by a name (string, key in the JSON
+object used to represent the choice) and a set of dataqualities
+(object, the value in the JSON object used to represent the choice).
+
+sdfChoice merges the functions of two constructs found in {{-jso}}:
+
+* `enum`
+
+  What would have been
+
+  ~~~ json
+  "enum": ["foo", "bar", "baz"]
+  ~~~
+
+  in SDF 1.0, is often best represented as:
+
+  ~~~ json
+  "sdfChoice": {
+    "foo": { "description": "This is a foonly"},
+    "bar": { "description": "As defined in the second world congress"},
+    "baz": { "description": "From zigbee foobaz"}
+  }
+  ~~~
+
+  This allows the placement of other dataqualities such as
+  `description` in the example.
+
+  If an enum needs to use a data type different from text string,
+  e.g. what would have been
+
+  ~~~ json
+  "type": "number",
+  "enum": [1, 2, 3]
+  ~~~
+
+  in SDF 1.0, is represented as:
+
+  ~~~ json
+  "type": "number",
+  "sdfChoice": {
+    "a-better-name-for-alternative-1": { "const": 1 },
+    "alternative-2": { "const": 2 },
+    "the-third-alternative": { "const": 3 }
+  }
+  ~~~
+
+  where the string names obviously would be chosen in a way that is
+  descriptive for what these numbers actually stand for; sdfChoice
+  also makes it easy to add number ranges into the mix.
+
+  (Note that `const` can also be used for strings as in the previous
+  example, e.g., if the actual string value is indeed a crucial
+  element for the data model.)
+
+* anyOf
+
+  {{-jso}} provides a type union called `anyOf`, which provides a
+  choice between anonymous alternatives.
+
+  What could have been
+
+  ~~~ json
+  "anyOf": [
+    {"type": "array", "minItems": 3, "maxItems": "3", "items": {
+       "sdfRef": "rgbVal"}}
+    {"type": "array", "minItems": 4, "maxItems": "4", "items": {
+       "sdfRef": "cmykVal"}}
+  ]
+  ~~~
+
+  in {{-jso}} can be more descriptively notated in SDF as:
+
+  ~~~ json
+  "sdfChoice": {
+    "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
+              "sdfRef": "rgbVal"}}
+    "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
+              "sdfRef": "cmykVal"}}
+  ]
+  ~~~
+
+Note that there is no need in SDF for the type intersection construct
+`allOf` or the peculiar type-xor construct `oneOf` found in {{-jso}}.
+
+As a simplification for readers of SDF specifications accustomed to
+the {{-jso}} enum keyword, this is retained, but limited to a choice
+of text string values, such that
+
+~~~ json
+"enum": ["foo", "bar", "baz"]
+~~~
+
+is syntactic sugar for
+
+~~~ json
+"sdfChoice": {
+  "foo": { "const": "foo"},
+  "bar": { "const": "bar"},
+  "baz": { "const": "baz"}
+}
+~~~
 
 # Keywords for definition groups
 
@@ -1051,15 +1157,9 @@ The appendix shows both the validation and the framework syntax.
 Since most of the lines are the same between these two files, those lines are shown only once, with a leading space, in the form of a unified diff.
 Lines leading with a `-` are part of the validation syntax, and lines leading with a `+` are part of the framework syntax.
 
-(The json-schema.org descriptions need to be regenerated after the
-converter has been upgraded to handle the group choices introduced in
-the latest CDDL.)
-
-<!-- 
 ~~~ jso.json
-{: :include sdf.jso.json-unidiff}
+{::include sdf.jso.json-unidiff}
 ~~~
- -->
  
 # Acknowledgements
 {: numbered="no"}

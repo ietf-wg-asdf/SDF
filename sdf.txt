@@ -5,8 +5,8 @@
 T2TRG                                                     M. Koster, Ed.
 Internet-Draft                                               SmartThings
 Intended status: Informational                           C. Bormann, Ed.
-Expires: 19 May 2021                              Universität Bremen TZI
-                                                        15 November 2020
+Expires: 29 July 2021                             Universität Bremen TZI
+                                                         25 January 2021
 
 
   Semantic Definition Format (SDF) for Data and Interactions of Things
@@ -27,8 +27,10 @@ Abstract
 
    A JSON format representation of SDF 1.0 was defined in the previous
    (-00) version of this document.  SDF 1.1 is expected to be defined in
-   a future version; the present document represents a draft on the way
-   from 1.0 to 1.1.  Hence, this is not an implementation draft.
+   a future version; the present document is a _candidate implementation
+   draft_ for SDF 1.1.  If the ASDF WG reaches consensus on this
+   candidate, the next version will be SDF 1.1, an SDF implementation
+   draft.
 
 Contributing
 
@@ -45,18 +47,21 @@ Contributing
    The IETF Note Well applies (https://www.ietf.org/about/note-well/
    (https://www.ietf.org/about/note-well/)).
 
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 1]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 1]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
@@ -68,11 +73,11 @@ Internet-Draft                  OneDM SDF                  November 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 May 2021.
+   This Internet-Draft will expire on 29 July 2021.
 
 Copyright Notice
 
-   Copyright (c) 2020 IETF Trust and the persons identified as the
+   Copyright (c) 2021 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -87,58 +92,59 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.1.  Terminology and Conventions . . . . . . . . . . . . . . .   3
-   2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   5
+     1.1.  Terminology and Conventions . . . . . . . . . . . . . . .   4
+   2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   6
      2.2.  Elements of an SDF model  . . . . . . . . . . . . . . . .   7
        2.2.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . .   8
        2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .   8
        2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .   9
        2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .  10
        2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  10
-       2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  10
+       2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  11
        2.2.7.  sdfProduct  . . . . . . . . . . . . . . . . . . . . .  11
    3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  11
      3.1.  Information block . . . . . . . . . . . . . . . . . . . .  11
      3.2.  Namespaces section  . . . . . . . . . . . . . . . . . . .  12
+
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 2]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
      3.3.  Definitions section . . . . . . . . . . . . . . . . . . .  13
    4.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .  14
      4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  14
      4.2.  Contributing global names . . . . . . . . . . . . . . . .  15
      4.3.  Referencing global names  . . . . . . . . . . . . . . . .  15
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 2]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
-
      4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  16
+     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  17
        4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  17
      4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  18
-     4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  18
-   5.  Keywords for definition groups  . . . . . . . . . . . . . . .  22
-     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  22
-     5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  22
-     5.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . . . .  23
-     5.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . . . .  23
-     5.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . . . .  24
-   6.  High Level Composition  . . . . . . . . . . . . . . . . . . .  24
-     6.1.  Paths in the model namespaces . . . . . . . . . . . . . .  25
-     6.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  25
-       6.2.1.  Use of the "sdfRef" keyword to re-use a definition  .  25
-     6.3.  sdfThing  . . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.4.  sdfProduct  . . . . . . . . . . . . . . . . . . . . . . .  27
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  27
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  28
-   Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  29
-   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  33
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  33
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  33
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  34
+     4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  19
+       4.7.1.  sdfChoice . . . . . . . . . . . . . . . . . . . . . .  22
+   5.  Keywords for definition groups  . . . . . . . . . . . . . . .  24
+     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  24
+     5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  25
+     5.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . . . .  25
+     5.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . . . .  26
+     5.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . . . .  27
+   6.  High Level Composition  . . . . . . . . . . . . . . . . . . .  27
+     6.1.  Paths in the model namespaces . . . . . . . . . . . . . .  28
+     6.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  28
+       6.2.1.  Use of the "sdfRef" keyword to re-use a definition  .  28
+     6.3.  sdfThing  . . . . . . . . . . . . . . . . . . . . . . . .  29
+     6.4.  sdfProduct  . . . . . . . . . . . . . . . . . . . . . . .  30
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  30
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  30
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  31
+   Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  32
+   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  36
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  74
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  74
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  74
 
 1.  Introduction
 
@@ -153,6 +159,17 @@ Internet-Draft                  OneDM SDF                  November 2020
    associated interactions (Events, Actions, Properties), as well as the
    Data types for the information exchanged in those interactions.
 
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 3]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    A JSON format representation of SDF 1.0 was defined in the previous
    (-00) version of this document.  SDF 1.1 is expected to be defined in
    a future version; the present document represents a draft on the way
@@ -161,15 +178,6 @@ Internet-Draft                  OneDM SDF                  November 2020
 1.1.  Terminology and Conventions
 
    Thing:  A physical device that is also made available in the Internet
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 3]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
-
       of Things.  The term is used here for Things that are notable for
       their interaction with the physical world beyond interaction with
       humans; a temperature sensor or a light might be a Thing, but a
@@ -206,6 +214,18 @@ Internet-Draft                  OneDM SDF                  November 2020
       identified by a Class Name Keyword.
 
    Property:  An affordance that can potentially be used to read, write,
+
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 4]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
       and/or observe state on an Object.  (Note that Entries are often
       called properties in other environments; in this document, the
       term Property is specifically reserved for affordances, even if
@@ -217,14 +237,6 @@ Internet-Draft                  OneDM SDF                  November 2020
 
    Event:  An affordance that can potentially be used to obtain
       information about what happened to an Object.
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 4]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
    Object:  A grouping of Property, Action, and Event definitions; the
       main "atom" of reusable semantics for model construction.  (Note
@@ -263,24 +275,19 @@ Internet-Draft                  OneDM SDF                  November 2020
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 5]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
 2.  Overview
 
 2.1.  Example Definition
 
    We start with an example for the SDF definition of a simple Object
    called "Switch" (Figure 1).
-
-
-
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 5]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
 {
     "info": {
@@ -323,20 +330,18 @@ Internet-Draft                  OneDM SDF                  November 2020
    and will be false for "off".  The actions "on" or "off" declared in
    the "sdfAction" group are redundant with setting the "value" and are
    in the example to illustrate that there are often different ways of
+
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 6]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    achieving the same effect.  The action "toggle" will invert the value
    of the sdfProperty value, so that 2-way switches can be created;
    having such action will avoid the need for first retrieving the
    current value and then applying/setting the inverted value.
-
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 6]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
    The "sdfObject" group lists the affordances of instances of this
    object.  The "sdfProperty" group lists the property affordances
@@ -382,17 +387,16 @@ Internet-Draft                  OneDM SDF                  November 2020
                    |-------|
                    `-------'
 
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 7]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
                  Figure 2: Main classes used in SDF models
 
    The seven main Class Name Keywords are discussed below.
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 7]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
 2.2.1.  sdfObject
 
@@ -435,20 +439,22 @@ Internet-Draft                  OneDM SDF                  November 2020
    means that even Property qualities such as "readable" and "writable"
    can be associated with definitions in "sdfData" groups, as well.)
 
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 8]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    For definitions in "sdfProperty" and "sdfData", SDF provides
    qualities that can constrain the structure and values of data allowed
    in an instance of these data, as well as qualities that associate
    semantics to these data, for engineering units and unit scaling
    information.
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 8]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
    For the data definition within "sdfProperty" or "sdfData", SDF
    borrows a number of elements proposed for the drafts 4 and 7 of the
@@ -489,22 +495,22 @@ Internet-Draft                  OneDM SDF                  November 2020
    Actions may have (or lack) qualities of idempotency and side-effect
    safety.
 
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                  [Page 9]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    The current version of SDF only provides data constraint modeling and
    semantics for the input and output data of definitions in "sdfAction"
    groups.  Again, data definitions for payloads of protocol messages,
    and detailed protocol settings for invoking the action, are expected
    to be part of the protocol binding.
-
-
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                  [Page 9]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
 2.2.4.  sdfEvent
 
@@ -545,6 +551,17 @@ Internet-Draft                  OneDM SDF                  November 2020
    multiple definitions that have similar basic characteristics and
    requirements.
 
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 10]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
 2.2.6.  sdfThing
 
    Back at the top level, the "sdfThing" groups enables definition of
@@ -554,13 +571,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    A definition in an "sdfThing" group can refine the metadata of the
    definitions it is composed from: other definitions in "sdfThing"
    groups definitions in "sdfObject" groups.
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 10]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
 2.2.7.  sdfProduct
 
@@ -592,6 +602,22 @@ Internet-Draft                  OneDM SDF                  November 2020
 
    Qualities of the information block are shown in Table 1.
 
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 11]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
     +===========+========+==========+=================================+
     | Quality   | Type   | Required | Description                     |
     +===========+========+==========+=================================+
@@ -609,14 +635,6 @@ Internet-Draft                  OneDM SDF                  November 2020
     +-----------+--------+----------+---------------------------------+
 
                 Table 1: Qualities of the Information Block
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 11]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
    While the format of the version string is marked as TBD, it is
    intended to be lexicographically increasing over the life of a model:
@@ -645,6 +663,17 @@ Internet-Draft                  OneDM SDF                  November 2020
    this entry) becomes the default namespace for the SDF definition
    file.
 
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 12]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
      +==================+========+==========+=======================+
      | Quality          | Type   | Required | Description           |
      +==================+========+==========+=======================+
@@ -661,18 +690,6 @@ Internet-Draft                  OneDM SDF                  November 2020
      +------------------+--------+----------+-----------------------+
 
                        Table 2: Namespaces Section
-
-
-
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 12]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
    The following example declares a set of namespaces and defines "cap"
    as the default namespace.  By convention, the values in the namespace
@@ -705,6 +722,14 @@ Internet-Draft                  OneDM SDF                  November 2020
    pairs) for the individual definition.  (In short, we speak of the map
    entries as "named sets of qualities".)
 
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 13]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    Each group may contain zero or more definitions.  Each identifier
    defined creates a new type and term in the target namespace.
    Declarations have a scope of the current definition block.
@@ -715,20 +740,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    qualities and contained definitions.
 
    An example for an Object definition is given in Figure 3:
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 13]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
    "sdfObject": {
      "foo": {
@@ -767,6 +778,14 @@ Internet-Draft                  OneDM SDF                  November 2020
    Global names look exactly like "https://" URIs with attached fragment
    identifiers.
 
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 14]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    There is no intention to require that these URIs can be dereferenced.
    (However, as future versions of SDF might find a use for
    dereferencing global names, the URI should be chosen in such a way
@@ -778,13 +797,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    part should not be used (it might be used in later versions).
 
    The fragment identifier is constructed as per Section 6 of [RFC6901].
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 14]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
 4.2.  Contributing global names
 
@@ -821,6 +833,15 @@ Internet-Draft                  OneDM SDF                  November 2020
    to URIs as per [RFC3986] and the prefixes to ASCII characters
    [RFC0020].
 
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 15]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    A name that is contributed by the current SDF definition file can be
    referenced by a Same-Document Reference as per section 4.4 of
    [RFC3986].  As there is little point in referencing the entire SDF
@@ -833,14 +854,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    declarations in the namespaces section.
 
    For example, if a namespace prefix is defined:
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 15]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
    "namespace": {
      "foo": "https://example.com/"
@@ -878,6 +891,13 @@ Internet-Draft                  OneDM SDF                  November 2020
      "sdfRef": "#/sdfData/temperatureData"
    }
 
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 16]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    creates a new definition "temperatureProperty" that contains all of
    the qualities defined in the definition at /sdfData/temperatureData.
 
@@ -886,17 +906,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    The value of "sdfRequired" is an array of name references, each
    pointing to one declaration the instantiation of which is declared
    mandatory.
-
-
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 16]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
 
 4.5.1.  Optionality using the keyword "sdfRequired"
 
@@ -913,6 +922,37 @@ Internet-Draft                  OneDM SDF                  November 2020
    example also shows the use of JSON pointer with "sdfRef" to use a
    pre-existing definition in this definition, for the "alarmType" data
    (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 17]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
 
 {
   "sdfObject": {
@@ -946,14 +986,6 @@ Internet-Draft                  OneDM SDF                  November 2020
   }
 }
 
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 17]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
-
                      Figure 4: Using sdfRequired
 
 4.6.  Common Qualities
@@ -964,6 +996,19 @@ Internet-Draft                  OneDM SDF                  November 2020
    absent.  If a label is required for an application and no label is
    given in the SDF model, the last part ("reference-token", Section 3
    of [RFC6901]) of the JSON pointer to the definition can be used.
+
+
+
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 18]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
 
     +=============+==============+===================================+
     | Quality     | Type         | Description                       |
@@ -998,18 +1043,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    Table 5 lists data qualities defined specifically for the present
    specification.
 
-
-
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 18]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
-
    The term "allowed types" stands for primitive JSON types, JSON maps
    ("objects")" as well as homogeneous arrays of numbers, text,
    Booleans, or maps.  (This list might be extended in a future version
@@ -1025,11 +1058,15 @@ Internet-Draft                  OneDM SDF                  November 2020
    |                |/         |                                       |
    |                |"integer" |                                       |
    |                |/ "array" |                                       |
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 19]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    |                |/ "object"|                                       |
-   +----------------+----------+---------------------------------------+
-   |enum            |array of  |enumeration constraint                 |
-   |                |allowed   |                                       |
-   |                |values    |                                       |
    +----------------+----------+---------------------------------------+
    |const           |allowed   |specifies a constant value for a data  |
    |                |value     |item or property                       |
@@ -1058,14 +1095,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    |                |          |octets                                 |
    +----------------+----------+---------------------------------------+
    |maxLength       |integer   |(string) longest length string in      |
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 19]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
-
    |                |          |octets                                 |
    +----------------+----------+---------------------------------------+
    |pattern         |string    |(string) regular expression to         |
@@ -1085,6 +1114,14 @@ Internet-Draft                  OneDM SDF                  November 2020
    +----------------+----------+---------------------------------------+
    |maxItems        |number    |(array) Maximum number of items in     |
    |                |          |array                                  |
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 20]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
    +----------------+----------+---------------------------------------+
    |uniqueItems     |boolean   |(array) if true, requires items to be  |
    |                |          |all different                          |
@@ -1114,14 +1151,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    (2) Note that the term "properties" as used for map entries in
    [I-D.handrews-json-schema-validation] is unrelated to sdfProperty.
 
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 20]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
-
      +===============+===============+====================+=========+
      | Quality       | Type          | Description        | Default |
      +===============+===============+====================+=========+
@@ -1141,6 +1170,14 @@ Internet-Draft                  OneDM SDF                  November 2020
      |               |               | given by unit      |         |
      +---------------+---------------+--------------------+---------+
      | readable      | boolean       | Reads are allowed  | true    |
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 21]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
      +---------------+---------------+--------------------+---------+
      | writable      | boolean       | Writes are allowed | true    |
      +---------------+---------------+--------------------+---------+
@@ -1161,22 +1198,125 @@ Internet-Draft                  OneDM SDF                  November 2020
      | subtype       | "byte-string" | subtype            | N/A     |
      |               | / "unix-time" | enumeration        |         |
      +---------------+---------------+--------------------+---------+
+     | sdfChoice     | named set of  | named alternatives | N/A     |
+     |               | data          |                    |         |
+     |               | qualities     |                    |         |
+     +---------------+---------------+--------------------+---------+
+     | enum          | array of      | abbreviation for   | N/A     |
+     |               | strings       | string-valued      |         |
+     |               |               | named alternatives |         |
+     +---------------+---------------+--------------------+---------+
 
         Table 5: SDF-defined Qualities of sdfProperty and sdfData
 
    (3) note that the quality "unit" was called "units" in SDF 1.0.
 
+4.7.1.  sdfChoice
+
+   Data can be a choice of named alternatives, called "sdfChoice".  Each
+   alternative is identified by a name (string, key in the JSON object
+   used to represent the choice) and a set of dataqualities (object, the
+   value in the JSON object used to represent the choice).
+
+   sdfChoice merges the functions of two constructs found in
+   [I-D.handrews-json-schema-validation]:
+
+  *  "enum"
+
+     What would have been
+
+     "enum": ["foo", "bar", "baz"]
 
 
 
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 21]
+Koster & Bormann          Expires 29 July 2021                 [Page 22]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
+
+     in SDF 1.0, is often best represented as:
+
+  "sdfChoice": {
+    "foo": { "description": "This is a foonly"},
+    "bar": { "description": "As defined in the second world congress"},
+    "baz": { "description": "From zigbee foobaz"}
+  }
+
+     This allows the placement of other dataqualities such as
+     "description" in the example.
+
+     If an enum needs to use a data type different from text string,
+     e.g. what would have been
+
+     "type": "number",
+     "enum": [1, 2, 3]
+
+     in SDF 1.0, is represented as:
+
+     "type": "number",
+     "sdfChoice": {
+       "a-better-name-for-alternative-1": { "const": 1 },
+       "alternative-2": { "const": 2 },
+       "the-third-alternative": { "const": 3 }
+     }
+
+     where the string names obviously would be chosen in a way that is
+     descriptive for what these numbers actually stand for; sdfChoice
+     also makes it easy to add number ranges into the mix.
+
+     (Note that "const" can also be used for strings as in the previous
+     example, e.g., if the actual string value is indeed a crucial
+     element for the data model.)
+
+  *  anyOf
+
+     [I-D.handrews-json-schema-validation] provides a type union called
+     "anyOf", which provides a choice between anonymous alternatives.
+
+     What could have been
+
+     "anyOf": [
+       {"type": "array", "minItems": 3, "maxItems": "3", "items": {
+          "sdfRef": "rgbVal"}}
+       {"type": "array", "minItems": 4, "maxItems": "4", "items": {
+          "sdfRef": "cmykVal"}}
+     ]
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 23]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+     in [I-D.handrews-json-schema-validation] can be more descriptively
+     notated in SDF as:
+
+  "sdfChoice": {
+    "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
+              "sdfRef": "rgbVal"}}
+    "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
+              "sdfRef": "cmykVal"}}
+  ]
+
+   Note that there is no need in SDF for the type intersection construct
+   "allOf" or the peculiar type-xor construct "oneOf" found in
+   [I-D.handrews-json-schema-validation].
+
+   As a simplification for readers of SDF specifications accustomed to
+   the [I-D.handrews-json-schema-validation] enum keyword, this is
+   retained, but limited to a choice of text string values, such that
+
+   "enum": ["foo", "bar", "baz"]
+
+   is syntactic sugar for
+
+   "sdfChoice": {
+     "foo": { "const": "foo"},
+     "bar": { "const": "bar"},
+     "baz": { "const": "baz"}
+   }
 
 5.  Keywords for definition groups
 
@@ -1195,6 +1335,16 @@ Internet-Draft                  OneDM SDF                  November 2020
    additional qualities are shown in Table 6.  None of these qualities
    are required or have default values that are assumed if the quality
    is absent.
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 24]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
 
          +=============+===========+=============================+
          | Quality     | Type      | Description                 |
@@ -1227,13 +1377,6 @@ Internet-Draft                  OneDM SDF                  November 2020
    The qualities of a Property definition include the data qualities
    (and thus the common qualities), see Section 4.7.
 
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 22]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
-
 5.3.  sdfAction
 
    The sdfAction keyword denotes a group of zero or more Action
@@ -1244,6 +1387,20 @@ Internet-Draft                  OneDM SDF                  November 2020
 
    The qualities of an Action definition include the common qualities,
    additional qualities are shown in Table 7.
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 25]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
 
         +===============+===========+============================+
         | Quality       | Type      | Description                |
@@ -1285,9 +1442,20 @@ Internet-Draft                  OneDM SDF                  November 2020
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 23]
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 26]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
         +===============+===========+============================+
@@ -1341,9 +1509,9 @@ Internet-Draft                  OneDM SDF                  November 2020
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 24]
+Koster & Bormann          Expires 29 July 2021                 [Page 27]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
    *  The ability to enrich and refine a base definition to have
@@ -1397,9 +1565,9 @@ Internet-Draft                  OneDM SDF                  November 2020
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 25]
+Koster & Bormann          Expires 29 July 2021                 [Page 28]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
    additional restriction that the length cannot be smaller than 5 cm.
@@ -1453,9 +1621,9 @@ Internet-Draft                  OneDM SDF                  November 2020
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 26]
+Koster & Bormann          Expires 29 July 2021                 [Page 29]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
                    +===========+========+=============+
@@ -1509,9 +1677,9 @@ Internet-Draft                  OneDM SDF                  November 2020
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 27]
+Koster & Bormann          Expires 29 July 2021                 [Page 30]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
    [I-D.ietf-cbor-cddl-control]
@@ -1565,9 +1733,9 @@ Internet-Draft                  OneDM SDF                  November 2020
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 28]
+Koster & Bormann          Expires 29 July 2021                 [Page 31]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
    [I-D.irtf-t2trg-rest-iot]
@@ -1621,9 +1789,9 @@ Appendix A.  Formal Syntax of SDF
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 29]
+Koster & Bormann          Expires 29 July 2021                 [Page 32]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
 start = sdf-syntax
@@ -1677,9 +1845,9 @@ thingqualities = {
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 30]
+Koster & Bormann          Expires 29 July 2021                 [Page 33]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
 productqualities = thingqualities ; ISSUE: get rid of sdfProduct?
@@ -1733,9 +1901,9 @@ dataqualities = {               ; also propertyqualities
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 31]
+Koster & Bormann          Expires 29 July 2021                 [Page 34]
 
-Internet-Draft                  OneDM SDF                  November 2020
+Internet-Draft                  OneDM SDF                   January 2021
 
 
  EXTENSION-POINT<"data-ext">
@@ -1752,14 +1920,20 @@ compound-type = (
   ? properties: named<dataqualities>,
 )
 
+choice-type = (
+  ("sdfChoice" .feature "1.1") => named<dataqualities>
+)
+
 jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
+    // choice-type
     // (type: text .feature "type-ext")                       ; EXTENSION-POINT
    )
- ? enum: [+ allowed-types]                                              ; should validate against type
- ? const: allowed-types
- ? default: allowed-types
+ ? "enum" => [+ text]               ; limited to text strings in SDF 1.1
+ ? ("enum" .feature "1.0") => [+ allowed-types]    ; should validate against type
+ ? const: allowed-types                            ; should validate against type
+ ? default: allowed-types                          ; should validate against type
  ; number/integer constraints
  ? minimum: number
  ? maximum: number
@@ -1780,25 +1954,27 @@ jsonschema = (
  ? items: { ;;; ultimately, this will be mostly recursive, but, for now
             ;;; let's find out what we actually need
      ? sdfRef: sdf-pointer          ; import limited to the subset that we allow here...
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 35]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
      ? description: text            ; long text (no constraints)
      ? $comment: text               ; source code comments only, no semantics
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type
+        // choice-type              ; do we really need arrays of choices?
         // (type: text .feature "itemtype-ext")                       ; EXTENSION-POINT
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 32]
-
-Internet-Draft                  OneDM SDF                  November 2020
-
-
        )
      ; jso subset
      ? minimum: number
      ? maximum: number
-     ? enum: [+ any]
+     ? "enum" => [+ text] ; limited to text strings in SDF 1.1
+     ? ("enum" .feature "1.0") => [+ any]
      ? format: text
      ? minLength: number
      ? maxLength: number
@@ -1819,9 +1995,2107 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
    syntax, and lines leading with a "+" are part of the framework
    syntax.
 
-   (The json-schema.org descriptions need to be regenerated after the
-   converter has been upgraded to handle the group choices introduced in
-   the latest CDDL.)
+    {
+   -  "title": "sdf-validation.cddl",
+   +  "title": "sdf-framework.cddl",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$ref": "#/definitions/sdf-syntax",
+      "definitions": {
+        "sdf-syntax": {
+          "type": "object",
+          "required": [
+            "info"
+          ],
+          "properties": {
+            "info": {
+              "$ref": "#/definitions/sdfinfo"
+            },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 36]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+            "namespace": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "defaultNamespace": {
+              "type": "string"
+            },
+            "sdfThing": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/thingqualities"
+              }
+            },
+            "sdfProduct": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/productqualities"
+              }
+            },
+            "sdfObject": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/objectqualities"
+              }
+            },
+            "sdfProperty": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/propertyqualities"
+              }
+            },
+            "sdfAction": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/actionqualities"
+              }
+            },
+            "sdfEvent": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/eventqualities"
+              }
+            },
+            "sdfData": {
+              "type": "object",
+              "additionalProperties": {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 37]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                "$ref": "#/definitions/dataqualities"
+              }
+            }
+          },
+   -      "additionalProperties": false
+   +      "additionalProperties": {
+   +      }
+        },
+        "sdfinfo": {
+          "type": "object",
+          "required": [
+            "title",
+            "version",
+            "copyright",
+            "license"
+          ],
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "copyright": {
+              "type": "string"
+            },
+            "license": {
+              "type": "string"
+            }
+          },
+   -      "additionalProperties": false
+   +      "additionalProperties": {
+   +      }
+        },
+        "thingqualities": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "$comment": {
+              "type": "string"
+            },
+            "sdfRef": {
+              "$ref": "#/definitions/sdf-pointer"
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 38]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+            },
+            "sdfRequired": {
+              "$ref": "#/definitions/pointer-list"
+            },
+            "sdfObject": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/objectqualities"
+              }
+            },
+            "sdfThing": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/thingqualities"
+              }
+            }
+          },
+   -      "additionalProperties": false
+   +      "additionalProperties": {
+   +      }
+        },
+        "sdf-pointer": {
+          "type": "string"
+        },
+        "pointer-list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/sdf-pointer"
+          }
+        },
+        "objectqualities": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "$comment": {
+              "type": "string"
+            },
+            "sdfRef": {
+              "$ref": "#/definitions/sdf-pointer"
+            },
+            "sdfRequired": {
+              "$ref": "#/definitions/pointer-list"
+            },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 39]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+            "sdfProperty": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/propertyqualities"
+              }
+            },
+            "sdfAction": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/actionqualities"
+              }
+            },
+            "sdfEvent": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/eventqualities"
+              }
+            },
+            "sdfData": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/dataqualities"
+              }
+            }
+          },
+   -      "additionalProperties": false
+   +      "additionalProperties": {
+   +      }
+        },
+        "propertyqualities": {
+          "$ref": "#/definitions/dataqualities"
+        },
+        "dataqualities": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "number",
+                    "string",
+                    "boolean",
+                    "integer",
+                    "array"
+                  ]
+                },
+                "enum": {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 40]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                  "type": "array",
+                  "items": {
+   -                "type": "string"
+   +                "$ref": "#/definitions/allowed-types"
+                  },
+                  "minItems": 1
+                },
+                "const": {
+                  "$ref": "#/definitions/allowed-types"
+                },
+                "default": {
+                  "$ref": "#/definitions/allowed-types"
+                },
+                "minimum": {
+                  "type": "number"
+                },
+                "maximum": {
+                  "type": "number"
+                },
+                "exclusiveMinimum": {
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                },
+                "exclusiveMaximum": {
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                },
+                "multipleOf": {
+                  "type": "number"
+                },
+                "minLength": {
+                  "type": "number"
+                },
+                "maxLength": {
+                  "type": "number"
+                },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 41]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                "pattern": {
+                  "type": "string"
+                },
+                "format": {
+   -              "type": "string",
+   -              "enum": [
+   -                "date-time",
+   -                "date",
+   -                "time",
+   -                "uri",
+   -                "uri-reference",
+   -                "uuid"
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "date-time"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "date"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "time"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uri"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uri-reference"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uuid"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+                  ]
+                },
+                "minItems": {
+                  "type": "number"
+                },
+                "maxItems": {
+                  "type": "number"
+                },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 42]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                "uniqueItems": {
+                  "type": "boolean"
+                },
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "number",
+                            "string",
+                            "boolean",
+                            "integer"
+                          ]
+                        },
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+                          "type": "string"
+                        },
+                        "minLength": {
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+                        }
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 43]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                      },
+   -                  "additionalProperties": false
+   +                  "additionalProperties": {
+   +                  }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "object"
+                        },
+                        "required": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 1
+                        },
+                        "properties": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "$ref": "#/definitions/dataqualities"
+                          }
+                        },
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 44]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                          "type": "string"
+                        },
+                        "minLength": {
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+                        }
+                      },
+   -                  "additionalProperties": false
+   +                  "additionalProperties": {
+   +                  }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "sdfChoice": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "$ref": "#/definitions/dataqualities"
+                          }
+                        },
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+                          "type": "string"
+                        },
+                        "minLength": {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 45]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+                        }
+                      },
+   -                  "additionalProperties": false
+   +                  "additionalProperties": {
+   +                  }
+   +                },
+   +                {
+   +                  "type": "object",
+   +                  "properties": {
+   +                    "type": {
+   +                      "type": "string"
+   +                    },
+   +                    "sdfRef": {
+   +                      "$ref": "#/definitions/sdf-pointer"
+   +                    },
+   +                    "description": {
+   +                      "type": "string"
+   +                    },
+   +                    "$comment": {
+   +                      "type": "string"
+   +                    },
+   +                    "minimum": {
+   +                      "type": "number"
+   +                    },
+   +                    "maximum": {
+   +                      "type": "number"
+   +                    },
+   +                    "enum": {
+   +                      "type": "array",
+   +                      "minItems": 1
+   +                    },
+   +                    "format": {
+   +                      "type": "string"
+   +                    },
+   +                    "minLength": {
+   +                      "type": "number"
+   +                    },
+   +                    "maxLength": {
+   +                      "type": "number"
+   +                    }
+   +                  },
+   +                  "additionalProperties": {
+   +                  }
+                    }
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 46]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                  ]
+                },
+                "description": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "$comment": {
+                  "type": "string"
+                },
+                "sdfRef": {
+                  "$ref": "#/definitions/sdf-pointer"
+                },
+                "sdfRequired": {
+                  "$ref": "#/definitions/pointer-list"
+                },
+   +            "units": {
+   +              "type": "string"
+   +            },
+                "unit": {
+                  "type": "string"
+                },
+                "scaleMinimum": {
+                  "type": "number"
+                },
+                "scaleMaximum": {
+                  "type": "number"
+                },
+                "observable": {
+                  "type": "boolean"
+                },
+                "readable": {
+                  "type": "boolean"
+                },
+                "writable": {
+                  "type": "boolean"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "subtype": {
+   -              "type": "string",
+   -              "enum": [
+   -                "byte-string",
+   -                "unix-time"
+   +              "anyOf": [
+   +                {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 47]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                  "type": "string",
+   +                  "const": "byte-string"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "unix-time"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+                  ]
+                },
+                "contentFormat": {
+                  "type": "string"
+                }
+              },
+   -          "additionalProperties": false
+   +          "additionalProperties": {
+   +          }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "const": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                },
+                "properties": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/definitions/dataqualities"
+                  }
+                },
+                "enum": {
+                  "type": "array",
+                  "items": {
+   -                "type": "string"
+   +                "$ref": "#/definitions/allowed-types"
+                  },
+                  "minItems": 1
+                },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 48]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                "const": {
+                  "$ref": "#/definitions/allowed-types"
+                },
+                "default": {
+                  "$ref": "#/definitions/allowed-types"
+                },
+                "minimum": {
+                  "type": "number"
+                },
+                "maximum": {
+                  "type": "number"
+                },
+                "exclusiveMinimum": {
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                },
+                "exclusiveMaximum": {
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                },
+                "multipleOf": {
+                  "type": "number"
+                },
+                "minLength": {
+                  "type": "number"
+                },
+                "maxLength": {
+                  "type": "number"
+                },
+                "pattern": {
+                  "type": "string"
+                },
+                "format": {
+   -              "type": "string",
+   -              "enum": [
+   -                "date-time",
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 49]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   -                "date",
+   -                "time",
+   -                "uri",
+   -                "uri-reference",
+   -                "uuid"
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "date-time"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "date"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "time"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uri"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uri-reference"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uuid"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+                  ]
+                },
+                "minItems": {
+                  "type": "number"
+                },
+                "maxItems": {
+                  "type": "number"
+                },
+                "uniqueItems": {
+                  "type": "boolean"
+                },
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 50]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "number",
+                            "string",
+                            "boolean",
+                            "integer"
+                          ]
+                        },
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+                          "type": "string"
+                        },
+                        "minLength": {
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+                        }
+                      },
+   -                  "additionalProperties": false
+   +                  "additionalProperties": {
+   +                  }
+                    },
+                    {
+                      "type": "object",
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 51]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "object"
+                        },
+                        "required": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 1
+                        },
+                        "properties": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "$ref": "#/definitions/dataqualities"
+                          }
+                        },
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+                          "type": "string"
+                        },
+                        "minLength": {
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 52]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                        }
+                      },
+   -                  "additionalProperties": false
+   +                  "additionalProperties": {
+   +                  }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "sdfChoice": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "$ref": "#/definitions/dataqualities"
+                          }
+                        },
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+                          "type": "string"
+                        },
+                        "minLength": {
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+                        }
+                      },
+   -                  "additionalProperties": false
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 53]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                  "additionalProperties": {
+   +                  }
+   +                },
+   +                {
+   +                  "type": "object",
+   +                  "properties": {
+   +                    "type": {
+   +                      "type": "string"
+   +                    },
+   +                    "sdfRef": {
+   +                      "$ref": "#/definitions/sdf-pointer"
+   +                    },
+   +                    "description": {
+   +                      "type": "string"
+   +                    },
+   +                    "$comment": {
+   +                      "type": "string"
+   +                    },
+   +                    "minimum": {
+   +                      "type": "number"
+   +                    },
+   +                    "maximum": {
+   +                      "type": "number"
+   +                    },
+   +                    "enum": {
+   +                      "type": "array",
+   +                      "minItems": 1
+   +                    },
+   +                    "format": {
+   +                      "type": "string"
+   +                    },
+   +                    "minLength": {
+   +                      "type": "number"
+   +                    },
+   +                    "maxLength": {
+   +                      "type": "number"
+   +                    }
+   +                  },
+   +                  "additionalProperties": {
+   +                  }
+                    }
+                  ]
+                },
+                "description": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 54]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                },
+                "$comment": {
+                  "type": "string"
+                },
+                "sdfRef": {
+                  "$ref": "#/definitions/sdf-pointer"
+                },
+                "sdfRequired": {
+                  "$ref": "#/definitions/pointer-list"
+                },
+   +            "units": {
+   +              "type": "string"
+   +            },
+                "unit": {
+                  "type": "string"
+                },
+                "scaleMinimum": {
+                  "type": "number"
+                },
+                "scaleMaximum": {
+                  "type": "number"
+                },
+                "observable": {
+                  "type": "boolean"
+                },
+                "readable": {
+                  "type": "boolean"
+                },
+                "writable": {
+                  "type": "boolean"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "subtype": {
+   -              "type": "string",
+   -              "enum": [
+   -                "byte-string",
+   -                "unix-time"
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "byte-string"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "unix-time"
+   +                },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 55]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                {
+   +                  "type": "string"
+   +                }
+                  ]
+                },
+                "contentFormat": {
+                  "type": "string"
+                }
+              },
+   -          "additionalProperties": false
+   +          "additionalProperties": {
+   +          }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "sdfChoice": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/definitions/dataqualities"
+                  }
+                },
+                "enum": {
+                  "type": "array",
+                  "items": {
+   -                "type": "string"
+   +                "$ref": "#/definitions/allowed-types"
+                  },
+                  "minItems": 1
+                },
+                "const": {
+                  "$ref": "#/definitions/allowed-types"
+                },
+                "default": {
+                  "$ref": "#/definitions/allowed-types"
+                },
+                "minimum": {
+                  "type": "number"
+                },
+                "maximum": {
+                  "type": "number"
+                },
+                "exclusiveMinimum": {
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 56]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                      "type": "number"
+                    }
+                  ]
+                },
+                "exclusiveMaximum": {
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                },
+                "multipleOf": {
+                  "type": "number"
+                },
+                "minLength": {
+                  "type": "number"
+                },
+                "maxLength": {
+                  "type": "number"
+                },
+                "pattern": {
+                  "type": "string"
+                },
+                "format": {
+   -              "type": "string",
+   -              "enum": [
+   -                "date-time",
+   -                "date",
+   -                "time",
+   -                "uri",
+   -                "uri-reference",
+   -                "uuid"
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "date-time"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "date"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "time"
+   +                },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 57]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                {
+   +                  "type": "string",
+   +                  "const": "uri"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uri-reference"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uuid"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+                  ]
+                },
+                "minItems": {
+                  "type": "number"
+                },
+                "maxItems": {
+                  "type": "number"
+                },
+                "uniqueItems": {
+                  "type": "boolean"
+                },
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "number",
+                            "string",
+                            "boolean",
+                            "integer"
+                          ]
+                        },
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 58]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+                          "type": "string"
+                        },
+                        "minLength": {
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+                        }
+                      },
+   -                  "additionalProperties": false
+   +                  "additionalProperties": {
+   +                  }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "object"
+                        },
+                        "required": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 1
+                        },
+                        "properties": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "$ref": "#/definitions/dataqualities"
+                          }
+                        },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 59]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+                          "type": "string"
+                        },
+                        "minLength": {
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+                        }
+                      },
+   -                  "additionalProperties": false
+   +                  "additionalProperties": {
+   +                  }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "sdfChoice": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "$ref": "#/definitions/dataqualities"
+                          }
+                        },
+                        "sdfRef": {
+                          "$ref": "#/definitions/sdf-pointer"
+                        },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 60]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                        "description": {
+                          "type": "string"
+                        },
+                        "$comment": {
+                          "type": "string"
+                        },
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "enum": {
+                          "type": "array",
+   -                      "items": {
+   -                        "type": "string"
+   -                      },
+                          "minItems": 1
+                        },
+                        "format": {
+                          "type": "string"
+                        },
+                        "minLength": {
+                          "type": "number"
+                        },
+                        "maxLength": {
+                          "type": "number"
+                        }
+                      },
+   -                  "additionalProperties": false
+   +                  "additionalProperties": {
+   +                  }
+   +                },
+   +                {
+   +                  "type": "object",
+   +                  "properties": {
+   +                    "type": {
+   +                      "type": "string"
+   +                    },
+   +                    "sdfRef": {
+   +                      "$ref": "#/definitions/sdf-pointer"
+   +                    },
+   +                    "description": {
+   +                      "type": "string"
+   +                    },
+   +                    "$comment": {
+   +                      "type": "string"
+   +                    },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 61]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                    "minimum": {
+   +                      "type": "number"
+   +                    },
+   +                    "maximum": {
+   +                      "type": "number"
+   +                    },
+   +                    "enum": {
+   +                      "type": "array",
+   +                      "minItems": 1
+   +                    },
+   +                    "format": {
+   +                      "type": "string"
+   +                    },
+   +                    "minLength": {
+   +                      "type": "number"
+   +                    },
+   +                    "maxLength": {
+   +                      "type": "number"
+   +                    }
+   +                  },
+   +                  "additionalProperties": {
+   +                  }
+                    }
+                  ]
+                },
+                "description": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "$comment": {
+                  "type": "string"
+                },
+                "sdfRef": {
+                  "$ref": "#/definitions/sdf-pointer"
+                },
+                "sdfRequired": {
+                  "$ref": "#/definitions/pointer-list"
+                },
+   +            "units": {
+   +              "type": "string"
+   +            },
+                "unit": {
+                  "type": "string"
+                },
+                "scaleMinimum": {
+                  "type": "number"
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 62]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+                },
+                "scaleMaximum": {
+                  "type": "number"
+                },
+                "observable": {
+                  "type": "boolean"
+                },
+                "readable": {
+                  "type": "boolean"
+                },
+                "writable": {
+                  "type": "boolean"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "subtype": {
+   -              "type": "string",
+   -              "enum": [
+   -                "byte-string",
+   -                "unix-time"
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "byte-string"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "unix-time"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+                  ]
+                },
+                "contentFormat": {
+                  "type": "string"
+                }
+              },
+   -          "additionalProperties": false
+   -        }
+   -      ]
+   -    },
+   -    "allowed-types": {
+   -      "anyOf": [
+   -        {
+   -          "type": "number"
+   -        },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 63]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   -        {
+   -          "type": "string"
+   -        },
+   -        {
+   -          "type": "boolean"
+   -        },
+   -        {
+   -          "type": "null"
+   -        },
+   -        {
+   -          "type": "array",
+   -          "items": {
+   -            "type": "number"
+   +          "additionalProperties": {
+              }
+            },
+            {
+   -          "type": "array",
+   -          "items": {
+   -            "type": "string"
+   -          }
+   +          "type": "object",
+   +          "properties": {
+   +            "type": {
+   +              "type": "string"
+   +            },
+   +            "enum": {
+   +              "type": "array",
+   +              "items": {
+   +                "$ref": "#/definitions/allowed-types"
+   +              },
+   +              "minItems": 1
+   +            },
+   +            "const": {
+   +              "$ref": "#/definitions/allowed-types"
+   +            },
+   +            "default": {
+   +              "$ref": "#/definitions/allowed-types"
+   +            },
+   +            "minimum": {
+   +              "type": "number"
+   +            },
+   +            "maximum": {
+   +              "type": "number"
+   +            },
+   +            "exclusiveMinimum": {
+   +              "anyOf": [
+   +                {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 64]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                  "type": "boolean"
+   +                },
+   +                {
+   +                  "type": "number"
+   +                }
+   +              ]
+   +            },
+   +            "exclusiveMaximum": {
+   +              "anyOf": [
+   +                {
+   +                  "type": "boolean"
+   +                },
+   +                {
+   +                  "type": "number"
+   +                }
+   +              ]
+   +            },
+   +            "multipleOf": {
+   +              "type": "number"
+   +            },
+   +            "minLength": {
+   +              "type": "number"
+   +            },
+   +            "maxLength": {
+   +              "type": "number"
+   +            },
+   +            "pattern": {
+   +              "type": "string"
+   +            },
+   +            "format": {
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "date-time"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "date"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "time"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uri"
+   +                },
+   +                {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 65]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                  "type": "string",
+   +                  "const": "uri-reference"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "uuid"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+   +              ]
+   +            },
+   +            "minItems": {
+   +              "type": "number"
+   +            },
+   +            "maxItems": {
+   +              "type": "number"
+   +            },
+   +            "uniqueItems": {
+   +              "type": "boolean"
+   +            },
+   +            "items": {
+   +              "anyOf": [
+   +                {
+   +                  "type": "object",
+   +                  "properties": {
+   +                    "type": {
+   +                      "type": "string",
+   +                      "enum": [
+   +                        "number",
+   +                        "string",
+   +                        "boolean",
+   +                        "integer"
+   +                      ]
+   +                    },
+   +                    "sdfRef": {
+   +                      "$ref": "#/definitions/sdf-pointer"
+   +                    },
+   +                    "description": {
+   +                      "type": "string"
+   +                    },
+   +                    "$comment": {
+   +                      "type": "string"
+   +                    },
+   +                    "minimum": {
+   +                      "type": "number"
+   +                    },
+   +                    "maximum": {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 66]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                      "type": "number"
+   +                    },
+   +                    "enum": {
+   +                      "type": "array",
+   +                      "minItems": 1
+   +                    },
+   +                    "format": {
+   +                      "type": "string"
+   +                    },
+   +                    "minLength": {
+   +                      "type": "number"
+   +                    },
+   +                    "maxLength": {
+   +                      "type": "number"
+   +                    }
+   +                  },
+   +                  "additionalProperties": {
+   +                  }
+   +                },
+   +                {
+   +                  "type": "object",
+   +                  "properties": {
+   +                    "type": {
+   +                      "type": "string",
+   +                      "const": "object"
+   +                    },
+   +                    "required": {
+   +                      "type": "array",
+   +                      "items": {
+   +                        "type": "string"
+   +                      },
+   +                      "minItems": 1
+   +                    },
+   +                    "properties": {
+   +                      "type": "object",
+   +                      "additionalProperties": {
+   +                        "$ref": "#/definitions/dataqualities"
+   +                      }
+   +                    },
+   +                    "sdfRef": {
+   +                      "$ref": "#/definitions/sdf-pointer"
+   +                    },
+   +                    "description": {
+   +                      "type": "string"
+   +                    },
+   +                    "$comment": {
+   +                      "type": "string"
+   +                    },
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 67]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                    "minimum": {
+   +                      "type": "number"
+   +                    },
+   +                    "maximum": {
+   +                      "type": "number"
+   +                    },
+   +                    "enum": {
+   +                      "type": "array",
+   +                      "minItems": 1
+   +                    },
+   +                    "format": {
+   +                      "type": "string"
+   +                    },
+   +                    "minLength": {
+   +                      "type": "number"
+   +                    },
+   +                    "maxLength": {
+   +                      "type": "number"
+   +                    }
+   +                  },
+   +                  "additionalProperties": {
+   +                  }
+   +                },
+   +                {
+   +                  "type": "object",
+   +                  "properties": {
+   +                    "sdfChoice": {
+   +                      "type": "object",
+   +                      "additionalProperties": {
+   +                        "$ref": "#/definitions/dataqualities"
+   +                      }
+   +                    },
+   +                    "sdfRef": {
+   +                      "$ref": "#/definitions/sdf-pointer"
+   +                    },
+   +                    "description": {
+   +                      "type": "string"
+   +                    },
+   +                    "$comment": {
+   +                      "type": "string"
+   +                    },
+   +                    "minimum": {
+   +                      "type": "number"
+   +                    },
+   +                    "maximum": {
+   +                      "type": "number"
+   +                    },
+   +                    "enum": {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 68]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                      "type": "array",
+   +                      "minItems": 1
+   +                    },
+   +                    "format": {
+   +                      "type": "string"
+   +                    },
+   +                    "minLength": {
+   +                      "type": "number"
+   +                    },
+   +                    "maxLength": {
+   +                      "type": "number"
+   +                    }
+   +                  },
+   +                  "additionalProperties": {
+   +                  }
+   +                },
+   +                {
+   +                  "type": "object",
+   +                  "properties": {
+   +                    "type": {
+   +                      "type": "string"
+   +                    },
+   +                    "sdfRef": {
+   +                      "$ref": "#/definitions/sdf-pointer"
+   +                    },
+   +                    "description": {
+   +                      "type": "string"
+   +                    },
+   +                    "$comment": {
+   +                      "type": "string"
+   +                    },
+   +                    "minimum": {
+   +                      "type": "number"
+   +                    },
+   +                    "maximum": {
+   +                      "type": "number"
+   +                    },
+   +                    "enum": {
+   +                      "type": "array",
+   +                      "minItems": 1
+   +                    },
+   +                    "format": {
+   +                      "type": "string"
+   +                    },
+   +                    "minLength": {
+   +                      "type": "number"
+   +                    },
+   +                    "maxLength": {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 69]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +                      "type": "number"
+   +                    }
+   +                  },
+   +                  "additionalProperties": {
+   +                  }
+   +                }
+   +              ]
+   +            },
+   +            "description": {
+   +              "type": "string"
+   +            },
+   +            "label": {
+   +              "type": "string"
+   +            },
+   +            "$comment": {
+   +              "type": "string"
+   +            },
+   +            "sdfRef": {
+   +              "$ref": "#/definitions/sdf-pointer"
+   +            },
+   +            "sdfRequired": {
+   +              "$ref": "#/definitions/pointer-list"
+   +            },
+   +            "units": {
+   +              "type": "string"
+   +            },
+   +            "unit": {
+   +              "type": "string"
+   +            },
+   +            "scaleMinimum": {
+   +              "type": "number"
+   +            },
+   +            "scaleMaximum": {
+   +              "type": "number"
+   +            },
+   +            "observable": {
+   +              "type": "boolean"
+   +            },
+   +            "readable": {
+   +              "type": "boolean"
+   +            },
+   +            "writable": {
+   +              "type": "boolean"
+   +            },
+   +            "nullable": {
+   +              "type": "boolean"
+   +            },
+   +            "subtype": {
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 70]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "byte-string"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "unix-time"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+   +              ]
+   +            },
+   +            "contentFormat": {
+   +              "type": "string"
+   +            }
+   +          },
+   +          "additionalProperties": {
+   +          }
+   +        }
+   +      ]
+   +    },
+   +    "allowed-types": {
+   +      "anyOf": [
+   +        {
+   +          "type": "number"
+   +        },
+   +        {
+   +          "type": "string"
+   +        },
+   +        {
+   +          "type": "boolean"
+   +        },
+   +        {
+   +          "type": "null"
+   +        },
+   +        {
+   +          "type": "array",
+   +          "items": {
+   +            "type": "number"
+   +          }
+   +        },
+   +        {
+   +          "type": "array",
+   +          "items": {
+   +            "type": "string"
+   +          }
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 71]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+              }
+   +        },
+   +        {
+            }
+          ]
+        },
+        "actionqualities": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "$comment": {
+              "type": "string"
+            },
+            "sdfRef": {
+              "$ref": "#/definitions/sdf-pointer"
+            },
+            "sdfRequired": {
+              "$ref": "#/definitions/pointer-list"
+            },
+            "sdfInputData": {
+              "$ref": "#/definitions/parameter-list"
+            },
+   +        "sdfRequiredInputData": {
+   +          "$ref": "#/definitions/pointer-list"
+   +        },
+            "sdfOutputData": {
+              "$ref": "#/definitions/parameter-list"
+            },
+            "sdfData": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/dataqualities"
+              }
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 72]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+            }
+          },
+   -      "additionalProperties": false
+   +      "additionalProperties": {
+   +      }
+        },
+        "parameter-list": {
+   -      "$ref": "#/definitions/dataqualities"
+   +      "anyOf": [
+   +        {
+   +          "$ref": "#/definitions/pointer-list"
+   +        },
+   +        {
+   +          "$ref": "#/definitions/dataqualities"
+   +        }
+   +      ]
+        },
+        "eventqualities": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "$comment": {
+              "type": "string"
+            },
+            "sdfRef": {
+              "$ref": "#/definitions/sdf-pointer"
+            },
+            "sdfRequired": {
+              "$ref": "#/definitions/pointer-list"
+            },
+            "sdfOutputData": {
+              "$ref": "#/definitions/parameter-list"
+            },
+            "sdfData": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/dataqualities"
+              }
+            }
+          },
+   -      "additionalProperties": false
+   +      "additionalProperties": {
+   +      }
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 73]
+
+Internet-Draft                  OneDM SDF                   January 2021
+
+
+        },
+        "productqualities": {
+          "$ref": "#/definitions/thingqualities"
+        }
+      }
+    }
 
 Acknowledgements
 
@@ -1839,15 +4113,6 @@ Contributors
    Finland
 
    Email: ari.keranen@ericsson.com
-
-
-
-
-
-
-Koster & Bormann           Expires 19 May 2021                 [Page 33]
-
-Internet-Draft                  OneDM SDF                  November 2020
 
 
    Wouter van der Beek
@@ -1870,6 +4135,15 @@ Authors' Addresses
 
    Phone: +1-707-502-5136
    Email: Michael.Koster@smartthings.com
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 74]
+
+Internet-Draft                  OneDM SDF                   January 2021
 
 
    Carsten Bormann (editor)
@@ -1901,4 +4175,26 @@ Authors' Addresses
 
 
 
-Koster & Bormann           Expires 19 May 2021                 [Page 34]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann          Expires 29 July 2021                 [Page 75]

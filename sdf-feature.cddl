@@ -108,14 +108,20 @@ compound-type = (
   ? properties: named<dataqualities>,
 )
 
+choice-type = (
+  ("sdfChoice" .feature "1.1") => named<dataqualities>
+)
+
 jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
+    // choice-type
     // (type: text .feature "type-ext")                       ; EXTENSION-POINT
    )
- ? enum: [+ allowed-types]                                              ; should validate against type
- ? const: allowed-types
- ? default: allowed-types
+ ? "enum" => [+ text]               ; limited to text strings in SDF 1.1
+ ? ("enum" .feature "1.0") => [+ allowed-types]    ; should validate against type
+ ? const: allowed-types                            ; should validate against type
+ ? default: allowed-types                          ; should validate against type
  ; number/integer constraints
  ? minimum: number
  ? maximum: number
@@ -141,12 +147,14 @@ jsonschema = (
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type
+        // choice-type              ; do we really need arrays of choices?
         // (type: text .feature "itemtype-ext")                       ; EXTENSION-POINT
        )
      ; jso subset
      ? minimum: number
      ? maximum: number
-     ? enum: [+ any]
+     ? "enum" => [+ text] ; limited to text strings in SDF 1.1
+     ? ("enum" .feature "1.0") => [+ any]
      ? format: text
      ? minLength: number
      ? maxLength: number
