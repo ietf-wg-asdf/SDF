@@ -127,7 +127,7 @@ Internet-Draft                  OneDM SDF                  February 2021
        4.7.1.  sdfType . . . . . . . . . . . . . . . . . . . . . . .  23
        4.7.2.  sdfChoice . . . . . . . . . . . . . . . . . . . . . .  23
    5.  Keywords for definition groups  . . . . . . . . . . . . . . .  25
-     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  25
+     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  26
      5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  26
      5.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . . . .  26
      5.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . . . .  27
@@ -1253,22 +1253,24 @@ Internet-Draft                  OneDM SDF                  February 2021
    "sdfType" value, and a conventional JSON representation for values of
    the type.
 
-     +=============+=====================+========+==================+
-     | sdfType     | Description         | type   | JSON             |
-     |             |                     |        | Representation   |
-     +=============+=====================+========+==================+
-     | byte-string | A sequence of zero  | string | base64url        |
-     |             | or more bytes       |        | without padding  |
-     |             |                     |        | (Section 3.4.5.2 |
-     |             |                     |        | of [RFC8949])    |
-     +-------------+---------------------+--------+------------------+
-     | unix-time   | A point in civil    | number | number           |
-     |             | time as a POSIX     |        |                  |
-     |             | time (Section 3.4.2 |        |                  |
-     |             | of [RFC8949])       |        |                  |
-     +-------------+---------------------+--------+------------------+
+     +=============+=============+========+==========================+
+     | sdfType     | Description | type   | JSON Representation      |
+     +=============+=============+========+==========================+
+     | byte-string | A sequence  | string | base64url without        |
+     |             | of zero or  |        | padding (Section 3.4.5.2 |
+     |             | more bytes  |        | of [RFC8949])            |
+     +-------------+-------------+--------+--------------------------+
+     | unix-time   | A point in  | number | POSIX time               |
+     |             | civil time  |        | (Section 3.4.2 of        |
+     |             | (note 1)    |        | [RFC8949])               |
+     +-------------+-------------+--------+--------------------------+
 
-               Table 6: Values for sdfType defined in SDF 1.1
+           Table 6: Values defined in SDF 1.1 for sdfType quality
+
+   (1) Note that the definition of "unix-time" does not imply the
+   capability to represent points in time that fall on leap seconds.
+   More date/time-related sdfTypes are likely to be added in future
+   versions of this specification.
 
    In SDF 1.0, a similar concept was called "subtype".
 
@@ -1279,8 +1281,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    used to represent the choice) and a set of dataqualities (object, the
    value in the JSON object used to represent the choice).
 
-   sdfChoice merges the functions of two constructs found in
-   [I-D.handrews-json-schema-validation]:
 
 
 
@@ -1289,6 +1289,9 @@ Koster & Bormann         Expires 12 August 2021                [Page 23]
 
 Internet-Draft                  OneDM SDF                  February 2021
 
+
+   sdfChoice merges the functions of two constructs found in
+   [I-D.handrews-json-schema-validation]:
 
   *  "enum"
 
@@ -1335,9 +1338,6 @@ Internet-Draft                  OneDM SDF                  February 2021
      [I-D.handrews-json-schema-validation] provides a type union called
      "anyOf", which provides a choice between anonymous alternatives.
 
-     What could have been
-
-
 
 
 
@@ -1345,6 +1345,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 24]
 
 Internet-Draft                  OneDM SDF                  February 2021
 
+
+     What could have been
 
      "anyOf": [
        {"type": "array", "minItems": 3, "maxItems": "3", "items": {
@@ -1387,12 +1389,10 @@ Internet-Draft                  OneDM SDF                  February 2021
    the target namespace.  All these definitions share some common
    qualities as discussed in Section 4.6.
 
-5.1.  sdfObject
 
-   The sdfObject keyword denotes a group of zero or more Object
-   definitions.  Object definitions may contain or include definitions
-   of Properties, Actions, Events declared for the object, as well as
-   data types (sdfData group) to be used in this or other Objects.
+
+
+
 
 
 
@@ -1401,6 +1401,13 @@ Koster & Bormann         Expires 12 August 2021                [Page 25]
 
 Internet-Draft                  OneDM SDF                  February 2021
 
+
+5.1.  sdfObject
+
+   The sdfObject keyword denotes a group of zero or more Object
+   definitions.  Object definitions may contain or include definitions
+   of Properties, Actions, Events declared for the object, as well as
+   data types (sdfData group) to be used in this or other Objects.
 
    The qualities of an sdfObject include the common qualities,
    additional qualities are shown in Table 7.  None of these qualities
@@ -1443,13 +1450,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    The sdfAction keyword denotes a group of zero or more Action
    definitions.
 
-   Actions are used to model commands and methods which are invoked.
-   Actions have parameter data that are supplied upon invocation.
-
-   The qualities of an Action definition include the common qualities,
-   additional qualities are shown in Table 8.
-
-
 
 
 
@@ -1457,6 +1457,12 @@ Koster & Bormann         Expires 12 August 2021                [Page 26]
 
 Internet-Draft                  OneDM SDF                  February 2021
 
+
+   Actions are used to model commands and methods which are invoked.
+   Actions have parameter data that are supplied upon invocation.
+
+   The qualities of an Action definition include the common qualities,
+   additional qualities are shown in Table 8.
 
         +===============+===========+============================+
         | Quality       | Type      | Description                |
@@ -1492,12 +1498,6 @@ Internet-Draft                  OneDM SDF                  February 2021
 
    The qualities of sdfEvent include the common qualities, additional
    qualities are shown in Table 9.
-
-
-
-
-
-
 
 
 
