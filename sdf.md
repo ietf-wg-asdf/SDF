@@ -854,11 +854,16 @@ This table also gives a description of the semantics of the sdfType,
 the conventional value for `type` to be used with the `sdfType` value,
 and a conventional JSON representation for values of the type.
 
-| sdfType     | Description                                                          | type   | JSON Representation                                        |
-|-------------|----------------------------------------------------------------------|--------|------------------------------------------------------------|
-| byte-string | A sequence of zero or more bytes                                     | string | base64url without padding ({{Section 3.4.5.2 of RFC8949}}) |
-| unix-time   | A point in civil time as a POSIX time ({{Section 3.4.2 of RFC8949}}) | number | number                                                     |
-{: #sdftype1 title="Values for sdfType defined in SDF 1.1"}
+| sdfType     | Description                      | type   | JSON Representation                                        |
+|-------------|----------------------------------|--------|------------------------------------------------------------|
+| byte-string | A sequence of zero or more bytes | string | base64url without padding ({{Section 3.4.5.2 of RFC8949}}) |
+| unix-time   | A point in civil time (note 1)   | number | POSIX time ({{Section 3.4.2 of RFC8949}})                  |
+{: #sdftype1 title="Values defined in SDF 1.1 for sdfType quality"}
+
+(1) Note that the definition of `unix-time` does not imply the
+capability to represent points in time that fall on leap seconds.
+More date/time-related sdfTypes are likely to be added in future versions
+of this specification.
 
 In SDF 1.0, a similar concept was called `subtype`.
 
@@ -1206,4 +1211,6 @@ repository).
 <!--  LocalWords:  namespaces sdfRequired Optionality sdfAction
  -->
 <!--  LocalWords:  sdfProduct dereferenced dereferencing atomicity
+ -->
+<!--  LocalWords:  interworking
  -->
