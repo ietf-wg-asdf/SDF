@@ -60,6 +60,7 @@ normative:
   RFC3986: uri
   RFC6901: pointer
   RFC8610: cddl
+  RFC8949: cbor
   W3C.NOTE-curie-20101216: curie
   RFC0020: ascii
   SPDX:
@@ -818,7 +819,7 @@ numbers can be used.
 (2) Note that the term "properties" as used for map entries in {{-jso}} is unrelated to sdfProperty.
 
 | Quality       | Type                        | Description                                                         | Default |
-|---------------+-----------------------------+---------------------------------------------------------------------+---------|
+|---------------|-----------------------------|---------------------------------------------------------------------|---------|
 | (common)      |                             | {{common-qualities}}                                                |         |
 | unit          | string                      | SenML unit name as per {{-units}}, subregistry SenML Units (note 3) | N/A     |
 | scaleMinimum  | number                      | lower limit of value in units given by unit                         | N/A     |
@@ -828,12 +829,43 @@ numbers can be used.
 | observable    | boolean                     | flag to indicate asynchronous notification is available             | true    |
 | nullable      | boolean                     | indicates a null value is available for this type                   | true    |
 | contentFormat | string                      | content type (IANA media type string plus parameters), encoding     | N/A     |
-| subtype       | "byte-string" / "unix-time" | subtype enumeration                                                 | N/A     |
+| sdfType       | string ({{sdftype}})        | sdfType enumeration (extensible)                                    | N/A     |
 | sdfChoice     | named set of data qualities | named alternatives                                                  | N/A     |
 | enum          | array of strings            | abbreviation for string-valued named alternatives                   | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
 (3) note that the quality `unit` was called `units` in SDF 1.0.
+
+### sdfType
+
+SDF defines a number of basic types beyond those provided by JSON or
+{{-jso}}.
+These types are identified by the `sdfType` quality, which is a text
+string from a set of type names defined by SDF.
+
+To aid interworking with {{-jso}} implementations, it is RECOMMENDED
+that `sdfType` is always used in conjunction with the `type` quality
+inherited from {{-jso}}, in such a way as to yield a common
+representation of the type's values in JSON.
+
+Values for `sdfType` that are defined in SDF 1.1 are shown in
+{{sdftype1}}.
+This table also gives a description of the semantics of the sdfType,
+the conventional value for `type` to be used with the `sdfType` value,
+and a conventional JSON representation for values of the type.
+
+| sdfType     | Description                      | type   | JSON Representation                                        |
+|-------------|----------------------------------|--------|------------------------------------------------------------|
+| byte-string | A sequence of zero or more bytes | string | base64url without padding ({{Section 3.4.5.2 of RFC8949}}) |
+| unix-time   | A point in civil time (note 1)   | number | POSIX time ({{Section 3.4.2 of RFC8949}})                  |
+{: #sdftype1 title="Values defined in SDF 1.1 for sdfType quality"}
+
+(1) Note that the definition of `unix-time` does not imply the
+capability to represent points in time that fall on leap seconds.
+More date/time-related sdfTypes are likely to be added in future versions
+of this specification.
+
+In SDF 1.0, a similar concept was called `subtype`.
 
 ### sdfChoice
 
@@ -1179,4 +1211,6 @@ repository).
 <!--  LocalWords:  namespaces sdfRequired Optionality sdfAction
  -->
 <!--  LocalWords:  sdfProduct dereferenced dereferencing atomicity
+ -->
+<!--  LocalWords:  interworking
  -->

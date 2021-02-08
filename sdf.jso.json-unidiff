@@ -553,6 +553,25 @@
 +                }
                ]
              },
+             "sdfType": {
+-              "type": "string",
+-              "enum": [
+-                "byte-string",
+-                "unix-time"
++              "anyOf": [
++                {
++                  "type": "string",
++                  "const": "byte-string"
++                },
++                {
++                  "type": "string",
++                  "const": "unix-time"
++                },
++                {
++                  "type": "string"
++                }
+               ]
+             },
              "contentFormat": {
                "type": "string"
              }
@@ -912,6 +931,25 @@
                "type": "boolean"
              },
              "subtype": {
+-              "type": "string",
+-              "enum": [
+-                "byte-string",
+-                "unix-time"
++              "anyOf": [
++                {
++                  "type": "string",
++                  "const": "byte-string"
++                },
++                {
++                  "type": "string",
++                  "const": "unix-time"
++                },
++                {
++                  "type": "string"
++                }
+               ]
+             },
+             "sdfType": {
 -              "type": "string",
 -              "enum": [
 -                "byte-string",
@@ -1296,40 +1334,40 @@
 +                }
                ]
              },
-             "contentFormat": {
-               "type": "string"
-             }
-           },
+             "sdfType": {
+-              "type": "string",
+-              "enum": [
+-                "byte-string",
+-                "unix-time"
+-              ]
+-            },
+-            "contentFormat": {
+-              "type": "string"
+-            }
+-          },
 -          "additionalProperties": false
--        }
--      ]
--    },
--    "allowed-types": {
--      "anyOf": [
--        {
--          "type": "number"
--        },
--        {
--          "type": "string"
--        },
--        {
--          "type": "boolean"
--        },
--        {
--          "type": "null"
--        },
--        {
--          "type": "array",
--          "items": {
--            "type": "number"
++              "anyOf": [
++                {
++                  "type": "string",
++                  "const": "byte-string"
++                },
++                {
++                  "type": "string",
++                  "const": "unix-time"
++                },
++                {
++                  "type": "string"
++                }
++              ]
++            },
++            "contentFormat": {
++              "type": "string"
++            }
++          },
 +          "additionalProperties": {
-           }
-         },
-         {
--          "type": "array",
--          "items": {
--            "type": "string"
--          }
++          }
++        },
++        {
 +          "type": "object",
 +          "properties": {
 +            "type": {
@@ -1659,40 +1697,55 @@
 +                }
 +              ]
 +            },
++            "sdfType": {
++              "anyOf": [
++                {
++                  "type": "string",
++                  "const": "byte-string"
++                },
++                {
++                  "type": "string",
++                  "const": "unix-time"
++                },
++                {
++                  "type": "string"
++                }
++              ]
++            },
 +            "contentFormat": {
 +              "type": "string"
 +            }
 +          },
 +          "additionalProperties": {
 +          }
-+        }
-+      ]
-+    },
-+    "allowed-types": {
-+      "anyOf": [
-+        {
-+          "type": "number"
-+        },
-+        {
-+          "type": "string"
-+        },
-+        {
-+          "type": "boolean"
-+        },
-+        {
-+          "type": "null"
-+        },
-+        {
-+          "type": "array",
-+          "items": {
-+            "type": "number"
-+          }
-+        },
-+        {
-+          "type": "array",
-+          "items": {
-+            "type": "string"
-+          }
+         }
+       ]
+     },
+     "allowed-types": {
+       "anyOf": [
+         {
+           "type": "number"
+         },
+         {
+           "type": "string"
+         },
+         {
+           "type": "boolean"
+         },
+         {
+           "type": "null"
+         },
+         {
+           "type": "array",
+           "items": {
+             "type": "number"
+           }
+         },
+         {
+           "type": "array",
+           "items": {
+             "type": "string"
+           }
          },
          {
            "type": "array",
