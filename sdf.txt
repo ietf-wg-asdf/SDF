@@ -143,9 +143,9 @@ Internet-Draft                  OneDM SDF                  February 2021
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  33
    Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  33
    Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  37
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  75
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  75
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  75
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  76
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  76
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  77
 
 1.  Introduction
 
@@ -1966,8 +1966,10 @@ Internet-Draft                  OneDM SDF                  February 2021
  ? readable: bool
  ? writable: bool
  ? nullable: bool
- ? subtype: "byte-string" / "unix-time"
-           / (text .feature "subtype-ext")                       ; EXTENSION-POINT
+ ? ("subtype" .feature 1.0) => "byte-string" / "unix-time"
+            / (text .feature "subtype-ext")                       ; EXTENSION-POINT
+ ? ("sdfType" .feature 1.1) => "byte-string" / "unix-time"
+            / (text .feature "sdftype-ext")                       ; EXTENSION-POINT
  ? contentFormat: text
  EXTENSION-POINT<"data-ext">
 }
@@ -2008,8 +2010,6 @@ jsonschema = (
  ? maxLength: number
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
-           / "uri" / "uri-reference" / "uuid"
-           / (text .feature "format-ext")                       ; EXTENSION-POINT
 
 
 
@@ -2018,6 +2018,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 36]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+           / "uri" / "uri-reference" / "uuid"
+           / (text .feature "format-ext")                       ; EXTENSION-POINT
  ; array constraints
  ? minItems: number
  ? maxItems: number
@@ -2064,8 +2066,6 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
       "$schema": "http://json-schema.org/draft-07/schema#",
       "$ref": "#/definitions/sdf-syntax",
       "definitions": {
-        "sdf-syntax": {
-          "type": "object",
 
 
 
@@ -2074,6 +2074,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 37]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+        "sdf-syntax": {
+          "type": "object",
           "required": [
             "info"
           ],
@@ -2120,8 +2122,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                 "$ref": "#/definitions/actionqualities"
               }
             },
-            "sdfEvent": {
-              "type": "object",
 
 
 
@@ -2130,6 +2130,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 38]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+            "sdfEvent": {
+              "type": "object",
               "additionalProperties": {
                 "$ref": "#/definitions/eventqualities"
               }
@@ -2176,8 +2178,6 @@ Internet-Draft                  OneDM SDF                  February 2021
           "properties": {
             "description": {
               "type": "string"
-            },
-            "label": {
 
 
 
@@ -2186,6 +2186,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 39]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+            },
+            "label": {
               "type": "string"
             },
             "$comment": {
@@ -2232,8 +2234,6 @@ Internet-Draft                  OneDM SDF                  February 2021
             "label": {
               "type": "string"
             },
-            "$comment": {
-              "type": "string"
 
 
 
@@ -2242,6 +2242,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 40]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+            "$comment": {
+              "type": "string"
             },
             "sdfRef": {
               "$ref": "#/definitions/sdf-pointer"
@@ -2288,8 +2290,6 @@ Internet-Draft                  OneDM SDF                  February 2021
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": [
-                    "number",
 
 
 
@@ -2298,6 +2298,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 41]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+                  "enum": [
+                    "number",
                     "string",
                     "boolean",
                     "integer",
@@ -2344,8 +2346,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                     }
                   ]
                 },
-                "multipleOf": {
-                  "type": "number"
 
 
 
@@ -2354,6 +2354,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 42]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+                "multipleOf": {
+                  "type": "number"
                 },
                 "minLength": {
                   "type": "number"
@@ -2400,8 +2402,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                },
    +                {
    +                  "type": "string"
-   +                }
-                  ]
 
 
 
@@ -2410,6 +2410,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 43]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+   +                }
+                  ]
                 },
                 "minItems": {
                   "type": "number"
@@ -2456,8 +2458,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    -                      },
                           "minItems": 1
                         },
-                        "format": {
-                          "type": "string"
 
 
 
@@ -2466,6 +2466,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 44]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+                        "format": {
+                          "type": "string"
                         },
                         "minLength": {
                           "type": "number"
@@ -2512,8 +2514,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                         },
                         "maximum": {
                           "type": "number"
-                        },
-                        "enum": {
 
 
 
@@ -2522,6 +2522,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 45]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+                        },
+                        "enum": {
                           "type": "array",
    -                      "items": {
    -                        "type": "string"
@@ -2568,8 +2570,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                         },
                         "enum": {
                           "type": "array",
-   -                      "items": {
-   -                        "type": "string"
 
 
 
@@ -2578,6 +2578,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 46]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+   -                      "items": {
+   -                        "type": "string"
    -                      },
                           "minItems": 1
                         },
@@ -2624,8 +2626,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                      "type": "string"
    +                    },
    +                    "minLength": {
-   +                      "type": "number"
-   +                    },
 
 
 
@@ -2634,6 +2634,8 @@ Koster & Bormann         Expires 12 August 2021                [Page 47]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+   +                      "type": "number"
+   +                    },
    +                    "maxLength": {
    +                      "type": "number"
    +                    }
@@ -2680,8 +2682,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                   "type": "boolean"
                 },
                 "nullable": {
-                  "type": "boolean"
-                },
 
 
 
@@ -2690,7 +2690,28 @@ Koster & Bormann         Expires 12 August 2021                [Page 48]
 Internet-Draft                  OneDM SDF                  February 2021
 
 
+                  "type": "boolean"
+                },
                 "subtype": {
+   -              "type": "string",
+   -              "enum": [
+   -                "byte-string",
+   -                "unix-time"
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "byte-string"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "unix-time"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+                  ]
+                },
+                "sdfType": {
    -              "type": "string",
    -              "enum": [
    -                "byte-string",
@@ -2717,6 +2738,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +          "additionalProperties": {
    +          }
             },
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 49]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
             {
               "type": "object",
               "properties": {
@@ -2738,14 +2767,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                   }
                 },
                 "enum": {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 49]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                   "type": "array",
                   "items": {
    -                "type": "string"
@@ -2773,6 +2794,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                     {
                       "type": "number"
                     }
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 50]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                   ]
                 },
                 "exclusiveMaximum": {
@@ -2794,14 +2823,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                 "maxLength": {
                   "type": "number"
                 },
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 50]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                 "pattern": {
                   "type": "string"
                 },
@@ -2829,6 +2850,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                },
    +                {
    +                  "type": "string",
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 51]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                  "const": "uri"
    +                },
    +                {
@@ -2850,14 +2879,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                 "maxItems": {
                   "type": "number"
                 },
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 51]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                 "uniqueItems": {
                   "type": "boolean"
                 },
@@ -2885,6 +2906,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                           "type": "string"
                         },
                         "minimum": {
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 52]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                           "type": "number"
                         },
                         "maximum": {
@@ -2906,14 +2935,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                         "maxLength": {
                           "type": "number"
                         }
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 52]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                       },
    -                  "additionalProperties": false
    +                  "additionalProperties": {
@@ -2941,6 +2962,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                         },
                         "sdfRef": {
                           "$ref": "#/definitions/sdf-pointer"
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 53]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                         },
                         "description": {
                           "type": "string"
@@ -2962,14 +2991,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                           "minItems": 1
                         },
                         "format": {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 53]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                           "type": "string"
                         },
                         "minLength": {
@@ -2997,6 +3018,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                         },
                         "description": {
                           "type": "string"
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 54]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                         },
                         "$comment": {
                           "type": "string"
@@ -3018,14 +3047,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                           "type": "string"
                         },
                         "minLength": {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 54]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                           "type": "number"
                         },
                         "maxLength": {
@@ -3053,6 +3074,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                    },
    +                    "minimum": {
    +                      "type": "number"
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 55]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                    },
    +                    "maximum": {
    +                      "type": "number"
@@ -3074,14 +3103,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                  "additionalProperties": {
    +                  }
                     }
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 55]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                   ]
                 },
                 "description": {
@@ -3109,6 +3130,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                   "type": "number"
                 },
                 "scaleMaximum": {
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 56]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                   "type": "number"
                 },
                 "observable": {
@@ -3130,14 +3159,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    -                "unix-time"
    +              "anyOf": [
    +                {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 56]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +                  "type": "string",
    +                  "const": "byte-string"
    +                },
@@ -3146,6 +3167,33 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                  "const": "unix-time"
    +                },
    +                {
+   +                  "type": "string"
+   +                }
+                  ]
+                },
+                "sdfType": {
+   -              "type": "string",
+   -              "enum": [
+   -                "byte-string",
+   -                "unix-time"
+   +              "anyOf": [
+   +                {
+   +                  "type": "string",
+   +                  "const": "byte-string"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "unix-time"
+   +                },
+   +                {
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 57]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                  "type": "string"
    +                }
                   ]
@@ -3186,14 +3234,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                 },
                 "maximum": {
                   "type": "number"
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 57]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                 },
                 "exclusiveMinimum": {
                   "anyOf": [
@@ -3202,6 +3242,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                     },
                     {
                       "type": "number"
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 58]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                     }
                   ]
                 },
@@ -3242,14 +3290,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                  "const": "date-time"
    +                },
    +                {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 58]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +                  "type": "string",
    +                  "const": "date"
    +                },
@@ -3258,6 +3298,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                  "const": "time"
    +                },
    +                {
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 59]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                  "type": "string",
    +                  "const": "uri"
    +                },
@@ -3298,14 +3346,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                           ]
                         },
                         "sdfRef": {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 59]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                           "$ref": "#/definitions/sdf-pointer"
                         },
                         "description": {
@@ -3314,6 +3354,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                         "$comment": {
                           "type": "string"
                         },
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 60]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                         "minimum": {
                           "type": "number"
                         },
@@ -3354,14 +3402,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                             "type": "string"
                           },
                           "minItems": 1
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 60]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                         },
                         "properties": {
                           "type": "object",
@@ -3370,6 +3410,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                           }
                         },
                         "sdfRef": {
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 61]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                           "$ref": "#/definitions/sdf-pointer"
                         },
                         "description": {
@@ -3410,14 +3458,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                       "properties": {
                         "sdfChoice": {
                           "type": "object",
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 61]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                           "additionalProperties": {
                             "$ref": "#/definitions/dataqualities"
                           }
@@ -3426,6 +3466,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                           "$ref": "#/definitions/sdf-pointer"
                         },
                         "description": {
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 62]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                           "type": "string"
                         },
                         "$comment": {
@@ -3466,14 +3514,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                    },
    +                    "sdfRef": {
    +                      "$ref": "#/definitions/sdf-pointer"
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 62]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +                    },
    +                    "description": {
    +                      "type": "string"
@@ -3482,6 +3522,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                      "type": "string"
    +                    },
    +                    "minimum": {
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 63]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                      "type": "number"
    +                    },
    +                    "maximum": {
@@ -3522,14 +3570,6 @@ Internet-Draft                  OneDM SDF                  February 2021
                   "$ref": "#/definitions/pointer-list"
                 },
    +            "units": {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 63]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +              "type": "string"
    +            },
                 "unit": {
@@ -3538,6 +3578,14 @@ Internet-Draft                  OneDM SDF                  February 2021
                 "scaleMinimum": {
                   "type": "number"
                 },
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 64]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
                 "scaleMaximum": {
                   "type": "number"
                 },
@@ -3572,48 +3620,48 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                }
                   ]
                 },
-                "contentFormat": {
-                  "type": "string"
-                }
-              },
+                "sdfType": {
+   -              "type": "string",
+   -              "enum": [
+   -                "byte-string",
+   -                "unix-time"
+   -              ]
+   -            },
+   -            "contentFormat": {
+   -              "type": "string"
+   -            }
+   -          },
    -          "additionalProperties": false
-   -        }
+   +              "anyOf": [
+   +                {
 
 
 
-Koster & Bormann         Expires 12 August 2021                [Page 64]
+Koster & Bormann         Expires 12 August 2021                [Page 65]
 
 Internet-Draft                  OneDM SDF                  February 2021
 
 
-   -      ]
-   -    },
-   -    "allowed-types": {
-   -      "anyOf": [
-   -        {
-   -          "type": "number"
-   -        },
-   -        {
-   -          "type": "string"
-   -        },
-   -        {
-   -          "type": "boolean"
-   -        },
-   -        {
-   -          "type": "null"
-   -        },
-   -        {
-   -          "type": "array",
-   -          "items": {
-   -            "type": "number"
+   +                  "type": "string",
+   +                  "const": "byte-string"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "unix-time"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+   +              ]
+   +            },
+   +            "contentFormat": {
+   +              "type": "string"
+   +            }
+   +          },
    +          "additionalProperties": {
-              }
-            },
-            {
-   -          "type": "array",
-   -          "items": {
-   -            "type": "string"
-   -          }
+   +          }
+   +        },
+   +        {
    +          "type": "object",
    +          "properties": {
    +            "type": {
@@ -3634,14 +3682,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +            },
    +            "minimum": {
    +              "type": "number"
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 65]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +            },
    +            "maximum": {
    +              "type": "number"
@@ -3650,6 +3690,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +              "anyOf": [
    +                {
    +                  "type": "boolean"
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 66]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                },
    +                {
    +                  "type": "number"
@@ -3690,14 +3738,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                },
    +                {
    +                  "type": "string",
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 66]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +                  "const": "time"
    +                },
    +                {
@@ -3706,6 +3746,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                },
    +                {
    +                  "type": "string",
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 67]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                  "const": "uri-reference"
    +                },
    +                {
@@ -3746,14 +3794,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                    "description": {
    +                      "type": "string"
    +                    },
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 67]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +                    "$comment": {
    +                      "type": "string"
    +                    },
@@ -3762,6 +3802,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                    },
    +                    "maximum": {
    +                      "type": "number"
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 68]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                    },
    +                    "enum": {
    +                      "type": "array",
@@ -3802,14 +3850,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                    },
    +                    "sdfRef": {
    +                      "$ref": "#/definitions/sdf-pointer"
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 68]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +                    },
    +                    "description": {
    +                      "type": "string"
@@ -3818,6 +3858,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                      "type": "string"
    +                    },
    +                    "minimum": {
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 69]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                      "type": "number"
    +                    },
    +                    "maximum": {
@@ -3858,14 +3906,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                    "$comment": {
    +                      "type": "string"
    +                    },
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 69]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +                    "minimum": {
    +                      "type": "number"
    +                    },
@@ -3874,6 +3914,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                    },
    +                    "enum": {
    +                      "type": "array",
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 70]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                      "minItems": 1
    +                    },
    +                    "format": {
@@ -3914,14 +3962,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                      "type": "array",
    +                      "minItems": 1
    +                    },
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 70]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +                    "format": {
    +                      "type": "string"
    +                    },
@@ -3930,6 +3970,14 @@ Internet-Draft                  OneDM SDF                  February 2021
    +                    },
    +                    "maxLength": {
    +                      "type": "number"
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 71]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
    +                    }
    +                  },
    +                  "additionalProperties": {
@@ -3970,14 +4018,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +            "readable": {
    +              "type": "boolean"
    +            },
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 71]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
    +            "writable": {
    +              "type": "boolean"
    +            },
@@ -3985,6 +4025,29 @@ Internet-Draft                  OneDM SDF                  February 2021
    +              "type": "boolean"
    +            },
    +            "subtype": {
+   +              "anyOf": [
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 72]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
+   +                {
+   +                  "type": "string",
+   +                  "const": "byte-string"
+   +                },
+   +                {
+   +                  "type": "string",
+   +                  "const": "unix-time"
+   +                },
+   +                {
+   +                  "type": "string"
+   +                }
+   +              ]
+   +            },
+   +            "sdfType": {
    +              "anyOf": [
    +                {
    +                  "type": "string",
@@ -4005,42 +4068,42 @@ Internet-Draft                  OneDM SDF                  February 2021
    +          },
    +          "additionalProperties": {
    +          }
-   +        }
-   +      ]
-   +    },
-   +    "allowed-types": {
-   +      "anyOf": [
-   +        {
-   +          "type": "number"
-   +        },
-   +        {
-   +          "type": "string"
-   +        },
-   +        {
-   +          "type": "boolean"
-   +        },
-   +        {
-   +          "type": "null"
-   +        },
-   +        {
-   +          "type": "array",
-   +          "items": {
-   +            "type": "number"
+            }
+          ]
+        },
+        "allowed-types": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
 
 
 
-Koster & Bormann         Expires 12 August 2021                [Page 72]
+Koster & Bormann         Expires 12 August 2021                [Page 73]
 
 Internet-Draft                  OneDM SDF                  February 2021
 
 
-   +          }
-   +        },
-   +        {
-   +          "type": "array",
-   +          "items": {
-   +            "type": "string"
-   +          }
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             {
               "type": "array",
@@ -4075,6 +4138,14 @@ Internet-Draft                  OneDM SDF                  February 2021
             "sdfRequired": {
               "$ref": "#/definitions/pointer-list"
             },
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 74]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
             "sdfInputData": {
               "$ref": "#/definitions/parameter-list"
             },
@@ -4082,14 +4153,6 @@ Internet-Draft                  OneDM SDF                  February 2021
    +          "$ref": "#/definitions/pointer-list"
    +        },
             "sdfOutputData": {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 73]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
               "$ref": "#/definitions/parameter-list"
             },
             "sdfData": {
@@ -4131,6 +4194,14 @@ Internet-Draft                  OneDM SDF                  February 2021
             },
             "sdfRequired": {
               "$ref": "#/definitions/pointer-list"
+
+
+
+Koster & Bormann         Expires 12 August 2021                [Page 75]
+
+Internet-Draft                  OneDM SDF                  February 2021
+
+
             },
             "sdfOutputData": {
               "$ref": "#/definitions/parameter-list"
@@ -4138,14 +4209,6 @@ Internet-Draft                  OneDM SDF                  February 2021
             "sdfData": {
               "type": "object",
               "additionalProperties": {
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 74]
-
-Internet-Draft                  OneDM SDF                  February 2021
-
-
                 "$ref": "#/definitions/dataqualities"
               }
             }
@@ -4188,19 +4251,14 @@ Contributors
    Email: wovander@cisco.com
 
 
-Authors' Addresses
 
 
-
-
-
-
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 75]
+Koster & Bormann         Expires 12 August 2021                [Page 76]
 
 Internet-Draft                  OneDM SDF                  February 2021
 
+
+Authors' Addresses
 
    Michael Koster (editor)
    SmartThings
@@ -4251,6 +4309,4 @@ Internet-Draft                  OneDM SDF                  February 2021
 
 
 
-
-
-Koster & Bormann         Expires 12 August 2021                [Page 76]
+Koster & Bormann         Expires 12 August 2021                [Page 77]
