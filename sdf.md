@@ -5,7 +5,7 @@ title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
 abbrev: OneDM SDF
 docname: draft-ietf-asdf-sdf-latest
-category: info
+category: std
 
 ipr: trust200902
 area: Applications
