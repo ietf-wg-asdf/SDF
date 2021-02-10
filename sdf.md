@@ -723,12 +723,17 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
   "sdfObject": {
     "temperatureWithAlarm": {
       "sdfRequired": [
-        "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData",
+        "#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
         "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
       ],
       "sdfData":{
         "temperatureData": {
           "type": "number"
+        }
+      },
+      "sdfProperty": {
+        "currentTemperature": {
+          "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
         }
       },
       "sdfEvent": {
