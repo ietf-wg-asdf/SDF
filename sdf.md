@@ -17,13 +17,13 @@ pi: [toc, sortrefs, symrefs, comments]
 
 author:
   - name: Michael Koster
-    org: SmartThings
-    street: 665 Clyde Avenue
-    city: Mountain View
-    code: '94043'
+    org: Dogtiger Labs
+    street: 524 H Street
+    city: Antioch, CA
+    code: '94509'
     country: USA
     phone: "+1-707-502-5136"
-    email: Michael.Koster@smartthings.com
+    email: michaeljohnkoster@gmail.com
     role: editor
   - name: Carsten Bormann
     org: Universität Bremen TZI
