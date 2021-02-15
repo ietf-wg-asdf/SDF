@@ -44,13 +44,13 @@ contributor:
     country: Finland
     email: ari.keranen@ericsson.com
   - name: Wouter van der Beek
-    org: Cisco Systems
+    org: Cascoda Ltd.
     street:
-    - Eastpoint Business Park
-    - Alfie Byrne Road
-    city: Dublin 3
-    country: Ireland
-    email: wovander@cisco.com
+    - Threefield House
+    - Threefield Lane
+    city: Southampton
+    country: United Kingdom
+    email: w.vanderbeek@cascoda.com
  
 normative:
   IANA.senml: units
