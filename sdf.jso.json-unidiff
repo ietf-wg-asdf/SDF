@@ -534,11 +534,7 @@
              "nullable": {
                "type": "boolean"
              },
-             "subtype": {
--              "type": "string",
--              "enum": [
--                "byte-string",
--                "unix-time"
++            "subtype": {
 +              "anyOf": [
 +                {
 +                  "type": "string",
@@ -551,8 +547,8 @@
 +                {
 +                  "type": "string"
 +                }
-               ]
-             },
++              ]
++            },
              "sdfType": {
 -              "type": "string",
 -              "enum": [
@@ -930,11 +926,7 @@
              "nullable": {
                "type": "boolean"
              },
-             "subtype": {
--              "type": "string",
--              "enum": [
--                "byte-string",
--                "unix-time"
++            "subtype": {
 +              "anyOf": [
 +                {
 +                  "type": "string",
@@ -947,8 +939,8 @@
 +                {
 +                  "type": "string"
 +                }
-               ]
-             },
++              ]
++            },
              "sdfType": {
 -              "type": "string",
 -              "enum": [
@@ -1315,11 +1307,12 @@
              "nullable": {
                "type": "boolean"
              },
-             "subtype": {
+-            "sdfType": {
 -              "type": "string",
 -              "enum": [
 -                "byte-string",
 -                "unix-time"
++            "subtype": {
 +              "anyOf": [
 +                {
 +                  "type": "string",
@@ -1334,18 +1327,15 @@
 +                }
                ]
              },
-             "sdfType": {
--              "type": "string",
--              "enum": [
--                "byte-string",
--                "unix-time"
--              ]
--            },
 -            "contentFormat": {
 -              "type": "string"
 -            }
 -          },
 -          "additionalProperties": false
+-        }
+-      ]
+-    },
++            "sdfType": {
 +              "anyOf": [
 +                {
 +                  "type": "string",
@@ -1718,9 +1708,9 @@
 +          },
 +          "additionalProperties": {
 +          }
-         }
-       ]
-     },
++        }
++      ]
++    },
      "allowed-types": {
        "anyOf": [
          {
