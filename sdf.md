@@ -846,8 +846,8 @@ with `minimum` and `maximum`.
 They express that the number as given in the data model, bounded by
 `minimum` and `maximum`, needs to be translated into a value on the
 scale given by `scaleMinimum` and `scaleMaximum` to give the actual
-value of the item (in the information model and, if `unit` is given,
-in that unit).
+value of the item (value in the information model and, if `unit` is
+given, in that unit).
 Specifically, in rational arithmetic, with *smin*, *smax*, *min*, and
 *max* as the values of `scaleMinimum`, `scaleMaximum`, `minimum`, and
 `maximum`:
