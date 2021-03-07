@@ -1198,7 +1198,7 @@ Published specification:
 : {{media-type}} of RFC XXXX
 
 Applications that use this media type:
-: No known applications currently use this media type.
+: Tools for data and interaction modeling in the Internet of Things
 
 Fragment identifier considerations:
 : A JSON Pointer fragment identifier may be used, as defined in
