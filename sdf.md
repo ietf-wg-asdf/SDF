@@ -827,8 +827,8 @@ numbers can be used.
 |---------------|-----------------------------|---------------------------------------------------------------------|---------|
 | (common)      |                             | {{common-qualities}}                                                |         |
 | unit          | string                      | SenML unit name as per {{-units}}, subregistry SenML Units (note 3) | N/A     |
-| scaleMinimum  | number                      | lower limit of value in units given by unit                         | N/A     |
-| scaleMaximum  | number                      | upper limit of value in units given by unit                         | N/A     |
+| scaleMinimum  | number                      | lower limit of value in units given by unit (note 4)                 | N/A     |
+| scaleMaximum  | number                      | upper limit of value in units given by unit (note 4)                 | N/A     |
 | readable      | boolean                     | Reads are allowed                                                   | true    |
 | writable      | boolean                     | Writes are allowed                                                  | true    |
 | observable    | boolean                     | flag to indicate asynchronous notification is available             | true    |
@@ -840,6 +840,21 @@ numbers can be used.
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
 (3) note that the quality `unit` was called `units` in SDF 1.0.
+
+(4) `scaleMinimum` and `scaleMaximum` need to be used in conjunction
+with `minimum` and `maximum`.
+They express that the number as given in the data model, bounded by
+`minimum` and `maximum`, needs to be translated into a value on the
+scale given by `scaleMinimum` and `scaleMaximum` to give the actual
+value of the item (in the information model and, if `unit` is given,
+in that unit).
+Specifically, in rational arithmetic, with *smin*, *smax*, *min*, and
+*max* as the values of `scaleMinimum`, `scaleMaximum`, `minimum`, and
+`maximum`:
+
+~~~ math
+value = smin + ((number - min) ~\cdot~ (smax - smin) / (max - min))
+~~~
 
 ### sdfType
 
