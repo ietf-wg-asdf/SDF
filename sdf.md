@@ -496,6 +496,9 @@ This object has three sections: the information block, the namespaces section, a
 ## Information block
 
 The information block contains generic meta data for the file itself and all included definitions.
+To enable tool integration, the information block is optional in the grammar
+of SDF; most processes for working with SDF files will have policies
+that only SDF models with an info block can be processed.
 
 The keyword (map key) that defines an information block is "info". Its
 value is a JSON map in turn, with a set of entries that represent qualities that apply to the included definition.
