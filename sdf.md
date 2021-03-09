@@ -827,8 +827,8 @@ numbers can be used.
 |---------------|-----------------------------|---------------------------------------------------------------------|---------|
 | (common)      |                             | {{common-qualities}}                                                |         |
 | unit          | string                      | SenML unit name as per {{-units}}, subregistry SenML Units (note 3) | N/A     |
-| scaleMinimum  | number                      | lower limit of value in units given by unit                         | N/A     |
-| scaleMaximum  | number                      | upper limit of value in units given by unit                         | N/A     |
+| scaleMinimum  | number                      | lower limit of value in units given by unit (note 4)                 | N/A     |
+| scaleMaximum  | number                      | upper limit of value in units given by unit (note 4)                | N/A     |
 | readable      | boolean                     | Reads are allowed                                                   | true    |
 | writable      | boolean                     | Writes are allowed                                                  | true    |
 | observable    | boolean                     | flag to indicate asynchronous notification is available             | true    |
@@ -840,6 +840,9 @@ numbers can be used.
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
 (3) note that the quality `unit` was called `units` in SDF 1.0.
+
+(4) these qualities are not fully defined in SDF 1.1; they are
+reserved for SDF 1.next.
 
 ### sdfType
 
