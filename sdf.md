@@ -100,12 +100,10 @@ An SDF specification describes definitions of SDF Objects and their
 associated interactions (Events, Actions, Properties), as well as the
 Data types for the information exchanged in those interactions.
 
-A JSON format representation of SDF 1.0 was defined in the previous
-(-00) version of this document.  SDF 1.1 is expected to be defined in
-a future version; the present document is a *candidate implementation
-draft* for SDF 1.1.  If the ASDF WG reaches consensus on this
-candidate, the next version will be SDF 1.1, an SDF implementation
-draft.
+A JSON format representation of SDF 1.0 was defined in a previous
+(-00) version of this document.  The present document has been
+designated as an *implementation draft*, labeled SDF 1.1, at the
+IETF110 meeting of the ASDF WG (2021-03-11).
 
 --- note_Contributing
 
@@ -136,10 +134,10 @@ An SDF specification describes definitions of SDF Objects and their
 associated interactions (Events, Actions, Properties), as well as the
 Data types for the information exchanged in those interactions.
 
-A JSON format representation of SDF 1.0 was defined in the previous
-(-00) version of this document.  SDF 1.1 is expected to be defined in
-a future version; the present document represents a draft on the way
-from 1.0 to 1.1.  Hence, this is not an implementation draft.
+A JSON format representation of SDF 1.0 was defined in a previous
+(-00) version of this document.  The present document has been
+designated as an *implementation draft*, labeled SDF 1.1, at the
+IETF110 meeting of the ASDF WG (2021-03-11).
 
 
 ## Terminology and Conventions
