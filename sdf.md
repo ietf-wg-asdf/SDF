@@ -6,10 +6,11 @@ title: >
 abbrev: OneDM SDF
 docname: draft-ietf-asdf-sdf-latest
 category: std
+consensus: true
 
 ipr: trust200902
 area: Applications
-workgroup: T2TRG
+workgroup: ASDF
 keyword: Internet-Draft
 
 stand_alone: yes
@@ -80,6 +81,7 @@ informative:
     date: false
 # VERSION 2.1.2 | April 2020
     target: https://openconnectivity.org/specs/OCF_Resource_Type_Specification.pdf
+  RFC8576: seccons
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -496,6 +498,11 @@ This object has three sections: the information block, the namespaces section, a
 ## Information block
 
 The information block contains generic meta data for the file itself and all included definitions.
+To enable tool integration, the information block is optional in the grammar
+of SDF; most processes for working with SDF files will have policies
+that only SDF models with an info block can be processed.
+It is therefore RECOMMENDED that SDF validator tools emit a warning
+when no information block is found.
 
 The keyword (map key) that defines an information block is "info". Its
 value is a JSON map in turn, with a set of entries that represent qualities that apply to the included definition.
@@ -1160,6 +1167,85 @@ Product definitions may set optional defaults and constant values for specific u
 
 The qualities of sdfProduct are the same as for sdfThing and are shown in {{sdfthingqual}}.
 
+
+IANA Considerations {#iana}
+===================
+
+Media Type
+-----------
+
+IANA is requested to add the following Media-Type to the "Media Types" registry.
+
+| Name     | Template             | Reference                 |
+| sdf+json | application/sdf+json | RFC XXXX, {{media-type}}  |
+{: align="left"}
+
+// RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
+
+{: spacing="compact"}
+Type name:
+: application
+
+Subtype name:
+: sdf+json
+
+Required parameters:
+: none
+
+Optional parameters:
+: none
+
+Encoding considerations:
+: binary (JSON is UTF-8-encoded text)
+
+Security considerations:
+: {{seccons}} of RFC XXXX
+
+Interoperability considerations:
+: none
+
+Published specification:
+: {{media-type}} of RFC XXXX
+
+Applications that use this media type:
+: Tools for data and interaction modeling in the Internet of Things
+
+Fragment identifier considerations:
+: A JSON Pointer fragment identifier may be used, as defined in
+  {{Section 6 of RFC6901}}.
+
+Person & email address to contact for further information:
+: ASDF WG mailing list (asdf@ietf.org),
+  or IETF Applications and Real-Time Area (art@ietf.org)
+
+Intended usage:
+: COMMON
+
+Restrictions on usage:
+: none
+
+Author/Change controller:
+: IETF
+
+Provisional registration:
+: no
+
+
+
+Registries
+----------
+
+(TBD: After future additions, check if we need any.)
+
+
+Security Considerations {#seccons}
+=======================
+
+Some wider issues are discussed in {{-seccons}}.
+
+(Specifics: TBD.)
+
+
 --- back
 
 # Formal Syntax of SDF {#syntax}
@@ -1207,7 +1293,7 @@ Lines leading with a `-` are part of the validation syntax, and lines leading wi
 {: numbered="no"}
 
 This draft is based on `sdf.md` and `sdf-schema.json` in the old
-one-data-model `language` repository, as well as Ari Keranen's
+one-data-model `language` repository, as well as {{{Ari Keränen}}}'s
 "alt-schema" from the Ericsson Research `ipso-odm` repository (which
 is now under subdirectory `sdflint` in the one-data model `tools`
 repository).
