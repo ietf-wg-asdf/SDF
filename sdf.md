@@ -834,8 +834,8 @@ numbers can be used.
 |---------------|-----------------------------|---------------------------------------------------------------------|---------|
 | (common)      |                             | {{common-qualities}}                                                |         |
 | unit          | string                      | SenML unit name as per {{-units}}, subregistry SenML Units (note 3) | N/A     |
-| scaleMinimum  | number                      | lower limit of value in units given by unit                         | N/A     |
-| scaleMaximum  | number                      | upper limit of value in units given by unit                         | N/A     |
+| scaleMinimum  | number                      | lower limit of value in units given by unit (note 4)                 | N/A     |
+| scaleMaximum  | number                      | upper limit of value in units given by unit (note 4)                | N/A     |
 | readable      | boolean                     | Reads are allowed                                                   | true    |
 | writable      | boolean                     | Writes are allowed                                                  | true    |
 | observable    | boolean                     | flag to indicate asynchronous notification is available             | true    |
@@ -848,12 +848,17 @@ numbers can be used.
 
 (3) note that the quality `unit` was called `units` in SDF 1.0.
 
+(4) these qualities were included in SDF 1.0, but were not fully
+    defined; they are not included in SDF 1.1.  In 1.next, they will
+    be replaced by qualities to express scaling that are more aligned
+    with the processes that combine ecosystem and instance specific
+    information with an SDF model.
+
 ### sdfType
 
 SDF defines a number of basic types beyond those provided by JSON or
-{{-jso}}.
-These types are identified by the `sdfType` quality, which is a text
-string from a set of type names defined by SDF.
+{{-jso}}.  These types are identified by the `sdfType` quality, which
+is a text string from a set of type names defined by SDF.
 
 To aid interworking with {{-jso}} implementations, it is RECOMMENDED
 that `sdfType` is always used in conjunction with the `type` quality
