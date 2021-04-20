@@ -17,19 +17,17 @@ serializations as needed.
        An SDF specification describes definitions of SDF Objects and their
 associated interactions (Events, Actions, Properties), as well as the
 Data types for the information exchanged in those interactions. 
-       A JSON format representation of SDF 1.0 was defined in the previous
-(-00) version of this document.  SDF 1.1 is expected to be defined in
-a future version; the present document is a  candidate implementation
-draft  for SDF 1.1.  If the ASDF WG reaches consensus on this
-candidate, the next version will be SDF 1.1, an SDF implementation
-draft. 
+       A JSON format representation of SDF 1.0 was defined in a previous
+(-00) version of this document.  The present document has been
+designated as an  implementation draft , labeled SDF 1.1, at the
+IETF110 meeting of the ASDF WG (2021-03-11). 
     " name="description">
 <meta content="xml2rfc 3.5.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.5.0
-    Python 3.9.2
+    Python 3.9.4
     appdirs 1.4.4
     ConfigArgParse 1.2.3
     google-i18n-address 2.4.0
@@ -43,8 +41,9 @@ draft.
     pyflakes 2.2.0
     PyYAML 5.3.1
     requests 2.25.1
-    setuptools 53.0.0
+    setuptools 54.1.2
     six 1.15.0
+    WeasyPrint 0.42.3
 -->
 <link href="sdf.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1184,13 +1183,11 @@ dt+dd:empty::before{
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OneDM SDF</td>
-<td class="right">March 2021</td>
+<td class="right">April 2021</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-
-<td class="center">Expires 10 September 2021</td>
-
+<td class="center">Expires 22 October 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1198,21 +1195,17 @@ dt+dd:empty::before{
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">T2TRG</dd>
+<dd class="workgroup">ASDF</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-
-<time datetime="2021-03-09" class="published">9 March 2021</time>
-
+<time datetime="2021-04-20" class="published">20 April 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-
-<dd class="expires"><time datetime="2021-09-10">10 September 2021</time></dd>
-
+<dd class="expires"><time datetime="2021-10-22">22 October 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1240,12 +1233,10 @@ serializations as needed.<a href="#section-abstract-1" class="pilcrow">¶</a></p
 <p id="section-abstract-2">An SDF specification describes definitions of SDF Objects and their
 associated interactions (Events, Actions, Properties), as well as the
 Data types for the information exchanged in those interactions.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
-<p id="section-abstract-3">A JSON format representation of SDF 1.0 was defined in the previous
-(-00) version of this document.  SDF 1.1 is expected to be defined in
-a future version; the present document is a <em>candidate implementation
-draft</em> for SDF 1.1.  If the ASDF WG reaches consensus on this
-candidate, the next version will be SDF 1.1, an SDF implementation
-draft.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+<p id="section-abstract-3">A JSON format representation of SDF 1.0 was defined in a previous
+(-00) version of this document.  The present document has been
+designated as an <em>implementation draft</em>, labeled SDF 1.1, at the
+IETF110 meeting of the ASDF WG (2021-03-11).<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </section>
 <section class="note" id="section-note.1">
       <h2 id="name-contributing">
@@ -1278,9 +1269,7 @@ list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-
-        This Internet-Draft will expire on 10 September 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
-
+        This Internet-Draft will expire on 22 October 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1308,216 +1297,183 @@ list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
         <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
 <a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
         </h2>
-
-<nav class="toc"><ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.1">
+<nav class="toc"><ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.1.2.1">
-
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.1.2.1">
                 <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-terminology-and-conventions" class="xref">Terminology and Conventions</a><a href="#section-toc.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-
-          <li class="compact ulEmpty toc" id="section-toc.1-1.2">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-overview" class="xref">Overview</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
-<ul class="compact ulEmpty toc">
-<li class="compact ulEmpty toc" id="section-toc.1-1.2.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.2.2.1">
                 <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-example-definition" class="xref">Example Definition</a><a href="#section-toc.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.2.2.2">
                 <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-elements-of-an-sdf-model" class="xref">Elements of an SDF model</a><a href="#section-toc.1-1.2.2.2.1" class="pilcrow">¶</a></p>
-<ul class="compact ulEmpty toc">
-<li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.2.2.2.2.1">
                     <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="xref">2.2.1</a>.  <a href="#name-sdfobject" class="xref">sdfObject</a><a href="#section-toc.1-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2.2.2">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.2.2.2.2.2">
                     <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="xref">2.2.2</a>.  <a href="#name-sdfproperty" class="xref">sdfProperty</a><a href="#section-toc.1-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2.2.3">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.2.2.2.2.3">
                     <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="xref">2.2.3</a>.  <a href="#name-sdfaction" class="xref">sdfAction</a><a href="#section-toc.1-1.2.2.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2.2.4">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.2.2.2.2.4">
                     <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="xref">2.2.4</a>.  <a href="#name-sdfevent" class="xref">sdfEvent</a><a href="#section-toc.1-1.2.2.2.2.4.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2.2.5">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.2.2.2.2.5">
                     <p id="section-toc.1-1.2.2.2.2.5.1"><a href="#section-2.2.5" class="xref">2.2.5</a>.  <a href="#name-sdfdata" class="xref">sdfData</a><a href="#section-toc.1-1.2.2.2.2.5.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2.2.6">
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.2.2.2.2.6">
                     <p id="section-toc.1-1.2.2.2.2.6.1"><a href="#section-2.2.6" class="xref">2.2.6</a>.  <a href="#name-sdfthing" class="xref">sdfThing</a><a href="#section-toc.1-1.2.2.2.2.6.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2.2.7">
-=======
-          <li class="ulEmpty compact toc" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-overview" class="xref">Overview</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-example-definition" class="xref">Example Definition</a><a href="#section-toc.1-1.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-elements-of-an-sdf-model" class="xref">Elements of an SDF model</a><a href="#section-toc.1-1.2.2.2.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.1">
-                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="xref">2.2.1</a>.  <a href="#name-sdfobject" class="xref">sdfObject</a><a href="#section-toc.1-1.2.2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.2">
-                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="xref">2.2.2</a>.  <a href="#name-sdfproperty" class="xref">sdfProperty</a><a href="#section-toc.1-1.2.2.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.3">
-                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="xref">2.2.3</a>.  <a href="#name-sdfaction" class="xref">sdfAction</a><a href="#section-toc.1-1.2.2.2.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.4">
-                    <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="xref">2.2.4</a>.  <a href="#name-sdfevent" class="xref">sdfEvent</a><a href="#section-toc.1-1.2.2.2.2.4.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.5">
-                    <p id="section-toc.1-1.2.2.2.2.5.1"><a href="#section-2.2.5" class="xref">2.2.5</a>.  <a href="#name-sdfdata" class="xref">sdfData</a><a href="#section-toc.1-1.2.2.2.2.5.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.6">
-                    <p id="section-toc.1-1.2.2.2.2.6.1"><a href="#section-2.2.6" class="xref">2.2.6</a>.  <a href="#name-sdfthing" class="xref">sdfThing</a><a href="#section-toc.1-1.2.2.2.2.6.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.7">
-
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.2.2.2.2.7">
                     <p id="section-toc.1-1.2.2.2.2.7.1"><a href="#section-2.2.7" class="xref">2.2.7</a>.  <a href="#name-sdfproduct" class="xref">sdfProduct</a><a href="#section-toc.1-1.2.2.2.2.7.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-
-          <li class="ulEmpty compact toc" id="section-toc.1-1.3">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-sdf-structure" class="xref">SDF structure</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.3.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-information-block" class="xref">Information block</a><a href="#section-toc.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-namespaces-section" class="xref">Namespaces section</a><a href="#section-toc.1-1.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.3">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.3.2.3">
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-definitions-section" class="xref">Definitions section</a><a href="#section-toc.1-1.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-
-          <li class="ulEmpty compact toc" id="section-toc.1-1.4">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-names-and-namespaces" class="xref">Names and namespaces</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.4.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-structure" class="xref">Structure</a><a href="#section-toc.1-1.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.4.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-contributing-global-names" class="xref">Contributing global names</a><a href="#section-toc.1-1.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.4.2.3">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.3">
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-referencing-global-names" class="xref">Referencing global names</a><a href="#section-toc.1-1.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.4.2.4">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.4">
                 <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="xref">4.4</a>.  <a href="#name-sdfref" class="xref">sdfRef</a><a href="#section-toc.1-1.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.4.2.5">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.5">
                 <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="xref">4.5</a>.  <a href="#name-sdfrequired" class="xref">sdfRequired</a><a href="#section-toc.1-1.4.2.5.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.4.2.5.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.4.2.5.2.1">
                     <p id="section-toc.1-1.4.2.5.2.1.1"><a href="#section-4.5.1" class="xref">4.5.1</a>.  <a href="#name-optionality-using-the-keywo" class="xref">Optionality using the keyword "sdfRequired"</a><a href="#section-toc.1-1.4.2.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
-
-              <li class="ulEmpty compact toc" id="section-toc.1-1.4.2.6">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.6">
                 <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="xref">4.6</a>.  <a href="#name-common-qualities" class="xref">Common Qualities</a><a href="#section-toc.1-1.4.2.6.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.4.2.7">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.7">
                 <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="xref">4.7</a>.  <a href="#name-data-qualities" class="xref">Data Qualities</a><a href="#section-toc.1-1.4.2.7.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.4.2.7.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.4.2.7.2.1">
                     <p id="section-toc.1-1.4.2.7.2.1.1"><a href="#section-4.7.1" class="xref">4.7.1</a>.  <a href="#name-sdftype" class="xref">sdfType</a><a href="#section-toc.1-1.4.2.7.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="ulEmpty compact toc" id="section-toc.1-1.4.2.7.2.2">
-
+                  <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.7.2.2">
                     <p id="section-toc.1-1.4.2.7.2.2.1"><a href="#section-4.7.2" class="xref">4.7.2</a>.  <a href="#name-sdfchoice" class="xref">sdfChoice</a><a href="#section-toc.1-1.4.2.7.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-
-          <li class="ulEmpty compact toc" id="section-toc.1-1.5">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-keywords-for-definition-gro" class="xref">Keywords for definition groups</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.5.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-sdfobject-2" class="xref">sdfObject</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.5.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.2">
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-sdfproperty-2" class="xref">sdfProperty</a><a href="#section-toc.1-1.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.5.2.3">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.3">
                 <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-sdfaction-2" class="xref">sdfAction</a><a href="#section-toc.1-1.5.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.5.2.4">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.4">
                 <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="xref">5.4</a>.  <a href="#name-sdfevent-2" class="xref">sdfEvent</a><a href="#section-toc.1-1.5.2.4.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.5.2.5">
-
+              <li class="ulEmpty toc compact" id="section-toc.1-1.5.2.5">
                 <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="xref">5.5</a>.  <a href="#name-sdfdata-2" class="xref">sdfData</a><a href="#section-toc.1-1.5.2.5.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-
-          <li class="ulEmpty compact toc" id="section-toc.1-1.6">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-high-level-composition" class="xref">High Level Composition</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.6.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.1">
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-paths-in-the-model-namespac" class="xref">Paths in the model namespaces</a><a href="#section-toc.1-1.6.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.6.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2">
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-modular-composition" class="xref">Modular Composition</a><a href="#section-toc.1-1.6.2.2.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.6.2.2.2.1">
-
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.6.2.2.2.1">
                     <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-use-of-the-sdfref-keyword-t" class="xref">Use of the "sdfRef" keyword to re-use a definition</a><a href="#section-toc.1-1.6.2.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
-
-              <li class="ulEmpty compact toc" id="section-toc.1-1.6.2.3">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.3">
                 <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-sdfthing-2" class="xref">sdfThing</a><a href="#section-toc.1-1.6.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.6.2.4">
-
+              <li class="ulEmpty toc compact" id="section-toc.1-1.6.2.4">
                 <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="xref">6.4</a>.  <a href="#name-sdfproduct-2" class="xref">sdfProduct</a><a href="#section-toc.1-1.6.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-
-          <li class="ulEmpty compact toc" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
-<ul class="ulEmpty compact toc">
-<li class="ulEmpty compact toc" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-media-type" class="xref">Media Type</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulEmpty compact toc" id="section-toc.1-1.7.2.2">
-
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-registries" class="xref">Registries</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-
-          <li class="ulEmpty compact toc" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="xref">Formal Syntax of SDF</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="xref">json-schema.org Rendition of SDF Syntax</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.9.2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
+              <li class="ulEmpty toc compact" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.9.2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
+            </ul>
 </li>
-          <li class="ulEmpty compact toc" id="section-toc.1-1.12">
-
-            <p id="section-toc.1-1.12.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="xref">Formal Syntax of SDF</a><a href="#section-toc.1-1.10.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="xref">json-schema.org Rendition of SDF Syntax</a><a href="#section-toc.1-1.11.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a><a href="#section-toc.1-1.12.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#section-appendix.d" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="ulEmpty toc compact" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#section-appendix.e" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.14.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </nav>
@@ -1537,10 +1493,10 @@ serializations as needed.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">An SDF specification describes definitions of SDF Objects and their
 associated interactions (Events, Actions, Properties), as well as the
 Data types for the information exchanged in those interactions.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">A JSON format representation of SDF 1.0 was defined in the previous
-(-00) version of this document.  SDF 1.1 is expected to be defined in
-a future version; the present document represents a draft on the way
-from 1.0 to 1.1.  Hence, this is not an implementation draft.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-3">A JSON format representation of SDF 1.0 was defined in a previous
+(-00) version of this document.  The present document has been
+designated as an <em>implementation draft</em>, labeled SDF 1.1, at the
+IETF110 meeting of the ASDF WG (2021-03-11).<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="terminology-and-conventions">
 <section id="section-1.1">
         <h3 id="name-terminology-and-conventions">
@@ -1882,7 +1838,7 @@ link sdfProperty to sdfData-->
                   <polygon fill="black" points="141.68,404.16,133.0828,399.3549,136.7009,403.7035,132.3524,407.3215,141.68,404.16" stroke="black" stroke-width="1.0"></polygon>
                   <text fill="black" font-family="sans-serif" font-size="13" x="22.5" y="348.5684">isInstanceOf</text>
                   <text fill="black" font-family="sans-serif" font-size="13" x="126.0527" y="400.0923">1</text>
-                  <!--MD5=[b3007b946c75c7f3a6e9e7e2a59f94c1]
+                  <!--MD5=[1d7a579bb8f4db2a2bdc5a019d26e4d8]
 @startuml
 
 sdfThing - -> "0+" sdfObject : hasObject
@@ -1919,7 +1875,7 @@ class sdfData {
 
 @enduml
 
-PlantUML version 1.2021.01(Tue Feb 02 08:55:08 CET 2021)
+PlantUML version 1.2021.4(Sun Apr 04 10:49:39 CEST 2021)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
@@ -2115,7 +2071,9 @@ This object has three sections: the information block, the namespaces section, a
 <p id="section-3.1-1">The information block contains generic meta data for the file itself and all included definitions.
 To enable tool integration, the information block is optional in the grammar
 of SDF; most processes for working with SDF files will have policies
-that only SDF models with an info block can be processed.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+that only SDF models with an info block can be processed.
+It is therefore RECOMMENDED that SDF validator tools emit a warning
+when no information block is found.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The keyword (map key) that defines an information block is "info". Its
 value is a JSON map in turn, with a set of entries that represent qualities that apply to the included definition.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">Qualities of the information block are shown in <a href="#infoblockqual" class="xref">Table 1</a>.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
@@ -3251,13 +3209,158 @@ consumption there is no conflict with the intended goal.<a href="#section-6.2.1-
 </div>
 </section>
 </div>
+<div id="iana">
 <section id="section-7">
-      <h2 id="name-references">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
+      <h2 id="name-iana-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
+<div id="media-type">
 <section id="section-7.1">
+        <h3 id="name-media-type">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-media-type" class="section-name selfRef">Media Type</a>
+        </h3>
+<p id="section-7.1-1">IANA is requested to add the following Media-Type to the "Media Types" registry.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<table class="left" id="table-11">
+          <caption><a href="#table-11" class="selfRef">Table 11</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Name</th>
+              <th class="text-left" rowspan="1" colspan="1">Template</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdf+json</td>
+              <td class="text-left" rowspan="1" colspan="1">application/sdf+json</td>
+              <td class="text-left" rowspan="1" colspan="1">RFC XXXX, <a href="#media-type" class="xref">Section 7.1</a>
+</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-7.1-3">// RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel dlCompact" id="section-7.1-4">
+          <dt id="section-7.1-4.1">
+Type name:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.2">
+            <p id="section-7.1-4.2.1">application<a href="#section-7.1-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.3">
+Subtype name:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.4">
+            <p id="section-7.1-4.4.1">sdf+json<a href="#section-7.1-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.5">
+Required parameters:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.6">
+            <p id="section-7.1-4.6.1">none<a href="#section-7.1-4.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.7">
+Optional parameters:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.8">
+            <p id="section-7.1-4.8.1">none<a href="#section-7.1-4.8.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.9">
+Encoding considerations:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.10">
+            <p id="section-7.1-4.10.1">binary (JSON is UTF-8-encoded text)<a href="#section-7.1-4.10.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.11">
+Security considerations:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.12">
+            <p id="section-7.1-4.12.1"><a href="#seccons" class="xref">Section 8</a> of RFC XXXX<a href="#section-7.1-4.12.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.13">
+Interoperability considerations:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.14">
+            <p id="section-7.1-4.14.1">none<a href="#section-7.1-4.14.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.15">
+Published specification:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.16">
+            <p id="section-7.1-4.16.1"><a href="#media-type" class="xref">Section 7.1</a> of RFC XXXX<a href="#section-7.1-4.16.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.17">
+Applications that use this media type:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.18">
+            <p id="section-7.1-4.18.1">Tools for data and interaction modeling in the Internet of Things<a href="#section-7.1-4.18.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.19">
+Fragment identifier considerations:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.20">
+            <p id="section-7.1-4.20.1">A JSON Pointer fragment identifier may be used, as defined in
+<span><a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a> of [<a href="#RFC6901" class="xref">RFC6901</a>]</span>.<a href="#section-7.1-4.20.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.21">
+Person &amp; email address to contact for further information:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.22">
+            <p id="section-7.1-4.22.1">ASDF WG mailing list (asdf@ietf.org),
+or IETF Applications and Real-Time Area (art@ietf.org)<a href="#section-7.1-4.22.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.23">
+Intended usage:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.24">
+            <p id="section-7.1-4.24.1">COMMON<a href="#section-7.1-4.24.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.25">
+Restrictions on usage:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.26">
+            <p id="section-7.1-4.26.1">none<a href="#section-7.1-4.26.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.27">
+Author/Change controller:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.28">
+            <p id="section-7.1-4.28.1">IETF<a href="#section-7.1-4.28.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.29">
+Provisional registration:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.30">
+            <p id="section-7.1-4.30.1">no<a href="#section-7.1-4.30.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="registries">
+<section id="section-7.2">
+        <h3 id="name-registries">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-registries" class="section-name selfRef">Registries</a>
+        </h3>
+<p id="section-7.2-1">(TBD: After future additions, check if we need any.)<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="seccons">
+<section id="section-8">
+      <h2 id="name-security-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-8-1">Some wider issues are discussed in <span>[<a href="#RFC8576" class="xref">RFC8576</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">(Specifics: TBD.)<a href="#section-8-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-9">
+      <h2 id="name-references">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<section id="section-9.1">
         <h3 id="name-normative-references">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="I-D.handrews-json-schema-validation">[I-D.handrews-json-schema-validation]</dt>
@@ -3310,9 +3413,9 @@ consumption there is no conflict with the intended goal.<a href="#section-6.2.1-
 <dd class="break"></dd>
 </dl>
 </section>
-<section id="section-7.2">
+<section id="section-9.2">
         <h3 id="name-informative-references">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="I-D.irtf-t2trg-rest-iot">[I-D.irtf-t2trg-rest-iot]</dt>
@@ -3330,6 +3433,10 @@ consumption there is no conflict with the intended goal.<a href="#section-6.2.1-
 <dt id="RFC3339">[RFC3339]</dt>
         <dd>
 <span class="refAuthor">Klyne, G.</span><span class="refAuthor"> and C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339">https://www.rfc-editor.org/info/rfc3339</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8576">[RFC8576]</dt>
+        <dd>
+<span class="refAuthor">Garcia-Morchon, O.</span><span class="refAuthor">, Kumar, S.</span><span class="refAuthor">, and M. Sethi</span>, <span class="refTitle">"Internet of Things (IoT) Security: State of the Art and Challenges"</span>, <span class="seriesInfo">RFC 8576</span>, <span class="seriesInfo">DOI 10.17487/RFC8576</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8576">https://www.rfc-editor.org/info/rfc8576</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ZCL">[ZCL]</dt>
       <dd>
@@ -5386,7 +5493,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
 <p id="section-appendix.c-1">This draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the old
-one-data-model <code>language</code> repository, as well as Ari Keranen's
+one-data-model <code>language</code> repository, as well as <span class="contact-name">Ari Keränen</span>'s
 "alt-schema" from the Ericsson Research <code>ipso-odm</code> repository (which
 is now under subdirectory <code>sdflint</code> in the one-data model <code>tools</code>
 repository).<a href="#section-appendix.c-1" class="pilcrow">¶</a></p>
