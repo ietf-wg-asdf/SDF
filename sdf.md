@@ -145,7 +145,7 @@ IETF110 meeting of the ASDF WG (2021-03-11).
 <!-- Note: Should we use RFC 2119? -->
 
 Thing:
-: A physical device that is also made available in the Internet of
+: A physical item that is also made available in the Internet of
   Things.  The term is used here for Things that are notable for their
   interaction with the physical world beyond interaction with humans;
   a temperature sensor or a light might be a Thing, but a router that
