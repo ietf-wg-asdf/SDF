@@ -711,10 +711,10 @@ creates a new definition "temperatureProperty" that contains all of the qualitie
 The sdfRef member need not be the only member of a map.
 Additional members may be present with the intention to override parts
 of the referenced map.
-More formally, the semantics of a JSON map given that contains an
-sdfRef member is defined to be as if the following steps were performed:
+More formally, for an JSON map that contains an
+sdfRef member, the semantics is defined to be as if the following steps were performed:
 
-1. The JSON map given that contains the sdfRef member is copied into a
+1. The JSON map that contains the sdfRef member is copied into a
    variable named "patch".
 2. The sdfRef member of the copy in "patch" is removed.
 3. the JSON pointer that is the value of the sdfRef member is
@@ -722,7 +722,7 @@ sdfRef member is defined to be as if the following steps were performed:
 4. The JSON Merge Patch algorithm {{-merge-patch}} is applied to patch
    the contents of "original" with the contents of "patch".
 5. The result of the Merge Patch is used in place of the value of the
-   JSON map given.
+   original JSON map.
 
 TODO: Make sure that the grammar in {{syntax}} allows specifying the
 null values that are necessary to remove members in a merge-patch.
