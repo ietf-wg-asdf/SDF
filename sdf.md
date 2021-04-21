@@ -718,7 +718,7 @@ sdfRef member is defined to be as if the following steps were performed:
    variable named "patch".
 2. The sdfRef member of the copy in "patch" is removed.
 3. the JSON pointer that is the value of the sdfRef member is
-   dereferenced and copied into a variable named "original".
+   dereferenced and the result is copied into a variable named "original".
 4. The JSON Merge Patch algorithm {{-merge-patch}} is applied to patch
    the contents of "original" with the contents of "patch".
 5. The result of the Merge Patch is used in place of the value of the
