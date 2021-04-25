@@ -300,7 +300,9 @@ changes the state based on the current state of the Property named `value`.
 ## Elements of an SDF model
 
 The SDF language uses seven predefined Class Name Keywords for modeling connected
-Things, six of which are illustrated in {{fig-class-2}} (the seventh class `sdfProduct` is similar to `sdfThing`).
+Things, six of which are illustrated in {{fig-class-2}} (the seventh
+class `sdfProduct` is similar enough to `sdfThing` that it would look
+the same in the figure).
 
 ~~~ plantuml-utxt
 sdfThing --> "0+" sdfObject : hasObject
