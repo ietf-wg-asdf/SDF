@@ -709,16 +709,11 @@ creates a new definition "temperatureProperty" that contains all of the qualitie
 
 ## sdfRequired
 
-The value of "sdfRequired" is an array of name references, each
-pointing to one declaration the instantiation of which is declared mandatory.
-
-### Optionality using the keyword "sdfRequired"
-
 The keyword "sdfRequired" is provided to apply a constraint that
 defines for which declarations corresponding data are mandatory in an
 instance conforming the current definition.
 
-The value of "sdfRequired" is an array of JSON pointers, each
+The value of "sdfRequired" is an array of name references (JSON pointers), each
 indicating one declaration that is mandatory to be represented.
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
