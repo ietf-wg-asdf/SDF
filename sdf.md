@@ -145,7 +145,7 @@ IETF110 meeting of the ASDF WG (2021-03-11).
 <!-- Note: Should we use RFC 2119? -->
 
 Thing:
-: A physical device that is also made available in the Internet of
+: A physical item that is also made available in the Internet of
   Things.  The term is used here for Things that are notable for their
   interaction with the physical world beyond interaction with humans;
   a temperature sensor or a light might be a Thing, but a router that
@@ -300,7 +300,7 @@ changes the state based on the current state of the Property named `value`.
 ## Elements of an SDF model
 
 The SDF language uses seven predefined Class Name Keywords for modeling connected
-Things, six of which are illustrated in {{fig-class-2}} (the seventh class `sdfProduct` is exactly like `sdfThing`).
+Things, six of which are illustrated in {{fig-class-2}} (the seventh class `sdfProduct` is similar to `sdfThing`).
 
 ~~~ plantuml-utxt
 sdfThing --> "0+" sdfObject : hasObject
@@ -709,16 +709,11 @@ creates a new definition "temperatureProperty" that contains all of the qualitie
 
 ## sdfRequired
 
-The value of "sdfRequired" is an array of name references, each
-pointing to one declaration the instantiation of which is declared mandatory.
-
-### Optionality using the keyword "sdfRequired"
-
 The keyword "sdfRequired" is provided to apply a constraint that
 defines for which declarations corresponding data are mandatory in an
 instance conforming the current definition.
 
-The value of "sdfRequired" is an array of JSON pointers, each
+The value of "sdfRequired" is an array of name references (JSON pointers), each
 indicating one declaration that is mandatory to be represented.
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
