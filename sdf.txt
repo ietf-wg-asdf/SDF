@@ -5,8 +5,8 @@
 ASDF                                                      M. Koster, Ed.
 Internet-Draft                                             Dogtiger Labs
 Intended status: Standards Track                         C. Bormann, Ed.
-Expires: 22 October 2021                          Universität Bremen TZI
-                                                           20 April 2021
+Expires: 27 October 2021                          Universität Bremen TZI
+                                                           25 April 2021
 
 
   Semantic Definition Format (SDF) for Data and Interactions of Things
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Koster & Bormann         Expires 22 October 2021                [Page 1]
+Koster & Bormann         Expires 27 October 2021                [Page 1]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -68,7 +68,7 @@ Internet-Draft                  OneDM SDF                     April 2021
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 October 2021.
+   This Internet-Draft will expire on 27 October 2021.
 
 Copyright Notice
 
@@ -88,15 +88,15 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Terminology and Conventions . . . . . . . . . . . . . . .   4
-   2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   6
+   2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   5
      2.2.  Elements of an SDF model  . . . . . . . . . . . . . . . .   7
        2.2.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . .   8
        2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .   8
        2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .   9
        2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .  10
        2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  10
-       2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  11
+       2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  10
        2.2.7.  sdfProduct  . . . . . . . . . . . . . . . . . . . . .  11
    3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  11
      3.1.  Information block . . . . . . . . . . . . . . . . . . . .  11
@@ -109,14 +109,13 @@ Table of Contents
 
 
 
-Koster & Bormann         Expires 22 October 2021                [Page 2]
+Koster & Bormann         Expires 27 October 2021                [Page 2]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
 
      4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  16
      4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  17
-       4.5.1.  Optionality using the keyword "sdfRequired" . . . . .  17
      4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  18
      4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  19
        4.7.1.  sdfType . . . . . . . . . . . . . . . . . . . . . . .  23
@@ -159,25 +158,21 @@ Internet-Draft                  OneDM SDF                     April 2021
    associated interactions (Events, Actions, Properties), as well as the
    Data types for the information exchanged in those interactions.
 
-
-
-
-
-
-
-Koster & Bormann         Expires 22 October 2021                [Page 3]
-
-Internet-Draft                  OneDM SDF                     April 2021
-
-
    A JSON format representation of SDF 1.0 was defined in a previous
    (-00) version of this document.  The present document has been
    designated as an _implementation draft_, labeled SDF 1.1, at the
    IETF110 meeting of the ASDF WG (2021-03-11).
 
+
+
+Koster & Bormann         Expires 27 October 2021                [Page 3]
+
+Internet-Draft                  OneDM SDF                     April 2021
+
+
 1.1.  Terminology and Conventions
 
-   Thing:  A physical device that is also made available in the Internet
+   Thing:  A physical item that is also made available in the Internet
       of Things.  The term is used here for Things that are notable for
       their interaction with the physical world beyond interaction with
       humans; a temperature sensor or a light might be a Thing, but a
@@ -214,18 +209,6 @@ Internet-Draft                  OneDM SDF                     April 2021
       identified by a Class Name Keyword.
 
    Property:  An affordance that can potentially be used to read, write,
-
-
-
-
-
-
-
-Koster & Bormann         Expires 22 October 2021                [Page 4]
-
-Internet-Draft                  OneDM SDF                     April 2021
-
-
       and/or observe state on an Object.  (Note that Entries are often
       called properties in other environments; in this document, the
       term Property is specifically reserved for affordances, even if
@@ -234,6 +217,14 @@ Internet-Draft                  OneDM SDF                     April 2021
 
    Action:  An affordance that can potentially be used to perform a
       named operation on an Object.
+
+
+
+
+Koster & Bormann         Expires 27 October 2021                [Page 4]
+
+Internet-Draft                  OneDM SDF                     April 2021
+
 
    Event:  An affordance that can potentially be used to obtain
       information about what happened to an Object.
@@ -275,19 +266,21 @@ Internet-Draft                  OneDM SDF                     April 2021
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-
-
-Koster & Bormann         Expires 22 October 2021                [Page 5]
-
-Internet-Draft                  OneDM SDF                     April 2021
-
-
 2.  Overview
 
 2.1.  Example Definition
 
    We start with an example for the SDF definition of a simple Object
    called "Switch" (Figure 1).
+
+
+
+
+
+Koster & Bormann         Expires 27 October 2021                [Page 5]
+
+Internet-Draft                  OneDM SDF                     April 2021
+
 
    {
        "info": {
@@ -330,18 +323,20 @@ Internet-Draft                  OneDM SDF                     April 2021
    and will be false for "off".  The actions "on" or "off" declared in
    the "sdfAction" group are redundant with setting the "value" and are
    in the example to illustrate that there are often different ways of
-
-
-
-Koster & Bormann         Expires 22 October 2021                [Page 6]
-
-Internet-Draft                  OneDM SDF                     April 2021
-
-
    achieving the same effect.  The action "toggle" will invert the value
    of the sdfProperty value, so that 2-way switches can be created;
    having such action will avoid the need for first retrieving the
    current value and then applying/setting the inverted value.
+
+
+
+
+
+
+Koster & Bormann         Expires 27 October 2021                [Page 6]
+
+Internet-Draft                  OneDM SDF                     April 2021
+
 
    The "sdfObject" group lists the affordances of instances of this
    object.  The "sdfProperty" group lists the property affordances
@@ -363,7 +358,8 @@ Internet-Draft                  OneDM SDF                     April 2021
 
    The SDF language uses seven predefined Class Name Keywords for
    modeling connected Things, six of which are illustrated in Figure 2
-   (the seventh class "sdfProduct" is exactly like "sdfThing").
+   (the seventh class "sdfProduct" is similar enough to "sdfThing" that
+   it would look the same in the figure).
 
                    ,--------.
                    |sdfThing|
@@ -387,16 +383,16 @@ Internet-Draft                  OneDM SDF                     April 2021
                    |-------|
                    `-------'
 
-
-
-Koster & Bormann         Expires 22 October 2021                [Page 7]
-
-Internet-Draft                  OneDM SDF                     April 2021
-
-
                  Figure 2: Main classes used in SDF models
 
    The seven main Class Name Keywords are discussed below.
+
+
+
+Koster & Bormann         Expires 27 October 2021                [Page 7]
+
+Internet-Draft                  OneDM SDF                     April 2021
+
 
 2.2.1.  sdfObject
 
@@ -439,22 +435,20 @@ Internet-Draft                  OneDM SDF                     April 2021
    means that even Property qualities such as "readable" and "writable"
    can be associated with definitions in "sdfData" groups, as well.)
 
-
-
-
-
-
-
-Koster & Bormann         Expires 22 October 2021                [Page 8]
-
-Internet-Draft                  OneDM SDF                     April 2021
-
-
    For definitions in "sdfProperty" and "sdfData", SDF provides
    qualities that can constrain the structure and values of data allowed
    in an instance of these data, as well as qualities that associate
    semantics to these data, for engineering units and unit scaling
    information.
+
+
+
+
+
+Koster & Bormann         Expires 27 October 2021                [Page 8]
+
+Internet-Draft                  OneDM SDF                     April 2021
+
 
    For the data definition within "sdfProperty" or "sdfData", SDF
    borrows a number of elements proposed for the drafts 4 and 7 of the
@@ -495,22 +489,22 @@ Internet-Draft                  OneDM SDF                     April 2021
    Actions may have (or lack) qualities of idempotency and side-effect
    safety.
 
-
-
-
-
-
-
-Koster & Bormann         Expires 22 October 2021                [Page 9]
-
-Internet-Draft                  OneDM SDF                     April 2021
-
-
    The current version of SDF only provides data constraint modeling and
    semantics for the input and output data of definitions in "sdfAction"
    groups.  Again, data definitions for payloads of protocol messages,
    and detailed protocol settings for invoking the action, are expected
    to be part of the protocol binding.
+
+
+
+
+
+
+
+Koster & Bormann         Expires 27 October 2021                [Page 9]
+
+Internet-Draft                  OneDM SDF                     April 2021
+
 
 2.2.4.  sdfEvent
 
@@ -551,17 +545,6 @@ Internet-Draft                  OneDM SDF                     April 2021
    multiple definitions that have similar basic characteristics and
    requirements.
 
-
-
-
-
-
-
-Koster & Bormann         Expires 22 October 2021               [Page 10]
-
-Internet-Draft                  OneDM SDF                     April 2021
-
-
 2.2.6.  sdfThing
 
    Back at the top level, the "sdfThing" groups enables definition of
@@ -571,6 +554,13 @@ Internet-Draft                  OneDM SDF                     April 2021
    A definition in an "sdfThing" group can refine the metadata of the
    definitions it is composed from: other definitions in "sdfThing"
    groups definitions in "sdfObject" groups.
+
+
+
+Koster & Bormann         Expires 27 October 2021               [Page 10]
+
+Internet-Draft                  OneDM SDF                     April 2021
+
 
 2.2.7.  sdfProduct
 
@@ -613,7 +603,17 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 11]
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 27 October 2021               [Page 11]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -669,7 +669,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 12]
+Koster & Bormann         Expires 27 October 2021               [Page 12]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -725,7 +725,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 13]
+Koster & Bormann         Expires 27 October 2021               [Page 13]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -781,7 +781,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 14]
+Koster & Bormann         Expires 27 October 2021               [Page 14]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -837,7 +837,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 15]
+Koster & Bormann         Expires 27 October 2021               [Page 15]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -893,7 +893,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 16]
+Koster & Bormann         Expires 27 October 2021               [Page 16]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -901,20 +901,39 @@ Internet-Draft                  OneDM SDF                     April 2021
    creates a new definition "temperatureProperty" that contains all of
    the qualities defined in the definition at /sdfData/temperatureData.
 
+   The sdfRef member need not be the only member of a map.  Additional
+   members may be present with the intention to override parts of the
+   referenced map.  More formally, for a JSON map that contains an
+   sdfRef member, the semantics is defined to be as if the following
+   steps were performed:
+
+   1.  The JSON map that contains the sdfRef member is copied into a
+       variable named "patch".
+
+   2.  The sdfRef member of the copy in "patch" is removed.
+
+   3.  the JSON pointer that is the value of the sdfRef member is
+       dereferenced and the result is copied into a variable named
+       "original".
+
+   4.  The JSON Merge Patch algorithm [RFC7396] is applied to patch the
+       contents of "original" with the contents of "patch".
+
+   5.  The result of the Merge Patch is used in place of the value of
+       the original JSON map.
+
+   TODO: Make sure that the grammar in Appendix A allows specifying the
+   null values that are necessary to remove members in a merge-patch.
+
 4.5.  sdfRequired
-
-   The value of "sdfRequired" is an array of name references, each
-   pointing to one declaration the instantiation of which is declared
-   mandatory.
-
-4.5.1.  Optionality using the keyword "sdfRequired"
 
    The keyword "sdfRequired" is provided to apply a constraint that
    defines for which declarations corresponding data are mandatory in an
    instance conforming the current definition.
 
-   The value of "sdfRequired" is an array of JSON pointers, each
-   indicating one declaration that is mandatory to be represented.
+   The value of "sdfRequired" is an array of name references (JSON
+   pointers), each indicating one declaration that is mandatory to be
+   represented.
 
    The example in Figure 4 shows two required elements in the sdfObject
    definition for "temperatureWithAlarm", the sdfProperty
@@ -930,26 +949,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann         Expires 22 October 2021               [Page 17]
+Koster & Bormann         Expires 27 October 2021               [Page 17]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1005,7 +1005,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 18]
+Koster & Bormann         Expires 27 October 2021               [Page 18]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1061,7 +1061,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 19]
+Koster & Bormann         Expires 27 October 2021               [Page 19]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1117,7 +1117,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 20]
+Koster & Bormann         Expires 27 October 2021               [Page 20]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1173,7 +1173,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 21]
+Koster & Bormann         Expires 27 October 2021               [Page 21]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1229,7 +1229,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 22]
+Koster & Bormann         Expires 27 October 2021               [Page 22]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1285,7 +1285,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 23]
+Koster & Bormann         Expires 27 October 2021               [Page 23]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1341,7 +1341,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 24]
+Koster & Bormann         Expires 27 October 2021               [Page 24]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1397,7 +1397,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 25]
+Koster & Bormann         Expires 27 October 2021               [Page 25]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1453,7 +1453,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 26]
+Koster & Bormann         Expires 27 October 2021               [Page 26]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1509,7 +1509,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 27]
+Koster & Bormann         Expires 27 October 2021               [Page 27]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1565,7 +1565,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 28]
+Koster & Bormann         Expires 27 October 2021               [Page 28]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1621,7 +1621,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 29]
+Koster & Bormann         Expires 27 October 2021               [Page 29]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1677,7 +1677,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 30]
+Koster & Bormann         Expires 27 October 2021               [Page 30]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1733,7 +1733,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 31]
+Koster & Bormann         Expires 27 October 2021               [Page 31]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1789,7 +1789,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 32]
+Koster & Bormann         Expires 27 October 2021               [Page 32]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -1823,6 +1823,10 @@ Internet-Draft                  OneDM SDF                     April 2021
               DOI 10.17487/RFC6901, April 2013,
               <https://www.rfc-editor.org/info/rfc6901>.
 
+   [RFC7396]  Hoffman, P. and J. Snell, "JSON Merge Patch", RFC 7396,
+              DOI 10.17487/RFC7396, October 2014,
+              <https://www.rfc-editor.org/info/rfc7396>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -1838,17 +1842,15 @@ Internet-Draft                  OneDM SDF                     April 2021
               DOI 10.17487/RFC8949, December 2020,
               <https://www.rfc-editor.org/info/rfc8949>.
 
-   [SPDX]     "SPDX License List", <https://spdx.org/licenses/>.
 
 
 
-
-
-
-Koster & Bormann         Expires 22 October 2021               [Page 33]
+Koster & Bormann         Expires 27 October 2021               [Page 33]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
+
+   [SPDX]     "SPDX License List", <https://spdx.org/licenses/>.
 
    [W3C.NOTE-curie-20101216]
               Birbeck, M. and S. McCarron, "CURIE Syntax 1.0", World
@@ -1893,22 +1895,17 @@ Appendix A.  Formal Syntax of SDF
    Michael Koster's "schema", with a view of covering the syntax that is
    currently in use at the One Data Model "playground" repository.
 
+   This appendix shows the framework syntax only, i.e., a syntax with
+   liberal extension points.  Since this syntax is nearly useless in
+   finding typos in an SDF specification, a second syntax, the
 
 
 
-
-
-
-
-
-Koster & Bormann         Expires 22 October 2021               [Page 34]
+Koster & Bormann         Expires 27 October 2021               [Page 34]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
 
-   This appendix shows the framework syntax only, i.e., a syntax with
-   liberal extension points.  Since this syntax is nearly useless in
-   finding typos in an SDF specification, a second syntax, the
    validation syntax, is defined that does not include the extension
    points.  The validation syntax can be generated from the framework
    syntax by leaving out all lines containing the string "EXTENSION-
@@ -1954,17 +1951,17 @@ Internet-Draft                  OneDM SDF                     April 2021
    pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
 
    commonqualities = (
+    ? description: text            ; long text (no constraints)
+    ? label: text                  ; short text (no constraints); default to key
+    ? $comment: text               ; source code comments only, no semantics
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 35]
+Koster & Bormann         Expires 27 October 2021               [Page 35]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
 
-    ? description: text            ; long text (no constraints)
-    ? label: text                  ; short text (no constraints); default to key
-    ? $comment: text               ; source code comments only, no semantics
     ? sdfRef: sdf-pointer
     ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
    )
@@ -2011,15 +2008,16 @@ Internet-Draft                  OneDM SDF                     April 2021
     EXTENSION-POINT<"event-ext">
    }
 
+   dataqualities = {               ; also propertyqualities
+    commonqualities,
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 36]
+
+Koster & Bormann         Expires 27 October 2021               [Page 36]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
 
-   dataqualities = {               ; also propertyqualities
-    commonqualities,
     jsonschema,
     ? ("units" .feature "1.0") => text
     ? ("unit" .feature "1.1") => text
@@ -2066,16 +2064,16 @@ Internet-Draft                  OneDM SDF                     April 2021
     ? minimum: number
     ? maximum: number
     ? exclusiveMinimum: bool / number      ; jso draft 4/7
+    ? exclusiveMaximum: bool / number      ; jso draft 4/7
+    ? multipleOf: number                   ; ISSUE: Do we need this?
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 37]
+Koster & Bormann         Expires 27 October 2021               [Page 37]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
 
-    ? exclusiveMaximum: bool / number      ; jso draft 4/7
-    ? multipleOf: number                   ; ISSUE: Do we need this?
     ; text string constraints
     ? minLength: number
     ? maxLength: number
@@ -2125,7 +2123,9 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 38]
+
+
+Koster & Bormann         Expires 27 October 2021               [Page 38]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2181,7 +2181,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 39]
+Koster & Bormann         Expires 27 October 2021               [Page 39]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2237,7 +2237,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 40]
+Koster & Bormann         Expires 27 October 2021               [Page 40]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2293,7 +2293,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 41]
+Koster & Bormann         Expires 27 October 2021               [Page 41]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2349,7 +2349,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 42]
+Koster & Bormann         Expires 27 October 2021               [Page 42]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2405,7 +2405,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 43]
+Koster & Bormann         Expires 27 October 2021               [Page 43]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2461,7 +2461,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 44]
+Koster & Bormann         Expires 27 October 2021               [Page 44]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2517,7 +2517,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 45]
+Koster & Bormann         Expires 27 October 2021               [Page 45]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2573,7 +2573,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 46]
+Koster & Bormann         Expires 27 October 2021               [Page 46]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2629,7 +2629,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 47]
+Koster & Bormann         Expires 27 October 2021               [Page 47]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2685,7 +2685,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 48]
+Koster & Bormann         Expires 27 October 2021               [Page 48]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2741,7 +2741,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 49]
+Koster & Bormann         Expires 27 October 2021               [Page 49]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2797,7 +2797,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 50]
+Koster & Bormann         Expires 27 October 2021               [Page 50]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2853,7 +2853,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 51]
+Koster & Bormann         Expires 27 October 2021               [Page 51]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2909,7 +2909,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 52]
+Koster & Bormann         Expires 27 October 2021               [Page 52]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -2965,7 +2965,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 53]
+Koster & Bormann         Expires 27 October 2021               [Page 53]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3021,7 +3021,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 54]
+Koster & Bormann         Expires 27 October 2021               [Page 54]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3077,7 +3077,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 55]
+Koster & Bormann         Expires 27 October 2021               [Page 55]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3133,7 +3133,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 56]
+Koster & Bormann         Expires 27 October 2021               [Page 56]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3189,7 +3189,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 57]
+Koster & Bormann         Expires 27 October 2021               [Page 57]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3245,7 +3245,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 58]
+Koster & Bormann         Expires 27 October 2021               [Page 58]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3301,7 +3301,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 59]
+Koster & Bormann         Expires 27 October 2021               [Page 59]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3357,7 +3357,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 60]
+Koster & Bormann         Expires 27 October 2021               [Page 60]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3413,7 +3413,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 61]
+Koster & Bormann         Expires 27 October 2021               [Page 61]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3469,7 +3469,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 62]
+Koster & Bormann         Expires 27 October 2021               [Page 62]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3525,7 +3525,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 63]
+Koster & Bormann         Expires 27 October 2021               [Page 63]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3581,7 +3581,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 64]
+Koster & Bormann         Expires 27 October 2021               [Page 64]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3637,7 +3637,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 65]
+Koster & Bormann         Expires 27 October 2021               [Page 65]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3693,7 +3693,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 66]
+Koster & Bormann         Expires 27 October 2021               [Page 66]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3749,7 +3749,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 67]
+Koster & Bormann         Expires 27 October 2021               [Page 67]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3805,7 +3805,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 68]
+Koster & Bormann         Expires 27 October 2021               [Page 68]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3861,7 +3861,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 69]
+Koster & Bormann         Expires 27 October 2021               [Page 69]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3917,7 +3917,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 70]
+Koster & Bormann         Expires 27 October 2021               [Page 70]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -3973,7 +3973,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 71]
+Koster & Bormann         Expires 27 October 2021               [Page 71]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -4029,7 +4029,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 72]
+Koster & Bormann         Expires 27 October 2021               [Page 72]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -4085,7 +4085,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 73]
+Koster & Bormann         Expires 27 October 2021               [Page 73]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -4141,7 +4141,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 74]
+Koster & Bormann         Expires 27 October 2021               [Page 74]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -4197,7 +4197,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 75]
+Koster & Bormann         Expires 27 October 2021               [Page 75]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -4253,7 +4253,7 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 76]
+Koster & Bormann         Expires 27 October 2021               [Page 76]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -4309,7 +4309,7 @@ Authors' Addresses
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 77]
+Koster & Bormann         Expires 27 October 2021               [Page 77]
 
 Internet-Draft                  OneDM SDF                     April 2021
 
@@ -4365,4 +4365,4 @@ Internet-Draft                  OneDM SDF                     April 2021
 
 
 
-Koster & Bormann         Expires 22 October 2021               [Page 78]
+Koster & Bormann         Expires 27 October 2021               [Page 78]
