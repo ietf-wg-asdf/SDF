@@ -711,7 +711,7 @@ creates a new definition "temperatureProperty" that contains all of the qualitie
 The sdfRef member need not be the only member of a map.
 Additional members may be present with the intention to override parts
 of the referenced map.
-More formally, for an JSON map that contains an
+More formally, for a JSON map that contains an
 sdfRef member, the semantics is defined to be as if the following steps were performed:
 
 1. The JSON map that contains the sdfRef member is copied into a
