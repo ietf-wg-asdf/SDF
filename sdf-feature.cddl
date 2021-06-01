@@ -48,9 +48,11 @@ thingqualities = {
 
 productqualities = thingqualities ; ISSUE: get rid of sdfProduct?
 
-; for single objects
+; for single objects, or for arrays of objects (1.2)
 objectqualities = {
  commonqualities,
+ ? ("minItems" .feature "1.2") => number
+ ? ("maxItems" .feature "1.2") => number
  ? sdfProperty: named<propertyqualities>
  ? sdfAction: named<actionqualities>
  ? sdfEvent: named<eventqualities>

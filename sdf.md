@@ -101,10 +101,12 @@ An SDF specification describes definitions of SDF Objects and their
 associated interactions (Events, Actions, Properties), as well as the
 Data types for the information exchanged in those interactions.
 
-A JSON format representation of SDF 1.0 was defined in a previous
-(-00) version of this document.  The present document has been
+A JSON format representation of SDF 1.0 was defined in
+version (-00) of this document; version (-05) was
 designated as an *implementation draft*, labeled SDF 1.1, at the
 IETF110 meeting of the ASDF WG (2021-03-11).
+The present version (-06) is intended for discussion at the ASDF
+interim meeting on 2021-06-02.
 
 --- note_Contributing
 
@@ -363,6 +365,9 @@ will enable interoperable functionality to be configured for diverse
 product types.
 An `sdfObject` definition for a common on/off control may be used to
 control may different kinds of Things that require on/off control.
+
+Optional qualities "minItems" and "maxItems" can be used to define
+sdfObjects as arrays.
 
 ### sdfProperty
 
@@ -1026,6 +1031,8 @@ quality is absent.
 | sdfAction   | action    | zero or more named action definitions for this object                    |
 | sdfEvent    | event     | zero or more named event definitions for this object                     |
 | sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
+| minItems    | number    | (array) Minimum number of sdfObject instances in array                   |
+| maxItems    | number    | (array) Maximum number of sdfObject instances in array                   |
 {: #sdfobjqual title="Qualities of sdfObject"}
 
 
