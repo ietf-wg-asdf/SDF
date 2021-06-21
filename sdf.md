@@ -264,7 +264,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
         "Switch": {
             "sdfProperty": {
                 "value": {
-                    "description": "The state of the switch; false for off and true for on."
+                    "description": "The state of the switch; false for off and true for on.",
                     "type": "boolean"
                 }
             },
@@ -982,7 +982,7 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "sdfChoice": {
     "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-              "sdfRef": "rgbVal"}}
+              "sdfRef": "rgbVal"}},
     "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
               "sdfRef": "cmykVal"}}
   ]
