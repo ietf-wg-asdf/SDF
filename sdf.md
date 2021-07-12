@@ -89,24 +89,28 @@ entity:
 
 --- abstract
 
+[^intro-]
 
-The Semantic Definition Format (SDF) is a format for domain experts to
-use in the creation and maintenance of data and interaction models in
-the Internet of Things.  It was created as a common language for use
-in the development of the One Data Model liaison organization (OneDM)
-definitions.  Tools convert this format to database formats and other
-serializations as needed.
+[^intro-]:
+    The Semantic Definition Format (SDF) is a format for domain experts to
+    use in the creation and maintenance of data and interaction models in
+    the Internet of Things.  It was created as a common language for use
+    in the development of the One Data Model liaison organization (OneDM)
+    definitions.  Tools convert this format to database formats and other
+    serializations as needed.
 
-An SDF specification describes definitions of SDF Objects and their
-associated interactions (Events, Actions, Properties), as well as the
-Data types for the information exchanged in those interactions.
+    An SDF specification describes definitions of SDF Objects and their
+    associated interactions (Events, Actions, Properties), as well as the
+    Data types for the information exchanged in those interactions.
 
-A JSON format representation of SDF 1.0 was defined in
-version (-00) of this document; version (-05) was
-designated as an *implementation draft*, labeled SDF 1.1, at the
-IETF110 meeting of the ASDF WG (2021-03-11).
-The present version (-06) is intended for discussion at the ASDF
-interim meeting on 2021-06-02.
+[^status]
+
+[^status]: A JSON format representation of SDF 1.0 was defined in
+    version (-00) of this document; version (-05) was designated as an
+    *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
+    the ASDF WG (2021-03-11).
+    The present version (-07) has a few editorial improvements over -06,
+    which was discussed at the ASDF interim meeting on 2021-06-02.
 
 --- note_Contributing
 
@@ -125,23 +129,11 @@ The IETF Note Well applies (<https://www.ietf.org/about/note-well/>).
 
 # Introduction
 
+<!-- Just copying the abstract, for now... -->
 
-The Semantic Definition Format (SDF) is a format for domain experts to
-use in the creation and maintenance of data and interaction models in
-the Internet of Things.  It was created as a common language for use
-in the development of the One Data Model liaison organization (OneDM)
-definitions.  Tools convert this format to database formats and other
-serializations as needed.
+[^intro-]
 
-An SDF specification describes definitions of SDF Objects and their
-associated interactions (Events, Actions, Properties), as well as the
-Data types for the information exchanged in those interactions.
-
-A JSON format representation of SDF 1.0 was defined in a previous
-(-00) version of this document.  The present document has been
-designated as an *implementation draft*, labeled SDF 1.1, at the
-IETF110 meeting of the ASDF WG (2021-03-11).
-
+[^status]
 
 ## Terminology and Conventions
 
@@ -300,6 +292,14 @@ The example `toggle` is an Action that
 changes the state based on the current state of the Property named `value`.
 (The third type of affordance is Events, which are not described in this example.)
 
+In the JSON representation, note how (with the exception of the `info`
+group) maps that have keys taken from the SDF vocabulary (`info`,
+`namespace`, `sdfObject`) alternate in nesting with maps that have keys
+that are freely defined by the model writer (`Switch`, `value`, `on`,
+etc.); the latter usually use the `named<>` production in the [formal
+syntax of SDF](#syntax), while the former SDF-defined vocabulary items
+are often, but not always, called *qualities*.
+
 ## Elements of an SDF model
 
 The SDF language uses seven predefined Class Name Keywords for modeling connected
@@ -421,7 +421,7 @@ modeled, an "object" type can be used to combine these parameters into one.)
 <!-- (using `sdfData` definitions, i.e., the same entries as for `sdfProperty` declarations). -->
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
-`sdfPoperty`; the effects may play out over time and emit action
+`sdfProperty`; the effects may play out over time and emit action
 results.
 Actions may also not always complete and may result in application
 errors, such as an item blocking the closing of an automatic door.
