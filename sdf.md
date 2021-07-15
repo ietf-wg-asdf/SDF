@@ -18,7 +18,7 @@ pi: [toc, sortrefs, symrefs, comments]
 
 author:
   - name: Michael Koster
-    org: Dogtiger Labs
+    org: PassiveLogic
     street: 524 H Street
     city: Antioch, CA
     code: '94509'
