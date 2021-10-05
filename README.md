@@ -19,4 +19,4 @@ Internet-Draft for the One Data Model Simple Definition Format (SDF)
 
 [sdftype-html]: https://raw.githack.com/ietf-wg-asdf/SDF/sdftype/sdf.html
 [sdftype-diff]: https://tools.ietf.org/rfcdiff?url1=https://raw.githubusercontent.com/ietf-wg-asdf/SDF/master/sdf.txt&url2=https://raw.githubusercontent.com/ietf-wg-asdf/SDF/sdftype/sdf.txt
-[I-D-01-sdftype-diff]: https://tools.ietf.org/rfcdiff?url1=draft-ietf-asdf-sdf-01.txt&url2=https://raw.githack.com/ietf-wg-asdf/SDF/sdftype/sdf.txt
+[I-D-01-sdftype-diff]: https://tools.ietf.org/rfcdiff?url1=draft-ietf-asdf-sdf.txt&url2=https://raw.githack.com/ietf-wg-asdf/SDF/sdftype/sdf.txt
