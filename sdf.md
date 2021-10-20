@@ -719,6 +719,9 @@ The sdfRef member need not be the only member of a map.
 Additional members may be present with the intention to override parts
 of the referenced map or to add new qualities or definitions.
 
+The sdfRef keyword also indicates a relationship to the referenced definition: the semantics of the new definition are based on the semantics of the referenced definition.
+For example, if the referenced definition is a "coordinate" type with unit of meters and description of how the value refers to a common reference point, a set of X, Y, and Z coordinate properties could be created with sdfRef based on that definition which all share those semantics but get separate definitions.
+
 More formally, for a JSON map that contains an
 sdfRef member, the semantics is defined to be as if the following steps were performed:
 
