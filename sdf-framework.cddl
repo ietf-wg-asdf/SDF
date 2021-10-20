@@ -34,7 +34,8 @@ commonqualities = (
  ? description: text            ; long text (no constraints)
  ? label: text                  ; short text (no constraints); default to key
  ? $comment: text               ; source code comments only, no semantics
- ? sdfRef: sdf-pointer
+ ? (sdfRef: sdf-pointer //
+    sdfRefFrom: sdf-pointer)
  ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
 )
 
@@ -145,7 +146,8 @@ jsonschema = (
  ? uniqueItems: bool
  ? items: { ;;; ultimately, this will be mostly recursive, but, for now
             ;;; let's find out what we actually need
-     ? sdfRef: sdf-pointer          ; import limited to the subset that we allow here...
+     ? (sdfRef: sdf-pointer //      ; import limited to the subset that we allow here...
+        sdfRefFrom: sdf-pointer)
      ? description: text            ; long text (no constraints)
      ? $comment: text               ; source code comments only, no semantics
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three

@@ -722,12 +722,14 @@ of the referenced map or to add new qualities or definitions.
 The sdfRef keyword also indicates a relationship to the referenced definition: the semantics of the new definition are based on the semantics of the referenced definition.
 For example, if the referenced definition is a "coordinate" type with unit of meters and description of how the value refers to a common reference point, a set of X, Y, and Z coordinate properties could be created with sdfRef based on that definition which all share those semantics but get separate definitions.
 
+When sdfRef is processed, the keyword is renamed to sdfRefFrom to keep the information about the relationship between definitions but to avoid potential subsequent processing steps attempting to copy the referenced qualities and definitions again.
+
 More formally, for a JSON map that contains an
 sdfRef member, the semantics is defined to be as if the following steps were performed:
 
 1. The JSON map that contains the sdfRef member is copied into a
    variable named "patch".
-2. The sdfRef member of the copy in "patch" is removed.
+2. The sdfRef member of the copy in "patch" is renamed to "sdfRefFrom".
 3. the JSON pointer that is the value of the sdfRef member is
    dereferenced and the result is copied into a variable named "original".
 4. The JSON Merge Patch algorithm {{-merge-patch}} is applied to patch
