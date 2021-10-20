@@ -740,6 +740,8 @@ sdfRef member, the semantics is defined to be as if the following steps were per
 TODO: Make sure that the grammar in {{syntax}} allows specifying the
 null values that are necessary to remove members in a merge-patch.
 
+A model where all sdfRef references are processed as described above is called a resolved model.
+
 ## sdfRequired
 
 The keyword "sdfRequired" is provided to apply a constraint that
