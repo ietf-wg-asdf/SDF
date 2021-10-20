@@ -701,7 +701,7 @@ Name references occur only in specific elements of the syntax of SDF:
 ## sdfRef
 
 In a JSON map establishing a definition, the keyword "sdfRef" is used
-to copy all of the qualities of the referenced definition, indicated
+to copy all of the qualities and enclosed definitions of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
 (This can be compared to the processing of the "$ref" keyword in {{-jso}}.)
 
@@ -717,7 +717,8 @@ creates a new definition "temperatureProperty" that contains all of the qualitie
 
 The sdfRef member need not be the only member of a map.
 Additional members may be present with the intention to override parts
-of the referenced map.
+of the referenced map or to add new qualities or definitions.
+
 More formally, for a JSON map that contains an
 sdfRef member, the semantics is defined to be as if the following steps were performed:
 
