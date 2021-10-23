@@ -833,16 +833,6 @@ versions of the json-schema.org proposal they were imported from.
 {{sdfdataqual2}} lists data qualities defined specifically for the
 present specification.
 
-The term "allowed types" stands for primitive JSON types, JSON maps ("objects")" as well as
-homogeneous arrays of numbers, text, Booleans, or maps.  (This list might be
-extended in a future version of SDF.)  An "allowed value" is a value
-allowed for one of these types.
-
-(1) A type value of `integer` means that only integral values of JSON
-numbers can be used.
-
-(2) Note that the term "properties" as used for map entries in JSO is unrelated to sdfProperty.
-
 | Quality       | Type                        | Description                                                         | Default |
 |---------------|-----------------------------|---------------------------------------------------------------------|---------|
 | (common)      |                             | {{common-qualities}}                                                |         |
@@ -1197,7 +1187,7 @@ IANA is requested to add the following Media-Type to the "Media Types" registry.
 
 // RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
 
-{: spacing="compact"}
+{:compact}
 Type name:
 : application
 
@@ -1350,7 +1340,7 @@ The data quality "`multipleOf`" gives a positive number that
 constrains the data value to be an integer multiple of the number
 given.
 (Type "`integer`" can also be expressed as a "`multipleOf`" quality of
-value 1, unless another "`multipleOf`" quality is present.
+value 1, unless another "`multipleOf`" quality is present.)
 
 
 ## type "`string`"
@@ -1362,20 +1352,19 @@ The length (as measured in characters) can be constrained by the
 additional data qualities "`minLength`" and "`maxLength`", which are
 inclusive bounds.
 Note that the previous version of the present document explained
-text string length values in octets, which however is not meaningful
+text string length values in bytes, which however is not meaningful
 unless bound to a specific encoding (which could be UTF-8, if this
 unusual behavior is to be restored).
 
 The data quality "`pattern`" takes a string value that is interpreted
 as an [ECMA-262] regular expression in Unicode mode that constrain the
 string (note that these are not anchored by default, so unless `^` and
-`$` anchors are employed they match any string that *contains* a match
-for the regular expression).
+`$` anchors are employed, ECMA-262 regular expressions match any string that *contains* a match).
 The JSO proposals acknowledge that regular expression support is
 rather diverse in various platforms, so the suggestion is to limit
 them to:
 
-{: spacing="compact"}
+{:compact}
 * characters;
 * character classes in square brackets, including ranges; their complements;
 * simple quantifiers `*`, `+`, `?`, and range quantifiers `{n}`,
@@ -1396,6 +1385,7 @@ the abstract meaning of the format given (i.e., the format "date-time"
 is less about the specific syntax employed in {{RFC3339}} than about the usage
 as an absolute point in civil time).
 
+{:compact}
 * "`date-time`", "`date`", "`time`":
   An {{RFC3339}} `date-time`, `full-date`, or `full-time`, respectively.
 * "`uri`", "`uri-reference`":
