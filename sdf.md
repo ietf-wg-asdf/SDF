@@ -971,9 +971,9 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "anyOf": [
     {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-       "sdfRef": "rgbVal"}}
+       "sdfRef": "#/sdfData/rgbVal"}}
     {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-       "sdfRef": "cmykVal"}}
+       "sdfRef": "#/sdfData/cmykVal"}}
   ]
   ~~~
 
@@ -982,9 +982,9 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "sdfChoice": {
     "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-              "sdfRef": "rgbVal"}},
+              "sdfRef": "#/sdfData/rgbVal"}},
     "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-              "sdfRef": "cmykVal"}}
+              "sdfRef": "#/sdfData/cmykVal"}}
   ~~~
 
 Note that there is no need in SDF for the type intersection construct
