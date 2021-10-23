@@ -769,7 +769,7 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
             "type": "object",
             "properties": {
               "alarmType": {
-                "sdfRef": "cap:/sdfData/alarmTypes/quantityAlarms",
+                "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
                 "const": "OverTemperatureAlarm"
               },
               "temperature": {
