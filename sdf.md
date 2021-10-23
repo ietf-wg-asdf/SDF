@@ -1336,7 +1336,7 @@ of something.
 The types "`number`" and "`integer`" are associated with floating point
 and integer numbers, as they are available in JSON.
 A type value of `integer` means that only integer values of JSON
-numbers can be used (note that `10.0` is an integral value, even if it
+numbers can be used (note that `10.0` is an integer value, even if it
 is in a notation that would also allow non-zero decimal fractions).
 
 The additional data qualities "`minimum`", "`maximum`",
