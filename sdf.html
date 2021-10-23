@@ -1206,7 +1206,7 @@ li > p:last-of-type {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 25 April 2022</td>
+<td class="center">Expires 27 April 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1219,12 +1219,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-10-22" class="published">22 October 2021</time>
+<time datetime="2021-10-24" class="published">24 October 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-04-25">25 April 2022</time></dd>
+<dd class="expires"><time datetime="2022-04-27">27 April 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1290,7 +1290,7 @@ list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 April 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 April 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2559,13 +2559,6 @@ compatible with the (data model) semantics from the
 versions of the json-schema.org proposal they were imported from.<a href="#section-4.7-2" class="pilcrow">¶</a></p>
 <p id="section-4.7-3"><a href="#sdfdataqual2" class="xref">Table 4</a> lists data qualities defined specifically for the
 present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
-<p id="section-4.7-4">The term "allowed types" stands for primitive JSON types, JSON maps ("objects")" as well as
-homogeneous arrays of numbers, text, Booleans, or maps.  (This list might be
-extended in a future version of SDF.)  An "allowed value" is a value
-allowed for one of these types.<a href="#section-4.7-4" class="pilcrow">¶</a></p>
-<p id="section-4.7-5">(1) A type value of <code>integer</code> means that only integral values of JSON
-numbers can be used.<a href="#section-4.7-5" class="pilcrow">¶</a></p>
-<p id="section-4.7-6">(2) Note that the term "properties" as used for map entries in JSO is unrelated to sdfProperty.<a href="#section-4.7-6" class="pilcrow">¶</a></p>
 <span id="name-sdf-defined-qualities-of-sd"></span><div id="sdfdataqual2">
 <table class="center" id="table-4">
           <caption>
@@ -2658,12 +2651,12 @@ numbers can be used.<a href="#section-4.7-5" class="pilcrow">¶</a></p>
           </tbody>
         </table>
 </div>
-<p id="section-4.7-8">(3) note that the quality <code>unit</code> was called <code>units</code> in SDF 1.0.<a href="#section-4.7-8" class="pilcrow">¶</a></p>
-<p id="section-4.7-9">(4) these qualities were included in SDF 1.0, but were not fully
+<p id="section-4.7-5">(3) note that the quality <code>unit</code> was called <code>units</code> in SDF 1.0.<a href="#section-4.7-5" class="pilcrow">¶</a></p>
+<p id="section-4.7-6">(4) these qualities were included in SDF 1.0, but were not fully
     defined; they are not included in SDF 1.1.  In 1.next, they will
     be replaced by qualities to express scaling that are more aligned
     with the processes that combine ecosystem and instance specific
-    information with an SDF model.<a href="#section-4.7-9" class="pilcrow">¶</a></p>
+    information with an SDF model.<a href="#section-4.7-6" class="pilcrow">¶</a></p>
 <div id="sdftype">
 <section id="section-4.7.1">
           <h4 id="name-sdftype">
@@ -5512,8 +5505,8 @@ of something.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
         </h3>
 <p id="appendix-C.1-1">The types "<code>number</code>" and "<code>integer</code>" are associated with floating point
 and integer numbers, as they are available in JSON.
-A type value of <code>integer</code> means that only integral values of JSON
-numbers can be used (note that <code>10.0</code> is an integral value, even if it
+A type value of <code>integer</code> means that only integer values of JSON
+numbers can be used (note that <code>10.0</code> is an integer value, even if it
 is in a notation that would also allow non-zero decimal fractions).<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.1-2">The additional data qualities "<code>minimum</code>", "<code>maximum</code>",
 "<code>exclusiveMinimum</code>", "<code>exclusiveMaximum</code>" provide number values that
@@ -5525,7 +5518,7 @@ is not used.)<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
 constrains the data value to be an integer multiple of the number
 given.
 (Type "<code>integer</code>" can also be expressed as a "<code>multipleOf</code>" quality of
-value 1, unless another "<code>multipleOf</code>" quality is present.<a href="#appendix-C.1-3" class="pilcrow">¶</a></p>
+value 1, unless another "<code>multipleOf</code>" quality is present.)<a href="#appendix-C.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="type-string">
@@ -5539,14 +5532,13 @@ they are available in JSON.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
 additional data qualities "<code>minLength</code>" and "<code>maxLength</code>", which are
 inclusive bounds.
 Note that the previous version of the present document explained
-text string length values in octets, which however is not meaningful
+text string length values in bytes, which however is not meaningful
 unless bound to a specific encoding (which could be UTF-8, if this
 unusual behavior is to be restored).<a href="#appendix-C.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-3">The data quality "<code>pattern</code>" takes a string value that is interpreted
 as an <span>[<a href="#ECMA-262" class="xref">ECMA-262</a>]</span> regular expression in Unicode mode that constrain the
 string (note that these are not anchored by default, so unless <code>^</code> and
-<code>$</code> anchors are employed they match any string that <em>contains</em> a match
-for the regular expression).
+<code>$</code> anchors are employed, ECMA-262 regular expressions match any string that <em>contains</em> a match).
 The JSO proposals acknowledge that regular expression support is
 rather diverse in various platforms, so the suggestion is to limit
 them to:<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
@@ -5575,14 +5567,14 @@ this data quality changes the type from being a simple text string to
 the abstract meaning of the format given (i.e., the format "date-time"
 is less about the specific syntax employed in <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span> than about the usage
 as an absolute point in civil time).<a href="#appendix-C.2-6" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-C.2-7.1">"<code>date-time</code>", "<code>date</code>", "<code>time</code>":
+<ul class="compact">
+<li class="compact" id="appendix-C.2-7.1">"<code>date-time</code>", "<code>date</code>", "<code>time</code>":
 An <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span> <code>date-time</code>, <code>full-date</code>, or <code>full-time</code>, respectively.<a href="#appendix-C.2-7.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-C.2-7.2">"<code>uri</code>", "<code>uri-reference</code>":
+          <li class="compact" id="appendix-C.2-7.2">"<code>uri</code>", "<code>uri-reference</code>":
 An <span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span> URI or URI Reference, respectively.<a href="#appendix-C.2-7.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-C.2-7.3">"<code>uuid</code>": An <span>[<a href="#RFC4122" class="xref">RFC4122</a>]</span> UUID.<a href="#appendix-C.2-7.3" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-7.3">"<code>uuid</code>": An <span>[<a href="#RFC4122" class="xref">RFC4122</a>]</span> UUID.<a href="#appendix-C.2-7.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -5624,7 +5616,7 @@ allowable map key for the specified JSON object, and the value is a
 map with a named set of data qualities giving the type for the
 corresponding value in the specified JSON object.<a href="#appendix-C.5-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.5-3">All entries specified this way are optional, unless they are listed in
-the value of the additional quality "<code>required</code>", which is an array if
+the value of the additional quality "<code>required</code>", which is an array of
 string values that give the key names of required entries.<a href="#appendix-C.5-3" class="pilcrow">¶</a></p>
 <p id="appendix-C.5-4">Note that the term "properties" as an additional quality for
 defining map entries is unrelated to sdfProperty.<a href="#appendix-C.5-4" class="pilcrow">¶</a></p>
