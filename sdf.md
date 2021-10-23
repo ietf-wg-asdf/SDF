@@ -1433,7 +1433,7 @@ map with a named set of data qualities giving the type for the
 corresponding value in the specified JSON object.
 
 All entries specified this way are optional, unless they are listed in
-the value of the additional quality "`required`", which is an array if
+the value of the additional quality "`required`", which is an array of
 string values that give the key names of required entries.
 
 Note that the term "properties" as an additional quality for
