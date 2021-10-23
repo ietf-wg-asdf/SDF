@@ -698,7 +698,7 @@ Name references occur only in specific elements of the syntax of SDF:
 * pointing to elements via sdfRequired value elements
 
 
-## sdfRef
+## sdfRef {#sdfref}
 
 In a JSON map establishing a definition, the keyword "sdfRef" is used
 to copy all of the qualities and enclosed definitions of the referenced definition, indicated
@@ -723,6 +723,8 @@ The sdfRef keyword also indicates a relationship to the referenced definition: t
 For example, if the referenced definition is a "coordinate" type with unit of meters and description of how the value refers to a common reference point, a set of X, Y, and Z coordinate properties could be created with sdfRef based on that definition which all share those semantics but get separate definitions.
 
 When sdfRef is processed, the keyword is renamed to sdfRefFrom to keep the information about the relationship between definitions but to avoid potential subsequent processing steps attempting to copy the referenced qualities and definitions again.
+When processing sdfRef, if the target definition contains sdfRef (i.e., is based on yet another definition), that MUST be processed before processing the first target definition.
+If the target definition contains sdfRefFrom (i.e., was based on another definition that has been already processed), the sdfRefFrom MUST NOT be copied.
 
 More formally, for a JSON map that contains an
 sdfRef member, the semantics is defined to be as if the following steps were performed:
@@ -740,7 +742,47 @@ sdfRef member, the semantics is defined to be as if the following steps were per
 TODO: Make sure that the grammar in {{syntax}} allows specifying the
 null values that are necessary to remove members in a merge-patch.
 
-A model where all sdfRef references are processed as described above is called a resolved model.
+### Resolved models
+
+A model where all sdfRef references are processed as described in {{sdfref}} is called a resolved model.
+
+For example, given the following sdfData definitions:
+
+~~~ json
+"sdfData": {
+  "Coordinate" : {
+    "type": "number", "unit": "m"
+  },
+  "X-Coordinate" : {
+    "sdfRef" : "#/sdfData/Coordinate",
+    "description": "Distance from the base of the Thing along the X axis."
+  },
+  "Pos-X-Coordinate" : {
+    "sdfRef": "#/sdfData/X-Coordinate",
+    "minimum": 0
+  }
+}
+~~~
+
+After resolving the definitions would look as follows:
+
+~~~ json
+"sdfData": {
+  "Coordinate" : {
+    "type": "number", "unit": "m"
+  },
+  "X-Coordinate" : {
+    "sdfRefFrom" : "#/sdfData/Coordinate",
+    "description": "Distance from the base of the Thing along the X axis.",
+    "type": "number", "unit": "m"
+  },
+  "Pos-X-Coordinate" : {
+    "sdfRefFrom": "#/sdfData/X-Coordinate",
+    "description": "Distance from the base of the Thing along the X axis.",
+    "minimum": 0, "type": "number", "unit": "m"
+  }
+}
+~~~
 
 ## sdfRequired
 
