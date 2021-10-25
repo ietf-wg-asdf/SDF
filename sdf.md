@@ -56,9 +56,9 @@ contributor:
 normative:
   IANA.senml: units
 # [SenML unit]: https://www.iana.org/assignments/senml/senml.xhtml#senml-units
-  I-D.handrews-json-schema-validation: jso
-# -02#section-7.3
+  RFC3339: dt
   RFC3986: uri
+  RFC4122: uuid
   RFC6901: pointer
   RFC7396: merge-patch
   RFC8610: cddl
@@ -71,6 +71,9 @@ normative:
     date: false
   I-D.ietf-cbor-cddl-control: control
 informative:
+  I-D.handrews-json-schema-validation: jso
+# -02#section-7.3 -- formats
+  I-D.wright-json-schema: jso4
   I-D.irtf-t2trg-rest-iot: rest-iot
   ZCL: DOI.10.1016/B978-0-7506-8597-9.00006-9
   OMA:
@@ -80,9 +83,17 @@ informative:
   OCF:
     title: OCF Resource Type Specification
     date: false
-# VERSION 2.1.2 | April 2020
+# v2.1.4 August 2021
     target: https://openconnectivity.org/specs/OCF_Resource_Type_Specification.pdf
   RFC8576: seccons
+  ECMA-262:
+    target: https://www.ecma-international.org/wp-content/uploads/ECMA-262.pdf
+    title: ECMAScript 2020 Language Specification
+    author:
+    - org: Ecma International
+    date: 2020-06
+    seriesinfo:
+      ECMA: Standard ECMA-262, 11th Edition
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -228,11 +239,14 @@ Protocol Binding:
 
 <!-- XXX -->
 
+The term "byte" is used in its now-customary sense as a synonym for
+"octet".
+
 Conventions:
 
 - The singular form is chosen as the preferred one for the keywords defined here.
 
-{::boilerplate bcp14}
+{::boilerplate bcp14-tagged}
 
 # Overview
 
@@ -392,8 +406,10 @@ these data, as well as qualities that associate semantics to these
 data, for engineering units and unit scaling information.
 
 For the data definition within `sdfProperty` or `sdfData`, SDF borrows
-a number of elements proposed for the drafts 4 and 7 of the json-schema.org "JSON Schema"
-format {{-jso}}, enhanced by qualities that are specific to SDF.
+some vocabulary proposed for the drafts 4 and 7 of the
+json-schema.org "JSON Schema"
+format (collectively called JSO here), enhanced by qualities that are specific to SDF.
+Details about the former are in {{jso-inspired}}.
 For the current version of SDF, data are constrained to be of
 simple types (number, string, Boolean),
 JSON maps composed of named data ("objects"), and arrays of these types.
@@ -524,7 +540,7 @@ Qualities of the information block are shown in {{infoblockqual}}.
 {: #infoblockqual title="Qualities of the Information Block"}
 
 While the format of the version string is marked as TBD, it is intended to be lexicographically increasing over the life of a model: a newer model always has a version string that string-compares higher than all previous versions.
-This is easily achieved by following the convention to start the version with an {{?RFC3339}} `date-time` or, if new versions are generated less frequently than once a day, just the `full-date` (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see {{example1}} for an example).
+This is easily achieved by following the convention to start the version with an {{RFC3339}} `date-time` or, if new versions are generated less frequently than once a day, just the `full-date` (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see {{example1}} for an example).
 
 The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an {{SPDX}} license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)
@@ -809,46 +825,14 @@ pointer to the definition can be used.
 Data qualities are used in `sdfData` and `sdfProperty` definitions,
 which are named sets of data qualities (abbreviated as `named-sdq`).
 
-{{sdfdataqual1}} lists data qualities borrowed from {{-jso}}; the
-intention is that these qualities retain their semantics from the
+{{jso-inspired}} lists data qualities inspired by the various
+proposals at json-schema.org; the
+intention is that these (information model level) qualities are
+compatible with the (data model) semantics from the
 versions of the json-schema.org proposal they were imported from.
-A description that starts with a parenthesized term means the quality
-is only applicable when `type` has the value of the term.
 
 {{sdfdataqual2}} lists data qualities defined specifically for the
 present specification.
-
-The term "allowed types" stands for primitive JSON types, JSON maps ("objects")" as well as
-homogeneous arrays of numbers, text, Booleans, or maps.  (This list might be
-extended in a future version of SDF.)  An "allowed value" is a value
-allowed for one of these types.
-
-| Quality          | Type                                                             | Description                                                        |
-|------------------+------------------------------------------------------------------+--------------------------------------------------------------------|
-| type             | "number" / "string" / "boolean" / "integer" / "array" / "object" | JSON data type (note 1)                                             |
-| const            | allowed value                                                    | specifies a constant value for a data item or property             |
-| default          | allowed value                                                    | specifies the default value for initialization                     |
-| minimum          | number                                                           | (number) lower limit of value                                      |
-| maximum          | number                                                           | (number) upper limit of value                                      |
-| exclusiveMinimum | number or boolean (jso draft 7/4)                                | (number) lower limit of value                                      |
-| exclusiveMaximum | number or boolean (jso draft 7/4)                                | (number) lower limit of value                                      |
-| multipleOf       | number                                                           | (number) resolution of the number \[NEEDED?]                       |
-| minLength        | integer                                                          | (string) shortest length string in octets                          |
-| maxLength        | integer                                                          | (string) longest length string in octets                           |
-| pattern          | string                                                           | (string) regular expression to constrain a string pattern          |
-| format           | "date-time" / "date" / "time" / "uri" / "uri-reference" / "uuid" | (string) JSON Schema formats as per {{-jso}}, Section 7.3          |
-| minItems         | number                                                           | (array) Minimum number of items in array                            |
-| maxItems         | number                                                           | (array) Maximum number of items in array                           |
-| uniqueItems      | boolean                                                          | (array) if true, requires items to be all different                |
-| items            | (subset of common/data qualities; see {{syntax}}                 | (array) constraints on array items                                  |
-| required         | array of strings                                                 | (object) names of properties (note 2) that are required in the JSON map ("object") |
-| properties       | named set of data qualities                                      | (object) entries allowed for the JSON map ("object")                  |
-{: #sdfdataqual1 title="Qualities of sdfProperty and sdfData borrowed from json-schema.org"}
-
-(1) A type value of `integer` means that only integral values of JSON
-numbers can be used.
-
-(2) Note that the term "properties" as used for map entries in {{-jso}} is unrelated to sdfProperty.
 
 | Quality       | Type                        | Description                                                         | Default |
 |---------------|-----------------------------|---------------------------------------------------------------------|---------|
@@ -862,7 +846,7 @@ numbers can be used.
 | nullable      | boolean                     | indicates a null value is available for this type                   | true    |
 | contentFormat | string                      | content type (IANA media type string plus parameters), encoding     | N/A     |
 | sdfType       | string ({{sdftype}})        | sdfType enumeration (extensible)                                    | N/A     |
-| sdfChoice     | named set of data qualities | named alternatives                                                  | N/A     |
+| sdfChoice     | named set of data qualities ({{sdfchoice}}) | named alternatives                                                  | N/A     |
 | enum          | array of strings            | abbreviation for string-valued named alternatives                   | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
@@ -877,7 +861,7 @@ numbers can be used.
 ### sdfType
 
 SDF defines a number of basic types beyond those provided by JSON or
-{{-jso}}.  These types are identified by the `sdfType` quality, which
+JSO.  These types are identified by the `sdfType` quality, which
 is a text string from a set of type names defined by SDF.
 
 To aid interworking with {{-jso}} implementations, it is RECOMMENDED
@@ -1204,7 +1188,7 @@ IANA is requested to add the following Media-Type to the "Media Types" registry.
 
 // RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
 
-{: spacing="compact"}
+{:compact}
 Type name:
 : application
 
@@ -1310,7 +1294,159 @@ Lines leading with a `-` are part of the validation syntax, and lines leading wi
 ~~~ jso.json
 {::include sdf.jso.json-unidiff}
 ~~~
- 
+
+# Data Qualities inspired by json-schema.org {#jso-inspired}
+
+Data qualities define data used in SDF affordances at an information
+model level.
+A popular way to describe JSON data at a data model level is proposed
+by a number of drafts on json-schema.org (which collectively are
+abbreviated JSO here)); for reference to a popular version we will
+point here to {{-jso}}.
+As the vocabulary used by JSO is familiar to many JSON modellers, the
+present specification borrows some of the terms and ports their
+semantics to the information model level needed for SDF.
+
+The main data quality imported is the "`type`".
+In SDF, this can take one of six (text string) values, which are
+discussed in the following subsections (note that the JSO type
+"`null`" is not supported as a value of this data quality in SDF).
+
+The additional quality "`const`" restricts the data to one specific
+value (given as the value of the `const` quality).
+
+Similarly, the additional quality "`default`" provides data that can
+be used in the absence of the data (given as the value of the `const`
+quality); this is mainly documentary and not very well-defined for SDF
+as no process is defined that would add default values to an instance
+of something.
+
+
+## type "`number`", type "`integer`"
+
+The types "`number`" and "`integer`" are associated with floating point
+and integer numbers, as they are available in JSON.
+A type value of `integer` means that only integer values of JSON
+numbers can be used (note that `10.0` is an integer value, even if it
+is in a notation that would also allow non-zero decimal fractions).
+
+The additional data qualities "`minimum`", "`maximum`",
+"`exclusiveMinimum`", "`exclusiveMaximum`" provide number values that
+serve as inclusive/exclusive lower/upper bounds for the number.
+(Note that the Boolean form of
+"`exclusiveMinimum`"/"`exclusiveMaximum`" found in earlier JSO drafts
+is not used.)
+
+The data quality "`multipleOf`" gives a positive number that
+constrains the data value to be an integer multiple of the number
+given.
+(Type "`integer`" can also be expressed as a "`multipleOf`" quality of
+value 1, unless another "`multipleOf`" quality is present.)
+
+
+## type "`string`"
+
+The type "`string`" is associated with Unicode text string values as
+they are available in JSON.
+
+The length (as measured in characters) can be constrained by the
+additional data qualities "`minLength`" and "`maxLength`", which are
+inclusive bounds.
+Note that the previous version of the present document explained
+text string length values in bytes, which however is not meaningful
+unless bound to a specific encoding (which could be UTF-8, if this
+unusual behavior is to be restored).
+
+The data quality "`pattern`" takes a string value that is interpreted
+as an [ECMA-262] regular expression in Unicode mode that constrain the
+string (note that these are not anchored by default, so unless `^` and
+`$` anchors are employed, ECMA-262 regular expressions match any string that *contains* a match).
+The JSO proposals acknowledge that regular expression support is
+rather diverse in various platforms, so the suggestion is to limit
+them to:
+
+{:compact}
+* characters;
+* character classes in square brackets, including ranges; their complements;
+* simple quantifiers `*`, `+`, `?`, and range quantifiers `{n}`,
+  `{n,m}`, and `{n,}`;
+* grouping parentheses;
+* the choice operator `|`;
+* and anchors (beginning-of-input `^` and end-of-input `$`).
+
+Note that this subset is somewhat similar to the subset introduced by
+iregexps {{?I-D.bormann-jsonpath-iregexp}}, which however are anchored
+regular expressions, and which include certain backslash escapes for
+characters and character classes.
+
+The additional data quality "`format`" can take one of the following
+values.  Note that, at an information model level, the presence of
+this data quality changes the type from being a simple text string to
+the abstract meaning of the format given (i.e., the format "date-time"
+is less about the specific syntax employed in {{RFC3339}} than about the usage
+as an absolute point in civil time).
+
+{:compact}
+* "`date-time`", "`date`", "`time`":
+  An {{RFC3339}} `date-time`, `full-date`, or `full-time`, respectively.
+* "`uri`", "`uri-reference`":
+  An {{RFC3986}} URI or URI Reference, respectively.
+* "`uuid`": An {{RFC4122}} UUID.
+
+## type "`boolean`"
+
+The type "`boolean`" can take the values "`true`" or "`false`".
+
+## type "`array`"
+
+The type "`array`" is associated with arrays as they are available in
+JSON.
+
+The additional quality "`items`" gives the type that each of the
+elements of the array must match.
+
+The number of elements in the array can be constrained by the additional
+data qualities "`minItems`" and "`maxItems`", which are inclusive
+bounds.
+
+The additional data quality "`uniqueItems`" gives a Boolean value
+that, if true, requires the elements to be all different.
+
+## type "`object`"
+
+The type "`object`" is associated with maps, from strings to values, as
+they are available in JSON ("objects").
+
+The additional quality "`properties`" is a map the entries of which
+describe entries in the specified JSON object: The key gives an
+allowable map key for the specified JSON object, and the value is a
+map with a named set of data qualities giving the type for the
+corresponding value in the specified JSON object.
+
+All entries specified this way are optional, unless they are listed in
+the value of the additional quality "`required`", which is an array of
+string values that give the key names of required entries.
+
+Note that the term "properties" as an additional quality for
+defining map entries is unrelated to sdfProperty.
+
+## Implementation notes
+
+JSO-based keywords are also used in the specification techniques of a
+number of ecosystems, but some adjustments may be required.
+
+E.g., {{OCF}} is based on Swagger 2.0 which appears to be based on
+"draft-4" {{-jso4}} (also called draft-5, but semantically intended to
+be equivalent to draft-4).
+The "`exclusiveMinimum`" and "`exclusiveMaximum`" keywords use the
+Boolean form there, so on import to SDF their values have to be
+replaced by the values of the respective "`minimum`"/"`maximum`"
+keyword, which are themselves then removed; the reverse transformation
+applies on export.
+
+TBD: add any useful implementation notes we can find for other
+ecosystems that use JSO.
+
 # Acknowledgements
 {: numbered="no"}
 
