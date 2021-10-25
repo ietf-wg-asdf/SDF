@@ -73,6 +73,7 @@ normative:
 informative:
   I-D.handrews-json-schema-validation: jso
 # -02#section-7.3 -- formats
+  I-D.wright-json-schema: jso4
   I-D.irtf-t2trg-rest-iot: rest-iot
   ZCL: DOI.10.1016/B978-0-7506-8597-9.00006-9
   OMA:
@@ -1304,12 +1305,12 @@ abbreviated JSO here)); for reference to a popular version we will
 point here to {{-jso}}.
 As the vocabulary used by JSO is familiar to many JSON modellers, the
 present specification borrows some of the terms and ports their
-semantics to an information model level.
+semantics to the information model level needed for SDF.
 
 The main data quality imported is the "`type`".
 In SDF, this can take one of six (text string) values, which are
-discussed in the following subsections (note that the type "`null`" is
-not supported as a value of this data quality in SDF).
+discussed in the following subsections (note that the JSO type
+"`null`" is not supported as a value of this data quality in SDF).
 
 The additional quality "`const`" restricts the data to one specific
 value (given as the value of the `const` quality).
@@ -1428,6 +1429,23 @@ string values that give the key names of required entries.
 
 Note that the term "properties" as an additional quality for
 defining map entries is unrelated to sdfProperty.
+
+## Implementation notes
+
+JSO-based keywords are also used in the specification techniques of a
+number of ecosystems, but some adjustments may be required.
+
+E.g., {{OCF}} is based on Swagger 2.0 which appears to be based on
+"draft-4" {{-jso4}} (also called draft-5, but semantically intended to
+be equivalent to draft-4).
+The "`exclusiveMinimum`" and "`exclusiveMaximum`" keywords use the
+Boolean form there, so on import to SDF their values have to be
+replaced by the values of the respective "`minimum`"/"`maximum`"
+keyword, which are themselves then removed; the reverse transformation
+applies on export.
+
+TBD: add any useful implementation notes we can find for other
+ecosystems that use JSO.
 
 # Acknowledgements
 {: numbered="no"}
