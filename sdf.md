@@ -55,8 +55,9 @@ contributor:
  
 normative:
   IANA.senml: units
-# [SenML unit]: https://www.iana.org/assignments/senml/senml.xhtml#senml-units
   RFC3339: dt
+  RFC8428: senml
+  RFC8798: senml-units-2
   RFC3986: uri
   RFC4122: uuid
   RFC6901: pointer
@@ -834,25 +835,40 @@ versions of the json-schema.org proposal they were imported from.
 {{sdfdataqual2}} lists data qualities defined specifically for the
 present specification.
 
-| Quality       | Type                        | Description                                                         | Default |
-|---------------|-----------------------------|---------------------------------------------------------------------|---------|
-| (common)      |                             | {{common-qualities}}                                                |         |
-| unit          | string                      | SenML unit name as per {{-units}}, subregistry SenML Units (note 3) | N/A     |
-| scaleMinimum  | number                      | lower limit of value in units given by unit (note 4)                 | N/A     |
-| scaleMaximum  | number                      | upper limit of value in units given by unit (note 4)                | N/A     |
-| readable      | boolean                     | Reads are allowed                                                   | true    |
-| writable      | boolean                     | Writes are allowed                                                  | true    |
-| observable    | boolean                     | flag to indicate asynchronous notification is available             | true    |
-| nullable      | boolean                     | indicates a null value is available for this type                   | true    |
-| contentFormat | string                      | content type (IANA media type string plus parameters), encoding     | N/A     |
-| sdfType       | string ({{sdftype}})        | sdfType enumeration (extensible)                                    | N/A     |
-| sdfChoice     | named set of data qualities ({{sdfchoice}}) | named alternatives                                                  | N/A     |
-| enum          | array of strings            | abbreviation for string-valued named alternatives                   | N/A     |
+| Quality       | Type                                      | Description                                                     | Default |
+|---------------+-------------------------------------------+-----------------------------------------------------------------+---------|
+| (common)      |                                           | {{common-qualities}}                                              |         |
+| unit          | string                                    | unit name (note 1)                                              | N/A     |
+| scaleMinimum  | number                                    | lower limit of value in units given by unit (note 2)            | N/A     |
+| scaleMaximum  | number                                    | upper limit of value in units given by unit (note 2)            | N/A     |
+| readable      | boolean                                   | Reads are allowed                                               | true    |
+| writable      | boolean                                   | Writes are allowed                                              | true    |
+| observable    | boolean                                   | flag to indicate asynchronous notification is available         | true    |
+| nullable      | boolean                                   | indicates a null value is available for this type               | true    |
+| contentFormat | string                                    | content type (IANA media type string plus parameters), encoding | N/A     |
+| sdfType       | string ({{sdftype}})                        | sdfType enumeration (extensible)                                | N/A     |
+| sdfChoice     | named set of data qualities ({{sdfchoice}}) | named alternatives                                              | N/A     |
+| enum          | array of strings                          | abbreviation for string-valued named alternatives               | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
 
-(3) note that the quality `unit` was called `units` in SDF 1.0.
 
-(4) these qualities were included in SDF 1.0, but were not fully
+1. Note that the quality `unit` was called `units` in SDF 1.0.
+   The unit name SHOULD be as
+   per the {{senml-units (SenML Units)<RFC8428}} Registry
+   or the {{secondary-units (Secondary Units)<RFC8798}} Registry in {{-units}}
+   as specified by
+   {{Sections 4.5.1 and 12.1 of -senml}} and {{Section 3 of
+   -senml-units-2}}, respectively.
+   Exceptionally, if a registration in these registries cannot be
+   obtained or would be inappropriate, the unit name can also be a URI
+   that is pointing to a definition of the unit.  Note that SDF
+   processors are not expected to (and normally SHOULD NOT)
+   dereference these URIs; they may be useful to humans, though.
+   A URI unit name is distinguished from a registered unit name by the
+   presence of a colon; registered unit names that contain a colon (at
+   the time of writing, none) can therefore not be used in SDF.
+
+2. these qualities were included in SDF 1.0, but were not fully
     defined; they are not included in SDF 1.1.  In 1.next, they will
     be replaced by qualities to express scaling that are more aligned
     with the processes that combine ecosystem and instance specific
