@@ -985,6 +985,7 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
               "sdfRef": "#/sdfData/rgbVal"}},
     "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
               "sdfRef": "#/sdfData/cmykVal"}}
+  }
   ~~~
 
 Note that there is no need in SDF for the type intersection construct
