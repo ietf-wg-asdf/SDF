@@ -82,7 +82,7 @@ informative:
   OCF:
     title: OCF Resource Type Specification
     date: false
-# VERSION 2.1.2 | April 2020
+# v2.1.4 August 2021
     target: https://openconnectivity.org/specs/OCF_Resource_Type_Specification.pdf
   RFC8576: seccons
   ECMA-262:
