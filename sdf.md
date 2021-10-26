@@ -575,7 +575,7 @@ added, if needed, where the namespace entry is used.
   "cap": "https://example.com/capability/cap",
   "zcl": "https://zcl.example.com/sdf"
 },
-"defaultNamespace": "cap",
+"defaultNamespace": "cap"
 ~~~
 
 If no defaultNamespace setting is given, the SDF definition file does not
@@ -972,7 +972,7 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "anyOf": [
     {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-       "sdfRef": "#/sdfData/rgbVal"}}
+       "sdfRef": "#/sdfData/rgbVal"}},
     {"type": "array", "minItems": 4, "maxItems": "4", "items": {
        "sdfRef": "#/sdfData/cmykVal"}}
   ]
