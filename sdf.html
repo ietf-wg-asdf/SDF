@@ -21,14 +21,15 @@ Data types for the information exchanged in those interactions.
 version (-00) of this document; version (-05) was designated as an
  implementation draft , labeled SDF 1.1, at the IETF110 meeting of
 the ASDF WG (2021-03-11).
-The present version (-07) has a few editorial improvements over -06,
-which was discussed at the ASDF interim meeting on 2021-06-02. 
+The present version (-08) adds URIs as alternative measurement
+unit names, is editorially more self-contained, and uses updated
+xml2rfc conventions for its plain-text rendering. 
     " name="description">
-<meta content="xml2rfc 3.10.0" name="generator">
+<meta content="xml2rfc 3.11.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.10.0
+  xml2rfc 3.11.1
     Python 3.9.7
     appdirs 1.4.4
     ConfigArgParse 1.2.3
@@ -1202,11 +1203,11 @@ li > p:last-of-type {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OneDM SDF</td>
-<td class="right">October 2021</td>
+<td class="right">November 2021</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 27 April 2022</td>
+<td class="center">Expires 10 May 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1219,12 +1220,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-10-24" class="published">24 October 2021</time>
+<time datetime="2021-11-06" class="published">6 November 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-04-27">27 April 2022</time></dd>
+<dd class="expires"><time datetime="2022-05-10">10 May 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1256,8 +1257,9 @@ Data types for the information exchanged in those interactions.<a href="#section
 version (-00) of this document; version (-05) was designated as an
 <em>implementation draft</em>, labeled SDF 1.1, at the IETF110 meeting of
 the ASDF WG (2021-03-11).
-The present version (-07) has a few editorial improvements over -06,
-which was discussed at the ASDF interim meeting on 2021-06-02.</span><a href="#section-abstract-3" class="pilcrow">¶</a></p>
+The present version (-08) adds URIs as alternative measurement
+unit names, is editorially more self-contained, and uses updated
+xml2rfc conventions for its plain-text rendering.</span><a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </section>
 <section class="note" id="section-note.1">
       <h2 id="name-contributing">
@@ -1290,7 +1292,7 @@ list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 April 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 May 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1308,9 +1310,9 @@ list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
             publication of this document. Please review these documents
             carefully, as they describe your rights and restrictions with
             respect to this document. Code Components extracted from this
-            document must include Simplified BSD License text as described in
+            document must include Revised BSD License text as described in
             Section 4.e of the Trust Legal Provisions and are provided without
-            warranty as described in the Simplified BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="toc">
@@ -1458,7 +1460,10 @@ list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
                 <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-media-type" class="xref">Media Type</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-registries" class="xref">Registries</a></p>
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-ietf-urn-sub-namespace-for-" class="xref">IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit)</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="xref">7.3</a>.  <a href="#name-registries" class="xref">Registries</a></p>
 </li>
             </ul>
 </li>
@@ -1500,6 +1505,9 @@ list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5">
                 <p id="section-toc.1-1.12.2.5.1"><a href="#appendix-C.5" class="xref">C.5</a>.  <a href="#name-type-object" class="xref">type "<code>object</code>"</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.6">
+                <p id="section-toc.1-1.12.2.6.1"><a href="#appendix-C.6" class="xref">C.6</a>.  <a href="#name-implementation-notes" class="xref">Implementation notes</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
@@ -1533,8 +1541,9 @@ Data types for the information exchanged in those interactions.<a href="#section
 version (-00) of this document; version (-05) was designated as an
 <em>implementation draft</em>, labeled SDF 1.1, at the IETF110 meeting of
 the ASDF WG (2021-03-11).
-The present version (-07) has a few editorial improvements over -06,
-which was discussed at the ASDF interim meeting on 2021-06-02.</span><a href="#section-1-3" class="pilcrow">¶</a></p>
+The present version (-08) adds URIs as alternative measurement
+unit names, is editorially more self-contained, and uses updated
+xml2rfc conventions for its plain-text rendering.</span><a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="terminology-and-conventions">
 <section id="section-1.1">
         <h3 id="name-terminology-and-conventions">
@@ -1684,8 +1693,7 @@ and similar details.<a href="#section-1.1-1.32.1" class="pilcrow">¶</a></p>
 <li class="normal" id="section-1.1-4.1">The singular form is chosen as the preferred one for the keywords defined here.<a href="#section-1.1-4.1" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-1.1-5">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL</span>
-NOT", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-1.1-5">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
@@ -1887,7 +1895,7 @@ link sdfProperty to sdfData-->
                   <polygon fill="black" points="141.68,404.16,133.0828,399.3549,136.7009,403.7035,132.3524,407.3215,141.68,404.16" stroke="black" stroke-width="1.0"></polygon>
                   <text fill="black" font-family="sans-serif" font-size="13" x="22.5" y="348.5684">isInstanceOf</text>
                   <text fill="black" font-family="sans-serif" font-size="13" x="126.0527" y="400.0923">1</text>
-                  <!--MD5=[6398293148bc6fcc63b748a0c4541f48]
+                  <!--MD5=[cdc18c8c27ae4a757fc9242559db5e75]
 @startuml
 
 sdfThing - -> "0+" sdfObject : hasObject
@@ -1924,7 +1932,7 @@ class sdfData {
 
 @enduml
 
-PlantUML version 1.2021.9(Sun Jul 25 12:13:56 CEST 2021)
+PlantUML version 1.2021.12(Tue Oct 05 18:01:58 CEST 2021)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
@@ -2230,7 +2238,7 @@ added, if needed, where the namespace entry is used.<a href="#section-3.2-5" cla
   "cap": "https://example.com/capability/cap",
   "zcl": "https://zcl.example.com/sdf"
 },
-"defaultNamespace": "cap",
+"defaultNamespace": "cap"
 </pre><a href="#section-3.2-6" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2-7">If no defaultNamespace setting is given, the SDF definition file does not
@@ -2468,7 +2476,7 @@ indicating one declaration that is mandatory to be represented.<a href="#section
             "type": "object",
             "properties": {
               "alarmType": {
-                "sdfRef": "cap:/sdfData/alarmTypes/quantityAlarms",
+                "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
                 "const": "OverTemperatureAlarm"
               },
               "temperature": {
@@ -2585,19 +2593,19 @@ present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">unit</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">SenML unit name as per <span>[<a href="#IANA.senml" class="xref">IANA.senml</a>]</span>, subregistry SenML Units (note 3)</td>
+              <td class="text-left" rowspan="1" colspan="1">unit name (note 1)</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">scaleMinimum</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">lower limit of value in units given by unit (note 4)</td>
+              <td class="text-left" rowspan="1" colspan="1">lower limit of value in units given by unit (note 2)</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">scaleMaximum</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">upper limit of value in units given by unit (note 4)</td>
+              <td class="text-left" rowspan="1" colspan="1">upper limit of value in units given by unit (note 2)</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
@@ -2651,12 +2659,37 @@ present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
           </tbody>
         </table>
 </div>
-<p id="section-4.7-5">(3) note that the quality <code>unit</code> was called <code>units</code> in SDF 1.0.<a href="#section-4.7-5" class="pilcrow">¶</a></p>
-<p id="section-4.7-6">(4) these qualities were included in SDF 1.0, but were not fully
-    defined; they are not included in SDF 1.1.  In 1.next, they will
-    be replaced by qualities to express scaling that are more aligned
-    with the processes that combine ecosystem and instance specific
-    information with an SDF model.<a href="#section-4.7-6" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.7-5">
+<li id="section-4.7-5.1">
+            <p id="section-4.7-5.1.1">Note that the quality <code>unit</code> was called <code>units</code> in SDF 1.0.
+The unit name <span class="bcp14">SHOULD</span> be as
+per the <a href="https://rfc-editor.org/rfc/rfc8428#senml-units" class="relref">SenML Units</a> Registry
+or the <a href="https://rfc-editor.org/rfc/rfc8798#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="xref">IANA.senml</a>]</span>
+as specified by
+Sections <a href="https://rfc-editor.org/rfc/rfc8428#section-4.5.1" class="relref">4.5.1</a> and <a href="https://rfc-editor.org/rfc/rfc8428#section-12.1" class="relref">12.1</a> of <span>[<a href="#RFC8428" class="xref">RFC8428</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8798#section-3" class="relref">Section 3</a> of [<a href="#RFC8798" class="xref">RFC8798</a>]</span>, respectively.<a href="#section-4.7-5.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.7-5.1.2">
+Exceptionally, if a registration in these registries cannot be
+obtained or would be inappropriate, the unit name can also be a URI
+that is pointing to a definition of the unit.  Note that SDF
+processors are not expected to (and normally <span class="bcp14">SHOULD NOT</span>)
+dereference these URIs; they may be useful to humans, though.
+A URI unit name is distinguished from a registered unit name by the
+presence of a colon; registered unit names that contain a colon (at
+the time of writing, none) can therefore not be used in SDF.<a href="#section-4.7-5.1.2" class="pilcrow">¶</a></p>
+<p id="section-4.7-5.1.3">
+For use by translators into ecosystems that require URIs for unit
+names, the URN sub-namespace "urn:ietf:params:unit" is provided
+(<a href="#unit-urn" class="xref">Section 7.2</a>); URNs from this sub-namespace <span class="bcp14">MUST NOT</span> be used in a
+<code>unit</code> quality, in favor of simply notating the unit name (e.g.,
+<code>kg</code> instead of <code>urn:ietf:params:unit:kg</code>).<a href="#section-4.7-5.1.3" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-4.7-5.2">these qualities were included in SDF 1.0, but were not fully
+ defined; they are not included in SDF 1.1.  In 1.next, they will
+ be replaced by qualities to express scaling that are more aligned
+ with the processes that combine ecosystem and instance specific
+ information with an SDF model.<a href="#section-4.7-5.2" class="pilcrow">¶</a>
+</li>
+        </ol>
 <div id="sdftype">
 <section id="section-4.7.1">
           <h4 id="name-sdftype">
@@ -2785,9 +2818,9 @@ What could have been<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
 <pre class="lang-json sourcecode">
 "anyOf": [
   {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-     "sdfRef": "rgbVal"}}
+     "sdfRef": "#/sdfData/rgbVal"}},
   {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-     "sdfRef": "cmykVal"}}
+     "sdfRef": "#/sdfData/cmykVal"}}
 ]
 </pre><a href="#section-4.7.2-3.2.4" class="pilcrow">¶</a>
 </div>
@@ -2797,10 +2830,10 @@ in <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handre
 <pre class="lang-json sourcecode">
 "sdfChoice": {
   "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-            "sdfRef": "rgbVal"}},
+            "sdfRef": "#/sdfData/rgbVal"}},
   "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-            "sdfRef": "cmykVal"}}
-]
+            "sdfRef": "#/sdfData/cmykVal"}}
+}
 </pre><a href="#section-4.7.2-3.2.6" class="pilcrow">¶</a>
 </div>
 </li>
@@ -3297,12 +3330,52 @@ Provisional registration:  </dt>
 </dl>
 </section>
 </div>
-<div id="registries">
+<div id="unit-urn">
 <section id="section-7.2">
-        <h3 id="name-registries">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-registries" class="section-name selfRef">Registries</a>
+        <h3 id="name-ietf-urn-sub-namespace-for-">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-ietf-urn-sub-namespace-for-" class="section-name selfRef">IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit)</a>
         </h3>
-<p id="section-7.2-1">(TBD: After future additions, check if we need any.)<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">IANA is requested to register the following value in the "<a href="https://www.iana.org/assignments/params#params-1" class="relref">IETF URN Sub-namespace for Registered Protocol Parameter Identifiers</a>" registry, following the template in
+<span>[<a href="#RFC3553" class="xref">RFC3553</a>]</span>:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-7.2-2">
+          <dt id="section-7.2-2.1">
+Registry name:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.2-2.2">
+            <p id="section-7.2-2.2.1">unit<a href="#section-7.2-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.2-2.3">
+Specification:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.2-2.4">
+            <p id="section-7.2-2.4.1">RFC XXXX<a href="#section-7.2-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.2-2.5">
+Repository:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.2-2.6">
+            <p id="section-7.2-2.6.1">combining the symbol values from the <a href="https://www.iana.org/assignments/senml#senml-units" class="relref">SenML Units</a> Registry and the <a href="https://www.iana.org/assignments/senml#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="xref">IANA.senml</a>]</span> as specified by Sections <a href="https://rfc-editor.org/rfc/rfc8428#section-4.5.1" class="relref">4.5.1</a> and <a href="https://rfc-editor.org/rfc/rfc8428#section-12.1" class="relref">12.1</a> of <span>[<a href="#RFC8428" class="xref">RFC8428</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8798#section-3" class="relref">Section 3</a> of [<a href="#RFC8798" class="xref">RFC8798</a>]</span>,
+respectively (which by the registration policy are guaranteed to be
+non-overlapping).<a href="#section-7.2-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.2-2.7">
+Index value:  </dt>
+          <dd style="margin-left: 1.5em" id="section-7.2-2.8">
+            <p id="section-7.2-2.8.1">Percent-encoding (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>) is required of
+any characters in unit names as required by ABNF rule "pchar" in
+<span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>, specifically at the time of writing for the
+unit names "%" (deprecated in favor of "/"), "%RH", "%EL".<a href="#section-7.2-2.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="registries">
+<section id="section-7.3">
+        <h3 id="name-registries">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-registries" class="section-name selfRef">Registries</a>
+        </h3>
+<p id="section-7.3-1">(TBD: After future additions, check if we need any.)<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3329,6 +3402,10 @@ Provisional registration:  </dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Additional Control Operators for CDDL"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-cddl-control-07</span>, <time datetime="2021-10-21" class="refDate">21 October 2021</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-cbor-cddl-control-07.txt">https://www.ietf.org/archive/id/draft-ietf-cbor-cddl-control-07.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="IANA.params">[IANA.params]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Uniform Resource Name (URN) Namespace for IETF Use"</span>, <span>&lt;<a href="https://www.iana.org/assignments/params">https://www.iana.org/assignments/params</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="IANA.senml">[IANA.senml]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"Sensor Measurement Lists (SenML)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/senml">https://www.iana.org/assignments/senml</a>&gt;</span>. </dd>
@@ -3344,6 +3421,10 @@ Provisional registration:  </dt>
 <dt id="RFC3339">[RFC3339]</dt>
         <dd>
 <span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339">https://www.rfc-editor.org/info/rfc3339</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3553">[RFC3553]</dt>
+        <dd>
+<span class="refAuthor">Mealling, M.</span>, <span class="refAuthor">Masinter, L.</span>, <span class="refAuthor">Hardie, T.</span>, and <span class="refAuthor">G. Klyne</span>, <span class="refTitle">"An IETF URN Sub-namespace for Registered Protocol Parameters"</span>, <span class="seriesInfo">BCP 73</span>, <span class="seriesInfo">RFC 3553</span>, <span class="seriesInfo">DOI 10.17487/RFC3553</span>, <time datetime="2003-06" class="refDate">June 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3553">https://www.rfc-editor.org/info/rfc3553</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3986">[RFC3986]</dt>
         <dd>
@@ -3365,9 +3446,17 @@ Provisional registration:  </dt>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8428">[RFC8428]</dt>
+        <dd>
+<span class="refAuthor">Jennings, C.</span>, <span class="refAuthor">Shelby, Z.</span>, <span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Keranen, A.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Sensor Measurement Lists (SenML)"</span>, <span class="seriesInfo">RFC 8428</span>, <span class="seriesInfo">DOI 10.17487/RFC8428</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8428">https://www.rfc-editor.org/info/rfc8428</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8610">[RFC8610]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Vigano, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8610">https://www.rfc-editor.org/info/rfc8610</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8798">[RFC8798]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Additional Units for Sensor Measurement Lists (SenML)"</span>, <span class="seriesInfo">RFC 8798</span>, <span class="seriesInfo">DOI 10.17487/RFC8798</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8798">https://www.rfc-editor.org/info/rfc8798</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8949">[RFC8949]</dt>
         <dd>
@@ -3403,6 +3492,10 @@ Provisional registration:  </dt>
 <dt id="I-D.irtf-t2trg-rest-iot">[I-D.irtf-t2trg-rest-iot]</dt>
         <dd>
 <span class="refAuthor">Keranen, A.</span>, <span class="refAuthor">Kovatsch, M.</span>, and <span class="refAuthor">K. Hartke</span>, <span class="refTitle">"Guidance on RESTful Design for Internet of Things Systems"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-t2trg-rest-iot-08</span>, <time datetime="2021-08-25" class="refDate">25 August 2021</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-irtf-t2trg-rest-iot-08.txt">https://www.ietf.org/archive/id/draft-irtf-t2trg-rest-iot-08.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.wright-json-schema">[I-D.wright-json-schema]</dt>
+        <dd>
+<span class="refAuthor">Wright, A.</span> and <span class="refAuthor">H. Andrews</span>, <span class="refTitle">"JSON Schema: A Media Type for Describing JSON Documents"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-wright-json-schema-01</span>, <time datetime="2017-04-16" class="refDate">16 April 2017</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-wright-json-schema-01.txt">https://www.ietf.org/archive/id/draft-wright-json-schema-01.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OCF">[OCF]</dt>
         <dd>
@@ -5486,11 +5579,11 @@ abbreviated JSO here)); for reference to a popular version we will
 point here to <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>.
 As the vocabulary used by JSO is familiar to many JSON modellers, the
 present specification borrows some of the terms and ports their
-semantics to an information model level.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+semantics to the information model level needed for SDF.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">The main data quality imported is the "<code>type</code>".
 In SDF, this can take one of six (text string) values, which are
-discussed in the following subsections (note that the type "<code>null</code>" is
-not supported as a value of this data quality in SDF).<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+discussed in the following subsections (note that the JSO type
+"<code>null</code>" is not supported as a value of this data quality in SDF).<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <p id="appendix-C-3">The additional quality "<code>const</code>" restricts the data to one specific
 value (given as the value of the <code>const</code> quality).<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <p id="appendix-C-4">Similarly, the additional quality "<code>default</code>" provides data that can
@@ -5620,6 +5713,25 @@ the value of the additional quality "<code>required</code>", which is an array o
 string values that give the key names of required entries.<a href="#appendix-C.5-3" class="pilcrow">¶</a></p>
 <p id="appendix-C.5-4">Note that the term "properties" as an additional quality for
 defining map entries is unrelated to sdfProperty.<a href="#appendix-C.5-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="implementation-notes">
+<section id="appendix-C.6">
+        <h3 id="name-implementation-notes">
+<a href="#appendix-C.6" class="section-number selfRef">C.6. </a><a href="#name-implementation-notes" class="section-name selfRef">Implementation notes</a>
+        </h3>
+<p id="appendix-C.6-1">JSO-based keywords are also used in the specification techniques of a
+number of ecosystems, but some adjustments may be required.<a href="#appendix-C.6-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.6-2">E.g., <span>[<a href="#OCF" class="xref">OCF</a>]</span> is based on Swagger 2.0 which appears to be based on
+"draft-4" <span>[<a href="#I-D.wright-json-schema" class="xref">I-D.wright-json-schema</a>]</span> (also called draft-5, but semantically intended to
+be equivalent to draft-4).
+The "<code>exclusiveMinimum</code>" and "<code>exclusiveMaximum</code>" keywords use the
+Boolean form there, so on import to SDF their values have to be
+replaced by the values of the respective "<code>minimum</code>"/"<code>maximum</code>"
+keyword, which are themselves then removed; the reverse transformation
+applies on export.<a href="#appendix-C.6-2" class="pilcrow">¶</a></p>
+<p id="appendix-C.6-3">TBD: add any useful implementation notes we can find for other
+ecosystems that use JSO.<a href="#appendix-C.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
