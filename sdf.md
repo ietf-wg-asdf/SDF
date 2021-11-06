@@ -52,7 +52,7 @@ contributor:
     city: Southampton
     country: United Kingdom
     email: w.vanderbeek@cascoda.com
- 
+
 normative:
   IANA.senml: units
   RFC3339: dt
@@ -121,8 +121,9 @@ entity:
     version (-00) of this document; version (-05) was designated as an
     *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
     the ASDF WG (2021-03-11).
-    The present version (-07) has a few editorial improvements over -06,
-    which was discussed at the ASDF interim meeting on 2021-06-02.
+    The present version (-08) adds URIs as alternative measurement
+    unit names, is editorially more self-contained, and uses updated
+    xml2rfc conventions for its plain-text rendering.
 
 --- note_Contributing
 
@@ -574,7 +575,7 @@ added, if needed, where the namespace entry is used.
   "cap": "https://example.com/capability/cap",
   "zcl": "https://zcl.example.com/sdf"
 },
-"defaultNamespace": "cap",
+"defaultNamespace": "cap"
 ~~~
 
 If no defaultNamespace setting is given, the SDF definition file does not
@@ -971,7 +972,7 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "anyOf": [
     {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-       "sdfRef": "#/sdfData/rgbVal"}}
+       "sdfRef": "#/sdfData/rgbVal"}},
     {"type": "array", "minItems": 4, "maxItems": "4", "items": {
        "sdfRef": "#/sdfData/cmykVal"}}
   ]
@@ -1125,7 +1126,7 @@ Modular composition of definitions enables an existing definition (could be in t
 
 ### Use of the "sdfRef" keyword to re-use a definition
 
-An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. 
+An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template.
 
 In the definition that uses "sdfRef", new qualities may be added
 and existing qualities from the referenced definition may be
