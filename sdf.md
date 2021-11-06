@@ -52,7 +52,7 @@ contributor:
     city: Southampton
     country: United Kingdom
     email: w.vanderbeek@cascoda.com
- 
+
 normative:
   IANA.senml: units
   RFC3339: dt
@@ -1126,7 +1126,7 @@ Modular composition of definitions enables an existing definition (could be in t
 
 ### Use of the "sdfRef" keyword to re-use a definition
 
-An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template. 
+An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template.
 
 In the definition that uses "sdfRef", new qualities may be added
 and existing qualities from the referenced definition may be
