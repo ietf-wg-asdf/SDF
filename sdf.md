@@ -55,6 +55,7 @@ contributor:
 
 normative:
   IANA.senml: units
+  IANA.params: params
   RFC3339: dt
   RFC8428: senml
   RFC8798: senml-units-2
@@ -860,6 +861,7 @@ present specification.
    as specified by
    {{Sections 4.5.1 and 12.1 of -senml}} and {{Section 3 of
    -senml-units-2}}, respectively.
+
    Exceptionally, if a registration in these registries cannot be
    obtained or would be inappropriate, the unit name can also be a URI
    that is pointing to a definition of the unit.  Note that SDF
@@ -868,6 +870,12 @@ present specification.
    A URI unit name is distinguished from a registered unit name by the
    presence of a colon; registered unit names that contain a colon (at
    the time of writing, none) can therefore not be used in SDF.
+
+   For use by translators into ecosystems that require URIs for unit
+   names, the URN sub-namespace "urn:ietf:params:unit" is provided
+   ({{unit-urn}}); URNs from this sub-namespace MUST NOT be used in a
+   `unit` quality, in favor of simply notating the unit name (e.g.,
+   `kg` instead of `urn:ietf:params:unit:kg`).
 
 2. these qualities were included in SDF 1.0, but were not fully
     defined; they are not included in SDF 1.1.  In 1.next, they will
@@ -1254,6 +1262,33 @@ Provisional registration:
 : no
 
 
+IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit) {#unit-urn}
+-------------------------------------
+
+IANA is requested to register the following value in the "{{params-1
+(IETF URN Sub-namespace for Registered Protocol Parameter
+Identifiers)<IANA.params}}" registry, following the template in
+{{!RFC3553}}:
+
+Registry name:
+: unit
+
+Specification:
+: RFC XXXX
+
+Repository:
+:  combining the symbol values from the {{senml-units (SenML
+   Units)<IANA.senml}} Registry and the {{secondary-units (Secondary
+   Units)<IANA.senml}} Registry in {{-units}} as specified by {{Sections
+   4.5.1 and 12.1 of -senml}} and {{Section 3 of -senml-units-2}},
+   respectively (which by the registration policy are guaranteed to be
+   non-overlapping).
+
+Index value:
+: Percent-encoding ({{Section 2.1 of -uri}}) is required of
+  any characters in unit names as required by ABNF rule "pchar" in
+  {{Section 3.3 of -uri}}, specifically at the time of writing for the
+  unit names "%" (deprecated in favor of "/"), "%RH", "%EL".
 
 Registries
 ----------
