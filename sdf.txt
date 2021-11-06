@@ -29,10 +29,8 @@ Abstract
    // A JSON format representation of SDF 1.0 was defined in version
    // (-00) of this document; version (-05) was designated as an
    // _implementation draft_, labeled SDF 1.1, at the IETF110 meeting of
-   // the ASDF WG (2021-03-11).  The present version (-08) adds URIs as
-   // alternative measurement unit names, is editorially more self-
-   // contained, and uses updated xml2rfc conventions for its plain-text
-   // rendering.
+   // the ASDF WG (2021-03-11).  The present version (-09) adds a URN
+   // namespace for registered measurement unit names.
 
 Contributing
 
@@ -48,6 +46,8 @@ Contributing
 
    The IETF Note Well applies (https://www.ietf.org/about/note-well/
    (https://www.ietf.org/about/note-well/)).
+
+
 
 
 
@@ -187,10 +187,8 @@ Internet-Draft                  OneDM SDF                  November 2021
    // A JSON format representation of SDF 1.0 was defined in version
    // (-00) of this document; version (-05) was designated as an
    // _implementation draft_, labeled SDF 1.1, at the IETF110 meeting of
-   // the ASDF WG (2021-03-11).  The present version (-08) adds URIs as
-   // alternative measurement unit names, is editorially more self-
-   // contained, and uses updated xml2rfc conventions for its plain-text
-   // rendering.
+   // the ASDF WG (2021-03-11).  The present version (-09) adds a URN
+   // namespace for registered measurement unit names.
 
 1.1.  Terminology and Conventions
 
@@ -219,6 +217,8 @@ Internet-Draft                  OneDM SDF                  November 2021
    Block:  One or more entries in a JSON map that is part of an SDF
       specification; these entries together serve a specific function.
 
+   Group:  An entry in the main SDF map and in certain nested
+
 
 
 Koster & Bormann           Expires 10 May 2022                  [Page 4]
@@ -226,7 +226,6 @@ Koster & Bormann           Expires 10 May 2022                  [Page 4]
 Internet-Draft                  OneDM SDF                  November 2021
 
 
-   Group:  An entry in the main SDF map and in certain nested
       definitions that has a Class Name Keyword as its key and a map of
       definition entries (Definition Group) as a value.
 
@@ -272,8 +271,9 @@ Internet-Draft                  OneDM SDF                  November 2021
       used as a definition for reference in a different place.
 
    Protocol Binding:  A companion document to an SDF specification that
-
-
+      defines how to map the abstract concepts in the specification into
+      the protocols in use in a specific ecosystem.  Might supply URL
+      components, numeric IDs, and similar details.
 
 
 
@@ -281,10 +281,6 @@ Koster & Bormann           Expires 10 May 2022                  [Page 5]
 
 Internet-Draft                  OneDM SDF                  November 2021
 
-
-      defines how to map the abstract concepts in the specification into
-      the protocols in use in a specific ecosystem.  Might supply URL
-      components, numeric IDs, and similar details.
 
    The term "byte" is used in its now-customary sense as a synonym for
    "octet".
@@ -306,6 +302,10 @@ Internet-Draft                  OneDM SDF                  November 2021
 
    We start with an example for the SDF definition of a simple Object
    called "Switch" (Figure 1).
+
+
+
+
 
 
 
