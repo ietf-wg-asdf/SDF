@@ -535,10 +535,10 @@ Qualities of the information block are shown in {{infoblockqual}}.
 
 | Quality   | Type   | Required | Description                                                 |
 |-----------|--------|----------|-------------------------------------------------------------|
-| title     | string | yes      | A short summary to be displayed in search results, etc.     |
-| version   | string | yes      | The incremental version of the definition, format TBD       |
-| copyright | string | yes      | Link to text or embedded text containing a copyright notice |
-| license   | string | yes      | Link to text or embedded text containing license terms      |
+| title     | string | no       | A short summary to be displayed in search results, etc.     |
+| version   | string | no       | The incremental version of the definition, format TBD       |
+| copyright | string | no       | Link to text or embedded text containing a copyright notice |
+| license   | string | no       | Link to text or embedded text containing license terms      |
 {: #infoblockqual title="Qualities of the Information Block"}
 
 While the format of the version string is marked as TBD, it is intended to be lexicographically increasing over the life of a model: a newer model always has a version string that string-compares higher than all previous versions.
