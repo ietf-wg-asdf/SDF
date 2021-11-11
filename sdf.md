@@ -1066,8 +1066,7 @@ The qualities of an Action definition include the common qualities, additional q
 
 `sdfInputData` defines the input data of the action.  `sdfOutputData`
 defines the output data of the action.
-
-TBD: indicating optionality
+`sdfRequired` can be used to indicate mandatory input and/or output parameters.
 
 ## sdfEvent
 
@@ -1080,14 +1079,13 @@ The qualities of sdfEvent include the common qualities, additional qualities are
 | Quality       | Type      | Description                                                              |
 |---------------+-----------+--------------------------------------------------------------------------|
 | (common)      |           | {{common-qualities}}                                                     |
-| sdfOutputData | map       | data qualities of the output data for an Event                           |
+| sdfOutputData | named-sdq | zero or more named data type definitions of the output data for an Event |
 | sdfData       | named-sdq | zero or more named data type definitions that might be used in the above |
 {: #sdfevqual title="Qualities of sdfEvent"}
 
 `sdfOutputData` defines the output data of the action.
-As discussed in {{sdfevent-overview}}, a set of data qualities with
-type "object" can be used to substructure the output data item, with
-optionality indicated by the data quality `required`.
+`sdfRequired` can be used to indicate mandatory output parameters.
+
 
 ## sdfData
 
