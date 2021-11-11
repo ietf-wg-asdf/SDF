@@ -433,10 +433,8 @@ state, often resulting in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.
 
-Actions may have data parameters; these are modeled as a single item of input
-data and output data, each.  (Where multiple parameters need to be
-modeled, an "object" type can be used to combine these parameters into one.)
-<!-- (using `sdfData` definitions, i.e., the same entries as for `sdfProperty` declarations). -->
+Actions may have data parameters; these are modeled as a set of named input
+data and output data definitions.
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
 `sdfProperty`; the effects may play out over time and emit action
@@ -784,15 +782,12 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
       "sdfEvent": {
         "overTemperatureEvent": {
           "sdfOutputData": {
-            "type": "object",
-            "properties": {
-              "alarmType": {
-                "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
-                "const": "OverTemperatureAlarm"
-              },
-              "temperature": {
-                "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
-              }
+            "alarmType": {
+              "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
+              "const": "OverTemperatureAlarm"
+            },
+            "temperature": {
+              "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
             }
           }
         }
@@ -1064,16 +1059,15 @@ The qualities of an Action definition include the common qualities, additional q
 | Quality       | Type      | Description                                                              |
 |---------------+-----------+--------------------------------------------------------------------------|
 | (common)      |           | {{common-qualities}}                                                     |
-| sdfInputData  | map       | data qualities of the input data for an Action                           |
-| sdfOutputData | map       | data qualities of the output data for an Action                          |
+| sdfInputData  | named-sdq | zero or more named data type definitions for input data for an Action    |
+| sdfOutputData | named-sdq | zero or more named data type definitions of the output data for an Action|
 | sdfData       | named-sdq | zero or more named data type definitions that might be used in the above |
 {: #sdfactqual title="Qualities of sdfAction"}
 
 `sdfInputData` defines the input data of the action.  `sdfOutputData`
 defines the output data of the action.
-As discussed in {{sdfaction-overview}}, a set of data qualities with
-type "object" can be used to substructure either data item, with
-optionality indicated by the data quality `required`.
+
+TBD: indicating optionality
 
 ## sdfEvent
 
