@@ -68,9 +68,9 @@ parameter-list =
 
 actionqualities = {
  commonqualities,
- ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
+ ? sdfInputData: named<dataqualities>    ; zero or more named data type definitions
  ? ("sdfRequiredInputData" .feature "1.0") => pointer-list
- ? sdfOutputData: parameter-list  ; sdfRequired applies here
+ ? sdfOutputData: named<dataqualities>   ; zero or more named data type definitions
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
  EXTENSION-POINT<"action-ext">
 }
