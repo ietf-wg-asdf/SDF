@@ -517,7 +517,7 @@ work together to provide the definitions and declarations that are the
 payload of the SDF format.
 
 A SDF definition file contains a single JSON map (JSON object).
-This object has three sections: the information block, the namespaces section, and the definitions section.
+This object has three blocks: the information block, the namespaces block, and the definitions block.
 
 ## Information block
 
@@ -547,9 +547,9 @@ This is easily achieved by following the convention to start the version with an
 The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an {{SPDX}} license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)
 
-## Namespaces section
+## Namespaces block
 
-The namespaces section contains the namespace map and the defaultNamespace setting.
+The namespaces block contains the namespace map and the defaultNamespace setting.
 
 The namespace map is a map from short names for URIs to the namespace URIs
 themselves.
@@ -562,7 +562,7 @@ this entry) becomes the default namespace for the SDF definition file.
 |------------------|--------|----------|------------------------------------------------------------------------------------------------------|
 | namespace        | map    | no       | Defines short names mapped to namespace URIs, to be used as identifier prefixes                      |
 | defaultNamespace | string | no       | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
-{: #nssec title="Namespaces Section"}
+{: #nssec title="Namespaces Block"}
 
 The following example declares a set of namespaces and defines `cap`
 as the default namespace.
@@ -587,9 +587,9 @@ If no namespace map is given, no short names for namespace URIs are
 set up, and no defaultNamespace can be given.
 
 
-## Definitions section
+## Definitions block
 
-The Definitions section contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
+The Definitions block contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
 The value of each group is a JSON map (object), the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
 (In short, we speak of the map entries as "named sets of qualities".)
 
@@ -684,7 +684,7 @@ definition file that does not set a default namespace.
 
 Name references that point outside the current SDF definition file
 need to contain curie prefixes.  These then reference namespace
-declarations in the namespaces section.
+declarations in the namespaces block.
 
 For example, if a namespace prefix is defined:
 
