@@ -187,7 +187,7 @@ Group:
   entries (Definition Group) as a value.
 
 Class Name Keyword:
-: One of sdfThing, sdfProduct, sdfObject, sdfProperty, sdfAction,
+: One of sdfThing, sdfObject, sdfProperty, sdfAction,
   sdfEvent, or sdfData; the Classes for these type keywords are
   capitalized and prefixed with `sdf`.
 
@@ -318,10 +318,8 @@ are often, but not always, called *qualities*.
 
 ## Elements of an SDF model
 
-The SDF language uses seven predefined Class Name Keywords for modeling connected
-Things, six of which are illustrated in {{fig-class-2}} (the seventh
-class `sdfProduct` is similar enough to `sdfThing` that it would look
-the same in the figure).
+The SDF language uses six predefined Class Name Keywords for modeling connected
+Things which are illustrated in {{fig-class-2}}.
 
 ~~~ plantuml-utxt
 sdfThing --> "0+" sdfObject : hasObject
@@ -358,7 +356,7 @@ class sdfData {
 ~~~
 {: #fig-class-2 title="Main classes used in SDF models"}
 
-The seven main Class Name Keywords are discussed below.
+The six main Class Name Keywords are discussed below.
 
 ### sdfObject
 
@@ -499,15 +497,6 @@ complex devices that will use one or more `sdfObject` definitions.
 
 A definition in an `sdfThing` group can refine the metadata of the definitions it
 is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
-
-### sdfProduct
-
-`sdfThing` has a derived class `sdfProduct`, which can be used to
-indicate a top level inventory item with a Stock-Keeping Unit (SKU)
-identifier and other particular metadata.
-Structurally, there is no difference between definitions in either
-group; semantically, a definition in an `sdfProduct` group is intended
-to describe a class of complete Things.
 
 
 # SDF structure
@@ -1184,18 +1173,7 @@ The qualities of sdfThing are shown in {{sdfthingqual}}.
 | (common)  |        | {{common-qualities}} |
 | sdfThing  | thing  |                      |
 | sdfObject | object |                      |
-{: #sdfthingqual title="Qualities of sdfThing and sdfProduct"}
-
-
-## sdfProduct
-
-An sdfProduct provides the level of abstraction for representing a unique product or a profile for a standardized type of product, for example a "device type" definition with required minimum functionality.
-
-Products may be composed of Objects and Things at the high level, and may include their own definitions of Properties, Actions, and Events that can be used to extend or complete the included Object definitions.
-
-Product definitions may set optional defaults and constant values for specific use cases, for example units, range, and scale settings for properties, or available parameters for Actions.
-
-The qualities of sdfProduct are the same as for sdfThing and are shown in {{sdfthingqual}}.
+{: #sdfthingqual title="Qualities of sdfThing"}
 
 
 IANA Considerations {#iana}
@@ -1515,7 +1493,7 @@ repository).
  -->
 <!--  LocalWords:  namespaces sdfRequired Optionality sdfAction
  -->
-<!--  LocalWords:  sdfProduct dereferenced dereferencing atomicity
+<!--  LocalWords:  dereferenced dereferencing atomicity
  -->
 <!--  LocalWords:  interworking
  -->
