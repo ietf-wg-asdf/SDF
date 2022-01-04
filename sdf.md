@@ -979,9 +979,9 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "anyOf": [
     {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-       "sdfRef": "#/sdfData/rgbVal"}},
+       "$ref": "#/sdfData/rgbVal"}},
     {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-       "sdfRef": "#/sdfData/cmykVal"}}
+       "$ref": "#/sdfData/cmykVal"}}
   ]
   ~~~
 
