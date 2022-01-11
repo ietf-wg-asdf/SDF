@@ -2051,7 +2051,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
    ; for building hierarchy
    thingqualities = {
-    commonqualities,
+    commonqualities
     ? sdfObject: named<objectqualities>
     ? sdfThing: named<thingqualities>
     EXTENSION-POINT<"thing-ext">
@@ -2061,7 +2061,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
    ; for single objects, or for arrays of objects (1.2)
    objectqualities = {
-    commonqualities,
+    commonqualities
     ? ("minItems" .feature "1.2") => number
     ? ("maxItems" .feature "1.2") => number
     ? sdfProperty: named<propertyqualities>
@@ -2086,7 +2086,7 @@ Internet-Draft                  OneDM SDF                   January 2022
      dataqualities .feature (["1.1", "dataqualities-as-parameter"])
 
    actionqualities = {
-    commonqualities,
+    commonqualities
     ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
     ? ("sdfRequiredInputData" .feature "1.0") => pointer-list
     ? sdfOutputData: parameter-list  ; sdfRequired applies here
@@ -2102,8 +2102,8 @@ Internet-Draft                  OneDM SDF                   January 2022
    }
 
    dataqualities = {               ; also propertyqualities
-    commonqualities,
-    jsonschema,
+    commonqualities
+    jsonschema
     ? ("units" .feature "1.0") => text
     ? ("unit" .feature "1.1") => text
     ? ("scaleMinimum" .feature "1.0") => number
@@ -2134,9 +2134,9 @@ Internet-Draft                  OneDM SDF                   January 2022
                  / (any .feature "allowed-ext")                     ; EXTENSION-POINT
 
    compound-type = (
-     "type" => ("object" .feature "1.1"),
-     ? required: [+text],
-     ? properties: named<dataqualities>,
+     "type" => ("object" .feature "1.1")
+     ? required: [+text]
+     ? properties: named<dataqualities>
    )
 
    choice-type = (

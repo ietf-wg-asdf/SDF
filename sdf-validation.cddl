@@ -37,7 +37,7 @@ commonqualities = (
 
 ; for building hierarchy
 thingqualities = {
- commonqualities,
+ commonqualities
  ? sdfObject: named<objectqualities>
  ? sdfThing: named<thingqualities>
 }
@@ -46,7 +46,7 @@ productqualities = thingqualities ; ISSUE: get rid of sdfProduct?
 
 ; for single objects, or for arrays of objects (1.2)
 objectqualities = {
- commonqualities,
+ commonqualities
  ? ("minItems" .feature "1.2") => number
  ? ("maxItems" .feature "1.2") => number
  ? sdfProperty: named<propertyqualities>
@@ -61,7 +61,7 @@ parameter-list =
   dataqualities .feature (["1.1", "dataqualities-as-parameter"])
 
 actionqualities = {
- commonqualities,
+ commonqualities
  ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
@@ -74,8 +74,8 @@ eventqualities = {
 }
 
 dataqualities = {               ; also propertyqualities
- commonqualities,
- jsonschema,
+ commonqualities
+ jsonschema
  ? ("unit" .feature "1.1") => text
  ? observable: bool
  ? readable: bool
@@ -90,9 +90,9 @@ allowed-types = number / text / bool / null
               / {* text => any}
 
 compound-type = (
-  "type" => ("object" .feature "1.1"),
-  ? required: [+text],
-  ? properties: named<dataqualities>,
+  "type" => ("object" .feature "1.1")
+  ? required: [+text]
+  ? properties: named<dataqualities>
 )
 
 choice-type = (
