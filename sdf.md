@@ -637,13 +637,13 @@ There is no intention to require that these URIs can be dereferenced.
 global names, the URI should be chosen in such a way that this may
 become possible in the future.)
 
-The absolute URI of a global name should be a URI as per Section 3 of
-{{-uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
+The absolute URI of a global name should be a URI as per {{Section 3 of
+-uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
 For the present version of this specification, the query part should
 not be used (it might be used in later versions).
 
-The fragment identifier is constructed as per Section 6 of
-{{-pointer}}.
+The fragment identifier is constructed as per {{Section 6 of
+-pointer}}.
 
 ## Contributing global names
 
@@ -664,8 +664,8 @@ E.g., in {{example1}}, definitions for the following global names are contribute
 * https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on
 * https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
-Note the `#`, which separates the absolute-URI part (Section 4.3 of
-{{-uri}}) from the fragment identifier part.
+Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
+-uri}}) from the fragment identifier part.
 
 ## Referencing global names
 
@@ -675,8 +675,8 @@ but also limiting the IRIs involved in that production to URIs as per {{-uri}}
 and the prefixes to ASCII characters {{-ascii}}.
 
 A name that is contributed by the current SDF definition file can be
-referenced by a Same-Document Reference as per section 4.4 of
-{{-uri}}.
+referenced by a Same-Document Reference as per {{Section 4.4 of
+-uri}}.
 As there is little point in referencing the entire SDF definition
 file, this will be a `#` followed by a JSON pointer.
 This is the only kind of name reference to itself that is possible in an SDF
@@ -810,7 +810,7 @@ them.  These are listed in {{tbl-common-qualities}}.  None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
 If a label is required for an application and no label is given in the SDF model, the
-last part (`reference-token`, Section 3 of {{-pointer}}) of the JSON
+last part (`reference-token`, {{Section 3 of -pointer}}) of the JSON
 pointer to the definition can be used.
 
 | Quality     | Type         | Description                                                        |
@@ -1320,7 +1320,7 @@ The validation syntax can be generated from the framework syntax by
 leaving out all lines containing the string `EXTENSION-POINT`; as this
 is trivial, the result is not shown here.
 
-This appendix makes use of CDDL "features" as defined in Section 4 of {{-control}}.
+This appendix makes use of CDDL "features" as defined in {{Section 4 of -control}}.
 A feature named "1.0" is used to indicate parts of the syntax being
 deprecated towards SDF 1.1, and a feature named "1.1" is used to
 indicate new syntax intended for SDF 1.1.
