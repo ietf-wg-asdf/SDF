@@ -71,7 +71,7 @@ normative:
     title: SPDX License List
     target: https://spdx.org/licenses/
     date: false
-  I-D.ietf-cbor-cddl-control: control
+  RFC9165: control
 informative:
   I-D.handrews-json-schema-validation: jso
 # -02#section-7.3 -- formats
