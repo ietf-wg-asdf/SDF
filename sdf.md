@@ -127,8 +127,8 @@ entity:
     version (-00) of this document; version (-05) was designated as an
     *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
     the ASDF WG (2021-03-11).
-    The present version (-09) adds a URN namespace for registered
-    measurement unit names.
+    The present version (-10) collects a few smaller changes as input
+    to the 2022-01-17 ASDF WG interim.
 
 --- note_Contributing
 
