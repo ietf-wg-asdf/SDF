@@ -5,8 +5,8 @@
 ASDF                                                      M. Koster, Ed.
 Internet-Draft                                              PassiveLogic
 Intended status: Standards Track                         C. Bormann, Ed.
-Expires: 15 July 2022                             Universität Bremen TZI
-                                                         11 January 2022
+Expires: 20 July 2022                             Universität Bremen TZI
+                                                         16 January 2022
 
 
   Semantic Definition Format (SDF) for Data and Interactions of Things
@@ -29,10 +29,34 @@ Abstract
    // A JSON format representation of SDF 1.0 was defined in version
    // (-00) of this document; version (-05) was designated as an
    // _implementation draft_, labeled SDF 1.1, at the IETF110 meeting of
-   // the ASDF WG (2021-03-11).  The present version (-09) adds a URN
-   // namespace for registered measurement unit names.
+   // the ASDF WG (2021-03-11).  The present version (-10) collects a
+   // few smaller changes as input to the 2022-01-17 ASDF WG interim.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-asdf-sdf/.
+
+   Discussion of this document takes place on the A Semantic Definition
+   Format for Data and Interactions of Things (ASDF) Working Group
+   mailing list (mailto:asdf@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/asdf/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/ietf-wg-asdf/SDF.
 
 Contributing
+
+
+
+
+
+Koster & Bormann          Expires 20 July 2022                  [Page 1]
+
+Internet-Draft                  OneDM SDF                   January 2022
+
 
    Recent versions of this document are available at its GitHub
    repository https://github.com/ietf-wg-asdf/SDF (https://github.com/
@@ -46,17 +70,6 @@ Contributing
 
    The IETF Note Well applies (https://www.ietf.org/about/note-well/
    (https://www.ietf.org/about/note-well/)).
-
-
-
-
-
-
-
-Koster & Bormann          Expires 15 July 2022                  [Page 1]
-
-Internet-Draft                  OneDM SDF                   January 2022
-
 
 Status of This Memo
 
@@ -73,7 +86,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 July 2022.
+   This Internet-Draft will expire on 20 July 2022.
 
 Copyright Notice
 
@@ -88,6 +101,18 @@ Copyright Notice
    extracted from this document must include Revised BSD License text as
    described in Section 4.e of the Trust Legal Provisions and are
    provided without warranty as described in the Revised BSD License.
+
+
+
+
+
+
+
+
+Koster & Bormann          Expires 20 July 2022                  [Page 2]
+
+Internet-Draft                  OneDM SDF                   January 2022
+
 
 Table of Contents
 
@@ -106,14 +131,6 @@ Table of Contents
    3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  12
      3.1.  Information block . . . . . . . . . . . . . . . . . . . .  13
      3.2.  Namespaces block  . . . . . . . . . . . . . . . . . . . .  14
-
-
-
-Koster & Bormann          Expires 15 July 2022                  [Page 2]
-
-Internet-Draft                  OneDM SDF                   January 2022
-
-
      3.3.  Definitions block . . . . . . . . . . . . . . . . . . . .  15
    4.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .  16
      4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  16
@@ -145,6 +162,14 @@ Internet-Draft                  OneDM SDF                   January 2022
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  33
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  33
      9.1.  Normative References  . . . . . . . . . . . . . . . . . .  33
+
+
+
+Koster & Bormann          Expires 20 July 2022                  [Page 3]
+
+Internet-Draft                  OneDM SDF                   January 2022
+
+
      9.2.  Informative References  . . . . . . . . . . . . . . . . .  35
    Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  36
    Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  40
@@ -158,17 +183,6 @@ Internet-Draft                  OneDM SDF                   January 2022
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  81
    Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  81
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  82
-
-
-
-
-
-
-
-Koster & Bormann          Expires 15 July 2022                  [Page 3]
-
-Internet-Draft                  OneDM SDF                   January 2022
-
 
 1.  Introduction
 
@@ -187,8 +201,8 @@ Internet-Draft                  OneDM SDF                   January 2022
    // A JSON format representation of SDF 1.0 was defined in version
    // (-00) of this document; version (-05) was designated as an
    // _implementation draft_, labeled SDF 1.1, at the IETF110 meeting of
-   // the ASDF WG (2021-03-11).  The present version (-09) adds a URN
-   // namespace for registered measurement unit names.
+   // the ASDF WG (2021-03-11).  The present version (-10) collects a
+   // few smaller changes as input to the 2022-01-17 ASDF WG interim.
 
 1.1.  Terminology and Conventions
 
@@ -201,6 +215,17 @@ Internet-Draft                  OneDM SDF                   January 2022
       are mostly on the digital side.
 
    Affordance:  An element of an interface offered for interaction,
+
+
+
+
+
+
+Koster & Bormann          Expires 20 July 2022                  [Page 4]
+
+Internet-Draft                  OneDM SDF                   January 2022
+
+
       defining its possible uses or making clear how it can or should be
       used.  The term is used here for the digital interfaces of a Thing
       only; it might also have physical affordances such as buttons,
@@ -218,14 +243,6 @@ Internet-Draft                  OneDM SDF                   January 2022
       specification; these entries together serve a specific function.
 
    Group:  An entry in the main SDF map and in certain nested
-
-
-
-Koster & Bormann          Expires 15 July 2022                  [Page 4]
-
-Internet-Draft                  OneDM SDF                   January 2022
-
-
       definitions that has a Class Name Keyword as its key and a map of
       definition entries (Definition Group) as a value.
 
@@ -257,6 +274,14 @@ Internet-Draft                  OneDM SDF                   January 2022
       name "object" might be imported from a data definition language
       with the other semantics.)
 
+
+
+
+Koster & Bormann          Expires 20 July 2022                  [Page 5]
+
+Internet-Draft                  OneDM SDF                   January 2022
+
+
    Element:  A part or an aspect of something abstract; used here in its
       usual English definition.  (Occasionally, also used specifically
       for the elements of JSON arrays.)
@@ -274,13 +299,6 @@ Internet-Draft                  OneDM SDF                   January 2022
       defines how to map the abstract concepts in the specification into
       the protocols in use in a specific ecosystem.  Might supply URL
       components, numeric IDs, and similar details.
-
-
-
-Koster & Bormann          Expires 15 July 2022                  [Page 5]
-
-Internet-Draft                  OneDM SDF                   January 2022
-
 
    The term "byte" is used in its now-customary sense as a synonym for
    "octet".
@@ -315,25 +333,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann          Expires 15 July 2022                  [Page 6]
+Koster & Bormann          Expires 20 July 2022                  [Page 6]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -389,7 +389,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                  [Page 7]
+Koster & Bormann          Expires 20 July 2022                  [Page 7]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -445,7 +445,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                  [Page 8]
+Koster & Bormann          Expires 20 July 2022                  [Page 8]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -501,7 +501,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                  [Page 9]
+Koster & Bormann          Expires 20 July 2022                  [Page 9]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -557,7 +557,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 10]
+Koster & Bormann          Expires 20 July 2022                 [Page 10]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -613,7 +613,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 11]
+Koster & Bormann          Expires 20 July 2022                 [Page 11]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -669,7 +669,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 12]
+Koster & Bormann          Expires 20 July 2022                 [Page 12]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -725,7 +725,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 13]
+Koster & Bormann          Expires 20 July 2022                 [Page 13]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -781,7 +781,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 14]
+Koster & Bormann          Expires 20 July 2022                 [Page 14]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -837,7 +837,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 15]
+Koster & Bormann          Expires 20 July 2022                 [Page 15]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -893,7 +893,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 16]
+Koster & Bormann          Expires 20 July 2022                 [Page 16]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -949,7 +949,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 17]
+Koster & Bormann          Expires 20 July 2022                 [Page 17]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1005,7 +1005,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 18]
+Koster & Bormann          Expires 20 July 2022                 [Page 18]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1061,7 +1061,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 19]
+Koster & Bormann          Expires 20 July 2022                 [Page 19]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1117,7 +1117,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 20]
+Koster & Bormann          Expires 20 July 2022                 [Page 20]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1173,7 +1173,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 21]
+Koster & Bormann          Expires 20 July 2022                 [Page 21]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1229,7 +1229,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 22]
+Koster & Bormann          Expires 20 July 2022                 [Page 22]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1285,7 +1285,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 23]
+Koster & Bormann          Expires 20 July 2022                 [Page 23]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1341,7 +1341,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 24]
+Koster & Bormann          Expires 20 July 2022                 [Page 24]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1397,7 +1397,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 25]
+Koster & Bormann          Expires 20 July 2022                 [Page 25]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1453,7 +1453,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 26]
+Koster & Bormann          Expires 20 July 2022                 [Page 26]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1509,7 +1509,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 27]
+Koster & Bormann          Expires 20 July 2022                 [Page 27]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1565,7 +1565,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 28]
+Koster & Bormann          Expires 20 July 2022                 [Page 28]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1621,7 +1621,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 29]
+Koster & Bormann          Expires 20 July 2022                 [Page 29]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1677,7 +1677,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 30]
+Koster & Bormann          Expires 20 July 2022                 [Page 30]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1733,7 +1733,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 31]
+Koster & Bormann          Expires 20 July 2022                 [Page 31]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1789,7 +1789,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 32]
+Koster & Bormann          Expires 20 July 2022                 [Page 32]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1845,7 +1845,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 33]
+Koster & Bormann          Expires 20 July 2022                 [Page 33]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1901,7 +1901,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 34]
+Koster & Bormann          Expires 20 July 2022                 [Page 34]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -1957,7 +1957,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 35]
+Koster & Bormann          Expires 20 July 2022                 [Page 35]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2013,7 +2013,7 @@ Appendix A.  Formal Syntax of SDF
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 36]
+Koster & Bormann          Expires 20 July 2022                 [Page 36]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2069,7 +2069,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 37]
+Koster & Bormann          Expires 20 July 2022                 [Page 37]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2125,7 +2125,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 38]
+Koster & Bormann          Expires 20 July 2022                 [Page 38]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2181,7 +2181,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 39]
+Koster & Bormann          Expires 20 July 2022                 [Page 39]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2237,7 +2237,7 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 40]
+Koster & Bormann          Expires 20 July 2022                 [Page 40]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2293,7 +2293,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 41]
+Koster & Bormann          Expires 20 July 2022                 [Page 41]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2349,7 +2349,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 42]
+Koster & Bormann          Expires 20 July 2022                 [Page 42]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2405,7 +2405,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 43]
+Koster & Bormann          Expires 20 July 2022                 [Page 43]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2461,7 +2461,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 44]
+Koster & Bormann          Expires 20 July 2022                 [Page 44]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2517,7 +2517,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 45]
+Koster & Bormann          Expires 20 July 2022                 [Page 45]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2573,7 +2573,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 46]
+Koster & Bormann          Expires 20 July 2022                 [Page 46]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2629,7 +2629,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 47]
+Koster & Bormann          Expires 20 July 2022                 [Page 47]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2685,7 +2685,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 48]
+Koster & Bormann          Expires 20 July 2022                 [Page 48]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2741,7 +2741,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 49]
+Koster & Bormann          Expires 20 July 2022                 [Page 49]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2797,7 +2797,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 50]
+Koster & Bormann          Expires 20 July 2022                 [Page 50]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2853,7 +2853,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 51]
+Koster & Bormann          Expires 20 July 2022                 [Page 51]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2909,7 +2909,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 52]
+Koster & Bormann          Expires 20 July 2022                 [Page 52]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -2965,7 +2965,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 53]
+Koster & Bormann          Expires 20 July 2022                 [Page 53]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3021,7 +3021,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 54]
+Koster & Bormann          Expires 20 July 2022                 [Page 54]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3077,7 +3077,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 55]
+Koster & Bormann          Expires 20 July 2022                 [Page 55]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3133,7 +3133,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 56]
+Koster & Bormann          Expires 20 July 2022                 [Page 56]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3189,7 +3189,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 57]
+Koster & Bormann          Expires 20 July 2022                 [Page 57]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3245,7 +3245,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 58]
+Koster & Bormann          Expires 20 July 2022                 [Page 58]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3301,7 +3301,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 59]
+Koster & Bormann          Expires 20 July 2022                 [Page 59]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3357,7 +3357,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 60]
+Koster & Bormann          Expires 20 July 2022                 [Page 60]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3413,7 +3413,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 61]
+Koster & Bormann          Expires 20 July 2022                 [Page 61]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3469,7 +3469,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 62]
+Koster & Bormann          Expires 20 July 2022                 [Page 62]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3525,7 +3525,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 63]
+Koster & Bormann          Expires 20 July 2022                 [Page 63]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3581,7 +3581,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 64]
+Koster & Bormann          Expires 20 July 2022                 [Page 64]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3637,7 +3637,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 65]
+Koster & Bormann          Expires 20 July 2022                 [Page 65]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3693,7 +3693,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 66]
+Koster & Bormann          Expires 20 July 2022                 [Page 66]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3749,7 +3749,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 67]
+Koster & Bormann          Expires 20 July 2022                 [Page 67]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3805,7 +3805,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 68]
+Koster & Bormann          Expires 20 July 2022                 [Page 68]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3861,7 +3861,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 69]
+Koster & Bormann          Expires 20 July 2022                 [Page 69]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3917,7 +3917,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 70]
+Koster & Bormann          Expires 20 July 2022                 [Page 70]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -3973,7 +3973,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 71]
+Koster & Bormann          Expires 20 July 2022                 [Page 71]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4029,7 +4029,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 72]
+Koster & Bormann          Expires 20 July 2022                 [Page 72]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4085,7 +4085,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 73]
+Koster & Bormann          Expires 20 July 2022                 [Page 73]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4141,7 +4141,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 74]
+Koster & Bormann          Expires 20 July 2022                 [Page 74]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4197,7 +4197,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 75]
+Koster & Bormann          Expires 20 July 2022                 [Page 75]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4253,7 +4253,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 76]
+Koster & Bormann          Expires 20 July 2022                 [Page 76]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4309,7 +4309,7 @@ Internet-Draft                  OneDM SDF                   January 2022
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 77]
+Koster & Bormann          Expires 20 July 2022                 [Page 77]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4365,7 +4365,7 @@ Appendix C.  Data Qualities inspired by json-schema.org
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 78]
+Koster & Bormann          Expires 20 July 2022                 [Page 78]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4421,7 +4421,7 @@ C.2.  type "string"
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 79]
+Koster & Bormann          Expires 20 July 2022                 [Page 79]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4477,7 +4477,7 @@ C.4.  type "array"
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 80]
+Koster & Bormann          Expires 20 July 2022                 [Page 80]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4533,7 +4533,7 @@ Contributors
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 81]
+Koster & Bormann          Expires 20 July 2022                 [Page 81]
 
 Internet-Draft                  OneDM SDF                   January 2022
 
@@ -4589,4 +4589,4 @@ Authors' Addresses
 
 
 
-Koster & Bormann          Expires 15 July 2022                 [Page 82]
+Koster & Bormann          Expires 20 July 2022                 [Page 82]
