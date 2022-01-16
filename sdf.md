@@ -16,6 +16,11 @@ keyword: Internet-Draft
 stand_alone: yes
 pi: [toc, sortrefs, symrefs, comments]
 
+venue:
+    group: A Semantic Definition Format for Data and Interactions of Things (ASDF)
+    mail: asdf@ietf.org
+    github: ietf-wg-asdf/SDF
+
 author:
   - name: Michael Koster
     org: PassiveLogic
