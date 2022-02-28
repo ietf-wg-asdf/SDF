@@ -1,4 +1,5 @@
 ---
+v: 3
 coding: utf-8
 
 title: >
@@ -7,14 +8,11 @@ abbrev: OneDM SDF
 docname: draft-ietf-asdf-sdf-latest
 category: std
 consensus: true
+submissiontype: IETF
 
-ipr: trust200902
 area: Applications
 workgroup: ASDF
 keyword: Internet-Draft
-
-stand_alone: yes
-pi: [toc, sortrefs, symrefs, comments]
 
 venue:
     group: A Semantic Definition Format for Data and Interactions of Things (ASDF)
@@ -49,7 +47,7 @@ contributor:
     code: '02420'
     country: Finland
     email: ari.keranen@ericsson.com
-  - name: Wouter van der Beek
+  - name: Wouter | van der Beek
     org: Cascoda Ltd.
     street:
     - Threefield House
@@ -263,37 +261,37 @@ We start with an example for the SDF definition of a simple Object called "Switc
 
 ~~~ json
 {
-    "info": {
-        "title": "Example file for OneDM Semantic Definition Format",
-        "version": "2019-04-24",
-        "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-        "license": "https://example.com/license"
-    },
-    "namespace": {
-        "cap": "https://example.com/capability/cap"
-    },
-    "defaultNamespace": "cap",
-    "sdfObject": {
-        "Switch": {
-            "sdfProperty": {
-                "value": {
-                    "description": "The state of the switch; false for off and true for on.",
-                    "type": "boolean"
-                }
-            },
-            "sdfAction": {
-                "on": {
-                    "description": "Turn the switch on; equivalent to setting value to true."
-                },
-                "off": {
-                    "description": "Turn the switch off; equivalent to setting value to false."
-                },
-                "toggle": {
-                    "description": "Toggle the switch; equivalent to setting value to its complement."
-                }
-            }
+  "info": {
+    "title": "Example file for OneDM Semantic Definition Format",
+    "version": "2019-04-24",
+    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+    "license": "https://example.com/license"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "Switch": {
+      "sdfProperty": {
+        "value": {
+          "description": "The state of the switch; false for off and true for on.",
+          "type": "boolean"
         }
+      },
+      "sdfAction": {
+        "on": {
+          "description": "Turn the switch on; equivalent to setting value to true."
+        },
+        "off": {
+          "description": "Turn the switch off; equivalent to setting value to false."
+        },
+        "toggle": {
+          "description": "Toggle the switch; equivalent to setting value to its complement."
+        }
+      }
     }
+  }
 }
 ~~~
 {: #example1 title="A simple example of an SDF definition file"}
