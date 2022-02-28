@@ -5,7 +5,6 @@ sdf-syntax = {
  ? namespace: named<text>
  ? defaultNamespace: text
  ? sdfThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
- ? sdfProduct: named<productqualities>   ; Product is a composition of things and objects that can model a SKU-level instance of a product
  ? sdfObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
  ? sdfProperty: named<propertyqualities> ; Property represents the state of an instance of an object
  ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
@@ -45,8 +44,6 @@ thingqualities = {
  ? sdfThing: named<thingqualities>
  EXTENSION-POINT<"thing-ext">
 }
-
-productqualities = thingqualities ; ISSUE: get rid of sdfProduct?
 
 ; for single objects, or for arrays of objects (1.2)
 objectqualities = {
