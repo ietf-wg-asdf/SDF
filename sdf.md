@@ -1157,7 +1157,7 @@ consumption there is no conflict with the intended goal.
 ...
   "cable-length" : {
     "sdfRef": "#/sdfData/length"
-    "minimum": 0.05,
+    "minimum": 5e-2,
     "description": "Cables must be at least 5 cm."
   }
 ~~~
