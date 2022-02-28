@@ -57,8 +57,6 @@ objectqualities = {
  EXTENSION-POINT<"object-ext">
 }
 
-propertyqualities = dataqualities ; the definitions in sdfData are declarations in sdfProperty
-
 parameter-list =
   pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
   dataqualities .feature (["1.1", "dataqualities-as-parameter"])
@@ -79,16 +77,13 @@ eventqualities = {
  EXTENSION-POINT<"event-ext">
 }
 
-dataqualities = {               ; also propertyqualities
+dataqualities = {
  commonqualities
  jsonschema
  ? ("units" .feature "1.0") => text
  ? ("unit" .feature "1.1") => text
  ? ("scaleMinimum" .feature "1.0") => number
  ? ("scaleMaximum" .feature "1.0") => number
- ? observable: bool
- ? readable: bool
- ? writable: bool
  ? nullable: bool
  ? ("subtype" .feature "1.0") => "byte-string" / "unix-time"
             / (text .feature "subtype-ext")                       ; EXTENSION-POINT
@@ -96,6 +91,13 @@ dataqualities = {               ; also propertyqualities
             / (text .feature "sdftype-ext")                       ; EXTENSION-POINT
  ? contentFormat: text
  EXTENSION-POINT<"data-ext">
+}
+
+propertyqualities = {
+ dataqualities
+ ? observable: bool
+ ? readable: bool
+ ? writable: bool
 }
 
 allowed-types = number / text / bool / null

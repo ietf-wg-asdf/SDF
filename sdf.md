@@ -398,10 +398,7 @@ changes.
 (These three aspects are described by the qualities `readable`,
 `writable`, and `observable` defined for an `sdfProperty`.)
 
-Definitions in `sdfProperty` groups look like definitions in `sdfData` groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing Object.
-(Qualities beyond those of `sdfData` definitions could be defined for `sdfProperty` declarations
-but currently aren't; this means that even Property qualities
-such as `readable` and `writable` can be associated with definitions in `sdfData` groups, as well.)
+Definitions in `sdfProperty` groups include the definitions from `sdfData` groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing Object.
 
 For definitions in `sdfProperty` and `sdfData`, SDF provides qualities that can
 constrain the structure and values of data allowed in an instance of
@@ -834,15 +831,12 @@ present specification.
 | unit          | string                                    | unit name (note 1)                                              | N/A     |
 | scaleMinimum  | number                                    | lower limit of value in units given by unit (note 2)            | N/A     |
 | scaleMaximum  | number                                    | upper limit of value in units given by unit (note 2)            | N/A     |
-| readable      | boolean                                   | Reads are allowed                                               | true    |
-| writable      | boolean                                   | Writes are allowed                                              | true    |
-| observable    | boolean                                   | flag to indicate asynchronous notification is available         | true    |
 | nullable      | boolean                                   | indicates a null value is available for this type               | true    |
 | contentFormat | string                                    | content type (IANA media type string plus parameters), encoding | N/A     |
 | sdfType       | string ({{sdftype}})                        | sdfType enumeration (extensible)                                | N/A     |
 | sdfChoice     | named set of data qualities ({{sdfchoice}}) | named alternatives                                              | N/A     |
 | enum          | array of strings                          | abbreviation for string-valued named alternatives               | N/A     |
-{: #sdfdataqual2 title="SDF-defined Qualities of sdfProperty and sdfData"}
+{: #sdfdataqual2 title="SDF-defined Qualities of sdfData"}
 
 
 1. Note that the quality `unit` was called `units` in SDF 1.0.
@@ -1043,7 +1037,15 @@ The sdfProperty keyword denotes a group of zero or more Property definitions.
 Properties are used to model elements of state.
 
 The qualities of a Property definition include the data qualities (and
-thus the common qualities), see {{data-qualities}}.
+thus the common qualities), see {{data-qualities}}, additional qualities are shown in {{sdfpropqual}}.
+
+| Quality       | Type      | Description                                             | Default |
+|---------------+-----------+---------------------------------------------------------|---------|
+| (data)        |           | {{data-qualities}}                                      |         |
+| readable      | boolean   | Reads are allowed                                       | true    |
+| writable      | boolean   | Writes are allowed                                      | true    |
+| observable    | boolean   | flag to indicate asynchronous notification is available | true    |
+{: #sdfpropqual title="Qualities of sdfProperty"}
 
 ## sdfAction
 
