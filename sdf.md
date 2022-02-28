@@ -125,20 +125,10 @@ entity:
     version (-00) of this document; version (-05) was designated as an
     *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
     the ASDF WG (2021-03-11).
-    The present version (-10) collects a few smaller changes as input
-    to the 2022-01-17 ASDF WG interim.
+    The present version (-11) collects a few smaller changes as input
+    to the 2022-02-28 ASDF WG interim.
+    It also removes deprecated elements from SDF 1.0.
 
---- note_Contributing
-
-Recent versions of this document are available at its GitHub
-repository <https://github.com/ietf-wg-asdf/SDF> — this also provides
-an issue tracker as well as a way to supply "pull requests".
-
-General discussion of this SDF Internet-Draft happens on the mailing
-list of the IETF ASDF Working Group, asdf@ietf.org (subscribe at
-<https://www.ietf.org/mailman/listinfo/asdf>).
-
-The IETF Note Well applies (<https://www.ietf.org/about/note-well/>).
 
 --- middle
 
