@@ -695,10 +695,10 @@ Name references occur only in specific elements of the syntax of SDF:
 * pointing to elements via sdfRequired value elements
 
 
-## sdfRef
+## sdfRef {#sdfref}
 
 In a JSON map establishing a definition, the keyword "sdfRef" is used
-to copy all of the qualities of the referenced definition, indicated
+to copy all of the qualities and enclosed definitions of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
 (This can be compared to the processing of the "$ref" keyword in {{-jso}}.)
 
@@ -714,7 +714,10 @@ creates a new definition "temperatureProperty" that contains all of the qualitie
 
 The sdfRef member need not be the only member of a map.
 Additional members may be present with the intention to override parts
-of the referenced map.
+of the referenced map or to add new qualities or definitions.
+
+When processing sdfRef, if the target definition contains also sdfRef (i.e., is based on yet another definition), that MUST be processed first.
+
 More formally, for a JSON map that contains an
 sdfRef member, the semantics is defined to be as if the following steps were performed:
 
@@ -730,6 +733,46 @@ sdfRef member, the semantics is defined to be as if the following steps were per
 
 TODO: Make sure that the grammar in {{syntax}} allows specifying the
 null values that are necessary to remove members in a merge-patch.
+
+### Resolved models
+
+A model where all sdfRef references are processed as described in {{sdfref}} is called a resolved model.
+
+For example, given the following sdfData definitions:
+
+~~~ json
+"sdfData": {
+  "Coordinate" : {
+    "type": "number", "unit": "m"
+  },
+  "X-Coordinate" : {
+    "sdfRef" : "#/sdfData/Coordinate",
+    "description": "Distance from the base of the Thing along the X axis."
+  },
+  "Pos-X-Coordinate" : {
+    "sdfRef": "#/sdfData/X-Coordinate",
+    "minimum": 0
+  }
+}
+~~~
+
+After resolving the definitions would look as follows:
+
+~~~ json
+"sdfData": {
+  "Coordinate" : {
+    "type": "number", "unit": "m"
+  },
+  "X-Coordinate" : {
+    "description": "Distance from the base of the Thing along the X axis.",
+    "type": "number", "unit": "m"
+  },
+  "Pos-X-Coordinate" : {
+    "description": "Distance from the base of the Thing along the X axis.",
+    "minimum": 0, "type": "number", "unit": "m"
+  }
+}
+~~~
 
 ## sdfRequired
 
