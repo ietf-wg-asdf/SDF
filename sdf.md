@@ -147,7 +147,10 @@ entity:
 
 Thing:
 : A physical item that is also made available in the Internet of
-  Things.  The term is used here for Things that are notable for their
+  Things.
+  In SDF, they are modelled using Property, Action, and Event
+  definitions.
+  The term itself is used here for Things that are notable for their
   interaction with the physical world beyond interaction with humans;
   a temperature sensor or a light might be a Thing, but a router that
   employs both temperature sensors and indicator lights might exhibit
@@ -261,7 +264,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
-  "sdfObject": {
+  "sdfThing": {
     "Switch": {
       "sdfProperty": {
         "value": {
@@ -291,7 +294,7 @@ The state `value` declared in the `sdfProperty` group, represented by a Boolean,
 The actions `on` or `off` declared in the `sdfAction` group are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action `toggle` will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
 
-The `sdfObject` group lists the affordances of instances of this object.
+The `sdfThing` group lists the affordances of instances of this object.
 The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the object.
 Properties can have additional qualities to describe the state more precisely.
 Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
@@ -303,7 +306,7 @@ changes the state based on the current state of the Property named `value`.
 
 In the JSON representation, note how (with the exception of the `info`
 group) maps that have keys taken from the SDF vocabulary (`info`,
-`namespace`, `sdfObject`) alternate in nesting with maps that have keys
+`namespace`, `sdfThing`) alternate in nesting with maps that have keys
 that are freely defined by the model writer (`Switch`, `value`, `on`,
 etc.); the latter usually use the `named<>` production in the [formal
 syntax of SDF](#syntax), while the former SDF-defined vocabulary items
@@ -312,15 +315,16 @@ are often, but not always, called *qualities*.
 ## Elements of an SDF model
 
 The SDF language uses six predefined Class Name Keywords for modeling connected
-Things which are illustrated in {{fig-class-2}}.
+Things which are illustrated in {{fig-class-2}} (the sixth
+class `sdfObject` is similar enough to `sdfThing` that it would look
+the same in the figure).
 
 ~~~ plantuml-utxt
-sdfThing --> "0+" sdfObject : hasObject
 sdfThing --> "0+" sdfThing : hasThing
 
-sdfObject --> "0+" sdfProperty : hasProperty
-sdfObject --> "0+" sdfAction : hasAction
-sdfObject --> "0+" sdfEvent : hasEvent
+sdfThing --> "0+" sdfProperty : hasProperty
+sdfThing --> "0+" sdfAction : hasAction
+sdfThing --> "0+" sdfEvent : hasEvent
 
 sdfAction --> "1+" sdfData : hasInputData
 sdfAction --> "0+" sdfData : hasOutputData
@@ -330,9 +334,6 @@ sdfEvent --> "1+" sdfData : hasOutputData
 sdfProperty --> "1" sdfData : isInstanceOf
 
 class sdfThing {
-}
-
-class sdfObject {
 }
 
 class sdfProperty {
@@ -351,34 +352,38 @@ class sdfData {
 
 The six main Class Name Keywords are discussed below.
 
-### sdfObject
+### sdfThing
 
-Objects, the items listed in an `sdfObject` group, are the main "atom" of reusable semantics for model construction.
+Things, the items listed in an `sdfThing` group, are the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks LwM2M
 Objects {{OMA}}, and
 OCF Resource Types {{OCF}}.
+They can also be mapped to Web of Things (WoT) Thing Models (TMs).
 
-An `sdfObject` contains a set of `sdfProperty`, `sdfAction`, and
+An `sdfThing` contains a set of `sdfProperty`, `sdfAction`, and
 `sdfEvent` definitions that describe the interaction affordances
 associated with some scope of functionality.
 
-For the granularity of definition, `sdfObject` definitions are meant
-to be kept narrow enough in scope to enable broad reuse and
+For the granularity of definition, reusable `sdfThing` definitions
+are meant to be kept narrow enough in scope to enable broad reuse and
 interoperability.
-For example, defining a light bulb using separate `sdfObject`
+For example, defining a light bulb using separate `sdfThing`
 definitions for on/off control, dimming, and color control affordances
 will enable interoperable functionality to be configured for diverse
 product types.
-An `sdfObject` definition for a common on/off control may be used to
+An `sdfThing` definition for a common on/off control may be used to
 control may different kinds of Things that require on/off control.
 
+However, in order to model more complex devices, `sdfThing` definitions
+also allow for nesting by including `sdfThing` definitions themselves.
+
 Optional qualities "minItems" and "maxItems" can be used to define
-sdfObjects as arrays.
+sdfThings as arrays.
 
 ### sdfProperty
 
-`sdfProperty` is used to model elements of state within `sdfObject` instances.
+`sdfProperty` is used to model elements of state within `sdfThing` instances.
 
 An instance of `sdfProperty` may be associated with some protocol
 affordance to enable the application to obtain the state variable and,
@@ -480,13 +485,16 @@ data types such as mode and machine state enumerations to be reused
 across multiple definitions that have similar basic characteristics
 and requirements.
 
-### sdfThing
+### sdfObject
 
-Back at the top level, the `sdfThing` groups enables definition of models for
-complex devices that will use one or more `sdfObject` definitions.
+Ealier versions of SDF defined `sdfObject` as the atomic component
+for building SDF models.
+This function is now fulfilled by the `sdfThing` definition which
+also allows for nested components.
 
-A definition in an `sdfThing` group can refine the metadata of the definitions it
-is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
+For the sake of backwards compatibility, `sdfObject` is kept in this
+version of SDF but deprecated and realigned with the new `sdfThing`
+definition, before being removed in a future version.
 
 
 # SDF structure
@@ -581,7 +589,7 @@ A definition may in turn contain other definitions. Each definition is a named s
 An example for an Object definition is given in {{exobject}}:
 
 ~~~ json
-"sdfObject": {
+"sdfThing": {
   "foo": {
     "sdfProperty": {
       "bar": {
@@ -593,11 +601,13 @@ An example for an Object definition is given in {{exobject}}:
 ~~~
 {: #exobject title="Example Object definition"}
 
-This example defines an Object "foo" that is defined in the default namespace (full address: `#/sdfObject/foo`), containing a property that can be addressed as
-`#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
+This example defines an Object "foo" that is defined in the default namespace (full address: `#/sdfThing/foo`), containing a property that can be addressed as
+`#/sdfThing/foo/sdfProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
-Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfObject` entries, are declarations.  Similarly, entries within an `sdfThing` describe instances of `sdfObject` (or nested `sdfThing`) that form part of instances of the Thing.
+<!-- TODO: Maybe this paragraph should be reworded -->
+Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfThing` entries, are declarations. The `sdfThing` itself can also
+describe other instances of (potentially nested) `sdfThing` that form part of instances of the Thing as a whole.
 
 # Names and namespaces
 
@@ -638,10 +648,10 @@ we therefore also call it the "target namespace" of the SDF definition file.
 
 E.g., in {{example1}}, definitions for the following global names are contributed:
 
-* https://example.com/capability/cap#/sdfObject/Switch
-* https://example.com/capability/cap#/sdfObject/Switch/sdfProperty/value
-* https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on
-* https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
+* https://example.com/capability/cap#/sdfThing/Switch
+* https://example.com/capability/cap#/sdfThing/Switch/sdfProperty/value
+* https://example.com/capability/cap#/sdfThing/Switch/sdfAction/on
+* https://example.com/capability/cap#/sdfThing/Switch/sdfAction/off
 
 Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
 -uri}}) from the fragment identifier part.
@@ -740,15 +750,15 @@ instance conforming the current definition.
 The value of "sdfRequired" is an array of name references (JSON pointers), each
 indicating one declaration that is mandatory to be represented.
 
-The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
+The example in {{example-req}} shows two required elements in the sdfThing definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
 ~~~ json
 {
-  "sdfObject": {
+  "sdfThing": {
     "temperatureWithAlarm": {
       "sdfRequired": [
-        "#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
-        "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
+        "#/sdfThing/temperatureWithAlarm/sdfProperty/currentTemperature",
+        "#/sdfThing/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
       ],
       "sdfData":{
         "temperatureData": {
@@ -757,7 +767,7 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
       },
       "sdfProperty": {
         "currentTemperature": {
-          "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+          "sdfRef": "#/sdfThing/temperatureWithAlarm/sdfData/temperatureData"
         }
       },
       "sdfEvent": {
@@ -770,7 +780,7 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
                 "const": "OverTemperatureAlarm"
               },
               "temperature": {
-                "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+                "sdfRef": "#/sdfThing/temperatureWithAlarm/sdfData/temperatureData"
               }
             }
           }
@@ -998,26 +1008,33 @@ is syntactic sugar for
 The following SDF keywords are used to create definition groups in the target namespace.
 All these definitions share some common qualities as discussed in {{common-qualities}}.
 
-## sdfObject
+## sdfThing
 
-The sdfObject keyword denotes a group of zero or more Object definitions.
-Object definitions may contain or include definitions of Properties, Actions, Events declared for the object, as well as data types (sdfData group) to be used in this or other Objects.
+The sdfThing keyword denotes a group of zero or more Thing definitions.
+Thing definitions may contain or include definitions of Properties, Actions, Events declared for the thing, as well as data types (sdfData group) to be used in this or other Things.
 
-The qualities of an sdfObject include the common qualities, additional qualities are shown in {{sdfobjqual}}.
+They can also be used to build more complex models by including other sdfThing or (deprecated) sdfObject definitions.
+In this case, sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment
+and a defined freezer compartment, making up a combination refrigerator-freezer product.
+
+The qualities of an sdfThing include the common qualities, additional qualities are shown in {{sdfthingqual}}.
 None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
 
+The qualities of sdfThing are shown in {{sdfthingqual}}.
+
 | Quality     | Type      | Description                                                              |
 |-------------+-----------+--------------------------------------------------------------------------|
 | (common)    |           | {{common-qualities}}                                                     |
-| sdfProperty | property  | zero or more named property definitions for this object                  |
-| sdfAction   | action    | zero or more named action definitions for this object                    |
-| sdfEvent    | event     | zero or more named event definitions for this object                     |
+| sdfProperty | property  | zero or more named property definitions for this thing                   |
+| sdfAction   | action    | zero or more named action definitions for this thing                     |
+| sdfEvent    | event     | zero or more named event definitions for this thing                      |
 | sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
-| minItems    | number    | (array) Minimum number of sdfObject instances in array                   |
-| maxItems    | number    | (array) Maximum number of sdfObject instances in array                   |
-{: #sdfobjqual title="Qualities of sdfObject"}
+| sdfThing    | thing     | zero or more named thing definitions for this thing                      |
+| minItems    | number    | (array) Minimum number of sdfThing instances in array                    |
+| maxItems    | number    | (array) Maximum number of sdfThing instances in array                    |
+{: #sdfthingqual title="Qualities of sdfThing"}
 
 
 ## sdfProperty
@@ -1109,7 +1126,7 @@ The requirements for high level composition include the following:
 
 The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.
 
-The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where `ns` is the namespace prefix (short name for the namespace).
+The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfThing/Switch/sdfAction/on" where `ns` is the namespace prefix (short name for the namespace).
 
 ## Modular Composition
 
@@ -1153,22 +1170,13 @@ consumption there is no conflict with the intended goal.
 ~~~
 {: #exa-sdfref}
 
-## sdfThing
+## sdfObject
 
-An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip.
+An sdfObject is equivalent to an sdfThing with the exception and is included to ensure backwards compatability with ealier
+versions of SDF.
+The sdfObject definition will eventually be removed in a later version.
 
-sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
-
-An sdfThing may be composed of sdfObjects and other sdfThings.
-
-The qualities of sdfThing are shown in {{sdfthingqual}}.
-
-| Quality   | Type   | Description          |
-|-----------|--------|----------------------|
-| (common)  |        | {{common-qualities}} |
-| sdfThing  | thing  |                      |
-| sdfObject | object |                      |
-{: #sdfthingqual title="Qualities of sdfThing"}
+The qualities of sdfObject are shown above in {{sdfthingqual}}.
 
 
 IANA Considerations {#iana}

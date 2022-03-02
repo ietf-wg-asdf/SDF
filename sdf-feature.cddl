@@ -37,16 +37,10 @@ commonqualities = (
  ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
 )
 
-; for building hierarchy
+; for single or nested things, or for arrays of things (1.2)
+; the sdfObject field is deprecated and is going to be removed
+; in a future version of SDF
 thingqualities = {
- commonqualities
- ? sdfObject: named<objectqualities>
- ? sdfThing: named<thingqualities>
- EXTENSION-POINT<"thing-ext">
-}
-
-; for single objects, or for arrays of objects (1.2)
-objectqualities = {
  commonqualities
  ? ("minItems" .feature "1.2") => number
  ? ("maxItems" .feature "1.2") => number
@@ -54,8 +48,14 @@ objectqualities = {
  ? sdfAction: named<actionqualities>
  ? sdfEvent: named<eventqualities>
  ? sdfData: named<dataqualities>
- EXTENSION-POINT<"object-ext">
+ ? sdfObject: named<objectqualities>
+ ? sdfThing: named<thingqualities>
+ EXTENSION-POINT<"thing-ext">
 }
+
+; Included for backwards compatability
+; Deprecated in SDF 1.2
+objectqualities = thingqualities
 
 parameter-list =
   pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
