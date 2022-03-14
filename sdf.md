@@ -767,7 +767,7 @@ After resolving the definitions would look as follows:
     "description": "Distance from the base of the Thing along the X axis.",
     "type": "number", "unit": "m"
   },
-  "Pos-X-Coordinate" : {
+  "Non-neg-X-Coordinate" : {
     "description": "Distance from the base of the Thing along the X axis.",
     "minimum": 0, "type": "number", "unit": "m"
   }
