@@ -716,7 +716,7 @@ The sdfRef member need not be the only member of a map.
 Additional members may be present with the intention to override parts
 of the referenced map or to add new qualities or definitions.
 
-When processing sdfRef, if the target definition contains also sdfRef (i.e., is based on yet another definition), that MUST be processed first.
+When processing sdfRef, if the target definition contains also sdfRef (i.e., is based on yet another definition), that MUST be processed as well.
 
 More formally, for a JSON map that contains an
 sdfRef member, the semantics is defined to be as if the following steps were performed:
@@ -749,7 +749,7 @@ For example, given the following sdfData definitions:
     "sdfRef" : "#/sdfData/Coordinate",
     "description": "Distance from the base of the Thing along the X axis."
   },
-  "Pos-X-Coordinate" : {
+  "Non-neg-X-Coordinate" : {
     "sdfRef": "#/sdfData/X-Coordinate",
     "minimum": 0
   }
