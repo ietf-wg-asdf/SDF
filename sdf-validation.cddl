@@ -5,7 +5,6 @@ sdf-syntax = {
  ? namespace: named<text>
  ? defaultNamespace: text
  ? sdfThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
- ? sdfProduct: named<productqualities>   ; Product is a composition of things and objects that can model a SKU-level instance of a product
  ? sdfObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
  ? sdfProperty: named<propertyqualities> ; Property represents the state of an instance of an object
  ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
@@ -42,8 +41,6 @@ thingqualities = {
  ? sdfThing: named<thingqualities>
 }
 
-productqualities = thingqualities ; ISSUE: get rid of sdfProduct?
-
 ; for single objects, or for arrays of objects (1.2)
 objectqualities = {
  commonqualities
@@ -54,8 +51,6 @@ objectqualities = {
  ? sdfEvent: named<eventqualities>
  ? sdfData: named<dataqualities>
 }
-
-propertyqualities = dataqualities ; the definitions in sdfData are declarations in sdfProperty
 
 parameter-list =
   dataqualities .feature (["1.1", "dataqualities-as-parameter"])
@@ -73,16 +68,20 @@ eventqualities = {
  ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
 }
 
-dataqualities = {               ; also propertyqualities
+dataqualities = {
  commonqualities
  jsonschema
  ? ("unit" .feature "1.1") => text
- ? observable: bool
- ? readable: bool
- ? writable: bool
  ? nullable: bool
  ? ("sdfType" .feature "1.1") => "byte-string" / "unix-time"
  ? contentFormat: text
+}
+
+propertyqualities = {
+ ? observable: bool
+ ? readable: bool
+ ? writable: bool
+ ~dataqualities
 }
 
 allowed-types = number / text / bool / null
@@ -95,15 +94,11 @@ compound-type = (
   ? properties: named<dataqualities>
 )
 
-choice-type = (
-  ("sdfChoice" .feature "1.1") => named<dataqualities>
-)
-
 jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
-    // choice-type
    )
+ ? ("sdfChoice" .feature "1.1") => named<dataqualities> ; if present, all other qualities apply to all choices
  ? "enum" => [+ text]               ; limited to text strings in SDF 1.1
  ? const: allowed-types                            ; should validate against type
  ? default: allowed-types                          ; should validate against type
@@ -131,8 +126,8 @@ jsonschema = (
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type
-        // choice-type              ; do we really need arrays of choices?
        )
+     ? ("sdfChoice" .feature "1.1") => named<dataqualities>
      ; jso subset
      ? minimum: number
      ? maximum: number

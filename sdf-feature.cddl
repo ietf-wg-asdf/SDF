@@ -94,10 +94,10 @@ dataqualities = {
 }
 
 propertyqualities = {
- dataqualities
  ? observable: bool
  ? readable: bool
  ? writable: bool
+ ~dataqualities
 }
 
 allowed-types = number / text / bool / null
@@ -111,16 +111,12 @@ compound-type = (
   ? properties: named<dataqualities>
 )
 
-choice-type = (
-  ("sdfChoice" .feature "1.1") => named<dataqualities>
-)
-
 jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
-    // choice-type
     // (type: text .feature "type-ext")                       ; EXTENSION-POINT
    )
+ ? ("sdfChoice" .feature "1.1") => named<dataqualities> ; if present, all other qualities apply to all choices
  ? "enum" => [+ text]               ; limited to text strings in SDF 1.1
  ? ("enum" .feature "1.0") => [+ allowed-types]    ; should validate against type
  ? const: allowed-types                            ; should validate against type
@@ -150,9 +146,9 @@ jsonschema = (
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type
-        // choice-type              ; do we really need arrays of choices?
         // (type: text .feature "itemtype-ext")                       ; EXTENSION-POINT
        )
+     ? ("sdfChoice" .feature "1.1") => named<dataqualities>
      ; jso subset
      ? minimum: number
      ? maximum: number

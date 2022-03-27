@@ -940,6 +940,9 @@ Data can be a choice of named alternatives, called `sdfChoice`.
 Each alternative is identified by a name (string, key in the JSON
 object used to represent the choice) and a set of dataqualities
 (object, the value in the JSON object used to represent the choice).
+Dataqualities that are specified at the same level as the sdfChoice
+apply to all choices in the sdfChoice, except those specific choices
+where the dataquality is overridden at the choice level.
 
 sdfChoice merges the functions of two constructs found in {{-jso}}:
 
