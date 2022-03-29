@@ -38,8 +38,6 @@ commonqualities = (
 )
 
 ; for single or nested things, or for arrays of things (1.2)
-; the sdfObject field is deprecated and is going to be removed
-; in a future version of SDF
 thingqualities = {
  commonqualities
  ? ("minItems" .feature "1.2") => number
@@ -53,8 +51,7 @@ thingqualities = {
  EXTENSION-POINT<"thing-ext">
 }
 
-; Included for backwards compatability
-; Deprecated in SDF 1.2
+; sdfObject and sdfThing are syntactically equivalent
 objectqualities = thingqualities
 
 parameter-list =
