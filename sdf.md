@@ -206,8 +206,8 @@ Event:
 : An affordance that can potentially be used to obtain information about what happened to an Object.
 
 Object:
-: A grouping of Property, Action, and Event definitions; the main
-  "atom" of reusable semantics for model construction.  (Note that
+: A grouping of Property, Action, and Event definitions; one of the two
+  "atoms" of reusable semantics for model construction.  (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object is specifically reserved for the above grouping, even if
@@ -354,32 +354,19 @@ The six main Class Name Keywords are discussed below.
 
 ### sdfThing
 
-Things, the items listed in an `sdfThing` group, are the main "atom" of reusable semantics for model construction.
-It aligns in scope with common definition items from many IoT modeling
-systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks LwM2M
-Objects {{OMA}}, and
-OCF Resource Types {{OCF}}.
-They can also be mapped to Web of Things (WoT) Thing Models (TMs).
+Things, the items listed in an `sdfThing` group, are one of the "atoms"
+of reusable semantics for model construction (together with `sdfObject`).
 
 An `sdfThing` contains a set of `sdfProperty`, `sdfAction`, and
 `sdfEvent` definitions that describe the interaction affordances
 associated with some scope of functionality.
 
-For the granularity of definition, reusable `sdfThing` definitions
-are meant to be kept narrow enough in scope to enable broad reuse and
-interoperability.
-For example, defining a light bulb using separate `sdfThing`
-definitions for on/off control, dimming, and color control affordances
-will enable interoperable functionality to be configured for diverse
-product types.
-An `sdfThing` definition for a common on/off control may be used to
-control may different kinds of Things that require on/off control.
-
 However, in order to model more complex devices, `sdfThing` definitions
-also allow for nesting by including `sdfThing` definitions themselves.
+also allow for nesting by including `sdfThing` and `sdfObject` definitions
+themselves.
 
 Optional qualities "minItems" and "maxItems" can be used to define
-sdfThings as arrays.
+`sdfThing`s as arrays.
 
 ### sdfProperty
 
@@ -487,15 +474,23 @@ and requirements.
 
 ### sdfObject
 
-Ealier versions of SDF defined `sdfObject` as the atomic component
-for building SDF models.
-This function is now fulfilled by the `sdfThing` definition which
-also allows for nested components.
+Similar to `sdfThing`, `sdfOject` definitions can be used both as
+atomic components and as building blocks for creating complex SDF models.
+They are syncatically equivalent, but have different semantics.
 
-For the sake of backwards compatibility, `sdfObject` is kept in this
-version of SDF but deprecated and realigned with the new `sdfThing`
-definition, before being removed in a future version.
+A single `sdfObject` aligns in scope with common definition items from many
+IoT modeling systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks
+LwM2M Objects {{OMA}}, and OCF Resource Types {{OCF}}.
 
+For the granularity of definition, reusable `sdfObject` definitions
+are meant to be kept narrow enough in scope to enable broad reuse and
+interoperability.
+For example, defining a light bulb using separate `sdfObject`
+definitions for on/off control, dimming, and color control affordances
+will enable interoperable functionality to be configured for diverse
+product types.
+An `sdfObject` definition for a common on/off control may be used to
+control may different kinds of Things that require on/off control.
 
 # SDF structure
 
@@ -1011,15 +1006,15 @@ All these definitions share some common qualities as discussed in {{common-quali
 ## sdfThing
 
 The sdfThing keyword denotes a group of zero or more Thing definitions.
-Thing definitions may contain or include definitions of Properties, Actions, Events declared for the thing, as well as data types (sdfData group) to be used in this or other Things.
+Thing definitions may contain or include definitions of Properties, Actions, Events declared
+for the thing, as well as data types (sdfData group) to be used in this or other Things.
 
-They can also be used to build more complex models by including other sdfThing or (deprecated) sdfObject definitions.
-In this case, sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment
-and a defined freezer compartment, making up a combination refrigerator-freezer product.
+They can also be used to build more complex models by including other sdfThing or sdfObject definitions.
+In this case, sdfThing definitions carry additional semantic meaning, such as a defined refrigerator
+compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
 
-The qualities of an sdfThing include the common qualities, additional qualities are shown in {{sdfthingqual}}.
-None of these
-qualities are required or have default values that are assumed if the
+The qualities of an sdfThing include the common qualities, additional qualities are shown in
+{{sdfthingqual}}. None of these qualities are required or have default values that are assumed if the
 quality is absent.
 
 The qualities of sdfThing are shown in {{sdfthingqual}}.
@@ -1112,11 +1107,11 @@ The qualities of sdfData include the data qualities (and thus the common qualiti
 
 The requirements for high level composition include the following:
 
-- The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.
+- The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects and Things.
 
-- The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.
+- The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects and things.
 
-- The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.
+- The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects and things.
 
 - The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.
 
@@ -1172,9 +1167,12 @@ consumption there is no conflict with the intended goal.
 
 ## sdfObject
 
-An sdfObject is equivalent to an sdfThing with the exception and is included to ensure backwards compatability with ealier
-versions of SDF.
-The sdfObject definition will eventually be removed in a later version.
+An sdfObject is syntactically equivalent to an sdfThing but has a different
+semantic meaning. It models components or features (like a switch or a single
+socket of an outlet strip) instead of complete Things.
+
+Similar to sdfThings, sdfObjects allow for nesting, creating arbitrarily complex
+models.
 
 The qualities of sdfObject are shown above in {{sdfthingqual}}.
 
