@@ -264,7 +264,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
-  "sdfThing": {
+  "sdfObject": {
     "Switch": {
       "sdfProperty": {
         "value": {
@@ -294,7 +294,7 @@ The state `value` declared in the `sdfProperty` group, represented by a Boolean,
 The actions `on` or `off` declared in the `sdfAction` group are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action `toggle` will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
 
-The `sdfThing` group lists the affordances of instances of this object.
+The `sdfObject` group lists the affordances of instances of this object.
 The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the object.
 Properties can have additional qualities to describe the state more precisely.
 Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
@@ -306,7 +306,7 @@ changes the state based on the current state of the Property named `value`.
 
 In the JSON representation, note how (with the exception of the `info`
 group) maps that have keys taken from the SDF vocabulary (`info`,
-`namespace`, `sdfThing`) alternate in nesting with maps that have keys
+`namespace`, `sdfObject`) alternate in nesting with maps that have keys
 that are freely defined by the model writer (`Switch`, `value`, `on`,
 etc.); the latter usually use the `named<>` production in the [formal
 syntax of SDF](#syntax), while the former SDF-defined vocabulary items
@@ -645,10 +645,10 @@ we therefore also call it the "target namespace" of the SDF definition file.
 
 E.g., in {{example1}}, definitions for the following global names are contributed:
 
-* https://example.com/capability/cap#/sdfThing/Switch
-* https://example.com/capability/cap#/sdfThing/Switch/sdfProperty/value
-* https://example.com/capability/cap#/sdfThing/Switch/sdfAction/on
-* https://example.com/capability/cap#/sdfThing/Switch/sdfAction/off
+* https://example.com/capability/cap#/sdfObject/Switch
+* https://example.com/capability/cap#/sdfObject/Switch/sdfProperty/value
+* https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on
+* https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
 Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
 -uri}}) from the fragment identifier part.
