@@ -370,7 +370,8 @@ Optional qualities "minItems" and "maxItems" can be used to define
 
 ### sdfProperty
 
-`sdfProperty` is used to model elements of state within `sdfThing` instances.
+`sdfProperty` is used to model elements of state within `sdfThing`
+and `sdfObject` instances.
 
 An instance of `sdfProperty` may be associated with some protocol
 affordance to enable the application to obtain the state variable and,
