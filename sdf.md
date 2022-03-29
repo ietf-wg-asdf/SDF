@@ -585,7 +585,7 @@ A definition may in turn contain other definitions. Each definition is a named s
 An example for an Object definition is given in {{exobject}}:
 
 ~~~ json
-"sdfThing": {
+"sdfObject": {
   "foo": {
     "sdfProperty": {
       "bar": {
@@ -597,13 +597,14 @@ An example for an Object definition is given in {{exobject}}:
 ~~~
 {: #exobject title="Example Object definition"}
 
-This example defines an Object "foo" that is defined in the default namespace (full address: `#/sdfThing/foo`), containing a property that can be addressed as
-`#/sdfThing/foo/sdfProperty/bar`, with data of type boolean.
+This example defines an Object "foo" that is defined in the default namespace (full address: `#/sdfObject/foo`), containing a property that can be addressed as
+`#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
 <!-- TODO: Maybe this paragraph should be reworded -->
-Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfThing` entries, are declarations. The `sdfThing` itself can also
-describe other instances of (potentially nested) `sdfThing` that form part of instances of the Thing as a whole.
+Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfThing` entries, are declarations. The `sdfObject` itself can also
+describe other instances of (potentially nested) `sdfObject` or `sdfThing` definitions that form part of
+instances of the Thing as a whole.
 
 # Names and namespaces
 
