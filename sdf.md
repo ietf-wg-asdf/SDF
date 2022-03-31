@@ -1014,8 +1014,8 @@ quality is absent.
 | sdfEvent    | event     | zero or more named event definitions for this object                     |
 | sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
 | sdfThing    | thing     | zero or more named thing definitions for this object                     |
-| minItems    | number    | (array) Minimum number of sdfObject instances in array                    |
-| maxItems    | number    | (array) Maximum number of sdfObject instances in array                    |
+| minItems    | number    | (array) Minimum number of sdfObject instances in array                   |
+| maxItems    | number    | (array) Maximum number of sdfObject instances in array                   |
 {: #sdfthingqual title="Qualities of sdfObject"}
 
 
