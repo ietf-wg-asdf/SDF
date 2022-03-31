@@ -997,33 +997,27 @@ is syntactic sugar for
 The following SDF keywords are used to create definition groups in the target namespace.
 All these definitions share some common qualities as discussed in {{common-qualities}}.
 
-## sdfThing
+## sdfObject
 
-The sdfThing keyword denotes a group of zero or more Thing definitions.
-Thing definitions may contain or include definitions of Properties, Actions, Events declared
-for the thing, as well as data types (sdfData group) to be used in this or other Things.
+The sdfObject keyword denotes a group of zero or more Object definitions.
+Object definitions may contain or include definitions of Properties, Actions, Events declared for the object, as well as data types (sdfData group) to be used in this or other Objects.
 
-They can also be used to build more complex models by including other sdfThing or sdfObject definitions.
-In this case, sdfThing definitions carry additional semantic meaning, such as a defined refrigerator
-compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
-
-The qualities of an sdfThing include the common qualities, additional qualities are shown in
-{{sdfthingqual}}. None of these qualities are required or have default values that are assumed if the
+The qualities of an sdfObject include the common qualities, additional qualities are shown in {{sdfobjqual}}.
+None of these
+qualities are required or have default values that are assumed if the
 quality is absent.
-
-The qualities of sdfThing are shown in {{sdfthingqual}}.
 
 | Quality     | Type      | Description                                                              |
 |-------------+-----------+--------------------------------------------------------------------------|
 | (common)    |           | {{common-qualities}}                                                     |
-| sdfProperty | property  | zero or more named property definitions for this thing                   |
-| sdfAction   | action    | zero or more named action definitions for this thing                     |
-| sdfEvent    | event     | zero or more named event definitions for this thing                      |
+| sdfProperty | property  | zero or more named property definitions for this object                  |
+| sdfAction   | action    | zero or more named action definitions for this object                    |
+| sdfEvent    | event     | zero or more named event definitions for this object                     |
 | sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
-| sdfThing    | thing     | zero or more named thing definitions for this thing                      |
-| minItems    | number    | (array) Minimum number of sdfThing instances in array                    |
-| maxItems    | number    | (array) Maximum number of sdfThing instances in array                    |
-{: #sdfthingqual title="Qualities of sdfThing"}
+| sdfThing    | thing     | zero or more named thing definitions for this object                     |
+| minItems    | number    | (array) Minimum number of sdfObject instances in array                    |
+| maxItems    | number    | (array) Maximum number of sdfObject instances in array                    |
+{: #sdfthingqual title="Qualities of sdfObject"}
 
 
 ## sdfProperty
@@ -1159,16 +1153,17 @@ consumption there is no conflict with the intended goal.
 ~~~
 {: #exa-sdfref}
 
-## sdfObject
+## sdfThing
 
-An sdfObject is syntactically equivalent to an sdfThing but has a different
-semantic meaning. It models components or features (like a switch or a single
-socket of an outlet strip) instead of complete Things.
+An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip.
 
-Similar to sdfThings, sdfObjects allow for nesting, creating arbitrarily complex
+sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
+Syntactically, however, an sdfThing is equivalent to an sdfObject.
+
+Similar to sdfObjects, sdfThings allow for nesting and the creation of arbitrarily complex
 models.
 
-The qualities of sdfObject are shown above in {{sdfthingqual}}.
+The qualities of sdfThing are shown above in {{sdfthingqual}}.
 
 
 IANA Considerations {#iana}
