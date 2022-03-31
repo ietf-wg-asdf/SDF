@@ -37,8 +37,8 @@ commonqualities = (
  ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
 )
 
-; for single or nested things, or for arrays of things (1.2)
-thingqualities = {
+; for single or nested objects, or for arrays of objects (1.2)
+objectqualities = {
  commonqualities
  ? ("minItems" .feature "1.2") => number
  ? ("maxItems" .feature "1.2") => number
@@ -52,7 +52,7 @@ thingqualities = {
 }
 
 ; sdfObject and sdfThing are syntactically equivalent
-objectqualities = thingqualities
+thingqualities = objectqualities
 
 parameter-list =
   pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
