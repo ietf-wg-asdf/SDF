@@ -490,24 +490,6 @@ complex devices that will use one or more `sdfObject` definitions.
 A definition in an `sdfThing` group can refine the metadata of the definitions it
 is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
 
-Similar to `sdfThing`, `sdfOject` definitions can be used both as
-atomic components and as building blocks for creating complex SDF models.
-They are syncatically equivalent, but have different semantics.
-
-A single `sdfObject` aligns in scope with common definition items from many
-IoT modeling systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks
-LwM2M Objects {{OMA}}, and OCF Resource Types {{OCF}}.
-
-For the granularity of definition, reusable `sdfObject` definitions
-are meant to be kept narrow enough in scope to enable broad reuse and
-interoperability.
-For example, defining a light bulb using separate `sdfObject`
-definitions for on/off control, dimming, and color control affordances
-will enable interoperable functionality to be configured for diverse
-product types.
-An `sdfObject` definition for a common on/off control may be used to
-control may different kinds of Things that require on/off control.
-
 # SDF structure
 
 SDF definitions are contained in SDF files.  One or more SDF files can
