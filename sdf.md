@@ -147,8 +147,7 @@ entity:
 
 Thing:
 : A physical item that is also made available in the Internet of
-  Things.
-  The term itself is used here for Things that are notable for their
+  Things.  The term is used here for Things that are notable for their
   interaction with the physical world beyond interaction with humans;
   a temperature sensor or a light might be a Thing, but a router that
   employs both temperature sensors and indicator lights might exhibit
@@ -204,8 +203,8 @@ Event:
 : An affordance that can potentially be used to obtain information about what happened to an Object.
 
 Object:
-: A grouping of Property, Action, and Event definitions; one of the two
-  "atoms" of reusable semantics for model construction.  (Note that
+: A grouping of Property, Action, and Event definitions; the main
+  "atom" of reusable semantics for model construction.  (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object is specifically reserved for the above grouping, even if
