@@ -487,6 +487,7 @@ complex devices that will use one or more `sdfObject` definitions.
 A definition in an `sdfThing` group can refine the metadata of the definitions it
 is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
 
+
 # SDF structure
 
 SDF definitions are contained in SDF files.  One or more SDF files can
