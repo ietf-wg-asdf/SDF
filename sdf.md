@@ -616,7 +616,7 @@ This example defines an Object "foo" that is defined in the default namespace (f
 `#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
-Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar". Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfObject` entries, are declarations. Similarly, entries within an `sdfThing` describe instances of `sdfObject` (or nested `sdfThing`) that form part of instances of the Thing.
+Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfObject` entries, are declarations.  Similarly, entries within an `sdfThing` describe instances of `sdfObject` (or nested `sdfThing`) that form part of instances of the Thing.
 
 # Names and namespaces
 
@@ -759,7 +759,7 @@ instance conforming the current definition.
 The value of "sdfRequired" is an array of name references (JSON pointers), each
 indicating one declaration that is mandatory to be represented.
 
-The example in {{example-req}} shows two required elements in the sdfThing definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
+The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
 ~~~ json
 {
