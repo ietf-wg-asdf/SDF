@@ -1016,7 +1016,7 @@ quality is absent.
 | sdfThing    | thing     | zero or more named thing definitions for this object                     |
 | minItems    | number    | (array) Minimum number of sdfObject instances in array                   |
 | maxItems    | number    | (array) Maximum number of sdfObject instances in array                   |
-{: #sdfthingqual title="Qualities of sdfObject"}
+{: #sdfobjqual title="Qualities of sdfObject"}
 
 
 ## sdfProperty
@@ -1162,7 +1162,7 @@ Syntactically, however, an sdfThing is equivalent to an sdfObject.
 Similar to sdfObjects, sdfThings allow for nesting and the creation of arbitrarily complex
 models.
 
-The qualities of sdfThing are shown above in {{sdfthingqual}}.
+The qualities of sdfThing are shown above in {{sdfobjqual}}.
 
 
 IANA Considerations {#iana}
