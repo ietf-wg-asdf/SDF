@@ -317,7 +317,11 @@ Things which are illustrated in {{fig-class-2}}.
 ~~~ plantuml-utxt
 sdfThing --> "0+" sdfObject : hasObject
 sdfThing --> "0+" sdfThing : hasThing
+sdfThing --> "0+" sdfProperty : hasProperty
+sdfThing --> "0+" sdfAction : hasAction
+sdfThing --> "0+" sdfEvent : hasEvent
 
+sdfObject --> "0+" sdfObject : hasObject
 sdfObject --> "0+" sdfProperty : hasProperty
 sdfObject --> "0+" sdfAction : hasAction
 sdfObject --> "0+" sdfEvent : hasEvent
@@ -1060,6 +1064,7 @@ quality is absent.
 | Quality     | Type      | Description                                                              |
 |-------------+-----------+--------------------------------------------------------------------------|
 | (common)    |           | {{common-qualities}}                                                     |
+| sdfObject   | object    | zero or more named nested object definitions for this object             |
 | sdfProperty | property  | zero or more named property definitions for this object                  |
 | sdfAction   | action    | zero or more named action definitions for this object                    |
 | sdfEvent    | event     | zero or more named event definitions for this object                     |
@@ -1212,11 +1217,17 @@ An sdfThing may be composed of sdfObjects and other sdfThings.
 
 The qualities of sdfThing are shown in {{sdfthingqual}}.
 
-| Quality   | Type   | Description          |
-|-----------|--------|----------------------|
-| (common)  |        | {{common-qualities}} |
-| sdfThing  | thing  |                      |
-| sdfObject | object |                      |
+| Quality     | Type      | Description                                                              |
+|-------------|-----------|--------------------------------------------------------------------------|
+| (common)    |           | {{common-qualities}}                                                     |
+| sdfThing    | thing     |                                                                          |
+| sdfObject   | object    |                                                                          |
+| sdfProperty | property  | zero or more named property definitions for this thing                   |
+| sdfAction   | action    | zero or more named action definitions for this thing                     |
+| sdfEvent    | event     | zero or more named event definitions for this thing                      |
+| sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
+| minItems    | number    | (array) Minimum number of sdfThing instances in array                    |
+| maxItems    | number    | (array) Maximum number of sdfThing instances in array                    |
 {: #sdfthingqual title="Qualities of sdfThing"}
 
 
