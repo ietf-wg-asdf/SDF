@@ -35,6 +35,11 @@ commonqualities = (
  ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
 )
 
+arraydefinitionqualities = {
+ ? ("minItems" .feature "1.2") => number
+ ? ("maxItems" .feature "1.2") => number
+}
+
 affordancequalities = {
  ? sdfProperty: named<propertyqualities> ; Property represents the state of an instance of an object
  ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
@@ -52,10 +57,8 @@ thingqualities = {
 ; for single objects, or for arrays of objects (1.2)
 objectqualities = {
  commonqualities
- ? ("minItems" .feature "1.2") => number
- ? ("maxItems" .feature "1.2") => number
- ? sdfProperty: named<propertyqualities>
  affordancequalities
+ arraydefinitionqualities
  EXTENSION-POINT<"object-ext">
 }
 
