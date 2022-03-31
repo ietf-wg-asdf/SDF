@@ -148,8 +148,6 @@ entity:
 Thing:
 : A physical item that is also made available in the Internet of
   Things.
-  In SDF, they are modelled using Property, Action, and Event
-  definitions.
   The term itself is used here for Things that are notable for their
   interaction with the physical world beyond interaction with humans;
   a temperature sensor or a light might be a Thing, but a router that
