@@ -352,21 +352,30 @@ class sdfData {
 
 The six main Class Name Keywords are discussed below.
 
-### sdfThing
+### sdfObject
 
-Things, the items listed in an `sdfThing` group, are one of the "atoms"
-of reusable semantics for model construction (together with `sdfObject`).
+Objects, the items listed in an `sdfObject` group, are the main "atom" of reusable semantics for model construction.
+It aligns in scope with common definition items from many IoT modeling
+systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks LwM2M
+Objects {{OMA}}, and
+OCF Resource Types {{OCF}}.
 
-An `sdfThing` contains a set of `sdfProperty`, `sdfAction`, and
+An `sdfObject` contains a set of `sdfProperty`, `sdfAction`, and
 `sdfEvent` definitions that describe the interaction affordances
 associated with some scope of functionality.
 
-However, in order to model more complex devices, `sdfThing` definitions
-also allow for nesting by including `sdfThing` and `sdfObject` definitions
-themselves.
+For the granularity of definition, `sdfObject` definitions are meant
+to be kept narrow enough in scope to enable broad reuse and
+interoperability.
+For example, defining a light bulb using separate `sdfObject`
+definitions for on/off control, dimming, and color control affordances
+will enable interoperable functionality to be configured for diverse
+product types.
+An `sdfObject` definition for a common on/off control may be used to
+control may different kinds of Things that require on/off control.
 
 Optional qualities "minItems" and "maxItems" can be used to define
-`sdfThing`s as arrays.
+sdfObjects as arrays.
 
 ### sdfProperty
 
@@ -473,7 +482,13 @@ data types such as mode and machine state enumerations to be reused
 across multiple definitions that have similar basic characteristics
 and requirements.
 
-### sdfObject
+### sdfThing
+
+Back at the top level, the `sdfThing` groups enables definition of models for
+complex devices that will use one or more `sdfObject` definitions.
+
+A definition in an `sdfThing` group can refine the metadata of the definitions it
+is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
 
 Similar to `sdfThing`, `sdfOject` definitions can be used both as
 atomic components and as building blocks for creating complex SDF models.
@@ -601,10 +616,7 @@ This example defines an Object "foo" that is defined in the default namespace (f
 `#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
-<!-- TODO: Maybe this paragraph should be reworded -->
-Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfThing` entries, are declarations. The `sdfObject` itself can also
-describe other instances of (potentially nested) `sdfObject` or `sdfThing` definitions that form part of
-instances of the Thing as a whole.
+Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar". Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfObject` entries, are declarations. Similarly, entries within an `sdfThing` describe instances of `sdfObject` (or nested `sdfThing`) that form part of instances of the Thing.
 
 # Names and namespaces
 
@@ -751,11 +763,11 @@ The example in {{example-req}} shows two required elements in the sdfThing defin
 
 ~~~ json
 {
-  "sdfThing": {
+  "sdfObject": {
     "temperatureWithAlarm": {
       "sdfRequired": [
-        "#/sdfThing/temperatureWithAlarm/sdfProperty/currentTemperature",
-        "#/sdfThing/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
+        "#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
+        "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
       ],
       "sdfData":{
         "temperatureData": {
@@ -764,7 +776,7 @@ The example in {{example-req}} shows two required elements in the sdfThing defin
       },
       "sdfProperty": {
         "currentTemperature": {
-          "sdfRef": "#/sdfThing/temperatureWithAlarm/sdfData/temperatureData"
+          "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
         }
       },
       "sdfEvent": {
@@ -777,7 +789,7 @@ The example in {{example-req}} shows two required elements in the sdfThing defin
                 "const": "OverTemperatureAlarm"
               },
               "temperature": {
-                "sdfRef": "#/sdfThing/temperatureWithAlarm/sdfData/temperatureData"
+                "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
               }
             }
           }
@@ -1123,7 +1135,7 @@ The requirements for high level composition include the following:
 
 The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.
 
-The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfThing/Switch/sdfAction/on" where `ns` is the namespace prefix (short name for the namespace).
+The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where `ns` is the namespace prefix (short name for the namespace).
 
 ## Modular Composition
 
