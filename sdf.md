@@ -110,14 +110,11 @@ entity:
 [^intro-]:
     The Semantic Definition Format (SDF) is a format for domain experts to
     use in the creation and maintenance of data and interaction models in
-    the Internet of Things.  It was created as a common language for use
-    in the development of the One Data Model liaison organization (OneDM)
-    definitions.  Tools convert this format to database formats and other
-    serializations as needed.
-
-    An SDF specification describes definitions of SDF Objects and their
-    associated interactions (Events, Actions, Properties), as well as the
-    Data types for the information exchanged in those interactions.
+    the Internet of Things. An SDF specification describes definitions of
+    SDF Objects and their associated interactions (Events, Actions,
+    Properties), as well as the Data types for the information exchanged
+    in those interactions. Tools convert this format to database formats
+    and other serializations as needed.
 
 [^status]
 
