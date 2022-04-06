@@ -321,7 +321,6 @@ sdfThing --> "0+" sdfProperty : hasProperty
 sdfThing --> "0+" sdfAction : hasAction
 sdfThing --> "0+" sdfEvent : hasEvent
 
-sdfObject --> "0+" sdfObject : hasObject
 sdfObject --> "0+" sdfProperty : hasProperty
 sdfObject --> "0+" sdfAction : hasAction
 sdfObject --> "0+" sdfEvent : hasEvent
@@ -1064,7 +1063,6 @@ quality is absent.
 | Quality     | Type      | Description                                                              |
 |-------------+-----------+--------------------------------------------------------------------------|
 | (common)    |           | {{common-qualities}}                                                     |
-| sdfObject   | object    | zero or more named nested object definitions for this object             |
 | sdfProperty | property  | zero or more named property definitions for this object                  |
 | sdfAction   | action    | zero or more named action definitions for this object                    |
 | sdfEvent    | event     | zero or more named event definitions for this object                     |
