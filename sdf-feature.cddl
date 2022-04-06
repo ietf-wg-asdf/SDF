@@ -6,8 +6,7 @@ sdf-syntax = {
  ? defaultNamespace: text
  ? sdfThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
  ? sdfObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
- affordancequalities                     ; Includes Properties, Actions, and Events
- ? sdfData: named<dataqualities>         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
+ affordancequalities                     ; Includes Properties, Actions, and Events as well as sdfData
  EXTENSION-POINT<"top-ext">
 }
 
@@ -44,6 +43,8 @@ affordancequalities = {
  ? sdfProperty: named<propertyqualities> ; Property represents the state of an instance of an object
  ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
  ? sdfEvent: named<eventqualities>       ; Event represents an occurrence of something associated with an object
+ ? sdfData: named<dataqualities>         ; Data represents a piece of information that can be the
+                                         ; state of a property or a parameter to an action or a signal in an event
 }
 
 ; for building hierarchy
