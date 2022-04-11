@@ -492,7 +492,7 @@ SDF definitions are contained in SDF files.  One or more SDF files can
 work together to provide the definitions and declarations that are the
 payload of the SDF format.
 
-A SDF definition file contains a single JSON map (JSON object).
+An SDF definition file contains a single JSON map (JSON object).
 This object has three blocks: the information block, the namespaces block, and the definitions block.
 
 ## Information block
