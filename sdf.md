@@ -515,7 +515,7 @@ Given Names roughly alternate (with the information block,
 
 The meaning of the JSON object that is the member value associated
 with a Given Name is derived from the Quality Name that was used as
-the member name associated to parent.
+the member name associated to the parent.
 In the CDDL grammar given in {{syntax}}, JSON objects with member names that are
 Given Names are defined using the generic `named<objectmembers>`,
 where `objectmembers` is in turn the structure of the members of the
