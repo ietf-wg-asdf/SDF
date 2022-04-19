@@ -506,8 +506,9 @@ names that are used is either of:
   associated with the member value given with a certain Quality Name.
 
 * A set of "*Given Names*", where the entries in the object are separate
-  entities (definitions, declarations, etc.) that each are freely named by
-  the SDF model author so these names can be employed by a user of that model.
+  entities (definitions, declarations, etc.) that each have names that
+  are chosen by the SDF model author in order that these names can be
+  employed by a user of that model.
 
 In a path from the root of the tree to any leaf, Quality Names and
 Given Names roughly alternate (with the information block,
