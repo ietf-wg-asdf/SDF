@@ -520,7 +520,7 @@ the member name associated to the parent.
 In the CDDL grammar given in {{syntax}}, JSON objects with member names that are
 Given Names are defined using the generic rule reference `named<objectmembers>`,
 where `objectmembers` is in turn the structure of the members of the
-JSON object that is the value of the Given Name.
+JSON object that is the value of the member named by the Given Name.
 As quality-named objects and given-named objects roughly alternate in
 a path down the tree, `objectmembers` is usually an object built from
 Quality Names.
