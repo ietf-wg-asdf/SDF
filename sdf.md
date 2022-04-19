@@ -319,10 +319,10 @@ sdfObject --> "0+" sdfProperty : hasProperty
 sdfObject --> "0+" sdfAction : hasAction
 sdfObject --> "0+" sdfEvent : hasEvent
 
-sdfAction --> "1+" sdfData : hasInputData
+sdfAction --> "0+" sdfData : hasInputData
 sdfAction --> "0+" sdfData : hasOutputData
 
-sdfEvent --> "1+" sdfData : hasOutputData
+sdfEvent --> "0+" sdfData : hasOutputData
 
 sdfProperty --> "1" sdfData : isInstanceOf
 
