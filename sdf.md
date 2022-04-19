@@ -485,6 +485,73 @@ complex devices that will use one or more `sdfObject` definitions.
 A definition in an `sdfThing` group can refine the metadata of the definitions it
 is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
 
+## Member names: Given Names and Quality Names
+
+SDF models are JSON objects (maps) that mostly employ JSON objects as
+member values, which in turn mostly employ JSON objects as their
+member values, and so on.
+This nested structure of JSON objects creates a tree, where the edges
+are the member names (map keys) used in these JSON objects.
+(In certain cases, where member names are not needed, JSON arrays may
+be interspersed in this tree.)
+
+### Given Names and Quality Names
+
+For any particular JSON object in an SDF model, the set of member
+names that are used is either of:
+
+* A set of "*Quality Names*", where the entries in the object are
+  Qualities.  Quality Names are defined by the present specification
+  and its extensions, together with specific semantics to be
+  associated with the member value given with a certain Quality Name.
+
+* A set of "*Given Names*", where the entries in the object are separate
+  entities (definitions, declarations, etc.) that each have names that
+  are chosen by the SDF model author in order that these names can be
+  employed by a user of that model.
+
+In a path from the root of the tree to any leaf, Quality Names and
+Given Names roughly alternate (with the information block,
+{{information-block}}, as a prominent exception).
+
+The meaning of the JSON object that is the member value associated
+with a Given Name is derived from the Quality Name that was used as
+the member name associated to the parent.
+In the CDDL grammar given in {{syntax}}, JSON objects with member names that are
+Given Names are defined using the CDDL generic rule reference `named<objectmembers>`,
+where `objectmembers` is in turn the structure of the members of the
+JSON object that is the value of the member named by the Given Name.
+As quality-named objects and given-named objects roughly alternate in
+a path down the tree, `objectmembers` is usually an object built from
+Quality Names.
+
+### Hierarchical Names
+
+From the outside of a specification, Given Names are usually used as
+part of a hierarchical name that looks like a JSON pointer {{RFC6901}},
+itself generally rooted in (used as the fragment identifier in) an
+outer namespace that looks like an `https://` URL (see {{names-and-namespaces}}).
+
+As Quality Names and Given Names roughly alternate in a path into the
+model, the JSON pointer part of the hierarchical name also alternates
+between Quality Names and Given Names.
+
+### Extensibility of Given Names and Quality Names
+
+In SDF, both Quality Names and Given Names are *extension points*.
+This is more obvious for Quality Names: Extending SDF is mostly done
+by defining additional qualities.  To enable non-conflicting third
+party extensions to SDF, an extension is planned that will allow the
+use of qualified names (names with an embedded colon) as Quality
+Names.
+Until that extension is defined, Quality Names with (one or more)
+embedded colons are reserved and MUST NOT be used in an SDF model.
+
+Further, to enable Given Names to have a more powerful role in building
+global hierarchical names, an extension is planned that makes use of
+qualified names for Given Names.
+So, until that extension is defined, Given Names with (one or more)
+embedded colons are reserved and MUST NOT be used in an SDF model.
 
 # SDF structure
 
@@ -492,7 +559,7 @@ SDF definitions are contained in SDF files.  One or more SDF files can
 work together to provide the definitions and declarations that are the
 payload of the SDF format.
 
-A SDF definition file contains a single JSON map (JSON object).
+An SDF definition file contains a single JSON map (JSON object).
 This object has three blocks: the information block, the namespaces block, and the definitions block.
 
 ## Information block
