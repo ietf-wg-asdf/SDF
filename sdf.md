@@ -204,7 +204,9 @@ Event:
 
 Object:
 : A grouping of Property, Action, and Event definitions; the main
-  "atom" of reusable semantics for model construction.  (Note that
+  "atom" of reusable semantics for model construction. Objects are
+  similar to Things but do not allow nesting, i. e. they cannot contain
+  other Objects or Things. (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object is specifically reserved for the above grouping, even if
@@ -487,6 +489,10 @@ and requirements.
 
 Back at the top level, the `sdfThing` groups enables definition of models for
 complex devices that will use one or more `sdfObject` definitions.
+`sdfThing` groups, however, also allow for including interaction
+affordances, `sdfData`, as well as `minItems` and `maxItems` qualities.
+Therefore, they can be seen as a superset of `sdfObject` groups, additionally
+allowing for composition.
 
 A definition in an `sdfThing` group can refine the metadata of the definitions it
 is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
