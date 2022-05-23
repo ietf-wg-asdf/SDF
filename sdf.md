@@ -76,7 +76,7 @@ normative:
     date: false
   RFC9165: control
 informative:
-  I-D.handrews-json-schema-validation: jso
+  I-D.handrews-json-schema-validation-01: jso
 # -02#section-7.3 -- formats
   I-D.wright-json-schema: jso4
   I-D.irtf-t2trg-rest-iot: rest-iot
