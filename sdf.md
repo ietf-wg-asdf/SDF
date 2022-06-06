@@ -47,6 +47,9 @@ contributor:
     code: '02420'
     country: Finland
     email: ari.keranen@ericsson.com
+  - name: Jan Romann
+    org: Universität Bremen
+    email: jan.romann@uni-bremen.de
   - name: Wouter | van der Beek
     org: Cascoda Ltd.
     street:
