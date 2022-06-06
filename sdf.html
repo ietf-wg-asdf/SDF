@@ -10,13 +10,11 @@
 <meta content="
        The Semantic Definition Format (SDF) is a format for domain experts to
 use in the creation and maintenance of data and interaction models in
-the Internet of Things.  It was created as a common language for use
-in the development of the One Data Model liaison organization (OneDM)
-definitions.  Tools convert this format to database formats and other
-serializations as needed. 
-       An SDF specification describes definitions of SDF Objects and their
-associated interactions (Events, Actions, Properties), as well as the
-Data types for the information exchanged in those interactions. 
+the Internet of Things. An SDF specification describes definitions of
+SDF Objects and their associated interactions (Events, Actions,
+Properties), as well as the Data types for the information exchanged
+in those interactions. Tools convert this format to database formats
+and other serializations as needed. 
        A JSON format representation of SDF 1.0 was defined in
 version (-00) of this document; version (-05) was designated as an
  implementation draft , labeled SDF 1.1, at the IETF110 meeting of
@@ -25,12 +23,12 @@ The present version (-11) collects a few smaller changes as input
 to the 2022-02-28 ASDF WG interim.
 It also removes deprecated elements from SDF 1.0. 
     " name="description">
-<meta content="xml2rfc 3.12.3" name="generator">
+<meta content="xml2rfc 3.12.7" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.3
-    Python 3.9.10
+  xml2rfc 3.12.7
+    Python 3.9.12
     appdirs 1.4.4
     ConfigArgParse 1.2.3
     google-i18n-address 2.4.0
@@ -40,12 +38,12 @@ It also removes deprecated elements from SDF 1.0.
     kitchen 1.2.6
     lxml 4.6.2
     MarkupSafe 2.0.1
-    pycairo 1.20.1
+    pycairo 1.21.0
     pycountry 20.7.3
     pyflakes 2.2.0
     PyYAML 5.4.1
     requests 2.25.1
-    setuptools 60.5.0
+    setuptools 60.10.0
     six 1.15.0
     WeasyPrint 0.42.3
 -->
@@ -673,6 +671,9 @@ hr.addr {
   figure {
     overflow: scroll;
   }
+  pre.breakable {
+    break-inside: auto;
+  }
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
   }
@@ -1204,11 +1205,11 @@ li > p:last-of-type {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OneDM SDF</td>
-<td class="right">March 2022</td>
+<td class="right">June 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 28 September 2022</td>
+<td class="center">Expires 8 December 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1221,12 +1222,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-03-27" class="published">27 March 2022</time>
+<time datetime="2022-06-06" class="published">6 June 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-09-28">28 September 2022</time></dd>
+<dd class="expires"><time datetime="2022-12-08">8 December 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1247,20 +1248,18 @@ li > p:last-of-type {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">The Semantic Definition Format (SDF) is a format for domain experts to
 use in the creation and maintenance of data and interaction models in
-the Internet of Things.  It was created as a common language for use
-in the development of the One Data Model liaison organization (OneDM)
-definitions.  Tools convert this format to database formats and other
-serializations as needed.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">An SDF specification describes definitions of SDF Objects and their
-associated interactions (Events, Actions, Properties), as well as the
-Data types for the information exchanged in those interactions.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
-<p id="section-abstract-3"><span class="cref" id="status">A JSON format representation of SDF 1.0 was defined in
+the Internet of Things. An SDF specification describes definitions of
+SDF Objects and their associated interactions (Events, Actions,
+Properties), as well as the Data types for the information exchanged
+in those interactions. Tools convert this format to database formats
+and other serializations as needed.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2"><span class="cref" id="status">A JSON format representation of SDF 1.0 was defined in
 version (-00) of this document; version (-05) was designated as an
 <em>implementation draft</em>, labeled SDF 1.1, at the IETF110 meeting of
 the ASDF WG (2021-03-11).
 The present version (-11) collects a few smaller changes as input
 to the 2022-02-28 ASDF WG interim.
-It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstract-3" class="pilcrow">¶</a></p>
+It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1295,7 +1294,7 @@ It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstra
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 September 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 December 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1358,6 +1357,20 @@ It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstra
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.6">
                     <p id="section-toc.1-1.2.2.2.2.6.1"><a href="#section-2.2.6" class="xref">2.2.6</a>.  <a href="#name-sdfthing" class="xref">sdfThing</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="xref">2.3</a>.  <a href="#name-member-names-given-names-an" class="xref">Member names: Given Names and Quality Names</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.1">
+                    <p id="section-toc.1-1.2.2.3.2.1.1"><a href="#section-2.3.1" class="xref">2.3.1</a>.  <a href="#name-given-names-and-quality-nam" class="xref">Given Names and Quality Names</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.2">
+                    <p id="section-toc.1-1.2.2.3.2.2.1"><a href="#section-2.3.2" class="xref">2.3.2</a>.  <a href="#name-hierarchical-names" class="xref">Hierarchical Names</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.3">
+                    <p id="section-toc.1-1.2.2.3.2.3.1"><a href="#section-2.3.3" class="xref">2.3.3</a>.  <a href="#name-extensibility-of-given-name" class="xref">Extensibility of Given Names and Quality Names</a></p>
 </li>
                 </ul>
 </li>
@@ -1513,13 +1526,24 @@ It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstra
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="xref">Appendix D</a>.  <a href="#name-composition-examples" class="xref">Composition Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-D.1" class="xref">D.1</a>.  <a href="#name-outlet-strip-example" class="xref">Outlet Strip Example</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-D.2" class="xref">D.2</a>.  <a href="#name-refrigerator-freezer-exampl" class="xref">Refrigerator-Freezer Example</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-F" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-F" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-G" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1532,20 +1556,18 @@ It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstra
       </h2>
 <p id="section-1-1">The Semantic Definition Format (SDF) is a format for domain experts to
 use in the creation and maintenance of data and interaction models in
-the Internet of Things.  It was created as a common language for use
-in the development of the One Data Model liaison organization (OneDM)
-definitions.  Tools convert this format to database formats and other
-serializations as needed.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">An SDF specification describes definitions of SDF Objects and their
-associated interactions (Events, Actions, Properties), as well as the
-Data types for the information exchanged in those interactions.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3"><span class="cref" id="status_1">A JSON format representation of SDF 1.0 was defined in
+the Internet of Things. An SDF specification describes definitions of
+SDF Objects and their associated interactions (Events, Actions,
+Properties), as well as the Data types for the information exchanged
+in those interactions. Tools convert this format to database formats
+and other serializations as needed.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2"><span class="cref" id="status_1">A JSON format representation of SDF 1.0 was defined in
 version (-00) of this document; version (-05) was designated as an
 <em>implementation draft</em>, labeled SDF 1.1, at the IETF110 meeting of
 the ASDF WG (2021-03-11).
 The present version (-11) collects a few smaller changes as input
 to the 2022-02-28 ASDF WG interim.
-It also removes deprecated elements from SDF 1.0.</span><a href="#section-1-3" class="pilcrow">¶</a></p>
+It also removes deprecated elements from SDF 1.0.</span><a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="terminology-and-conventions">
 <section id="section-1.1">
         <h3 id="name-terminology-and-conventions">
@@ -1634,7 +1656,9 @@ with the other semantics.)<a href="#section-1.1-1.18.1" class="pilcrow">¶</a></
 <dt id="section-1.1-1.23">Object:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.24">
             <p id="section-1.1-1.24.1">A grouping of Property, Action, and Event definitions; the main
-"atom" of reusable semantics for model construction.  (Note that
+"atom" of reusable semantics for model construction. Objects are
+similar to Things but do not allow nesting, i. e. they cannot contain
+other Objects or Things. (Note that
 JSON maps are often called JSON objects due to JSON's JavaScript
 heritage; in this document, the
 term Object is specifically reserved for the above grouping, even if
@@ -1774,125 +1798,182 @@ Things which are illustrated in <a href="#fig-class-2" class="xref">Figure 2</a>
 <figure id="figure-2">
           <div id="section-2.2-2.1">
             <div class="alignLeft art-svg artwork" id="section-2.2-2.1.1">
-<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" height="444px" preserveAspectRatio="none" version="1.1" viewBox="0 0 431 444" width="431px">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" height="437px" preserveAspectRatio="none" version="1.1" viewBox="0 0 542 437" width="542px">
                 <defs></defs>
                 <g>
                   <!--MD5=[f586c7dc61127226118a576b1af9a47e]
 class sdfThing-->
-    <rect fill="white" height="48" id="sdfThing" width="82" x="172.5" y="7" stroke="black" stroke-width="1.5"></rect>
-                  <ellipse cx="187.5" cy="23" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                  <path d="M189.9731,29.1431 Q189.3921,29.4419 188.7529,29.5913 Q188.1138,29.7407 187.4082,29.7407 Q184.9014,29.7407 183.5815,28.0889 Q182.2617,26.437 182.2617,23.3159 Q182.2617,20.1865 183.5815,18.5347 Q184.9014,16.8828 187.4082,16.8828 Q188.1138,16.8828 188.7612,17.0322 Q189.4087,17.1816 189.9731,17.4805 L189.9731,20.2031 Q189.3423,19.6221 188.7488,19.3523 Q188.1553,19.0825 187.5244,19.0825 Q186.1797,19.0825 185.4949,20.1492 Q184.8101,21.2158 184.8101,23.3159 Q184.8101,25.4077 185.4949,26.4744 Q186.1797,27.541 187.5244,27.541 Q188.1553,27.541 188.7488,27.2712 Q189.3423,27.0015 189.9731,26.4204 Z" fill="black"></path>
-                  <text fill="black" font-family="sans-serif" font-size="12" x="201.5" y="27.5352">sdfThing</text>
-                  <line x1="173.5" x2="253.5" y1="39" y2="39" stroke="black" stroke-width="1.5"></line>
-                  <line x1="173.5" x2="253.5" y1="47" y2="47" stroke="black" stroke-width="1.5"></line>
+    <g id="elem_sdfThing">
+                    <rect fill="white" height="48" id="sdfThing" rx="2.5" ry="2.5" width="93" x="136.38" y="7" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="151.38" cy="23" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M153.8531,29.1431 Q153.2721,29.4419 152.6329,29.5913 Q151.9938,29.7407 151.2882,29.7407 Q148.7814,29.7407 147.4615,28.0889 Q146.1417,26.437 146.1417,23.3159 Q146.1417,20.1865 147.4615,18.5347 Q148.7814,16.8828 151.2882,16.8828 Q151.9938,16.8828 152.6412,17.0322 Q153.2887,17.1816 153.8531,17.4805 L153.8531,20.2031 Q153.2223,19.6221 152.6288,19.3523 Q152.0353,19.0825 151.4044,19.0825 Q150.0597,19.0825 149.3749,20.1492 Q148.6901,21.2158 148.6901,23.3159 Q148.6901,25.4077 149.3749,26.4744 Q150.0597,27.541 151.4044,27.541 Q152.0353,27.541 152.6288,27.2712 Q153.2223,27.0015 153.8531,26.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="165.38" y="28.291">sdfThing</text>
+                    <line x1="137.38" x2="228.38" y1="39" y2="39" stroke="black" stroke-width="0.5"></line>
+                    <line x1="137.38" x2="228.38" y1="47" y2="47" stroke="black" stroke-width="0.5"></line>
+                  </g>
                   <!--MD5=[c2cb69c003582447ed3e9466f0338261]
 class sdfObject-->
-    <rect fill="white" height="48" id="sdfObject" width="88" x="169.5" y="132" stroke="black" stroke-width="1.5"></rect>
-                  <ellipse cx="184.5" cy="148" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                  <path d="M186.9731,154.1431 Q186.3921,154.4419 185.7529,154.5913 Q185.1138,154.7407 184.4082,154.7407 Q181.9014,154.7407 180.5815,153.0889 Q179.2617,151.437 179.2617,148.3159 Q179.2617,145.1865 180.5815,143.5347 Q181.9014,141.8828 184.4082,141.8828 Q185.1138,141.8828 185.7612,142.0322 Q186.4087,142.1816 186.9731,142.4805 L186.9731,145.2031 Q186.3423,144.6221 185.7488,144.3523 Q185.1553,144.0825 184.5244,144.0825 Q183.1797,144.0825 182.4949,145.1492 Q181.8101,146.2158 181.8101,148.3159 Q181.8101,150.4077 182.4949,151.4744 Q183.1797,152.541 184.5244,152.541 Q185.1553,152.541 185.7488,152.2712 Q186.3423,152.0015 186.9731,151.4204 Z" fill="black"></path>
-                  <text fill="black" font-family="sans-serif" font-size="12" x="198.5" y="152.5352">sdfObject</text>
-                  <line x1="170.5" x2="256.5" y1="164" y2="164" stroke="black" stroke-width="1.5"></line>
-                  <line x1="170.5" x2="256.5" y1="172" y2="172" stroke="black" stroke-width="1.5"></line>
+    <g id="elem_sdfObject">
+                    <rect fill="white" height="48" id="sdfObject" rx="2.5" ry="2.5" width="97" x="205.38" y="132" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="220.38" cy="148" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M222.8531,154.1431 Q222.2721,154.4419 221.6329,154.5913 Q220.9938,154.7407 220.2882,154.7407 Q217.7814,154.7407 216.4615,153.0889 Q215.1417,151.437 215.1417,148.3159 Q215.1417,145.1865 216.4615,143.5347 Q217.7814,141.8828 220.2882,141.8828 Q220.9938,141.8828 221.6412,142.0322 Q222.2887,142.1816 222.8531,142.4805 L222.8531,145.2031 Q222.2223,144.6221 221.6288,144.3523 Q221.0353,144.0825 220.4044,144.0825 Q219.0597,144.0825 218.3749,145.1492 Q217.6901,146.2158 217.6901,148.3159 Q217.6901,150.4077 218.3749,151.4744 Q219.0597,152.541 220.4044,152.541 Q221.0353,152.541 221.6288,152.2712 Q222.2223,152.0015 222.8531,151.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="234.38" y="153.291">sdfObject</text>
+                    <line x1="206.38" x2="301.38" y1="164" y2="164" stroke="black" stroke-width="0.5"></line>
+                    <line x1="206.38" x2="301.38" y1="172" y2="172" stroke="black" stroke-width="0.5"></line>
+                  </g>
                   <!--MD5=[79be1817db664391ee5ba2fd11c31888]
 class sdfProperty-->
-    <rect fill="white" height="48" id="sdfProperty" width="99" x="7" y="257" stroke="black" stroke-width="1.5"></rect>
-                  <ellipse cx="22" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                  <path d="M24.4731,279.1431 Q23.8921,279.4419 23.2529,279.5913 Q22.6138,279.7407 21.9082,279.7407 Q19.4014,279.7407 18.0815,278.0889 Q16.7617,276.437 16.7617,273.3159 Q16.7617,270.1865 18.0815,268.5347 Q19.4014,266.8828 21.9082,266.8828 Q22.6138,266.8828 23.2612,267.0322 Q23.9087,267.1816 24.4731,267.4805 L24.4731,270.2031 Q23.8423,269.6221 23.2488,269.3523 Q22.6553,269.0825 22.0244,269.0825 Q20.6797,269.0825 19.9949,270.1492 Q19.3101,271.2158 19.3101,273.3159 Q19.3101,275.4077 19.9949,276.4744 Q20.6797,277.541 22.0244,277.541 Q22.6553,277.541 23.2488,277.2712 Q23.8423,277.0015 24.4731,276.4204 Z" fill="black"></path>
-                  <text fill="black" font-family="sans-serif" font-size="12" x="36" y="277.5352">sdfProperty</text>
-                  <line x1="8" x2="105" y1="289" y2="289" stroke="black" stroke-width="1.5"></line>
-                  <line x1="8" x2="105" y1="297" y2="297" stroke="black" stroke-width="1.5"></line>
+    <g id="elem_sdfProperty">
+                    <rect fill="white" height="48" id="sdfProperty" rx="2.5" ry="2.5" width="111" x="29.38" y="257" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="44.38" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M46.8531,279.1431 Q46.2721,279.4419 45.6329,279.5913 Q44.9938,279.7407 44.2882,279.7407 Q41.7814,279.7407 40.4615,278.0889 Q39.1417,276.437 39.1417,273.3159 Q39.1417,270.1865 40.4615,268.5347 Q41.7814,266.8828 44.2882,266.8828 Q44.9938,266.8828 45.6412,267.0322 Q46.2887,267.1816 46.8531,267.4805 L46.8531,270.2031 Q46.2223,269.6221 45.6288,269.3523 Q45.0353,269.0825 44.4044,269.0825 Q43.0597,269.0825 42.3749,270.1492 Q41.6901,271.2158 41.6901,273.3159 Q41.6901,275.4077 42.3749,276.4744 Q43.0597,277.541 44.4044,277.541 Q45.0353,277.541 45.6288,277.2712 Q46.2223,277.0015 46.8531,276.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="58.38" y="278.291">sdfProperty</text>
+                    <line x1="30.38" x2="139.38" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
+                    <line x1="30.38" x2="139.38" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
+                  </g>
                   <!--MD5=[bdacf205fe3695f723a4cfa5db06fd81]
 class sdfAction-->
-    <rect fill="white" height="48" id="sdfAction" width="85" x="171" y="257" stroke="black" stroke-width="1.5"></rect>
-                  <ellipse cx="186" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                  <path d="M188.4731,279.1431 Q187.8921,279.4419 187.2529,279.5913 Q186.6138,279.7407 185.9082,279.7407 Q183.4014,279.7407 182.0815,278.0889 Q180.7617,276.437 180.7617,273.3159 Q180.7617,270.1865 182.0815,268.5347 Q183.4014,266.8828 185.9082,266.8828 Q186.6138,266.8828 187.2612,267.0322 Q187.9087,267.1816 188.4731,267.4805 L188.4731,270.2031 Q187.8423,269.6221 187.2488,269.3523 Q186.6553,269.0825 186.0244,269.0825 Q184.6797,269.0825 183.9949,270.1492 Q183.3101,271.2158 183.3101,273.3159 Q183.3101,275.4077 183.9949,276.4744 Q184.6797,277.541 186.0244,277.541 Q186.6553,277.541 187.2488,277.2712 Q187.8423,277.0015 188.4731,276.4204 Z" fill="black"></path>
-                  <text fill="black" font-family="sans-serif" font-size="12" x="200" y="277.5352">sdfAction</text>
-                  <line x1="172" x2="255" y1="289" y2="289" stroke="black" stroke-width="1.5"></line>
-                  <line x1="172" x2="255" y1="297" y2="297" stroke="black" stroke-width="1.5"></line>
+    <g id="elem_sdfAction">
+                    <rect fill="white" height="48" id="sdfAction" rx="2.5" ry="2.5" width="97" x="363.38" y="257" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="378.38" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M380.8531,279.1431 Q380.2721,279.4419 379.6329,279.5913 Q378.9938,279.7407 378.2882,279.7407 Q375.7814,279.7407 374.4615,278.0889 Q373.1417,276.437 373.1417,273.3159 Q373.1417,270.1865 374.4615,268.5347 Q375.7814,266.8828 378.2882,266.8828 Q378.9938,266.8828 379.6412,267.0322 Q380.2887,267.1816 380.8531,267.4805 L380.8531,270.2031 Q380.2223,269.6221 379.6288,269.3523 Q379.0353,269.0825 378.4044,269.0825 Q377.0597,269.0825 376.3749,270.1492 Q375.6901,271.2158 375.6901,273.3159 Q375.6901,275.4077 376.3749,276.4744 Q377.0597,277.541 378.4044,277.541 Q379.0353,277.541 379.6288,277.2712 Q380.2223,277.0015 380.8531,276.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="392.38" y="278.291">sdfAction</text>
+                    <line x1="364.38" x2="459.38" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
+                    <line x1="364.38" x2="459.38" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
+                  </g>
                   <!--MD5=[ccecbd8aeb25c61fe37a32079d0173e2]
 class sdfEvent-->
-    <rect fill="white" height="48" id="sdfEvent" width="81" x="315" y="257" stroke="black" stroke-width="1.5"></rect>
-                  <ellipse cx="330" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                  <path d="M332.4731,279.1431 Q331.8921,279.4419 331.2529,279.5913 Q330.6138,279.7407 329.9082,279.7407 Q327.4014,279.7407 326.0815,278.0889 Q324.7617,276.437 324.7617,273.3159 Q324.7617,270.1865 326.0815,268.5347 Q327.4014,266.8828 329.9082,266.8828 Q330.6138,266.8828 331.2612,267.0322 Q331.9087,267.1816 332.4731,267.4805 L332.4731,270.2031 Q331.8423,269.6221 331.2488,269.3523 Q330.6553,269.0825 330.0244,269.0825 Q328.6797,269.0825 327.9949,270.1492 Q327.3101,271.2158 327.3101,273.3159 Q327.3101,275.4077 327.9949,276.4744 Q328.6797,277.541 330.0244,277.541 Q330.6553,277.541 331.2488,277.2712 Q331.8423,277.0015 332.4731,276.4204 Z" fill="black"></path>
-                  <text fill="black" font-family="sans-serif" font-size="12" x="344" y="277.5352">sdfEvent</text>
-                  <line x1="316" x2="395" y1="289" y2="289" stroke="black" stroke-width="1.5"></line>
-                  <line x1="316" x2="395" y1="297" y2="297" stroke="black" stroke-width="1.5"></line>
+    <g id="elem_sdfEvent">
+                    <rect fill="white" height="48" id="sdfEvent" rx="2.5" ry="2.5" width="90" x="175.88" y="257" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="190.88" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M193.3531,279.1431 Q192.7721,279.4419 192.1329,279.5913 Q191.4938,279.7407 190.7882,279.7407 Q188.2814,279.7407 186.9615,278.0889 Q185.6417,276.437 185.6417,273.3159 Q185.6417,270.1865 186.9615,268.5347 Q188.2814,266.8828 190.7882,266.8828 Q191.4938,266.8828 192.1412,267.0322 Q192.7887,267.1816 193.3531,267.4805 L193.3531,270.2031 Q192.7223,269.6221 192.1288,269.3523 Q191.5353,269.0825 190.9044,269.0825 Q189.5597,269.0825 188.8749,270.1492 Q188.1901,271.2158 188.1901,273.3159 Q188.1901,275.4077 188.8749,276.4744 Q189.5597,277.541 190.9044,277.541 Q191.5353,277.541 192.1288,277.2712 Q192.7223,277.0015 193.3531,276.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="204.88" y="278.291">sdfEvent</text>
+                    <line x1="176.88" x2="264.88" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
+                    <line x1="176.88" x2="264.88" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
+                  </g>
                   <!--MD5=[154484d28240d22ab997079d2c9ce9cd]
 class sdfData-->
-    <rect fill="white" height="48" id="sdfData" width="77" x="142" y="382" stroke="black" stroke-width="1.5"></rect>
-                  <ellipse cx="157" cy="398" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                  <path d="M159.4731,404.1431 Q158.8921,404.4419 158.2529,404.5913 Q157.6138,404.7407 156.9082,404.7407 Q154.4014,404.7407 153.0815,403.0889 Q151.7617,401.437 151.7617,398.3159 Q151.7617,395.1865 153.0815,393.5347 Q154.4014,391.8828 156.9082,391.8828 Q157.6138,391.8828 158.2612,392.0322 Q158.9087,392.1816 159.4731,392.4805 L159.4731,395.2031 Q158.8423,394.6221 158.2488,394.3523 Q157.6553,394.0825 157.0244,394.0825 Q155.6797,394.0825 154.9949,395.1492 Q154.3101,396.2158 154.3101,398.3159 Q154.3101,400.4077 154.9949,401.4744 Q155.6797,402.541 157.0244,402.541 Q157.6553,402.541 158.2488,402.2712 Q158.8423,402.0015 159.4731,401.4204 Z" fill="black"></path>
-                  <text fill="black" font-family="sans-serif" font-size="12" x="171" y="402.5352">sdfData</text>
-                  <line x1="143" x2="218" y1="414" y2="414" stroke="black" stroke-width="1.5"></line>
-                  <line x1="143" x2="218" y1="422" y2="422" stroke="black" stroke-width="1.5"></line>
+    <g id="elem_sdfData">
+                    <rect fill="white" height="48" id="sdfData" rx="2.5" ry="2.5" width="84" x="236.88" y="382" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="251.88" cy="398" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M254.3531,404.1431 Q253.7721,404.4419 253.1329,404.5913 Q252.4938,404.7407 251.7882,404.7407 Q249.2814,404.7407 247.9615,403.0889 Q246.6417,401.437 246.6417,398.3159 Q246.6417,395.1865 247.9615,393.5347 Q249.2814,391.8828 251.7882,391.8828 Q252.4938,391.8828 253.1412,392.0322 Q253.7887,392.1816 254.3531,392.4805 L254.3531,395.2031 Q253.7223,394.6221 253.1288,394.3523 Q252.5353,394.0825 251.9044,394.0825 Q250.5597,394.0825 249.8749,395.1492 Q249.1901,396.2158 249.1901,398.3159 Q249.1901,400.4077 249.8749,401.4744 Q250.5597,402.541 251.9044,402.541 Q252.5353,402.541 253.1288,402.2712 Q253.7223,402.0015 254.3531,401.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="265.88" y="403.291">sdfData</text>
+                    <line x1="237.88" x2="319.88" y1="414" y2="414" stroke="black" stroke-width="0.5"></line>
+                    <line x1="237.88" x2="319.88" y1="422" y2="422" stroke="black" stroke-width="0.5"></line>
+                  </g>
                   <!--MD5=[474ac19abf738d5435f62202b2040a8c]
 link sdfThing to sdfObject-->
-    <path d="M213.5,55.14 C213.5,75.49 213.5,105.19 213.5,126.91" fill="none" id="sdfThing-to-sdfObject" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="213.5,131.97,217.5,122.97,213.5,126.97,209.5,122.97,213.5,131.97" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="214.5" y="98.5684">hasObject</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="193.0813" y="121.1064">0+</text>
+    <g id="link_sdfThing_sdfObject">
+                    <path d="M196.23,55.14 C208.08,75.67 225.41,105.69 237.98,127.46" fill="none" id="sdfThing-to-sdfObject" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="240.58,131.97,239.5426,122.1759,238.0793,127.6403,232.615,126.177,240.58,131.97" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="222.88" y="98.5684">hasObject</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="216.5869" y="121.1064">0+</text>
+                  </g>
                   <!--MD5=[84a99f3e6ba5135b350f4e647ff40b17]
 link sdfThing to sdfThing-->
-    <path d="M254.55,19.58 C273.25,18.41 289.5,22.22 289.5,31 C289.5,38.96 276.15,42.83 259.73,42.62" fill="none" id="sdfThing-to-sdfThing" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="254.55,42.42,263.3953,46.7513,259.5466,42.6056,263.6923,38.7568,254.55,42.42" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="295.5" y="36.0684">hasThing</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="262.5267" y="40.6379">0+</text>
+    <g id="link_sdfThing_sdfThing">
+                    <path d="M229.78,19.45 C248.59,18.79 264.38,22.64 264.38,31 C264.38,38.57 251.41,42.45 234.98,42.62" fill="none" id="sdfThing-to-sdfThing" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="229.78,42.55,238.7219,46.6782,234.7795,42.6214,238.8362,38.679,229.78,42.55" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="270.38" y="36.0684">hasThing</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="237.2916" y="40.6834">0+</text>
+                  </g>
+                  <!--MD5=[aafb040aa9bcf4f28b2a9ddbf948d7af]
+link sdfThing to sdfProperty-->
+    <g id="link_sdfThing_sdfProperty">
+                    <path d="M136.24,47.85 C99.47,63.1 50.71,90.1 27.88,132 C6,172.15 36.48,222.48 60.61,252.89" fill="none" id="sdfThing-to-sdfProperty" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="63.81,256.86,61.2602,247.3469,60.6657,252.9724,55.0401,252.3779,63.81,256.86" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="28.88" y="161.0684">hasProperty</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="38.1046" y="246.3604">0+</text>
+                  </g>
+                  <!--MD5=[1d7f3d7beec3cd9affa0abce6a6b2567]
+link sdfThing to sdfAction-->
+    <g id="link_sdfThing_sdfAction">
+                    <path d="M229.38,49.49 C250.37,58.49 274.89,70.61 294.88,85 C357.38,129.99 386.13,138.55 414.88,210 C420.13,223.05 420.02,238.6 418.33,251.72" fill="none" id="sdfThing-to-sdfAction" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="417.58,256.8,422.8497,248.4795,418.3091,251.8534,414.9352,247.3129,417.58,256.8" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="400.88" y="161.0684">hasAction</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="398.7344" y="246.285">0+</text>
+                  </g>
+                  <!--MD5=[72d56d283d4f06699a13f84f73fb0c30]
+link sdfThing to sdfEvent-->
+    <g id="link_sdfThing_sdfEvent">
+                    <path d="M164.53,55.07 C136.67,93.12 90.31,170.42 123.88,227 C129.59,236.63 150.24,248.49 171.03,258.55" fill="none" id="sdfThing-to-sdfEvent" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="175.74,260.8,169.3441,253.3105,171.2286,258.6442,165.8949,260.5287,175.74,260.8" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="121.88" y="161.0684">hasEvent</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="149.7882" y="254.3227">0+</text>
+                  </g>
                   <!--MD5=[c9f4ee01ef3119b1a79851932bb5a9a6]
 link sdfObject to sdfProperty-->
-    <path d="M173.07,180.22 C158.87,188.97 143.08,199.38 129.5,210 C112.81,223.05 95.64,239.35 82.14,252.93" fill="none" id="sdfObject-to-sdfProperty" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="78.44,256.69,87.6036,253.0805,81.9469,253.1261,81.9013,247.4694,78.44,256.69" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="130.5" y="223.5684">hasProperty</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="63.7559" y="246.1468">0+</text>
+    <g id="link_sdfObject_sdfProperty">
+                    <path d="M205.22,177.82 C187.33,186.53 167.43,197.55 150.88,210 C134.41,222.39 118.48,239.1 106.4,253.09" fill="none" id="sdfObject-to-sdfProperty" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="103.1,256.95,111.9849,252.7006,106.3457,253.1467,105.8996,247.5074,103.1,256.95" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="151.88" y="223.5684">hasProperty</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="87.5779" y="246.081">0+</text>
+                  </g>
                   <!--MD5=[ec9a56bd8655f4d1893aa031ec22e05c]
 link sdfObject to sdfAction-->
-    <path d="M213.5,180.14 C213.5,200.49 213.5,230.19 213.5,251.91" fill="none" id="sdfObject-to-sdfAction" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="213.5,256.97,217.5,247.97,213.5,251.97,209.5,247.97,213.5,256.97" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="214.5" y="223.5684">hasAction</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="193.0813" y="246.1064">0+</text>
+    <g id="link_sdfObject_sdfAction">
+                    <path d="M283.59,180.14 C310.52,201.1 350.16,231.95 378.24,253.81" fill="none" id="sdfObject-to-sdfAction" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="382.29,256.97,377.6481,248.2836,378.3455,253.8973,372.7319,254.5948,382.29,256.97" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="342.88" y="223.5684">hasAction</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="353.9189" y="246.1064">0+</text>
+                  </g>
                   <!--MD5=[e82b08c6210a768f8efa9371b7de17ad]
 link sdfObject to sdfEvent-->
-    <path d="M247.28,180.26 C259.62,189.17 273.49,199.68 285.5,210 C301.11,223.41 317.43,239.59 330.38,253.02" fill="none" id="sdfObject-to-sdfEvent" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="333.94,256.73,330.5912,247.4679,330.4767,253.1236,324.821,253.0091,333.94,256.73" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="304.5" y="223.5684">hasEvent</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="308.109" y="246.1971">0+</text>
+    <g id="link_sdfObject_sdfEvent">
+                    <path d="M247.67,180.14 C242.21,200.49 234.24,230.19 228.41,251.91" fill="none" id="sdfObject-to-sdfEvent" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="227.06,256.97,233.2411,249.3023,228.3465,252.1384,225.5104,247.2438,227.06,256.97" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="239.88" y="223.5684">hasEvent</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="208.3021" y="246.1064">0+</text>
+                  </g>
                   <!--MD5=[7eee11d65eceecf8b941af956a7f2b88]
 link sdfAction to sdfData-->
-    <path d="M170.82,293.49 C149.97,301.5 126.77,314.51 114.5,335 C103.81,352.85 119.15,369.91 137.72,382.71" fill="none" id="sdfAction-to-sdfData" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="141.98,385.54,136.7103,377.2195,137.8197,382.7665,132.2727,383.8759,141.98,385.54" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="115.5" y="348.5684">hasInputData</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="116.1095" y="378.5032">1+</text>
+    <g id="link_sdfAction_sdfData">
+                    <path d="M380.75,305.1 C369.18,314.08 356.14,324.68 344.88,335 C330.26,348.4 315.01,364.43 302.85,377.76" fill="none" id="sdfAction-to-sdfData" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="299.18,381.81,308.1824,377.8153,302.5327,378.1006,302.2474,372.451,299.18,381.81" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="345.88" y="348.5684">hasInputData</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="284.0756" y="371.2976">0+</text>
+                  </g>
                   <!--MD5=[7eee11d65eceecf8b941af956a7f2b88]
 link sdfAction to sdfData-->
-    <path d="M212.27,305.04 C211.1,318.86 208.85,336.68 204.5,352 C202.12,360.37 198.63,369.11 195.04,377.01" fill="none" id="sdfAction-to-sdfData-1" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="192.8,381.82,200.2318,375.3572,194.9152,377.2894,192.9829,371.9728,192.8,381.82" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="208.5" y="348.5684">hasOutputData</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="175.6456" y="371.3101">0+</text>
+    <g id="link_sdfAction_sdfData">
+                    <path d="M429.37,305.05 C438.09,319.54 444.86,338.07 434.88,352 C410.43,386.13 362.73,398.55 326.48,402.93" fill="none" id="sdfAction-to-sdfData-1" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="321.22,403.52,330.6095,406.4928,326.1889,402.9631,329.7185,398.5425,321.22,403.52" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="439.88" y="348.5684">hasOutputData</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="328.7606" y="399.6454">0+</text>
+                  </g>
                   <!--MD5=[1d999dc69acbeb1774ac85a19f512fd6]
 link sdfEvent to sdfData-->
-    <path d="M345.94,305.15 C338.7,320.24 327.43,339.4 312.5,352 C287.09,373.44 251.9,386.99 224.25,395.01" fill="none" id="sdfEvent-to-sdfData" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="219.18,396.45,228.9277,397.858,223.9924,395.0934,226.7571,390.1581,219.18,396.45" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="328.5" y="348.5684">hasOutputData</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="227.077" y="391.2202">1+</text>
+    <g id="link_sdfEvent_sdfData">
+                    <path d="M209.53,305.09 C204.25,319.26 200.56,337.41 207.88,352 C213.43,363.07 222.51,372.42 232.35,380.03" fill="none" id="sdfEvent-to-sdfData" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="236.6,383.19,231.746,374.6204,232.5812,380.2152,226.9863,381.0505,236.6,383.19" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="208.88" y="348.5684">hasOutputData</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="210.7478" y="376.1409">0+</text>
+                  </g>
                   <!--MD5=[0c4745fb3134cadd1f7ab6e63b3ea9cc]
 link sdfProperty to sdfData-->
-    <path d="M32.44,305.12 C20.65,319.29 11.01,337.45 21.5,352 C47.45,388 98.9,399.92 136.27,403.67" fill="none" id="sdfProperty-to-sdfData" stroke="black" stroke-width="1.0"></path>
-                  <polygon fill="black" points="141.68,404.16,133.0828,399.3549,136.7009,403.7035,132.3524,407.3215,141.68,404.16" stroke="black" stroke-width="1.0"></polygon>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="22.5" y="348.5684">isInstanceOf</text>
-                  <text fill="black" font-family="sans-serif" font-size="13" x="126.0527" y="400.0923">1</text>
-                  <!--MD5=[ca9790f7baa3e41f15db4a5d5b882cf2]
+    <g id="link_sdfProperty_sdfData">
+                    <path d="M89.17,305.07 C93.14,320.32 100.52,339.7 113.88,352 C146.15,381.73 195.19,394.79 231.43,400.52" fill="none" id="sdfProperty-to-sdfData" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="236.68,401.31,228.3744,396.0168,231.7355,400.5669,227.1855,403.928,236.68,401.31" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="114.88" y="348.5684">isInstanceOf</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="220.7394" y="396.8099">1</text>
+                  </g>
+                  <!--MD5=[27dee1531c147366aefb4bf4059fa9f3]
 @startuml
 
 sdfThing - -> "0+" sdfObject : hasObject
 sdfThing - -> "0+" sdfThing : hasThing
+sdfThing - -> "0+" sdfProperty : hasProperty
+sdfThing - -> "0+" sdfAction : hasAction
+sdfThing - -> "0+" sdfEvent : hasEvent
 
 sdfObject - -> "0+" sdfProperty : hasProperty
 sdfObject - -> "0+" sdfAction : hasAction
 sdfObject - -> "0+" sdfEvent : hasEvent
 
-sdfAction - -> "1+" sdfData : hasInputData
+sdfAction - -> "0+" sdfData : hasInputData
 sdfAction - -> "0+" sdfData : hasOutputData
 
-sdfEvent - -> "1+" sdfData : hasOutputData
+sdfEvent - -> "0+" sdfData : hasOutputData
 
 sdfProperty - -> "1" sdfData : isInstanceOf
 
@@ -1916,11 +1997,11 @@ class sdfData {
 
 @enduml
 
-PlantUML version 1.2022.1(Tue Feb 01 19:19:58 CET 2022)
+PlantUML version 1.2022.5(Sat Apr 30 12:55:52 CEST 2022)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Default Encoding: US-ASCII
+Default Encoding: UTF-8
 Language: en
 Country: DE
 -->
@@ -2073,9 +2154,95 @@ and requirements.<a href="#section-2.2.5-2" class="pilcrow">¶</a></p>
 <a href="#section-2.2.6" class="section-number selfRef">2.2.6. </a><a href="#name-sdfthing" class="section-name selfRef">sdfThing</a>
           </h4>
 <p id="section-2.2.6-1">Back at the top level, the <code>sdfThing</code> groups enables definition of models for
-complex devices that will use one or more <code>sdfObject</code> definitions.<a href="#section-2.2.6-1" class="pilcrow">¶</a></p>
+complex devices that will use one or more <code>sdfObject</code> definitions.
+<code>sdfThing</code> groups, however, also allow for including interaction
+affordances, <code>sdfData</code>, as well as <code>minItems</code> and <code>maxItems</code> qualities.
+Therefore, they can be seen as a superset of <code>sdfObject</code> groups, additionally
+allowing for composition.<a href="#section-2.2.6-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.6-2">A definition in an <code>sdfThing</code> group can refine the metadata of the definitions it
 is composed from: other definitions in <code>sdfThing</code> groups definitions in <code>sdfObject</code> groups.<a href="#section-2.2.6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="member-names-given-names-and-quality-names">
+<section id="section-2.3">
+        <h3 id="name-member-names-given-names-an">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-member-names-given-names-an" class="section-name selfRef">Member names: Given Names and Quality Names</a>
+        </h3>
+<p id="section-2.3-1">SDF models are JSON objects (maps) that mostly employ JSON objects as
+member values, which in turn mostly employ JSON objects as their
+member values, and so on.
+This nested structure of JSON objects creates a tree, where the edges
+are the member names (map keys) used in these JSON objects.
+(In certain cases, where member names are not needed, JSON arrays may
+be interspersed in this tree.)<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<div id="given-names-and-quality-names">
+<section id="section-2.3.1">
+          <h4 id="name-given-names-and-quality-nam">
+<a href="#section-2.3.1" class="section-number selfRef">2.3.1. </a><a href="#name-given-names-and-quality-nam" class="section-name selfRef">Given Names and Quality Names</a>
+          </h4>
+<p id="section-2.3.1-1">For any particular JSON object in an SDF model, the set of member
+names that are used is either of:<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.3.1-2.1">A set of "<em>Quality Names</em>", where the entries in the object are
+Qualities.  Quality Names are defined by the present specification
+and its extensions, together with specific semantics to be
+associated with the member value given with a certain Quality Name.<a href="#section-2.3.1-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.3.1-2.2">A set of "<em>Given Names</em>", where the entries in the object are separate
+entities (definitions, declarations, etc.) that each have names that
+are chosen by the SDF model author in order that these names can be
+employed by a user of that model.<a href="#section-2.3.1-2.2" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-2.3.1-3">In a path from the root of the tree to any leaf, Quality Names and
+Given Names roughly alternate (with the information block,
+<a href="#information-block" class="xref">Section 3.1</a>, as a prominent exception).<a href="#section-2.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.3.1-4">The meaning of the JSON object that is the member value associated
+with a Given Name is derived from the Quality Name that was used as
+the member name associated to the parent.
+In the CDDL grammar given in <a href="#syntax" class="xref">Appendix A</a>, JSON objects with member names that are
+Given Names are defined using the CDDL generic rule reference <code>named&lt;objectmembers&gt;</code>,
+where <code>objectmembers</code> is in turn the structure of the members of the
+JSON object that is the value of the member named by the Given Name.
+As quality-named objects and given-named objects roughly alternate in
+a path down the tree, <code>objectmembers</code> is usually an object built from
+Quality Names.<a href="#section-2.3.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="hierarchical-names">
+<section id="section-2.3.2">
+          <h4 id="name-hierarchical-names">
+<a href="#section-2.3.2" class="section-number selfRef">2.3.2. </a><a href="#name-hierarchical-names" class="section-name selfRef">Hierarchical Names</a>
+          </h4>
+<p id="section-2.3.2-1">From the outside of a specification, Given Names are usually used as
+part of a hierarchical name that looks like a JSON pointer <span>[<a href="#RFC6901" class="xref">RFC6901</a>]</span>,
+itself generally rooted in (used as the fragment identifier in) an
+outer namespace that looks like an <code>https://</code> URL (see <a href="#names-and-namespaces" class="xref">Section 4</a>).<a href="#section-2.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.3.2-2">As Quality Names and Given Names roughly alternate in a path into the
+model, the JSON pointer part of the hierarchical name also alternates
+between Quality Names and Given Names.<a href="#section-2.3.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="extensibility-of-given-names-and-quality-names">
+<section id="section-2.3.3">
+          <h4 id="name-extensibility-of-given-name">
+<a href="#section-2.3.3" class="section-number selfRef">2.3.3. </a><a href="#name-extensibility-of-given-name" class="section-name selfRef">Extensibility of Given Names and Quality Names</a>
+          </h4>
+<p id="section-2.3.3-1">In SDF, both Quality Names and Given Names are <em>extension points</em>.
+This is more obvious for Quality Names: Extending SDF is mostly done
+by defining additional qualities.  To enable non-conflicting third
+party extensions to SDF, an extension is planned that will allow the
+use of qualified names (names with an embedded colon) as Quality
+Names.
+Until that extension is defined, Quality Names with (one or more)
+embedded colons are reserved and <span class="bcp14">MUST NOT</span> be used in an SDF model.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3.3-2">Further, to enable Given Names to have a more powerful role in building
+global hierarchical names, an extension is planned that makes use of
+qualified names for Given Names.
+So, until that extension is defined, Given Names with (one or more)
+embedded colons are reserved and <span class="bcp14">MUST NOT</span> be used in an SDF model.<a href="#section-2.3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2090,7 +2257,7 @@ is composed from: other definitions in <code>sdfThing</code> groups definitions 
 <p id="section-3-1">SDF definitions are contained in SDF files.  One or more SDF files can
 work together to provide the definitions and declarations that are the
 payload of the SDF format.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">A SDF definition file contains a single JSON map (JSON object).
+<p id="section-3-2">An SDF definition file contains a single JSON map (JSON object).
 This object has three blocks: the information block, the namespaces block, and the definitions block.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="information-block">
 <section id="section-3.1">
@@ -2370,7 +2537,7 @@ namespace map.<a href="#section-4.3-10" class="pilcrow">¶</a></p>
 <p id="section-4.4-1">In a JSON map establishing a definition, the keyword "sdfRef" is used
 to copy all of the qualities and enclosed definitions of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
-(This can be compared to the processing of the "$ref" keyword in <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+(This can be compared to the processing of the "$ref" keyword in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4-2">For example, this reference:<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <div id="section-4.4-3">
 <pre class="lang-json sourcecode">
@@ -2692,9 +2859,9 @@ names, the URN sub-namespace "urn:ietf:params:unit" is provided
 <p id="section-4.7.1-1">SDF defines a number of basic types beyond those provided by JSON or
 JSO.  These types are identified by the <code>sdfType</code> quality, which
 is a text string from a set of type names defined by SDF.<a href="#section-4.7.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.7.1-2">To aid interworking with <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span> implementations, it is <span class="bcp14">RECOMMENDED</span>
+<p id="section-4.7.1-2">To aid interworking with <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span> implementations, it is <span class="bcp14">RECOMMENDED</span>
 that <code>sdfType</code> is always used in conjunction with the <code>type</code> quality
-inherited from <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>, in such a way as to yield a common
+inherited from <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>, in such a way as to yield a common
 representation of the type's values in JSON.<a href="#section-4.7.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.7.1-3">Values for <code>sdfType</code> that are defined in SDF 1.1 are shown in
 <a href="#sdftype1" class="xref">Table 5</a>.
@@ -2750,7 +2917,7 @@ object used to represent the choice) and a set of dataqualities
 Dataqualities that are specified at the same level as the sdfChoice
 apply to all choices in the sdfChoice, except those specific choices
 where the dataquality is overridden at the choice level.<a href="#section-4.7.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.7.2-2">sdfChoice merges the functions of two constructs found in <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>:<a href="#section-4.7.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.7.2-2">sdfChoice merges the functions of two constructs found in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>:<a href="#section-4.7.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.7.2-3.1">
               <p id="section-4.7.2-3.1.1"><code>enum</code><a href="#section-4.7.2-3.1.1" class="pilcrow">¶</a></p>
@@ -2807,7 +2974,7 @@ element for the data model.)<a href="#section-4.7.2-3.1.12" class="pilcrow">¶</
 </li>
             <li class="normal" id="section-4.7.2-3.2">
               <p id="section-4.7.2-3.2.1">anyOf<a href="#section-4.7.2-3.2.1" class="pilcrow">¶</a></p>
-<p id="section-4.7.2-3.2.2"><span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span> provides a type union called <code>anyOf</code>, which provides a
+<p id="section-4.7.2-3.2.2"><span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span> provides a type union called <code>anyOf</code>, which provides a
 choice between anonymous alternatives.<a href="#section-4.7.2-3.2.2" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-3.2.3">
 What could have been<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
@@ -2822,7 +2989,7 @@ What could have been<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
 </pre><a href="#section-4.7.2-3.2.4" class="pilcrow">¶</a>
 </div>
 <p id="section-4.7.2-3.2.5">
-in <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span> can be more descriptively notated in SDF as:<a href="#section-4.7.2-3.2.5" class="pilcrow">¶</a></p>
+in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span> can be more descriptively notated in SDF as:<a href="#section-4.7.2-3.2.5" class="pilcrow">¶</a></p>
 <div id="section-4.7.2-3.2.6">
 <pre class="lang-json sourcecode">
 "sdfChoice": {
@@ -2836,9 +3003,9 @@ in <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handre
 </li>
           </ul>
 <p id="section-4.7.2-4">Note that there is no need in SDF for the type intersection construct
-<code>allOf</code> or the peculiar type-xor construct <code>oneOf</code> found in <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>.<a href="#section-4.7.2-4" class="pilcrow">¶</a></p>
+<code>allOf</code> or the peculiar type-xor construct <code>oneOf</code> found in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>.<a href="#section-4.7.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-5">As a simplification for readers of SDF specifications accustomed to
-the <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span> enum keyword, this is retained, but limited to a choice
+the <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span> enum keyword, this is retained, but limited to a choice
 of text string values, such that<a href="#section-4.7.2-5" class="pilcrow">¶</a></p>
 <div id="section-4.7.2-6">
 <pre class="lang-json sourcecode">
@@ -3192,8 +3359,13 @@ consumption there is no conflict with the intended goal.<a href="#section-6.2.1-
         <h3 id="name-sdfthing-2">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-sdfthing-2" class="section-name selfRef">sdfThing</a>
         </h3>
-<p id="section-6.3-1">An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.3-2">sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
+(see <a href="#exa-sdfthing-outlet-strip" class="xref">Figure 6</a> in {outlet-strip-example}} for an example SDF model).<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
+An <code>sdfThing</code> can also contain Interaction Affordances and sdfData itself, such
+as a status (on/off) for the refrigerator-freezer as a whole (see
+<a href="#exa-sdfthing-fridge-freezer" class="xref">Figure 7</a> in <a href="#fridge-freezer-example" class="xref">Appendix D.2</a> for an example SDF
+model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">An sdfThing may be composed of sdfObjects and other sdfThings.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <p id="section-6.3-4">The qualities of sdfThing are shown in <a href="#sdfthingqual" class="xref">Table 10</a>.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-sdfthing"></span><div id="sdfthingqual">
@@ -3226,6 +3398,36 @@ consumption there is no conflict with the intended goal.<a href="#section-6.2.1-
               <td class="text-left" rowspan="1" colspan="1">sdfObject</td>
               <td class="text-left" rowspan="1" colspan="1">object</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfProperty</td>
+              <td class="text-left" rowspan="1" colspan="1">property</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named property definitions for this thing</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfAction</td>
+              <td class="text-left" rowspan="1" colspan="1">action</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named action definitions for this thing</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfEvent</td>
+              <td class="text-left" rowspan="1" colspan="1">event</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named event definitions for this thing</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfData</td>
+              <td class="text-left" rowspan="1" colspan="1">named-sdq</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named data type definitions that might be used in the above</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">minItems</td>
+              <td class="text-left" rowspan="1" colspan="1">number</td>
+              <td class="text-left" rowspan="1" colspan="1">(array) Minimum number of sdfThing instances in array</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">maxItems</td>
+              <td class="text-left" rowspan="1" colspan="1">number</td>
+              <td class="text-left" rowspan="1" colspan="1">(array) Maximum number of sdfThing instances in array</td>
             </tr>
           </tbody>
         </table>
@@ -3494,11 +3696,11 @@ unit names "%" (deprecated in favor of "/"), "%RH", "%EL".<a href="#section-7.2-
 <dd class="break"></dd>
 <dt id="I-D.bormann-jsonpath-iregexp">[I-D.bormann-jsonpath-iregexp]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">T. Bray</span>, <span class="refTitle">"I-Regexp: An Interoperable Regexp Format"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-jsonpath-iregexp-03</span>, <time datetime="2022-03-07" class="refDate">7 March 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-bormann-jsonpath-iregexp-03.txt">https://www.ietf.org/archive/id/draft-bormann-jsonpath-iregexp-03.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">T. Bray</span>, <span class="refTitle">"I-Regexp: An Interoperable Regexp Format"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-jsonpath-iregexp-04</span>, <time datetime="2022-04-25" class="refDate">25 April 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-bormann-jsonpath-iregexp-04.txt">https://www.ietf.org/archive/id/draft-bormann-jsonpath-iregexp-04.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.handrews-json-schema-validation">[I-D.handrews-json-schema-validation]</dt>
+<dt id="I-D.handrews-json-schema-validation-01">[I-D.handrews-json-schema-validation-01]</dt>
         <dd>
-<span class="refAuthor">Wright, A.</span>, <span class="refAuthor">Andrews, H.</span>, and <span class="refAuthor">B. Hutton</span>, <span class="refTitle">"JSON Schema Validation: A Vocabulary for Structural Validation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-validation-02</span>, <time datetime="2019-09-17" class="refDate">17 September 2019</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-handrews-json-schema-validation-02.txt">https://www.ietf.org/archive/id/draft-handrews-json-schema-validation-02.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Wright, A.</span>, <span class="refAuthor">Andrews, H.</span>, and <span class="refAuthor">G. Luff</span>, <span class="refTitle">"JSON Schema Validation: A Vocabulary for Structural Validation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-validation-01</span>, <time datetime="2018-03-19" class="refDate">19 March 2018</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-handrews-json-schema-validation-01.txt">https://www.ietf.org/archive/id/draft-handrews-json-schema-validation-01.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.irtf-t2trg-rest-iot">[I-D.irtf-t2trg-rest-iot]</dt>
         <dd>
@@ -3550,7 +3752,7 @@ indicate new syntax intended for SDF 1.1.
 Features whose names end in "-ext" indicate extension points for
 further evolution.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <div id="appendix-A-4">
-<pre class="lang-cddl sourcecode">
+<pre class="breakable lang-cddl sourcecode">
 start = sdf-syntax
 
 sdf-syntax = {
@@ -3559,10 +3761,7 @@ sdf-syntax = {
  ? defaultNamespace: text
  ? sdfThing: named&lt;thingqualities&gt;       ; Thing is a composition of objects that work together in some way
  ? sdfObject: named&lt;objectqualities&gt;     ; Object is a set of Properties, Actions, and Events that together perform a particular function
- ? sdfProperty: named&lt;propertyqualities&gt; ; Property represents the state of an instance of an object
- ? sdfAction: named&lt;actionqualities&gt;     ; Action is a directive to invoke an application layer verb associated with an object
- ? sdfEvent: named&lt;eventqualities&gt;       ; Event represents an occurrence of something associated with an object
- ? sdfData: named&lt;dataqualities&gt;         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
+ paedataqualities                     ; Includes Properties, Actions, and Events as well as sdfData
  EXTENSION-POINT&lt;"top-ext"&gt;
 }
 
@@ -3590,23 +3789,34 @@ commonqualities = (
  ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
 )
 
+arraydefinitionqualities = (
+ ? ("minItems" .feature "1.2") =&gt; uint
+ ? ("maxItems" .feature "1.2") =&gt; uint
+)
+
+paedataqualities = (
+ ? sdfProperty: named&lt;propertyqualities&gt; ; Property represents the state of an instance of an object
+ ? sdfAction: named&lt;actionqualities&gt;     ; Action is a directive to invoke an application layer verb associated with an object
+ ? sdfEvent: named&lt;eventqualities&gt;       ; Event represents an occurrence of something associated with an object
+ ? sdfData: named&lt;dataqualities&gt;         ; Data represents a piece of information that can be the
+                                         ; state of a property or a parameter to an action or a signal in an event
+)
+
 ; for building hierarchy
 thingqualities = {
  commonqualities
  ? sdfObject: named&lt;objectqualities&gt;
  ? sdfThing: named&lt;thingqualities&gt;
+ paedataqualities
+ arraydefinitionqualities
  EXTENSION-POINT&lt;"thing-ext"&gt;
 }
 
 ; for single objects, or for arrays of objects (1.2)
 objectqualities = {
  commonqualities
- ? ("minItems" .feature "1.2") =&gt; number
- ? ("maxItems" .feature "1.2") =&gt; number
- ? sdfProperty: named&lt;propertyqualities&gt;
- ? sdfAction: named&lt;actionqualities&gt;
- ? sdfEvent: named&lt;eventqualities&gt;
- ? sdfData: named&lt;dataqualities&gt;
+ paedataqualities
+ arraydefinitionqualities
  EXTENSION-POINT&lt;"object-ext"&gt;
 }
 
@@ -3681,15 +3891,15 @@ jsonschema = (
  ? exclusiveMaximum: bool / number      ; jso draft 4/7
  ? multipleOf: number                   ; ISSUE: Do we need this?
  ; text string constraints
- ? minLength: number
- ? maxLength: number
+ ? minLength: uint
+ ? maxLength: uint
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
            / (text .feature "format-ext")                       ; EXTENSION-POINT
  ; array constraints
- ? minItems: number
- ? maxItems: number
+ ? minItems: uint
+ ? maxItems: uint
  ? uniqueItems: bool
  ? items: { ;;; ultimately, this will be mostly recursive, but, for now
             ;;; let's find out what we actually need
@@ -3708,8 +3918,8 @@ jsonschema = (
      ? "enum" =&gt; [+ text] ; limited to text strings in SDF 1.1
      ? ("enum" .feature "1.0") =&gt; [+ any]
      ? format: text
-     ? minLength: number
-     ? maxLength: number
+     ? minLength: uint
+     ? maxLength: uint
      EXTENSION-POINT&lt;"items-ext"&gt;
    }
 )
@@ -3724,47 +3934,21 @@ jsonschema = (
       </h2>
 <p id="appendix-B-1">This appendix describes the syntax of SDF defined in <a href="#syntax" class="xref">Appendix A</a>, but
 using a version of the description techniques advertised on
-json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">The appendix shows both the validation and the framework syntax.
 Since most of the lines are the same between these two files, those lines are shown only once, with a leading space, in the form of a unified diff.
 Lines leading with a <code>-</code> are part of the validation syntax, and lines leading with a <code>+</code> are part of the framework syntax.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <div id="appendix-B-3">
-<pre class="lang-jso.json sourcecode">
+<pre class="breakable lang-jso.json sourcecode">
  {
--  "title": "sdf-validation.cddl",
-+  "title": "sdf-framework.cddl",
+-  "title": "sdf-validation.cddl -- Generated: 2022-06-06T12:50:46Z",
++  "title": "sdf-framework.cddl -- Generated: 2022-06-06T12:50:46Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
--  "$comment": "Generated: 2022-03-27T11:57:27Z",
-+  "$comment": "Generated: 2022-03-27T11:57:28Z",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
      "sdf-syntax": {
        "type": "object",
        "properties": {
-         "info": {
-           "$ref": "#/definitions/sdfinfo"
-         },
-         "namespace": {
-           "type": "object",
-           "additionalProperties": {
-             "type": "string"
-           }
-         },
-         "defaultNamespace": {
-           "type": "string"
-         },
-         "sdfThing": {
-           "type": "object",
-           "additionalProperties": {
-             "$ref": "#/definitions/thingqualities"
-           }
-         },
-         "sdfObject": {
-           "type": "object",
-           "additionalProperties": {
-             "$ref": "#/definitions/objectqualities"
-           }
-         },
          "sdfProperty": {
            "type": "object",
            "additionalProperties": {
@@ -3787,6 +3971,30 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
            "type": "object",
            "additionalProperties": {
              "$ref": "#/definitions/dataqualities"
+           }
+         },
+         "info": {
+           "$ref": "#/definitions/sdfinfo"
+         },
+         "namespace": {
+           "type": "object",
+           "additionalProperties": {
+             "type": "string"
+           }
+         },
+         "defaultNamespace": {
+           "type": "string"
+         },
+         "sdfThing": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/thingqualities"
+           }
+         },
+         "sdfObject": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/objectqualities"
            }
          }
        },
@@ -3817,6 +4025,36 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
      "thingqualities": {
        "type": "object",
        "properties": {
+         "minItems": {
+           "$ref": "#/definitions/uint"
+         },
+         "maxItems": {
+           "$ref": "#/definitions/uint"
+         },
+         "sdfProperty": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/propertyqualities"
+           }
+         },
+         "sdfAction": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/actionqualities"
+           }
+         },
+         "sdfEvent": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/eventqualities"
+           }
+         },
+         "sdfData": {
+           "type": "object",
+           "additionalProperties": {
+             "$ref": "#/definitions/dataqualities"
+           }
+         },
          "description": {
            "type": "string"
          },
@@ -3861,26 +4099,11 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
      "objectqualities": {
        "type": "object",
        "properties": {
-         "description": {
-           "type": "string"
-         },
-         "label": {
-           "type": "string"
-         },
-         "$comment": {
-           "type": "string"
-         },
-         "sdfRef": {
-           "$ref": "#/definitions/sdf-pointer"
-         },
-         "sdfRequired": {
-           "$ref": "#/definitions/pointer-list"
-         },
          "minItems": {
-           "type": "number"
+           "$ref": "#/definitions/uint"
          },
          "maxItems": {
-           "type": "number"
+           "$ref": "#/definitions/uint"
          },
          "sdfProperty": {
            "type": "object",
@@ -3905,6 +4128,21 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
            "additionalProperties": {
              "$ref": "#/definitions/dataqualities"
            }
+         },
+         "description": {
+           "type": "string"
+         },
+         "label": {
+           "type": "string"
+         },
+         "$comment": {
+           "type": "string"
+         },
+         "sdfRef": {
+           "$ref": "#/definitions/sdf-pointer"
+         },
+         "sdfRequired": {
+           "$ref": "#/definitions/pointer-list"
          }
        },
 -      "additionalProperties": false
@@ -3976,10 +4214,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                "type": "number"
              },
              "minLength": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "maxLength": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "pattern": {
                "type": "string"
@@ -4024,10 +4262,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                ]
              },
              "minItems": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "maxItems": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "uniqueItems": {
                "type": "boolean"
@@ -4078,10 +4316,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                        "type": "string"
                      },
                      "minLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      },
                      "maxLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      }
                    },
 -                  "additionalProperties": false
@@ -4140,10 +4378,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                        "type": "string"
                      },
                      "minLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      },
                      "maxLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      }
                    },
 -                  "additionalProperties": false
@@ -4185,10 +4423,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -4347,10 +4585,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                "type": "number"
              },
              "minLength": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "maxLength": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "pattern": {
                "type": "string"
@@ -4395,10 +4633,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                ]
              },
              "minItems": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "maxItems": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "uniqueItems": {
                "type": "boolean"
@@ -4449,10 +4687,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                        "type": "string"
                      },
                      "minLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      },
                      "maxLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      }
                    },
 -                  "additionalProperties": false
@@ -4511,10 +4749,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                        "type": "string"
                      },
                      "minLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      },
                      "maxLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      }
                    },
 -                  "additionalProperties": false
@@ -4556,10 +4794,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -4717,10 +4955,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                "type": "number"
              },
              "minLength": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "maxLength": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "pattern": {
                "type": "string"
@@ -4765,10 +5003,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                ]
              },
              "minItems": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "maxItems": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "uniqueItems": {
                "type": "boolean"
@@ -4819,10 +5057,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                        "type": "string"
                      },
                      "minLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      },
                      "maxLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      }
                    },
 -                  "additionalProperties": false
@@ -4881,10 +5119,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                        "type": "string"
                      },
                      "minLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      },
                      "maxLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      }
                    },
 -                  "additionalProperties": false
@@ -4957,10 +5195,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -5110,10 +5348,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "number"
 +            },
 +            "minLength": {
-+              "type": "number"
++              "$ref": "#/definitions/uint"
 +            },
 +            "maxLength": {
-+              "type": "number"
++              "$ref": "#/definitions/uint"
 +            },
 +            "pattern": {
 +              "type": "string"
@@ -5150,10 +5388,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              ]
 +            },
 +            "minItems": {
-+              "type": "number"
++              "$ref": "#/definitions/uint"
 +            },
 +            "maxItems": {
-+              "type": "number"
++              "$ref": "#/definitions/uint"
 +            },
 +            "uniqueItems": {
 +              "type": "boolean"
@@ -5201,10 +5439,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -5259,10 +5497,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -5303,10 +5541,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -5450,10 +5688,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "number"
 +            },
 +            "minLength": {
-+              "type": "number"
++              "$ref": "#/definitions/uint"
 +            },
 +            "maxLength": {
-+              "type": "number"
++              "$ref": "#/definitions/uint"
 +            },
 +            "pattern": {
 +              "type": "string"
@@ -5490,10 +5728,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              ]
 +            },
 +            "minItems": {
-+              "type": "number"
++              "$ref": "#/definitions/uint"
 +            },
 +            "maxItems": {
-+              "type": "number"
++              "$ref": "#/definitions/uint"
 +            },
 +            "uniqueItems": {
 +              "type": "boolean"
@@ -5541,10 +5779,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -5599,10 +5837,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -5643,10 +5881,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -5793,10 +6031,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                "type": "number"
              },
              "minLength": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "maxLength": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "pattern": {
                "type": "string"
@@ -5841,10 +6079,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                ]
              },
              "minItems": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "maxItems": {
-               "type": "number"
+               "$ref": "#/definitions/uint"
              },
              "uniqueItems": {
                "type": "boolean"
@@ -5895,10 +6133,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                        "type": "string"
                      },
                      "minLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      },
                      "maxLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      }
                    },
 -                  "additionalProperties": false
@@ -5957,10 +6195,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                        "type": "string"
                      },
                      "minLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      },
                      "maxLength": {
-                       "type": "number"
+                       "$ref": "#/definitions/uint"
                      }
                    },
 -                  "additionalProperties": false
@@ -6002,10 +6240,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +                      "type": "string"
 +                    },
 +                    "minLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    },
 +                    "maxLength": {
-+                      "type": "number"
++                      "$ref": "#/definitions/uint"
 +                    }
 +                  },
 +                  "additionalProperties": {
@@ -6128,6 +6366,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          }
        ]
      },
+     "uint": {
+       "type": "integer",
+       "minimum": 0
+     },
      "actionqualities": {
        "type": "object",
        "properties": {
@@ -6225,7 +6467,7 @@ model level.
 A popular way to describe JSON data at a data model level is proposed
 by a number of drafts on json-schema.org (which collectively are
 abbreviated JSO here)); for reference to a popular version we will
-point here to <span>[<a href="#I-D.handrews-json-schema-validation" class="xref">I-D.handrews-json-schema-validation</a>]</span>.
+point here to <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>.
 As the vocabulary used by JSO is familiar to many JSON modellers, the
 present specification borrows some of the terms and ports their
 semantics to the information model level needed for SDF.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
@@ -6385,20 +6627,116 @@ ecosystems that use JSO.<a href="#appendix-C.6-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="acknowledgements">
+<div id="composition-examples">
 <section id="appendix-D">
+      <h2 id="name-composition-examples">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-composition-examples" class="section-name selfRef">Composition Examples</a>
+      </h2>
+<p id="appendix-D-1">This appendix contains two examples illustrating different composition approaches
+using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<div id="outlet-strip-example">
+<section id="appendix-D.1">
+        <h3 id="name-outlet-strip-example">
+<a href="#appendix-D.1" class="section-number selfRef">D.1. </a><a href="#name-outlet-strip-example" class="section-name selfRef">Outlet Strip Example</a>
+        </h3>
+<div id="exa-sdfthing-outlet-strip">
+<figure id="figure-6">
+          <div class="alignLeft art-text artwork" id="appendix-D.1-1.1">
+<pre>
+{
+  "sdfThing": {
+    "outlet-strip" : {
+      "label": "An outlet Strip",
+      "description": "Contains a number of Sockets",
+      "sdfObject": {
+        "socket": {
+          "label": "An array of sockets in the outlet strip",
+          "minItems": 2,
+          "maxItems": 10
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="fridge-freezer-example">
+<section id="appendix-D.2">
+        <h3 id="name-refrigerator-freezer-exampl">
+<a href="#appendix-D.2" class="section-number selfRef">D.2. </a><a href="#name-refrigerator-freezer-exampl" class="section-name selfRef">Refrigerator-Freezer Example</a>
+        </h3>
+<div id="exa-sdfthing-fridge-freezer">
+<figure id="figure-7">
+          <div class="alignLeft art-text artwork" id="appendix-D.2-1.1">
+<pre>
+{
+  "sdfThing": {
+    "refrigerator-freezer" : {
+      "label": "A refrigerator combined with a freezer",
+      "sdfProperty": {
+        "status": {
+          "type": "boolean",
+          "label": {
+            "Indicates if the refrigerator-freezer combination is powered"
+          }
+        }
+      },
+      "sdfObject": {
+        "refrigerator": {
+          "label": "A refrigerator compartment",
+          "sdfProperty": {
+            "temperature": {
+              "sdfRef": "#/sdfProproperty/temperature",
+              "maximum": 8
+            }
+          }
+        },
+        "freezer": {
+          "label": "A freezer compartment",
+          "sdfProperty": {
+            "temperature": {
+              "sdfRef": "#/sdfProproperty/temperature",
+              "maximum": -6
+            }
+          }
+        }
+      },
+    }
+  },
+  "sdfProperty": {
+    "temperature": {
+      "label": "The temperature for this compartment",
+      "type": "integer",
+      "unit": "C"
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgements">
+<section id="appendix-E">
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-D-1">This draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the old
+<p id="appendix-E-1">This draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the old
 one-data-model <code>language</code> repository, as well as <span class="contact-name">Ari Keränen</span>'s
 "alt-schema" from the Ericsson Research <code>ipso-odm</code> repository (which
 is now under subdirectory <code>sdflint</code> in the one-data model <code>tools</code>
-repository).<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+repository).<a href="#appendix-E-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
-<section id="appendix-E">
+<section id="appendix-F">
       <h2 id="name-contributors">
 <a href="#name-contributors" class="section-name selfRef">Contributors</a>
       </h2>
@@ -6411,6 +6749,14 @@ repository).<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:ari.keranen@ericsson.com" class="email">ari.keranen@ericsson.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Jan Romann</span></div>
+<div dir="auto" class="left"><span class="org">Universität Bremen</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:jan.romann@uni-bremen.de" class="email">jan.romann@uni-bremen.de</a>
 </div>
 </address>
 <address class="vcard">
@@ -6427,7 +6773,7 @@ repository).<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-F">
+<section id="appendix-G">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
