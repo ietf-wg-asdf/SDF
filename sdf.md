@@ -201,7 +201,9 @@ Event:
 
 Object:
 : A grouping of Property, Action, and Event definitions; the main
-  "atom" of reusable semantics for model construction.  (Note that
+  "atom" of reusable semantics for model construction. Objects are
+  similar to Things but do not allow nesting, i. e. they cannot contain
+  other Objects or Things. (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object is specifically reserved for the above grouping, even if
@@ -314,6 +316,9 @@ Things which are illustrated in {{fig-class-2}}.
 ~~~ plantuml-utxt
 sdfThing --> "0+" sdfObject : hasObject
 sdfThing --> "0+" sdfThing : hasThing
+sdfThing --> "0+" sdfProperty : hasProperty
+sdfThing --> "0+" sdfAction : hasAction
+sdfThing --> "0+" sdfEvent : hasEvent
 
 sdfObject --> "0+" sdfProperty : hasProperty
 sdfObject --> "0+" sdfAction : hasAction
@@ -481,6 +486,10 @@ and requirements.
 
 Back at the top level, the `sdfThing` groups enables definition of models for
 complex devices that will use one or more `sdfObject` definitions.
+`sdfThing` groups, however, also allow for including interaction
+affordances, `sdfData`, as well as `minItems` and `maxItems` qualities.
+Therefore, they can be seen as a superset of `sdfObject` groups, additionally
+allowing for composition.
 
 A definition in an `sdfThing` group can refine the metadata of the definitions it
 is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
@@ -1268,19 +1277,30 @@ consumption there is no conflict with the intended goal.
 
 ## sdfThing
 
-An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip.
+An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
+(see {{exa-sdfthing-outlet-strip}} in {outlet-strip-example}} for an example SDF model).
 
 sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
+An `sdfThing` can also contain Interaction Affordances and sdfData itself, such
+as a status (on/off) for the refrigerator-freezer as a whole (see
+{{exa-sdfthing-fridge-freezer}} in {{fridge-freezer-example}} for an example SDF
+model illustrating these aspects).
 
 An sdfThing may be composed of sdfObjects and other sdfThings.
 
 The qualities of sdfThing are shown in {{sdfthingqual}}.
 
-| Quality   | Type   | Description          |
-|-----------|--------|----------------------|
-| (common)  |        | {{common-qualities}} |
-| sdfThing  | thing  |                      |
-| sdfObject | object |                      |
+| Quality     | Type      | Description                                                              |
+|-------------|-----------|--------------------------------------------------------------------------|
+| (common)    |           | {{common-qualities}}                                                     |
+| sdfThing    | thing     |                                                                          |
+| sdfObject   | object    |                                                                          |
+| sdfProperty | property  | zero or more named property definitions for this thing                   |
+| sdfAction   | action    | zero or more named action definitions for this thing                     |
+| sdfEvent    | event     | zero or more named event definitions for this thing                      |
+| sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
+| minItems    | number    | (array) Minimum number of sdfThing instances in array                    |
+| maxItems    | number    | (array) Maximum number of sdfThing instances in array                    |
 {: #sdfthingqual title="Qualities of sdfThing"}
 
 
@@ -1583,6 +1603,80 @@ applies on export.
 
 TBD: add any useful implementation notes we can find for other
 ecosystems that use JSO.
+
+# Composition Examples {#composition-examples}
+
+This appendix contains two examples illustrating different composition approaches
+using the `sdfThing` quality.
+
+## Outlet Strip Example {#outlet-strip-example}
+
+~~~
+{
+  "sdfThing": {
+    "outlet-strip" : {
+      "label": "An outlet Strip",
+      "description": "Contains a number of Sockets",
+      "sdfObject": {
+        "socket": {
+          "label": "An array of sockets in the outlet strip",
+          "minItems": 2,
+          "maxItems": 10
+        }
+      }
+    }
+  }
+}
+~~~
+{: #exa-sdfthing-outlet-strip}
+
+## Refrigerator-Freezer Example {#fridge-freezer-example}
+
+~~~
+{
+  "sdfThing": {
+    "refrigerator-freezer" : {
+      "label": "A refrigerator combined with a freezer",
+      "sdfProperty": {
+        "status": {
+          "type": "boolean",
+          "label": {
+            "Indicates if the refrigerator-freezer combination is powered"
+          }
+        }
+      },
+      "sdfObject": {
+        "refrigerator": {
+          "label": "A refrigerator compartment",
+          "sdfProperty": {
+            "temperature": {
+              "sdfRef": "#/sdfProproperty/temperature",
+              "maximum": 8
+            }
+          }
+        },
+        "freezer": {
+          "label": "A freezer compartment",
+          "sdfProperty": {
+            "temperature": {
+              "sdfRef": "#/sdfProproperty/temperature",
+              "maximum": -6
+            }
+          }
+        }
+      },
+    }
+  },
+  "sdfProperty": {
+    "temperature": {
+      "label": "The temperature for this compartment",
+      "type": "integer",
+      "unit": "C"
+    }
+  }
+}
+~~~
+{: #exa-sdfthing-fridge-freezer}
 
 # Acknowledgements
 {: numbered="no"}
