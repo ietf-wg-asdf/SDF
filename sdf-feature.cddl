@@ -4,8 +4,8 @@ sdf-syntax = {
  ? info: sdfinfo                  ; This will be required in most process policies, but not a syntax error
  ? namespace: named<text>
  ? defaultNamespace: text
- ? sdfThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
- ? sdfObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
+ ? sdfThing: named<thingqualities>   ; Thing is a composition of objects that work together in some way
+ ? sdfObject: named<objectqualities> ; Object is a set of Properties, Actions, and Events that together perform a particular function
  paedataqualities                 ; Includes Properties, Actions, and Events as well as sdfData
  EXTENSION-POINT<"top-ext">
 }
@@ -74,14 +74,14 @@ actionqualities = {
  ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
  ? ("sdfRequiredInputData" .feature "1.0") => pointer-list
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
- ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
+ ? sdfData: named<dataqualities>  ; zero or more named data type definitions that might be used in the above
  EXTENSION-POINT<"action-ext">
 }
 
 eventqualities = {
  commonqualities
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
- ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
+ ? sdfData: named<dataqualities>  ; zero or more named data type definitions that might be used in the above
  EXTENSION-POINT<"event-ext">
 }
 
