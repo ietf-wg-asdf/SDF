@@ -136,15 +136,15 @@ jsonschema = (
  ? exclusiveMaximum: bool / number      ; jso draft 4/7
  ? multipleOf: number                   ; ISSUE: Do we need this?
  ; text string constraints
- ? minLength: number
- ? maxLength: number
+ ? minLength: uint
+ ? maxLength: uint
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
            / (text .feature "format-ext")                       ; EXTENSION-POINT
  ; array constraints
- ? minItems: number
- ? maxItems: number
+ ? minItems: uint
+ ? maxItems: uint
  ? uniqueItems: bool
  ? items: { ;;; ultimately, this will be mostly recursive, but, for now
             ;;; let's find out what we actually need
@@ -163,8 +163,8 @@ jsonschema = (
      ? "enum" => [+ text] ; limited to text strings in SDF 1.1
      ? ("enum" .feature "1.0") => [+ any]
      ? format: text
-     ? minLength: number
-     ? maxLength: number
+     ? minLength: uint
+     ? maxLength: uint
      EXTENSION-POINT<"items-ext">
    }
 )
