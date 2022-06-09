@@ -6,10 +6,7 @@ sdf-syntax = {
  ? defaultNamespace: text
  ? sdfThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
  ? sdfObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
- ? sdfProperty: named<propertyqualities> ; Property represents the state of an instance of an object
- ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
- ? sdfEvent: named<eventqualities>       ; Event represents an occurrence of something associated with an object
- ? sdfData: named<dataqualities>         ; Data represents a piece of information that can be the state of a property or a parameter to an action or a signal in an event
+ paedataqualities                     ; Includes Properties, Actions, and Events as well as sdfData
 }
 
 sdfinfo = {
@@ -34,22 +31,33 @@ commonqualities = (
  ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
 )
 
+arraydefinitionqualities = (
+ ? ("minItems" .feature "1.2") => uint
+ ? ("maxItems" .feature "1.2") => uint
+)
+
+paedataqualities = (
+ ? sdfProperty: named<propertyqualities> ; Property represents the state of an instance of an object
+ ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
+ ? sdfEvent: named<eventqualities>       ; Event represents an occurrence of something associated with an object
+ ? sdfData: named<dataqualities>         ; Data represents a piece of information that can be the
+                                         ; state of a property or a parameter to an action or a signal in an event
+)
+
 ; for building hierarchy
 thingqualities = {
  commonqualities
  ? sdfObject: named<objectqualities>
  ? sdfThing: named<thingqualities>
+ paedataqualities
+ arraydefinitionqualities
 }
 
 ; for single objects, or for arrays of objects (1.2)
 objectqualities = {
  commonqualities
- ? ("minItems" .feature "1.2") => number
- ? ("maxItems" .feature "1.2") => number
- ? sdfProperty: named<propertyqualities>
- ? sdfAction: named<actionqualities>
- ? sdfEvent: named<eventqualities>
- ? sdfData: named<dataqualities>
+ paedataqualities
+ arraydefinitionqualities
 }
 
 parameter-list =
@@ -109,14 +117,14 @@ jsonschema = (
  ? exclusiveMaximum: bool / number      ; jso draft 4/7
  ? multipleOf: number                   ; ISSUE: Do we need this?
  ; text string constraints
- ? minLength: number
- ? maxLength: number
+ ? minLength: uint
+ ? maxLength: uint
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
  ; array constraints
- ? minItems: number
- ? maxItems: number
+ ? minItems: uint
+ ? maxItems: uint
  ? uniqueItems: bool
  ? items: { ;;; ultimately, this will be mostly recursive, but, for now
             ;;; let's find out what we actually need
@@ -133,7 +141,7 @@ jsonschema = (
      ? maximum: number
      ? "enum" => [+ text] ; limited to text strings in SDF 1.1
      ? format: text
-     ? minLength: number
-     ? maxLength: number
+     ? minLength: uint
+     ? maxLength: uint
    }
 )

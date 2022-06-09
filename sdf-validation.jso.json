@@ -1,36 +1,11 @@
 {
-  "title": "sdf-validation.cddl",
+  "title": "sdf-validation.cddl -- Generated: 2022-06-06T12:50:46Z",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$comment": "Generated: 2022-03-27T11:57:27Z",
   "$ref": "#/definitions/sdf-syntax",
   "definitions": {
     "sdf-syntax": {
       "type": "object",
       "properties": {
-        "info": {
-          "$ref": "#/definitions/sdfinfo"
-        },
-        "namespace": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "defaultNamespace": {
-          "type": "string"
-        },
-        "sdfThing": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/thingqualities"
-          }
-        },
-        "sdfObject": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/objectqualities"
-          }
-        },
         "sdfProperty": {
           "type": "object",
           "additionalProperties": {
@@ -53,6 +28,30 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/dataqualities"
+          }
+        },
+        "info": {
+          "$ref": "#/definitions/sdfinfo"
+        },
+        "namespace": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultNamespace": {
+          "type": "string"
+        },
+        "sdfThing": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/thingqualities"
+          }
+        },
+        "sdfObject": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/objectqualities"
           }
         }
       },
@@ -79,6 +78,36 @@
     "thingqualities": {
       "type": "object",
       "properties": {
+        "minItems": {
+          "$ref": "#/definitions/uint"
+        },
+        "maxItems": {
+          "$ref": "#/definitions/uint"
+        },
+        "sdfProperty": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/propertyqualities"
+          }
+        },
+        "sdfAction": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/actionqualities"
+          }
+        },
+        "sdfEvent": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/eventqualities"
+          }
+        },
+        "sdfData": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/dataqualities"
+          }
+        },
         "description": {
           "type": "string"
         },
@@ -121,26 +150,11 @@
     "objectqualities": {
       "type": "object",
       "properties": {
-        "description": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "$comment": {
-          "type": "string"
-        },
-        "sdfRef": {
-          "$ref": "#/definitions/sdf-pointer"
-        },
-        "sdfRequired": {
-          "$ref": "#/definitions/pointer-list"
-        },
         "minItems": {
-          "type": "number"
+          "$ref": "#/definitions/uint"
         },
         "maxItems": {
-          "type": "number"
+          "$ref": "#/definitions/uint"
         },
         "sdfProperty": {
           "type": "object",
@@ -165,6 +179,21 @@
           "additionalProperties": {
             "$ref": "#/definitions/dataqualities"
           }
+        },
+        "description": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "sdfRef": {
+          "$ref": "#/definitions/sdf-pointer"
+        },
+        "sdfRequired": {
+          "$ref": "#/definitions/pointer-list"
         }
       },
       "additionalProperties": false
@@ -233,10 +262,10 @@
               "type": "number"
             },
             "minLength": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "maxLength": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "pattern": {
               "type": "string"
@@ -253,10 +282,10 @@
               ]
             },
             "minItems": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "maxItems": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "uniqueItems": {
               "type": "boolean"
@@ -307,10 +336,10 @@
                       "type": "string"
                     },
                     "minLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     },
                     "maxLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     }
                   },
                   "additionalProperties": false
@@ -367,10 +396,10 @@
                       "type": "string"
                     },
                     "minLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     },
                     "maxLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     }
                   },
                   "additionalProperties": false
@@ -489,10 +518,10 @@
               "type": "number"
             },
             "minLength": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "maxLength": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "pattern": {
               "type": "string"
@@ -509,10 +538,10 @@
               ]
             },
             "minItems": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "maxItems": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "uniqueItems": {
               "type": "boolean"
@@ -563,10 +592,10 @@
                       "type": "string"
                     },
                     "minLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     },
                     "maxLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     }
                   },
                   "additionalProperties": false
@@ -623,10 +652,10 @@
                       "type": "string"
                     },
                     "minLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     },
                     "maxLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     }
                   },
                   "additionalProperties": false
@@ -742,10 +771,10 @@
               "type": "number"
             },
             "minLength": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "maxLength": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "pattern": {
               "type": "string"
@@ -762,10 +791,10 @@
               ]
             },
             "minItems": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "maxItems": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "uniqueItems": {
               "type": "boolean"
@@ -816,10 +845,10 @@
                       "type": "string"
                     },
                     "minLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     },
                     "maxLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     }
                   },
                   "additionalProperties": false
@@ -876,10 +905,10 @@
                       "type": "string"
                     },
                     "minLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     },
                     "maxLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     }
                   },
                   "additionalProperties": false
@@ -989,10 +1018,10 @@
               "type": "number"
             },
             "minLength": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "maxLength": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "pattern": {
               "type": "string"
@@ -1009,10 +1038,10 @@
               ]
             },
             "minItems": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "maxItems": {
-              "type": "number"
+              "$ref": "#/definitions/uint"
             },
             "uniqueItems": {
               "type": "boolean"
@@ -1063,10 +1092,10 @@
                       "type": "string"
                     },
                     "minLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     },
                     "maxLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     }
                   },
                   "additionalProperties": false
@@ -1123,10 +1152,10 @@
                       "type": "string"
                     },
                     "minLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     },
                     "maxLength": {
-                      "type": "number"
+                      "$ref": "#/definitions/uint"
                     }
                   },
                   "additionalProperties": false
@@ -1207,6 +1236,10 @@
           }
         }
       ]
+    },
+    "uint": {
+      "type": "integer",
+      "minimum": 0
     },
     "actionqualities": {
       "type": "object",
