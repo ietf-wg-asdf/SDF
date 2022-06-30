@@ -71,6 +71,7 @@ normative:
   RFC7396: merge-patch
   RFC8610: cddl
   RFC8949: cbor
+  RFC9193: data-ct
   W3C.NOTE-curie-20101216: curie
   RFC0020: ascii
   SPDX:
