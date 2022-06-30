@@ -5,8 +5,8 @@
 ASDF                                                      M. Koster, Ed.
 Internet-Draft                                              PassiveLogic
 Intended status: Standards Track                         C. Bormann, Ed.
-Expires: 8 December 2022                          Universität Bremen TZI
-                                                             6 June 2022
+Expires: 1 January 2023                           Universität Bremen TZI
+                                                            30 June 2022
 
 
   Semantic Definition Format (SDF) for Data and Interactions of Things
@@ -26,9 +26,9 @@ Abstract
    // A JSON format representation of SDF 1.0 was defined in version
    // (-00) of this document; version (-05) was designated as an
    // _implementation draft_, labeled SDF 1.1, at the IETF110 meeting of
-   // the ASDF WG (2021-03-11).  The present version (-11) collects a
-   // few smaller changes as input to the 2022-02-28 ASDF WG interim.
-   // It also removes deprecated elements from SDF 1.0.
+   // the ASDF WG (2021-03-11).  The present version (-12) collects
+   // smaller changes up to 2022-06-30.  It also removes deprecated
+   // elements from SDF 1.0.
 
 About This Document
 
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 1]
+Koster & Bormann         Expires 1 January 2023                 [Page 1]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -68,7 +68,7 @@ Internet-Draft                  OneDM SDF                      June 2022
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 December 2022.
+   This Internet-Draft will expire on 1 January 2023.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 2]
+Koster & Bormann         Expires 1 January 2023                 [Page 2]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -143,18 +143,18 @@ Internet-Draft                  OneDM SDF                      June 2022
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  37
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  37
      9.1.  Normative References  . . . . . . . . . . . . . . . . . .  37
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .  38
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  39
    Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  40
    Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  44
-   Appendix C.  Data Qualities inspired by json-schema.org . . . . .  96
+   Appendix C.  Data Qualities inspired by json-schema.org . . . . .  97
      C.1.  type "number", type "integer" . . . . . . . . . . . . . .  97
-     C.2.  type "string" . . . . . . . . . . . . . . . . . . . . . .  97
-     C.3.  type "boolean"  . . . . . . . . . . . . . . . . . . . . .  98
-     C.4.  type "array"  . . . . . . . . . . . . . . . . . . . . . .  98
+     C.2.  type "string" . . . . . . . . . . . . . . . . . . . . . .  98
+     C.3.  type "boolean"  . . . . . . . . . . . . . . . . . . . . .  99
+     C.4.  type "array"  . . . . . . . . . . . . . . . . . . . . . .  99
      C.5.  type "object" . . . . . . . . . . . . . . . . . . . . . .  99
      C.6.  Implementation notes  . . . . . . . . . . . . . . . . . .  99
-   Appendix D.  Composition Examples . . . . . . . . . . . . . . . .  99
-     D.1.  Outlet Strip Example  . . . . . . . . . . . . . . . . . .  99
+   Appendix D.  Composition Examples . . . . . . . . . . . . . . . . 100
+     D.1.  Outlet Strip Example  . . . . . . . . . . . . . . . . . . 100
      D.2.  Refrigerator-Freezer Example  . . . . . . . . . . . . . . 100
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . . 102
    Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . . 102
@@ -165,7 +165,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 3]
+Koster & Bormann         Expires 1 January 2023                 [Page 3]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -184,9 +184,9 @@ Internet-Draft                  OneDM SDF                      June 2022
    // A JSON format representation of SDF 1.0 was defined in version
    // (-00) of this document; version (-05) was designated as an
    // _implementation draft_, labeled SDF 1.1, at the IETF110 meeting of
-   // the ASDF WG (2021-03-11).  The present version (-11) collects a
-   // few smaller changes as input to the 2022-02-28 ASDF WG interim.
-   // It also removes deprecated elements from SDF 1.0.
+   // the ASDF WG (2021-03-11).  The present version (-12) collects
+   // smaller changes up to 2022-06-30.  It also removes deprecated
+   // elements from SDF 1.0.
 
 1.1.  Terminology and Conventions
 
@@ -221,7 +221,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 4]
+Koster & Bormann         Expires 1 January 2023                 [Page 4]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -277,7 +277,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 5]
+Koster & Bormann         Expires 1 January 2023                 [Page 5]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -333,7 +333,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 6]
+Koster & Bormann         Expires 1 January 2023                 [Page 6]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -389,7 +389,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 7]
+Koster & Bormann         Expires 1 January 2023                 [Page 7]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -445,7 +445,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 8]
+Koster & Bormann         Expires 1 January 2023                 [Page 8]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -501,7 +501,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022                [Page 9]
+Koster & Bormann         Expires 1 January 2023                 [Page 9]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -557,7 +557,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 10]
+Koster & Bormann         Expires 1 January 2023                [Page 10]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -613,7 +613,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 11]
+Koster & Bormann         Expires 1 January 2023                [Page 11]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -669,7 +669,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 12]
+Koster & Bormann         Expires 1 January 2023                [Page 12]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -725,7 +725,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 13]
+Koster & Bormann         Expires 1 January 2023                [Page 13]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -781,7 +781,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 14]
+Koster & Bormann         Expires 1 January 2023                [Page 14]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -837,7 +837,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 15]
+Koster & Bormann         Expires 1 January 2023                [Page 15]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -893,7 +893,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 16]
+Koster & Bormann         Expires 1 January 2023                [Page 16]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -949,7 +949,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 17]
+Koster & Bormann         Expires 1 January 2023                [Page 17]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1005,7 +1005,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 18]
+Koster & Bormann         Expires 1 January 2023                [Page 18]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1061,7 +1061,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 19]
+Koster & Bormann         Expires 1 January 2023                [Page 19]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1117,7 +1117,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 20]
+Koster & Bormann         Expires 1 January 2023                [Page 20]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1173,7 +1173,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 21]
+Koster & Bormann         Expires 1 January 2023                [Page 21]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1229,7 +1229,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 22]
+Koster & Bormann         Expires 1 January 2023                [Page 22]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1285,48 +1285,48 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 23]
+Koster & Bormann         Expires 1 January 2023                [Page 23]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
 
-   +===============+================+========================+=========+
-   | Quality       | Type           | Description            | Default |
-   +===============+================+========================+=========+
-   | (common)      |                | Section 4.6            |         |
-   +---------------+----------------+------------------------+---------+
-   | unit          | string         | unit name (note 1)     | N/A     |
-   +---------------+----------------+------------------------+---------+
-   | scaleMinimum  | number         | lower limit of value   | N/A     |
-   |               |                | in units given by      |         |
-   |               |                | unit (note 2)          |         |
-   +---------------+----------------+------------------------+---------+
-   | scaleMaximum  | number         | upper limit of value   | N/A     |
-   |               |                | in units given by      |         |
-   |               |                | unit (note 2)          |         |
-   +---------------+----------------+------------------------+---------+
-   | nullable      | boolean        | indicates a null       | true    |
-   |               |                | value is available     |         |
-   |               |                | for this type          |         |
-   +---------------+----------------+------------------------+---------+
-   | contentFormat | string         | content type (IANA     | N/A     |
-   |               |                | media type string      |         |
-   |               |                | plus parameters),      |         |
-   |               |                | encoding               |         |
-   +---------------+----------------+------------------------+---------+
-   | sdfType       | string         | sdfType enumeration    | N/A     |
-   |               | (Section       | (extensible)           |         |
-   |               | 4.7.1)         |                        |         |
-   +---------------+----------------+------------------------+---------+
-   | sdfChoice     | named set of   | named alternatives     | N/A     |
-   |               | data qualities |                        |         |
-   |               | (Section       |                        |         |
-   |               | 4.7.2)         |                        |         |
-   +---------------+----------------+------------------------+---------+
-   | enum          | array of       | abbreviation for       | N/A     |
-   |               | strings        | string-valued named    |         |
-   |               |                | alternatives           |         |
-   +---------------+----------------+------------------------+---------+
+    +===============+================+======================+=========+
+    | Quality       | Type           | Description          | Default |
+    +===============+================+======================+=========+
+    | (common)      |                | Section 4.6          |         |
+    +---------------+----------------+----------------------+---------+
+    | unit          | string         | unit name (note 1)   | N/A     |
+    +---------------+----------------+----------------------+---------+
+    | scaleMinimum  | number         | lower limit of value | N/A     |
+    |               |                | in units given by    |         |
+    |               |                | unit (note 2)        |         |
+    +---------------+----------------+----------------------+---------+
+    | scaleMaximum  | number         | upper limit of value | N/A     |
+    |               |                | in units given by    |         |
+    |               |                | unit (note 2)        |         |
+    +---------------+----------------+----------------------+---------+
+    | nullable      | boolean        | indicates a null     | true    |
+    |               |                | value is available   |         |
+    |               |                | for this type        |         |
+    +---------------+----------------+----------------------+---------+
+    | contentFormat | string         | content type (IANA   | N/A     |
+    |               |                | media type string    |         |
+    |               |                | plus parameters),    |         |
+    |               |                | encoding (note 3)    |         |
+    +---------------+----------------+----------------------+---------+
+    | sdfType       | string         | sdfType enumeration  | N/A     |
+    |               | (Section       | (extensible)         |         |
+    |               | 4.7.1)         |                      |         |
+    +---------------+----------------+----------------------+---------+
+    | sdfChoice     | named set of   | named alternatives   | N/A     |
+    |               | data qualities |                      |         |
+    |               | (Section       |                      |         |
+    |               | 4.7.2)         |                      |         |
+    +---------------+----------------+----------------------+---------+
+    | enum          | array of       | abbreviation for     | N/A     |
+    |               | strings        | string-valued named  |         |
+    |               |                | alternatives         |         |
+    +---------------+----------------+----------------------+---------+
 
                  Table 4: SDF-defined Qualities of sdfData
 
@@ -1341,7 +1341,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 24]
+Koster & Bormann         Expires 1 January 2023                [Page 24]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1364,6 +1364,10 @@ Internet-Draft                  OneDM SDF                      June 2022
        with the processes that combine ecosystem and instance specific
        information with an SDF model.
 
+   3.  The contentFormat quality follows the Content-Format-Spec as
+       defined in Section 6 of [RFC9193], allowing for expressing both
+       numeric and string based Content-Formats.
+
 4.7.1.  sdfType
 
    SDF defines a number of basic types beyond those provided by JSON or
@@ -1381,6 +1385,23 @@ Internet-Draft                  OneDM SDF                      June 2022
    the conventional value for type to be used with the sdfType value,
    and a conventional JSON representation for values of the type.
 
+
+
+
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 25]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
      +=============+=============+========+==========================+
      | sdfType     | Description | type   | JSON Representation      |
      +=============+=============+========+==========================+
@@ -1394,13 +1415,6 @@ Internet-Draft                  OneDM SDF                      June 2022
      +-------------+-------------+--------+--------------------------+
 
            Table 5: Values defined in SDF 1.1 for sdfType quality
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 25]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
 
    (1) Note that the definition of unix-time does not imply the
    capability to represent points in time that fall on leap seconds.
@@ -1436,6 +1450,14 @@ Internet-Draft                  OneDM SDF                      June 2022
         "baz": { "description": "From zigbee foobaz"}
       }
 
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 26]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
       This allows the placement of other dataqualities such as
       description in the example.
 
@@ -1446,17 +1468,6 @@ Internet-Draft                  OneDM SDF                      June 2022
       "enum": [1, 2, 3]
 
       in SDF 1.0, is represented as:
-
-
-
-
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 26]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
 
       "type": "number",
       "sdfChoice": {
@@ -1491,6 +1502,18 @@ Internet-Draft                  OneDM SDF                      June 2022
       in [I-D.handrews-json-schema-validation-01] can be more
       descriptively notated in SDF as:
 
+
+
+
+
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 27]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
       "sdfChoice": {
         "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
                   "sdfRef": "#/sdfData/rgbVal"}},
@@ -1505,14 +1528,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    As a simplification for readers of SDF specifications accustomed to
    the [I-D.handrews-json-schema-validation-01] enum keyword, this is
    retained, but limited to a choice of text string values, such that
-
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 27]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
 
    "enum": ["foo", "bar", "baz"]
 
@@ -1550,22 +1565,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 28]
+Koster & Bormann         Expires 1 January 2023                [Page 28]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1621,7 +1621,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 29]
+Koster & Bormann         Expires 1 January 2023                [Page 29]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1677,7 +1677,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 30]
+Koster & Bormann         Expires 1 January 2023                [Page 30]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1733,7 +1733,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 31]
+Koster & Bormann         Expires 1 January 2023                [Page 31]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1789,7 +1789,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 32]
+Koster & Bormann         Expires 1 January 2023                [Page 32]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1845,7 +1845,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 33]
+Koster & Bormann         Expires 1 January 2023                [Page 33]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1901,7 +1901,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 34]
+Koster & Bormann         Expires 1 January 2023                [Page 34]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -1957,7 +1957,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 35]
+Koster & Bormann         Expires 1 January 2023                [Page 35]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -2013,7 +2013,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 36]
+Koster & Bormann         Expires 1 January 2023                [Page 36]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -2030,10 +2030,11 @@ Internet-Draft                  OneDM SDF                      June 2022
 
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
-              Use", <https://www.iana.org/assignments/params>.
+              Use", 19 May 2003,
+              <https://www.iana.org/assignments/params>.
 
    [IANA.senml]
-              IANA, "Sensor Measurement Lists (SenML)",
+              IANA, "Sensor Measurement Lists (SenML)", 1 June 2018,
               <https://www.iana.org/assignments/senml>.
 
    [RFC0020]  Cerf, V., "ASCII format for network interchange", STD 80,
@@ -2068,8 +2069,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-
-Koster & Bormann         Expires 8 December 2022               [Page 37]
+Koster & Bormann         Expires 1 January 2023                [Page 37]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -2112,23 +2112,31 @@ Internet-Draft                  OneDM SDF                      June 2022
               DOI 10.17487/RFC9165, December 2021,
               <https://www.rfc-editor.org/info/rfc9165>.
 
+   [RFC9193]  Keränen, A. and C. Bormann, "Sensor Measurement Lists
+              (SenML) Fields for Indicating Data Value Content-Format",
+              RFC 9193, DOI 10.17487/RFC9193, June 2022,
+              <https://www.rfc-editor.org/info/rfc9193>.
+
    [SPDX]     "SPDX License List", <https://spdx.org/licenses/>.
 
-   [W3C.NOTE-curie-20101216]
-              Birbeck, M. and S. McCarron, "CURIE Syntax 1.0", World
-              Wide Web Consortium NOTE NOTE-curie-20101216, 16 December
-              2010, <https://www.w3.org/TR/2010/NOTE-curie-20101216>.
-
-9.2.  Informative References
 
 
 
 
 
-Koster & Bormann         Expires 8 December 2022               [Page 38]
+
+Koster & Bormann         Expires 1 January 2023                [Page 38]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
+
+   [W3C.NOTE-curie-20101216]
+              Birbeck, M., Ed. and S. McCarron, Ed., "CURIE Syntax 1.0",
+              W3C NOTE NOTE-curie-20101216, W3C NOTE-curie-20101216, 16
+              December 2010,
+              <https://www.w3.org/TR/2010/NOTE-curie-20101216/>.
+
+9.2.  Informative References
 
    [ECMA-262] Ecma International, "ECMAScript 2020 Language
               Specification", ECMA Standard ECMA-262, 11th Edition, June
@@ -2168,6 +2176,16 @@ Internet-Draft                  OneDM SDF                      June 2022
               <https://openconnectivity.org/specs/
               OCF_Resource_Type_Specification.pdf>.
 
+
+
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 39]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    [OMA]      "OMA LightweightM2M (LwM2M) Object and Resource Registry",
               <http://www.openmobilealliance.org/wp/omna/lwm2m/
               lwm2mregistry.html>.
@@ -2177,19 +2195,9 @@ Internet-Draft                  OneDM SDF                      June 2022
               RFC 8576, DOI 10.17487/RFC8576, April 2019,
               <https://www.rfc-editor.org/info/rfc8576>.
 
-
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 39]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
-   [ZCL]      "The ZigBee Cluster Library", Zigbee Wireless
-              Networking pp. 239-271,
-              DOI 10.1016/b978-0-7506-8597-9.00006-9, 2008,
-              <https://doi.org/10.1016/b978-0-7506-8597-9.00006-9>.
+   [ZCL]      Elsevier, "The ZigBee Cluster Library",
+              DOI 10.1016/b978-0-7506-8597-9.00006-9,
+              <http://dx.doi.org/10.1016/b978-0-7506-8597-9.00006-9>.
 
 Appendix A.  Formal Syntax of SDF
 
@@ -2218,14 +2226,22 @@ Appendix A.  Formal Syntax of SDF
     ? info: sdfinfo                  ; This will be required in most process policies, but not a syntax error
     ? namespace: named<text>
     ? defaultNamespace: text
-    ? sdfThing: named<thingqualities>       ; Thing is a composition of objects that work together in some way
-    ? sdfObject: named<objectqualities>     ; Object is a set of Properties, Actions, and Events that together perform a particular function
-    paedataqualities                     ; Includes Properties, Actions, and Events as well as sdfData
+    ? sdfThing: named<thingqualities>   ; Thing is a composition of objects that work together in some way
+    ? sdfObject: named<objectqualities> ; Object is a set of Properties, Actions, and Events that together perform a particular function
+    paedataqualities                 ; Includes Properties, Actions, and Events as well as sdfData
     EXTENSION-POINT<"top-ext">
    }
 
    sdfinfo = {
     ? title: text
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 40]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
     ? version: text
     ? copyright: text
     ? license: text
@@ -2234,13 +2250,6 @@ Appendix A.  Formal Syntax of SDF
 
    ; Shortcut for a map that gives names to instances of X (has text keys and values of type X)
    named<X> = { * text => X }
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 40]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
 
    EXTENSION-POINT<f> = ( * (text .feature f) => any ) ; only used in framework syntax
 
@@ -2281,6 +2290,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    ; for single objects, or for arrays of objects (1.2)
    objectqualities = {
     commonqualities
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 41]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
     paedataqualities
     arraydefinitionqualities
     EXTENSION-POINT<"object-ext">
@@ -2290,27 +2307,19 @@ Internet-Draft                  OneDM SDF                      June 2022
      pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
      dataqualities .feature (["1.1", "dataqualities-as-parameter"])
 
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 41]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    actionqualities = {
     commonqualities
     ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
     ? ("sdfRequiredInputData" .feature "1.0") => pointer-list
     ? sdfOutputData: parameter-list  ; sdfRequired applies here
-    ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
+    ? sdfData: named<dataqualities>  ; zero or more named data type definitions that might be used in the above
     EXTENSION-POINT<"action-ext">
    }
 
    eventqualities = {
     commonqualities
     ? sdfOutputData: parameter-list  ; sdfRequired applies here
-    ? sdfData: named<dataqualities>         ; zero or more named data type definitions that might be used in the above
+    ? sdfData: named<dataqualities>  ; zero or more named data type definitions that might be used in the above
     EXTENSION-POINT<"event-ext">
    }
 
@@ -2337,6 +2346,14 @@ Internet-Draft                  OneDM SDF                      June 2022
     ~dataqualities
    }
 
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 42]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    allowed-types = number / text / bool / null
                  / [* number] / [* text] / [* bool]
                  / {* text => any}
@@ -2346,14 +2363,6 @@ Internet-Draft                  OneDM SDF                      June 2022
      "type" => ("object" .feature "1.1")
      ? required: [+text]
      ? properties: named<dataqualities>
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 42]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    )
 
    jsonschema = (
@@ -2393,6 +2402,14 @@ Internet-Draft                  OneDM SDF                      June 2022
            // compound-type
            // (type: text .feature "itemtype-ext")                       ; EXTENSION-POINT
           )
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 43]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
         ? ("sdfChoice" .feature "1.1") => named<dataqualities>
         ; jso subset
         ? minimum: number
@@ -2402,14 +2419,6 @@ Internet-Draft                  OneDM SDF                      June 2022
         ? format: text
         ? minLength: uint
         ? maxLength: uint
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 43]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
         EXTENSION-POINT<"items-ext">
       }
    )
@@ -2427,8 +2436,8 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
    syntax, and lines leading with a + are part of the framework syntax.
 
     {
-   -  "title": "sdf-validation.cddl -- Generated: 2022-06-06T12:50:46Z",
-   +  "title": "sdf-framework.cddl -- Generated: 2022-06-06T12:50:46Z",
+   -  "title": "sdf-validation.cddl -- Generated: 2022-06-30T19:06:20Z",
+   +  "title": "sdf-framework.cddl -- Generated: 2022-06-30T19:06:20Z",
       "$schema": "http://json-schema.org/draft-07/schema#",
       "$ref": "#/definitions/sdf-syntax",
       "definitions": {
@@ -2449,6 +2458,14 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
             },
             "sdfEvent": {
               "type": "object",
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 44]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
               "additionalProperties": {
                 "$ref": "#/definitions/eventqualities"
               }
@@ -2458,14 +2475,6 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
               "additionalProperties": {
                 "$ref": "#/definitions/dataqualities"
               }
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 44]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
             },
             "info": {
               "$ref": "#/definitions/sdfinfo"
@@ -2505,6 +2514,14 @@ Internet-Draft                  OneDM SDF                      June 2022
             "version": {
               "type": "string"
             },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 45]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
             "copyright": {
               "type": "string"
             },
@@ -2514,14 +2531,6 @@ Internet-Draft                  OneDM SDF                      June 2022
           },
    -      "additionalProperties": false
    +      "additionalProperties": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 45]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +      }
         },
         "thingqualities": {
@@ -2561,6 +2570,14 @@ Internet-Draft                  OneDM SDF                      June 2022
               "type": "string"
             },
             "label": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 46]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
               "type": "string"
             },
             "$comment": {
@@ -2570,14 +2587,6 @@ Internet-Draft                  OneDM SDF                      June 2022
               "$ref": "#/definitions/sdf-pointer"
             },
             "sdfRequired": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 46]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
               "$ref": "#/definitions/pointer-list"
             },
             "sdfObject": {
@@ -2617,6 +2626,14 @@ Internet-Draft                  OneDM SDF                      June 2022
             },
             "sdfProperty": {
               "type": "object",
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 47]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
               "additionalProperties": {
                 "$ref": "#/definitions/propertyqualities"
               }
@@ -2626,14 +2643,6 @@ Internet-Draft                  OneDM SDF                      June 2022
               "additionalProperties": {
                 "$ref": "#/definitions/actionqualities"
               }
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 47]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
             },
             "sdfEvent": {
               "type": "object",
@@ -2673,6 +2682,14 @@ Internet-Draft                  OneDM SDF                      June 2022
               "type": "object",
               "properties": {
                 "type": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 48]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                   "type": "string",
                   "enum": [
                     "number",
@@ -2682,14 +2699,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                     "array"
                   ]
                 },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 48]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                 "sdfChoice": {
                   "type": "object",
                   "additionalProperties": {
@@ -2729,6 +2738,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "exclusiveMaximum": {
                   "anyOf": [
                     {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 49]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                       "type": "boolean"
                     },
                     {
@@ -2738,14 +2755,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                 },
                 "multipleOf": {
                   "type": "number"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 49]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                 },
                 "minLength": {
                   "$ref": "#/definitions/uint"
@@ -2785,6 +2794,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                {
    +                  "type": "string",
    +                  "const": "uri-reference"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 50]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                },
    +                {
    +                  "type": "string",
@@ -2794,14 +2811,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                  "type": "string"
    +                }
                   ]
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 50]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                 },
                 "minItems": {
                   "$ref": "#/definitions/uint"
@@ -2841,6 +2850,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                             "$ref": "#/definitions/dataqualities"
                           }
                         },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 51]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                         "minimum": {
                           "type": "number"
                         },
@@ -2850,14 +2867,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                         "enum": {
                           "type": "array",
    -                      "items": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 51]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    -                        "type": "string"
    -                      },
                           "minItems": 1
@@ -2897,6 +2906,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                           }
                         },
                         "sdfRef": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 52]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                           "$ref": "#/definitions/sdf-pointer"
                         },
                         "description": {
@@ -2906,14 +2923,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                           "type": "string"
                         },
                         "sdfChoice": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 52]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                           "type": "object",
                           "additionalProperties": {
                             "$ref": "#/definitions/dataqualities"
@@ -2953,6 +2962,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                      "type": "string"
    +                    },
    +                    "sdfRef": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 53]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                      "$ref": "#/definitions/sdf-pointer"
    +                    },
    +                    "description": {
@@ -2962,14 +2979,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                      "type": "string"
    +                    },
    +                    "sdfChoice": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 53]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                      "type": "object",
    +                      "additionalProperties": {
    +                        "$ref": "#/definitions/dataqualities"
@@ -3009,6 +3018,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "$comment": {
                   "type": "string"
                 },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 54]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                 "sdfRef": {
                   "$ref": "#/definitions/sdf-pointer"
                 },
@@ -3018,14 +3035,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +            "units": {
    +              "type": "string"
    +            },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 54]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                 "unit": {
                   "type": "string"
                 },
@@ -3065,6 +3074,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                },
    +                {
    +                  "type": "string",
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 55]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                  "const": "unix-time"
    +                },
    +                {
@@ -3074,14 +3091,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                 },
                 "contentFormat": {
                   "type": "string"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 55]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                 },
                 "observable": {
                   "type": "boolean"
@@ -3121,6 +3130,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                   "type": "object",
                   "additionalProperties": {
                     "$ref": "#/definitions/dataqualities"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 56]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                   }
                 },
                 "enum": {
@@ -3130,14 +3147,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                "$ref": "#/definitions/allowed-types"
                   },
                   "minItems": 1
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 56]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                 },
                 "const": {
                   "$ref": "#/definitions/allowed-types"
@@ -3177,6 +3186,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "minLength": {
                   "$ref": "#/definitions/uint"
                 },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 57]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                 "maxLength": {
                   "$ref": "#/definitions/uint"
                 },
@@ -3186,14 +3203,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "format": {
    -              "type": "string",
    -              "enum": [
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 57]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    -                "date-time",
    -                "date",
    -                "time",
@@ -3233,6 +3242,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "minItems": {
                   "$ref": "#/definitions/uint"
                 },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 58]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                 "maxItems": {
                   "$ref": "#/definitions/uint"
                 },
@@ -3242,14 +3259,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "items": {
                   "anyOf": [
                     {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 58]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                       "type": "object",
                       "properties": {
                         "type": {
@@ -3289,6 +3298,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    -                      },
                           "minItems": 1
                         },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 59]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                         "format": {
                           "type": "string"
                         },
@@ -3298,14 +3315,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                         "maxLength": {
                           "$ref": "#/definitions/uint"
                         }
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 59]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                       },
    -                  "additionalProperties": false
    +                  "additionalProperties": {
@@ -3345,6 +3354,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                           "additionalProperties": {
                             "$ref": "#/definitions/dataqualities"
                           }
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 60]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                         },
                         "minimum": {
                           "type": "number"
@@ -3354,14 +3371,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                         },
                         "enum": {
                           "type": "array",
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 60]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    -                      "items": {
    -                        "type": "string"
    -                      },
@@ -3401,6 +3410,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                      "additionalProperties": {
    +                        "$ref": "#/definitions/dataqualities"
    +                      }
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 61]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                    },
    +                    "minimum": {
    +                      "type": "number"
@@ -3410,14 +3427,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    },
    +                    "enum": {
    +                      "type": "array",
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 61]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                      "minItems": 1
    +                    },
    +                    "format": {
@@ -3457,6 +3466,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                   "type": "string"
                 },
    +            "scaleMinimum": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 62]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +              "type": "number"
    +            },
    +            "scaleMaximum": {
@@ -3466,14 +3483,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                   "type": "boolean"
                 },
    +            "subtype": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 62]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +              "anyOf": [
    +                {
    +                  "type": "string",
@@ -3513,6 +3522,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "observable": {
                   "type": "boolean"
                 },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 63]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                 "readable": {
                   "type": "boolean"
                 },
@@ -3522,14 +3539,6 @@ Internet-Draft                  OneDM SDF                      June 2022
               },
    -          "additionalProperties": false
    -        }
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 63]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    -      ]
    -    },
    -    "dataqualities": {
@@ -3569,6 +3578,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                   "$ref": "#/definitions/allowed-types"
                 },
                 "default": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 64]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                   "$ref": "#/definitions/allowed-types"
                 },
                 "minimum": {
@@ -3578,14 +3595,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                   "type": "number"
                 },
                 "exclusiveMinimum": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 64]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                   "anyOf": [
                     {
                       "type": "boolean"
@@ -3625,6 +3634,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    -                "time",
    -                "uri",
    -                "uri-reference",
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 65]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    -                "uuid"
    +              "anyOf": [
    +                {
@@ -3634,14 +3651,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                {
    +                  "type": "string",
    +                  "const": "date"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 65]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                },
    +                {
    +                  "type": "string",
@@ -3681,6 +3690,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                         "type": {
                           "type": "string",
                           "enum": [
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 66]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                             "number",
                             "string",
                             "boolean",
@@ -3690,14 +3707,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                         "sdfRef": {
                           "$ref": "#/definitions/sdf-pointer"
                         },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 66]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                         "description": {
                           "type": "string"
                         },
@@ -3737,6 +3746,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                  "additionalProperties": {
    +                  }
                     },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 67]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                     {
                       "type": "object",
                       "properties": {
@@ -3746,14 +3763,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                         },
                         "required": {
                           "type": "array",
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 67]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                           "items": {
                             "type": "string"
                           },
@@ -3793,6 +3802,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    -                      },
                           "minItems": 1
                         },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 68]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                         "format": {
                           "type": "string"
                         },
@@ -3802,14 +3819,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                         "maxLength": {
                           "$ref": "#/definitions/uint"
                         }
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 68]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                       },
    -                  "additionalProperties": false
    -                }
@@ -3849,6 +3858,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                {
    +                  "type": "object",
    +                  "properties": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 69]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                    "type": {
    +                      "type": "string"
    +                    },
@@ -3858,14 +3875,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    "description": {
    +                      "type": "string"
    +                    },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 69]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                    "$comment": {
    +                      "type": "string"
    +                    },
@@ -3905,6 +3914,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +            },
    +            "label": {
    +              "type": "string"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 70]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +            },
    +            "$comment": {
    +              "type": "string"
@@ -3914,14 +3931,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +            },
    +            "sdfRequired": {
    +              "$ref": "#/definitions/pointer-list"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 70]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +            },
    +            "units": {
    +              "type": "string"
@@ -3961,6 +3970,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                },
    +                {
    +                  "type": "string",
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 71]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                  "const": "unix-time"
    +                },
    +                {
@@ -3970,14 +3987,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +            },
    +            "contentFormat": {
    +              "type": "string"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 71]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +            },
    +            "observable": {
    +              "type": "boolean"
@@ -4017,6 +4026,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +            },
    +            "enum": {
    +              "type": "array",
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 72]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +              "items": {
    +                "$ref": "#/definitions/allowed-types"
    +              },
@@ -4026,14 +4043,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +              "$ref": "#/definitions/allowed-types"
    +            },
    +            "default": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 72]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +              "$ref": "#/definitions/allowed-types"
    +            },
    +            "minimum": {
@@ -4073,6 +4082,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +            },
    +            "pattern": {
    +              "type": "string"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 73]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +            },
    +            "format": {
    +              "anyOf": [
@@ -4082,14 +4099,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                },
    +                {
    +                  "type": "string",
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 73]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                  "const": "date"
    +                },
    +                {
@@ -4129,6 +4138,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                  "properties": {
    +                    "type": {
    +                      "type": "string",
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 74]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                      "enum": [
    +                        "number",
    +                        "string",
@@ -4138,14 +4155,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    },
    +                    "sdfRef": {
    +                      "$ref": "#/definitions/sdf-pointer"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 74]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                    },
    +                    "description": {
    +                      "type": "string"
@@ -4185,6 +4194,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                {
    +                  "type": "object",
    +                  "properties": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 75]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                    "type": {
    +                      "type": "string",
    +                      "const": "object"
@@ -4194,14 +4211,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                      "items": {
    +                        "type": "string"
    +                      },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 75]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                      "minItems": 1
    +                    },
    +                    "properties": {
@@ -4241,6 +4250,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    "minLength": {
    +                      "$ref": "#/definitions/uint"
    +                    },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 76]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                    "maxLength": {
    +                      "$ref": "#/definitions/uint"
    +                    }
@@ -4250,14 +4267,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                },
    +                {
    +                  "type": "object",
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 76]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                  "properties": {
    +                    "type": {
    +                      "type": "string"
@@ -4297,6 +4306,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                      "$ref": "#/definitions/uint"
    +                    }
    +                  },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 77]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                  "additionalProperties": {
    +                  }
    +                }
@@ -4306,14 +4323,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +              "type": "string"
    +            },
    +            "label": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 77]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +              "type": "string"
    +            },
    +            "$comment": {
@@ -4353,6 +4362,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                {
    +                  "type": "string"
    +                }
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 78]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +              ]
    +            },
    +            "sdfType": {
@@ -4362,14 +4379,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                  "const": "byte-string"
    +                },
    +                {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 78]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                  "type": "string",
    +                  "const": "unix-time"
    +                },
@@ -4409,6 +4418,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +              "type": "object",
    +              "additionalProperties": {
    +                "$ref": "#/definitions/dataqualities"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 79]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +              }
    +            },
    +            "enum": {
@@ -4418,14 +4435,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +              },
    +              "minItems": 1
    +            },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 79]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +            "const": {
    +              "$ref": "#/definitions/allowed-types"
    +            },
@@ -4465,6 +4474,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +              "$ref": "#/definitions/uint"
    +            },
    +            "maxLength": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 80]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +              "$ref": "#/definitions/uint"
    +            },
    +            "pattern": {
@@ -4474,14 +4491,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +              "anyOf": [
    +                {
    +                  "type": "string",
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 80]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                  "const": "date-time"
    +                },
    +                {
@@ -4521,6 +4530,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +            "items": {
    +              "anyOf": [
    +                {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 81]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                  "type": "object",
    +                  "properties": {
    +                    "type": {
@@ -4530,14 +4547,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                        "string",
    +                        "boolean",
    +                        "integer"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 81]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                      ]
    +                    },
    +                    "sdfRef": {
@@ -4577,6 +4586,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                  },
    +                  "additionalProperties": {
    +                  }
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 82]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                },
    +                {
    +                  "type": "object",
@@ -4586,14 +4603,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                      "const": "object"
    +                    },
    +                    "required": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 82]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                      "type": "array",
    +                      "items": {
    +                        "type": "string"
@@ -4633,6 +4642,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    },
    +                    "format": {
    +                      "type": "string"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 83]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                    },
    +                    "minLength": {
    +                      "$ref": "#/definitions/uint"
@@ -4642,14 +4659,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    }
    +                  },
    +                  "additionalProperties": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 83]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                  }
    +                },
    +                {
@@ -4689,6 +4698,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    "minLength": {
    +                      "$ref": "#/definitions/uint"
    +                    },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 84]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                    "maxLength": {
    +                      "$ref": "#/definitions/uint"
    +                    }
@@ -4698,14 +4715,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                }
    +              ]
    +            },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 84]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +            "description": {
    +              "type": "string"
    +            },
@@ -4745,6 +4754,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                {
    +                  "type": "string",
    +                  "const": "unix-time"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 85]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                },
    +                {
    +                  "type": "string"
@@ -4754,14 +4771,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +            "sdfType": {
    +              "anyOf": [
    +                {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 85]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                  "type": "string",
    +                  "const": "byte-string"
    +                },
@@ -4801,6 +4810,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    -              "additionalProperties": {
    -                "$ref": "#/definitions/dataqualities"
    -              }
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 86]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +              "type": "string"
                 },
                 "sdfChoice": {
@@ -4810,14 +4827,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                   }
                 },
                 "enum": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 86]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                   "type": "array",
                   "items": {
    -                "type": "string"
@@ -4857,6 +4866,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                     }
                   ]
                 },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 87]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                 "multipleOf": {
                   "type": "number"
                 },
@@ -4866,14 +4883,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "maxLength": {
                   "$ref": "#/definitions/uint"
                 },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 87]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                 "pattern": {
                   "type": "string"
                 },
@@ -4913,6 +4922,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                },
    +                {
    +                  "type": "string"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 88]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                }
                   ]
                 },
@@ -4922,14 +4939,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                 "maxItems": {
                   "$ref": "#/definitions/uint"
                 },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 88]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                 "uniqueItems": {
                   "type": "boolean"
                 },
@@ -4969,6 +4978,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                           "type": "number"
                         },
                         "enum": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 89]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                           "type": "array",
    -                      "items": {
    -                        "type": "string"
@@ -4978,14 +4995,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                         "format": {
                           "type": "string"
                         },
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 89]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                         "minLength": {
                           "$ref": "#/definitions/uint"
                         },
@@ -5025,6 +5034,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                         },
                         "$comment": {
                           "type": "string"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 90]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                         },
                         "sdfChoice": {
                           "type": "object",
@@ -5034,14 +5051,6 @@ Internet-Draft                  OneDM SDF                      June 2022
                         },
                         "minimum": {
                           "type": "number"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 90]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
                         },
                         "maximum": {
                           "type": "number"
@@ -5081,6 +5090,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    },
    +                    "$comment": {
    +                      "type": "string"
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 91]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +                    },
    +                    "sdfChoice": {
    +                      "type": "object",
@@ -5090,14 +5107,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                    },
    +                    "minimum": {
    +                      "type": "number"
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 91]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +                    },
    +                    "maximum": {
    +                      "type": "number"
@@ -5137,6 +5146,14 @@ Internet-Draft                  OneDM SDF                      June 2022
                   "$ref": "#/definitions/pointer-list"
                 },
    +            "units": {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 92]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +              "type": "string"
    +            },
                 "unit": {
@@ -5146,14 +5163,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +              "type": "number"
    +            },
    +            "scaleMaximum": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 92]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    +              "type": "number"
    +            },
                 "nullable": {
@@ -5193,6 +5202,14 @@ Internet-Draft                  OneDM SDF                      June 2022
    +                }
                   ]
                 },
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 93]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
                 "contentFormat": {
                   "type": "string"
                 }
@@ -5202,14 +5219,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +          }
             }
           ]
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 93]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
         },
         "allowed-types": {
           "anyOf": [
@@ -5249,6 +5258,14 @@ Internet-Draft                  OneDM SDF                      June 2022
               }
    +        },
    +        {
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 94]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
             }
           ]
         },
@@ -5258,14 +5275,6 @@ Internet-Draft                  OneDM SDF                      June 2022
         },
         "actionqualities": {
           "type": "object",
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 94]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
           "properties": {
             "description": {
               "type": "string"
@@ -5305,6 +5314,14 @@ Internet-Draft                  OneDM SDF                      June 2022
         "parameter-list": {
    -      "$ref": "#/definitions/dataqualities"
    +      "anyOf": [
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 95]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    +        {
    +          "$ref": "#/definitions/pointer-list"
    +        },
@@ -5314,14 +5331,6 @@ Internet-Draft                  OneDM SDF                      June 2022
    +      ]
         },
         "eventqualities": {
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 95]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
           "type": "object",
           "properties": {
             "description": {
@@ -5356,6 +5365,19 @@ Internet-Draft                  OneDM SDF                      June 2022
       }
     }
 
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 96]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
 Appendix C.  Data Qualities inspired by json-schema.org
 
    Data qualities define data used in SDF affordances at an information
@@ -5367,16 +5389,6 @@ Appendix C.  Data Qualities inspired by json-schema.org
    JSO is familiar to many JSON modellers, the present specification
    borrows some of the terms and ports their semantics to the
    information model level needed for SDF.
-
-
-
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 96]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
 
    The main data quality imported is the "type".  In SDF, this can take
    one of six (text string) values, which are discussed in the following
@@ -5411,6 +5423,17 @@ C.1.  type "number", type "integer"
    "integer" can also be expressed as a "multipleOf" quality of value 1,
    unless another "multipleOf" quality is present.)
 
+
+
+
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 97]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
 C.2.  type "string"
 
    The type "string" is associated with Unicode text string values as
@@ -5426,14 +5449,6 @@ C.2.  type "string"
    The data quality "pattern" takes a string value that is interpreted
    as an [ECMA-262] regular expression in Unicode mode that constrain
    the string (note that these are not anchored by default, so unless ^
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 97]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
-
    and $ anchors are employed, ECMA-262 regular expressions match any
    string that _contains_ a match).  The JSO proposals acknowledge that
    regular expression support is rather diverse in various platforms, so
@@ -5466,6 +5481,15 @@ Internet-Draft                  OneDM SDF                      June 2022
       respectively.
    *  "uuid": An [RFC4122] UUID.
 
+
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 98]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
 C.3.  type "boolean"
 
    The type "boolean" can take the values "true" or "false".
@@ -5481,14 +5505,6 @@ C.4.  type "array"
    The number of elements in the array can be constrained by the
    additional data qualities "minItems" and "maxItems", which are
    inclusive bounds.
-
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 98]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
 
    The additional data quality "uniqueItems" gives a Boolean value that,
    if true, requires the elements to be all different.
@@ -5516,6 +5532,20 @@ C.6.  Implementation notes
    JSO-based keywords are also used in the specification techniques of a
    number of ecosystems, but some adjustments may be required.
 
+
+
+
+
+
+
+
+
+
+Koster & Bormann         Expires 1 January 2023                [Page 99]
+
+Internet-Draft                  OneDM SDF                      June 2022
+
+
    E.g., [OCF] is based on Swagger 2.0 which appears to be based on
    "draft-4" [I-D.wright-json-schema] (also called draft-5, but
    semantically intended to be equivalent to draft-4).  The
@@ -5534,17 +5564,6 @@ Appendix D.  Composition Examples
    composition approaches using the sdfThing quality.
 
 D.1.  Outlet Strip Example
-
-
-
-
-
-
-
-Koster & Bormann         Expires 8 December 2022               [Page 99]
-
-Internet-Draft                  OneDM SDF                      June 2022
-
 
    {
      "sdfThing": {
@@ -5578,26 +5597,7 @@ D.2.  Refrigerator-Freezer Example
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster & Bormann         Expires 8 December 2022              [Page 100]
+Koster & Bormann         Expires 1 January 2023               [Page 100]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -5653,7 +5653,7 @@ Internet-Draft                  OneDM SDF                      June 2022
 
 
 
-Koster & Bormann         Expires 8 December 2022              [Page 101]
+Koster & Bormann         Expires 1 January 2023               [Page 101]
 
 Internet-Draft                  OneDM SDF                      June 2022
 
@@ -5672,6 +5672,11 @@ Contributors
    FI-02420 Jorvas
    Finland
    Email: ari.keranen@ericsson.com
+
+
+   Jan Romann
+   Universität Bremen
+   Email: jan.romann@uni-bremen.de
 
 
    Wouter van der Beek
@@ -5704,9 +5709,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-Koster & Bormann         Expires 8 December 2022              [Page 102]
+Koster & Bormann         Expires 1 January 2023               [Page 102]
