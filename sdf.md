@@ -937,17 +937,17 @@ versions of the json-schema.org proposal they were imported from.
 {{sdfdataqual2}} lists data qualities defined specifically for the
 present specification.
 
-| Quality       | Type                                      | Description                                                     | Default |
-|---------------+-------------------------------------------+-----------------------------------------------------------------+---------|
-| (common)      |                                           | {{common-qualities}}                                              |         |
-| unit          | string                                    | unit name (note 1)                                              | N/A     |
-| scaleMinimum  | number                                    | lower limit of value in units given by unit (note 2)            | N/A     |
-| scaleMaximum  | number                                    | upper limit of value in units given by unit (note 2)            | N/A     |
-| nullable      | boolean                                   | indicates a null value is available for this type               | true    |
-| contentFormat | string                                    | content type (IANA media type string plus parameters), encoding | N/A     |
-| sdfType       | string ({{sdftype}})                        | sdfType enumeration (extensible)                                | N/A     |
-| sdfChoice     | named set of data qualities ({{sdfchoice}}) | named alternatives                                              | N/A     |
-| enum          | array of strings                          | abbreviation for string-valued named alternatives               | N/A     |
+| Quality       | Type                                        | Description                                                              | Default |
+|---------------+---------------------------------------------+--------------------------------------------------------------------------+---------|
+| (common)      |                                             | {{common-qualities}}                                                     |         |
+| unit          | string                                      | unit name (note 1)                                                       | N/A     |
+| scaleMinimum  | number                                      | lower limit of value in units given by unit (note 2)                     | N/A     |
+| scaleMaximum  | number                                      | upper limit of value in units given by unit (note 2)                     | N/A     |
+| nullable      | boolean                                     | indicates a null value is available for this type                        | true    |
+| contentFormat | string                                      | content type (IANA media type string plus parameters), encoding (note 3) | N/A     |
+| sdfType       | string ({{sdftype}})                        | sdfType enumeration (extensible)                                         | N/A     |
+| sdfChoice     | named set of data qualities ({{sdfchoice}}) | named alternatives                                                       | N/A     |
+| enum          | array of strings                            | abbreviation for string-valued named alternatives                        | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfData"}
 
 
@@ -979,6 +979,10 @@ present specification.
     be replaced by qualities to express scaling that are more aligned
     with the processes that combine ecosystem and instance specific
     information with an SDF model.
+
+3. The `contentFormat` quality follows the Content-Format-Spec as defined in
+   {{Section 6 of RFC9193}}, allowing for expressing both numeric and string
+   based Content-Formats.
 
 ### sdfType
 
