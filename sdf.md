@@ -143,8 +143,6 @@ entity:
 
 ## Terminology and Conventions
 
-<!-- Note: Should we use RFC 2119? -->
-
 Thing:
 : A physical item that is also made available in the Internet of
   Things.  The term is used here for Things that are notable for their
@@ -205,7 +203,7 @@ Event:
 Object:
 : A grouping of Property, Action, and Event definitions; the main
   "atom" of reusable semantics for model construction. Objects are
-  similar to Things but do not allow nesting, i. e. they cannot contain
+  similar to Things but do not allow nesting, i.e., they cannot contain
   other Objects or Things. (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
@@ -233,8 +231,6 @@ Protocol Binding:
   the abstract concepts in the specification into the protocols in use
   in a specific ecosystem.  Might supply URL components, numeric IDs,
   and similar details.
-
-<!-- XXX -->
 
 The term "byte" is used in its now-customary sense as a synonym for
 "octet".
@@ -495,7 +491,7 @@ Therefore, they can be seen as a superset of `sdfObject` groups, additionally
 allowing for composition.
 
 A definition in an `sdfThing` group can refine the metadata of the definitions it
-is composed from: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
+is composed of: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
 
 ## Member names: Given Names and Quality Names
 
@@ -1467,7 +1463,7 @@ A popular way to describe JSON data at a data model level is proposed
 by a number of drafts on json-schema.org (which collectively are
 abbreviated JSO here)); for reference to a popular version we will
 point here to {{-jso}}.
-As the vocabulary used by JSO is familiar to many JSON modellers, the
+As the vocabulary used by JSO is familiar to many JSON modelers, the
 present specification borrows some of the terms and ports their
 semantics to the information model level needed for SDF.
 
