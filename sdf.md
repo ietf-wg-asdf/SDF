@@ -126,9 +126,7 @@ entity:
     version (-00) of this document; version (-05) was designated as an
     *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
     the ASDF WG (2021-03-11).
-    The present version (-12) collects smaller changes up to 2022-06-30.
-    It also removes deprecated elements from SDF 1.0.
-
+    The present version (-13) collects smaller changes up to 2023-01-12.
 
 --- middle
 
