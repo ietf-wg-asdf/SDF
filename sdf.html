@@ -22,29 +22,27 @@ the ASDF WG (2021-03-11).
 The present version (-12) collects smaller changes up to 2022-06-30.
 It also removes deprecated elements from SDF 1.0. 
     " name="description">
-<meta content="xml2rfc 3.13.0" name="generator">
+<meta content="xml2rfc 3.15.3" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.13.0
-    Python 3.9.13
+  xml2rfc 3.15.3
+    Python 3.10.9
     appdirs 1.4.4
-    ConfigArgParse 1.2.3
-    google-i18n-address 2.4.0
+    ConfigArgParse 1.5.3
+    google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    kitchen 1.2.6
-    lxml 4.9.0
+    lxml 4.9.2
     MarkupSafe 2.1.1
-    pycairo 1.21.0
     pycountry 22.3.5
-    pyflakes 2.2.0
-    PyYAML 5.4.1
-    requests 2.25.1
-    setuptools 62.3.2
-    six 1.15.0
-    WeasyPrint 0.42.3
+    PyYAML 6.0
+    requests 2.28.1
+    setuptools 65.6.3
+    six 1.16.0
+    wcwidth 0.2.5
+    weasyprint 57.2
 -->
 <link href="sdf.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -56,7 +54,7 @@ It also removes deprecated elements from SDF 1.0.
   this can be consolidated so that style settings occur only in one place, but
   for now the contents of this file consists first of the initial CSS work as
   provided to the RFC Formatter (xml2rfc) work, followed by itemized and
-  commented changes found necssary during the development of the v3
+  commented changes found necessary during the development of the v3
   formatters.
 
 */
@@ -65,6 +63,12 @@ It also removes deprecated elements from SDF 1.0.
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+:root {
+  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+  --font-serif: 'Noto Serif', 'Times', 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', Courier, 'Courier New', monospace;
+}
 
 @viewport {
   zoom: 1.0;
@@ -83,7 +87,7 @@ body {
   color: #222;
   background-color: #fff;
   font-size: 14px;
-  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.6;
   scroll-behavior: smooth;
 }
@@ -172,6 +176,15 @@ div {
 svg {
   display: block;
 }
+svg[font-family~="serif" i], svg [font-family~="serif" i] {
+  font-family: var(--font-serif);
+}
+svg[font-family~="sans-serif" i], svg [font-family~="sans-serif" i] {
+  font-family: var(--font-sans);
+}
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
 .alignCenter.art-text {
   background-color: #f9f9f9;
   border: 1px solid #eee;
@@ -186,6 +199,7 @@ svg {
   margin: 1em 0;
 }
 .alignCenter > *:first-child {
+  display: table;
   border: none;
   margin: 0 auto;
 }
@@ -264,9 +278,9 @@ a.selfRef:hover {
 } */
 
 /* Figures */
-tt, code, pre, code {
+tt, code, pre {
   background-color: #f9f9f9;
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-mono);
 }
 pre {
   border: 1px solid #eee;
@@ -503,7 +517,7 @@ address.vcard .nameRole {
   margin-left: 0;
 }
 address.vcard .label {
-  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
+  font-family: var(--font-sans);
   margin: 0.5em 0;
 }
 address.vcard .type {
@@ -666,7 +680,7 @@ hr.addr {
   figure {
     overflow: scroll;
   }
-  pre.breakable {
+  .breakable pre {
     break-inside: auto;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -736,7 +750,7 @@ hr.addr {
   size: A4;
   margin-bottom: 45mm;
   padding-top: 20px;
-  /* The follwing is commented out here, but set appropriately by in code, as
+  /* The following is commented out here, but set appropriately by in code, as
      the content depends on the document */
   /*
   @top-left {
@@ -836,12 +850,12 @@ section {
 }
 
 /* prevent monospace from becoming overly large */
-tt, code, pre, code {
+tt, code, pre {
   font-size: 95%;
 }
 
 /* Fix the height/width aspect for ascii art*/
-pre.sourcecode,
+.sourcecode pre,
 .art-text pre {
   line-height: 1.12;
 }
@@ -877,7 +891,7 @@ table th.text-right {
   text-align: right;
 }
 
-/* Make the alternative author contact informatio look less like just another
+/* Make the alternative author contact information look less like just another
    author, and group it closer with the primary author contact information */
 .alternative-contact {
   margin: 0.5em 0 0.25em 0;
@@ -1059,6 +1073,7 @@ aside > p {
 /* Sourcecode margin in print, when there's no pilcrow */
 @media print {
   .artwork,
+  .artwork > pre,
   .sourcecode {
     margin-bottom: 1em;
   }
@@ -1073,12 +1088,15 @@ ol.type-A { list-style-type: upper-alpha; }
 ol.type-i { list-style-type: lower-roman; }
 ol.type-I { list-style-type: lower-roman; }
 /* Apply the print table and row borders in general, on request from the RPC,
-and increase the contrast between border and odd row background sligthtly */
+and increase the contrast between border and odd row background slightly */
 table {
   border: 1px solid #ddd;
 }
 td {
   border-top: 1px solid #ddd;
+}
+tr {
+  break-inside: avoid;
 }
 tr:nth-child(2n+1) > td {
   background-color: #f8f8f8;
@@ -1130,7 +1148,7 @@ span.break, dd.break {
     break-before: auto;
   }
 }
-/* Text in compact lists should not get extra bottim margin space,
+/* Text in compact lists should not get extra bottom margin space,
    since that would makes the list not compact */
 ul.compact p, .ulCompact p,
 ol.compact p, .olCompact p {
@@ -1155,7 +1173,7 @@ p tt, p code, li tt, li code {
 pre {
    margin-top: 0.5px;
 }
-/* Tweak the comact list text */
+/* Tweak the compact list text */
 ul.compact, .ulCompact,
 ol.compact, .olCompact,
 dl.compact, .dlCompact {
@@ -1173,7 +1191,7 @@ dd > div.artwork:first-child,
 dd > aside:first-child,
 dd > figure:first-child,
 dd > ol:first-child,
-dd > div:first-child > pre.sourcecode,
+dd > div.sourcecode:first-child,
 dd > table:first-child,
 dd > ul:first-child {
   clear: left;
@@ -1187,24 +1205,24 @@ li > p {
   margin-bottom: 0.5em
 }
 /* Don't let p margin spill out from inside list items */
-li > p:last-of-type {
+li > p:last-of-type:only-child {
   margin-bottom: 0;
 }
 </style>
 <link href="rfc-local.css" rel="stylesheet" type="text/css">
 <script type="application/javascript">async function addMetadata(){try{const e=document.styleSheets[0].cssRules;for(let t=0;t<e.length;t++)if(/#identifiers/.exec(e[t].selectorText)){const a=e[t].cssText.replace("#identifiers","#external-updates");document.styleSheets[0].insertRule(a,document.styleSheets[0].cssRules.length)}}catch(e){console.log(e)}const e=document.getElementById("external-metadata");if(e)try{var t,a="",o=function(e){const t=document.getElementsByTagName("meta");for(let a=0;a<t.length;a++)if(t[a].getAttribute("name")===e)return t[a].getAttribute("content");return""}("rfc.number");if(o){t="https://www.rfc-editor.org/rfc/rfc"+o+".json";try{const e=await fetch(t);a=await e.json()}catch(e){t=document.URL.indexOf("html")>=0?document.URL.replace(/html$/,"json"):document.URL+".json";const o=await fetch(t);a=await o.json()}}if(!a)return;e.style.display="block";const s="",d="https://datatracker.ietf.org/doc",n="https://datatracker.ietf.org/ipr/search",c="https://www.rfc-editor.org/info",l=a.doc_id.toLowerCase(),i=a.doc_id.slice(0,3).toLowerCase(),f=a.doc_id.slice(3).replace(/^0+/,""),u={status:"Status",obsoletes:"Obsoletes",obsoleted_by:"Obsoleted By",updates:"Updates",updated_by:"Updated By",see_also:"See Also",errata_url:"Errata"};let h="<dl style='overflow:hidden' id='external-updates'>";["status","obsoletes","obsoleted_by","updates","updated_by","see_also","errata_url"].forEach(e=>{if("status"==e){a[e]=a[e].toLowerCase();var t=a[e].split(" "),o=t.length,w="",p=1;for(let e=0;e<o;e++)p<o?w=w+r(t[e])+" ":w+=r(t[e]),p++;a[e]=w}else if("obsoletes"==e||"obsoleted_by"==e||"updates"==e||"updated_by"==e){var g,m="",b=1;g=a[e].length;for(let t=0;t<g;t++)a[e][t]&&(a[e][t]=String(a[e][t]).toLowerCase(),m=b<g?m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>, ":m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>",b++);a[e]=m}else if("see_also"==e){var y,L="",C=1;y=a[e].length;for(let t=0;t<y;t++)if(a[e][t]){a[e][t]=String(a[e][t]);var _=a[e][t].slice(0,3),v=a[e][t].slice(3).replace(/^0+/,"");L=C<y?"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>, ":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>, ":"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>",C++}a[e]=L}else if("errata_url"==e){var R="";R=a[e]?R+"<a href='"+a[e]+"'>Errata exist</a> | <a href='"+d+"/"+l+"'>Datatracker</a>| <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>":"<a href='"+d+"/"+l+"'>Datatracker</a> | <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>",a[e]=R}""!=a[e]?"Errata"==u[e]?h+=`<dt>More info:</dt><dd>${a[e]}</dd>`:h+=`<dt>${u[e]}:</dt><dd>${a[e]}</dd>`:"Errata"==u[e]&&(h+=`<dt>More info:</dt><dd>${a[e]}</dd>`)}),h+="</dl>",e.innerHTML=h}catch(e){console.log(e)}else console.log("Could not locate metadata <div> element");function r(e){return e.charAt(0).toUpperCase()+e.slice(1)}}window.removeEventListener("load",addMetadata),window.addEventListener("load",addMetadata);</script>
 </head>
-<body>
+<body class="xml2rfc">
 <script src="metadata.min.js"></script>
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OneDM SDF</td>
-<td class="right">June 2022</td>
+<td class="right">January 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 1 January 2023</td>
+<td class="center">Expires 16 July 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1217,12 +1235,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-06-30" class="published">30 June 2022</time>
+<time datetime="2023-01-12" class="published">12 January 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-01-01">1 January 2023</time></dd>
+<dd class="expires"><time datetime="2023-07-16">16 July 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1265,7 +1283,8 @@ It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstra
 <p id="section-note.1-3">
         Discussion of this document takes place on the
         A Semantic Definition Format for Data and Interactions of Things (ASDF) Working Group mailing list (<span><a href="mailto:asdf@ietf.org">mailto:asdf@ietf.org</a></span>),
-        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/asdf/">https://mailarchive.ietf.org/arch/browse/asdf/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/asdf/">https://mailarchive.ietf.org/arch/browse/asdf/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/asdf/">https://www.ietf.org/mailman/listinfo/asdf/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
         <span><a href="https://github.com/ietf-wg-asdf/SDF">https://github.com/ietf-wg-asdf/SDF</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -1288,7 +1307,7 @@ It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstra
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 January 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 July 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1297,7 +1316,7 @@ It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstra
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2022 IETF Trust and the persons identified as the
+            Copyright (c) 2023 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1318,226 +1337,226 @@ It also removes deprecated elements from SDF 1.0.</span><a href="#section-abstra
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-terminology-and-conventions" class="xref">Terminology and Conventions</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-terminology-and-conventions" class="internal xref">Terminology and Conventions</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-overview" class="xref">Overview</a></p>
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-overview" class="internal xref">Overview</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-example-definition" class="xref">Example Definition</a></p>
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-example-definition" class="internal xref">Example Definition</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-elements-of-an-sdf-model" class="xref">Elements of an SDF model</a></p>
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-elements-of-an-sdf-model" class="internal xref">Elements of an SDF model</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.1">
-                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="xref">2.2.1</a>.  <a href="#name-sdfobject" class="xref">sdfObject</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="auto internal xref">2.2.1</a>.  <a href="#name-sdfobject" class="internal xref">sdfObject</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.2">
-                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="xref">2.2.2</a>.  <a href="#name-sdfproperty" class="xref">sdfProperty</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="auto internal xref">2.2.2</a>.  <a href="#name-sdfproperty" class="internal xref">sdfProperty</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.3">
-                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="xref">2.2.3</a>.  <a href="#name-sdfaction" class="xref">sdfAction</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-sdfaction" class="internal xref">sdfAction</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.4">
-                    <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="xref">2.2.4</a>.  <a href="#name-sdfevent" class="xref">sdfEvent</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="auto internal xref">2.2.4</a>.  <a href="#name-sdfevent" class="internal xref">sdfEvent</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.5">
-                    <p id="section-toc.1-1.2.2.2.2.5.1"><a href="#section-2.2.5" class="xref">2.2.5</a>.  <a href="#name-sdfdata" class="xref">sdfData</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.5.1"><a href="#section-2.2.5" class="auto internal xref">2.2.5</a>.  <a href="#name-sdfdata" class="internal xref">sdfData</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.6">
-                    <p id="section-toc.1-1.2.2.2.2.6.1"><a href="#section-2.2.6" class="xref">2.2.6</a>.  <a href="#name-sdfthing" class="xref">sdfThing</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.6.1"><a href="#section-2.2.6" class="auto internal xref">2.2.6</a>.  <a href="#name-sdfthing" class="internal xref">sdfThing</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="xref">2.3</a>.  <a href="#name-member-names-given-names-an" class="xref">Member names: Given Names and Quality Names</a></p>
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-member-names-given-names-an" class="internal xref">Member names: Given Names and Quality Names</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.1">
-                    <p id="section-toc.1-1.2.2.3.2.1.1"><a href="#section-2.3.1" class="xref">2.3.1</a>.  <a href="#name-given-names-and-quality-nam" class="xref">Given Names and Quality Names</a></p>
+                    <p id="section-toc.1-1.2.2.3.2.1.1"><a href="#section-2.3.1" class="auto internal xref">2.3.1</a>.  <a href="#name-given-names-and-quality-nam" class="internal xref">Given Names and Quality Names</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.2">
-                    <p id="section-toc.1-1.2.2.3.2.2.1"><a href="#section-2.3.2" class="xref">2.3.2</a>.  <a href="#name-hierarchical-names" class="xref">Hierarchical Names</a></p>
+                    <p id="section-toc.1-1.2.2.3.2.2.1"><a href="#section-2.3.2" class="auto internal xref">2.3.2</a>.  <a href="#name-hierarchical-names" class="internal xref">Hierarchical Names</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.3">
-                    <p id="section-toc.1-1.2.2.3.2.3.1"><a href="#section-2.3.3" class="xref">2.3.3</a>.  <a href="#name-extensibility-of-given-name" class="xref">Extensibility of Given Names and Quality Names</a></p>
+                    <p id="section-toc.1-1.2.2.3.2.3.1"><a href="#section-2.3.3" class="auto internal xref">2.3.3</a>.  <a href="#name-extensibility-of-given-name" class="internal xref">Extensibility of Given Names and Quality Names</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-sdf-structure" class="xref">SDF structure</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-sdf-structure" class="internal xref">SDF structure</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-information-block" class="xref">Information block</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-information-block" class="internal xref">Information block</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-namespaces-block" class="xref">Namespaces block</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-namespaces-block" class="internal xref">Namespaces block</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-definitions-block" class="xref">Definitions block</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-definitions-block" class="internal xref">Definitions block</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-names-and-namespaces" class="xref">Names and namespaces</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-names-and-namespaces" class="internal xref">Names and namespaces</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-structure" class="xref">Structure</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-structure" class="internal xref">Structure</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-contributing-global-names" class="xref">Contributing global names</a></p>
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-contributing-global-names" class="internal xref">Contributing global names</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-referencing-global-names" class="xref">Referencing global names</a></p>
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-referencing-global-names" class="internal xref">Referencing global names</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="xref">4.4</a>.  <a href="#name-sdfref" class="xref">sdfRef</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-sdfref" class="internal xref">sdfRef</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.1">
-                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="xref">4.4.1</a>.  <a href="#name-resolved-models" class="xref">Resolved models</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.  <a href="#name-resolved-models" class="internal xref">Resolved models</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
-                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="xref">4.5</a>.  <a href="#name-sdfrequired" class="xref">sdfRequired</a></p>
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-sdfrequired" class="internal xref">sdfRequired</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.6">
-                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="xref">4.6</a>.  <a href="#name-common-qualities" class="xref">Common Qualities</a></p>
+                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="auto internal xref">4.6</a>.  <a href="#name-common-qualities" class="internal xref">Common Qualities</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.7">
-                <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="xref">4.7</a>.  <a href="#name-data-qualities" class="xref">Data Qualities</a></p>
+                <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="auto internal xref">4.7</a>.  <a href="#name-data-qualities" class="internal xref">Data Qualities</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.7.2.1">
-                    <p id="section-toc.1-1.4.2.7.2.1.1"><a href="#section-4.7.1" class="xref">4.7.1</a>.  <a href="#name-sdftype" class="xref">sdfType</a></p>
+                    <p id="section-toc.1-1.4.2.7.2.1.1"><a href="#section-4.7.1" class="auto internal xref">4.7.1</a>.  <a href="#name-sdftype" class="internal xref">sdfType</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.7.2.2">
-                    <p id="section-toc.1-1.4.2.7.2.2.1"><a href="#section-4.7.2" class="xref">4.7.2</a>.  <a href="#name-sdfchoice" class="xref">sdfChoice</a></p>
+                    <p id="section-toc.1-1.4.2.7.2.2.1"><a href="#section-4.7.2" class="auto internal xref">4.7.2</a>.  <a href="#name-sdfchoice" class="internal xref">sdfChoice</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-keywords-for-definition-gro" class="xref">Keywords for definition groups</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-keywords-for-definition-gro" class="internal xref">Keywords for definition groups</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-sdfobject-2" class="xref">sdfObject</a></p>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-sdfobject-2" class="internal xref">sdfObject</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-sdfproperty-2" class="xref">sdfProperty</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-sdfproperty-2" class="internal xref">sdfProperty</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-sdfaction-2" class="xref">sdfAction</a></p>
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-sdfaction-2" class="internal xref">sdfAction</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="xref">5.4</a>.  <a href="#name-sdfevent-2" class="xref">sdfEvent</a></p>
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-sdfevent-2" class="internal xref">sdfEvent</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
-                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="xref">5.5</a>.  <a href="#name-sdfdata-2" class="xref">sdfData</a></p>
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-sdfdata-2" class="internal xref">sdfData</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-high-level-composition" class="xref">High Level Composition</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-high-level-composition" class="internal xref">High Level Composition</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-paths-in-the-model-namespac" class="xref">Paths in the model namespaces</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-paths-in-the-model-namespac" class="internal xref">Paths in the model namespaces</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-modular-composition" class="xref">Modular Composition</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-modular-composition" class="internal xref">Modular Composition</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
-                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-use-of-the-sdfref-keyword-t" class="xref">Use of the "sdfRef" keyword to re-use a definition</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-use-of-the-sdfref-keyword-t" class="internal xref">Use of the "sdfRef" keyword to re-use a definition</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-sdfthing-2" class="xref">sdfThing</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-sdfthing-2" class="internal xref">sdfThing</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-media-type" class="xref">Media Type</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-media-type" class="internal xref">Media Type</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-ietf-urn-sub-namespace-for-" class="xref">IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit)</a></p>
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-ietf-urn-sub-namespace-for-" class="internal xref">IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit)</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="xref">7.3</a>.  <a href="#name-registries" class="xref">Registries</a></p>
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-registries" class="internal xref">Registries</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-references" class="xref">References</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="xref">Formal Syntax of SDF</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-formal-syntax-of-sdf" class="internal xref">Formal Syntax of SDF</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="xref">json-schema.org Rendition of SDF Syntax</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-json-schemaorg-rendition-of" class="internal xref">json-schema.org Rendition of SDF Syntax</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="xref">Appendix C</a>.  <a href="#name-data-qualities-inspired-by-" class="xref">Data Qualities inspired by json-schema.org</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-data-qualities-inspired-by-" class="internal xref">Data Qualities inspired by json-schema.org</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#appendix-C.1" class="xref">C.1</a>.  <a href="#name-type-number-type-integer" class="xref">type "<code>number</code>", type "<code>integer</code>"</a></p>
+                <p id="section-toc.1-1.12.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-type-number-type-integer" class="internal xref">type "<code>number</code>", type "<code>integer</code>"</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#appendix-C.2" class="xref">C.2</a>.  <a href="#name-type-string" class="xref">type "<code>string</code>"</a></p>
+                <p id="section-toc.1-1.12.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-type-string" class="internal xref">type "<code>string</code>"</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.3">
-                <p id="section-toc.1-1.12.2.3.1"><a href="#appendix-C.3" class="xref">C.3</a>.  <a href="#name-type-boolean" class="xref">type "<code>boolean</code>"</a></p>
+                <p id="section-toc.1-1.12.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-type-boolean" class="internal xref">type "<code>boolean</code>"</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.4">
-                <p id="section-toc.1-1.12.2.4.1"><a href="#appendix-C.4" class="xref">C.4</a>.  <a href="#name-type-array" class="xref">type "<code>array</code>"</a></p>
+                <p id="section-toc.1-1.12.2.4.1"><a href="#appendix-C.4" class="auto internal xref">C.4</a>.  <a href="#name-type-array" class="internal xref">type "<code>array</code>"</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5">
-                <p id="section-toc.1-1.12.2.5.1"><a href="#appendix-C.5" class="xref">C.5</a>.  <a href="#name-type-object" class="xref">type "<code>object</code>"</a></p>
+                <p id="section-toc.1-1.12.2.5.1"><a href="#appendix-C.5" class="auto internal xref">C.5</a>.  <a href="#name-type-object" class="internal xref">type "<code>object</code>"</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.6">
-                <p id="section-toc.1-1.12.2.6.1"><a href="#appendix-C.6" class="xref">C.6</a>.  <a href="#name-implementation-notes" class="xref">Implementation notes</a></p>
+                <p id="section-toc.1-1.12.2.6.1"><a href="#appendix-C.6" class="auto internal xref">C.6</a>.  <a href="#name-implementation-notes" class="internal xref">Implementation notes</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="xref">Appendix D</a>.  <a href="#name-composition-examples" class="xref">Composition Examples</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-composition-examples" class="internal xref">Composition Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-D.1" class="xref">D.1</a>.  <a href="#name-outlet-strip-example" class="xref">Outlet Strip Example</a></p>
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-D.1" class="auto internal xref">D.1</a>.  <a href="#name-outlet-strip-example" class="internal xref">Outlet Strip Example</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
-                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-D.2" class="xref">D.2</a>.  <a href="#name-refrigerator-freezer-exampl" class="xref">Refrigerator-Freezer Example</a></p>
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-D.2" class="auto internal xref">D.2</a>.  <a href="#name-refrigerator-freezer-exampl" class="internal xref">Refrigerator-Freezer Example</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="xref"></a><a href="#name-acknowledgements" class="xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-F" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#appendix-G" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.16.1"><a href="#appendix-G" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1650,7 +1669,7 @@ with the other semantics.)<a href="#section-1.1-1.18.1" class="pilcrow">¶</a></
           <dd style="margin-left: 1.5em" id="section-1.1-1.24">
             <p id="section-1.1-1.24.1">A grouping of Property, Action, and Event definitions; the main
 "atom" of reusable semantics for model construction. Objects are
-similar to Things but do not allow nesting, i. e. they cannot contain
+similar to Things but do not allow nesting, i.e., they cannot contain
 other Objects or Things. (Note that
 JSON maps are often called JSON objects due to JSON's JavaScript
 heritage; in this document, the
@@ -1698,7 +1717,7 @@ and similar details.<a href="#section-1.1-1.32.1" class="pilcrow">¶</a></p>
         </ul>
 <p id="section-1.1-5">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
-described in BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> when, and only when, they
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1714,11 +1733,11 @@ appear in all capitals, as shown here.<a href="#section-1.1-5" class="pilcrow">�
         <h3 id="name-example-definition">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-example-definition" class="section-name selfRef">Example Definition</a>
         </h3>
-<p id="section-2.1-1">We start with an example for the SDF definition of a simple Object called "Switch" (<a href="#example1" class="xref">Figure 1</a>).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">We start with an example for the SDF definition of a simple Object called "Switch" (<a href="#example1" class="auto internal xref">Figure 1</a>).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <span id="name-a-simple-example-of-an-sdf-"></span><div id="example1">
 <figure id="figure-1">
-          <div id="section-2.1-2.1">
-<pre class="lang-json sourcecode">
+          <div class="lang-json sourcecode" id="section-2.1-2.1">
+<pre>
 {
   "info": {
     "title": "Example file for OneDM Semantic Definition Format",
@@ -1766,7 +1785,7 @@ The action <code>toggle</code> will invert the value of the sdfProperty value, s
 The <code>sdfProperty</code> group lists the property affordances described by the model; these represent various perspectives on the state of the object.
 Properties can have additional qualities to describe the state more precisely.
 Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
-Properties are often used with RESTful paradigms <span>[<a href="#I-D.irtf-t2trg-rest-iot" class="xref">I-D.irtf-t2trg-rest-iot</a>]</span>, describing state.
+Properties are often used with RESTful paradigms <span>[<a href="#I-D.irtf-t2trg-rest-iot" class="cite xref">I-D.irtf-t2trg-rest-iot</a>]</span>, describing state.
 The <code>sdfAction</code> group is the mechanism to describe other interactions in terms of their names, input, and output data (no data are used in the example), as in a POST method in REST or in a remote procedure call.
 The example <code>toggle</code> is an Action that
 changes the state based on the current state of the Property named <code>value</code>.
@@ -1775,8 +1794,8 @@ changes the state based on the current state of the Property named <code>value</
 group) maps that have keys taken from the SDF vocabulary (<code>info</code>,
 <code>namespace</code>, <code>sdfObject</code>) alternate in nesting with maps that have keys
 that are freely defined by the model writer (<code>Switch</code>, <code>value</code>, <code>on</code>,
-etc.); the latter usually use the <code>named&lt;&gt;</code> production in the <span><a href="#syntax" class="xref">formal
-syntax of SDF</a> (<a href="#syntax" class="xref">Appendix A</a>)</span>, while the former SDF-defined vocabulary items
+etc.); the latter usually use the <code>named&lt;&gt;</code> production in the <span><a href="#syntax" class="internal xref">formal
+syntax of SDF</a> (<a href="#syntax" class="internal xref">Appendix A</a>)</span>, while the former SDF-defined vocabulary items
 are often, but not always, called <em>qualities</em>.<a href="#section-2.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1786,7 +1805,7 @@ are often, but not always, called <em>qualities</em>.<a href="#section-2.1-5" cl
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-elements-of-an-sdf-model" class="section-name selfRef">Elements of an SDF model</a>
         </h3>
 <p id="section-2.2-1">The SDF language uses six predefined Class Name Keywords for modeling connected
-Things which are illustrated in <a href="#fig-class-2" class="xref">Figure 2</a>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+Things which are illustrated in <a href="#fig-class-2" class="auto internal xref">Figure 2</a>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <span id="name-main-classes-used-in-sdf-mo"></span><div id="fig-class-2">
 <figure id="figure-2">
           <div id="section-2.2-2.1">
@@ -1797,160 +1816,160 @@ Things which are illustrated in <a href="#fig-class-2" class="xref">Figure 2</a>
                   <!--MD5=[f586c7dc61127226118a576b1af9a47e]
 class sdfThing-->
     <g id="elem_sdfThing">
-                    <rect fill="white" height="48" id="sdfThing" rx="2.5" ry="2.5" width="93" x="136.38" y="7" stroke="black" stroke-width="0.5"></rect>
-                    <ellipse cx="151.38" cy="23" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                    <path d="M153.8531,29.1431 Q153.2721,29.4419 152.6329,29.5913 Q151.9938,29.7407 151.2882,29.7407 Q148.7814,29.7407 147.4615,28.0889 Q146.1417,26.437 146.1417,23.3159 Q146.1417,20.1865 147.4615,18.5347 Q148.7814,16.8828 151.2882,16.8828 Q151.9938,16.8828 152.6412,17.0322 Q153.2887,17.1816 153.8531,17.4805 L153.8531,20.2031 Q153.2223,19.6221 152.6288,19.3523 Q152.0353,19.0825 151.4044,19.0825 Q150.0597,19.0825 149.3749,20.1492 Q148.6901,21.2158 148.6901,23.3159 Q148.6901,25.4077 149.3749,26.4744 Q150.0597,27.541 151.4044,27.541 Q152.0353,27.541 152.6288,27.2712 Q153.2223,27.0015 153.8531,26.4204 Z" fill="black"></path>
-                    <text fill="black" font-family="sans-serif" font-size="14" x="165.38" y="28.291">sdfThing</text>
-                    <line x1="137.38" x2="228.38" y1="39" y2="39" stroke="black" stroke-width="0.5"></line>
-                    <line x1="137.38" x2="228.38" y1="47" y2="47" stroke="black" stroke-width="0.5"></line>
+                    <rect fill="white" height="48" id="sdfThing" rx="2.5" ry="2.5" width="93" x="136.13" y="7" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="151.13" cy="23" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M153.6031,29.1431 Q153.0221,29.4419 152.3829,29.5913 Q151.7438,29.7407 151.0382,29.7407 Q148.5314,29.7407 147.2115,28.0889 Q145.8917,26.437 145.8917,23.3159 Q145.8917,20.1865 147.2115,18.5347 Q148.5314,16.8828 151.0382,16.8828 Q151.7438,16.8828 152.3912,17.0322 Q153.0387,17.1816 153.6031,17.4805 L153.6031,20.2031 Q152.9723,19.6221 152.3788,19.3523 Q151.7853,19.0825 151.1544,19.0825 Q149.8097,19.0825 149.1249,20.1492 Q148.4401,21.2158 148.4401,23.3159 Q148.4401,25.4077 149.1249,26.4744 Q149.8097,27.541 151.1544,27.541 Q151.7853,27.541 152.3788,27.2712 Q152.9723,27.0015 153.6031,26.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="165.13" y="28.291">sdfThing</text>
+                    <line x1="137.13" x2="228.13" y1="39" y2="39" stroke="black" stroke-width="0.5"></line>
+                    <line x1="137.13" x2="228.13" y1="47" y2="47" stroke="black" stroke-width="0.5"></line>
                   </g>
                   <!--MD5=[c2cb69c003582447ed3e9466f0338261]
 class sdfObject-->
     <g id="elem_sdfObject">
-                    <rect fill="white" height="48" id="sdfObject" rx="2.5" ry="2.5" width="97" x="205.38" y="132" stroke="black" stroke-width="0.5"></rect>
-                    <ellipse cx="220.38" cy="148" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                    <path d="M222.8531,154.1431 Q222.2721,154.4419 221.6329,154.5913 Q220.9938,154.7407 220.2882,154.7407 Q217.7814,154.7407 216.4615,153.0889 Q215.1417,151.437 215.1417,148.3159 Q215.1417,145.1865 216.4615,143.5347 Q217.7814,141.8828 220.2882,141.8828 Q220.9938,141.8828 221.6412,142.0322 Q222.2887,142.1816 222.8531,142.4805 L222.8531,145.2031 Q222.2223,144.6221 221.6288,144.3523 Q221.0353,144.0825 220.4044,144.0825 Q219.0597,144.0825 218.3749,145.1492 Q217.6901,146.2158 217.6901,148.3159 Q217.6901,150.4077 218.3749,151.4744 Q219.0597,152.541 220.4044,152.541 Q221.0353,152.541 221.6288,152.2712 Q222.2223,152.0015 222.8531,151.4204 Z" fill="black"></path>
-                    <text fill="black" font-family="sans-serif" font-size="14" x="234.38" y="153.291">sdfObject</text>
-                    <line x1="206.38" x2="301.38" y1="164" y2="164" stroke="black" stroke-width="0.5"></line>
-                    <line x1="206.38" x2="301.38" y1="172" y2="172" stroke="black" stroke-width="0.5"></line>
+                    <rect fill="white" height="48" id="sdfObject" rx="2.5" ry="2.5" width="97" x="205.13" y="132" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="220.13" cy="148" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M222.6031,154.1431 Q222.0221,154.4419 221.3829,154.5913 Q220.7438,154.7407 220.0382,154.7407 Q217.5314,154.7407 216.2115,153.0889 Q214.8917,151.437 214.8917,148.3159 Q214.8917,145.1865 216.2115,143.5347 Q217.5314,141.8828 220.0382,141.8828 Q220.7438,141.8828 221.3912,142.0322 Q222.0387,142.1816 222.6031,142.4805 L222.6031,145.2031 Q221.9723,144.6221 221.3788,144.3523 Q220.7853,144.0825 220.1544,144.0825 Q218.8097,144.0825 218.1249,145.1492 Q217.4401,146.2158 217.4401,148.3159 Q217.4401,150.4077 218.1249,151.4744 Q218.8097,152.541 220.1544,152.541 Q220.7853,152.541 221.3788,152.2712 Q221.9723,152.0015 222.6031,151.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="234.13" y="153.291">sdfObject</text>
+                    <line x1="206.13" x2="301.13" y1="164" y2="164" stroke="black" stroke-width="0.5"></line>
+                    <line x1="206.13" x2="301.13" y1="172" y2="172" stroke="black" stroke-width="0.5"></line>
                   </g>
                   <!--MD5=[79be1817db664391ee5ba2fd11c31888]
 class sdfProperty-->
     <g id="elem_sdfProperty">
-                    <rect fill="white" height="48" id="sdfProperty" rx="2.5" ry="2.5" width="111" x="29.38" y="257" stroke="black" stroke-width="0.5"></rect>
-                    <ellipse cx="44.38" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                    <path d="M46.8531,279.1431 Q46.2721,279.4419 45.6329,279.5913 Q44.9938,279.7407 44.2882,279.7407 Q41.7814,279.7407 40.4615,278.0889 Q39.1417,276.437 39.1417,273.3159 Q39.1417,270.1865 40.4615,268.5347 Q41.7814,266.8828 44.2882,266.8828 Q44.9938,266.8828 45.6412,267.0322 Q46.2887,267.1816 46.8531,267.4805 L46.8531,270.2031 Q46.2223,269.6221 45.6288,269.3523 Q45.0353,269.0825 44.4044,269.0825 Q43.0597,269.0825 42.3749,270.1492 Q41.6901,271.2158 41.6901,273.3159 Q41.6901,275.4077 42.3749,276.4744 Q43.0597,277.541 44.4044,277.541 Q45.0353,277.541 45.6288,277.2712 Q46.2223,277.0015 46.8531,276.4204 Z" fill="black"></path>
-                    <text fill="black" font-family="sans-serif" font-size="14" x="58.38" y="278.291">sdfProperty</text>
-                    <line x1="30.38" x2="139.38" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
-                    <line x1="30.38" x2="139.38" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
+                    <rect fill="white" height="48" id="sdfProperty" rx="2.5" ry="2.5" width="111" x="29.13" y="257" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="44.13" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M46.6031,279.1431 Q46.0221,279.4419 45.3829,279.5913 Q44.7438,279.7407 44.0382,279.7407 Q41.5314,279.7407 40.2115,278.0889 Q38.8917,276.437 38.8917,273.3159 Q38.8917,270.1865 40.2115,268.5347 Q41.5314,266.8828 44.0382,266.8828 Q44.7438,266.8828 45.3912,267.0322 Q46.0387,267.1816 46.6031,267.4805 L46.6031,270.2031 Q45.9723,269.6221 45.3788,269.3523 Q44.7853,269.0825 44.1544,269.0825 Q42.8097,269.0825 42.1249,270.1492 Q41.4401,271.2158 41.4401,273.3159 Q41.4401,275.4077 42.1249,276.4744 Q42.8097,277.541 44.1544,277.541 Q44.7853,277.541 45.3788,277.2712 Q45.9723,277.0015 46.6031,276.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="58.13" y="278.291">sdfProperty</text>
+                    <line x1="30.13" x2="139.13" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
+                    <line x1="30.13" x2="139.13" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
                   </g>
                   <!--MD5=[bdacf205fe3695f723a4cfa5db06fd81]
 class sdfAction-->
     <g id="elem_sdfAction">
-                    <rect fill="white" height="48" id="sdfAction" rx="2.5" ry="2.5" width="97" x="363.38" y="257" stroke="black" stroke-width="0.5"></rect>
-                    <ellipse cx="378.38" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                    <path d="M380.8531,279.1431 Q380.2721,279.4419 379.6329,279.5913 Q378.9938,279.7407 378.2882,279.7407 Q375.7814,279.7407 374.4615,278.0889 Q373.1417,276.437 373.1417,273.3159 Q373.1417,270.1865 374.4615,268.5347 Q375.7814,266.8828 378.2882,266.8828 Q378.9938,266.8828 379.6412,267.0322 Q380.2887,267.1816 380.8531,267.4805 L380.8531,270.2031 Q380.2223,269.6221 379.6288,269.3523 Q379.0353,269.0825 378.4044,269.0825 Q377.0597,269.0825 376.3749,270.1492 Q375.6901,271.2158 375.6901,273.3159 Q375.6901,275.4077 376.3749,276.4744 Q377.0597,277.541 378.4044,277.541 Q379.0353,277.541 379.6288,277.2712 Q380.2223,277.0015 380.8531,276.4204 Z" fill="black"></path>
-                    <text fill="black" font-family="sans-serif" font-size="14" x="392.38" y="278.291">sdfAction</text>
-                    <line x1="364.38" x2="459.38" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
-                    <line x1="364.38" x2="459.38" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
+                    <rect fill="white" height="48" id="sdfAction" rx="2.5" ry="2.5" width="97" x="363.13" y="257" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="378.13" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M380.6031,279.1431 Q380.0221,279.4419 379.3829,279.5913 Q378.7438,279.7407 378.0382,279.7407 Q375.5314,279.7407 374.2115,278.0889 Q372.8917,276.437 372.8917,273.3159 Q372.8917,270.1865 374.2115,268.5347 Q375.5314,266.8828 378.0382,266.8828 Q378.7438,266.8828 379.3912,267.0322 Q380.0387,267.1816 380.6031,267.4805 L380.6031,270.2031 Q379.9723,269.6221 379.3788,269.3523 Q378.7853,269.0825 378.1544,269.0825 Q376.8097,269.0825 376.1249,270.1492 Q375.4401,271.2158 375.4401,273.3159 Q375.4401,275.4077 376.1249,276.4744 Q376.8097,277.541 378.1544,277.541 Q378.7853,277.541 379.3788,277.2712 Q379.9723,277.0015 380.6031,276.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="392.13" y="278.291">sdfAction</text>
+                    <line x1="364.13" x2="459.13" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
+                    <line x1="364.13" x2="459.13" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
                   </g>
                   <!--MD5=[ccecbd8aeb25c61fe37a32079d0173e2]
 class sdfEvent-->
     <g id="elem_sdfEvent">
-                    <rect fill="white" height="48" id="sdfEvent" rx="2.5" ry="2.5" width="90" x="175.88" y="257" stroke="black" stroke-width="0.5"></rect>
-                    <ellipse cx="190.88" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                    <path d="M193.3531,279.1431 Q192.7721,279.4419 192.1329,279.5913 Q191.4938,279.7407 190.7882,279.7407 Q188.2814,279.7407 186.9615,278.0889 Q185.6417,276.437 185.6417,273.3159 Q185.6417,270.1865 186.9615,268.5347 Q188.2814,266.8828 190.7882,266.8828 Q191.4938,266.8828 192.1412,267.0322 Q192.7887,267.1816 193.3531,267.4805 L193.3531,270.2031 Q192.7223,269.6221 192.1288,269.3523 Q191.5353,269.0825 190.9044,269.0825 Q189.5597,269.0825 188.8749,270.1492 Q188.1901,271.2158 188.1901,273.3159 Q188.1901,275.4077 188.8749,276.4744 Q189.5597,277.541 190.9044,277.541 Q191.5353,277.541 192.1288,277.2712 Q192.7223,277.0015 193.3531,276.4204 Z" fill="black"></path>
-                    <text fill="black" font-family="sans-serif" font-size="14" x="204.88" y="278.291">sdfEvent</text>
-                    <line x1="176.88" x2="264.88" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
-                    <line x1="176.88" x2="264.88" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
+                    <rect fill="white" height="48" id="sdfEvent" rx="2.5" ry="2.5" width="90" x="175.63" y="257" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="190.63" cy="273" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M193.1031,279.1431 Q192.5221,279.4419 191.8829,279.5913 Q191.2438,279.7407 190.5382,279.7407 Q188.0314,279.7407 186.7115,278.0889 Q185.3917,276.437 185.3917,273.3159 Q185.3917,270.1865 186.7115,268.5347 Q188.0314,266.8828 190.5382,266.8828 Q191.2438,266.8828 191.8912,267.0322 Q192.5387,267.1816 193.1031,267.4805 L193.1031,270.2031 Q192.4723,269.6221 191.8788,269.3523 Q191.2853,269.0825 190.6544,269.0825 Q189.3097,269.0825 188.6249,270.1492 Q187.9401,271.2158 187.9401,273.3159 Q187.9401,275.4077 188.6249,276.4744 Q189.3097,277.541 190.6544,277.541 Q191.2853,277.541 191.8788,277.2712 Q192.4723,277.0015 193.1031,276.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="204.63" y="278.291">sdfEvent</text>
+                    <line x1="176.63" x2="264.63" y1="289" y2="289" stroke="black" stroke-width="0.5"></line>
+                    <line x1="176.63" x2="264.63" y1="297" y2="297" stroke="black" stroke-width="0.5"></line>
                   </g>
                   <!--MD5=[154484d28240d22ab997079d2c9ce9cd]
 class sdfData-->
     <g id="elem_sdfData">
-                    <rect fill="white" height="48" id="sdfData" rx="2.5" ry="2.5" width="84" x="236.88" y="382" stroke="black" stroke-width="0.5"></rect>
-                    <ellipse cx="251.88" cy="398" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
-                    <path d="M254.3531,404.1431 Q253.7721,404.4419 253.1329,404.5913 Q252.4938,404.7407 251.7882,404.7407 Q249.2814,404.7407 247.9615,403.0889 Q246.6417,401.437 246.6417,398.3159 Q246.6417,395.1865 247.9615,393.5347 Q249.2814,391.8828 251.7882,391.8828 Q252.4938,391.8828 253.1412,392.0322 Q253.7887,392.1816 254.3531,392.4805 L254.3531,395.2031 Q253.7223,394.6221 253.1288,394.3523 Q252.5353,394.0825 251.9044,394.0825 Q250.5597,394.0825 249.8749,395.1492 Q249.1901,396.2158 249.1901,398.3159 Q249.1901,400.4077 249.8749,401.4744 Q250.5597,402.541 251.9044,402.541 Q252.5353,402.541 253.1288,402.2712 Q253.7223,402.0015 254.3531,401.4204 Z" fill="black"></path>
-                    <text fill="black" font-family="sans-serif" font-size="14" x="265.88" y="403.291">sdfData</text>
-                    <line x1="237.88" x2="319.88" y1="414" y2="414" stroke="black" stroke-width="0.5"></line>
-                    <line x1="237.88" x2="319.88" y1="422" y2="422" stroke="black" stroke-width="0.5"></line>
+                    <rect fill="white" height="48" id="sdfData" rx="2.5" ry="2.5" width="84" x="236.63" y="382" stroke="black" stroke-width="0.5"></rect>
+                    <ellipse cx="251.63" cy="398" fill="white" rx="11" ry="11" stroke="black" stroke-width="1.0"></ellipse>
+                    <path d="M254.1031,404.1431 Q253.5221,404.4419 252.8829,404.5913 Q252.2438,404.7407 251.5382,404.7407 Q249.0314,404.7407 247.7115,403.0889 Q246.3917,401.437 246.3917,398.3159 Q246.3917,395.1865 247.7115,393.5347 Q249.0314,391.8828 251.5382,391.8828 Q252.2438,391.8828 252.8912,392.0322 Q253.5387,392.1816 254.1031,392.4805 L254.1031,395.2031 Q253.4723,394.6221 252.8788,394.3523 Q252.2853,394.0825 251.6544,394.0825 Q250.3097,394.0825 249.6249,395.1492 Q248.9401,396.2158 248.9401,398.3159 Q248.9401,400.4077 249.6249,401.4744 Q250.3097,402.541 251.6544,402.541 Q252.2853,402.541 252.8788,402.2712 Q253.4723,402.0015 254.1031,401.4204 Z" fill="black"></path>
+                    <text fill="black" font-family="sans-serif" font-size="14" x="265.63" y="403.291">sdfData</text>
+                    <line x1="237.63" x2="319.63" y1="414" y2="414" stroke="black" stroke-width="0.5"></line>
+                    <line x1="237.63" x2="319.63" y1="422" y2="422" stroke="black" stroke-width="0.5"></line>
                   </g>
                   <!--MD5=[474ac19abf738d5435f62202b2040a8c]
 link sdfThing to sdfObject-->
     <g id="link_sdfThing_sdfObject">
-                    <path d="M196.23,55.14 C208.08,75.67 225.41,105.69 237.98,127.46" fill="none" id="sdfThing-to-sdfObject" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="240.58,131.97,239.5426,122.1759,238.0793,127.6403,232.615,126.177,240.58,131.97" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="222.88" y="98.5684">hasObject</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="216.5869" y="121.1064">0+</text>
+                    <path d="M196.16,55.42 C207.75,75.52 224.51,104.54 236.94,126.08" fill="none" id="sdfThing-to-sdfObject" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="239.41,130.35,238.3726,120.5559,236.9093,126.0203,231.445,124.557,239.41,130.35" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="222.63" y="98.5684">hasObject</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="216.4021" y="121.1091">0+</text>
                   </g>
                   <!--MD5=[84a99f3e6ba5135b350f4e647ff40b17]
 link sdfThing to sdfThing-->
     <g id="link_sdfThing_sdfThing">
-                    <path d="M229.78,19.45 C248.59,18.79 264.38,22.64 264.38,31 C264.38,38.57 251.41,42.45 234.98,42.62" fill="none" id="sdfThing-to-sdfThing" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="229.78,42.55,238.7219,46.6782,234.7795,42.6214,238.8362,38.679,229.78,42.55" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="270.38" y="36.0684">hasThing</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="237.2916" y="40.6834">0+</text>
+                    <path d="M229.53,19.35 C248.35,18.69 264.13,22.58 264.13,31 C264.13,38.44 251.83,42.33 236,42.69" fill="none" id="sdfThing-to-sdfThing" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="231.05,42.66,240.027,46.7114,236.0499,42.6886,240.0727,38.7115,231.05,42.66" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="270.13" y="36.0684">hasThing</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="237.0416" y="40.7969">0+</text>
                   </g>
                   <!--MD5=[aafb040aa9bcf4f28b2a9ddbf948d7af]
 link sdfThing to sdfProperty-->
     <g id="link_sdfThing_sdfProperty">
-                    <path d="M136.24,47.85 C99.47,63.1 50.71,90.1 27.88,132 C6,172.15 36.48,222.48 60.61,252.89" fill="none" id="sdfThing-to-sdfProperty" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="63.81,256.86,61.2602,247.3469,60.6657,252.9724,55.0401,252.3779,63.81,256.86" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="28.88" y="161.0684">hasProperty</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="38.1046" y="246.3604">0+</text>
+                    <path d="M136,47.85 C99.23,63.1 50.46,90.1 27.63,132 C6,171.7 35.57,221.37 59.56,251.88" fill="none" id="sdfThing-to-sdfProperty" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="62.41,255.43,59.8985,245.9068,59.2813,251.5298,53.6582,250.9127,62.41,255.43" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="28.63" y="161.0684">hasProperty</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="37.9817" y="246.443">0+</text>
                   </g>
                   <!--MD5=[1d7f3d7beec3cd9affa0abce6a6b2567]
 link sdfThing to sdfAction-->
     <g id="link_sdfThing_sdfAction">
-                    <path d="M229.38,49.49 C250.37,58.49 274.89,70.61 294.88,85 C357.38,129.99 386.13,138.55 414.88,210 C420.13,223.05 420.02,238.6 418.33,251.72" fill="none" id="sdfThing-to-sdfAction" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="417.58,256.8,422.8497,248.4795,418.3091,251.8534,414.9352,247.3129,417.58,256.8" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="400.88" y="161.0684">hasAction</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="398.7344" y="246.285">0+</text>
+                    <path d="M229.41,49.61 C250.34,58.6 274.73,70.67 294.63,85 C357.14,129.99 385.89,138.55 414.63,210 C419.75,222.7 419.78,237.77 418.22,250.67" fill="none" id="sdfThing-to-sdfAction" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="417.55,255.31,422.7961,246.9746,418.2651,250.3614,414.8783,245.8304,417.55,255.31" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="400.63" y="161.0684">hasAction</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="398.4969" y="246.285">0+</text>
                   </g>
                   <!--MD5=[72d56d283d4f06699a13f84f73fb0c30]
 link sdfThing to sdfEvent-->
     <g id="link_sdfThing_sdfEvent">
-                    <path d="M164.53,55.07 C136.67,93.12 90.31,170.42 123.88,227 C129.59,236.63 150.24,248.49 171.03,258.55" fill="none" id="sdfThing-to-sdfEvent" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="175.74,260.8,169.3441,253.3105,171.2286,258.6442,165.8949,260.5287,175.74,260.8" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="121.88" y="161.0684">hasEvent</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="149.7882" y="254.3227">0+</text>
+                    <path d="M164.06,55.38 C136.18,93.53 90.16,170.57 123.63,227 C129.23,236.43 149.15,248 169.5,257.92" fill="none" id="sdfThing-to-sdfEvent" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="173.87,260.02,167.4833,252.5226,169.3613,257.8587,164.0252,259.7366,173.87,260.02" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="121.63" y="161.0684">hasEvent</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="149.5914" y="254.3466">0+</text>
                   </g>
                   <!--MD5=[c9f4ee01ef3119b1a79851932bb5a9a6]
 link sdfObject to sdfProperty-->
     <g id="link_sdfObject_sdfProperty">
-                    <path d="M205.22,177.82 C187.33,186.53 167.43,197.55 150.88,210 C134.41,222.39 118.48,239.1 106.4,253.09" fill="none" id="sdfObject-to-sdfProperty" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="103.1,256.95,111.9849,252.7006,106.3457,253.1467,105.8996,247.5074,103.1,256.95" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="151.88" y="223.5684">hasProperty</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="87.5779" y="246.081">0+</text>
+                    <path d="M204.71,177.95 C186.9,186.64 167.11,197.61 150.63,210 C134.71,221.98 119.28,238.01 107.36,251.7" fill="none" id="sdfObject-to-sdfProperty" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="104.12,255.48,113.0049,251.2306,107.3657,251.6767,106.9196,246.0374,104.12,255.48" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="151.63" y="223.5684">hasProperty</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="87.5644" y="246.0715">0+</text>
                   </g>
                   <!--MD5=[ec9a56bd8655f4d1893aa031ec22e05c]
 link sdfObject to sdfAction-->
     <g id="link_sdfObject_sdfAction">
-                    <path d="M283.59,180.14 C310.52,201.1 350.16,231.95 378.24,253.81" fill="none" id="sdfObject-to-sdfAction" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="382.29,256.97,377.6481,248.2836,378.3455,253.8973,372.7319,254.5948,382.29,256.97" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="342.88" y="223.5684">hasAction</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="353.9189" y="246.1064">0+</text>
+                    <path d="M283.72,180.42 C310.19,201.03 348.73,231.03 376.58,252.71" fill="none" id="sdfObject-to-sdfAction" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="380.46,255.73,375.8181,247.0436,376.5155,252.6573,370.9019,253.3548,380.46,255.73" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="342.63" y="223.5684">hasAction</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="353.6739" y="246.1091">0+</text>
                   </g>
                   <!--MD5=[e82b08c6210a768f8efa9371b7de17ad]
 link sdfObject to sdfEvent-->
     <g id="link_sdfObject_sdfEvent">
-                    <path d="M247.67,180.14 C242.21,200.49 234.24,230.19 228.41,251.91" fill="none" id="sdfObject-to-sdfEvent" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="227.06,256.97,233.2411,249.3023,228.3465,252.1384,225.5104,247.2438,227.06,256.97" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="239.88" y="223.5684">hasEvent</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="208.3021" y="246.1064">0+</text>
+                    <path d="M247.35,180.42 C242,200.34 234.3,229.05 228.54,250.53" fill="none" id="sdfObject-to-sdfEvent" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="227.29,255.2,233.4711,247.5323,228.5765,250.3684,225.7404,245.4738,227.29,255.2" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="239.63" y="223.5684">hasEvent</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="208.2004" y="246.1091">0+</text>
                   </g>
                   <!--MD5=[7eee11d65eceecf8b941af956a7f2b88]
 link sdfAction to sdfData-->
     <g id="link_sdfAction_sdfData">
-                    <path d="M380.75,305.1 C369.18,314.08 356.14,324.68 344.88,335 C330.26,348.4 315.01,364.43 302.85,377.76" fill="none" id="sdfAction-to-sdfData" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="299.18,381.81,308.1824,377.8153,302.5327,378.1006,302.2474,372.451,299.18,381.81" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="345.88" y="348.5684">hasInputData</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="284.0756" y="371.2976">0+</text>
+                    <path d="M380.17,305.36 C368.69,314.29 355.78,324.78 344.63,335 C330.27,348.17 315.29,363.87 303.24,377.07" fill="none" id="sdfAction-to-sdfData" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="299.96,380.69,308.97,376.7126,303.3198,376.9871,303.0453,371.3369,299.96,380.69" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="345.63" y="348.5684">hasInputData</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="283.8382" y="371.2976">0+</text>
                   </g>
                   <!--MD5=[7eee11d65eceecf8b941af956a7f2b88]
 link sdfAction to sdfData-->
     <g id="link_sdfAction_sdfData">
-                    <path d="M429.37,305.05 C438.09,319.54 444.86,338.07 434.88,352 C410.43,386.13 362.73,398.55 326.48,402.93" fill="none" id="sdfAction-to-sdfData-1" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="321.22,403.52,330.6095,406.4928,326.1889,402.9631,329.7185,398.5425,321.22,403.52" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="439.88" y="348.5684">hasOutputData</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="328.7606" y="399.6454">0+</text>
+                    <path d="M429.32,305.37 C437.95,319.82 444.54,338.17 434.63,352 C410.38,385.85 363.27,398.34 327.13,402.82" fill="none" id="sdfAction-to-sdfData-1" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="322.48,403.35,331.8779,406.2961,327.4473,402.779,330.9644,398.3484,322.48,403.35" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="439.63" y="348.5684">hasOutputData</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="328.522" y="399.6454">0+</text>
                   </g>
                   <!--MD5=[1d999dc69acbeb1774ac85a19f512fd6]
 link sdfEvent to sdfData-->
     <g id="link_sdfEvent_sdfData">
-                    <path d="M209.53,305.09 C204.25,319.26 200.56,337.41 207.88,352 C213.43,363.07 222.51,372.42 232.35,380.03" fill="none" id="sdfEvent-to-sdfData" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="236.6,383.19,231.746,374.6204,232.5812,380.2152,226.9863,381.0505,236.6,383.19" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="208.88" y="348.5684">hasOutputData</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="210.7478" y="376.1409">0+</text>
+                    <path d="M209.17,305.42 C203.95,319.53 200.38,337.53 207.63,352 C213.04,362.77 221.78,371.92 231.32,379.42" fill="none" id="sdfEvent-to-sdfData" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="235.15,382.28,230.3303,373.691,231.1431,379.2892,225.545,380.102,235.15,382.28" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="208.63" y="348.5684">hasOutputData</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="210.5093" y="376.1409">0+</text>
                   </g>
                   <!--MD5=[0c4745fb3134cadd1f7ab6e63b3ea9cc]
 link sdfProperty to sdfData-->
     <g id="link_sdfProperty_sdfData">
-                    <path d="M89.17,305.07 C93.14,320.32 100.52,339.7 113.88,352 C146.15,381.73 195.19,394.79 231.43,400.52" fill="none" id="sdfProperty-to-sdfData" stroke="black" stroke-width="1.0"></path>
-                    <polygon fill="black" points="236.68,401.31,228.3744,396.0168,231.7355,400.5669,227.1855,403.928,236.68,401.31" stroke="black" stroke-width="1.0"></polygon>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="114.88" y="348.5684">isInstanceOf</text>
-                    <text fill="black" font-family="sans-serif" font-size="13" x="220.7394" y="396.8099">1</text>
+                    <path d="M89.02,305.4 C93.01,320.6 100.38,339.79 113.63,352 C145.64,381.48 194.15,394.57 230.3,400.38" fill="none" id="sdfProperty-to-sdfData" stroke="black" stroke-width="1.0"></path>
+                    <polygon fill="black" points="234.94,401.08,226.6344,395.7868,229.9955,400.3369,225.4455,403.698,234.94,401.08" stroke="black" stroke-width="1.0"></polygon>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="114.63" y="348.5684">isInstanceOf</text>
+                    <text fill="black" font-family="sans-serif" font-size="13" x="220.5011" y="396.8099">1</text>
                   </g>
-                  <!--MD5=[27dee1531c147366aefb4bf4059fa9f3]
+                  <!--MD5=[deebae7f7682a287bd7eeea252c2b62e]
 @startuml
 
 sdfThing - -> "0+" sdfObject : hasObject
@@ -1990,7 +2009,7 @@ class sdfData {
 
 @enduml
 
-PlantUML version 1.2022.5(Sat Apr 30 12:55:52 CEST 2022)
+PlantUML version 1.2022.13(Sat Nov 19 14:22:17 CET 2022)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
@@ -2014,9 +2033,9 @@ Country: DE
           </h4>
 <p id="section-2.2.1-1">Objects, the items listed in an <code>sdfObject</code> group, are the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
-systems, for example ZigBee Clusters <span>[<a href="#ZCL" class="xref">ZCL</a>]</span>, OMA SpecWorks LwM2M
-Objects <span>[<a href="#OMA" class="xref">OMA</a>]</span>, and
-OCF Resource Types <span>[<a href="#OCF" class="xref">OCF</a>]</span>.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
+systems, for example ZigBee Clusters <span>[<a href="#ZCL" class="cite xref">ZCL</a>]</span>, OMA SpecWorks LwM2M
+Objects <span>[<a href="#OMA" class="cite xref">OMA</a>]</span>, and
+OCF Resource Types <span>[<a href="#OCF" class="cite xref">OCF</a>]</span>.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.1-2">An <code>sdfObject</code> contains a set of <code>sdfProperty</code>, <code>sdfAction</code>, and
 <code>sdfEvent</code> definitions that describe the interaction affordances
 associated with some scope of functionality.<a href="#section-2.2.1-2" class="pilcrow">¶</a></p>
@@ -2055,7 +2074,7 @@ data, for engineering units and unit scaling information.<a href="#section-2.2.2
 some vocabulary proposed for the drafts 4 and 7 of the
 json-schema.org "JSON Schema"
 format (collectively called JSO here), enhanced by qualities that are specific to SDF.
-Details about the former are in <a href="#jso-inspired" class="xref">Appendix C</a>.
+Details about the former are in <a href="#jso-inspired" class="auto internal xref">Appendix C</a>.
 For the current version of SDF, data are constrained to be of
 simple types (number, string, Boolean),
 JSON maps composed of named data ("objects"), and arrays of these types.
@@ -2153,7 +2172,7 @@ affordances, <code>sdfData</code>, as well as <code>minItems</code> and <code>ma
 Therefore, they can be seen as a superset of <code>sdfObject</code> groups, additionally
 allowing for composition.<a href="#section-2.2.6-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.6-2">A definition in an <code>sdfThing</code> group can refine the metadata of the definitions it
-is composed from: other definitions in <code>sdfThing</code> groups definitions in <code>sdfObject</code> groups.<a href="#section-2.2.6-2" class="pilcrow">¶</a></p>
+is composed of: other definitions in <code>sdfThing</code> groups definitions in <code>sdfObject</code> groups.<a href="#section-2.2.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2191,11 +2210,11 @@ employed by a user of that model.<a href="#section-2.3.1-2.2" class="pilcrow">¶
           </ul>
 <p id="section-2.3.1-3">In a path from the root of the tree to any leaf, Quality Names and
 Given Names roughly alternate (with the information block,
-<a href="#information-block" class="xref">Section 3.1</a>, as a prominent exception).<a href="#section-2.3.1-3" class="pilcrow">¶</a></p>
+<a href="#information-block" class="auto internal xref">Section 3.1</a>, as a prominent exception).<a href="#section-2.3.1-3" class="pilcrow">¶</a></p>
 <p id="section-2.3.1-4">The meaning of the JSON object that is the member value associated
 with a Given Name is derived from the Quality Name that was used as
 the member name associated to the parent.
-In the CDDL grammar given in <a href="#syntax" class="xref">Appendix A</a>, JSON objects with member names that are
+In the CDDL grammar given in <a href="#syntax" class="auto internal xref">Appendix A</a>, JSON objects with member names that are
 Given Names are defined using the CDDL generic rule reference <code>named&lt;objectmembers&gt;</code>,
 where <code>objectmembers</code> is in turn the structure of the members of the
 JSON object that is the value of the member named by the Given Name.
@@ -2210,9 +2229,9 @@ Quality Names.<a href="#section-2.3.1-4" class="pilcrow">¶</a></p>
 <a href="#section-2.3.2" class="section-number selfRef">2.3.2. </a><a href="#name-hierarchical-names" class="section-name selfRef">Hierarchical Names</a>
           </h4>
 <p id="section-2.3.2-1">From the outside of a specification, Given Names are usually used as
-part of a hierarchical name that looks like a JSON pointer <span>[<a href="#RFC6901" class="xref">RFC6901</a>]</span>,
+part of a hierarchical name that looks like a JSON pointer <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>]</span>,
 itself generally rooted in (used as the fragment identifier in) an
-outer namespace that looks like an <code>https://</code> URL (see <a href="#names-and-namespaces" class="xref">Section 4</a>).<a href="#section-2.3.2-1" class="pilcrow">¶</a></p>
+outer namespace that looks like an <code>https://</code> URL (see <a href="#names-and-namespaces" class="auto internal xref">Section 4</a>).<a href="#section-2.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.3.2-2">As Quality Names and Given Names roughly alternate in a path into the
 model, the JSON pointer part of the hierarchical name also alternates
 between Quality Names and Given Names.<a href="#section-2.3.2-2" class="pilcrow">¶</a></p>
@@ -2265,7 +2284,7 @@ It is therefore <span class="bcp14">RECOMMENDED</span> that SDF validator tools 
 when no information block is found.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The keyword (map key) that defines an information block is "info". Its
 value is a JSON map in turn, with a set of entries that represent qualities that apply to the included definition.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.1-3">Qualities of the information block are shown in <a href="#infoblockqual" class="xref">Table 1</a>.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">Qualities of the information block are shown in <a href="#infoblockqual" class="auto internal xref">Table 1</a>.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-the-informatio"></span><div id="infoblockqual">
 <table class="center" id="table-1">
           <caption>
@@ -2310,10 +2329,10 @@ value is a JSON map in turn, with a set of entries that represent qualities that
 </div>
 <p id="section-3.1-5">The version quality is used to indicate version information about the set of definitions in the file.
 The version is <span class="bcp14">RECOMMENDED</span> to be lexicographically increasing over the life of a model: a newer model always has a version string that string-compares higher than all previous versions.
-This is easily achieved by following the convention to start the version with an <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span> <code>date-time</code> or, if new versions are generated less frequently than once a day, just the <code>full-date</code> (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see <a href="#example1" class="xref">Figure 1</a> for an example).
+This is easily achieved by following the convention to start the version with an <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> <code>date-time</code> or, if new versions are generated less frequently than once a day, just the <code>full-date</code> (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see <a href="#example1" class="auto internal xref">Figure 1</a> for an example).
 This specification does not give a strict definition for the format of the version string but each using system or organization should define internal structure and semantics to the level needed for their use.
 If no further details are provided, a <code>date-time</code> or <code>full-date</code> in this field can be assumed to indicate the latest update time of the definitions in the file.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1-6">The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an <span>[<a href="#SPDX" class="xref">SPDX</a>]</span> license identifier.
+<p id="section-3.1-6">The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an <span>[<a href="#SPDX" class="cite xref">SPDX</a>]</span> license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)<a href="#section-3.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2363,8 +2382,8 @@ as the default namespace.
 By convention, the values in the namespace map contain full URIs
 without a fragment identifier, and the fragment identifier is then
 added, if needed, where the namespace entry is used.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<div id="section-3.2-6">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-3.2-6">
+<pre>
 "namespace": {
   "cap": "https://example.com/capability/cap",
   "zcl": "https://zcl.example.com/sdf"
@@ -2392,11 +2411,11 @@ The value of each group is a JSON map (object), the keys of which serve for nami
 Each identifier defined creates a new type and term in the target namespace.
 Declarations have a scope of the current definition block.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">A definition may in turn contain other definitions. Each definition is a named set of qualities, i.e., it consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained definitions.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">An example for an Object definition is given in <a href="#exobject" class="xref">Figure 3</a>:<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3-4">An example for an Object definition is given in <a href="#exobject" class="auto internal xref">Figure 3</a>:<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <span id="name-example-object-definition"></span><div id="exobject">
 <figure id="figure-3">
-          <div id="section-3.3-5.1">
-<pre class="lang-json sourcecode">
+          <div class="lang-json sourcecode" id="section-3.3-5.1">
+<pre>
 "sdfObject": {
   "foo": {
     "sdfProperty": {
@@ -2439,10 +2458,10 @@ contribute to a global namespace.)<a href="#section-4-1" class="pilcrow">¶</a><
 (However, as future versions of SDF might find a use for dereferencing
 global names, the URI should be chosen in such a way that this may
 become possible in the future.)<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1-3">The absolute URI of a global name should be a URI as per <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>, with a scheme of "https" and a path (<code>hier-part</code> in <span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span>).
+<p id="section-4.1-3">The absolute URI of a global name should be a URI as per <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>, with a scheme of "https" and a path (<code>hier-part</code> in <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).
 For the present version of this specification, the query part should
 not be used (it might be used in later versions).<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">The fragment identifier is constructed as per <span><a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a> of [<a href="#RFC6901" class="xref">RFC6901</a>]</span>.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">The fragment identifier is constructed as per <span><a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a> of [<a href="#RFC6901" class="cite xref">RFC6901</a>]</span>.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributing-global-names">
@@ -2458,7 +2477,7 @@ default namespace is always the target namespace for a name for which
 a definition is contributed.
 When emphasizing that name definitions are contributed to the default namespace,
 we therefore also call it the "target namespace" of the SDF definition file.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">E.g., in <a href="#example1" class="xref">Figure 1</a>, definitions for the following global names are contributed:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">E.g., in <a href="#example1" class="auto internal xref">Figure 1</a>, definitions for the following global names are contributed:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-4.1">https://example.com/capability/cap#/sdfObject/Switch<a href="#section-4.2-4.1" class="pilcrow">¶</a>
 </li>
@@ -2469,7 +2488,7 @@ we therefore also call it the "target namespace" of the SDF definition file.<a h
           <li class="normal" id="section-4.2-4.4">https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off<a href="#section-4.2-4.4" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-4.2-5">Note the <code>#</code>, which separates the absolute-URI part (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>) from the fragment identifier part.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<p id="section-4.2-5">Note the <code>#</code>, which separates the absolute-URI part (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>) from the fragment identifier part.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="referencing-global-names">
@@ -2478,11 +2497,11 @@ we therefore also call it the "target namespace" of the SDF definition file.<a h
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-referencing-global-names" class="section-name selfRef">Referencing global names</a>
         </h3>
 <p id="section-4.3-1">A name reference takes the form of the production <code>curie</code> in
-<span>[<a href="#W3C.NOTE-curie-20101216" class="xref">W3C.NOTE-curie-20101216</a>]</span> (note that this excludes the production <code>safe-curie</code>),
-but also limiting the IRIs involved in that production to URIs as per <span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span>
-and the prefixes to ASCII characters <span>[<a href="#RFC0020" class="xref">RFC0020</a>]</span>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<span>[<a href="#W3C.NOTE-curie-20101216" class="cite xref">W3C.NOTE-curie-20101216</a>]</span> (note that this excludes the production <code>safe-curie</code>),
+but also limiting the IRIs involved in that production to URIs as per <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>
+and the prefixes to ASCII characters <span>[<a href="#RFC0020" class="cite xref">RFC0020</a>]</span>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">A name that is contributed by the current SDF definition file can be
-referenced by a Same-Document Reference as per <span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.4" class="relref">Section 4.4</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>.
+referenced by a Same-Document Reference as per <span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.4" class="relref">Section 4.4</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.
 As there is little point in referencing the entire SDF definition
 file, this will be a <code>#</code> followed by a JSON pointer.
 This is the only kind of name reference to itself that is possible in an SDF
@@ -2491,22 +2510,22 @@ definition file that does not set a default namespace.<a href="#section-4.3-2" c
 need to contain curie prefixes.  These then reference namespace
 declarations in the namespaces block.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.3-4">For example, if a namespace prefix is defined:<a href="#section-4.3-4" class="pilcrow">¶</a></p>
-<div id="section-4.3-5">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.3-5">
+<pre>
 "namespace": {
   "foo": "https://example.com/"
 }
 </pre><a href="#section-4.3-5" class="pilcrow">¶</a>
 </div>
 <p id="section-4.3-6">Then this reference to that namespace:<a href="#section-4.3-6" class="pilcrow">¶</a></p>
-<div id="section-4.3-7">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.3-7">
+<pre>
 { "sdfRef": "foo:#/sdfData/temperatureData" }
 </pre><a href="#section-4.3-7" class="pilcrow">¶</a>
 </div>
 <p id="section-4.3-8">references the global name:<a href="#section-4.3-8" class="pilcrow">¶</a></p>
-<div id="section-4.3-9">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.3-9">
+<pre>
 "https://example.com/#/sdfData/temperatureData"
 </pre><a href="#section-4.3-9" class="pilcrow">¶</a>
 </div>
@@ -2530,10 +2549,10 @@ namespace map.<a href="#section-4.3-10" class="pilcrow">¶</a></p>
 <p id="section-4.4-1">In a JSON map establishing a definition, the keyword "sdfRef" is used
 to copy all of the qualities and enclosed definitions of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
-(This can be compared to the processing of the "$ref" keyword in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+(This can be compared to the processing of the "$ref" keyword in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4-2">For example, this reference:<a href="#section-4.4-2" class="pilcrow">¶</a></p>
-<div id="section-4.4-3">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.4-3">
+<pre>
 "temperatureProperty": {
   "sdfRef": "#/sdfData/temperatureData"
 }
@@ -2555,24 +2574,24 @@ variable named "patch".<a href="#section-4.4-8.1" class="pilcrow">¶</a>
           <li id="section-4.4-8.3">the JSON pointer that is the value of the sdfRef member is
 dereferenced and the result is copied into a variable named "original".<a href="#section-4.4-8.3" class="pilcrow">¶</a>
 </li>
-          <li id="section-4.4-8.4">The JSON Merge Patch algorithm <span>[<a href="#RFC7396" class="xref">RFC7396</a>]</span> is applied to patch
+          <li id="section-4.4-8.4">The JSON Merge Patch algorithm <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is applied to patch
 the contents of "original" with the contents of "patch".<a href="#section-4.4-8.4" class="pilcrow">¶</a>
 </li>
           <li id="section-4.4-8.5">The result of the Merge Patch is used in place of the value of the
 original JSON map.<a href="#section-4.4-8.5" class="pilcrow">¶</a>
 </li>
         </ol>
-<p id="section-4.4-9">TODO: Make sure that the grammar in <a href="#syntax" class="xref">Appendix A</a> allows specifying the
+<p id="section-4.4-9">TODO: Make sure that the grammar in <a href="#syntax" class="auto internal xref">Appendix A</a> allows specifying the
 null values that are necessary to remove members in a merge-patch.<a href="#section-4.4-9" class="pilcrow">¶</a></p>
 <div id="resolved-models">
 <section id="section-4.4.1">
           <h4 id="name-resolved-models">
 <a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-resolved-models" class="section-name selfRef">Resolved models</a>
           </h4>
-<p id="section-4.4.1-1">A model where all sdfRef references are processed as described in <a href="#sdfref" class="xref">Section 4.4</a> is called a resolved model.<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.1-1">A model where all sdfRef references are processed as described in <a href="#sdfref" class="auto internal xref">Section 4.4</a> is called a resolved model.<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.1-2">For example, given the following sdfData definitions:<a href="#section-4.4.1-2" class="pilcrow">¶</a></p>
-<div id="section-4.4.1-3">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.4.1-3">
+<pre>
 "sdfData": {
   "Coordinate" : {
     "type": "number", "unit": "m"
@@ -2589,8 +2608,8 @@ null values that are necessary to remove members in a merge-patch.<a href="#sect
 </pre><a href="#section-4.4.1-3" class="pilcrow">¶</a>
 </div>
 <p id="section-4.4.1-4">After resolving the definitions would look as follows:<a href="#section-4.4.1-4" class="pilcrow">¶</a></p>
-<div id="section-4.4.1-5">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.4.1-5">
+<pre>
 "sdfData": {
   "Coordinate" : {
     "type": "number", "unit": "m"
@@ -2620,11 +2639,11 @@ defines for which declarations corresponding data are mandatory in an
 instance conforming the current definition.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
 <p id="section-4.5-2">The value of "sdfRequired" is an array of name references (JSON pointers), each
 indicating one declaration that is mandatory to be represented.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
-<p id="section-4.5-3">The example in <a href="#example-req" class="xref">Figure 4</a> shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".<a href="#section-4.5-3" class="pilcrow">¶</a></p>
+<p id="section-4.5-3">The example in <a href="#example-req" class="auto internal xref">Figure 4</a> shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".<a href="#section-4.5-3" class="pilcrow">¶</a></p>
 <span id="name-using-sdfrequired"></span><div id="example-req">
 <figure id="figure-4">
-          <div id="section-4.5-4.1">
-<pre class="lang-json sourcecode">
+          <div class="lang-json sourcecode" id="section-4.5-4.1">
+<pre>
 {
   "sdfObject": {
     "temperatureWithAlarm": {
@@ -2675,11 +2694,11 @@ indicating one declaration that is mandatory to be represented.<a href="#section
 <a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-common-qualities" class="section-name selfRef">Common Qualities</a>
         </h3>
 <p id="section-4.6-1">Definitions in SDF share a number of qualities that provide metadata for
-them.  These are listed in <a href="#tbl-common-qualities" class="xref">Table 3</a>.  None of these
+them.  These are listed in <a href="#tbl-common-qualities" class="auto internal xref">Table 3</a>.  None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
 If a label is required for an application and no label is given in the SDF model, the
-last part (<code>reference-token</code>, <span><a href="https://rfc-editor.org/rfc/rfc6901#section-3" class="relref">Section 3</a> of [<a href="#RFC6901" class="xref">RFC6901</a>]</span>) of the JSON
+last part (<code>reference-token</code>, <span><a href="https://rfc-editor.org/rfc/rfc6901#section-3" class="relref">Section 3</a> of [<a href="#RFC6901" class="cite xref">RFC6901</a>]</span>) of the JSON
 pointer to the definition can be used.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
 <span id="name-common-qualities-2"></span><div id="tbl-common-qualities">
 <table class="center" id="table-3">
@@ -2713,12 +2732,12 @@ pointer to the definition can be used.<a href="#section-4.6-1" class="pilcrow">�
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfRef</td>
               <td class="text-left" rowspan="1" colspan="1">sdf-pointer</td>
-              <td class="text-left" rowspan="1" colspan="1">(see <a href="#sdfref" class="xref">Section 4.4</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">(see <a href="#sdfref" class="auto internal xref">Section 4.4</a>)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfRequired</td>
               <td class="text-left" rowspan="1" colspan="1">pointer-list</td>
-              <td class="text-left" rowspan="1" colspan="1">(see <a href="#sdfrequired" class="xref">Section 4.5</a>, applies to qualities of properties, of data)</td>
+              <td class="text-left" rowspan="1" colspan="1">(see <a href="#sdfrequired" class="auto internal xref">Section 4.5</a>, applies to qualities of properties, of data)</td>
             </tr>
           </tbody>
         </table>
@@ -2732,12 +2751,12 @@ pointer to the definition can be used.<a href="#section-4.6-1" class="pilcrow">�
         </h3>
 <p id="section-4.7-1">Data qualities are used in <code>sdfData</code> and <code>sdfProperty</code> definitions,
 which are named sets of data qualities (abbreviated as <code>named-sdq</code>).<a href="#section-4.7-1" class="pilcrow">¶</a></p>
-<p id="section-4.7-2"><a href="#jso-inspired" class="xref">Appendix C</a> lists data qualities inspired by the various
+<p id="section-4.7-2"><a href="#jso-inspired" class="auto internal xref">Appendix C</a> lists data qualities inspired by the various
 proposals at json-schema.org; the
 intention is that these (information model level) qualities are
 compatible with the (data model) semantics from the
 versions of the json-schema.org proposal they were imported from.<a href="#section-4.7-2" class="pilcrow">¶</a></p>
-<p id="section-4.7-3"><a href="#sdfdataqual2" class="xref">Table 4</a> lists data qualities defined specifically for the
+<p id="section-4.7-3"><a href="#sdfdataqual2" class="auto internal xref">Table 4</a> lists data qualities defined specifically for the
 present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
 <span id="name-sdf-defined-qualities-of-sd"></span><div id="sdfdataqual2">
 <table class="center" id="table-4">
@@ -2758,7 +2777,7 @@ present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
               <td class="text-left" rowspan="1" colspan="1">(common)</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
               <td class="text-left" rowspan="1" colspan="1">
-                <a href="#common-qualities" class="xref">Section 4.6</a>
+                <a href="#common-qualities" class="auto internal xref">Section 4.6</a>
 </td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
@@ -2794,13 +2813,13 @@ present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfType</td>
-              <td class="text-left" rowspan="1" colspan="1">string (<a href="#sdftype" class="xref">Section 4.7.1</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">string (<a href="#sdftype" class="auto internal xref">Section 4.7.1</a>)</td>
               <td class="text-left" rowspan="1" colspan="1">sdfType enumeration (extensible)</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfChoice</td>
-              <td class="text-left" rowspan="1" colspan="1">named set of data qualities (<a href="#sdfchoice" class="xref">Section 4.7.2</a>)</td>
+              <td class="text-left" rowspan="1" colspan="1">named set of data qualities (<a href="#sdfchoice" class="auto internal xref">Section 4.7.2</a>)</td>
               <td class="text-left" rowspan="1" colspan="1">named alternatives</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
@@ -2818,9 +2837,9 @@ present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
             <p id="section-4.7-5.1.1">Note that the quality <code>unit</code> was called <code>units</code> in SDF 1.0.
 The unit name <span class="bcp14">SHOULD</span> be as
 per the <a href="https://rfc-editor.org/rfc/rfc8428#senml-units" class="relref">SenML Units</a> Registry
-or the <a href="https://rfc-editor.org/rfc/rfc8798#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="xref">IANA.senml</a>]</span>
+or the <a href="https://rfc-editor.org/rfc/rfc8798#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="cite xref">IANA.senml</a>]</span>
 as specified by
-Sections <a href="https://rfc-editor.org/rfc/rfc8428#section-4.5.1" class="relref">4.5.1</a> and <a href="https://rfc-editor.org/rfc/rfc8428#section-12.1" class="relref">12.1</a> of <span>[<a href="#RFC8428" class="xref">RFC8428</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8798#section-3" class="relref">Section 3</a> of [<a href="#RFC8798" class="xref">RFC8798</a>]</span>, respectively.<a href="#section-4.7-5.1.1" class="pilcrow">¶</a></p>
+Sections <a href="https://rfc-editor.org/rfc/rfc8428#section-4.5.1" class="relref">4.5.1</a> and <a href="https://rfc-editor.org/rfc/rfc8428#section-12.1" class="relref">12.1</a> of <span>[<a href="#RFC8428" class="cite xref">RFC8428</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8798#section-3" class="relref">Section 3</a> of [<a href="#RFC8798" class="cite xref">RFC8798</a>]</span>, respectively.<a href="#section-4.7-5.1.1" class="pilcrow">¶</a></p>
 <p id="section-4.7-5.1.2">
 Exceptionally, if a registration in these registries cannot be
 obtained or would be inappropriate, the unit name can also be a URI
@@ -2833,7 +2852,7 @@ the time of writing, none) can therefore not be used in SDF.<a href="#section-4.
 <p id="section-4.7-5.1.3">
 For use by translators into ecosystems that require URIs for unit
 names, the URN sub-namespace "urn:ietf:params:unit" is provided
-(<a href="#unit-urn" class="xref">Section 7.2</a>); URNs from this sub-namespace <span class="bcp14">MUST NOT</span> be used in a
+(<a href="#unit-urn" class="auto internal xref">Section 7.2</a>); URNs from this sub-namespace <span class="bcp14">MUST NOT</span> be used in a
 <code>unit</code> quality, in favor of simply notating the unit name (e.g.,
 <code>kg</code> instead of <code>urn:ietf:params:unit:kg</code>).<a href="#section-4.7-5.1.3" class="pilcrow">¶</a></p>
 </li>
@@ -2844,7 +2863,7 @@ names, the URN sub-namespace "urn:ietf:params:unit" is provided
  information with an SDF model.<a href="#section-4.7-5.2" class="pilcrow">¶</a>
 </li>
           <li id="section-4.7-5.3">The <code>contentFormat</code> quality follows the Content-Format-Spec as defined in
-<span><a href="https://rfc-editor.org/rfc/rfc9193#section-6" class="relref">Section 6</a> of [<a href="#RFC9193" class="xref">RFC9193</a>]</span>, allowing for expressing both numeric and string
+<span><a href="https://rfc-editor.org/rfc/rfc9193#section-6" class="relref">Section 6</a> of [<a href="#RFC9193" class="cite xref">RFC9193</a>]</span>, allowing for expressing both numeric and string
 based Content-Formats.<a href="#section-4.7-5.3" class="pilcrow">¶</a>
 </li>
         </ol>
@@ -2856,12 +2875,12 @@ based Content-Formats.<a href="#section-4.7-5.3" class="pilcrow">¶</a>
 <p id="section-4.7.1-1">SDF defines a number of basic types beyond those provided by JSON or
 JSO.  These types are identified by the <code>sdfType</code> quality, which
 is a text string from a set of type names defined by SDF.<a href="#section-4.7.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.7.1-2">To aid interworking with <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span> implementations, it is <span class="bcp14">RECOMMENDED</span>
+<p id="section-4.7.1-2">To aid interworking with <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span> implementations, it is <span class="bcp14">RECOMMENDED</span>
 that <code>sdfType</code> is always used in conjunction with the <code>type</code> quality
-inherited from <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>, in such a way as to yield a common
+inherited from <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>, in such a way as to yield a common
 representation of the type's values in JSON.<a href="#section-4.7.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.7.1-3">Values for <code>sdfType</code> that are defined in SDF 1.1 are shown in
-<a href="#sdftype1" class="xref">Table 5</a>.
+<a href="#sdftype1" class="auto internal xref">Table 5</a>.
 This table also gives a description of the semantics of the sdfType,
 the conventional value for <code>type</code> to be used with the <code>sdfType</code> value,
 and a conventional JSON representation for values of the type.<a href="#section-4.7.1-3" class="pilcrow">¶</a></p>
@@ -2884,13 +2903,13 @@ and a conventional JSON representation for values of the type.<a href="#section-
                 <td class="text-left" rowspan="1" colspan="1">byte-string</td>
                 <td class="text-left" rowspan="1" colspan="1">A sequence of zero or more bytes</td>
                 <td class="text-left" rowspan="1" colspan="1">string</td>
-                <td class="text-left" rowspan="1" colspan="1">base64url without padding (<span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.5.2" class="relref">Section 3.4.5.2</a> of [<a href="#RFC8949" class="xref">RFC8949</a>]</span>)</td>
+                <td class="text-left" rowspan="1" colspan="1">base64url without padding (<span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.5.2" class="relref">Section 3.4.5.2</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>)</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">unix-time</td>
                 <td class="text-left" rowspan="1" colspan="1">A point in civil time (note 1)</td>
                 <td class="text-left" rowspan="1" colspan="1">number</td>
-                <td class="text-left" rowspan="1" colspan="1">POSIX time (<span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.2" class="relref">Section 3.4.2</a> of [<a href="#RFC8949" class="xref">RFC8949</a>]</span>)</td>
+                <td class="text-left" rowspan="1" colspan="1">POSIX time (<span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.2" class="relref">Section 3.4.2</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>)</td>
               </tr>
             </tbody>
           </table>
@@ -2914,21 +2933,21 @@ object used to represent the choice) and a set of dataqualities
 Dataqualities that are specified at the same level as the sdfChoice
 apply to all choices in the sdfChoice, except those specific choices
 where the dataquality is overridden at the choice level.<a href="#section-4.7.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.7.2-2">sdfChoice merges the functions of two constructs found in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>:<a href="#section-4.7.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.7.2-2">sdfChoice merges the functions of two constructs found in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>:<a href="#section-4.7.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.7.2-3.1">
               <p id="section-4.7.2-3.1.1"><code>enum</code><a href="#section-4.7.2-3.1.1" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-3.1.2">
 What would have been<a href="#section-4.7.2-3.1.2" class="pilcrow">¶</a></p>
-<div id="section-4.7.2-3.1.3">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.7.2-3.1.3">
+<pre>
 "enum": ["foo", "bar", "baz"]
 </pre><a href="#section-4.7.2-3.1.3" class="pilcrow">¶</a>
 </div>
 <p id="section-4.7.2-3.1.4">
 in SDF 1.0, is often best represented as:<a href="#section-4.7.2-3.1.4" class="pilcrow">¶</a></p>
-<div id="section-4.7.2-3.1.5">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.7.2-3.1.5">
+<pre>
 "sdfChoice": {
   "foo": { "description": "This is a foonly"},
   "bar": { "description": "As defined in the second world congress"},
@@ -2942,16 +2961,16 @@ This allows the placement of other dataqualities such as
 <p id="section-4.7.2-3.1.7">
 If an enum needs to use a data type different from text string,
 e.g. what would have been<a href="#section-4.7.2-3.1.7" class="pilcrow">¶</a></p>
-<div id="section-4.7.2-3.1.8">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.7.2-3.1.8">
+<pre>
 "type": "number",
 "enum": [1, 2, 3]
 </pre><a href="#section-4.7.2-3.1.8" class="pilcrow">¶</a>
 </div>
 <p id="section-4.7.2-3.1.9">
 in SDF 1.0, is represented as:<a href="#section-4.7.2-3.1.9" class="pilcrow">¶</a></p>
-<div id="section-4.7.2-3.1.10">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.7.2-3.1.10">
+<pre>
 "type": "number",
 "sdfChoice": {
   "a-better-name-for-alternative-1": { "const": 1 },
@@ -2971,12 +2990,12 @@ element for the data model.)<a href="#section-4.7.2-3.1.12" class="pilcrow">¶</
 </li>
             <li class="normal" id="section-4.7.2-3.2">
               <p id="section-4.7.2-3.2.1">anyOf<a href="#section-4.7.2-3.2.1" class="pilcrow">¶</a></p>
-<p id="section-4.7.2-3.2.2"><span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span> provides a type union called <code>anyOf</code>, which provides a
+<p id="section-4.7.2-3.2.2"><span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span> provides a type union called <code>anyOf</code>, which provides a
 choice between anonymous alternatives.<a href="#section-4.7.2-3.2.2" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-3.2.3">
 What could have been<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
-<div id="section-4.7.2-3.2.4">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.7.2-3.2.4">
+<pre>
 "anyOf": [
   {"type": "array", "minItems": 3, "maxItems": "3", "items": {
      "$ref": "#/sdfData/rgbVal"}},
@@ -2986,9 +3005,9 @@ What could have been<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
 </pre><a href="#section-4.7.2-3.2.4" class="pilcrow">¶</a>
 </div>
 <p id="section-4.7.2-3.2.5">
-in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span> can be more descriptively notated in SDF as:<a href="#section-4.7.2-3.2.5" class="pilcrow">¶</a></p>
-<div id="section-4.7.2-3.2.6">
-<pre class="lang-json sourcecode">
+in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span> can be more descriptively notated in SDF as:<a href="#section-4.7.2-3.2.5" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-4.7.2-3.2.6">
+<pre>
 "sdfChoice": {
   "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
             "sdfRef": "#/sdfData/rgbVal"}},
@@ -3000,18 +3019,18 @@ in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.han
 </li>
           </ul>
 <p id="section-4.7.2-4">Note that there is no need in SDF for the type intersection construct
-<code>allOf</code> or the peculiar type-xor construct <code>oneOf</code> found in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>.<a href="#section-4.7.2-4" class="pilcrow">¶</a></p>
+<code>allOf</code> or the peculiar type-xor construct <code>oneOf</code> found in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>.<a href="#section-4.7.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-5">As a simplification for readers of SDF specifications accustomed to
-the <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span> enum keyword, this is retained, but limited to a choice
+the <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span> enum keyword, this is retained, but limited to a choice
 of text string values, such that<a href="#section-4.7.2-5" class="pilcrow">¶</a></p>
-<div id="section-4.7.2-6">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.7.2-6">
+<pre>
 "enum": ["foo", "bar", "baz"]
 </pre><a href="#section-4.7.2-6" class="pilcrow">¶</a>
 </div>
 <p id="section-4.7.2-7">is syntactic sugar for<a href="#section-4.7.2-7" class="pilcrow">¶</a></p>
-<div id="section-4.7.2-8">
-<pre class="lang-json sourcecode">
+<div class="lang-json sourcecode" id="section-4.7.2-8">
+<pre>
 "sdfChoice": {
   "foo": { "const": "foo"},
   "bar": { "const": "bar"},
@@ -3031,7 +3050,7 @@ of text string values, such that<a href="#section-4.7.2-5" class="pilcrow">¶</a
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-keywords-for-definition-gro" class="section-name selfRef">Keywords for definition groups</a>
       </h2>
 <p id="section-5-1">The following SDF keywords are used to create definition groups in the target namespace.
-All these definitions share some common qualities as discussed in <a href="#common-qualities" class="xref">Section 4.6</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+All these definitions share some common qualities as discussed in <a href="#common-qualities" class="auto internal xref">Section 4.6</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="sdfobject-1">
 <section id="section-5.1">
         <h3 id="name-sdfobject-2">
@@ -3039,7 +3058,7 @@ All these definitions share some common qualities as discussed in <a href="#comm
         </h3>
 <p id="section-5.1-1">The sdfObject keyword denotes a group of zero or more Object definitions.
 Object definitions may contain or include definitions of Properties, Actions, Events declared for the object, as well as data types (sdfData group) to be used in this or other Objects.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">The qualities of an sdfObject include the common qualities, additional qualities are shown in <a href="#sdfobjqual" class="xref">Table 6</a>.
+<p id="section-5.1-2">The qualities of an sdfObject include the common qualities, additional qualities are shown in <a href="#sdfobjqual" class="auto internal xref">Table 6</a>.
 None of these
 qualities are required or have default values that are assumed if the
 quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
@@ -3061,7 +3080,7 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
               <td class="text-left" rowspan="1" colspan="1">(common)</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
               <td class="text-left" rowspan="1" colspan="1">
-                <a href="#common-qualities" class="xref">Section 4.6</a>
+                <a href="#common-qualities" class="auto internal xref">Section 4.6</a>
 </td>
             </tr>
             <tr>
@@ -3107,7 +3126,7 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-1">The sdfProperty keyword denotes a group of zero or more Property definitions.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">Properties are used to model elements of state.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3">The qualities of a Property definition include the data qualities (and
-thus the common qualities), see <a href="#data-qualities" class="xref">Section 4.7</a>, additional qualities are shown in <a href="#sdfpropqual" class="xref">Table 7</a>.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+thus the common qualities), see <a href="#data-qualities" class="auto internal xref">Section 4.7</a>, additional qualities are shown in <a href="#sdfpropqual" class="auto internal xref">Table 7</a>.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-sdfproperty"></span><div id="sdfpropqual">
 <table class="center" id="table-7">
           <caption>
@@ -3127,7 +3146,7 @@ thus the common qualities), see <a href="#data-qualities" class="xref">Section 4
               <td class="text-left" rowspan="1" colspan="1">(data)</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
               <td class="text-left" rowspan="1" colspan="1">
-                <a href="#data-qualities" class="xref">Section 4.7</a>
+                <a href="#data-qualities" class="auto internal xref">Section 4.7</a>
 </td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
             </tr>
@@ -3161,7 +3180,7 @@ thus the common qualities), see <a href="#data-qualities" class="xref">Section 4
         </h3>
 <p id="section-5.3-1">The sdfAction keyword denotes a group of zero or more Action definitions.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">The qualities of an Action definition include the common qualities, additional qualities are shown in <a href="#sdfactqual" class="xref">Table 8</a>.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">The qualities of an Action definition include the common qualities, additional qualities are shown in <a href="#sdfactqual" class="auto internal xref">Table 8</a>.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-sdfaction"></span><div id="sdfactqual">
 <table class="center" id="table-8">
           <caption>
@@ -3180,7 +3199,7 @@ thus the common qualities), see <a href="#data-qualities" class="xref">Section 4
               <td class="text-left" rowspan="1" colspan="1">(common)</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
               <td class="text-left" rowspan="1" colspan="1">
-                <a href="#common-qualities" class="xref">Section 4.6</a>
+                <a href="#common-qualities" class="auto internal xref">Section 4.6</a>
 </td>
             </tr>
             <tr>
@@ -3203,7 +3222,7 @@ thus the common qualities), see <a href="#data-qualities" class="xref">Section 4
 </div>
 <p id="section-5.3-5"><code>sdfInputData</code> defines the input data of the action.  <code>sdfOutputData</code>
 defines the output data of the action.
-As discussed in <a href="#sdfaction-overview" class="xref">Section 2.2.3</a>, a set of data qualities with
+As discussed in <a href="#sdfaction-overview" class="auto internal xref">Section 2.2.3</a>, a set of data qualities with
 type "object" can be used to substructure either data item, with
 optionality indicated by the data quality <code>required</code>.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
 </section>
@@ -3215,7 +3234,7 @@ optionality indicated by the data quality <code>required</code>.<a href="#sectio
         </h3>
 <p id="section-5.4-1">The sdfEvent keyword denotes zero or more Event definitions.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.4-2">Events are used to model asynchronous occurrences that may be communicated proactively. Events have data elements which are communicated upon the occurrence of the event.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.4-3">The qualities of sdfEvent include the common qualities, additional qualities are shown in <a href="#sdfevqual" class="xref">Table 9</a>.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-3">The qualities of sdfEvent include the common qualities, additional qualities are shown in <a href="#sdfevqual" class="auto internal xref">Table 9</a>.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-sdfevent"></span><div id="sdfevqual">
 <table class="center" id="table-9">
           <caption>
@@ -3234,7 +3253,7 @@ optionality indicated by the data quality <code>required</code>.<a href="#sectio
               <td class="text-left" rowspan="1" colspan="1">(common)</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
               <td class="text-left" rowspan="1" colspan="1">
-                <a href="#common-qualities" class="xref">Section 4.6</a>
+                <a href="#common-qualities" class="auto internal xref">Section 4.6</a>
 </td>
             </tr>
             <tr>
@@ -3251,7 +3270,7 @@ optionality indicated by the data quality <code>required</code>.<a href="#sectio
         </table>
 </div>
 <p id="section-5.4-5"><code>sdfOutputData</code> defines the output data of the action.
-As discussed in <a href="#sdfevent-overview" class="xref">Section 2.2.4</a>, a set of data qualities with
+As discussed in <a href="#sdfevent-overview" class="auto internal xref">Section 2.2.4</a>, a set of data qualities with
 type "object" can be used to substructure the output data item, with
 optionality indicated by the data quality <code>required</code>.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
 </section>
@@ -3267,7 +3286,7 @@ definitions (named-sdq).<a href="#section-5.5-1" class="pilcrow">¶</a></p>
 type of data item and describes the constraints on the defined type.
 It is not itself a declaration, i.e., it does not cause any of these
 data items to be included in an affordance definition.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
-<p id="section-5.5-3">The qualities of sdfData include the data qualities (and thus the common qualities), see <a href="#data-qualities" class="xref">Section 4.7</a>.<a href="#section-5.5-3" class="pilcrow">¶</a></p>
+<p id="section-5.5-3">The qualities of sdfData include the data qualities (and thus the common qualities), see <a href="#data-qualities" class="auto internal xref">Section 4.7</a>.<a href="#section-5.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3317,7 +3336,7 @@ overridden.  (Note that JSON maps (objects) do not have a defined
 order, so the SDF processor may see these overrides before seeing the
 <code>sdfRef</code>.)<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-3">As a convention, overrides are intended to be used only for further restricting
-the set of data values, as shown in <a href="#exa-sdfref" class="xref">Figure 5</a>:  any value for a
+the set of data values, as shown in <a href="#exa-sdfref" class="auto internal xref">Figure 5</a>:  any value for a
 <code>cable-length</code> also is a valid value for a <code>length</code>, with the
 additional restriction that the length cannot be smaller than 5 cm.
 (This is labeled as a convention as it cannot be checked in the
@@ -3357,14 +3376,14 @@ consumption there is no conflict with the intended goal.<a href="#section-6.2.1-
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-sdfthing-2" class="section-name selfRef">sdfThing</a>
         </h3>
 <p id="section-6.3-1">An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
-(see <a href="#exa-sdfthing-outlet-strip" class="xref">Figure 6</a> in {outlet-strip-example}} for an example SDF model).<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+(see <a href="#exa-sdfthing-outlet-strip" class="auto internal xref">Figure 6</a> in {outlet-strip-example}} for an example SDF model).<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
 An <code>sdfThing</code> can also contain Interaction Affordances and sdfData itself, such
 as a status (on/off) for the refrigerator-freezer as a whole (see
-<a href="#exa-sdfthing-fridge-freezer" class="xref">Figure 7</a> in <a href="#fridge-freezer-example" class="xref">Appendix D.2</a> for an example SDF
+<a href="#exa-sdfthing-fridge-freezer" class="auto internal xref">Figure 7</a> in <a href="#fridge-freezer-example" class="auto internal xref">Appendix D.2</a> for an example SDF
 model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">An sdfThing may be composed of sdfObjects and other sdfThings.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
-<p id="section-6.3-4">The qualities of sdfThing are shown in <a href="#sdfthingqual" class="xref">Table 10</a>.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
+<p id="section-6.3-4">The qualities of sdfThing are shown in <a href="#sdfthingqual" class="auto internal xref">Table 10</a>.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-sdfthing"></span><div id="sdfthingqual">
 <table class="center" id="table-10">
           <caption>
@@ -3383,7 +3402,7 @@ model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a
               <td class="text-left" rowspan="1" colspan="1">(common)</td>
               <td class="text-left" rowspan="1" colspan="1"> </td>
               <td class="text-left" rowspan="1" colspan="1">
-                <a href="#common-qualities" class="xref">Section 4.6</a>
+                <a href="#common-qualities" class="auto internal xref">Section 4.6</a>
 </td>
             </tr>
             <tr>
@@ -3457,7 +3476,7 @@ model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdf+json</td>
               <td class="text-left" rowspan="1" colspan="1">application/sdf+json</td>
-              <td class="text-left" rowspan="1" colspan="1">RFC XXXX, <a href="#media-type" class="xref">Section 7.1</a>
+              <td class="text-left" rowspan="1" colspan="1">RFC XXXX, <a href="#media-type" class="auto internal xref">Section 7.1</a>
 </td>
             </tr>
           </tbody>
@@ -3491,7 +3510,7 @@ model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a
           <dd class="break"></dd>
 <dt id="section-7.1-4.11">Security considerations:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-4.12">
-            <p id="section-7.1-4.12.1"><a href="#seccons" class="xref">Section 8</a> of RFC XXXX<a href="#section-7.1-4.12.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-4.12.1"><a href="#seccons" class="auto internal xref">Section 8</a> of RFC XXXX<a href="#section-7.1-4.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-7.1-4.13">Interoperability considerations:</dt>
@@ -3501,7 +3520,7 @@ model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a
           <dd class="break"></dd>
 <dt id="section-7.1-4.15">Published specification:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-4.16">
-            <p id="section-7.1-4.16.1"><a href="#media-type" class="xref">Section 7.1</a> of RFC XXXX<a href="#section-7.1-4.16.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-4.16.1"><a href="#media-type" class="auto internal xref">Section 7.1</a> of RFC XXXX<a href="#section-7.1-4.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-7.1-4.17">Applications that use this media type:</dt>
@@ -3512,7 +3531,7 @@ model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a
 <dt id="section-7.1-4.19">Fragment identifier considerations:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-4.20">
             <p id="section-7.1-4.20.1">A JSON Pointer fragment identifier may be used, as defined in
-<span><a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a> of [<a href="#RFC6901" class="xref">RFC6901</a>]</span>.<a href="#section-7.1-4.20.1" class="pilcrow">¶</a></p>
+<span><a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a> of [<a href="#RFC6901" class="cite xref">RFC6901</a>]</span>.<a href="#section-7.1-4.20.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-7.1-4.21">Person &amp; email address to contact for further information:</dt>
@@ -3550,7 +3569,7 @@ or IETF Applications and Real-Time Area (art@ietf.org)<a href="#section-7.1-4.22
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-ietf-urn-sub-namespace-for-" class="section-name selfRef">IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit)</a>
         </h3>
 <p id="section-7.2-1">IANA is requested to register the following value in the "<a href="https://www.iana.org/assignments/params#params-1" class="relref">IETF URN Sub-namespace for Registered Protocol Parameter Identifiers</a>" registry, following the template in
-<span>[<a href="#RFC3553" class="xref">RFC3553</a>]</span>:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC3553" class="cite xref">RFC3553</a>]</span>:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-7.2-2">
           <dt id="section-7.2-2.1">Registry name:</dt>
           <dd style="margin-left: 1.5em" id="section-7.2-2.2">
@@ -3564,16 +3583,16 @@ or IETF Applications and Real-Time Area (art@ietf.org)<a href="#section-7.1-4.22
           <dd class="break"></dd>
 <dt id="section-7.2-2.5">Repository:</dt>
           <dd style="margin-left: 1.5em" id="section-7.2-2.6">
-            <p id="section-7.2-2.6.1">combining the symbol values from the <a href="https://www.iana.org/assignments/senml#senml-units" class="relref">SenML Units</a> Registry and the <a href="https://www.iana.org/assignments/senml#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="xref">IANA.senml</a>]</span> as specified by Sections <a href="https://rfc-editor.org/rfc/rfc8428#section-4.5.1" class="relref">4.5.1</a> and <a href="https://rfc-editor.org/rfc/rfc8428#section-12.1" class="relref">12.1</a> of <span>[<a href="#RFC8428" class="xref">RFC8428</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8798#section-3" class="relref">Section 3</a> of [<a href="#RFC8798" class="xref">RFC8798</a>]</span>,
+            <p id="section-7.2-2.6.1">combining the symbol values from the <a href="https://www.iana.org/assignments/senml#senml-units" class="relref">SenML Units</a> Registry and the <a href="https://www.iana.org/assignments/senml#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="cite xref">IANA.senml</a>]</span> as specified by Sections <a href="https://rfc-editor.org/rfc/rfc8428#section-4.5.1" class="relref">4.5.1</a> and <a href="https://rfc-editor.org/rfc/rfc8428#section-12.1" class="relref">12.1</a> of <span>[<a href="#RFC8428" class="cite xref">RFC8428</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8798#section-3" class="relref">Section 3</a> of [<a href="#RFC8798" class="cite xref">RFC8798</a>]</span>,
 respectively (which by the registration policy are guaranteed to be
 non-overlapping).<a href="#section-7.2-2.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-7.2-2.7">Index value:</dt>
           <dd style="margin-left: 1.5em" id="section-7.2-2.8">
-            <p id="section-7.2-2.8.1">Percent-encoding (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>) is required of
+            <p id="section-7.2-2.8.1">Percent-encoding (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>) is required of
 any characters in unit names as required by ABNF rule "pchar" in
-<span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3986" class="xref">RFC3986</a>]</span>, specifically at the time of writing for the
+<span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>, specifically at the time of writing for the
 unit names "%" (deprecated in favor of "/"), "%RH", "%EL".<a href="#section-7.2-2.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -3595,7 +3614,7 @@ unit names "%" (deprecated in favor of "/"), "%RH", "%EL".<a href="#section-7.2-
       <h2 id="name-security-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-8-1">Some wider issues are discussed in <span>[<a href="#RFC8576" class="xref">RFC8576</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">Some wider issues are discussed in <span>[<a href="#RFC8576" class="cite xref">RFC8576</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">(Specifics: TBD.)<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3610,11 +3629,11 @@ unit names "%" (deprecated in favor of "/"), "%RH", "%EL".<a href="#section-7.2-
 <dl class="references">
 <dt id="IANA.params">[IANA.params]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Uniform Resource Name (URN) Namespace for IETF Use"</span>, <time datetime="2003-05-19" class="refDate">19 May 2003</time>, <span>&lt;<a href="https://www.iana.org/assignments/params">https://www.iana.org/assignments/params</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Uniform Resource Name (URN) Namespace for IETF Use"</span>, <span>&lt;<a href="https://www.iana.org/assignments/params">https://www.iana.org/assignments/params</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.senml">[IANA.senml]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Sensor Measurement Lists (SenML)"</span>, <time datetime="2018-06-01" class="refDate">1 June 2018</time>, <span>&lt;<a href="https://www.iana.org/assignments/senml">https://www.iana.org/assignments/senml</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Sensor Measurement Lists (SenML)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/senml">https://www.iana.org/assignments/senml</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC0020">[RFC0020]</dt>
         <dd>
@@ -3705,7 +3724,7 @@ unit names "%" (deprecated in favor of "/"), "%RH", "%EL".<a href="#section-7.2-
 <dd class="break"></dd>
 <dt id="I-D.irtf-t2trg-rest-iot">[I-D.irtf-t2trg-rest-iot]</dt>
         <dd>
-<span class="refAuthor">Keranen, A.</span>, <span class="refAuthor">Kovatsch, M.</span>, and <span class="refAuthor">K. Hartke</span>, <span class="refTitle">"Guidance on RESTful Design for Internet of Things Systems"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-t2trg-rest-iot-09</span>, <time datetime="2022-02-26" class="refDate">26 February 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-irtf-t2trg-rest-iot-09.txt">https://www.ietf.org/archive/id/draft-irtf-t2trg-rest-iot-09.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Keränen, A.</span>, <span class="refAuthor">Kovatsch, M.</span>, and <span class="refAuthor">K. Hartke</span>, <span class="refTitle">"Guidance on RESTful Design for Internet of Things Systems"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-t2trg-rest-iot-11</span>, <time datetime="2023-01-11" class="refDate">11 January 2023</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-irtf-t2trg-rest-iot-11.txt">https://www.ietf.org/archive/id/draft-irtf-t2trg-rest-iot-11.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.wright-json-schema">[I-D.wright-json-schema]</dt>
         <dd>
@@ -3725,7 +3744,7 @@ unit names "%" (deprecated in favor of "/"), "%RH", "%EL".<a href="#section-7.2-
 <dd class="break"></dd>
 <dt id="ZCL">[ZCL]</dt>
       <dd>
-<span class="refAuthor">Elsevier</span>, <span class="refTitle">"The ZigBee Cluster Library"</span>, <span class="seriesInfo">DOI 10.1016/b978-0-7506-8597-9.00006-9</span>, <span>&lt;<a href="http://dx.doi.org/10.1016/b978-0-7506-8597-9.00006-9">http://dx.doi.org/10.1016/b978-0-7506-8597-9.00006-9</a>&gt;</span>. </dd>
+<span class="refTitle">"The ZigBee Cluster Library"</span>, <span class="seriesInfo">Zigbee Wireless Networking pp. 239-271</span>, <span class="seriesInfo">DOI 10.1016/b978-0-7506-8597-9.00006-9</span>, <time datetime="2008" class="refDate">2008</time>, <span>&lt;<a href="https://doi.org/10.1016/b978-0-7506-8597-9.00006-9">https://doi.org/10.1016/b978-0-7506-8597-9.00006-9</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -3735,7 +3754,7 @@ unit names "%" (deprecated in favor of "/"), "%RH", "%EL".<a href="#section-7.2-
       <h2 id="name-formal-syntax-of-sdf">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-formal-syntax-of-sdf" class="section-name selfRef">Formal Syntax of SDF</a>
       </h2>
-<p id="appendix-A-1">This appendix describes the syntax of SDF using CDDL <span>[<a href="#RFC8610" class="xref">RFC8610</a>]</span>.  Note
+<p id="appendix-A-1">This appendix describes the syntax of SDF using CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.  Note
 that this appendix was derived from Ari Keranen's "alt-schema" and
 Michael Koster's "schema", with a view of covering the syntax that is
 currently in use at the One Data Model <code>playground</code> repository.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
@@ -3746,14 +3765,14 @@ does not include the extension points.
 The validation syntax can be generated from the framework syntax by
 leaving out all lines containing the string <code>EXTENSION-POINT</code>; as this
 is trivial, the result is not shown here.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
-<p id="appendix-A-3">This appendix makes use of CDDL "features" as defined in <span><a href="https://rfc-editor.org/rfc/rfc9165#section-4" class="relref">Section 4</a> of [<a href="#RFC9165" class="xref">RFC9165</a>]</span>.
+<p id="appendix-A-3">This appendix makes use of CDDL "features" as defined in <span><a href="https://rfc-editor.org/rfc/rfc9165#section-4" class="relref">Section 4</a> of [<a href="#RFC9165" class="cite xref">RFC9165</a>]</span>.
 A feature named "1.0" is used to indicate parts of the syntax being
 deprecated towards SDF 1.1, and a feature named "1.1" is used to
 indicate new syntax intended for SDF 1.1.
 Features whose names end in "-ext" indicate extension points for
 further evolution.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
-<div id="appendix-A-4">
-<pre class="breakable lang-cddl sourcecode">
+<div class="breakable lang-cddl sourcecode" id="appendix-A-4">
+<pre>
 start = sdf-syntax
 
 sdf-syntax = {
@@ -3888,8 +3907,8 @@ jsonschema = (
  ; number/integer constraints
  ? minimum: number
  ? maximum: number
- ? exclusiveMinimum: bool / number      ; jso draft 4/7
- ? exclusiveMaximum: bool / number      ; jso draft 4/7
+ ? exclusiveMinimum: number
+ ? exclusiveMaximum: number
  ? multipleOf: number                   ; ISSUE: Do we need this?
  ; text string constraints
  ? minLength: uint
@@ -3933,17 +3952,17 @@ jsonschema = (
       <h2 id="name-json-schemaorg-rendition-of">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-json-schemaorg-rendition-of" class="section-name selfRef">json-schema.org Rendition of SDF Syntax</a>
       </h2>
-<p id="appendix-B-1">This appendix describes the syntax of SDF defined in <a href="#syntax" class="xref">Appendix A</a>, but
+<p id="appendix-B-1">This appendix describes the syntax of SDF defined in <a href="#syntax" class="auto internal xref">Appendix A</a>, but
 using a version of the description techniques advertised on
-json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">The appendix shows both the validation and the framework syntax.
 Since most of the lines are the same between these two files, those lines are shown only once, with a leading space, in the form of a unified diff.
 Lines leading with a <code>-</code> are part of the validation syntax, and lines leading with a <code>+</code> are part of the framework syntax.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<div id="appendix-B-3">
-<pre class="breakable lang-jso.json sourcecode">
+<div class="breakable lang-jso.json sourcecode" id="appendix-B-3">
+<pre>
  {
--  "title": "sdf-validation.cddl -- Generated: 2022-06-30T19:06:20Z",
-+  "title": "sdf-framework.cddl -- Generated: 2022-06-30T19:06:20Z",
+-  "title": "sdf-validation.cddl -- Generated: 2023-01-12T12:53:21Z",
++  "title": "sdf-framework.cddl -- Generated: 2023-01-12T12:53:22Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
@@ -4192,24 +4211,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                "type": "number"
              },
              "exclusiveMinimum": {
-               "anyOf": [
-                 {
-                   "type": "boolean"
-                 },
-                 {
-                   "type": "number"
-                 }
-               ]
+               "type": "number"
              },
              "exclusiveMaximum": {
-               "anyOf": [
-                 {
-                   "type": "boolean"
-                 },
-                 {
-                   "type": "number"
-                 }
-               ]
+               "type": "number"
              },
              "multipleOf": {
                "type": "number"
@@ -4563,24 +4568,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                "type": "number"
              },
              "exclusiveMinimum": {
-               "anyOf": [
-                 {
-                   "type": "boolean"
-                 },
-                 {
-                   "type": "number"
-                 }
-               ]
+               "type": "number"
              },
              "exclusiveMaximum": {
-               "anyOf": [
-                 {
-                   "type": "boolean"
-                 },
-                 {
-                   "type": "number"
-                 }
-               ]
+               "type": "number"
              },
              "multipleOf": {
                "type": "number"
@@ -4933,24 +4924,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                "type": "number"
              },
              "exclusiveMinimum": {
-               "anyOf": [
-                 {
-                   "type": "boolean"
-                 },
-                 {
-                   "type": "number"
-                 }
-               ]
+               "type": "number"
              },
              "exclusiveMaximum": {
-               "anyOf": [
-                 {
-                   "type": "boolean"
-                 },
-                 {
-                   "type": "number"
-                 }
-               ]
+               "type": "number"
              },
              "multipleOf": {
                "type": "number"
@@ -5326,24 +5303,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "number"
 +            },
 +            "exclusiveMinimum": {
-+              "anyOf": [
-+                {
-+                  "type": "boolean"
-+                },
-+                {
-+                  "type": "number"
-+                }
-+              ]
++              "type": "number"
 +            },
 +            "exclusiveMaximum": {
-+              "anyOf": [
-+                {
-+                  "type": "boolean"
-+                },
-+                {
-+                  "type": "number"
-+                }
-+              ]
++              "type": "number"
 +            },
 +            "multipleOf": {
 +              "type": "number"
@@ -5666,24 +5629,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "number"
 +            },
 +            "exclusiveMinimum": {
-+              "anyOf": [
-+                {
-+                  "type": "boolean"
-+                },
-+                {
-+                  "type": "number"
-+                }
-+              ]
++              "type": "number"
 +            },
 +            "exclusiveMaximum": {
-+              "anyOf": [
-+                {
-+                  "type": "boolean"
-+                },
-+                {
-+                  "type": "number"
-+                }
-+              ]
++              "type": "number"
 +            },
 +            "multipleOf": {
 +              "type": "number"
@@ -6009,24 +5958,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
                "type": "number"
              },
              "exclusiveMinimum": {
-               "anyOf": [
-                 {
-                   "type": "boolean"
-                 },
-                 {
-                   "type": "number"
-                 }
-               ]
+               "type": "number"
              },
              "exclusiveMaximum": {
-               "anyOf": [
-                 {
-                   "type": "boolean"
-                 },
-                 {
-                   "type": "number"
-                 }
-               ]
+               "type": "number"
              },
              "multipleOf": {
                "type": "number"
@@ -6468,8 +6403,8 @@ model level.
 A popular way to describe JSON data at a data model level is proposed
 by a number of drafts on json-schema.org (which collectively are
 abbreviated JSO here)); for reference to a popular version we will
-point here to <span>[<a href="#I-D.handrews-json-schema-validation-01" class="xref">I-D.handrews-json-schema-validation-01</a>]</span>.
-As the vocabulary used by JSO is familiar to many JSON modellers, the
+point here to <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>.
+As the vocabulary used by JSO is familiar to many JSON modelers, the
 present specification borrows some of the terms and ports their
 semantics to the information model level needed for SDF.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">The main data quality imported is the "<code>type</code>".
@@ -6521,7 +6456,7 @@ text string length values in bytes, which however is not meaningful
 unless bound to a specific encoding (which could be UTF-8, if this
 unusual behavior is to be restored).<a href="#appendix-C.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-3">The data quality "<code>pattern</code>" takes a string value that is interpreted
-as an <span>[<a href="#ECMA-262" class="xref">ECMA-262</a>]</span> regular expression in Unicode mode that constrain the
+as an <span>[<a href="#ECMA-262" class="cite xref">ECMA-262</a>]</span> regular expression in Unicode mode that constrain the
 string (note that these are not anchored by default, so unless <code>^</code> and
 <code>$</code> anchors are employed, ECMA-262 regular expressions match any string that <em>contains</em> a match).
 The JSO proposals acknowledge that regular expression support is
@@ -6543,23 +6478,23 @@ them to:<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="appendix-C.2-5">Note that this subset is somewhat similar to the subset introduced by
-iregexps <span>[<a href="#I-D.bormann-jsonpath-iregexp" class="xref">I-D.bormann-jsonpath-iregexp</a>]</span>, which however are anchored
+iregexps <span>[<a href="#I-D.bormann-jsonpath-iregexp" class="cite xref">I-D.bormann-jsonpath-iregexp</a>]</span>, which however are anchored
 regular expressions, and which include certain backslash escapes for
 characters and character classes.<a href="#appendix-C.2-5" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-6">The additional data quality "<code>format</code>" can take one of the following
 values.  Note that, at an information model level, the presence of
 this data quality changes the type from being a simple text string to
 the abstract meaning of the format given (i.e., the format "date-time"
-is less about the specific syntax employed in <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span> than about the usage
+is less about the specific syntax employed in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> than about the usage
 as an absolute point in civil time).<a href="#appendix-C.2-6" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="appendix-C.2-7.1">"<code>date-time</code>", "<code>date</code>", "<code>time</code>":
-An <span>[<a href="#RFC3339" class="xref">RFC3339</a>]</span> <code>date-time</code>, <code>full-date</code>, or <code>full-time</code>, respectively.<a href="#appendix-C.2-7.1" class="pilcrow">¶</a>
+An <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> <code>date-time</code>, <code>full-date</code>, or <code>full-time</code>, respectively.<a href="#appendix-C.2-7.1" class="pilcrow">¶</a>
 </li>
           <li class="compact" id="appendix-C.2-7.2">"<code>uri</code>", "<code>uri-reference</code>":
-An <span>[<a href="#RFC3986" class="xref">RFC3986</a>]</span> URI or URI Reference, respectively.<a href="#appendix-C.2-7.2" class="pilcrow">¶</a>
+An <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> URI or URI Reference, respectively.<a href="#appendix-C.2-7.2" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="appendix-C.2-7.3">"<code>uuid</code>": An <span>[<a href="#RFC4122" class="xref">RFC4122</a>]</span> UUID.<a href="#appendix-C.2-7.3" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-7.3">"<code>uuid</code>": An <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span> UUID.<a href="#appendix-C.2-7.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -6614,8 +6549,8 @@ defining map entries is unrelated to sdfProperty.<a href="#appendix-C.5-4" class
         </h3>
 <p id="appendix-C.6-1">JSO-based keywords are also used in the specification techniques of a
 number of ecosystems, but some adjustments may be required.<a href="#appendix-C.6-1" class="pilcrow">¶</a></p>
-<p id="appendix-C.6-2">E.g., <span>[<a href="#OCF" class="xref">OCF</a>]</span> is based on Swagger 2.0 which appears to be based on
-"draft-4" <span>[<a href="#I-D.wright-json-schema" class="xref">I-D.wright-json-schema</a>]</span> (also called draft-5, but semantically intended to
+<p id="appendix-C.6-2">E.g., <span>[<a href="#OCF" class="cite xref">OCF</a>]</span> is based on Swagger 2.0 which appears to be based on
+"draft-4" <span>[<a href="#I-D.wright-json-schema" class="cite xref">I-D.wright-json-schema</a>]</span> (also called draft-5, but semantically intended to
 be equivalent to draft-4).
 The "<code>exclusiveMinimum</code>" and "<code>exclusiveMaximum</code>" keywords use the
 Boolean form there, so on import to SDF their values have to be
