@@ -1645,7 +1645,7 @@ using the `sdfThing` quality.
       "sdfProperty": {
         "status": {
           "type": "boolean",
-          "description": "Indicates if the refrigerator-freezer combination is powered"
+          "description": "Indicates if the refrigerator-freezer is powered"
         }
       },
       "sdfObject": {
