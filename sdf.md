@@ -372,8 +372,10 @@ product types.
 An `sdfObject` definition for a common on/off control may be used to
 control may different kinds of Things that require on/off control.
 
-Optional qualities "minItems" and "maxItems" can be used to define
-sdfObjects as arrays.
+The presence of one or both of the optional qualities "minItems" and
+"maxItems" defines the sdfObject as an array.
+(Note: Setting "minItems" to zero and leaving out "maxItems" puts the
+minimum constraints on that array.)
 
 ### sdfProperty
 
