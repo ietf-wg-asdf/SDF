@@ -106,8 +106,8 @@ jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
    )
- ? ("sdfChoice" .feature "1.1") => named<dataqualities> ; if present, all other qualities apply to all choices
- ? "enum" => [+ text]               ; limited to text strings in SDF 1.1
+ ? ((("sdfChoice" .feature "1.1") => named<dataqualities>) ; if present, all other qualities apply to all choices
+  // ("enum" => [+ text]))               ; limited to text strings in SDF 1.1
  ? const: allowed-types                            ; should validate against type
  ? default: allowed-types                          ; should validate against type
  ; number/integer constraints
@@ -135,11 +135,11 @@ jsonschema = (
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type
        )
-     ? ("sdfChoice" .feature "1.1") => named<dataqualities>
+     ? ((("sdfChoice" .feature "1.1") => named<dataqualities>) ; if present, all other qualities apply to all choices
+     // ("enum" => [+ text]))               ; limited to text strings in SDF 1.1
      ; jso subset
      ? minimum: number
      ? maximum: number
-     ? "enum" => [+ text] ; limited to text strings in SDF 1.1
      ? format: text
      ? minLength: uint
      ? maxLength: uint
