@@ -1620,11 +1620,11 @@ using the `sdfThing` quality.
 {
   "sdfThing": {
     "outlet-strip" : {
-      "label": "An outlet Strip",
+      "label": "Outlet strip",
       "description": "Contains a number of Sockets",
       "sdfObject": {
         "socket": {
-          "label": "An array of sockets in the outlet strip",
+          "description": "An array of sockets in the outlet strip",
           "minItems": 2,
           "maxItems": 10
         }
@@ -1641,18 +1641,16 @@ using the `sdfThing` quality.
 {
   "sdfThing": {
     "refrigerator-freezer" : {
-      "label": "A refrigerator combined with a freezer",
+      "description": "A refrigerator combined with a freezer",
       "sdfProperty": {
         "status": {
           "type": "boolean",
-          "label": {
-            "Indicates if the refrigerator-freezer combination is powered"
-          }
+          "description": "Indicates if the refrigerator-freezer is powered"
         }
       },
       "sdfObject": {
         "refrigerator": {
-          "label": "A refrigerator compartment",
+          "description": "A refrigerator compartment",
           "sdfProperty": {
             "temperature": {
               "sdfRef": "#/sdfProproperty/temperature",
@@ -1669,14 +1667,14 @@ using the `sdfThing` quality.
             }
           }
         }
-      },
+      }
     }
   },
   "sdfProperty": {
     "temperature": {
-      "label": "The temperature for this compartment",
-      "type": "integer",
-      "unit": "C"
+      "description": "The temperature for this compartment",
+      "type": "number",
+      "unit": "Cel"
     }
   }
 }
