@@ -219,7 +219,7 @@ Definition:
   qualities.
 
 Declaration:
-: A reference to and a use of a definition within an enclosing
+: A definition within an enclosing
   definition, intended to create component instances within that
   enclosing definition.  Every declaration can also be used as a
   definition for reference in a different place.
