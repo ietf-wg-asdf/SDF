@@ -590,6 +590,7 @@ Qualities of the information block are shown in {{infoblockqual}}.
 | version   | string | no       | The incremental version of the definition                   |
 | copyright | string | no       | Link to text or embedded text containing a copyright notice |
 | license   | string | no       | Link to text or embedded text containing license terms      |
+| $comment  | string | no       | Source code comments only, no semantics                     |
 {: #infoblockqual title="Qualities of the Information Block"}
 
 The version quality is used to indicate version information about the set of definitions in the file.
