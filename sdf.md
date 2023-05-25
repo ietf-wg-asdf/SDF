@@ -597,7 +597,7 @@ This is easily achieved by following the convention to start the version with an
 This specification does not give a strict definition for the format of the version string but each using system or organization should define internal structure and semantics to the level needed for their use.
 If no further details are provided, a `date-time` or `full-date` in this field can be assumed to indicate the latest update time of the definitions in the file.
 
-The modified quality can be used with a value using {{RFC3339}} `date-time` or `full-date` format to express time of the latest modification of the definitions.
+The modified quality can be used with a value using {{RFC3339}} `date-time` (with `Z` for time-zone) or `full-date` format to express time of the latest revision of the definitions.
 
 The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an {{SPDX}} license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)
