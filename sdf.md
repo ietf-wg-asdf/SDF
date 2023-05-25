@@ -1357,6 +1357,23 @@ Fragment identifier considerations:
 : A JSON Pointer fragment identifier may be used, as defined in
   {{Section 6 of RFC6901}}.
 
+Additional information:
+: Magic number(s):
+  : n/a
+
+  File extension(s):
+  : .sdf.json
+
+  Windows Clipboard Name:
+  : "Semantic Definition Format (SDF) for Data and Interactions of Things"
+
+  Macintosh file type code(s):
+  : n/a
+
+  Macintosh Universal Type Identifier code:
+  : org.ietf.sdf-json<br>
+    conforms to public.text
+
 Person & email address to contact for further information:
 : ASDF WG mailing list (asdf@ietf.org),
   or IETF Applications and Real-Time Area (art@ietf.org)
