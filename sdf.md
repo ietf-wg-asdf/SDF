@@ -219,7 +219,7 @@ Definition:
   qualities.
 
 Declaration:
-: A reference to and a use of a definition within an enclosing
+: A definition within an enclosing
   definition, intended to create component instances within that
   enclosing definition.  Every declaration can also be used as a
   definition for reference in a different place.
@@ -372,8 +372,10 @@ product types.
 An `sdfObject` definition for a common on/off control may be used to
 control may different kinds of Things that require on/off control.
 
-Optional qualities "minItems" and "maxItems" can be used to define
-sdfObjects as arrays.
+The presence of one or both of the optional qualities "minItems" and
+"maxItems" defines the sdfObject as an array.
+(Note: Setting "minItems" to zero and leaving out "maxItems" puts the
+minimum constraints on that array.)
 
 ### sdfProperty
 
@@ -589,6 +591,7 @@ Qualities of the information block are shown in {{infoblockqual}}.
 | modified  | string | no       | Time of the latest modification                             |
 | copyright | string | no       | Link to text or embedded text containing a copyright notice |
 | license   | string | no       | Link to text or embedded text containing license terms      |
+| $comment  | string | no       | Source code comments only, no semantics                     |
 {: #infoblockqual title="Qualities of the Information Block"}
 
 The version quality is used to indicate version information about the set of definitions in the file.
@@ -1358,6 +1361,23 @@ Fragment identifier considerations:
 : A JSON Pointer fragment identifier may be used, as defined in
   {{Section 6 of RFC6901}}.
 
+Additional information:
+: Magic number(s):
+  : n/a
+
+  File extension(s):
+  : .sdf.json
+
+  Windows Clipboard Name:
+  : "Semantic Definition Format (SDF) for Data and Interactions of Things"
+
+  Macintosh file type code(s):
+  : n/a
+
+  Macintosh Universal Type Identifier code:
+  : org.ietf.sdf-json<br>
+    conforms to public.text
+
 Person & email address to contact for further information:
 : ASDF WG mailing list (asdf@ietf.org),
   or IETF Applications and Real-Time Area (art@ietf.org)
@@ -1623,11 +1643,11 @@ using the `sdfThing` quality.
 {
   "sdfThing": {
     "outlet-strip" : {
-      "label": "An outlet Strip",
+      "label": "Outlet strip",
       "description": "Contains a number of Sockets",
       "sdfObject": {
         "socket": {
-          "label": "An array of sockets in the outlet strip",
+          "description": "An array of sockets in the outlet strip",
           "minItems": 2,
           "maxItems": 10
         }
@@ -1644,18 +1664,16 @@ using the `sdfThing` quality.
 {
   "sdfThing": {
     "refrigerator-freezer" : {
-      "label": "A refrigerator combined with a freezer",
+      "description": "A refrigerator combined with a freezer",
       "sdfProperty": {
         "status": {
           "type": "boolean",
-          "label": {
-            "Indicates if the refrigerator-freezer combination is powered"
-          }
+          "description": "Indicates if the refrigerator-freezer is powered"
         }
       },
       "sdfObject": {
         "refrigerator": {
-          "label": "A refrigerator compartment",
+          "description": "A refrigerator compartment",
           "sdfProperty": {
             "temperature": {
               "sdfRef": "#/sdfProproperty/temperature",
@@ -1672,14 +1690,14 @@ using the `sdfThing` quality.
             }
           }
         }
-      },
+      }
     }
   },
   "sdfProperty": {
     "temperature": {
-      "label": "The temperature for this compartment",
-      "type": "integer",
-      "unit": "C"
+      "description": "The temperature for this compartment",
+      "type": "number",
+      "unit": "Cel"
     }
   }
 }

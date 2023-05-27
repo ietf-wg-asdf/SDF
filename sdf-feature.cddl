@@ -16,6 +16,7 @@ sdfinfo = {
  ? copyright: text
  ? license: text
  ? modified: modified-date-time
+ optional-comment
  EXTENSION-POINT<"info-ext">
 }
 
@@ -27,10 +28,14 @@ EXTENSION-POINT<f> = ( * (text .feature f) => any ) ; only used in framework syn
 sdf-pointer = text ; .regexp curie-regexp -- TO DO!
 pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
 
+optional-comment = (
+ ? $comment: text               ; source code comments only, no semantics
+)
+
 commonqualities = (
  ? description: text            ; long text (no constraints)
  ? label: text                  ; short text (no constraints); default to key
- ? $comment: text               ; source code comments only, no semantics
+ optional-comment
  ? sdfRef: sdf-pointer
  ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
 )
@@ -151,7 +156,7 @@ jsonschema = (
             ;;; let's find out what we actually need
      ? sdfRef: sdf-pointer          ; import limited to the subset that we allow here...
      ? description: text            ; long text (no constraints)
-     ? $comment: text               ; source code comments only, no semantics
+     optional-comment
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type

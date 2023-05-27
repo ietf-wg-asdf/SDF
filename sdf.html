@@ -21,27 +21,24 @@ version (-00) of this document; version (-05) was designated as an
 the ASDF WG (2021-03-11).
 The present version (-14) collects smaller changes up to 2023-03-26. 
     " name="description">
-<meta content="xml2rfc 3.16.0" name="generator">
+<meta content="xml2rfc 3.17.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.16.0
-    Python 3.9.16
+  xml2rfc 3.17.1
+    Python 3.11.2
     appdirs 1.4.4
-    ConfigArgParse 1.2.3
-    google-i18n-address 2.4.0
-    html5lib 1.1
+    ConfigArgParse 1.5.3
+    google-i18n-address 2.5.2
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.0
-    MarkupSafe 2.1.1
+    lxml 4.9.2
     pycountry 22.3.5
-    PyYAML 5.4.1
-    requests 2.25.1
+    PyYAML 6.0
+    requests 2.28.2
     setuptools 65.6.3
-    six 1.15.0
-    wcwidth 0.2.5
-    weasyprint 56.1
+    six 1.16.0
+    wcwidth 0.2.6
 -->
 <link href="sdf.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -71,7 +68,6 @@ The present version (-14) collects smaller changes up to 2023-03-26.
 
 @viewport {
   zoom: 1.0;
-  width: extend-to-zoom;
 }
 @-ms-viewport {
   width: extend-to-zoom;
@@ -267,7 +263,8 @@ a[href]:hover {
   background-color: #f2f2f2;
 }
 figcaption a[href],
-a[href].selfRef {
+a[href].selfRef,
+.iref + a[href].internal {
   color: #222;
 }
 /* XXX probably not this:
@@ -1217,11 +1214,11 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OneDM SDF</td>
-<td class="right">March 2023</td>
+<td class="right">May 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 21 September 2023</td>
+<td class="center">Expires 26 November 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1234,12 +1231,12 @@ li > p:last-of-type:only-child {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-20" class="published">20 March 2023</time>
+<time datetime="2023-05-25" class="published">25 May 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-21">21 September 2023</time></dd>
+<dd class="expires"><time datetime="2023-11-26">26 November 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1305,7 +1302,7 @@ The present version (-14) collects smaller changes up to 2023-03-26.</span><a hr
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 November 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1690,7 +1687,7 @@ qualities.<a href="#section-1.1-1.28.1" class="pilcrow">¶</a></p>
           <dd class="break"></dd>
 <dt id="section-1.1-1.29">Declaration:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.30">
-            <p id="section-1.1-1.30.1">A reference to and a use of a definition within an enclosing
+            <p id="section-1.1-1.30.1">A definition within an enclosing
 definition, intended to create component instances within that
 enclosing definition.  Every declaration can also be used as a
 definition for reference in a different place.<a href="#section-1.1-1.30.1" class="pilcrow">¶</a></p>
@@ -1980,8 +1977,10 @@ will enable interoperable functionality to be configured for diverse
 product types.
 An <code>sdfObject</code> definition for a common on/off control may be used to
 control may different kinds of Things that require on/off control.<a href="#section-2.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-4">Optional qualities "minItems" and "maxItems" can be used to define
-sdfObjects as arrays.<a href="#section-2.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-2.2.1-4">The presence of one or both of the optional qualities "minItems" and
+"maxItems" defines the sdfObject as an array.
+(Note: Setting "minItems" to zero and leaving out "maxItems" puts the
+minimum constraints on that array.)<a href="#section-2.2.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdfproperty">
@@ -2255,6 +2254,12 @@ value is a JSON map in turn, with a set of entries that represent qualities that
               <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">Link to text or embedded text containing license terms</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">$comment</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">no</td>
+              <td class="text-left" rowspan="1" colspan="1">Source code comments only, no semantics</td>
             </tr>
           </tbody>
         </table>
@@ -3469,30 +3474,62 @@ model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a
 <span><a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a> of [<a href="#RFC6901" class="cite xref">RFC6901</a>]</span>.<a href="#section-7.1-4.20.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-7.1-4.21">Person &amp; email address to contact for further information:</dt>
+<dt id="section-7.1-4.21">Additional information:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-4.22">
-            <p id="section-7.1-4.22.1">ASDF WG mailing list (asdf@ietf.org),
-or IETF Applications and Real-Time Area (art@ietf.org)<a href="#section-7.1-4.22.1" class="pilcrow">¶</a></p>
+            <span class="break"></span><dl class="dlParallel" id="section-7.1-4.22.1">
+              <dt id="section-7.1-4.22.1.1">Magic number(s):</dt>
+              <dd style="margin-left: 1.5em" id="section-7.1-4.22.1.2">
+                <p id="section-7.1-4.22.1.2.1">n/a<a href="#section-7.1-4.22.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+              <dd class="break"></dd>
+<dt id="section-7.1-4.22.1.3">File extension(s):</dt>
+              <dd style="margin-left: 1.5em" id="section-7.1-4.22.1.4">
+                <p id="section-7.1-4.22.1.4.1">.sdf.json<a href="#section-7.1-4.22.1.4.1" class="pilcrow">¶</a></p>
+</dd>
+              <dd class="break"></dd>
+<dt id="section-7.1-4.22.1.5">Windows Clipboard Name:</dt>
+              <dd style="margin-left: 1.5em" id="section-7.1-4.22.1.6">
+                <p id="section-7.1-4.22.1.6.1">"Semantic Definition Format (SDF) for Data and Interactions of Things"<a href="#section-7.1-4.22.1.6.1" class="pilcrow">¶</a></p>
+</dd>
+              <dd class="break"></dd>
+<dt id="section-7.1-4.22.1.7">Macintosh file type code(s):</dt>
+              <dd style="margin-left: 1.5em" id="section-7.1-4.22.1.8">
+                <p id="section-7.1-4.22.1.8.1">n/a<a href="#section-7.1-4.22.1.8.1" class="pilcrow">¶</a></p>
+</dd>
+              <dd class="break"></dd>
+<dt id="section-7.1-4.22.1.9">Macintosh Universal Type Identifier code:</dt>
+              <dd style="margin-left: 1.5em" id="section-7.1-4.22.1.10">
+                <p id="section-7.1-4.22.1.10.1">org.ietf.sdf-json<br>
+conforms to public.text<a href="#section-7.1-4.22.1.10.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
 </dd>
           <dd class="break"></dd>
-<dt id="section-7.1-4.23">Intended usage:</dt>
+<dt id="section-7.1-4.23">Person &amp; email address to contact for further information:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-4.24">
-            <p id="section-7.1-4.24.1">COMMON<a href="#section-7.1-4.24.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-4.24.1">ASDF WG mailing list (asdf@ietf.org),
+or IETF Applications and Real-Time Area (art@ietf.org)<a href="#section-7.1-4.24.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-7.1-4.25">Restrictions on usage:</dt>
+<dt id="section-7.1-4.25">Intended usage:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-4.26">
-            <p id="section-7.1-4.26.1">none<a href="#section-7.1-4.26.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-4.26.1">COMMON<a href="#section-7.1-4.26.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-7.1-4.27">Author/Change controller:</dt>
+<dt id="section-7.1-4.27">Restrictions on usage:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-4.28">
-            <p id="section-7.1-4.28.1">IETF<a href="#section-7.1-4.28.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-4.28.1">none<a href="#section-7.1-4.28.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-7.1-4.29">Provisional registration:</dt>
+<dt id="section-7.1-4.29">Author/Change controller:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-4.30">
-            <p id="section-7.1-4.30.1">no<a href="#section-7.1-4.30.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-4.30.1">IETF<a href="#section-7.1-4.30.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-7.1-4.31">Provisional registration:</dt>
+          <dd style="margin-left: 1.5em" id="section-7.1-4.32">
+            <p id="section-7.1-4.32.1">no<a href="#section-7.1-4.32.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -3725,6 +3762,7 @@ sdfinfo = {
  ? version: text
  ? copyright: text
  ? license: text
+ optional-comment
  EXTENSION-POINT&lt;"info-ext"&gt;
 }
 
@@ -3736,10 +3774,14 @@ EXTENSION-POINT&lt;f&gt; = ( * (text .feature f) =&gt; any ) ; only used in fram
 sdf-pointer = text ; .regexp curie-regexp -- TO DO!
 pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
 
+optional-comment = (
+ ? $comment: text               ; source code comments only, no semantics
+)
+
 commonqualities = (
  ? description: text            ; long text (no constraints)
  ? label: text                  ; short text (no constraints); default to key
- ? $comment: text               ; source code comments only, no semantics
+ optional-comment
  ? sdfRef: sdf-pointer
  ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
 )
@@ -3860,7 +3902,7 @@ jsonschema = (
             ;;; let's find out what we actually need
      ? sdfRef: sdf-pointer          ; import limited to the subset that we allow here...
      ? description: text            ; long text (no constraints)
-     ? $comment: text               ; source code comments only, no semantics
+     optional-comment
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type
@@ -3895,8 +3937,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 <div class="breakable lang-jso.json sourcecode" id="appendix-B-3">
 <pre>
  {
--  "title": "sdf-validation.cddl -- Generated: 2023-03-20T13:34:48Z",
-+  "title": "sdf-framework.cddl -- Generated: 2023-03-20T13:34:49Z",
+-  "title": "sdf-validation.cddl -- Generated: 2023-05-25T15:52:25Z",
++  "title": "sdf-framework.cddl -- Generated: 2023-05-25T15:52:28Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
@@ -3947,6 +3989,9 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
      "sdfinfo": {
        "type": "object",
        "properties": {
+         "$comment": {
+           "type": "string"
+         },
          "title": {
            "type": "string"
          },
@@ -3985,13 +4030,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          "sdfData": {
            "$ref": "#/definitions/sdfData-sdfChoice-properties-"
          },
+         "$comment": {
+           "type": "string"
+         },
          "description": {
            "type": "string"
          },
          "label": {
-           "type": "string"
-         },
-         "$comment": {
            "type": "string"
          },
          "sdfRef": {
@@ -4047,13 +4092,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          "sdfData": {
            "$ref": "#/definitions/sdfData-sdfChoice-properties-"
          },
+         "$comment": {
+           "type": "string"
+         },
          "description": {
            "type": "string"
          },
          "label": {
-           "type": "string"
-         },
-         "$comment": {
            "type": "string"
          },
          "sdfRef": {
@@ -4126,13 +4171,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "items": {
                "$ref": "#/definitions/items-"
              },
+             "$comment": {
+               "type": "string"
+             },
              "description": {
                "type": "string"
              },
              "label": {
-               "type": "string"
-             },
-             "$comment": {
                "type": "string"
              },
              "sdfRef": {
@@ -4239,13 +4284,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "items": {
                "$ref": "#/definitions/items-"
              },
+             "$comment": {
+               "type": "string"
+             },
              "description": {
                "type": "string"
              },
              "label": {
-               "type": "string"
-             },
-             "$comment": {
                "type": "string"
              },
              "sdfRef": {
@@ -4361,13 +4406,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "items": {
                "$ref": "#/definitions/items-"
              },
+             "$comment": {
+               "type": "string"
+             },
              "description": {
                "type": "string"
              },
              "label": {
-               "type": "string"
-             },
-             "$comment": {
                "type": "string"
              },
              "sdfRef": {
@@ -4485,13 +4530,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "items": {
                "$ref": "#/definitions/items-"
              },
+             "$comment": {
+               "type": "string"
+             },
              "description": {
                "type": "string"
              },
              "label": {
-               "type": "string"
-             },
-             "$comment": {
                "type": "string"
              },
              "sdfRef": {
@@ -4602,13 +4647,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "items": {
                "$ref": "#/definitions/items-"
              },
+             "$comment": {
+               "type": "string"
+             },
              "description": {
                "type": "string"
              },
              "label": {
-               "type": "string"
-             },
-             "$comment": {
                "type": "string"
              },
              "sdfRef": {
@@ -4716,13 +4761,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "items": {
                "$ref": "#/definitions/items-"
              },
+             "$comment": {
+               "type": "string"
+             },
              "description": {
                "type": "string"
              },
              "label": {
-               "type": "string"
-             },
-             "$comment": {
                "type": "string"
              },
              "sdfRef": {
@@ -4843,13 +4888,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "items": {
                "$ref": "#/definitions/items-"
              },
+             "$comment": {
+               "type": "string"
+             },
              "description": {
                "type": "string"
              },
              "label": {
-               "type": "string"
-             },
-             "$comment": {
                "type": "string"
              },
              "sdfRef": {
@@ -4947,13 +4992,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +            "items": {
 +              "$ref": "#/definitions/items-"
 +            },
++            "$comment": {
++              "type": "string"
++            },
 +            "description": {
 +              "type": "string"
 +            },
 +            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
 +              "type": "string"
 +            },
 +            "sdfRef": {
@@ -5058,13 +5103,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "items": {
                "$ref": "#/definitions/items-"
              },
+             "$comment": {
+               "type": "string"
+             },
              "description": {
                "type": "string"
              },
              "label": {
-               "type": "string"
-             },
-             "$comment": {
                "type": "string"
              },
              "sdfRef": {
@@ -5178,13 +5223,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +            "items": {
 +              "$ref": "#/definitions/items-"
 +            },
++            "$comment": {
++              "type": "string"
++            },
 +            "description": {
 +              "type": "string"
 +            },
 +            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
 +              "type": "string"
 +            },
 +            "sdfRef": {
@@ -5278,13 +5323,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +            "items": {
 +              "$ref": "#/definitions/items-"
 +            },
++            "$comment": {
++              "type": "string"
++            },
 +            "description": {
 +              "type": "string"
 +            },
 +            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
 +              "type": "string"
 +            },
 +            "sdfRef": {
@@ -5375,13 +5420,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +            "items": {
 +              "$ref": "#/definitions/items-"
 +            },
++            "$comment": {
++              "type": "string"
++            },
 +            "description": {
 +              "type": "string"
 +            },
 +            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
 +              "type": "string"
 +            },
 +            "sdfRef": {
@@ -5468,13 +5513,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
      "actionqualities": {
        "type": "object",
        "properties": {
+         "$comment": {
+           "type": "string"
+         },
          "description": {
            "type": "string"
          },
          "label": {
-           "type": "string"
-         },
-         "$comment": {
            "type": "string"
          },
          "sdfRef": {
@@ -5514,13 +5559,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
      "eventqualities": {
        "type": "object",
        "properties": {
+         "$comment": {
+           "type": "string"
+         },
          "description": {
            "type": "string"
          },
          "label": {
-           "type": "string"
-         },
-         "$comment": {
            "type": "string"
          },
          "sdfRef": {
@@ -5541,280 +5586,36 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +      }
      },
      "items-": {
-       "anyOf": [
-         {
-           "type": "object",
-           "properties": {
-             "sdfChoice": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "type": {
-               "type": "string",
-               "enum": [
-                 "number",
-                 "string",
-                 "boolean",
-                 "integer"
-               ]
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "description": {
-               "type": "string"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "format": {
-               "type": "string"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
+       "type": "object",
+       "properties": {
+         "$comment": {
+           "type": "string"
          },
-         {
-           "type": "object",
-           "properties": {
-             "enum": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "type": {
-               "type": "string",
-               "enum": [
-                 "number",
-                 "string",
-                 "boolean",
-                 "integer"
-               ]
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "description": {
-               "type": "string"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "format": {
-               "type": "string"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
+         "sdfRef": {
+           "$ref": "#/definitions/sdf-pointer"
          },
-         {
-           "type": "object",
-           "properties": {
-             "sdfChoice": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "type": {
-               "type": "string",
-               "const": "object"
-             },
-             "required": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "properties": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "description": {
-               "type": "string"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "format": {
-               "type": "string"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
+         "description": {
+           "type": "string"
          },
-         {
-           "type": "object",
-           "properties": {
-             "enum": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "type": {
-               "type": "string",
-               "const": "object"
-             },
-             "required": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "properties": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "description": {
-               "type": "string"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "format": {
-               "type": "string"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
-+        },
-+        {
-+          "type": "object",
-+          "properties": {
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "type": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "format": {
-+              "type": "string"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            }
-+          },
-+          "additionalProperties": {
-+          }
-+        },
-+        {
-+          "type": "object",
-+          "properties": {
-+            "enum": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
-+            "type": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "format": {
-+              "type": "string"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            }
-+          },
-+          "additionalProperties": {
-+          }
+         "minimum": {
+           "type": "number"
+         },
+         "maximum": {
+           "type": "number"
+         },
+         "format": {
+           "type": "string"
+         },
+         "minLength": {
+           "$ref": "#/definitions/uint"
+         },
+         "maxLength": {
+           "$ref": "#/definitions/uint"
          }
-       ]
+       },
+-      "additionalProperties": false
++      "additionalProperties": {
++      }
      },
      "format-": {
 -      "type": "string",
@@ -5853,8 +5654,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +        {
 +          "type": "string"
 +        }
-+      ]
-+    },
+       ]
+     },
 +    "subtype-sdfType-": {
 +      "anyOf": [
 +        {
@@ -5868,8 +5669,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +        {
 +          "type": "string"
 +        }
-       ]
-     },
++      ]
++    },
 +    "enum-": {
 +      "type": "array",
 +      "items": {
@@ -5893,12 +5694,6 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          "array"
        ]
      },
-     "sdfProperty-": {
-       "type": "object",
-       "additionalProperties": {
-         "$ref": "#/definitions/propertyqualities"
-       }
-     },
      "sdfEvent-": {
        "type": "object",
        "additionalProperties": {
@@ -5909,6 +5704,12 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
        "type": "object",
        "additionalProperties": {
          "$ref": "#/definitions/actionqualities"
+       }
+     },
+     "sdfProperty-": {
+       "type": "object",
+       "additionalProperties": {
+         "$ref": "#/definitions/propertyqualities"
        }
 -    },
 -    "sdfType-": {
@@ -6113,11 +5914,11 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
 {
   "sdfThing": {
     "outlet-strip" : {
-      "label": "An outlet Strip",
+      "label": "Outlet strip",
       "description": "Contains a number of Sockets",
       "sdfObject": {
         "socket": {
-          "label": "An array of sockets in the outlet strip",
+          "description": "An array of sockets in the outlet strip",
           "minItems": 2,
           "maxItems": 10
         }
@@ -6143,18 +5944,16 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
 {
   "sdfThing": {
     "refrigerator-freezer" : {
-      "label": "A refrigerator combined with a freezer",
+      "description": "A refrigerator combined with a freezer",
       "sdfProperty": {
         "status": {
           "type": "boolean",
-          "label": {
-            "Indicates if the refrigerator-freezer combination is powered"
-          }
+          "description": "Indicates if the refrigerator-freezer is powered"
         }
       },
       "sdfObject": {
         "refrigerator": {
-          "label": "A refrigerator compartment",
+          "description": "A refrigerator compartment",
           "sdfProperty": {
             "temperature": {
               "sdfRef": "#/sdfProproperty/temperature",
@@ -6171,14 +5970,14 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
             }
           }
         }
-      },
+      }
     }
   },
   "sdfProperty": {
     "temperature": {
-      "label": "The temperature for this compartment",
-      "type": "integer",
-      "unit": "C"
+      "description": "The temperature for this compartment",
+      "type": "number",
+      "unit": "Cel"
     }
   }
 }
