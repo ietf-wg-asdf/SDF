@@ -588,6 +588,7 @@ Qualities of the information block are shown in {{infoblockqual}}.
 |-----------|--------|----------|-------------------------------------------------------------|
 | title     | string | no       | A short summary to be displayed in search results, etc.     |
 | version   | string | no       | The incremental version of the definition                   |
+| modified  | string | no       | Time of the latest modification                             |
 | copyright | string | no       | Link to text or embedded text containing a copyright notice |
 | license   | string | no       | Link to text or embedded text containing license terms      |
 | $comment  | string | no       | Source code comments only, no semantics                     |
@@ -598,6 +599,8 @@ The version is RECOMMENDED to be lexicographically increasing over the life of a
 This is easily achieved by following the convention to start the version with an {{RFC3339}} `date-time` or, if new versions are generated less frequently than once a day, just the `full-date` (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see {{example1}} for an example).
 This specification does not give a strict definition for the format of the version string but each using system or organization should define internal structure and semantics to the level needed for their use.
 If no further details are provided, a `date-time` or `full-date` in this field can be assumed to indicate the latest update time of the definitions in the file.
+
+The modified quality can be used with a value using {{RFC3339}} `date-time` (with `Z` for time-zone) or `full-date` format to express time of the latest revision of the definitions.
 
 The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an {{SPDX}} license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)
