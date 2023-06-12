@@ -72,6 +72,9 @@ normative:
   RFC8610: cddl
   RFC8949: cbor
   RFC9193: data-ct
+  RFC8126:
+    -: reg
+    display: BCP26
   W3C.NOTE-curie-20101216: curie
   RFC0020: ascii
   SPDX:
@@ -103,6 +106,14 @@ informative:
     date: 2020-06
     seriesinfo:
       ECMA: Standard ECMA-262, 11th Edition
+  CamelCase:
+    target: http://wiki.c2.com/?CamelCase
+    title: Camel Case
+    date: '2014-12-18'
+  KebabCase:
+    target: http://wiki.c2.com/?KebabCase
+    title: Kebab Case
+    date: '2014-08-29'
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -126,7 +137,7 @@ entity:
     version (-00) of this document; version (-05) was designated as an
     *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
     the ASDF WG (2021-03-11).
-    The present version (-14) collects smaller changes up to 2023-03-26.
+    The present version (-14) collects smaller changes up to 2023-06-12.
 
 --- middle
 
@@ -544,22 +555,40 @@ As Quality Names and Given Names roughly alternate in a path into the
 model, the JSON pointer part of the hierarchical name also alternates
 between Quality Names and Given Names.
 
-### Extensibility of Given Names and Quality Names
+### Extensibility of Given Names and Quality Names {#gnqn}
 
 In SDF, both Quality Names and Given Names are *extension points*.
 This is more obvious for Quality Names: Extending SDF is mostly done
 by defining additional qualities.  To enable non-conflicting third
-party extensions to SDF, an extension is planned that will allow the
-use of qualified names (names with an embedded colon) as Quality
-Names.
-Until that extension is defined, Quality Names with (one or more)
-embedded colons are reserved and MUST NOT be used in an SDF model.
+party extensions to SDF, qualified names (names with an embedded
+colon) can be used as Quality Names.
+
+A nonqualified Quality Name is composed of ASCII letters, digits, and
+`$` signs, starting with a lower case letter or a `$` sign (i.e.,
+using a pattern of "⁠`[a-z$][A-Za-z$0-9]*`").
+Names with `$` signs are intended to be used for functions separate
+from most other names; for instance, in this specification `$comment`
+is used for the comment quality, the presence or absence of which does
+not change the meaning of the SDF model.
+Names that are composed of multiple English words can use the
+"lowerCamelCase" convention {{CamelCase}} for indicating the word
+boundaries; no other use is intended for upper case letters in quality
+names.
+
+A qualified Quality Name is composed of a Quality Name Prefix, a `:`
+(colon) character, and a nonqualified Quality Name.
+Quality Name Prefixes are registered in the "Quality Name Prefixes"
+sub-registry in the "SDF Parameters" registry ({{qnp}}); they are
+composed of lower case ASCII letters and digits, starting with a lower
+case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
 Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
 qualified names for Given Names.
 So, until that extension is defined, Given Names with (one or more)
 embedded colons are reserved and MUST NOT be used in an SDF model.
+
+All names in SDF are case-sensitive.
 
 # SDF structure
 
@@ -988,14 +1017,21 @@ present specification.
 
 SDF defines a number of basic types beyond those provided by JSON or
 JSO.  These types are identified by the `sdfType` quality, which
-is a text string from a set of type names defined by SDF.
+is a text string from a set of type names defined by the  "`sdfType`
+values" sub-registry in the "SDF Parameters" registry
+({{sdftype-values}}).
+The `sdfType` name is composed of lower case ASCII letters, digits,
+and `-` (ASCII hyphen/minus) characters, starting
+with a lower case ASCII letter (i.e., using a pattern of
+"⁠`[a-z][-a-z0-9]*`"), typically employing KebabCase for
+names constructed out of multiple words {{KebabCase}}.
 
 To aid interworking with {{-jso}} implementations, it is RECOMMENDED
 that `sdfType` is always used in conjunction with the `type` quality
 inherited from {{-jso}}, in such a way as to yield a common
 representation of the type's values in JSON.
 
-Values for `sdfType` that are defined in SDF 1.1 are shown in
+Values for `sdfType` that are defined in this specification are shown in
 {{sdftype1}}.
 This table also gives a description of the semantics of the sdfType,
 the conventional value for `type` to be used with the `sdfType` value,
@@ -1009,8 +1045,8 @@ and a conventional JSON representation for values of the type.
 
 (1) Note that the definition of `unix-time` does not imply the
 capability to represent points in time that fall on leap seconds.
-More date/time-related sdfTypes are likely to be added in future versions
-of this specification.
+More date/time-related sdfTypes are likely to be added in the sdfType
+value registry.
 
 In SDF 1.0, a similar concept was called `subtype`.
 
@@ -1318,6 +1354,11 @@ The qualities of sdfThing are shown in {{sdfthingqual}}.
 IANA Considerations {#iana}
 ===================
 
+
+[^replace-xxxx]
+
+[^replace-xxxx]: RFC Ed.: throughout this section, please replace RFC XXXX with this RFC number, and remove this note.
+
 Media Type
 -----------
 
@@ -1325,9 +1366,7 @@ IANA is requested to add the following Media-Type to the "Media Types" registry.
 
 | Name     | Template             | Reference                 |
 | sdf+json | application/sdf+json | RFC XXXX, {{media-type}}  |
-{: align="left"}
-
-// RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
+{: align="left" title="Media Type Registration for SDF"}
 
 {:compact}
 Type name:
@@ -1426,8 +1465,84 @@ Index value:
 Registries
 ----------
 
-(TBD: After future additions, check if we need any.)
+IANA is requested to create an "SDF Parameters" registry, with the
+sub-registries defined in this Section.
 
+### Quality Name Prefixes {#qnp}
+
+IANA is requested to create a "Quality Name Prefixes" sub-registry in
+the "SDF Parameters" registry, with the following template:
+
+Prefix:
+: A name composed of lower case ASCII letters and digits, starting
+  with a lower case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
+
+Contact:
+: A contact point for the organization that assigns quality names with
+  this prefix.
+
+Quality Name Prefixes are intended to be registered by organizations
+that intend to define quality names constructed with an
+organization-specifix prefix ({{gnqn}}).
+
+The registration policy is Expert Review as per {{Section 4.5 of -reg}}.
+The instructions to the Expert are to ascertain that the organization
+will handle quality names constructed using their prefix in a way that
+roughly achieves the objectives for an IANA registry that support
+interoperability of SDF models employing these quality names,
+including:
+
+* Stability, "stable and permanent";
+* Transparency, "readily available", "in sufficient detail" ({{Section
+  4.6 of -reg}}).
+
+The Expert will take into account that other organizations operate in
+different ways than the IETF, and that as a result some of these
+overall objectives will be achieved in a different way and to a
+different level of comfort.
+
+The "Quality Name Prefixes" sub-registry starts out empty.
+
+### sdfType Values
+
+IANA is requested to create a "sdfType values" sub-registry in
+the "SDF Parameters" registry, with the following template:
+
+Name:
+: A name composed of lower case ASCII letters, digits and `-` (ASCII
+  hyphen/minus) characters, starting with a lower case ASCII letter
+  (i.e., using a pattern of "⁠`[a-z][-a-z0-9]*`").
+
+Description:
+: A short description of the information model level structure and semantics
+
+type:
+: The value of the quality "type" to be used with this sdfType
+
+JSON Representation
+: A short description of a JSON representation that can be used for
+  this sdfType.  This MUST be consistent with the type.
+
+Reference:
+: A more detailed specification of meaning and use of sdfType.
+
+sdfType values are intended to be registered to enable modeling additional
+SDF-specific types (see {{sdftype}}).
+
+The registration policy is Specification Required as per {{Section 4.6 of
+-reg}}.  The instructions to the Expert are to ascertain that the
+specification provides enough detail to enable interoperability
+between implementations of the sdfType being registered, and that
+names are chosen with enough specificity that ecosystem-specific
+sdfTypes will not be confused with more generally applicable ones.
+
+The initial set of registrations is described in {{sdftype-r}}.
+
+| Name        | Description                      | type   | JSON Representation       | Reference                    |
+|-------------+----------------------------------+--------+---------------------------+------------------------------|
+| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949}} |
+| unix-time   | A point in civil time            | number | POSIX time                | {{Section 3.4.2 of RFC8949}}   |
+{: #sdftype-r title="Initial set of sdfType values"}
 
 Security Considerations {#seccons}
 =======================
