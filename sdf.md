@@ -1442,9 +1442,10 @@ Some wider issues are discussed in {{-seccons}}.
 # Formal Syntax of SDF {#syntax}
 
 This appendix describes the syntax of SDF using CDDL {{-cddl}}.  Note
-that this appendix was derived from Ari Keranen's "alt-schema" and
-Michael Koster's "schema", with a view of covering the syntax that is
-currently in use at the One Data Model `playground` repository.
+that this appendix was derived from {{{Ari Keränen}}}'s "alt-schema" and
+{{{Michael Koster}}}'s "schema", with a view of covering the syntax that
+was in use at the time of writing in the One Data Model `playground`
+repository.
 
 This appendix shows the framework syntax only, i.e., a syntax with liberal extension points.
 Since this syntax is nearly useless in finding typos in an SDF
@@ -1560,7 +1561,7 @@ them to:
 * and anchors (beginning-of-input `^` and end-of-input `$`).
 
 Note that this subset is somewhat similar to the subset introduced by
-iregexps {{?I-D.bormann-jsonpath-iregexp}}, which however are anchored
+iregexps {{?I-D.ietf-jsonpath-iregexp}}, which however are anchored
 regular expressions, and which include certain backslash escapes for
 characters and character classes.
 
