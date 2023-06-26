@@ -1,5 +1,5 @@
 {
-  "title": "sdf-framework.cddl -- Generated: 2023-05-25T15:52:28Z",
+  "title": "sdf-framework.cddl -- Generated: 2023-06-26T08:59:49Z",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/sdf-syntax",
   "definitions": {
@@ -63,10 +63,16 @@
         },
         "license": {
           "type": "string"
+        },
+        "modified": {
+          "$ref": "#/definitions/modified-date-time"
         }
       },
       "additionalProperties": {
       }
+    },
+    "modified-date-time": {
+      "type": "string"
     },
     "thingqualities": {
       "type": "object",
@@ -259,10 +265,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -365,10 +371,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -485,10 +491,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -602,10 +608,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -711,10 +717,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -817,10 +823,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -930,10 +936,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -1027,10 +1033,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -1138,10 +1144,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -1246,10 +1252,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -1346,10 +1352,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -1443,10 +1449,10 @@
               "type": "boolean"
             },
             "subtype": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/subtype-"
             },
             "sdfType": {
-              "$ref": "#/definitions/subtype-sdfType-"
+              "$ref": "#/definitions/sdfType-"
             },
             "contentFormat": {
               "type": "string"
@@ -1501,6 +1507,10 @@
     "uint": {
       "type": "integer",
       "minimum": 0
+    },
+    "sdftype-name": {
+      "type": "string",
+      "pattern": "^[a-z][\\-a-z0-9]*$"
     },
     "actionqualities": {
       "type": "object",
@@ -1636,7 +1646,22 @@
         }
       ]
     },
-    "subtype-sdfType-": {
+    "sdfType-": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "byte-string"
+        },
+        {
+          "type": "string",
+          "const": "unix-time"
+        },
+        {
+          "$ref": "#/definitions/sdftype-name"
+        }
+      ]
+    },
+    "subtype-": {
       "anyOf": [
         {
           "type": "string",
