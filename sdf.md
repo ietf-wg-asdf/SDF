@@ -635,7 +635,8 @@ The modified quality can be used with a value using {{RFC3339}} `date-time` (wit
 The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an {{SPDX}} license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)
 
-The features quality can be used to list names of critical (i.e., can not be safely ignored) SDF extension features that need to be understood for the definitions to be properly processed. Extension feature names will be specified in extension documents. 
+The `features` quality can be used to list names of critical (i.e., cannot be safely ignored) SDF extension features that need to be understood for the definitions to be properly processed.
+Extension feature names will be specified in extension documents.
 
 ## Namespaces block
 
