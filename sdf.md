@@ -568,8 +568,8 @@ A nonqualified Quality Name is composed of ASCII letters, digits, and
 using a pattern of "⁠`[a-z$][A-Za-z$0-9]*`").
 Names with `$` signs are intended to be used for functions separate
 from most other names; for instance, in this specification `$comment`
-is used for the comment quality, the presence or absence of which does
-not change the meaning of the SDF model.
+is used for the comment quality (the presence or absence of a
+`$comment` quality does not change the meaning of the SDF model).
 Names that are composed of multiple English words can use the
 "lowerCamelCase" convention {{CamelCase}} for indicating the word
 boundaries; no other use is intended for upper case letters in quality
