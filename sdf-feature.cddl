@@ -23,7 +23,8 @@ sdfinfo = {
 ; Shortcut for a map that gives names to instances of X (has text keys and values of type X)
 named<X> = { * text => X }
 
-EXTENSION-POINT<f> = ( * (text .feature f) => any ) ; only used in framework syntax
+EXTENSION-POINT<f> = ( * (quality-name .feature f) => any ) ; only used in framework syntax
+quality-name = text .regexp "([a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*"; for EXTENSION-POINT
 
 sdf-pointer = text ; .regexp curie-regexp -- TO DO!
 pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
@@ -91,6 +92,8 @@ eventqualities = {
  EXTENSION-POINT<"event-ext">
 }
 
+sdftype-name = text .regexp "[a-z][-a-z0-9]*"       ; EXTENSION-POINT
+
 dataqualities = {
  commonqualities
  jsonschema
@@ -100,9 +103,9 @@ dataqualities = {
  ? ("scaleMaximum" .feature "1.0") => number
  ? nullable: bool
  ? ("subtype" .feature "1.0") => "byte-string" / "unix-time"
-            / (text .feature "subtype-ext")                       ; EXTENSION-POINT
+            / (text .feature "subtype-ext")         ; EXTENSION-POINT
  ? ("sdfType" .feature "1.1") => "byte-string" / "unix-time"
-            / (text .feature "sdftype-ext")                       ; EXTENSION-POINT
+            / (sdftype-name .feature "sdftype-ext") ; EXTENSION-POINT
  ? contentFormat: text
  EXTENSION-POINT<"data-ext">
 }
@@ -117,7 +120,7 @@ propertyqualities = {
 allowed-types = number / text / bool / null
               / [* number] / [* text] / [* bool]
               / {* text => any}
-              / (any .feature "allowed-ext")                     ; EXTENSION-POINT
+              / (any .feature "allowed-ext")        ; EXTENSION-POINT
 
 compound-type = (
   "type" => ("object" .feature "1.1")
@@ -128,7 +131,7 @@ compound-type = (
 jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
-    // (type: text .feature "type-ext")                       ; EXTENSION-POINT
+    // (type: text .feature "type-ext")             ; EXTENSION-POINT
    )
  ? ((("sdfChoice" .feature "1.1") => named<dataqualities>) ; if present, all other qualities apply to all choices
   // ("enum" => [+ text]))               ; limited to text strings in SDF 1.1
@@ -147,7 +150,7 @@ jsonschema = (
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
-           / (text .feature "format-ext")                       ; EXTENSION-POINT
+           / (text .feature "format-ext")           ; EXTENSION-POINT
  ; array constraints
  ? minItems: uint
  ? maxItems: uint
@@ -160,7 +163,7 @@ jsonschema = (
      ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
      ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
         // compound-type
-        // (type: text .feature "itemtype-ext")                       ; EXTENSION-POINT
+        // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
        )
      ? ((("sdfChoice" .feature "1.1") => named<dataqualities>) ; if present, all other qualities apply to all choices
      // ("enum" => [+ text]))               ; limited to text strings in SDF 1.1
