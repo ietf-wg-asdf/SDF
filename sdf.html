@@ -2285,6 +2285,12 @@ value is a JSON map in turn, with a set of entries that represent qualities that
               <td class="text-left" rowspan="1" colspan="1">Link to text or embedded text containing license terms</td>
             </tr>
             <tr>
+              <td class="text-left" rowspan="1" colspan="1">features</td>
+              <td class="text-left" rowspan="1" colspan="1">array of strings</td>
+              <td class="text-left" rowspan="1" colspan="1">no</td>
+              <td class="text-left" rowspan="1" colspan="1">List of extension features used</td>
+            </tr>
+            <tr>
               <td class="text-left" rowspan="1" colspan="1">$comment</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">no</td>
@@ -2301,6 +2307,8 @@ If no further details are provided, a <code>date-time</code> or <code>full-date<
 <p id="section-3.1-6">The modified quality can be used with a value using <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> <code>date-time</code> (with <code>Z</code> for time-zone) or <code>full-date</code> format to express time of the latest revision of the definitions.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
 <p id="section-3.1-7">The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an <span>[<a href="#SPDX" class="cite xref">SPDX</a>]</span> license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1-8">The <code>features</code> quality can be used to list names of critical (i.e., cannot be safely ignored) SDF extension features that need to be understood for the definitions to be properly processed.
+Extension feature names will be specified in extension documents.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="namespaces-block">
@@ -3944,6 +3952,9 @@ sdfinfo = {
  ? copyright: text
  ? license: text
  ? modified: modified-date-time
+ ? features: [
+               * (any .feature "feature-name") ; EXTENSION-POINT
+             ]
  optional-comment
  EXTENSION-POINT&lt;"info-ext"&gt;
 }
@@ -4145,8 +4156,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 <div class="breakable lang-jso.json sourcecode" id="appendix-B-3">
 <pre>
  {
--  "title": "sdf-validation.cddl -- Generated: 2023-06-26T08:59:43Z",
-+  "title": "sdf-framework.cddl -- Generated: 2023-06-26T08:59:49Z",
+-  "title": "sdf-validation.cddl -- Generated: 2023-06-26T14:49:10Z",
++  "title": "sdf-framework.cddl -- Generated: 2023-06-26T14:49:13Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
@@ -4214,6 +4225,11 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          },
          "modified": {
            "$ref": "#/definitions/modified-date-time"
+         },
+         "features": {
+-          "type": "array",
+-          "maxItems": 0
++          "type": "array"
          }
        },
 -      "additionalProperties": false
@@ -5363,7 +5379,6 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          },
          {
 -          "type": "string"
--        },
 +          "type": "object",
 +          "properties": {
 +            "enum": {
@@ -5677,7 +5692,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +        },
 +        {
 +          "type": "string"
-+        },
+         },
          {
            "type": "boolean"
          },
