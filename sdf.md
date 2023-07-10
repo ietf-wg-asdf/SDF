@@ -114,6 +114,7 @@ informative:
     target: http://wiki.c2.com/?KebabCase
     title: Kebab Case
     date: '2014-08-29'
+  I-D.bormann-asdf-sdf-mapping:
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -239,7 +240,16 @@ Protocol Binding:
 : A companion document to an SDF specification that defines how to map
   the abstract concepts in the specification into the protocols in use
   in a specific ecosystem.  Might supply URL components, numeric IDs,
-  and similar details.
+  and similar details.  Protocol Bindings are one case of an
+  Augmentation Mechanism.
+
+Augmentation Mechanism:
+: A companion document to a base SDF specification that provides additional
+  information ("augments" the base specification), possibly for use in
+  a specific ecosystem or with a specific protocol ("Protocol Binding").
+  No specific Augmentation Mechanisms are defined in this version of SDF.
+  A simple mechanism for such augmentations has been discussed as a
+  "mapping file" {{I-D.bormann-asdf-sdf-mapping}}.
 
 The term "byte" is used in its now-customary sense as a synonym for
 "octet".
