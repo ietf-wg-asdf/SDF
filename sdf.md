@@ -478,11 +478,16 @@ part of the protocol binding.
 
 ### sdfData
 
-Definitions in `sdfData` groups are provided separately from those in
+Definitions in `sdfData` groups do not themselves specify affordances.
+These definitions
+are provided separately from those in
 `sdfProperty` groups to enable common
 modeling patterns, data constraints, and semantic anchor concepts to
 be factored out for data items that make up `sdfProperty` items and
 serve as input and output data for `sdfAction` and `sdfEvent` items.
+The `sdfData` definitions only spring to life by being referenced in
+one of these contexts (directly or indirectly via some other `sdfData`
+definitions).
 
 It is a common use case for such a data definition to be shared
 between an `sdfProperty` item and input or output parameters of an
@@ -584,9 +589,9 @@ case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
 Given Names are not restricted by the current formal SDF syntax.
 To enable non-surprising name translations in tools, combinations of
-ASCII alphanumeric characters and `-` (ASCII hyphen/minus) preferred,
+ASCII alphanumeric characters and `-` (ASCII hyphen/minus) are preferred,
 typically employing KebabCase for names constructed out of multiple
-words {{KebabCase}}.  ASCII hyphen/minus can then unambiguously
+words {{KebabCase}}.  ASCII hyphen/minus can then unambiguously be
 translated to an ASCII `_` underscore character and back depending on
 the programming environment.
 Some styles also allow a dot `.` in given names.
