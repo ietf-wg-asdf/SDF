@@ -1,12 +1,17 @@
 start = sdf-syntax
 
 sdf-syntax = {
- ? info: sdfinfo                  ; This will be required in most process policies, but not a syntax error
+ ; info will be required in most process policies
+ ? info: sdfinfo
  ? namespace: named<text>
  ? defaultNamespace: text
- ? sdfThing: named<thingqualities>   ; Thing is a composition of objects that work together in some way
- ? sdfObject: named<objectqualities> ; Object is a set of Properties, Actions, and Events that together perform a particular function
- paedataqualities                 ; Includes Properties, Actions, and Events as well as sdfData
+ ; Thing is a composition of objects that work together in some way
+ ? sdfThing: named<thingqualities>
+ ; Object is a set of Properties, Actions, and Events that together
+ ; perform a particular function
+ ? sdfObject: named<objectqualities>
+ ; Includes Properties, Actions, and Events as well as sdfData
+ paedataqualities
 }
 
 sdfinfo = {
@@ -20,23 +25,27 @@ sdfinfo = {
  optional-comment
 }
 
-; Shortcut for a map that gives names to instances of X (has text keys and values of type X)
+; Shortcut for a map that gives names to instances of X
+; (has keys of type text and values of type X)
 named<X> = { * text => X }
 
 
 sdf-pointer = text ; .regexp curie-regexp -- TO DO!
-pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
+; per se no point in having an empty list, but used for sdfRequired
+; in odmobject-multiple_axis_joystick.sdf.json
+pointer-list = [* sdf-pointer]
 
 optional-comment = (
- ? $comment: text               ; source code comments only, no semantics
+ ? $comment: text       ; source code comments only, no semantics
 )
 
 commonqualities = (
- ? description: text            ; long text (no constraints)
- ? label: text                  ; short text (no constraints); default to key
+ ? description: text    ; long text (no constraints)
+ ? label: text          ; short text (no constraints); default to key
  optional-comment
  ? sdfRef: sdf-pointer
- ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
+ ; applies to qualities of properties, of data:
+ ? sdfRequired: pointer-list
 )
 
 arraydefinitionqualities = (
@@ -45,11 +54,16 @@ arraydefinitionqualities = (
 )
 
 paedataqualities = (
- ? sdfProperty: named<propertyqualities> ; Property represents the state of an instance of an object
- ? sdfAction: named<actionqualities>     ; Action is a directive to invoke an application layer verb associated with an object
- ? sdfEvent: named<eventqualities>       ; Event represents an occurrence of something associated with an object
- ? sdfData: named<dataqualities>         ; Data represents a piece of information that can be the
-                                         ; state of a property or a parameter to an action or a signal in an event
+ ; Property represents the state of an instance of an object
+ ? sdfProperty: named<propertyqualities>
+ ; Action invokes an application layer verb associated with an object
+ ? sdfAction: named<actionqualities>
+ ; Event represents an occurrence of event associated with an object
+ ? sdfEvent: named<eventqualities>
+ ; Data represents a piece of information that can be the state of a
+ ; property or a parameter to an action or a signal in an event
+ ? sdfData: named<dataqualities>
+
 )
 
 ; for building hierarchy
@@ -73,15 +87,17 @@ parameter-list =
 
 actionqualities = {
  commonqualities
- ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
+ ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
- ? sdfData: named<dataqualities>  ; zero or more named data type definitions that might be used in the above
+ ; zero or more named data type definitions that might be used above
+ ? sdfData: named<dataqualities>
 }
 
 eventqualities = {
  commonqualities
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
- ? sdfData: named<dataqualities>  ; zero or more named data type definitions that might be used in the above
+ ; zero or more named data type definitions that might be used above
+ ? sdfData: named<dataqualities>
 }
 
 
@@ -115,10 +131,12 @@ jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
    )
- ? ((("sdfChoice" .feature "1.1") => named<dataqualities>) ; if present, all other qualities apply to all choices
-  // ("enum" => [+ text]))               ; limited to text strings in SDF 1.1
- ? const: allowed-types                            ; should validate against type
- ? default: allowed-types                          ; should validate against type
+ ; if present, all other qualities apply to all choices:
+ ? ((("sdfChoice" .feature "1.1") => named<dataqualities>)
+  // ("enum" => [+ text])) ; limited to text strings in SDF 1.1
+ ; the next three should validate against type:
+ ? const: allowed-types
+ ? default: allowed-types
  ; number/integer constraints
  ? minimum: number
  ? maximum: number
@@ -135,17 +153,20 @@ jsonschema = (
  ? minItems: uint
  ? maxItems: uint
  ? uniqueItems: bool
- ? items: { ;;; ultimately, this will be mostly recursive, but, for now
-            ;;; let's find out what we actually need
-     ? sdfRef: sdf-pointer          ; import limited to the subset that we allow here...
-     ? description: text            ; long text (no constraints)
+ ? items: { ;;; ultimately, this will be mostly recursive, but,
+            ;;; for now let's find out what we actually need
+     ? sdfRef: sdf-pointer ; import limited to subset allowed here...
+     ? description: text   ; long text (no constraints)
      optional-comment
-     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
-     ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
+     ; leave commonqualities out for non-complex data types,
+     ; but need the above three.
+     ; no further nesting: no "array"
+     ? ((type: "number" / "string" / "boolean" / "integer")
         // compound-type
        )
-     ? ((("sdfChoice" .feature "1.1") => named<dataqualities>) ; if present, all other qualities apply to all choices
-     // ("enum" => [+ text]))               ; limited to text strings in SDF 1.1
+     ; if present, all other qualities apply to all choices
+     ? ((("sdfChoice" .feature "1.1") => named<dataqualities>)
+     // ("enum" => [+ text])) ; limited to text strings in SDF 1.1
      ; jso subset
      ? minimum: number
      ? maximum: number

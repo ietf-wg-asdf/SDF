@@ -19,20 +19,20 @@ and other serializations as needed.
 version (-00) of this document; version (-05) was designated as an
  implementation draft , labeled SDF 1.1, at the IETF110 meeting of
 the ASDF WG (2021-03-11).
-The present version (-14) collects smaller changes up to 2023-06-12. 
+The present version (-14) collects smaller changes up to 2023-07-10. 
     " name="description">
-<meta content="xml2rfc 3.17.1" name="generator">
+<meta content="xml2rfc 3.17.4" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.17.1
+  xml2rfc 3.17.4
     Python 3.11.4
-    appdirs 1.4.4
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.2
+    google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.2
+    platformdirs 3.8.0
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.28.2
@@ -1214,11 +1214,11 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OneDM SDF</td>
-<td class="right">June 2023</td>
+<td class="right">July 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster &amp; Bormann</td>
-<td class="center">Expires 28 December 2023</td>
+<td class="center">Expires 12 January 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1231,12 +1231,12 @@ li > p:last-of-type:only-child {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-06-26" class="published">26 June 2023</time>
+<time datetime="2023-07-11" class="published">11 July 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-12-28">28 December 2023</time></dd>
+<dd class="expires"><time datetime="2024-01-12">12 January 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1266,7 +1266,7 @@ and other serializations as needed.<a href="#section-abstract-1" class="pilcrow"
 version (-00) of this document; version (-05) was designated as an
 <em>implementation draft</em>, labeled SDF 1.1, at the IETF110 meeting of
 the ASDF WG (2021-03-11).
-The present version (-14) collects smaller changes up to 2023-06-12.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
+The present version (-14) collects smaller changes up to 2023-07-10.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1302,7 +1302,7 @@ The present version (-14) collects smaller changes up to 2023-06-12.</span><a hr
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 December 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 January 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1581,7 +1581,7 @@ and other serializations as needed.<a href="#section-1-1" class="pilcrow">¶</a>
 version (-00) of this document; version (-05) was designated as an
 <em>implementation draft</em>, labeled SDF 1.1, at the IETF110 meeting of
 the ASDF WG (2021-03-11).
-The present version (-14) collects smaller changes up to 2023-06-12.</span><a href="#section-1-2" class="pilcrow">¶</a></p>
+The present version (-14) collects smaller changes up to 2023-07-10.</span><a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="terminology-and-conventions">
 <section id="section-1.1">
         <h3 id="name-terminology-and-conventions">
@@ -1706,7 +1706,18 @@ definition for reference in a different place.<a href="#section-1.1-1.30.1" clas
             <p id="section-1.1-1.32.1">A companion document to an SDF specification that defines how to map
 the abstract concepts in the specification into the protocols in use
 in a specific ecosystem.  Might supply URL components, numeric IDs,
-and similar details.<a href="#section-1.1-1.32.1" class="pilcrow">¶</a></p>
+and similar details.  Protocol Bindings are one case of an
+Augmentation Mechanism.<a href="#section-1.1-1.32.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-1.33">Augmentation Mechanism:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-1.34">
+            <p id="section-1.1-1.34.1">A companion document to a base SDF specification that provides additional
+information ("augments" the base specification), possibly for use in
+a specific ecosystem or with a specific protocol ("Protocol Binding").
+No specific Augmentation Mechanisms are defined in this version of SDF.
+A simple mechanism for such augmentations has been discussed as a
+"mapping file" <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xref">I-D.bormann-asdf-sdf-mapping</a>]</span>.<a href="#section-1.1-1.34.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1755,19 +1766,23 @@ appear in all capitals, as shown here.<a href="#section-1.1-5" class="pilcrow">�
     "Switch": {
       "sdfProperty": {
         "value": {
-          "description": "The state of the switch; false for off and true for on.",
+          "description":
+"The state of the switch; false for off and true for on.",
           "type": "boolean"
         }
       },
       "sdfAction": {
         "on": {
-          "description": "Turn the switch on; equivalent to setting value to true."
+          "description":
+"Turn the switch on; equivalent to setting value to true."
         },
         "off": {
-          "description": "Turn the switch off; equivalent to setting value to false."
+          "description":
+"Turn the switch off; equivalent to setting value to false."
         },
         "toggle": {
-          "description": "Toggle the switch; equivalent to setting value to its complement."
+          "description":
+"Toggle the switch; equivalent to setting value to its complement."
         }
       }
     }
@@ -2085,11 +2100,16 @@ part of the protocol binding.<a href="#section-2.2.4-3" class="pilcrow">¶</a></
           <h4 id="name-sdfdata">
 <a href="#section-2.2.5" class="section-number selfRef">2.2.5. </a><a href="#name-sdfdata" class="section-name selfRef">sdfData</a>
           </h4>
-<p id="section-2.2.5-1">Definitions in <code>sdfData</code> groups are provided separately from those in
+<p id="section-2.2.5-1">Definitions in <code>sdfData</code> groups do not themselves specify affordances.
+These definitions
+are provided separately from those in
 <code>sdfProperty</code> groups to enable common
 modeling patterns, data constraints, and semantic anchor concepts to
 be factored out for data items that make up <code>sdfProperty</code> items and
-serve as input and output data for <code>sdfAction</code> and <code>sdfEvent</code> items.<a href="#section-2.2.5-1" class="pilcrow">¶</a></p>
+serve as input and output data for <code>sdfAction</code> and <code>sdfEvent</code> items.
+The <code>sdfData</code> definitions only spring to life by being referenced in
+one of these contexts (directly or indirectly via some other <code>sdfData</code>
+definitions).<a href="#section-2.2.5-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.5-2">It is a common use case for such a data definition to be shared
 between an <code>sdfProperty</code> item and input or output parameters of an
 <code>sdfAction</code> or output data provided by an <code>sdfEvent</code>.
@@ -2203,12 +2223,26 @@ Quality Name Prefixes are registered in the "Quality Name Prefixes"
 sub-registry in the "SDF Parameters" registry (<a href="#qnp" class="auto internal xref">Section 7.3.1</a>); they are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠<code>[a-z][a-z0-9]*</code>").<a href="#section-2.3.3-3" class="pilcrow">¶</a></p>
-<p id="section-2.3.3-4">Further, to enable Given Names to have a more powerful role in building
+<p id="section-2.3.3-4">Given Names are not restricted by the current formal SDF syntax.
+To enable non-surprising name translations in tools, combinations of
+ASCII alphanumeric characters and <code>-</code> (ASCII hyphen/minus) are preferred,
+typically employing KebabCase for names constructed out of multiple
+words <span>[<a href="#KebabCase" class="cite xref">KebabCase</a>]</span>.  ASCII hyphen/minus can then unambiguously be
+translated to an ASCII <code>_</code> underscore character and back depending on
+the programming environment.
+Some styles also allow a dot <code>.</code> in given names.
+Given Names are often sufficiently self-explanatory that they can be
+used in place of the <code>label</code> quality if that is not given.
+In turn, if a given name turns out too complicated, a more elaborate
+<code>label</code> can be given and the given name kept simple.
+The current version of SDF does not address internationalization of
+given names.<a href="#section-2.3.3-4" class="pilcrow">¶</a></p>
+<p id="section-2.3.3-5">Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
 qualified names for Given Names.
 So, until that extension is defined, Given Names with (one or more)
-embedded colons are reserved and <span class="bcp14">MUST NOT</span> be used in an SDF model.<a href="#section-2.3.3-4" class="pilcrow">¶</a></p>
-<p id="section-2.3.3-5">All names in SDF are case-sensitive.<a href="#section-2.3.3-5" class="pilcrow">¶</a></p>
+embedded colons are reserved and <span class="bcp14">MUST NOT</span> be used in an SDF model.<a href="#section-2.3.3-5" class="pilcrow">¶</a></p>
+<p id="section-2.3.3-6">All names in SDF are case-sensitive.<a href="#section-2.3.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2573,7 +2607,8 @@ null values that are necessary to remove members in a merge-patch.<a href="#sect
   },
   "X-Coordinate" : {
     "sdfRef" : "#/sdfData/Coordinate",
-    "description": "Distance from the base of the Thing along the X axis."
+    "description":
+"Distance from the base of the Thing along the X axis."
   },
   "Non-neg-X-Coordinate" : {
     "sdfRef": "#/sdfData/X-Coordinate",
@@ -2590,11 +2625,13 @@ null values that are necessary to remove members in a merge-patch.<a href="#sect
     "type": "number", "unit": "m"
   },
   "X-Coordinate" : {
-    "description": "Distance from the base of the Thing along the X axis.",
+    "description":
+"Distance from the base of the Thing along the X axis.",
     "type": "number", "unit": "m"
   },
   "Non-neg-X-Coordinate" : {
-    "description": "Distance from the base of the Thing along the X axis.",
+    "description":
+"Distance from the base of the Thing along the X axis.",
     "minimum": 0, "type": "number", "unit": "m"
   }
 }
@@ -2623,8 +2660,8 @@ indicating one declaration that is mandatory to be represented.<a href="#section
   "sdfObject": {
     "temperatureWithAlarm": {
       "sdfRequired": [
-        "#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
-        "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
+"#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
+"#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
       ],
       "sdfData":{
         "temperatureData": {
@@ -2633,7 +2670,7 @@ indicating one declaration that is mandatory to be represented.<a href="#section
       },
       "sdfProperty": {
         "currentTemperature": {
-          "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
         }
       },
       "sdfEvent": {
@@ -2646,7 +2683,7 @@ indicating one declaration that is mandatory to be represented.<a href="#section
                 "const": "OverTemperatureAlarm"
               },
               "temperature": {
-                "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
               }
             }
           }
@@ -2932,7 +2969,8 @@ in SDF 1.0, is often best represented as:<a href="#section-4.7.2-3.1.4" class="p
 <pre>
 "sdfChoice": {
   "foo": { "description": "This is a foonly"},
-  "bar": { "description": "As defined in the second world congress"},
+  "bar": { "description":
+"As defined in the second world congress"},
   "baz": { "description": "From zigbee foobaz"}
 }
 </pre><a href="#section-4.7.2-3.1.5" class="pilcrow">¶</a>
@@ -2979,10 +3017,10 @@ What could have been<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-3.2.4">
 <pre>
 "anyOf": [
-  {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-     "$ref": "#/sdfData/rgbVal"}},
-  {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-     "$ref": "#/sdfData/cmykVal"}}
+  {"type": "array", "minItems": 3, "maxItems": "3",
+   "items": {"$ref": "#/sdfData/rgbVal"}},
+  {"type": "array", "minItems": 4, "maxItems": "4",
+   "items": {"$ref": "#/sdfData/cmykVal"}}
 ]
 </pre><a href="#section-4.7.2-3.2.4" class="pilcrow">¶</a>
 </div>
@@ -2991,10 +3029,10 @@ in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-
 <div class="lang-json sourcecode" id="section-4.7.2-3.2.6">
 <pre>
 "sdfChoice": {
-  "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-            "sdfRef": "#/sdfData/rgbVal"}},
-  "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-            "sdfRef": "#/sdfData/cmykVal"}}
+  "rgb": {"type": "array", "minItems": 3, "maxItems": "3",
+          "items": {"sdfRef": "#/sdfData/rgbVal"}},
+  "cmyk": {"type": "array", "minItems": 4, "maxItems": "4",
+           "items": {"sdfRef": "#/sdfData/cmykVal"}}
 }
 </pre><a href="#section-4.7.2-3.2.6" class="pilcrow">¶</a>
 </div>
@@ -3870,13 +3908,17 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
         <dd>
 <span class="refAuthor">Ecma International</span>, <span class="refTitle">"ECMAScript 2020 Language Specification"</span>, <span class="seriesInfo">ECMA Standard ECMA-262, 11th Edition</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.ecma-international.org/wp-content/uploads/ECMA-262.pdf">https://www.ecma-international.org/wp-content/uploads/ECMA-262.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.bormann-asdf-sdf-mapping">[I-D.bormann-asdf-sdf-mapping]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-02</span>, <time datetime="2023-04-26" class="refDate">26 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-02">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.handrews-json-schema-validation-01">[I-D.handrews-json-schema-validation-01]</dt>
         <dd>
 <span class="refAuthor">Wright, A.</span>, <span class="refAuthor">Andrews, H.</span>, and <span class="refAuthor">G. Luff</span>, <span class="refTitle">"JSON Schema Validation: A Vocabulary for Structural Validation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-validation-01</span>, <time datetime="2018-03-19" class="refDate">19 March 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01">https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-jsonpath-iregexp">[I-D.ietf-jsonpath-iregexp]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">T. Bray</span>, <span class="refTitle">"I-Regexp: An Interoperable Regexp Format"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jsonpath-iregexp-07</span>, <time datetime="2023-05-27" class="refDate">27 May 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jsonpath-iregexp-07">https://datatracker.ietf.org/doc/html/draft-ietf-jsonpath-iregexp-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">T. Bray</span>, <span class="refTitle">"I-Regexp: An Interoperable Regexp Format"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jsonpath-iregexp-08</span>, <time datetime="2023-06-29" class="refDate">29 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jsonpath-iregexp-08">https://datatracker.ietf.org/doc/html/draft-ietf-jsonpath-iregexp-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.irtf-t2trg-rest-iot">[I-D.irtf-t2trg-rest-iot]</dt>
         <dd>
@@ -3904,7 +3946,7 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
 <dd class="break"></dd>
 <dt id="ZCL">[ZCL]</dt>
       <dd>
-<span class="refTitle">"The ZigBee Cluster Library"</span>, <span class="seriesInfo">Zigbee Wireless Networking pp. 239-271</span>, <span class="seriesInfo">DOI 10.1016/b978-0-7506-8597-9.00006-9</span>, <time datetime="2008" class="refDate">2008</time>, <span>&lt;<a href="https://doi.org/10.1016/b978-0-7506-8597-9.00006-9">https://doi.org/10.1016/b978-0-7506-8597-9.00006-9</a>&gt;</span>. </dd>
+<span class="refTitle">"The ZigBee Cluster Library"</span>, <span class="refContent">Elsevier</span>, <span class="seriesInfo">Zigbee Wireless Networking pp. 239-271</span>, <span class="seriesInfo">DOI 10.1016/b978-0-7506-8597-9.00006-9</span>, <time datetime="2008" class="refDate">2008</time>, <span>&lt;<a href="https://doi.org/10.1016/b978-0-7506-8597-9.00006-9">https://doi.org/10.1016/b978-0-7506-8597-9.00006-9</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -3937,12 +3979,17 @@ further evolution.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 start = sdf-syntax
 
 sdf-syntax = {
- ? info: sdfinfo                  ; This will be required in most process policies, but not a syntax error
+ ; info will be required in most process policies
+ ? info: sdfinfo
  ? namespace: named&lt;text&gt;
  ? defaultNamespace: text
- ? sdfThing: named&lt;thingqualities&gt;   ; Thing is a composition of objects that work together in some way
- ? sdfObject: named&lt;objectqualities&gt; ; Object is a set of Properties, Actions, and Events that together perform a particular function
- paedataqualities                 ; Includes Properties, Actions, and Events as well as sdfData
+ ; Thing is a composition of objects that work together in some way
+ ? sdfThing: named&lt;thingqualities&gt;
+ ; Object is a set of Properties, Actions, and Events that together
+ ; perform a particular function
+ ? sdfObject: named&lt;objectqualities&gt;
+ ; Includes Properties, Actions, and Events as well as sdfData
+ paedataqualities
  EXTENSION-POINT&lt;"top-ext"&gt;
 }
 
@@ -3959,25 +4006,31 @@ sdfinfo = {
  EXTENSION-POINT&lt;"info-ext"&gt;
 }
 
-; Shortcut for a map that gives names to instances of X (has text keys and values of type X)
+; Shortcut for a map that gives names to instances of X
+; (has keys of type text and values of type X)
 named&lt;X&gt; = { * text =&gt; X }
 
-EXTENSION-POINT&lt;f&gt; = ( * (quality-name .feature f) =&gt; any ) ; only used in framework syntax
-quality-name = text .regexp "([a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*"; for EXTENSION-POINT
+; EXTENSION-POINT is only used in framework syntax
+EXTENSION-POINT&lt;f&gt; = ( * (quality-name .feature f) =&gt; any )
+quality-name = text .regexp                   ; for EXTENSION-POINT
+       "([a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*"; for EXTENSION-POINT
 
 sdf-pointer = text ; .regexp curie-regexp -- TO DO!
-pointer-list = [* sdf-pointer]  ; ISSUE: no point in having an empty list, no? but used for sdfRequired in odmobject-multiple_axis_joystick.sdf.json
+; per se no point in having an empty list, but used for sdfRequired
+; in odmobject-multiple_axis_joystick.sdf.json
+pointer-list = [* sdf-pointer]
 
 optional-comment = (
- ? $comment: text               ; source code comments only, no semantics
+ ? $comment: text       ; source code comments only, no semantics
 )
 
 commonqualities = (
- ? description: text            ; long text (no constraints)
- ? label: text                  ; short text (no constraints); default to key
+ ? description: text    ; long text (no constraints)
+ ? label: text          ; short text (no constraints); default to key
  optional-comment
  ? sdfRef: sdf-pointer
- ? sdfRequired: pointer-list    ; applies to qualities of properties, of data
+ ; applies to qualities of properties, of data:
+ ? sdfRequired: pointer-list
 )
 
 arraydefinitionqualities = (
@@ -3986,11 +4039,16 @@ arraydefinitionqualities = (
 )
 
 paedataqualities = (
- ? sdfProperty: named&lt;propertyqualities&gt; ; Property represents the state of an instance of an object
- ? sdfAction: named&lt;actionqualities&gt;     ; Action is a directive to invoke an application layer verb associated with an object
- ? sdfEvent: named&lt;eventqualities&gt;       ; Event represents an occurrence of something associated with an object
- ? sdfData: named&lt;dataqualities&gt;         ; Data represents a piece of information that can be the
-                                         ; state of a property or a parameter to an action or a signal in an event
+ ; Property represents the state of an instance of an object
+ ? sdfProperty: named&lt;propertyqualities&gt;
+ ; Action invokes an application layer verb associated with an object
+ ? sdfAction: named&lt;actionqualities&gt;
+ ; Event represents an occurrence of event associated with an object
+ ? sdfEvent: named&lt;eventqualities&gt;
+ ; Data represents a piece of information that can be the state of a
+ ; property or a parameter to an action or a signal in an event
+ ? sdfData: named&lt;dataqualities&gt;
+
 )
 
 ; for building hierarchy
@@ -4017,17 +4075,19 @@ parameter-list =
 
 actionqualities = {
  commonqualities
- ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here (a bit redundant)
+ ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here
  ? ("sdfRequiredInputData" .feature "1.0") =&gt; pointer-list
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
- ? sdfData: named&lt;dataqualities&gt;  ; zero or more named data type definitions that might be used in the above
+ ; zero or more named data type definitions that might be used above
+ ? sdfData: named&lt;dataqualities&gt;
  EXTENSION-POINT&lt;"action-ext"&gt;
 }
 
 eventqualities = {
  commonqualities
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
- ? sdfData: named&lt;dataqualities&gt;  ; zero or more named data type definitions that might be used in the above
+ ; zero or more named data type definitions that might be used above
+ ? sdfData: named&lt;dataqualities&gt;
  EXTENSION-POINT&lt;"event-ext"&gt;
 }
 
@@ -4072,11 +4132,13 @@ jsonschema = (
     // compound-type
     // (type: text .feature "type-ext")             ; EXTENSION-POINT
    )
- ? ((("sdfChoice" .feature "1.1") =&gt; named&lt;dataqualities&gt;) ; if present, all other qualities apply to all choices
-  // ("enum" =&gt; [+ text]))               ; limited to text strings in SDF 1.1
- ? ("enum" .feature "1.0") =&gt; [+ allowed-types]    ; should validate against type
- ? const: allowed-types                            ; should validate against type
- ? default: allowed-types                          ; should validate against type
+ ; if present, all other qualities apply to all choices:
+ ? ((("sdfChoice" .feature "1.1") =&gt; named&lt;dataqualities&gt;)
+  // ("enum" =&gt; [+ text])) ; limited to text strings in SDF 1.1
+ ; the next three should validate against type:
+ ? ("enum" .feature "1.0") =&gt; [+ allowed-types]
+ ? const: allowed-types
+ ? default: allowed-types
  ; number/integer constraints
  ? minimum: number
  ? maximum: number
@@ -4094,18 +4156,21 @@ jsonschema = (
  ? minItems: uint
  ? maxItems: uint
  ? uniqueItems: bool
- ? items: { ;;; ultimately, this will be mostly recursive, but, for now
-            ;;; let's find out what we actually need
-     ? sdfRef: sdf-pointer          ; import limited to the subset that we allow here...
-     ? description: text            ; long text (no constraints)
+ ? items: { ;;; ultimately, this will be mostly recursive, but,
+            ;;; for now let's find out what we actually need
+     ? sdfRef: sdf-pointer ; import limited to subset allowed here...
+     ? description: text   ; long text (no constraints)
      optional-comment
-     ; commonqualities, ; -- ISSUE: should leave this out for non-complex data types, but need the above three
-     ? ((type: "number" / "string" / "boolean" / "integer") ; no "array"
+     ; leave commonqualities out for non-complex data types,
+     ; but need the above three.
+     ; no further nesting: no "array"
+     ? ((type: "number" / "string" / "boolean" / "integer")
         // compound-type
         // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
        )
-     ? ((("sdfChoice" .feature "1.1") =&gt; named&lt;dataqualities&gt;) ; if present, all other qualities apply to all choices
-     // ("enum" =&gt; [+ text]))               ; limited to text strings in SDF 1.1
+     ; if present, all other qualities apply to all choices
+     ? ((("sdfChoice" .feature "1.1") =&gt; named&lt;dataqualities&gt;)
+     // ("enum" =&gt; [+ text])) ; limited to text strings in SDF 1.1
      ; jso subset
      ? minimum: number
      ? maximum: number
@@ -4156,8 +4221,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 <div class="breakable lang-jso.json sourcecode" id="appendix-B-3">
 <pre>
  {
--  "title": "sdf-validation.cddl -- Generated: 2023-06-26T14:49:10Z",
-+  "title": "sdf-framework.cddl -- Generated: 2023-06-26T14:49:13Z",
+-  "title": "sdf-validation.cddl -- Generated: 2023-07-10T22:16:34Z",
++  "title": "sdf-framework.cddl -- Generated: 2023-07-10T22:16:37Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
@@ -6187,7 +6252,8 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
       "sdfProperty": {
         "status": {
           "type": "boolean",
-          "description": "Indicates if the refrigerator-freezer is powered"
+          "description":
+"Indicates if the refrigerator-freezer is powered"
         }
       },
       "sdfObject": {
