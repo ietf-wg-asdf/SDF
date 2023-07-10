@@ -282,19 +282,23 @@ We start with an example for the SDF definition of a simple Object called "Switc
     "Switch": {
       "sdfProperty": {
         "value": {
-          "description": "The state of the switch; false for off and true for on.",
+          "description":
+"The state of the switch; false for off and true for on.",
           "type": "boolean"
         }
       },
       "sdfAction": {
         "on": {
-          "description": "Turn the switch on; equivalent to setting value to true."
+          "description":
+"Turn the switch on; equivalent to setting value to true."
         },
         "off": {
-          "description": "Turn the switch off; equivalent to setting value to false."
+          "description":
+"Turn the switch off; equivalent to setting value to false."
         },
         "toggle": {
-          "description": "Toggle the switch; equivalent to setting value to its complement."
+          "description":
+"Toggle the switch; equivalent to setting value to its complement."
         }
       }
     }
@@ -889,7 +893,8 @@ For example, given the following sdfData definitions:
   },
   "X-Coordinate" : {
     "sdfRef" : "#/sdfData/Coordinate",
-    "description": "Distance from the base of the Thing along the X axis."
+    "description":
+"Distance from the base of the Thing along the X axis."
   },
   "Non-neg-X-Coordinate" : {
     "sdfRef": "#/sdfData/X-Coordinate",
@@ -906,11 +911,13 @@ After resolving the definitions would look as follows:
     "type": "number", "unit": "m"
   },
   "X-Coordinate" : {
-    "description": "Distance from the base of the Thing along the X axis.",
+    "description":
+"Distance from the base of the Thing along the X axis.",
     "type": "number", "unit": "m"
   },
   "Non-neg-X-Coordinate" : {
-    "description": "Distance from the base of the Thing along the X axis.",
+    "description":
+"Distance from the base of the Thing along the X axis.",
     "minimum": 0, "type": "number", "unit": "m"
   }
 }
@@ -932,8 +939,8 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
   "sdfObject": {
     "temperatureWithAlarm": {
       "sdfRequired": [
-        "#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
-        "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
+"#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
+"#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
       ],
       "sdfData":{
         "temperatureData": {
@@ -942,7 +949,7 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
       },
       "sdfProperty": {
         "currentTemperature": {
-          "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
         }
       },
       "sdfEvent": {
@@ -955,7 +962,7 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
                 "const": "OverTemperatureAlarm"
               },
               "temperature": {
-                "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
               }
             }
           }
@@ -1109,7 +1116,8 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~ json
   "sdfChoice": {
     "foo": { "description": "This is a foonly"},
-    "bar": { "description": "As defined in the second world congress"},
+    "bar": { "description":
+  "As defined in the second world congress"},
     "baz": { "description": "From zigbee foobaz"}
   }
   ~~~
@@ -1153,10 +1161,10 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
 
   ~~~ json
   "anyOf": [
-    {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-       "$ref": "#/sdfData/rgbVal"}},
-    {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-       "$ref": "#/sdfData/cmykVal"}}
+    {"type": "array", "minItems": 3, "maxItems": "3",
+     "items": {"$ref": "#/sdfData/rgbVal"}},
+    {"type": "array", "minItems": 4, "maxItems": "4",
+     "items": {"$ref": "#/sdfData/cmykVal"}}
   ]
   ~~~
 
@@ -1164,10 +1172,10 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
 
   ~~~ json
   "sdfChoice": {
-    "rgb": {"type": "array", "minItems": 3, "maxItems": "3", "items": {
-              "sdfRef": "#/sdfData/rgbVal"}},
-    "cmyk": {"type": "array", "minItems": 4, "maxItems": "4", "items": {
-              "sdfRef": "#/sdfData/cmykVal"}}
+    "rgb": {"type": "array", "minItems": 3, "maxItems": "3",
+            "items": {"sdfRef": "#/sdfData/rgbVal"}},
+    "cmyk": {"type": "array", "minItems": 4, "maxItems": "4",
+             "items": {"sdfRef": "#/sdfData/cmykVal"}}
   }
   ~~~
 
@@ -1818,7 +1826,8 @@ using the `sdfThing` quality.
       "sdfProperty": {
         "status": {
           "type": "boolean",
-          "description": "Indicates if the refrigerator-freezer is powered"
+          "description":
+"Indicates if the refrigerator-freezer is powered"
         }
       },
       "sdfObject": {
