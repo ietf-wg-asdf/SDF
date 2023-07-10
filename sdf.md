@@ -478,11 +478,16 @@ part of the protocol binding.
 
 ### sdfData
 
-Definitions in `sdfData` groups are provided separately from those in
+Definitions in `sdfData` groups do not themselves specify affordances.
+These definitions
+are provided separately from those in
 `sdfProperty` groups to enable common
 modeling patterns, data constraints, and semantic anchor concepts to
 be factored out for data items that make up `sdfProperty` items and
 serve as input and output data for `sdfAction` and `sdfEvent` items.
+The `sdfData` definitions only spring to life by being referenced in
+one of these contexts (directly or indirectly via some other `sdfData`
+definitions).
 
 It is a common use case for such a data definition to be shared
 between an `sdfProperty` item and input or output parameters of an
