@@ -582,6 +582,21 @@ sub-registry in the "SDF Parameters" registry ({{qnp}}); they are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
+Given Names are not restricted by the current formal SDF syntax.
+To enable non-surprising name translations in tools, combinations of
+ASCII alphanumeric characters and `-` (ASCII hyphen/minus) preferred,
+typically employing KebabCase for names constructed out of multiple
+words {{KebabCase}}.  ASCII hyphen/minus can then unambiguously
+translated to an ASCII `_` underscore character and back depending on
+the programming environment.
+Some styles also allow a dot `.` in given names.
+Given Names are often sufficiently self-explanatory that they can be
+used in place of the `label` quality if that is not given.
+In turn, if a given name turns out too complicated, a more elaborate
+`label` can be given and the given name kept simple.
+The current version of SDF does not address internationalization of
+given names.
+
 Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
 qualified names for Given Names.
