@@ -584,9 +584,9 @@ case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
 Given Names are not restricted by the current formal SDF syntax.
 To enable non-surprising name translations in tools, combinations of
-ASCII alphanumeric characters and `-` (ASCII hyphen/minus) preferred,
+ASCII alphanumeric characters and `-` (ASCII hyphen/minus) are preferred,
 typically employing KebabCase for names constructed out of multiple
-words {{KebabCase}}.  ASCII hyphen/minus can then unambiguously
+words {{KebabCase}}.  ASCII hyphen/minus can then unambiguously be
 translated to an ASCII `_` underscore character and back depending on
 the programming environment.
 Some styles also allow a dot `.` in given names.
