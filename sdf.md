@@ -613,14 +613,15 @@ value is a JSON map in turn, with a set of entries that represent qualities that
 
 Qualities of the information block are shown in {{infoblockqual}}.
 
-| Quality   | Type   | Required | Description                                                 |
-|-----------|--------|----------|-------------------------------------------------------------|
-| title     | string | no       | A short summary to be displayed in search results, etc.     |
-| version   | string | no       | The incremental version of the definition                   |
-| modified  | string | no       | Time of the latest modification                             |
-| copyright | string | no       | Link to text or embedded text containing a copyright notice |
-| license   | string | no       | Link to text or embedded text containing license terms      |
-| $comment  | string | no       | Source code comments only, no semantics                     |
+| Quality   | Type             | Required | Description                                                 |
+|-----------|------------------|----------|-------------------------------------------------------------|
+| title     | string           | no       | A short summary to be displayed in search results, etc.     |
+| version   | string           | no       | The incremental version of the definition                   |
+| modified  | string           | no       | Time of the latest modification                             |
+| copyright | string           | no       | Link to text or embedded text containing a copyright notice |
+| license   | string           | no       | Link to text or embedded text containing license terms      |
+| features  | array of strings | no       | List of extension features used                             |
+| $comment  | string           | no       | Source code comments only, no semantics                     |
 {: #infoblockqual title="Qualities of the Information Block"}
 
 The version quality is used to indicate version information about the set of definitions in the file.
@@ -633,6 +634,9 @@ The modified quality can be used with a value using {{RFC3339}} `date-time` (wit
 
 The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an {{SPDX}} license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)
+
+The `features` quality can be used to list names of critical (i.e., cannot be safely ignored) SDF extension features that need to be understood for the definitions to be properly processed.
+Extension feature names will be specified in extension documents.
 
 ## Namespaces block
 

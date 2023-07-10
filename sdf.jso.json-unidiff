@@ -1,6 +1,6 @@
  {
--  "title": "sdf-validation.cddl -- Generated: 2023-06-26T08:59:43Z",
-+  "title": "sdf-framework.cddl -- Generated: 2023-06-26T08:59:49Z",
+-  "title": "sdf-validation.cddl -- Generated: 2023-06-26T14:49:10Z",
++  "title": "sdf-framework.cddl -- Generated: 2023-06-26T14:49:13Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
@@ -68,6 +68,11 @@
          },
          "modified": {
            "$ref": "#/definitions/modified-date-time"
+         },
+         "features": {
+-          "type": "array",
+-          "maxItems": 0
++          "type": "array"
          }
        },
 -      "additionalProperties": false
@@ -1217,7 +1222,6 @@
          },
          {
 -          "type": "string"
--        },
 +          "type": "object",
 +          "properties": {
 +            "enum": {
@@ -1531,7 +1535,7 @@
 +        },
 +        {
 +          "type": "string"
-+        },
+         },
          {
            "type": "boolean"
          },
