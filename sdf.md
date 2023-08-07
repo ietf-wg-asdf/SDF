@@ -891,7 +891,7 @@ Given the example ({{example1}}), and the following definition using an sdfRef, 
   "sdfObject": {
     "BasicSwitch": {
       "sdfRef": "cap:#/sdfObject/Switch",
-      "sdfProperty": {
+      "sdfAction": {
         "toggle": null
       }
     }
