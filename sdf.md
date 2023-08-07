@@ -880,6 +880,25 @@ sdfRef member, the semantics is defined to be as if the following steps were per
 TODO: Make sure that the grammar in {{syntax}} allows specifying the
 null values that are necessary to remove members in a merge-patch.
 
+Given the example ({{example1}}), and the following definition using an sdfRef, the resulting definition of "BasicSwitch" would be identical to the definition of the "Switch" except it would not contain the "toggle" property.
+
+~~~ json
+{
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "BasicSwitch": {
+      "sdfRef": "cap:#/sdfObject/Switch",
+      "sdfProperty": {
+        "toggle": null
+      }
+    }
+  }
+}
+~~~
+
 ### Resolved models
 
 A model where all sdfRef references are processed as described in {{sdfref}} is called a resolved model.
