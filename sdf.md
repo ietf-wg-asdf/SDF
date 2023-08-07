@@ -822,7 +822,7 @@ For example, if a namespace prefix is defined:
 Then this reference to that namespace:
 
 ~~~ json
-{ "sdfRef": "foo:#/sdfData/temperatureData" }
+"sdfRef": "foo:#/sdfData/temperatureData"
 ~~~
 
 references the global name:
@@ -935,35 +935,33 @@ indicating one declaration that is mandatory to be represented.
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
 ~~~ json
-{
-  "sdfObject": {
-    "temperatureWithAlarm": {
-      "sdfRequired": [
+"sdfObject": {
+  "temperatureWithAlarm": {
+    "sdfRequired": [
 "#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
 "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
-      ],
-      "sdfData":{
-        "temperatureData": {
-          "type": "number"
-        }
-      },
-      "sdfProperty": {
-        "currentTemperature": {
+    ],
+    "sdfData":{
+       "temperatureData": {
+        "type": "number"
+      }
+    },
+    "sdfProperty": {
+      "currentTemperature": {
 "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
-        }
-      },
-      "sdfEvent": {
-        "overTemperatureEvent": {
-          "sdfOutputData": {
-            "type": "object",
-            "properties": {
-              "alarmType": {
-                "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
-                "const": "OverTemperatureAlarm"
-              },
-              "temperature": {
+      }
+    },
+    "sdfEvent": {
+      "overTemperatureEvent": {
+       "sdfOutputData": {
+          "type": "object",
+          "properties": {
+            "alarmType": {
+              "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
+              "const": "OverTemperatureAlarm"
+            },
+            "temperature": {
 "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
-              }
             }
           }
         }
