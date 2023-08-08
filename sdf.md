@@ -880,10 +880,13 @@ sdfRef member, the semantics is defined to be as if the following steps were per
 TODO: Make sure that the grammar in {{syntax}} allows specifying the
 null values that are necessary to remove members in a merge-patch.
 
-Given the example ({{example1}}), and the following definition using an sdfRef, the resulting definition of "BasicSwitch" would be identical to the definition of the "Switch" except it would not contain the "toggle" property.
+Given the example ({{example1}}), and the following definition:
 
 ~~~ json
 {
+  "info": {
+    "title": "Example light switch using sdfRef",
+  },
   "namespace": {
     "cap": "https://example.com/capability/cap"
   },
@@ -898,6 +901,39 @@ Given the example ({{example1}}), and the following definition using an sdfRef, 
   }
 }
 ~~~
+
+The resulting definition of "BasicSwitch" sdfObject would be identical to the definition of the "Switch" sdfObject except it would not contain the "toggle" Action.
+
+~~~ json
+{
+  "info": {
+    "title": "Example light switch using sdfRef",
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "BasicSwitch": {
+      "sdfProperty": {
+        "value": {
+          "description": "The state of the switch; false for off and true for on.",
+          "type": "boolean"
+        }
+      },
+      "sdfAction": {
+        "on": {
+          "description": "Turn the switch on; equivalent to setting value to true."
+        },
+        "off": {
+          "description": "Turn the switch off; equivalent to setting value to false."
+        }
+      }
+    }
+  }
+}
+~~~
+
 
 ### Resolved models
 
