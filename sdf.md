@@ -39,14 +39,13 @@ author:
     phone: +49-421-218-63921
     email: cabo@tzi.org
     role: editor
-contributor:
   - name: Ari Keränen
     org: Ericsson
-    street: ''
     city: Jorvas
     code: '02420'
     country: Finland
     email: ari.keranen@ericsson.com
+contributor:
   - name: Jan Romann
     org: Universität Bremen
     email: jan.romann@uni-bremen.de
