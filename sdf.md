@@ -39,14 +39,13 @@ author:
     phone: +49-421-218-63921
     email: cabo@tzi.org
     role: editor
-contributor:
   - name: Ari Keränen
     org: Ericsson
-    street: ''
     city: Jorvas
     code: '02420'
     country: Finland
     email: ari.keranen@ericsson.com
+contributor:
   - name: Jan Romann
     org: Universität Bremen
     email: jan.romann@uni-bremen.de
@@ -138,8 +137,9 @@ entity:
     version (-00) of this document; version (-05) was designated as an
     *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
     the ASDF WG (2021-03-11).
-    The present version (-15) adds an example for removing an
-    affordance via `sdfRef`.
+    The present version (-15) adds a number of editorial improvements
+    and an example for removing an affordance from a target referenced
+    via `sdfRef`.
 
 --- middle
 
@@ -703,7 +703,9 @@ added, if needed, where the namespace entry is used.
 ~~~
 
 If no defaultNamespace setting is given, the SDF definition file does not
-contribute to a global namespace.  As the defaultNamespace is set by giving a
+contribute to a global namespace (all definitions remain local to the
+model and are not accessible for re-use by other models).
+As the defaultNamespace is set by giving a
 namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.
 
@@ -1396,6 +1398,8 @@ and existing qualities from the referenced definition may be
 overridden.  (Note that JSON maps (objects) do not have a defined
 order, so the SDF processor may see these overrides before seeing the
 `sdfRef`.)
+
+Note that if the referenced definition contains qualities or definitions that are not valid in the context where the sdfRef is used (e.g., if an sdfThing definition would be added in an sdfObject definition), the resulting model, when resolved, may be invalid.
 
 As a convention, overrides are intended to be used only for further restricting
 the set of data values, as shown in {{exa-sdfref}}:  any value for a
