@@ -902,7 +902,7 @@ Given the example ({{example1}}), and the following definition:
 }
 ~~~
 
-The resulting definition of "BasicSwitch" sdfObject would be identical to the definition of the "Switch" sdfObject except it would not contain the "toggle" Action.
+The resulting definition of the "BasicSwitch" sdfObject would be identical to the definition of the "Switch" sdfObject except it would not contain the "toggle" Action.
 
 ~~~ json
 {
