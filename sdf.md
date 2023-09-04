@@ -703,7 +703,9 @@ added, if needed, where the namespace entry is used.
 ~~~
 
 If no defaultNamespace setting is given, the SDF definition file does not
-contribute to a global namespace.  As the defaultNamespace is set by giving a
+contribute to a global namespace (all definitions remain local to the
+model and are not accessible for re-use by other models).
+As the defaultNamespace is set by giving a
 namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.
 
