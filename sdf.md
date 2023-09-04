@@ -137,8 +137,9 @@ entity:
     version (-00) of this document; version (-05) was designated as an
     *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
     the ASDF WG (2021-03-11).
-    The present version (-15) adds an example for removing an
-    affordance via `sdfRef`.
+    The present version (-15) adds a number of editorial improvements
+    and an example for removing an affordance from a target referenced
+    via `sdfRef`.
 
 --- middle
 
