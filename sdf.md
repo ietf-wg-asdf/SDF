@@ -885,7 +885,7 @@ Given the example ({{example1}}), and the following definition:
 ~~~ json
 {
   "info": {
-    "title": "Example light switch using sdfRef",
+    "title": "Example light switch using sdfRef"
   },
   "namespace": {
     "cap": "https://example.com/capability/cap"
@@ -907,7 +907,7 @@ The resulting definition of "BasicSwitch" sdfObject would be identical to the de
 ~~~ json
 {
   "info": {
-    "title": "Example light switch using sdfRef",
+    "title": "Example light switch using sdfRef"
   },
   "namespace": {
     "cap": "https://example.com/capability/cap"
