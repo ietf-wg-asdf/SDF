@@ -881,7 +881,9 @@ generally describe the _result_ of applying a merge-patch; the notations
 are not powerful enough to describe, for instance, the effect of null
 values given with the sdfRef to remove members of JSON objects from
 the referenced target.  Nonetheless, the syntaxes also give the syntax
-of the sdfRef itself, which vanishes during the resolution.
+of the sdfRef itself, which vanishes during the resolution; in many
+cases therefore even merge-patch inputs will validate with these
+formal syntaxes.
 
 Given the example ({{example1}}), and the following definition:
 
