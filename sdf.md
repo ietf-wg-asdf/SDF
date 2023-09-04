@@ -1393,6 +1393,8 @@ overridden.  (Note that JSON maps (objects) do not have a defined
 order, so the SDF processor may see these overrides before seeing the
 `sdfRef`.)
 
+Note that if the referenced definition contains qualities or definitions that are not valid in the context where the sdfRef is used (e.g., if an sdfThing definition would be added in an sdfObject definition), the resulting model, when resolved, may be invalid.
+
 As a convention, overrides are intended to be used only for further restricting
 the set of data values, as shown in {{exa-sdfref}}:  any value for a
 `cable-length` also is a valid value for a `length`, with the
