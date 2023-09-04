@@ -822,7 +822,7 @@ For example, if a namespace prefix is defined:
 Then this reference to that namespace:
 
 ~~~ json
-{ "sdfRef": "foo:#/sdfData/temperatureData" }
+"sdfRef": "foo:#/sdfData/temperatureData"
 ~~~
 
 references the global name:
@@ -880,6 +880,64 @@ sdfRef member, the semantics is defined to be as if the following steps were per
 TODO: Make sure that the grammar in {{syntax}} allows specifying the
 null values that are necessary to remove members in a merge-patch.
 
+Given the example ({{example1}}), and the following definition:
+
+~~~ json
+{
+  "info": {
+    "title": "Example light switch using sdfRef"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "BasicSwitch": {
+      "sdfRef": "cap:#/sdfObject/Switch",
+      "sdfAction": {
+        "toggle": null
+      }
+    }
+  }
+}
+~~~
+
+The resulting definition of the "BasicSwitch" sdfObject would be identical to the definition of the "Switch" sdfObject except it would not contain the "toggle" Action.
+
+~~~ json
+{
+  "info": {
+    "title": "Example light switch using sdfRef"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "BasicSwitch": {
+      "sdfProperty": {
+        "value": {
+          "description":
+"The state of the switch; false for off and true for on.",
+          "type": "boolean"
+        }
+      },
+      "sdfAction": {
+        "on": {
+          "description":
+"Turn the switch on; equivalent to setting value to true."
+        },
+        "off": {
+          "description":
+"Turn the switch off; equivalent to setting value to false."
+        }
+      }
+    }
+  }
+}
+~~~
+
+
 ### Resolved models
 
 A model where all sdfRef references are processed as described in {{sdfref}} is called a resolved model.
@@ -935,35 +993,33 @@ indicating one declaration that is mandatory to be represented.
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
 ~~~ json
-{
-  "sdfObject": {
-    "temperatureWithAlarm": {
-      "sdfRequired": [
+"sdfObject": {
+  "temperatureWithAlarm": {
+    "sdfRequired": [
 "#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
 "#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
-      ],
-      "sdfData":{
-        "temperatureData": {
-          "type": "number"
-        }
-      },
-      "sdfProperty": {
-        "currentTemperature": {
+    ],
+    "sdfData":{
+       "temperatureData": {
+        "type": "number"
+      }
+    },
+    "sdfProperty": {
+      "currentTemperature": {
 "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
-        }
-      },
-      "sdfEvent": {
-        "overTemperatureEvent": {
-          "sdfOutputData": {
-            "type": "object",
-            "properties": {
-              "alarmType": {
-                "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
-                "const": "OverTemperatureAlarm"
-              },
-              "temperature": {
+      }
+    },
+    "sdfEvent": {
+      "overTemperatureEvent": {
+       "sdfOutputData": {
+          "type": "object",
+          "properties": {
+            "alarmType": {
+              "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
+              "const": "OverTemperatureAlarm"
+            },
+            "temperature": {
 "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
-              }
             }
           }
         }
