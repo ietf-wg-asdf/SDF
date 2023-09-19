@@ -1222,7 +1222,7 @@ li > p:last-of-type:only-child {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster, et al.</td>
-<td class="center">Expires 7 March 2024</td>
+<td class="center">Expires 22 March 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1235,12 +1235,12 @@ li > p:last-of-type:only-child {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-09-04" class="published">4 September 2023</time>
+<time datetime="2023-09-19" class="published">19 September 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-03-07">7 March 2024</time></dd>
+<dd class="expires"><time datetime="2024-03-22">22 March 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1312,7 +1312,7 @@ via <code>sdfRef</code>.</span><a href="#section-abstract-2" class="pilcrow">¶<
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2037,10 +2037,11 @@ constrain the structure and values of data allowed in an instance of
 these data, as well as qualities that associate semantics to these
 data, for engineering units and unit scaling information.<a href="#section-2.2.2-4" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-5">For the data definition within <code>sdfProperty</code> or <code>sdfData</code>, SDF borrows
-some vocabulary proposed for the drafts 4 and 7 of the
-json-schema.org "JSON Schema"
-format (collectively called JSO here), enhanced by qualities that are specific to SDF.
-Details about the former are in <a href="#jso-inspired" class="auto internal xref">Appendix C</a>.
+some vocabulary proposed for the drafts 4 <span>[<a href="#JSO4" class="cite xref">JSO4</a>]</span> <span>[<a href="#JSO4V" class="cite xref">JSO4V</a>]</span> and 7
+<span>[<a href="#JSO7" class="cite xref">JSO7</a>]</span> <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span> of the json-schema.org "JSON Schema" format
+(collectively called JSO here), enhanced by qualities that are
+specific to SDF.
+Details about the JSO-inspired vocabulary are in <a href="#jso-inspired" class="auto internal xref">Appendix C</a>.
 For the current version of SDF, data are constrained to be of
 simple types (number, string, Boolean),
 JSON maps composed of named data ("objects"), and arrays of these types.
@@ -2572,7 +2573,7 @@ namespace map.<a href="#section-4.3-10" class="pilcrow">¶</a></p>
 <p id="section-4.4-1">In a JSON map establishing a definition, the keyword "sdfRef" is used
 to copy all of the qualities and enclosed definitions of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
-(This can be compared to the processing of the "$ref" keyword in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+(This can be compared to the processing of the "$ref" keyword in <span>[<a href="#JSO7" class="cite xref">JSO7</a>]</span>.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4-2">For example, this reference:<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.4-3">
 <pre>
@@ -2969,9 +2970,9 @@ and <code>-</code> (ASCII hyphen/minus) characters, starting
 with a lower case ASCII letter (i.e., using a pattern of
 "⁠<code>[a-z][-a-z0-9]*</code>"), typically employing KebabCase for
 names constructed out of multiple words <span>[<a href="#KebabCase" class="cite xref">KebabCase</a>]</span>.<a href="#section-4.7.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.7.1-2">To aid interworking with <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span> implementations, it is <span class="bcp14">RECOMMENDED</span>
+<p id="section-4.7.1-2">To aid interworking with JSO implementations, it is <span class="bcp14">RECOMMENDED</span>
 that <code>sdfType</code> is always used in conjunction with the <code>type</code> quality
-inherited from <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>, in such a way as to yield a common
+inherited from <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span>, in such a way as to yield a common
 representation of the type's values in JSON.<a href="#section-4.7.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.7.1-3">Values for <code>sdfType</code> that are defined in this specification are shown in
 <a href="#sdftype1" class="auto internal xref">Table 5</a>.
@@ -3027,7 +3028,7 @@ object used to represent the choice) and a set of dataqualities
 Dataqualities that are specified at the same level as the sdfChoice
 apply to all choices in the sdfChoice, except those specific choices
 where the dataquality is overridden at the choice level.<a href="#section-4.7.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.7.2-2">sdfChoice merges the functions of two constructs found in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>:<a href="#section-4.7.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.7.2-2">sdfChoice merges the functions of two constructs found in <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span>:<a href="#section-4.7.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.7.2-3.1">
               <p id="section-4.7.2-3.1.1"><code>enum</code><a href="#section-4.7.2-3.1.1" class="pilcrow">¶</a></p>
@@ -3055,7 +3056,7 @@ This allows the placement of other dataqualities such as
 <code>description</code> in the example.<a href="#section-4.7.2-3.1.6" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-3.1.7">
 If an enum needs to use a data type different from text string,
-e.g. what would have been<a href="#section-4.7.2-3.1.7" class="pilcrow">¶</a></p>
+e.g. what would have been:<a href="#section-4.7.2-3.1.7" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-3.1.8">
 <pre>
 "type": "number",
@@ -3085,10 +3086,11 @@ element for the data model.)<a href="#section-4.7.2-3.1.12" class="pilcrow">¶</
 </li>
             <li class="normal" id="section-4.7.2-3.2">
               <p id="section-4.7.2-3.2.1">anyOf<a href="#section-4.7.2-3.2.1" class="pilcrow">¶</a></p>
-<p id="section-4.7.2-3.2.2"><span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span> provides a type union called <code>anyOf</code>, which provides a
+<p id="section-4.7.2-3.2.2">
+JSO provides a type union called <code>anyOf</code>, which provides a
 choice between anonymous alternatives.<a href="#section-4.7.2-3.2.2" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-3.2.3">
-What could have been<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
+What could have been in JSO:<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-3.2.4">
 <pre>
 "anyOf": [
@@ -3100,7 +3102,7 @@ What could have been<a href="#section-4.7.2-3.2.3" class="pilcrow">¶</a></p>
 </pre><a href="#section-4.7.2-3.2.4" class="pilcrow">¶</a>
 </div>
 <p id="section-4.7.2-3.2.5">
-in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span> can be more descriptively notated in SDF as:<a href="#section-4.7.2-3.2.5" class="pilcrow">¶</a></p>
+can be more descriptively notated in SDF as:<a href="#section-4.7.2-3.2.5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-3.2.6">
 <pre>
 "sdfChoice": {
@@ -3114,9 +3116,9 @@ in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-
 </li>
           </ul>
 <p id="section-4.7.2-4">Note that there is no need in SDF for the type intersection construct
-<code>allOf</code> or the peculiar type-xor construct <code>oneOf</code> found in <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>.<a href="#section-4.7.2-4" class="pilcrow">¶</a></p>
-<p id="section-4.7.2-5">As a simplification for readers of SDF specifications accustomed to
-the <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span> enum keyword, this is retained, but limited to a choice
+<code>allOf</code> or the peculiar type-xor construct <code>oneOf</code> found in <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span>.<a href="#section-4.7.2-4" class="pilcrow">¶</a></p>
+<p id="section-4.7.2-5">As a simplification for users of SDF specifications accustomed to
+the JSO enum keyword, this is retained, but limited to a choice
 of text string values, such that<a href="#section-4.7.2-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-6">
 <pre>
@@ -3988,10 +3990,6 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-02</span>, <time datetime="2023-04-26" class="refDate">26 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-02">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.handrews-json-schema-validation-01">[I-D.handrews-json-schema-validation-01]</dt>
-        <dd>
-<span class="refAuthor">Wright, A.</span>, <span class="refAuthor">Andrews, H.</span>, and <span class="refAuthor">G. Luff</span>, <span class="refTitle">"JSON Schema Validation: A Vocabulary for Structural Validation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-validation-01</span>, <time datetime="2018-03-19" class="refDate">19 March 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01">https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.ietf-jsonpath-iregexp">[I-D.ietf-jsonpath-iregexp]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">T. Bray</span>, <span class="refTitle">"I-Regexp: An Interoperable Regexp Format"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jsonpath-iregexp-08</span>, <time datetime="2023-06-29" class="refDate">29 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jsonpath-iregexp-08">https://datatracker.ietf.org/doc/html/draft-ietf-jsonpath-iregexp-08</a>&gt;</span>. </dd>
@@ -4000,9 +3998,25 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
         <dd>
 <span class="refAuthor">Keränen, A.</span>, <span class="refAuthor">Kovatsch, M.</span>, and <span class="refAuthor">K. Hartke</span>, <span class="refTitle">"Guidance on RESTful Design for Internet of Things Systems"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-t2trg-rest-iot-12</span>, <time datetime="2023-07-25" class="refDate">25 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-t2trg-rest-iot-12">https://datatracker.ietf.org/doc/html/draft-irtf-t2trg-rest-iot-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.wright-json-schema">[I-D.wright-json-schema]</dt>
+<dt id="JSO4">[JSO4]</dt>
         <dd>
-<span class="refAuthor">Wright, A.</span> and <span class="refAuthor">H. Andrews</span>, <span class="refTitle">"JSON Schema: A Media Type for Describing JSON Documents"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-wright-json-schema-01</span>, <time datetime="2017-04-16" class="refDate">16 April 2017</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-wright-json-schema-01">https://datatracker.ietf.org/doc/html/draft-wright-json-schema-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Galiegue, F.</span>, <span class="refAuthor">Zyp, K.</span>, and <span class="refAuthor">G. Court</span>, <span class="refTitle">"JSON Schema: core definitions and terminology"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-zyp-json-schema-04</span>, <time datetime="2013-01-31" class="refDate">31 January 2013</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04">https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04</a>&gt;</span>. <span class="annotation">This is the base specification for json-schema.org "draft 4".</span>
+          </dd>
+<dd class="break"></dd>
+<dt id="JSO4V">[JSO4V]</dt>
+        <dd>
+<span class="refAuthor">Zyp, K.</span> and <span class="refAuthor">G. Court</span>, <span class="refTitle">"JSON Schema: interactive and non interactive validation"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fge-json-schema-validation-00</span>, <time datetime="2013-01-31" class="refDate">31 January 2013</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00">https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00</a>&gt;</span>. <span class="annotation">This is the validation specification for json-schema.org "draft 4".</span>
+          </dd>
+<dd class="break"></dd>
+<dt id="JSO7">[JSO7]</dt>
+        <dd>
+<span class="refAuthor">Wright, A.</span> and <span class="refAuthor">H. Andrews</span>, <span class="refTitle">"JSON Schema: A Media Type for Describing JSON Documents"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-01</span>, <time datetime="2018-03-19" class="refDate">19 March 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-01">https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-01</a>&gt;</span>. <span class="annotation">This is the base specification for json-schema.org "draft 7".</span>
+          </dd>
+<dd class="break"></dd>
+<dt id="JSO7V">[JSO7V]</dt>
+        <dd>
+<span class="refAuthor">Wright, A.</span>, <span class="refAuthor">Andrews, H.</span>, and <span class="refAuthor">G. Luff</span>, <span class="refTitle">"JSON Schema Validation: A Vocabulary for Structural Validation of JSON"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-handrews-json-schema-validation-01</span>, <time datetime="2018-03-19" class="refDate">19 March 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01">https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01</a>&gt;</span>. <span class="annotation">This is the validation specification for json-schema.org "draft 7".</span>
+          </dd>
 <dd class="break"></dd>
 <dt id="KebabCase">[KebabCase]</dt>
         <dd>
@@ -4290,7 +4304,7 @@ rfc3339z = '
       </h2>
 <p id="appendix-B-1">This appendix describes the syntax of SDF defined in <a href="#syntax" class="auto internal xref">Appendix A</a>, but
 using a version of the description techniques advertised on
-json-schema.org <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+json-schema.org <span>[<a href="#JSO7" class="cite xref">JSO7</a>]</span> <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">The appendix shows both the validation and the framework syntax.
 Since most of the lines are the same between these two files, those lines are shown only once, with a leading space, in the form of a unified diff.
 Lines leading with a <code>-</code> are part of the validation syntax, and lines leading with a <code>+</code> are part of the framework syntax.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
@@ -6115,7 +6129,7 @@ model level.
 A popular way to describe JSON data at a data model level is proposed
 by a number of drafts on json-schema.org (which collectively are
 abbreviated JSO here)); for reference to a popular version we will
-point here to <span>[<a href="#I-D.handrews-json-schema-validation-01" class="cite xref">I-D.handrews-json-schema-validation-01</a>]</span>.
+point here to <span>[<a href="#JSO7" class="cite xref">JSO7</a>]</span> and <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span>.
 As the vocabulary used by JSO is familiar to many JSON modelers, the
 present specification borrows some of the terms and ports their
 semantics to the information model level needed for SDF.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
@@ -6144,7 +6158,7 @@ is in a notation that would also allow non-zero decimal fractions).<a href="#app
 "<code>exclusiveMinimum</code>", "<code>exclusiveMaximum</code>" provide number values that
 serve as inclusive/exclusive lower/upper bounds for the number.
 (Note that the Boolean form of
-"<code>exclusiveMinimum</code>"/"<code>exclusiveMaximum</code>" found in earlier JSO drafts
+"<code>exclusiveMinimum</code>"/"<code>exclusiveMaximum</code>" found in earlier JSO drafts <span>[<a href="#JSO4V" class="cite xref">JSO4V</a>]</span>
 is not used.)<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.1-3">The data quality "<code>multipleOf</code>" gives a positive number that
 constrains the data value to be an integer multiple of the number
@@ -6262,15 +6276,13 @@ defining map entries is unrelated to sdfProperty.<a href="#appendix-C.5-4" class
 <p id="appendix-C.6-1">JSO-based keywords are also used in the specification techniques of a
 number of ecosystems, but some adjustments may be required.<a href="#appendix-C.6-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.6-2">E.g., <span>[<a href="#OCF" class="cite xref">OCF</a>]</span> is based on Swagger 2.0 which appears to be based on
-"draft-4" <span>[<a href="#I-D.wright-json-schema" class="cite xref">I-D.wright-json-schema</a>]</span> (also called draft-5, but semantically intended to
+"draft-4" <span>[<a href="#JSO4" class="cite xref">JSO4</a>]</span><span>[<a href="#JSO4V" class="cite xref">JSO4V</a>]</span> (also called draft-5, but semantically intended to
 be equivalent to draft-4).
 The "<code>exclusiveMinimum</code>" and "<code>exclusiveMaximum</code>" keywords use the
 Boolean form there, so on import to SDF their values have to be
 replaced by the values of the respective "<code>minimum</code>"/"<code>maximum</code>"
 keyword, which are themselves then removed; the reverse transformation
 applies on export.<a href="#appendix-C.6-2" class="pilcrow">¶</a></p>
-<p id="appendix-C.6-3">TBD: add any useful implementation notes we can find for other
-ecosystems that use JSO.<a href="#appendix-C.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
