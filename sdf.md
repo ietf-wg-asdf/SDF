@@ -82,9 +82,24 @@ normative:
     date: false
   RFC9165: control
 informative:
-  I-D.handrews-json-schema-validation-01: jso
+  JSO7: 
+    =: I-D.handrews-json-schema-01
+    -: jso
+    ann: This is the base specification for json-schema.org "draft 7".
+  JSO7V:
+    =: I-D.handrews-json-schema-validation-01
+    -: jso7v
+    ann: This is the validation specification for json-schema.org "draft 7".
+  JSO4:
+    =: I-D.draft-zyp-json-schema-04
+#   =: I-D.wright-json-schema
+    -: jso4
+    ann: This is the base specification for json-schema.org "draft 4".
+  JSO4V:
+    =: I-D.fge-json-schema-validation-00
+    -: jso4v
+    ann: This is the validation specification for json-schema.org "draft 4".
 # -02#section-7.3 -- formats
-  I-D.wright-json-schema: jso4
   I-D.irtf-t2trg-rest-iot: rest-iot
   ZCL: DOI.10.1016/B978-0-7506-8597-9.00006-9
   OMA:
@@ -421,10 +436,11 @@ these data, as well as qualities that associate semantics to these
 data, for engineering units and unit scaling information.
 
 For the data definition within `sdfProperty` or `sdfData`, SDF borrows
-some vocabulary proposed for the drafts 4 and 7 of the
-json-schema.org "JSON Schema"
-format (collectively called JSO here), enhanced by qualities that are specific to SDF.
-Details about the former are in {{jso-inspired}}.
+some vocabulary proposed for the drafts 4 {{-jso4}} {{-jso4v}} and 7
+{{-jso}} {{-jso7v}} of the json-schema.org "JSON Schema" format
+(collectively called JSO here), enhanced by qualities that are
+specific to SDF.
+Details about the JSO-inspired vocabulary are in {{jso-inspired}}.
 For the current version of SDF, data are constrained to be of
 simple types (number, string, Boolean),
 JSON maps composed of named data ("objects"), and arrays of these types.
@@ -1130,9 +1146,9 @@ with a lower case ASCII letter (i.e., using a pattern of
 "⁠`[a-z][-a-z0-9]*`"), typically employing KebabCase for
 names constructed out of multiple words {{KebabCase}}.
 
-To aid interworking with {{-jso}} implementations, it is RECOMMENDED
+To aid interworking with JSO implementations, it is RECOMMENDED
 that `sdfType` is always used in conjunction with the `type` quality
-inherited from {{-jso}}, in such a way as to yield a common
+inherited from {{-jso7v}}, in such a way as to yield a common
 representation of the type's values in JSON.
 
 Values for `sdfType` that are defined in this specification are shown in
@@ -1164,7 +1180,7 @@ Dataqualities that are specified at the same level as the sdfChoice
 apply to all choices in the sdfChoice, except those specific choices
 where the dataquality is overridden at the choice level.
 
-sdfChoice merges the functions of two constructs found in {{-jso}}:
+sdfChoice merges the functions of two constructs found in {{-jso7v}}:
 
 * `enum`
 
@@ -1189,7 +1205,7 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   `description` in the example.
 
   If an enum needs to use a data type different from text string,
-  e.g. what would have been
+  e.g. what would have been:
 
   ~~~ json
   "type": "number",
@@ -1217,10 +1233,10 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
 
 * anyOf
 
-  {{-jso}} provides a type union called `anyOf`, which provides a
+  JSO provides a type union called `anyOf`, which provides a
   choice between anonymous alternatives.
 
-  What could have been
+  What could have been in JSO:
 
   ~~~ json
   "anyOf": [
@@ -1231,7 +1247,7 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ]
   ~~~
 
-  in {{-jso}} can be more descriptively notated in SDF as:
+  can be more descriptively notated in SDF as:
 
   ~~~ json
   "sdfChoice": {
@@ -1243,10 +1259,10 @@ sdfChoice merges the functions of two constructs found in {{-jso}}:
   ~~~
 
 Note that there is no need in SDF for the type intersection construct
-`allOf` or the peculiar type-xor construct `oneOf` found in {{-jso}}.
+`allOf` or the peculiar type-xor construct `oneOf` found in {{-jso7v}}.
 
-As a simplification for readers of SDF specifications accustomed to
-the {{-jso}} enum keyword, this is retained, but limited to a choice
+As a simplification for users of SDF specifications accustomed to
+the JSO enum keyword, this is retained, but limited to a choice
 of text string values, such that
 
 ~~~ json
@@ -1693,7 +1709,7 @@ further evolution.
 
 This appendix describes the syntax of SDF defined in {{syntax}}, but
 using a version of the description techniques advertised on
-json-schema.org {{-jso}}.
+json-schema.org {{-jso}} {{-jso7v}}.
 
 The appendix shows both the validation and the framework syntax.
 Since most of the lines are the same between these two files, those lines are shown only once, with a leading space, in the form of a unified diff.
@@ -1710,7 +1726,7 @@ model level.
 A popular way to describe JSON data at a data model level is proposed
 by a number of drafts on json-schema.org (which collectively are
 abbreviated JSO here)); for reference to a popular version we will
-point here to {{-jso}}.
+point here to {{-jso}} and {{-jso7v}}.
 As the vocabulary used by JSO is familiar to many JSON modelers, the
 present specification borrows some of the terms and ports their
 semantics to the information model level needed for SDF.
@@ -1742,7 +1758,7 @@ The additional data qualities "`minimum`", "`maximum`",
 "`exclusiveMinimum`", "`exclusiveMaximum`" provide number values that
 serve as inclusive/exclusive lower/upper bounds for the number.
 (Note that the Boolean form of
-"`exclusiveMinimum`"/"`exclusiveMaximum`" found in earlier JSO drafts
+"`exclusiveMinimum`"/"`exclusiveMaximum`" found in earlier JSO drafts {{-jso4v}}
 is not used.)
 
 The data quality "`multipleOf`" gives a positive number that
@@ -1844,16 +1860,13 @@ JSO-based keywords are also used in the specification techniques of a
 number of ecosystems, but some adjustments may be required.
 
 E.g., {{OCF}} is based on Swagger 2.0 which appears to be based on
-"draft-4" {{-jso4}} (also called draft-5, but semantically intended to
+"draft-4" {{-jso4}}{{-jso4v}} (also called draft-5, but semantically intended to
 be equivalent to draft-4).
 The "`exclusiveMinimum`" and "`exclusiveMaximum`" keywords use the
 Boolean form there, so on import to SDF their values have to be
 replaced by the values of the respective "`minimum`"/"`maximum`"
 keyword, which are themselves then removed; the reverse transformation
 applies on export.
-
-TBD: add any useful implementation notes we can find for other
-ecosystems that use JSO.
 
 # Composition Examples {#composition-examples}
 
