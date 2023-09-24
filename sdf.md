@@ -319,6 +319,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
   }
 }
 ~~~
+{: sourcecode-name="example1.sdf.json"}
 {: #example1 title="A simple example of an SDF definition file"}
 
 This is a model of a switch.
@@ -959,6 +960,7 @@ The resulting definition of the "BasicSwitch" sdfObject would be identical to th
   }
 }
 ~~~
+{: sourcecode-name="example1-without-toggle.sdf.json"}
 
 
 ### Resolved models
@@ -1892,6 +1894,7 @@ using the `sdfThing` quality.
   }
 }
 ~~~
+{: sourcecode-name="example-sdfthing-outlet-strip.sdf.json"}
 {: #exa-sdfthing-outlet-strip}
 
 ## Refrigerator-Freezer Example {#fridge-freezer-example}
@@ -1939,6 +1942,7 @@ using the `sdfThing` quality.
   }
 }
 ~~~
+{: sourcecode-name="example-sdfthing-refrigerator-freezer.sdf.json"}
 {: #exa-sdfthing-fridge-freezer}
 
 # Acknowledgements
