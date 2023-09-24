@@ -281,7 +281,43 @@ Conventions:
 We start with an example for the SDF definition of a simple Object called "Switch" ({{example1}}).
 
 ~~~ json
-{::include examples/example1.json}
+{
+  "info": {
+    "title": "Example file for OneDM Semantic Definition Format",
+    "version": "2019-04-24",
+    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+    "license": "https://example.com/license"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "Switch": {
+      "sdfProperty": {
+        "value": {
+          "description":
+"The state of the switch; false for off and true for on.",
+          "type": "boolean"
+        }
+      },
+      "sdfAction": {
+        "on": {
+          "description":
+"Turn the switch on; equivalent to setting value to true."
+        },
+        "off": {
+          "description":
+"Turn the switch off; equivalent to setting value to false."
+        },
+        "toggle": {
+          "description":
+"Toggle the switch; equivalent to setting value to its complement."
+        }
+      }
+    }
+  }
+}
 ~~~
 {: #example1 title="A simple example of an SDF definition file"}
 
@@ -892,7 +928,36 @@ Given the example ({{example1}}), and the following definition:
 The resulting definition of the "BasicSwitch" sdfObject would be identical to the definition of the "Switch" sdfObject except it would not contain the "toggle" Action.
 
 ~~~ json
-{::include examples/example1-without-toggle.json}
+{
+  "info": {
+    "title": "Example light switch using sdfRef"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "BasicSwitch": {
+      "sdfProperty": {
+        "value": {
+          "description":
+"The state of the switch; false for off and true for on.",
+          "type": "boolean"
+        }
+      },
+      "sdfAction": {
+        "on": {
+          "description":
+"Turn the switch on; equivalent to setting value to true."
+        },
+        "off": {
+          "description":
+"Turn the switch off; equivalent to setting value to false."
+        }
+      }
+    }
+  }
+}
 ~~~
 
 
@@ -1811,14 +1876,68 @@ using the `sdfThing` quality.
 ## Outlet Strip Example {#outlet-strip-example}
 
 ~~~
-{::include examples/example-sdfthing-outlet-strip.json}
+{
+  "sdfThing": {
+    "outlet-strip" : {
+      "label": "Outlet strip",
+      "description": "Contains a number of Sockets",
+      "sdfObject": {
+        "socket": {
+          "description": "An array of sockets in the outlet strip",
+          "minItems": 2,
+          "maxItems": 10
+        }
+      }
+    }
+  }
+}
 ~~~
 {: #exa-sdfthing-outlet-strip}
 
 ## Refrigerator-Freezer Example {#fridge-freezer-example}
 
 ~~~
-{::include examples/example-sdfthing-refrigerator-freezer.json}
+{
+  "sdfThing": {
+    "refrigerator-freezer" : {
+      "description": "A refrigerator combined with a freezer",
+      "sdfProperty": {
+        "status": {
+          "type": "boolean",
+          "description":
+"Indicates if the refrigerator-freezer is powered"
+        }
+      },
+      "sdfObject": {
+        "refrigerator": {
+          "description": "A refrigerator compartment",
+          "sdfProperty": {
+            "temperature": {
+              "sdfRef": "#/sdfProproperty/temperature",
+              "maximum": 8
+            }
+          }
+        },
+        "freezer": {
+          "label": "A freezer compartment",
+          "sdfProperty": {
+            "temperature": {
+              "sdfRef": "#/sdfProproperty/temperature",
+              "maximum": -6
+            }
+          }
+        }
+      }
+    }
+  },
+  "sdfProperty": {
+    "temperature": {
+      "description": "The temperature for this compartment",
+      "type": "number",
+      "unit": "Cel"
+    }
+  }
+}
 ~~~
 {: #exa-sdfthing-fridge-freezer}
 
