@@ -82,7 +82,7 @@ normative:
     date: false
   RFC9165: control
 informative:
-  JSO7: 
+  JSO7:
     =: I-D.handrews-json-schema-01
     -: jso
     ann: This is the base specification for json-schema.org "draft 7".
@@ -1880,7 +1880,7 @@ using the `sdfThing` quality.
 ~~~
 {
   "sdfThing": {
-    "outlet-strip" : {
+    "outlet-strip": {
       "label": "Outlet strip",
       "description": "Contains a number of Sockets",
       "sdfObject": {
@@ -1902,7 +1902,7 @@ using the `sdfThing` quality.
 ~~~
 {
   "sdfThing": {
-    "refrigerator-freezer" : {
+    "refrigerator-freezer": {
       "description": "A refrigerator combined with a freezer",
       "sdfProperty": {
         "status": {
