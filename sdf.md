@@ -1877,7 +1877,7 @@ using the `sdfThing` quality.
 
 ## Outlet Strip Example {#outlet-strip-example}
 
-~~~
+~~~ json
 {
   "sdfThing": {
     "outlet-strip": {
@@ -1899,7 +1899,7 @@ using the `sdfThing` quality.
 
 ## Refrigerator-Freezer Example {#fridge-freezer-example}
 
-~~~
+~~~ json
 {
   "sdfThing": {
     "refrigerator-freezer": {
