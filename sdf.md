@@ -82,7 +82,7 @@ normative:
     date: false
   RFC9165: control
 informative:
-  JSO7: 
+  JSO7:
     =: I-D.handrews-json-schema-01
     -: jso
     ann: This is the base specification for json-schema.org "draft 7".
@@ -186,7 +186,7 @@ Affordance:
 Quality:
 : A metadata item in a definition or declaration which says something
   about that definition or declaration.  A quality is represented in
-  SDF as an entry in a JSON map (object) that serves as a definition
+  SDF as an entry in a JSON map (JSON object) that serves as a definition
   or declaration.
 
 Entry:
@@ -232,7 +232,7 @@ Object:
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object is specifically reserved for the above grouping, even if
-  the type name "object" might be imported from a data definition
+  the type name `"object"` might be imported from a data definition
   language with the other semantics.)
 
 Element:
@@ -326,8 +326,8 @@ The state `value` declared in the `sdfProperty` group, represented by a Boolean,
 The actions `on` or `off` declared in the `sdfAction` group are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action `toggle` will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
 
-The `sdfObject` group lists the affordances of instances of this object.
-The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the object.
+The `sdfObject` group lists the affordances of instances of this Object.
+The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the Object.
 Properties can have additional qualities to describe the state more precisely.
 Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
 Properties are often used with RESTful paradigms {{-rest-iot}}, describing state.
@@ -443,7 +443,7 @@ specific to SDF.
 Details about the JSO-inspired vocabulary are in {{jso-inspired}}.
 For the current version of SDF, data are constrained to be of
 simple types (number, string, Boolean),
-JSON maps composed of named data ("objects"), and arrays of these types.
+JSON maps composed of named data, and arrays of these types.
 Syntax extension points are provided that can be used to provide
 richer types in future versions of this specification (possibly more
 of which can be borrowed from json-schema.org).
@@ -464,7 +464,7 @@ might be considered to be roughly analogous to method calls.
 
 Actions may have data parameters; these are modeled as a single item of input
 data and output data, each.  (Where multiple parameters need to be
-modeled, an "object" type can be used to combine these parameters into one.)
+modeled, an `"object"` type can be used to combine these parameters into one.)
 <!-- (using `sdfData` definitions, i.e., the same entries as for `sdfProperty` declarations). -->
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
@@ -540,25 +540,25 @@ is composed of: other definitions in `sdfThing` groups definitions in `sdfObject
 
 ## Member names: Given Names and Quality Names
 
-SDF models are JSON objects (maps) that mostly employ JSON objects as
-member values, which in turn mostly employ JSON objects as their
+SDF models are JSON maps that mostly employ JSON maps as
+member values, which in turn mostly employ JSON maps as their
 member values, and so on.
-This nested structure of JSON objects creates a tree, where the edges
-are the member names (map keys) used in these JSON objects.
+This nested structure of JSON maps creates a tree, where the edges
+are the member names (map keys) used in these JSON maps.
 (In certain cases, where member names are not needed, JSON arrays may
 be interspersed in this tree.)
 
 ### Given Names and Quality Names
 
-For any particular JSON object in an SDF model, the set of member
+For any particular JSON map in an SDF model, the set of member
 names that are used is either of:
 
-* A set of "*Quality Names*", where the entries in the object are
+* A set of "*Quality Names*", where the entries in the map are
   Qualities.  Quality Names are defined by the present specification
   and its extensions, together with specific semantics to be
   associated with the member value given with a certain Quality Name.
 
-* A set of "*Given Names*", where the entries in the object are separate
+* A set of "*Given Names*", where the entries in the map are separate
   entities (definitions, declarations, etc.) that each have names that
   are chosen by the SDF model author in order that these names can be
   employed by a user of that model.
@@ -567,16 +567,16 @@ In a path from the root of the tree to any leaf, Quality Names and
 Given Names roughly alternate (with the information block,
 {{information-block}}, as a prominent exception).
 
-The meaning of the JSON object that is the member value associated
+The meaning of the JSON map that is the member value associated
 with a Given Name is derived from the Quality Name that was used as
 the member name associated to the parent.
-In the CDDL grammar given in {{syntax}}, JSON objects with member names that are
-Given Names are defined using the CDDL generic rule reference `named<objectmembers>`,
-where `objectmembers` is in turn the structure of the members of the
-JSON object that is the value of the member named by the Given Name.
-As quality-named objects and given-named objects roughly alternate in
-a path down the tree, `objectmembers` is usually an object built from
-Quality Names.
+In the CDDL grammar given in {{syntax}}, JSON maps with member names that are
+Given Names are defined using the CDDL generic rule reference `named<membervalues>`,
+where `membervalues` is in turn the structure of the member values of the
+JSON map, i.e., the value of the member named by the Given Name.
+As quality-named maps and given-named maps roughly alternate in
+a path down the tree, `membervalues` is usually a map built from
+Quality Names as keys.
 
 ### Hierarchical Names
 
@@ -645,8 +645,8 @@ SDF definitions are contained in SDF files.  One or more SDF files can
 work together to provide the definitions and declarations that are the
 payload of the SDF format.
 
-An SDF definition file contains a single JSON map (JSON object).
-This object has three blocks: the information block, the namespaces block, and the definitions block.
+An SDF definition file contains a single JSON map.
+This map has three blocks: the information block, the namespaces block, and the definitions block.
 
 ## Information block
 
@@ -732,7 +732,7 @@ set up, and no defaultNamespace can be given.
 ## Definitions block
 
 The Definitions block contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
-The value of each group is a JSON map (object), the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
+The value of each group is a JSON map, the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
 (In short, we speak of the map entries as "named sets of qualities".)
 
 Each group may contain zero or more definitions.
@@ -897,7 +897,7 @@ sdfRef member, the semantics is defined to be as if the following steps were per
 Note that the formal syntaxes given in Appendices {{<syntax}} and {{<jso}}
 generally describe the _result_ of applying a merge-patch; the notations
 are not powerful enough to describe, for instance, the effect of null
-values given with the sdfRef to remove members of JSON objects from
+values given with the sdfRef to remove members of JSON maps from
 the referenced target.  Nonetheless, the syntaxes also give the syntax
 of the sdfRef itself, which vanishes during the resolution; in many
 cases therefore even merge-patch inputs will validate with these
@@ -1174,8 +1174,9 @@ In SDF 1.0, a similar concept was called `subtype`.
 
 Data can be a choice of named alternatives, called `sdfChoice`.
 Each alternative is identified by a name (string, key in the JSON
-object used to represent the choice) and a set of dataqualities
-(object, the value in the JSON object used to represent the choice).
+map used to represent the choice) and a set of dataqualities
+(inner JSON map, the value used to represent the
+choice in the outer JSON map).
 Dataqualities that are specified at the same level as the sdfChoice
 apply to all choices in the sdfChoice, except those specific choices
 where the dataquality is overridden at the choice level.
@@ -1291,7 +1292,7 @@ All these definitions share some common qualities as discussed in {{common-quali
 ## sdfObject
 
 The sdfObject keyword denotes a group of zero or more Object definitions.
-Object definitions may contain or include definitions of Properties, Actions, Events declared for the object, as well as data types (sdfData group) to be used in this or other Objects.
+Object definitions may contain or include definitions of Properties, Actions, Events declared for the Object, as well as data types (sdfData group) to be used in this or other Objects.
 
 The qualities of an sdfObject include the common qualities, additional qualities are shown in {{sdfobjqual}}.
 None of these
@@ -1301,9 +1302,9 @@ quality is absent.
 | Quality     | Type      | Description                                                              |
 |-------------+-----------+--------------------------------------------------------------------------|
 | (common)    |           | {{common-qualities}}                                                     |
-| sdfProperty | property  | zero or more named property definitions for this object                  |
-| sdfAction   | action    | zero or more named action definitions for this object                    |
-| sdfEvent    | event     | zero or more named event definitions for this object                     |
+| sdfProperty | property  | zero or more named property definitions for this Object                  |
+| sdfAction   | action    | zero or more named action definitions for this Object                    |
+| sdfEvent    | event     | zero or more named event definitions for this Object                     |
 | sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
 | minItems    | number    | (array) Minimum number of sdfObject instances in array                   |
 | maxItems    | number    | (array) Maximum number of sdfObject instances in array                   |
@@ -1346,7 +1347,7 @@ The qualities of an Action definition include the common qualities, additional q
 `sdfInputData` defines the input data of the action.  `sdfOutputData`
 defines the output data of the action.
 As discussed in {{sdfaction-overview}}, a set of data qualities with
-type "object" can be used to substructure either data item, with
+type `"object"` can be used to substructure either data item, with
 optionality indicated by the data quality `required`.
 
 ## sdfEvent
@@ -1366,7 +1367,7 @@ The qualities of sdfEvent include the common qualities, additional qualities are
 
 `sdfOutputData` defines the output data of the action.
 As discussed in {{sdfevent-overview}}, a set of data qualities with
-type "object" can be used to substructure the output data item, with
+type `"object"` can be used to substructure the output data item, with
 optionality indicated by the data quality `required`.
 
 ## sdfData
@@ -1387,9 +1388,9 @@ The requirements for high level composition include the following:
 
 - The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.
 
-- The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.
+- The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer Objects, while retaining the atomicity of the individual Objects.
 
-- The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.
+- The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of Objects.
 
 - The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.
 
@@ -1399,7 +1400,7 @@ The requirements for high level composition include the following:
 
 The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.
 
-The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where `ns` is the namespace prefix (short name for the namespace).
+The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an Object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where `ns` is the namespace prefix (short name for the namespace).
 
 ## Modular Composition
 
@@ -1411,7 +1412,7 @@ An existing definition may be used as a template for a new definition, that is, 
 
 In the definition that uses "sdfRef", new qualities may be added
 and existing qualities from the referenced definition may be
-overridden.  (Note that JSON maps (objects) do not have a defined
+overridden.  (Note that JSON maps do not have a defined
 order, so the SDF processor may see these overrides before seeing the
 `sdfRef`.)
 
@@ -1447,7 +1448,7 @@ consumption there is no conflict with the intended goal.
 
 ## sdfThing
 
-An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
+An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the Object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
 (see {{exa-sdfthing-outlet-strip}} in {outlet-strip-example}} for an example SDF model).
 
 sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
@@ -1839,13 +1840,13 @@ that, if true, requires the elements to be all different.
 ## type "`object`"
 
 The type "`object`" is associated with maps, from strings to values, as
-they are available in JSON ("objects").
+they are available in JSON.
 
 The additional quality "`properties`" is a map the entries of which
-describe entries in the specified JSON object: The key gives an
-allowable map key for the specified JSON object, and the value is a
+describe entries in the specified JSON map: The key gives an
+allowable map key for the specified JSON map, and the value is a
 map with a named set of data qualities giving the type for the
-corresponding value in the specified JSON object.
+corresponding value in the specified JSON map.
 
 All entries specified this way are optional, unless they are listed in
 the value of the additional quality "`required`", which is an array of
