@@ -1,4 +1,4 @@
-render: sdf.md
+render: sdf-framework.cddl sdf.jso.json-unidiff sdf.md
 	kdrfc sdf.md
 
 sourcecode: sdf.xml
