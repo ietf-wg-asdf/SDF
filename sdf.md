@@ -1176,10 +1176,10 @@ In SDF 1.0, a similar concept was called `subtype`.
 ### sdfChoice
 
 Data can be a choice of named alternatives, called `sdfChoice`.
-Each alternative is identified by a name (string, key in the JSON
-map used to represent the choice) and a set of dataqualities
-(inner JSON map, the value used to represent the
-choice in the outer JSON map).
+Each alternative is identified by a name (string, key in the outer JSON
+map used to represent the overall choice) and a set of dataqualities
+(each in an inner JSON map, the value used to represent the
+individual alternative in the outer JSON map).
 Dataqualities that are specified at the same level as the sdfChoice
 apply to all choices in the sdfChoice, except those specific choices
 where the dataquality is overridden at the choice level.
