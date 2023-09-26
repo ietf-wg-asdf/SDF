@@ -296,7 +296,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
 ~~~ json
 {
   "info": {
-    "title": "Example file for OneDM Semantic Definition Format",
+    "title": "Example document for OneDM Semantic Definition Format",
     "version": "2019-04-24",
     "copyright": "Copyright 2019 Example Corp. All rights reserved.",
     "license": "https://example.com/license"
@@ -332,8 +332,8 @@ We start with an example for the SDF definition of a simple Object called "Switc
   }
 }
 ~~~
+{: #example1 title="A simple example of an SDF document"}
 {: sourcecode-name="example1.sdf.json"}
-{: #example1 title="A simple example of an SDF definition file"}
 
 This is a model of a switch.
 The state `value` declared in the `sdfProperty` group, represented by a Boolean, will be true for "on" and will be false for "off".
@@ -667,18 +667,22 @@ All names in SDF are case-sensitive.
 
 # SDF structure
 
-SDF definitions are contained in SDF files.  One or more SDF files can
-work together to provide the definitions and declarations that are the
-payload of the SDF format.
+SDF definitions are contained in SDF documents, together with data
+about the SDF document itself (information block).
+Definitions and declarations from additional SDF documents can be
+referenced; together with the definitions and declarations in the
+referencing SDF document they build the SDF model expressed by that
+gSDF document.
 
-An SDF definition file contains a single JSON map.
+Each SDF document is represented as a single JSON map.
 This map has three blocks: the information block, the namespaces block, and the definitions block.
 
 ## Information block
 
-The information block contains generic meta data for the file itself and all included definitions.
+The information block contains generic meta data for the SDF document
+itself and all included definitions.
 To enable tool integration, the information block is optional in the grammar
-of SDF; most processes for working with SDF files will have policies
+of SDF; most processes for working with SDF documents will have policies
 that only SDF models with an info block can be processed.
 It is therefore RECOMMENDED that SDF validator tools emit a warning
 when no information block is found.
@@ -699,11 +703,14 @@ Qualities of the information block are shown in {{infoblockqual}}.
 | $comment  | string           | no       | Source code comments only, no semantics                     |
 {: #infoblockqual title="Qualities of the Information Block"}
 
-The version quality is used to indicate version information about the set of definitions in the file.
+The version quality is used to indicate version information about the
+set of definitions in the SDF document.
 The version is RECOMMENDED to be lexicographically increasing over the life of a model: a newer model always has a version string that string-compares higher than all previous versions.
 This is easily achieved by following the convention to start the version with an {{RFC3339}} `date-time` or, if new versions are generated less frequently than once a day, just the `full-date` (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see {{example1}} for an example).
 This specification does not give a strict definition for the format of the version string but each using system or organization should define internal structure and semantics to the level needed for their use.
-If no further details are provided, a `date-time` or `full-date` in this field can be assumed to indicate the latest update time of the definitions in the file.
+If no further details are provided, a `date-time` or `full-date` in
+this field can be assumed to indicate the latest update time of the
+definitions in the SDF document.
 
 The modified quality can be used with a value using {{RFC3339}} `date-time` (with `Z` for time-zone) or `full-date` format to express time of the latest revision of the definitions.
 
@@ -722,7 +729,7 @@ themselves.
 
 The defaultNamespace setting selects one of the entries in the
 namespace map by giving its short name.  The associated URI (value of
-this entry) becomes the default namespace for the SDF definition file.
+this entry) becomes the default namespace for the SDF document.
 
 | Quality          | Type   | Required | Description                                                                                          |
 |------------------|--------|----------|------------------------------------------------------------------------------------------------------|
@@ -744,7 +751,7 @@ added, if needed, where the namespace entry is used.
 "defaultNamespace": "cap"
 ~~~
 
-If no defaultNamespace setting is given, the SDF definition file does not
+If no defaultNamespace setting is given, the SDF document does not
 contribute to a global namespace (all definitions remain local to the
 model and are not accessible for re-use by other models).
 As the defaultNamespace is set by giving a
@@ -790,9 +797,9 @@ Some of the definitions are also declarations: the definition of the entry "bar"
 
 # Names and namespaces
 
-SDF definition files may contribute to a global namespace, and may
+SDF documents may contribute to a global namespace, and may
 reference elements from that global namespace.
-(An SDF definition file that does not set a defaultNamespace does not
+(An SDF document that does not set a defaultNamespace does not
 contribute to a global namespace.)
 
 ## Structure
@@ -817,14 +824,14 @@ The fragment identifier is constructed as per {{Section 6 of
 ## Contributing global names
 
 The fragment identifier part of a global name defined in an SDF
-definition file is constructed from a JSON pointer that selects the
-element defined for this name in the SDF definition file.
+document is constructed from a JSON pointer that selects the
+element defined for this name in the SDF document.
 
 The absolute URI part is a copy of the default namespace, i.e., the
 default namespace is always the target namespace for a name for which
 a definition is contributed.
 When emphasizing that name definitions are contributed to the default namespace,
-we therefore also call it the "target namespace" of the SDF definition file.
+we therefore also call it the "target namespace" of the SDF document.
 
 E.g., in {{example1}}, definitions for the following global names are contributed:
 
@@ -843,15 +850,14 @@ A name reference takes the form of the production `curie` in
 but also limiting the IRIs involved in that production to URIs as per {{-uri}}
 and the prefixes to ASCII characters {{-ascii}}.
 
-A name that is contributed by the current SDF definition file can be
+A name that is contributed by the current SDF document can be
 referenced by a Same-Document Reference as per {{Section 4.4 of
 -uri}}.
-As there is little point in referencing the entire SDF definition
-file, this will be a `#` followed by a JSON pointer.
+As there is little point in referencing the entire SDF document, this will be a `#` followed by a JSON pointer.
 This is the only kind of name reference to itself that is possible in an SDF
-definition file that does not set a default namespace.
+document that does not set a default namespace.
 
-Name references that point outside the current SDF definition file
+Name references that point outside the current SDF document
 need to contain curie prefixes.  These then reference namespace
 declarations in the namespaces block.
 
@@ -1427,13 +1433,20 @@ The requirements for high level composition include the following:
 
 ## Paths in the model namespaces
 
-The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.
+The model namespace is organized according to terms that are defined
+in the SDF documents that contribute to the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor.
 
-The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an Object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where `ns` is the namespace prefix (short name for the namespace).
+The structure of a path in a namespace is defined by the JSON Pointers
+to the definitions in the SDF documents in that namespace.
+For example, if there is an SDF document defining an Object "Switch"
+with an action "on", then the reference to the action would be
+"ns:/sdfObject/Switch/sdfAction/on" where `ns` is the namespace prefix
+(short name for the namespace).
 
 ## Modular Composition
 
-Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.
+Modular composition of definitions enables an existing definition
+(could be in the same or another SDF document) to become part of a new definition by including a reference to the existing definition within the model namespace.
 
 ### Use of the "sdfRef" keyword to re-use a definition
 
