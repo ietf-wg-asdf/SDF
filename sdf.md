@@ -82,7 +82,7 @@ normative:
     date: false
   RFC9165: control
 informative:
-  JSO7: 
+  JSO7:
     =: I-D.handrews-json-schema-01
     -: jso
     ann: This is the base specification for json-schema.org "draft 7".
@@ -320,6 +320,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
 }
 ~~~
 {: #example1 title="A simple example of an SDF document"}
+{: sourcecode-name="example1.sdf.json"}
 
 This is a model of a switch.
 The state `value` declared in the `sdfProperty` group, represented by a Boolean, will be true for "on" and will be false for "off".
@@ -965,6 +966,7 @@ The resulting definition of the "BasicSwitch" sdfObject would be identical to th
   }
 }
 ~~~
+{: sourcecode-name="example1-without-toggle.sdf.json"}
 
 
 ### Resolved models
@@ -1461,7 +1463,7 @@ consumption there is no conflict with the intended goal.
 ## sdfThing
 
 An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
-(see {{exa-sdfthing-outlet-strip}} in {outlet-strip-example}} for an example SDF model).
+(see {{exa-sdfthing-outlet-strip}} in {{outlet-strip-example}} for an example SDF model).
 
 sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
 An `sdfThing` can also contain Interaction Affordances and sdfData itself, such
@@ -1888,10 +1890,10 @@ using the `sdfThing` quality.
 
 ## Outlet Strip Example {#outlet-strip-example}
 
-~~~
+~~~ json
 {
   "sdfThing": {
-    "outlet-strip" : {
+    "outlet-strip": {
       "label": "Outlet strip",
       "description": "Contains a number of Sockets",
       "sdfObject": {
@@ -1905,14 +1907,15 @@ using the `sdfThing` quality.
   }
 }
 ~~~
+{: sourcecode-name="example-sdfthing-outlet-strip.sdf.json"}
 {: #exa-sdfthing-outlet-strip}
 
 ## Refrigerator-Freezer Example {#fridge-freezer-example}
 
-~~~
+~~~ json
 {
   "sdfThing": {
-    "refrigerator-freezer" : {
+    "refrigerator-freezer": {
       "description": "A refrigerator combined with a freezer",
       "sdfProperty": {
         "status": {
@@ -1952,6 +1955,7 @@ using the `sdfThing` quality.
   }
 }
 ~~~
+{: sourcecode-name="example-sdfthing-refrigerator-freezer.sdf.json"}
 {: #exa-sdfthing-fridge-freezer}
 
 # Acknowledgements
