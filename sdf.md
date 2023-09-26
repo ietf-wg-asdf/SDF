@@ -1448,7 +1448,7 @@ consumption there is no conflict with the intended goal.
 ## sdfThing
 
 An sdfThing is a set of declarations and qualities that may be part of
-a more complex model. For example, the object declarations that make
+a more complex model. For example, the sdfObject declarations that make
 up the definition of a single socket of an outlet strip could be
 encapsulated in an sdfThing, which itself could be used in a declaration in the sdfThing definition for the outlet strip
 (see {{exa-sdfthing-outlet-strip}} in {{outlet-strip-example}} for an example SDF model).
