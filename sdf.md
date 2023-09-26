@@ -129,6 +129,7 @@ informative:
     title: Kebab Case
     date: '2014-08-29'
   I-D.bormann-asdf-sdf-mapping:
+  I-D.bormann-t2trg-deref-id-01: deref
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -139,8 +140,9 @@ entity:
 
 [^intro-]:
     The Semantic Definition Format (SDF) is a format for domain experts to
-    use in the creation and maintenance of data and interaction models in
-    the Internet of Things. An SDF specification describes definitions of
+    use in the creation and maintenance of data and interaction models
+    that describe Things, i.e., physical objects that are available for interaction
+    over a network. An SDF specification describes definitions of
     SDF Objects and their associated interactions (Events, Actions,
     Properties), as well as the Data types for the information exchanged
     in those interactions. Tools convert this format to database formats
@@ -148,13 +150,8 @@ entity:
 
 [^status]
 
-[^status]: A JSON format representation of SDF 1.0 was defined in
-    version (-00) of this document; version (-05) was designated as an
-    *implementation draft*, labeled SDF 1.1, at the IETF110 meeting of
-    the ASDF WG (2021-03-11).
-    The present version (-15) adds a number of editorial improvements
-    and an example for removing an affordance from a target referenced
-    via `sdfRef`.
+[^status]: The present revision (-16) addresses the Working Group Last
+    Call comments.
 
 --- middle
 
@@ -165,16 +162,27 @@ entity:
 
 [^status]
 
+SDF is designed to be an extensible format.
+The present document constitutes the base specification for SDF; we
+speak of "base SDF" for short.
+In addition, SDF extensions can be defined, some of which may make use
+of extension points specifically defined for this in base SDF.
+For other extensions, it may be necessary to indicate in the SDF
+document that a specific extension is in effect; see
+{{information-block}} for details of the `feature` quality that can be
+used for such indications.
+Base SDF does not define a "version" concept for the SDF specification
+itself (as opposed to SDF documents); however there may be occasional
+historical notes about the earlier development drafts (1.0 etc.) that
+led to the present specification of base SDF.
+
 ## Terminology and Conventions
 
 Thing:
-: A physical item that is also made available in the Internet of
-  Things.  The term is used here for Things that are notable for their
-  interaction with the physical world beyond interaction with humans;
-  a temperature sensor or a light might be a Thing, but a router that
-  employs both temperature sensors and indicator lights might exhibit
-  less Thingness, as the effects of its functioning are mostly on the
-  digital side.
+: A physical item that is also available for interaction over a network.
+
+sdfThing:
+: A grouping of sdfObjects (Objects) and/or sdfThings.
 
 Affordance:
 : An element of an interface offered for interaction, defining its
@@ -226,9 +234,9 @@ Event:
 
 Object, sdfObject:
 : A grouping of Property, Action, and Event definitions; the main
-  "atom" of reusable semantics for model construction. Objects are
-  similar to Things but do not allow nesting, i.e., they cannot contain
-  other Objects or Things. (Note that
+  "atom" of reusable semantics for model construction. sdfObjects are
+  similar to sdfThings but do not allow nesting, i.e., they cannot contain
+  other Objects or sdfThings. (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object, short for sdfObject, is specifically reserved for the
@@ -262,7 +270,7 @@ Augmentation Mechanism:
 : A companion document to a base SDF specification that provides additional
   information ("augments" the base specification), possibly for use in
   a specific ecosystem or with a specific protocol ("Protocol Binding").
-  No specific Augmentation Mechanisms are defined in this version of SDF.
+  No specific Augmentation Mechanisms are defined in base SDF.
   A simple mechanism for such augmentations has been discussed as a
   "mapping file" {{I-D.bormann-asdf-sdf-mapping}}.
 
@@ -443,11 +451,11 @@ some vocabulary proposed for the drafts 4 {{-jso4}} {{-jso4v}} and 7
 (collectively called JSO here), enhanced by qualities that are
 specific to SDF.
 Details about the JSO-inspired vocabulary are in {{jso-inspired}}.
-For the current version of SDF, data are constrained to be of
+For base SDF, data are constrained to be of
 simple types (number, string, Boolean),
 JSON maps composed of named data, and arrays of these types.
 Syntax extension points are provided that can be used to provide
-richer types in future versions of this specification (possibly more
+richer types in a future extension of this specification (possibly more
 of which can be borrowed from json-schema.org).
 
 Note that `sdfProperty` definitions (and `sdfData` definitions in
@@ -477,7 +485,7 @@ errors, such as an item blocking the closing of an automatic door.
 
 Actions may have (or lack) qualities of idempotency and side-effect safety.
 
-The current version of SDF only provides data constraint modeling and semantics for the input and output data of definitions in `sdfAction` groups.
+Base SDF only provides data constraint modeling and semantics for the input and output data of definitions in `sdfAction` groups.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
 part of the protocol binding.
@@ -500,7 +508,7 @@ For instance, while a state change may simply be superseded by another
 state change, some events are "precious" and need to be preserved even
 if further events follow.
 
-The current version of SDF only provides data constraint modeling and
+Base SDF only provides data constraint modeling and
 semantics for the output data of Event affordances.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
@@ -630,7 +638,7 @@ Given Names are often sufficiently self-explanatory that they can be
 used in place of the `label` quality if that is not given.
 In turn, if a given name turns out too complicated, a more elaborate
 `label` can be given and the given name kept simple.
-The current version of SDF does not address internationalization of
+Base SDF does not address internationalization of
 given names.
 
 Further, to enable Given Names to have a more powerful role in building
@@ -777,14 +785,15 @@ Global names look exactly like `https://` URIs with attached fragment identifier
 
 There is no intention to require that these URIs can be dereferenced.
 <!-- Looking things up there is a convenience -->
-(However, as future versions of SDF might find a use for dereferencing
+(However, as future extensions of SDF might find a use for dereferencing
 global names, the URI should be chosen in such a way that this may
-become possible in the future.)
+become possible in the future.
+See also {{-deref}} for a discussion of dereferenceable identifiers.)
 
 The absolute URI of a global name should be a URI as per {{Section 3 of
 -uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
-For the present version of this specification, the query part should
-not be used (it might be used in later versions).
+For base SDF, the query part should
+not be used (it might be used in extensions).
 
 The fragment identifier is constructed as per {{Section 6 of
 -pointer}}.
@@ -1103,7 +1112,7 @@ present specification.
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfData"}
 
 
-1. Note that the quality `unit` was called `units` in SDF 1.0.
+1. Note that the quality `unit` was called `units` in SDF draft 1.0.
    The unit name SHOULD be as
    per the {{senml-units (SenML Units)<RFC8428}} Registry
    or the {{secondary-units (Secondary Units)<RFC8798}} Registry in {{-units}}
@@ -1115,9 +1124,10 @@ present specification.
    obtained or would be inappropriate, the unit name can also be a URI
    that is pointing to a definition of the unit.  Note that SDF
    processors are not expected to (and normally SHOULD NOT)
-   dereference these URIs; they may be useful to humans, though.
+   dereference these URIs (see also {{-deref}}); they may be useful to
+   humans, though.
    A URI unit name is distinguished from a registered unit name by the
-   presence of a colon; registered unit names that contain a colon (at
+   presence of a colon; any registered unit names that contain a colon (at
    the time of writing, none) can therefore not be used in SDF.
 
    For use by translators into ecosystems that require URIs for unit
@@ -1126,9 +1136,9 @@ present specification.
    `unit` quality, in favor of simply notating the unit name (e.g.,
    `kg` instead of `urn:ietf:params:unit:kg`).
 
-2. these qualities were included in SDF 1.0, but were not fully
-    defined; they are not included in SDF 1.1.  In 1.next, they will
-    be replaced by qualities to express scaling that are more aligned
+2. these qualities were included in SDF draft 1.0, but were not fully
+    defined; they are not included in base SDF.  Extensions might
+    define qualities to express scaling that are more aligned
     with the processes that combine ecosystem and instance specific
     information with an SDF model.
 
@@ -1164,14 +1174,14 @@ and a conventional JSON representation for values of the type.
 |-------------|----------------------------------|--------|------------------------------------------------------------|
 | byte-string | A sequence of zero or more bytes | string | base64url without padding ({{Section 3.4.5.2 of RFC8949}}) |
 | unix-time   | A point in civil time (note 1)   | number | POSIX time ({{Section 3.4.2 of RFC8949}})                  |
-{: #sdftype1 title="Values defined in SDF 1.1 for sdfType quality"}
+{: #sdftype1 title="Values defined in base SDF for the sdfType quality"}
 
 (1) Note that the definition of `unix-time` does not imply the
 capability to represent points in time that fall on leap seconds.
 More date/time-related sdfTypes are likely to be added in the sdfType
 value registry.
 
-In SDF 1.0, a similar concept was called `subtype`.
+(In SDF draft 1.0, a similar concept was called `subtype`.)
 
 ### sdfChoice
 
@@ -1194,7 +1204,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   "enum": ["foo", "bar", "baz"]
   ~~~
 
-  in SDF 1.0, is often best represented as:
+  in SDF draft 1.0, is often best represented as:
 
   ~~~ json
   "sdfChoice": {
@@ -1216,7 +1226,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   "enum": [1, 2, 3]
   ~~~
 
-  in SDF 1.0, is represented as:
+  in SDF draft 1.0, is represented as:
 
   ~~~ json
   "type": "number",
@@ -1393,7 +1403,7 @@ The requirements for high level composition include the following:
 
 - The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer Objects, while retaining the atomicity of the individual Objects.
 
-- The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of Objects.
+- The ability to compose Objects and other definition blocks into a higher level sdfThing that represents a product, while retaining the atomicity of Objects.
 
 - The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.
 
@@ -1451,7 +1461,10 @@ consumption there is no conflict with the intended goal.
 
 ## sdfThing
 
-An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the Object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
+An sdfThing is a set of declarations and qualities that may be part of
+a more complex model. For example, the sdfObject declarations that make
+up the definition of a single socket of an outlet strip could be
+encapsulated in an sdfThing, which itself could be used in a declaration in the sdfThing definition for the outlet strip
 (see {{exa-sdfthing-outlet-strip}} in {{outlet-strip-example}} for an example SDF model).
 
 sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
@@ -1522,6 +1535,7 @@ Published specification:
 
 Applications that use this media type:
 : Tools for data and interaction modeling in the Internet of Things
+  and related environments
 
 Fragment identifier considerations:
 : A JSON Pointer fragment identifier may be used, as defined in
@@ -1699,8 +1713,8 @@ is trivial, the result is not shown here.
 
 This appendix makes use of CDDL "features" as defined in {{Section 4 of -control}}.
 A feature named "1.0" is used to indicate parts of the syntax being
-deprecated towards SDF 1.1, and a feature named "1.1" is used to
-indicate new syntax intended for SDF 1.1.
+deprecated towards SDF draft 1.1, and a feature named "1.1" is used to
+indicate new syntax intended for SDF draft 1.1 and thus base SDF.
 Features whose names end in "-ext" indicate extension points for
 further evolution.
 
@@ -1780,10 +1794,10 @@ they are available in JSON.
 The length (as measured in characters) can be constrained by the
 additional data qualities "`minLength`" and "`maxLength`", which are
 inclusive bounds.
-Note that the previous version of the present document explained
+Note that earlier drafts of the present document explained
 text string length values in bytes, which however is not meaningful
 unless bound to a specific encoding (which could be UTF-8, if this
-unusual behavior is to be restored).
+unusual behavior is to be provided in an extension).
 
 The data quality "`pattern`" takes a string value that is interpreted
 as an [ECMA-262] regular expression in Unicode mode that constrain the
