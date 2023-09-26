@@ -1421,7 +1421,7 @@ The requirements for high level composition include the following:
 ## Paths in the model namespaces
 
 The model namespace is organized according to terms that are defined
-in the SDF documents that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.
+in the SDF documents that contribute to the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor.
 
 The structure of a path in a namespace is defined by the JSON Pointers
 to the definitions in the SDF documents in that namespace.
