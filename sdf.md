@@ -476,9 +476,9 @@ errors, such as an item blocking the closing of an automatic door.
 
 One idiom for giving an action initiator status and control about the
 ongoing action is to provide a URI for an ephemeral "action resource"
-in the sdfAction output data, allowing the action both to deliver
+in the sdfAction output data, allowing the action to deliver
 immediate feedback (including errors that prevent the action from
-starting) and to allow the action initiator to use the action resource
+starting) and the action initiator to use the action resource
 for further observation or modification of the ongoing action
 (including canceling it).
 Base SDF does not provide any tailored support for describing such
