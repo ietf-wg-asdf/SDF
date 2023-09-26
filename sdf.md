@@ -169,7 +169,7 @@ entity:
 ## Terminology and Conventions
 
 Thing:
-: A physical item that is also available over a network.
+: A physical item that is also available for interaction over a network.
 
 sdfThing:
 : A grouping of sdfObjects (Objects) and/or sdfThings.
