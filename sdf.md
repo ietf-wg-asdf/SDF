@@ -224,15 +224,16 @@ Action:
 Event:
 : An affordance that can potentially be used to obtain information about what happened to an Object.
 
-Object:
+Object, sdfObject:
 : A grouping of Property, Action, and Event definitions; the main
   "atom" of reusable semantics for model construction. Objects are
   similar to Things but do not allow nesting, i.e., they cannot contain
   other Objects or Things. (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
-  term Object is specifically reserved for the above grouping, even if
-  the type name `"object"` might be imported from a data definition
+  term Object, short for sdfObject, is specifically reserved for the
+  above grouping, even if
+  the type name `"object"` is imported from a data definition
   language with the other semantics.)
 
 Element:
