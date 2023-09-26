@@ -220,7 +220,8 @@ Class:
 
 Property:
 : An affordance that can potentially be used to read, write, and/or
-  observe state on an Object.  (Note that Entries are often called
+  observe state (current/stored information) on an Object.
+  (Note that Entries are often called
   properties in other environments; in this document, the term
   Property is specifically reserved for affordances, even if the map
   key "properties" might be imported from a data definition language
