@@ -658,8 +658,8 @@ SDF definitions are contained in SDF documents, together with data
 about the SDF document itself (information block).
 Definitions and declarations from additional SDF documents can be
 referenced; together with the definitions and declarations in the
-referencing SDF document they build the model expressed by that
-SDF document.
+referencing SDF document they build the SDF model expressed by that
+gSDF document.
 
 Each SDF document is represented as a single JSON map.
 This map has three blocks: the information block, the namespaces block, and the definitions block.
