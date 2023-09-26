@@ -185,9 +185,11 @@ sdfThing:
 : A grouping of sdfObjects (Objects) and/or sdfThings.
 
 Affordance:
-: An element of an interface offered for interaction, defining its
-  possible uses or making clear how it can or should be used.  The
-  term is used here for the digital interfaces of a Thing only; it
+: An element of an interface offered for interaction, for which
+  information is available (directly or indirectly) that indicates how
+  it can or should be used.
+  The term is used here for the digital (network-directed) interfaces
+  of a Thing only; it
   might also have physical affordances such as buttons, dials, and
   displays.
 
