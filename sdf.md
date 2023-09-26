@@ -82,7 +82,7 @@ normative:
     date: false
   RFC9165: control
 informative:
-  JSO7: 
+  JSO7:
     =: I-D.handrews-json-schema-01
     -: jso
     ann: This is the base specification for json-schema.org "draft 7".
@@ -317,6 +317,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
   }
 }
 ~~~
+{: sourcecode-name="example1.sdf.json"}
 {: #example1 title="A simple example of an SDF definition file"}
 
 This is a model of a switch.
@@ -957,6 +958,7 @@ The resulting definition of the "BasicSwitch" sdfObject would be identical to th
   }
 }
 ~~~
+{: sourcecode-name="example1-without-toggle.sdf.json"}
 
 
 ### Resolved models
@@ -1877,10 +1879,10 @@ using the `sdfThing` quality.
 
 ## Outlet Strip Example {#outlet-strip-example}
 
-~~~
+~~~ json
 {
   "sdfThing": {
-    "outlet-strip" : {
+    "outlet-strip": {
       "label": "Outlet strip",
       "description": "Contains a number of Sockets",
       "sdfObject": {
@@ -1894,14 +1896,15 @@ using the `sdfThing` quality.
   }
 }
 ~~~
+{: sourcecode-name="example-sdfthing-outlet-strip.sdf.json"}
 {: #exa-sdfthing-outlet-strip}
 
 ## Refrigerator-Freezer Example {#fridge-freezer-example}
 
-~~~
+~~~ json
 {
   "sdfThing": {
-    "refrigerator-freezer" : {
+    "refrigerator-freezer": {
       "description": "A refrigerator combined with a freezer",
       "sdfProperty": {
         "status": {
@@ -1941,6 +1944,7 @@ using the `sdfThing` quality.
   }
 }
 ~~~
+{: sourcecode-name="example-sdfthing-refrigerator-freezer.sdf.json"}
 {: #exa-sdfthing-fridge-freezer}
 
 # Acknowledgements
