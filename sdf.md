@@ -82,7 +82,7 @@ normative:
     date: false
   RFC9165: control
 informative:
-  JSO7: 
+  JSO7:
     =: I-D.handrews-json-schema-01
     -: jso
     ann: This is the base specification for json-schema.org "draft 7".
