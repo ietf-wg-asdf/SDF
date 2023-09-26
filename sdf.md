@@ -128,6 +128,7 @@ informative:
     target: http://wiki.c2.com/?KebabCase
     title: Kebab Case
     date: '2014-08-29'
+  I-D.bormann-asdf-sdftype-link: sdflink
   I-D.bormann-asdf-sdf-mapping:
   I-D.bormann-t2trg-deref-id-01: deref
 
@@ -485,6 +486,18 @@ take place immediately as would be expected for an update to an
 results.
 Actions may also not always complete and may result in application
 errors, such as an item blocking the closing of an automatic door.
+
+One idiom for giving an action initiator status and control about the
+ongoing action is to provide a URI for an ephemeral "action resource"
+in the sdfAction output data, allowing the action to deliver
+immediate feedback (including errors that prevent the action from
+starting) and the action initiator to use the action resource
+for further observation or modification of the ongoing action
+(including canceling it).
+Base SDF does not provide any tailored support for describing such
+action resources; an extension for modeling links in more detail
+(e.g., {{-sdflink}}) may be all that is needed to fully enable modeling
+them.
 
 Actions may have (or lack) qualities of idempotency and side-effect safety.
 
