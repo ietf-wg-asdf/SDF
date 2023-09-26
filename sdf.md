@@ -140,8 +140,9 @@ entity:
 
 [^intro-]:
     The Semantic Definition Format (SDF) is a format for domain experts to
-    use in the creation and maintenance of data and interaction models in
-    the Internet of Things. An SDF specification describes definitions of
+    use in the creation and maintenance of data and interaction models
+    that describe Things, i.e., physical objects that are available for interaction
+    over a network. An SDF specification describes definitions of
     SDF Objects and their associated interactions (Events, Actions,
     Properties), as well as the Data types for the information exchanged
     in those interactions. Tools convert this format to database formats
@@ -178,13 +179,10 @@ led to the present specification of base SDF.
 ## Terminology and Conventions
 
 Thing:
-: A physical item that is also made available in the Internet of
-  Things.  The term is used here for Things that are notable for their
-  interaction with the physical world beyond interaction with humans;
-  a temperature sensor or a light might be a Thing, but a router that
-  employs both temperature sensors and indicator lights might exhibit
-  less Thingness, as the effects of its functioning are mostly on the
-  digital side.
+: A physical item that is also available for interaction over a network.
+
+sdfThing:
+: A grouping of sdfObjects (Objects) and/or sdfThings.
 
 Affordance:
 : An element of an interface offered for interaction, defining its
@@ -234,11 +232,11 @@ Action:
 Event:
 : An affordance that can potentially be used to obtain information about what happened to an Object.
 
-Object:
+Object, sdfObject:
 : A grouping of Property, Action, and Event definitions; the main
-  "atom" of reusable semantics for model construction. Objects are
-  similar to Things but do not allow nesting, i.e., they cannot contain
-  other Objects or Things. (Note that
+  "atom" of reusable semantics for model construction. sdfObjects are
+  similar to sdfThings but do not allow nesting, i.e., they cannot contain
+  other Objects or sdfThings. (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object is specifically reserved for the above grouping, even if
@@ -1403,7 +1401,7 @@ The requirements for high level composition include the following:
 
 - The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.
 
-- The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.
+- The ability to compose Objects and other definition blocks into a higher level sdfThing that represents a product, while retaining the atomicity of objects.
 
 - The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.
 
@@ -1461,7 +1459,10 @@ consumption there is no conflict with the intended goal.
 
 ## sdfThing
 
-An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
+An sdfThing is a set of declarations and qualities that may be part of
+a more complex model. For example, the sdfObject declarations that make
+up the definition of a single socket of an outlet strip could be
+encapsulated in an sdfThing, which itself could be used in a declaration in the sdfThing definition for the outlet strip
 (see {{exa-sdfthing-outlet-strip}} in {{outlet-strip-example}} for an example SDF model).
 
 sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
@@ -1532,6 +1533,7 @@ Published specification:
 
 Applications that use this media type:
 : Tools for data and interaction modeling in the Internet of Things
+  and related environments
 
 Fragment identifier considerations:
 : A JSON Pointer fragment identifier may be used, as defined in
