@@ -49,8 +49,8 @@ commonqualities = (
 )
 
 arraydefinitionqualities = (
- ? ("minItems" .feature "1.2") => uint
- ? ("maxItems" .feature "1.2") => uint
+ ? "minItems" => uint
+ ? "maxItems" => uint
 )
 
 paedataqualities = (
@@ -75,15 +75,14 @@ thingqualities = {
  arraydefinitionqualities
 }
 
-; for single objects, or for arrays of objects (1.2)
+; for single objects, or for arrays of objects
 objectqualities = {
  commonqualities
  paedataqualities
  arraydefinitionqualities
 }
 
-parameter-list =
-  dataqualities .feature (["1.1", "dataqualities-as-parameter"])
+parameter-list = dataqualities
 
 actionqualities = {
  commonqualities
@@ -104,9 +103,9 @@ eventqualities = {
 dataqualities = {
  commonqualities
  jsonschema
- ? ("unit" .feature "1.1") => text
+ ? "unit" => text
  ? nullable: bool
- ? ("sdfType" .feature "1.1") => "byte-string" / "unix-time"
+ ? "sdfType" => "byte-string" / "unix-time"
  ? contentFormat: text
 }
 
@@ -122,7 +121,7 @@ allowed-types = number / text / bool / null
               / {* text => any}
 
 compound-type = (
-  "type" => ("object" .feature "1.1")
+  "type" => "object"
   ? required: [+text]
   ? properties: named<dataqualities>
 )
@@ -132,8 +131,8 @@ jsonschema = (
     // compound-type
    )
  ; if present, all other qualities apply to all choices:
- ? ((("sdfChoice" .feature "1.1") => named<dataqualities>)
-  // ("enum" => [+ text])) ; limited to text strings in SDF 1.1
+ ? (("sdfChoice" => named<dataqualities>)
+  // ("enum" => [+ text])) ; limited to text strings
  ; the next three should validate against type:
  ? const: allowed-types
  ? default: allowed-types
@@ -165,8 +164,8 @@ jsonschema = (
         // compound-type
        )
      ; if present, all other qualities apply to all choices
-     ? ((("sdfChoice" .feature "1.1") => named<dataqualities>)
-     // ("enum" => [+ text])) ; limited to text strings in SDF 1.1
+     ? (("sdfChoice" => named<dataqualities>)
+     // ("enum" => [+ text])) ; limited to text strings
      ; jso subset
      ? minimum: number
      ? maximum: number

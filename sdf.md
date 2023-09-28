@@ -1138,17 +1138,16 @@ present specification.
 |---------------+---------------------------------------------+--------------------------------------------------------------------------+---------|
 | (common)      |                                             | {{common-qualities}}                                                     |         |
 | unit          | string                                      | unit name (note 1)                                                       | N/A     |
-| scaleMinimum  | number                                      | lower limit of value in units given by unit (note 2)                     | N/A     |
-| scaleMaximum  | number                                      | upper limit of value in units given by unit (note 2)                     | N/A     |
 | nullable      | boolean                                     | indicates a null value is available for this type                        | true    |
-| contentFormat | string                                      | content type (IANA media type string plus parameters), encoding (note 3) | N/A     |
+| contentFormat | string                                      | content type (IANA media type string plus parameters), encoding (note 2) | N/A     |
 | sdfType       | string ({{sdftype}})                        | sdfType enumeration (extensible)                                         | N/A     |
 | sdfChoice     | named set of data qualities ({{sdfchoice}}) | named alternatives                                                       | N/A     |
 | enum          | array of strings                            | abbreviation for string-valued named alternatives                        | N/A     |
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfData"}
 
 
-1. Note that the quality `unit` was called `units` in SDF draft 1.0.
+1. Note that the quality `unit` was called `units` in earlier drafts
+   of SDF.
    The unit name SHOULD be as
    per the {{senml-units (SenML Units)<RFC8428}} Registry
    or the {{secondary-units (Secondary Units)<RFC8798}} Registry in {{-units}}
@@ -1172,13 +1171,7 @@ present specification.
    `unit` quality, in favor of simply notating the unit name (e.g.,
    `kg` instead of `urn:ietf:params:unit:kg`).
 
-2. these qualities were included in SDF draft 1.0, but were not fully
-    defined; they are not included in base SDF.  Extensions might
-    define qualities to express scaling that are more aligned
-    with the processes that combine ecosystem and instance specific
-    information with an SDF model.
-
-3. The `contentFormat` quality follows the Content-Format-Spec as defined in
+2. The `contentFormat` quality follows the Content-Format-Spec as defined in
    {{Section 6 of RFC9193}}, allowing for expressing both numeric and string
    based Content-Formats.
 
@@ -1217,7 +1210,7 @@ capability to represent points in time that fall on leap seconds.
 More date/time-related sdfTypes are likely to be added in the sdfType
 value registry.
 
-(In SDF draft 1.0, a similar concept was called `subtype`.)
+(In earlier drafts of this specification, a similar concept was called `subtype`.)
 
 ### sdfChoice
 
@@ -1240,7 +1233,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   "enum": ["foo", "bar", "baz"]
   ~~~
 
-  in SDF draft 1.0, is often best represented as:
+  in earlier drafts of this specification, is often best represented as:
 
   ~~~ json
   "sdfChoice": {
@@ -1262,7 +1255,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   "enum": [1, 2, 3]
   ~~~
 
-  in SDF draft 1.0, is represented as:
+  in earlier drafts of this specification, is represented as:
 
   ~~~ json
   "type": "number",
@@ -1755,9 +1748,6 @@ leaving out all lines containing the string `EXTENSION-POINT`; as this
 is trivial, the result is not shown here.
 
 This appendix makes use of CDDL "features" as defined in {{Section 4 of -control}}.
-A feature named "1.0" is used to indicate parts of the syntax being
-deprecated towards SDF draft 1.1, and a feature named "1.1" is used to
-indicate new syntax intended for SDF draft 1.1 and thus base SDF.
 Features whose names end in "-ext" indicate extension points for
 further evolution.
 
@@ -1837,7 +1827,7 @@ they are available in JSON.
 The length (as measured in characters) can be constrained by the
 additional data qualities "`minLength`" and "`maxLength`", which are
 inclusive bounds.
-Note that earlier drafts of the present document explained
+Note that earlier drafts of this specification explained
 text string length values in bytes, which however is not meaningful
 unless bound to a specific encoding (which could be UTF-8, if this
 unusual behavior is to be provided in an extension).
@@ -2007,7 +1997,7 @@ using the `sdfThing` quality.
 # Acknowledgements
 {: numbered="no"}
 
-This draft is based on `sdf.md` and `sdf-schema.json` in the old
+This specification is based on `sdf.md` and `sdf-schema.json` in the old
 one-data-model `language` repository, as well as {{{Ari Keränen}}}'s
 "alt-schema" from the Ericsson Research `ipso-odm` repository (which
 is now under subdirectory `sdflint` in the one-data model `tools`
