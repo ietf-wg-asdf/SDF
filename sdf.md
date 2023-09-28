@@ -170,12 +170,12 @@ In addition, SDF extensions can be defined, some of which may make use
 of extension points specifically defined for this in base SDF.
 For other extensions, it may be necessary to indicate in the SDF
 document that a specific extension is in effect; see
-{{information-block}} for details of the `feature` quality that can be
+{{information-block}} for details of the `features` quality that can be
 used for such indications.
-Base SDF does not define a "version" concept for the SDF specification
-itself (as opposed to SDF documents); however there may be occasional
-historical notes about the earlier development drafts (1.0 etc.) that
-led to the present specification of base SDF.
+With extension points and feature indications available,
+base SDF does not define a "version" concept for the SDF format itself
+(as opposed to version indications within SDF documents indicating
+their own evolution, see {{information-block}}).
 
 ## Terminology and Conventions
 
@@ -263,15 +263,29 @@ Declaration:
   enclosing definition.  Every declaration can also be used as a
   definition for reference in a different place.
 
+SDF Document:
+: Container for SDF Definitions, together with data
+  about the SDF Document itself (information block).
+  Represented as a JSON text representing a single JSON map, which is
+  built from nested maps.
+
+SDF Model:
+: Definitions and declarations that describe the digital interaction
+  opportunities offered by one or more classes of Things, represented
+  by sdfObjects and sdfThings.
+  An SDF Model can be fully contained in a single SDF Document, or it
+  can be built from an SDF Document that references definitions and
+  declarations from additional SDF documents.
+
 Protocol Binding:
-: A companion document to an SDF specification that defines how to map
-  the abstract concepts in the specification into the protocols in use
+: A companion document to an SDF Model that defines how to map
+  the abstract concepts in the model into the protocols in use
   in a specific ecosystem.  Might supply URL components, numeric IDs,
   and similar details.  Protocol Bindings are one case of an
   Augmentation Mechanism.
 
 Augmentation Mechanism:
-: A companion document to a base SDF specification that provides additional
+: A companion document to a base SDF Model that provides additional
   information ("augments" the base specification), possibly for use in
   a specific ecosystem or with a specific protocol ("Protocol Binding").
   No specific Augmentation Mechanisms are defined in base SDF.
@@ -566,7 +580,7 @@ is composed of: other definitions in `sdfThing` groups definitions in `sdfObject
 
 ## Member names: Given Names and Quality Names
 
-SDF models are JSON maps that mostly employ JSON maps as
+SDF documents are JSON maps that mostly employ JSON maps as
 member values, which in turn mostly employ JSON maps as their
 member values, and so on.
 This nested structure of JSON maps creates a tree, where the edges
@@ -576,7 +590,7 @@ be interspersed in this tree.)
 
 ### Given Names and Quality Names
 
-For any particular JSON map in an SDF model, the set of member
+For any particular JSON map in an SDF document, the set of member
 names that are used is either of:
 
 * A set of "*Quality Names*", where the entries in the map are
@@ -586,7 +600,7 @@ names that are used is either of:
 
 * A set of "*Given Names*", where the entries in the map are separate
   entities (definitions, declarations, etc.) that each have names that
-  are chosen by the SDF model author in order that these names can be
+  are chosen by the SDF document author in order that these names can be
   employed by a user of that model.
 
 In a path from the root of the tree to any leaf, Quality Names and
@@ -661,7 +675,7 @@ Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
 qualified names for Given Names.
 So, until that extension is defined, Given Names with (one or more)
-embedded colons are reserved and MUST NOT be used in an SDF model.
+embedded colons are reserved and MUST NOT be used in an SDF document.
 
 All names in SDF are case-sensitive.
 
@@ -672,7 +686,7 @@ about the SDF document itself (information block).
 Definitions and declarations from additional SDF documents can be
 referenced; together with the definitions and declarations in the
 referencing SDF document they build the SDF model expressed by that
-gSDF document.
+SDF document.
 
 Each SDF document is represented as a single JSON map.
 This map has three blocks: the information block, the namespaces block, and the definitions block.
@@ -683,7 +697,7 @@ The information block contains generic meta data for the SDF document
 itself and all included definitions.
 To enable tool integration, the information block is optional in the grammar
 of SDF; most processes for working with SDF documents will have policies
-that only SDF models with an info block can be processed.
+that only SDF documents with an info block can be processed.
 It is therefore RECOMMENDED that SDF validator tools emit a warning
 when no information block is found.
 
@@ -1297,7 +1311,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
 Note that there is no need in SDF for the type intersection construct
 `allOf` or the peculiar type-xor construct `oneOf` found in {{-jso7v}}.
 
-As a simplification for users of SDF specifications accustomed to
+As a simplification for users of SDF models who are accustomed to
 the JSO enum keyword, this is retained, but limited to a choice
 of text string values, such that
 
