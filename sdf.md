@@ -172,12 +172,10 @@ For other extensions, it may be necessary to indicate in the SDF
 document that a specific extension is in effect; see
 {{information-block}} for details of the `feature` quality that can be
 used for such indications.
-Base SDF does not define a "version" concept for the SDF specification
-itself (as opposed to version indications for the specifications
-contained in SDF documents);
-however there may be occasional
-historical notes about the earlier development drafts (1.0 etc.) that
-led to the present specification of base SDF.
+With extension points and feature indications available,
+base SDF does not define a "version" concept for the SDF format itself
+(as opposed to version indications within SDF documents indicating
+their own evolution, see {{information-block}}).
 
 ## Terminology and Conventions
 
