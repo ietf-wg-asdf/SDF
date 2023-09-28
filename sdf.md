@@ -1194,7 +1194,7 @@ capability to represent points in time that fall on leap seconds.
 More date/time-related sdfTypes are likely to be added in the sdfType
 value registry.
 
-(In earlier drafts of SDF, a similar concept was called `subtype`.)
+(In earlier drafts of this specification, a similar concept was called `subtype`.)
 
 ### sdfChoice
 
@@ -1217,7 +1217,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   "enum": ["foo", "bar", "baz"]
   ~~~
 
-  in earlier drafts of SDF, is often best represented as:
+  in earlier drafts of this specification, is often best represented as:
 
   ~~~ json
   "sdfChoice": {
@@ -1239,7 +1239,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   "enum": [1, 2, 3]
   ~~~
 
-  in earlier drafts of SDF, is represented as:
+  in earlier drafts of this specification, is represented as:
 
   ~~~ json
   "type": "number",
@@ -1811,7 +1811,7 @@ they are available in JSON.
 The length (as measured in characters) can be constrained by the
 additional data qualities "`minLength`" and "`maxLength`", which are
 inclusive bounds.
-Note that earlier drafts of SDF explained
+Note that earlier drafts of this specification explained
 text string length values in bytes, which however is not meaningful
 unless bound to a specific encoding (which could be UTF-8, if this
 unusual behavior is to be provided in an extension).
