@@ -170,7 +170,7 @@ In addition, SDF extensions can be defined, some of which may make use
 of extension points specifically defined for this in base SDF.
 For other extensions, it may be necessary to indicate in the SDF
 document that a specific extension is in effect; see
-{{information-block}} for details of the `feature` quality that can be
+{{information-block}} for details of the `features` quality that can be
 used for such indications.
 With extension points and feature indications available,
 base SDF does not define a "version" concept for the SDF format itself
