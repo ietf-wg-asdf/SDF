@@ -56,8 +56,8 @@ commonqualities = (
 )
 
 arraydefinitionqualities = (
- ? ("minItems" .feature "1.2") => uint
- ? ("maxItems" .feature "1.2") => uint
+ ? "minItems" => uint
+ ? "maxItems" => uint
 )
 
 paedataqualities = (
@@ -83,7 +83,7 @@ thingqualities = {
  EXTENSION-POINT<"thing-ext">
 }
 
-; for single objects, or for arrays of objects (1.2)
+; for single objects, or for arrays of objects
 objectqualities = {
  commonqualities
  paedataqualities
@@ -91,14 +91,11 @@ objectqualities = {
  EXTENSION-POINT<"object-ext">
 }
 
-parameter-list =
-  pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
-  dataqualities .feature (["1.1", "dataqualities-as-parameter"])
+parameter-list = dataqualities
 
 actionqualities = {
  commonqualities
  ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here
- ? ("sdfRequiredInputData" .feature "1.0") => pointer-list
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ; zero or more named data type definitions that might be used above
  ? sdfData: named<dataqualities>
@@ -118,14 +115,9 @@ sdftype-name = text .regexp "[a-z][-a-z0-9]*"       ; EXTENSION-POINT
 dataqualities = {
  commonqualities
  jsonschema
- ? ("units" .feature "1.0") => text
- ? ("unit" .feature "1.1") => text
- ? ("scaleMinimum" .feature "1.0") => number
- ? ("scaleMaximum" .feature "1.0") => number
+ ? "unit" => text
  ? nullable: bool
- ? ("subtype" .feature "1.0") => "byte-string" / "unix-time"
-            / (text .feature "subtype-ext")         ; EXTENSION-POINT
- ? ("sdfType" .feature "1.1") => "byte-string" / "unix-time"
+ ? "sdfType" => "byte-string" / "unix-time"
             / (sdftype-name .feature "sdftype-ext") ; EXTENSION-POINT
  ? contentFormat: text
  EXTENSION-POINT<"data-ext">
@@ -144,7 +136,7 @@ allowed-types = number / text / bool / null
               / (any .feature "allowed-ext")        ; EXTENSION-POINT
 
 compound-type = (
-  "type" => ("object" .feature "1.1")
+  "type" => "object"
   ? required: [+text]
   ? properties: named<dataqualities>
 )
@@ -155,10 +147,9 @@ jsonschema = (
     // (type: text .feature "type-ext")             ; EXTENSION-POINT
    )
  ; if present, all other qualities apply to all choices:
- ? ((("sdfChoice" .feature "1.1") => named<dataqualities>)
-  // ("enum" => [+ text])) ; limited to text strings in SDF 1.1
+ ? (("sdfChoice" => named<dataqualities>)
+  // ("enum" => [+ text])) ; limited to text strings
  ; the next three should validate against type:
- ? ("enum" .feature "1.0") => [+ allowed-types]
  ? const: allowed-types
  ? default: allowed-types
  ; number/integer constraints
@@ -191,8 +182,8 @@ jsonschema = (
         // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
        )
      ; if present, all other qualities apply to all choices
-     ? ((("sdfChoice" .feature "1.1") => named<dataqualities>)
-     // ("enum" => [+ text])) ; limited to text strings in SDF 1.1
+     ? (("sdfChoice" => named<dataqualities>)
+     // ("enum" => [+ text])) ; limited to text strings
      ; jso subset
      ? minimum: number
      ? maximum: number
