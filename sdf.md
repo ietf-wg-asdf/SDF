@@ -817,9 +817,10 @@ Often, definitions are also declarations: the definition of the
 entry "bar" in the property "foo" means that data corresponding to the
 "foo" property in a property interaction offered by Thing can have zero or
 one components modeled by "bar".  Entries within `sdfProperty`,
-`sdfAction`, and `sdfEvent`, within `sdfObject` entries, are
+`sdfAction`, and `sdfEvent`, within `sdfObject` or `sdfThing` entries, are
 declarations; entries within `sdfData` are not.
-Similarly, entries within an `sdfThing` definition specify that the
+Similarly, `sdfObject` or `sdfThing` entries within an `sdfThing`
+definition specify that the
 interactions offered by a Thing modeled by this sdfThing include the
 interactions modeled by the nested `sdfObject` or `sdfThing`.
 
