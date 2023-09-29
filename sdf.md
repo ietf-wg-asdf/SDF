@@ -209,7 +209,7 @@ Block:
 
 Group:
 : An entry in the main SDF map and in certain nested definitions that
-  has a Class Name Keyword as its key and a map of definition
+  has a Class Name Keyword as its key and a map of named definition
   entries (Definition Group) as a value.
 
 Class Name Keyword:
@@ -256,10 +256,12 @@ Definition:
 : An entry in a Definition Group; the entry creates a new semantic
   term for use in SDF models and associates it with a set of
   qualities.
+  Unless it is also a Declaration, a definition just defines a term,
+  it does not create a component item within the enclosing definition.
 
 Declaration:
 : A definition within an enclosing
-  definition, intended to create component instances within that
+  definition, intended to create a component item within that
   enclosing definition.  Every declaration can also be used as a
   definition for reference in a different place.
 
@@ -270,8 +272,8 @@ SDF Document:
   built from nested maps.
 
 SDF Model:
-: Definitions and declarations that describe the digital interaction
-  opportunities offered by one or more classes of Things, represented
+: Definitions and declarations that model the digital interaction
+  opportunities offered by one or more kinds of Things, represented
   by sdfObjects and sdfThings.
   An SDF Model can be fully contained in a single SDF Document, or it
   can be built from an SDF Document that references definitions and
@@ -354,7 +356,7 @@ The state `value` declared in the `sdfProperty` group, represented by a Boolean,
 The actions `on` or `off` declared in the `sdfAction` group are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action `toggle` will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
 
-The `sdfObject` group lists the affordances of instances of this Object.
+The `sdfObject` group lists the affordances of Things modeled by this Object.
 The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the Object.
 Properties can have additional qualities to describe the state more precisely.
 Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
@@ -439,16 +441,20 @@ product types.
 An `sdfObject` definition for a common on/off control may be used to
 control may different kinds of Things that require on/off control.
 
-The presence of one or both of the optional qualities "minItems" and
-"maxItems" defines the sdfObject as an array.
+The presence of one or both of the optional qualities "`minItems`" and
+"`maxItems`" defines the sdfObject as an array, i.e., all the
+affordances defined for the sdfObject exist a number of times, indexed
+by a number constrained to be between `minItems` and `maxItems`,
+inclusive, if given.
 (Note: Setting "minItems" to zero and leaving out "maxItems" puts the
 minimum constraints on that array.)
 
 ### sdfProperty
 
-`sdfProperty` is used to model elements of state within `sdfObject` instances.
+`sdfProperty` is used to model elements of state within Things modeled
+by the enclosing `sdfObject`.
 
-An instance of `sdfProperty` may be associated with some protocol
+An named definition entry in `sdfProperty` may be associated with some protocol
 affordance to enable the application to obtain the state variable and,
 optionally, modify the state variable.
 Additionally, some protocols provide for in-time reporting of state
@@ -459,9 +465,9 @@ changes.
 Definitions in `sdfProperty` groups include the definitions from `sdfData` groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing Object.
 
 For definitions in `sdfProperty` and `sdfData`, SDF provides qualities that can
-constrain the structure and values of data allowed in an instance of
-these data, as well as qualities that associate semantics to these
-data, for engineering units and unit scaling information.
+constrain the structure and values of data allowed in the interactions
+modeled by them, as well as qualities that associate semantics to these
+data, such as engineering units and unit scaling information.
 
 For the data definition within `sdfProperty` or `sdfData`, SDF borrows
 some vocabulary proposed for the drafts 4 {{-jso4}} {{-jso4v}} and 7
@@ -510,7 +516,7 @@ for further observation or modification of the ongoing action
 (including canceling it).
 Base SDF does not provide any tailored support for describing such
 action resources; an extension for modeling links in more detail
-(e.g., {{-sdflink}}) may be all that is needed to fully enable modeling
+(for instance, {{-sdflink}}) may be all that is needed to fully enable modeling
 them.
 
 Actions may have (or lack) qualities of idempotency and side-effect safety.
@@ -523,9 +529,9 @@ part of the protocol binding.
 ### sdfEvent {#sdfevent-overview}
 
 The `sdfEvent` group contains declarations of Events, which can model
-affordances that inform about "happenings" associated with an instance
-of an Object; these may result in a signal being stored or emitted as
-a result.
+affordances that inform about "happenings" associated with a Thing
+modeled by the enclosing Object; these may result in a signal being
+stored or emitted as a result.
 
 Note that there is a trivial overlap with sdfProperty state changes,
 which may also be defined as events but are not generally required to
@@ -807,7 +813,16 @@ This example defines an Object "foo" that is defined in the default namespace (f
 `#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
-Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within `sdfProperty`, `sdfAction`, and `sdfEvent`, within `sdfObject` entries, are declarations.  Similarly, entries within an `sdfThing` describe instances of `sdfObject` (or nested `sdfThing`) that form part of instances of the Thing.
+Often, definitions are also declarations: the definition of the
+entry "bar" in the property "foo" means that data corresponding to the
+"foo" property in a property interaction offered by Thing can have zero or
+one components modeled by "bar".  Entries within `sdfProperty`,
+`sdfAction`, and `sdfEvent`, within `sdfObject` or `sdfThing` entries, are
+declarations; entries within `sdfData` are not.
+Similarly, `sdfObject` or `sdfThing` entries within an `sdfThing`
+definition specify that the
+interactions offered by a Thing modeled by this sdfThing include the
+interactions modeled by the nested `sdfObject` or `sdfThing`.
 
 # Names and namespaces
 
@@ -847,7 +862,7 @@ a definition is contributed.
 When emphasizing that name definitions are contributed to the default namespace,
 we therefore also call it the "target namespace" of the SDF document.
 
-E.g., in {{example1}}, definitions for the following global names are contributed:
+For instance, in {{example1}}, definitions for the following global names are contributed:
 
 * https://example.com/capability/cap#/sdfObject/Switch
 * https://example.com/capability/cap#/sdfObject/Switch/sdfProperty/value
@@ -1055,8 +1070,8 @@ After resolving the definitions would look as follows:
 ## sdfRequired
 
 The keyword "sdfRequired" is provided to apply a constraint that
-defines for which declarations corresponding data are mandatory in an
-instance conforming the current definition.
+defines for which declarations the corresponding data are mandatory in a
+Thing modeled by the current definition.
 
 The value of "sdfRequired" is an array of name references (JSON pointers), each
 indicating one declaration that is mandatory to be represented.
@@ -1168,7 +1183,7 @@ present specification.
    For use by translators into ecosystems that require URIs for unit
    names, the URN sub-namespace "urn:ietf:params:unit" is provided
    ({{unit-urn}}); URNs from this sub-namespace MUST NOT be used in a
-   `unit` quality, in favor of simply notating the unit name (e.g.,
+   `unit` quality, in favor of simply notating the unit name (such as
    `kg` instead of `urn:ietf:params:unit:kg`).
 
 2. The `contentFormat` quality follows the Content-Format-Spec as defined in
@@ -1248,7 +1263,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   `description` in the example.
 
   If an enum needs to use a data type different from text string,
-  e.g. what would have been:
+  what would for instance have been:
 
   ~~~ json
   "type": "number",
@@ -1271,7 +1286,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   also makes it easy to add number ranges into the mix.
 
   (Note that `const` can also be used for strings as in the previous
-  example, e.g., if the actual string value is indeed a crucial
+  example, for instance, if the actual string value is indeed a crucial
   element for the data model.)
 
 * anyOf
@@ -1348,8 +1363,8 @@ quality is absent.
 | sdfAction   | action    | zero or more named action definitions for this Object                    |
 | sdfEvent    | event     | zero or more named event definitions for this Object                     |
 | sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
-| minItems    | number    | (array) Minimum number of sdfObject instances in array                   |
-| maxItems    | number    | (array) Maximum number of sdfObject instances in array                   |
+| minItems    | number    | (array) Minimum number of multiplied affordances in array |
+| maxItems    | number    | (array) Maximum number of multiplied affordances in array    |
 {: #sdfobjqual title="Qualities of sdfObject"}
 
 
@@ -1434,7 +1449,8 @@ The requirements for high level composition include the following:
 
 - The ability to compose Objects and other definition blocks into a higher level sdfThing that represents a product, while retaining the atomicity of Objects.
 
-- The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.
+- The ability to enrich and refine a base definition to have
+  product-specific qualities and quality values, such as unit, range, and scale settings.
 
 - The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.
 
@@ -1465,7 +1481,9 @@ overridden.  (Note that JSON maps do not have a defined
 order, so the SDF processor may see these overrides before seeing the
 `sdfRef`.)
 
-Note that if the referenced definition contains qualities or definitions that are not valid in the context where the sdfRef is used (e.g., if an sdfThing definition would be added in an sdfObject definition), the resulting model, when resolved, may be invalid.
+Note that if the referenced definition contains qualities or
+definitions that are not valid in the context where the sdfRef is used
+(for instance, if an sdfThing definition would be added in an sdfObject definition), the resulting model, when resolved, may be invalid.
 
 As a convention, overrides are intended to be used only for further restricting
 the set of data values, as shown in {{exa-sdfref}}:  any value for a
@@ -1504,14 +1522,16 @@ encapsulated in an sdfThing, which itself could be used in a declaration in the 
 (see {{exa-sdfthing-outlet-strip}} in {{outlet-strip-example}} for an example SDF model).
 
 sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
-An `sdfThing` can also contain Interaction Affordances and sdfData itself, such
+An sdfThing may be composed of sdfObjects and other sdfThings.
+It can also contain sdfData definitions, as well as declarations of interaction affordances itself, such
 as a status (on/off) for the refrigerator-freezer as a whole (see
 {{exa-sdfthing-fridge-freezer}} in {{fridge-freezer-example}} for an example SDF
 model illustrating these aspects).
 
-An sdfThing may be composed of sdfObjects and other sdfThings.
-
 The qualities of sdfThing are shown in {{sdfthingqual}}.
+Analogous to sdfObject, the presence of one or both of the optional
+qualities "`minItems`" and "`maxItems`" defines the sdfThing as an
+array.
 
 | Quality     | Type      | Description                                                              |
 |-------------|-----------|--------------------------------------------------------------------------|
@@ -1522,8 +1542,8 @@ The qualities of sdfThing are shown in {{sdfthingqual}}.
 | sdfAction   | action    | zero or more named action definitions for this thing                     |
 | sdfEvent    | event     | zero or more named event definitions for this thing                      |
 | sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
-| minItems    | number    | (array) Minimum number of sdfThing instances in array                    |
-| maxItems    | number    | (array) Maximum number of sdfThing instances in array                    |
+| minItems    | number    | (array) Minimum number of multiplied affordances in array      |
+| maxItems    | number    | (array) Maximum number of multiplied affordances in array                |
 {: #sdfthingqual title="Qualities of sdfThing"}
 
 
@@ -1794,7 +1814,7 @@ Similarly, the additional quality "`default`" provides data that can
 be used in the absence of the data (given as the value of the `const`
 quality); this is mainly documentary and not very well-defined for SDF
 as no process is defined that would add default values to an instance
-of something.
+of some interaction data.
 
 
 ## type "`number`", type "`integer`"
@@ -1910,7 +1930,7 @@ defining map entries is unrelated to sdfProperty.
 JSO-based keywords are also used in the specification techniques of a
 number of ecosystems, but some adjustments may be required.
 
-E.g., {{OCF}} is based on Swagger 2.0 which appears to be based on
+For instance, {{OCF}} is based on Swagger 2.0 which appears to be based on
 "draft-4" {{-jso4}}{{-jso4v}} (also called draft-5, but semantically intended to
 be equivalent to draft-4).
 The "`exclusiveMinimum`" and "`exclusiveMaximum`" keywords use the
