@@ -813,12 +813,12 @@ This example defines an Object "foo" that is defined in the default namespace (f
 `#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
-Some of the definitions are also declarations: the definition of the
+Often, definitions are also declarations: the definition of the
 entry "bar" in the property "foo" means that data corresponding to the
 "foo" property in a property interaction offered by Thing can have zero or
 one components modeled by "bar".  Entries within `sdfProperty`,
 `sdfAction`, and `sdfEvent`, within `sdfObject` entries, are
-declarations.
+declarations; entries within `sdfData` are not.
 Similarly, entries within an `sdfThing` definition specify that the
 interactions offered by a Thing modeled by this sdfThing include the
 interactions modeled by the nested `sdfObject` or `sdfThing`.
