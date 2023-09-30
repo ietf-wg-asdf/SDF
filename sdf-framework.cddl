@@ -141,14 +141,18 @@ compound-type = (
   ? properties: named<dataqualities>
 )
 
+optional-choice = (
+ ? (("sdfChoice" => named<dataqualities>)
+  // ("enum" => [+ text])) ; limited to text strings
+)
+
 jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
     // (type: text .feature "type-ext")             ; EXTENSION-POINT
    )
  ; if present, all other qualities apply to all choices:
- ? (("sdfChoice" => named<dataqualities>)
-  // ("enum" => [+ text])) ; limited to text strings
+ optional-choice
  ; the next three should validate against type:
  ? const: allowed-types
  ? default: allowed-types
@@ -169,8 +173,10 @@ jsonschema = (
  ? minItems: uint
  ? maxItems: uint
  ? uniqueItems: bool
- ? items: { ;;; ultimately, this will be mostly recursive, but,
-            ;;; for now let's find out what we actually need
+ ? items: jso-items
+)
+
+jso-items = {
      ? sdfRef: sdf-pointer ; import limited to subset allowed here...
      ? description: text   ; long text (no constraints)
      optional-comment
@@ -182,8 +188,7 @@ jsonschema = (
         // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
        )
      ; if present, all other qualities apply to all choices
-     ? (("sdfChoice" => named<dataqualities>)
-     // ("enum" => [+ text])) ; limited to text strings
+     optional-choice
      ; jso subset
      ? minimum: number
      ? maximum: number
@@ -192,7 +197,6 @@ jsonschema = (
      ? maxLength: uint
      EXTENSION-POINT<"items-ext">
    }
-)
 
 modified-date-time = text .abnf modified-dt-abnf
 modified-dt-abnf = "modified-dt" .det rfc3339z
