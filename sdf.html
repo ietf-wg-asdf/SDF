@@ -10,25 +10,21 @@
 <meta content="Ari Keränen" name="author">
 <meta content="
        The Semantic Definition Format (SDF) is a format for domain experts to
-use in the creation and maintenance of data and interaction models in
-the Internet of Things. An SDF specification describes definitions of
+use in the creation and maintenance of data and interaction models
+that describe Things, i.e., physical objects that are available for interaction
+over a network. An SDF specification describes definitions of
 SDF Objects and their associated interactions (Events, Actions,
 Properties), as well as the Data types for the information exchanged
 in those interactions. Tools convert this format to database formats
 and other serializations as needed. 
-       A JSON format representation of SDF 1.0 was defined in
-version (-00) of this document; version (-05) was designated as an
- implementation draft , labeled SDF 1.1, at the IETF110 meeting of
-the ASDF WG (2021-03-11).
-The present version (-15) adds a number of editorial improvements
-and an example for removing an affordance from a target referenced
-via  sdfRef . 
+       The present revision (-16) addresses the Working Group Last
+Call comments. 
     " name="description">
-<meta content="xml2rfc 3.18.0" name="generator">
+<meta content="xml2rfc 3.18.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.0
+  xml2rfc 3.18.1
     Python 3.11.5
     ConfigArgParse 1.5.3
     google-i18n-address 3.1.0
@@ -320,6 +316,9 @@ blockquote {
   border: 1px solid #ddd;
   border-radius: 3px;
   margin: 1em 0;
+}
+blockquote > *:last-child {
+  margin-bottom: 0;
 }
 cite {
   display: block;
@@ -1218,11 +1217,11 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OneDM SDF</td>
-<td class="right">September 2023</td>
+<td class="right">October 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster, et al.</td>
-<td class="center">Expires 22 March 2024</td>
+<td class="center">Expires 3 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1235,12 +1234,12 @@ li > p:last-of-type:only-child {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-09-19" class="published">19 September 2023</time>
+<time datetime="2023-10-01" class="published">1 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-03-22">22 March 2024</time></dd>
+<dd class="expires"><time datetime="2024-04-03">3 April 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1264,19 +1263,15 @@ li > p:last-of-type:only-child {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">The Semantic Definition Format (SDF) is a format for domain experts to
-use in the creation and maintenance of data and interaction models in
-the Internet of Things. An SDF specification describes definitions of
+use in the creation and maintenance of data and interaction models
+that describe Things, i.e., physical objects that are available for interaction
+over a network. An SDF specification describes definitions of
 SDF Objects and their associated interactions (Events, Actions,
 Properties), as well as the Data types for the information exchanged
 in those interactions. Tools convert this format to database formats
 and other serializations as needed.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2"><span class="cref" id="status">A JSON format representation of SDF 1.0 was defined in
-version (-00) of this document; version (-05) was designated as an
-<em>implementation draft</em>, labeled SDF 1.1, at the IETF110 meeting of
-the ASDF WG (2021-03-11).
-The present version (-15) adds a number of editorial improvements
-and an example for removing an affordance from a target referenced
-via <code>sdfRef</code>.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2"><span class="cref" id="status">The present revision (-16) addresses the Working Group Last
+Call comments.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1312,7 +1307,7 @@ via <code>sdfRef</code>.</span><a href="#section-abstract-2" class="pilcrow">¶<
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 March 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1581,19 +1576,28 @@ via <code>sdfRef</code>.</span><a href="#section-abstract-2" class="pilcrow">¶<
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">The Semantic Definition Format (SDF) is a format for domain experts to
-use in the creation and maintenance of data and interaction models in
-the Internet of Things. An SDF specification describes definitions of
+use in the creation and maintenance of data and interaction models
+that describe Things, i.e., physical objects that are available for interaction
+over a network. An SDF specification describes definitions of
 SDF Objects and their associated interactions (Events, Actions,
 Properties), as well as the Data types for the information exchanged
 in those interactions. Tools convert this format to database formats
 and other serializations as needed.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2"><span class="cref" id="status_1">A JSON format representation of SDF 1.0 was defined in
-version (-00) of this document; version (-05) was designated as an
-<em>implementation draft</em>, labeled SDF 1.1, at the IETF110 meeting of
-the ASDF WG (2021-03-11).
-The present version (-15) adds a number of editorial improvements
-and an example for removing an affordance from a target referenced
-via <code>sdfRef</code>.</span><a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2"><span class="cref" id="status_1">The present revision (-16) addresses the Working Group Last
+Call comments.</span><a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">SDF is designed to be an extensible format.
+The present document constitutes the base specification for SDF; we
+speak of "base SDF" for short.
+In addition, SDF extensions can be defined, some of which may make use
+of extension points specifically defined for this in base SDF.
+For other extensions, it may be necessary to indicate in the SDF
+document that a specific extension is in effect; see
+<a href="#information-block" class="auto internal xref">Section 3.1</a> for details of the <code>features</code> quality that can be
+used for such indications.
+With extension points and feature indications available,
+base SDF does not define a "version" concept for the SDF format itself
+(as opposed to version indications within SDF documents indicating
+their own evolution, see <a href="#information-block" class="auto internal xref">Section 3.1</a>).<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="terminology-and-conventions">
 <section id="section-1.1">
         <h3 id="name-terminology-and-conventions">
@@ -1602,134 +1606,157 @@ via <code>sdfRef</code>.</span><a href="#section-1-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-1.1-1">
           <dt id="section-1.1-1.1">Thing:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.2">
-            <p id="section-1.1-1.2.1">A physical item that is also made available in the Internet of
-Things.  The term is used here for Things that are notable for their
-interaction with the physical world beyond interaction with humans;
-a temperature sensor or a light might be a Thing, but a router that
-employs both temperature sensors and indicator lights might exhibit
-less Thingness, as the effects of its functioning are mostly on the
-digital side.<a href="#section-1.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.2.1">A physical item that is also available for interaction over a network.<a href="#section-1.1-1.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.3">Affordance:</dt>
+<dt id="section-1.1-1.3">sdfThing:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.4">
-            <p id="section-1.1-1.4.1">An element of an interface offered for interaction, defining its
-possible uses or making clear how it can or should be used.  The
-term is used here for the digital interfaces of a Thing only; it
-might also have physical affordances such as buttons, dials, and
-displays.<a href="#section-1.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.4.1">A grouping of sdfObjects (Objects) and/or sdfThings.<a href="#section-1.1-1.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.5">Quality:</dt>
+<dt id="section-1.1-1.5">Affordance:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.6">
-            <p id="section-1.1-1.6.1">A metadata item in a definition or declaration which says something
-about that definition or declaration.  A quality is represented in
-SDF as an entry in a JSON map (object) that serves as a definition
-or declaration.<a href="#section-1.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.6.1">An element of an interface offered for interaction, for which
+information is available (directly or indirectly) that indicates how
+it can or should be used.
+The term is used here for the digital (network-directed) interfaces
+of a Thing only; it
+might also have physical affordances such as buttons, dials, and
+displays.<a href="#section-1.1-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.7">Entry:</dt>
+<dt id="section-1.1-1.7">Quality:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.8">
-            <p id="section-1.1-1.8.1">A key-value pair in a map. (In JSON maps, sometimes also called "member".)<a href="#section-1.1-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.8.1">A metadata item in a definition or declaration which says something
+about that definition or declaration.  A quality is represented in
+SDF as an entry in a JSON map (JSON object) that serves as a definition
+or declaration.<a href="#section-1.1-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.9">Block:</dt>
+<dt id="section-1.1-1.9">Entry:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.10">
-            <p id="section-1.1-1.10.1">One or more entries in a JSON map that is part of an SDF
-specification; these entries together serve a specific function.<a href="#section-1.1-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.10.1">A key-value pair in a map. (In JSON maps, sometimes also called "member".)<a href="#section-1.1-1.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.11">Group:</dt>
+<dt id="section-1.1-1.11">Block:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.12">
-            <p id="section-1.1-1.12.1">An entry in the main SDF map and in certain nested definitions that
-has a Class Name Keyword as its key and a map of definition
-entries (Definition Group) as a value.<a href="#section-1.1-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.12.1">One or more entries in a JSON map that is part of an SDF
+specification; these entries together serve a specific function.<a href="#section-1.1-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.13">Class Name Keyword:</dt>
+<dt id="section-1.1-1.13">Group:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.14">
-            <p id="section-1.1-1.14.1">One of sdfThing, sdfObject, sdfProperty, sdfAction,
-sdfEvent, or sdfData; the Classes for these type keywords are
-capitalized and prefixed with <code>sdf</code>.<a href="#section-1.1-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.14.1">An entry in the main SDF map and in certain nested definitions that
+has a Class Name Keyword as its key and a map of named definition
+entries (Definition Group) as a value.<a href="#section-1.1-1.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.15">Class:</dt>
+<dt id="section-1.1-1.15">Class Name Keyword:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.16">
-            <p id="section-1.1-1.16.1">Abstract term for the information that is contained in groups
-identified by a Class Name Keyword.<a href="#section-1.1-1.16.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.16.1">One of sdfThing, sdfObject, sdfProperty, sdfAction,
+sdfEvent, or sdfData; the Classes for these type keywords are
+capitalized and prefixed with <code>sdf</code>.<a href="#section-1.1-1.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.17">Property:</dt>
+<dt id="section-1.1-1.17">Class:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.18">
-            <p id="section-1.1-1.18.1">An affordance that can potentially be used to read, write, and/or
-observe state on an Object.  (Note that Entries are often called
+            <p id="section-1.1-1.18.1">Abstract term for the information that is contained in groups
+identified by a Class Name Keyword.<a href="#section-1.1-1.18.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-1.19">Property:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-1.20">
+            <p id="section-1.1-1.20.1">An affordance that can potentially be used to read, write, and/or
+observe state (current/stored information) on an Object.
+(Note that Entries are often called
 properties in other environments; in this document, the term
 Property is specifically reserved for affordances, even if the map
 key "properties" might be imported from a data definition language
-with the other semantics.)<a href="#section-1.1-1.18.1" class="pilcrow">¶</a></p>
+with the other semantics.)<a href="#section-1.1-1.20.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.19">Action:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-1.20">
-            <p id="section-1.1-1.20.1">An affordance that can potentially be used to perform a named operation on an Object.<a href="#section-1.1-1.20.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.1-1.21">Event:</dt>
+<dt id="section-1.1-1.21">Action:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.22">
-            <p id="section-1.1-1.22.1">An affordance that can potentially be used to obtain information about what happened to an Object.<a href="#section-1.1-1.22.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.22.1">An affordance that can potentially be used to perform a named operation on an Object.<a href="#section-1.1-1.22.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.23">Object:</dt>
+<dt id="section-1.1-1.23">Event:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.24">
-            <p id="section-1.1-1.24.1">A grouping of Property, Action, and Event definitions; the main
-"atom" of reusable semantics for model construction. Objects are
-similar to Things but do not allow nesting, i.e., they cannot contain
-other Objects or Things. (Note that
+            <p id="section-1.1-1.24.1">An affordance that can potentially be used to obtain information about what happened to an Object.<a href="#section-1.1-1.24.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-1.25">Object, sdfObject:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-1.26">
+            <p id="section-1.1-1.26.1">A grouping of Property, Action, and Event definitions; the main
+"atom" of reusable semantics for model construction. sdfObjects are
+similar to sdfThings but do not allow nesting, i.e., they cannot contain
+other Objects or sdfThings. (Note that
 JSON maps are often called JSON objects due to JSON's JavaScript
 heritage; in this document, the
-term Object is specifically reserved for the above grouping, even if
-the type name "object" might be imported from a data definition
-language with the other semantics.)<a href="#section-1.1-1.24.1" class="pilcrow">¶</a></p>
+term Object, short for sdfObject, is specifically reserved for the
+above grouping, even if
+the type name <code>"object"</code> is imported from a data definition
+language with the other semantics.)<a href="#section-1.1-1.26.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.25">Element:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-1.26">
-            <p id="section-1.1-1.26.1">A part or an aspect of something abstract; used here in its usual English definition.
-(Occasionally, also used specifically for the elements of JSON arrays.)<a href="#section-1.1-1.26.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.1-1.27">Definition:</dt>
+<dt id="section-1.1-1.27">Element:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.28">
-            <p id="section-1.1-1.28.1">An entry in a Definition Group; the entry creates a new semantic
-term for use in SDF models and associates it with a set of
-qualities.<a href="#section-1.1-1.28.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.28.1">A part or an aspect of something abstract; used here in its usual English definition.
+(Occasionally, also used specifically for the elements of JSON arrays.)<a href="#section-1.1-1.28.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.29">Declaration:</dt>
+<dt id="section-1.1-1.29">Definition:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.30">
-            <p id="section-1.1-1.30.1">A definition within an enclosing
-definition, intended to create component instances within that
-enclosing definition.  Every declaration can also be used as a
-definition for reference in a different place.<a href="#section-1.1-1.30.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-1.30.1">An entry in a Definition Group; the entry creates a new semantic
+term for use in SDF models and associates it with a set of
+qualities.
+Unless it is also a Declaration, a definition just defines a term,
+it does not create a component item within the enclosing definition.<a href="#section-1.1-1.30.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.31">Protocol Binding:</dt>
+<dt id="section-1.1-1.31">Declaration:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-1.32">
-            <p id="section-1.1-1.32.1">A companion document to an SDF specification that defines how to map
-the abstract concepts in the specification into the protocols in use
+            <p id="section-1.1-1.32.1">A definition within an enclosing
+definition, intended to create a component item within that
+enclosing definition.  Every declaration can also be used as a
+definition for reference in a different place.<a href="#section-1.1-1.32.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-1.33">SDF Document:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-1.34">
+            <p id="section-1.1-1.34.1">Container for SDF Definitions, together with data
+about the SDF Document itself (information block).
+Represented as a JSON text representing a single JSON map, which is
+built from nested maps.<a href="#section-1.1-1.34.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-1.35">SDF Model:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-1.36">
+            <p id="section-1.1-1.36.1">Definitions and declarations that model the digital interaction
+opportunities offered by one or more kinds of Things, represented
+by sdfObjects and sdfThings.
+An SDF Model can be fully contained in a single SDF Document, or it
+can be built from an SDF Document that references definitions and
+declarations from additional SDF documents.<a href="#section-1.1-1.36.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-1.37">Protocol Binding:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-1.38">
+            <p id="section-1.1-1.38.1">A companion document to an SDF Model that defines how to map
+the abstract concepts in the model into the protocols in use
 in a specific ecosystem.  Might supply URL components, numeric IDs,
 and similar details.  Protocol Bindings are one case of an
-Augmentation Mechanism.<a href="#section-1.1-1.32.1" class="pilcrow">¶</a></p>
+Augmentation Mechanism.<a href="#section-1.1-1.38.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-1.33">Augmentation Mechanism:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-1.34">
-            <p id="section-1.1-1.34.1">A companion document to a base SDF specification that provides additional
+<dt id="section-1.1-1.39">Augmentation Mechanism:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-1.40">
+            <p id="section-1.1-1.40.1">A companion document to a base SDF Model that provides additional
 information ("augments" the base specification), possibly for use in
 a specific ecosystem or with a specific protocol ("Protocol Binding").
-No specific Augmentation Mechanisms are defined in this version of SDF.
+No specific Augmentation Mechanisms are defined in base SDF.
 A simple mechanism for such augmentations has been discussed as a
-"mapping file" <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xref">I-D.bormann-asdf-sdf-mapping</a>]</span>.<a href="#section-1.1-1.34.1" class="pilcrow">¶</a></p>
+"mapping file" <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xref">I-D.bormann-asdf-sdf-mapping</a>]</span>.<a href="#section-1.1-1.40.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1737,7 +1764,8 @@ A simple mechanism for such augmentations has been discussed as a
 "octet".<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">Conventions:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1.1-4.1">The singular form is chosen as the preferred one for the keywords defined here.<a href="#section-1.1-4.1" class="pilcrow">¶</a>
+<li class="normal" id="section-1.1-4.1">
+            <p id="section-1.1-4.1.1">The singular form is chosen as the preferred one for the keywords defined here.<a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-1.1-5">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
@@ -1765,7 +1793,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-5" class="pilcrow">�
 <pre>
 {
   "info": {
-    "title": "Example file for OneDM Semantic Definition Format",
+    "title": "Example document for OneDM Semantic Definition Format",
     "version": "2019-04-24",
     "copyright": "Copyright 2019 Example Corp. All rights reserved.",
     "license": "https://example.com/license"
@@ -1803,15 +1831,15 @@ appear in all capitals, as shown here.<a href="#section-1.1-5" class="pilcrow">�
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-a-simple-example-of-an-sdf-" class="selfRef">A simple example of an SDF definition file</a>
+<a href="#name-a-simple-example-of-an-sdf-" class="selfRef">A simple example of an SDF document</a>
           </figcaption></figure>
 </div>
 <p id="section-2.1-3">This is a model of a switch.
 The state <code>value</code> declared in the <code>sdfProperty</code> group, represented by a Boolean, will be true for "on" and will be false for "off".
 The actions <code>on</code> or <code>off</code> declared in the <code>sdfAction</code> group are redundant with setting the <code>value</code> and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action <code>toggle</code> will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.1-4">The <code>sdfObject</code> group lists the affordances of instances of this object.
-The <code>sdfProperty</code> group lists the property affordances described by the model; these represent various perspectives on the state of the object.
+<p id="section-2.1-4">The <code>sdfObject</code> group lists the affordances of Things modeled by this Object.
+The <code>sdfProperty</code> group lists the property affordances described by the model; these represent various perspectives on the state of the Object.
 Properties can have additional qualities to describe the state more precisely.
 Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
 Properties are often used with RESTful paradigms <span>[<a href="#I-D.irtf-t2trg-rest-iot" class="cite xref">I-D.irtf-t2trg-rest-iot</a>]</span>, describing state.
@@ -2012,8 +2040,11 @@ will enable interoperable functionality to be configured for diverse
 product types.
 An <code>sdfObject</code> definition for a common on/off control may be used to
 control may different kinds of Things that require on/off control.<a href="#section-2.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-4">The presence of one or both of the optional qualities "minItems" and
-"maxItems" defines the sdfObject as an array.
+<p id="section-2.2.1-4">The presence of one or both of the optional qualities "<code>minItems</code>" and
+"<code>maxItems</code>" defines the sdfObject as an array, i.e., all the
+affordances defined for the sdfObject exist a number of times, indexed
+by a number constrained to be between <code>minItems</code> and <code>maxItems</code>,
+inclusive, if given.
 (Note: Setting "minItems" to zero and leaving out "maxItems" puts the
 minimum constraints on that array.)<a href="#section-2.2.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -2023,8 +2054,9 @@ minimum constraints on that array.)<a href="#section-2.2.1-4" class="pilcrow">¶
           <h4 id="name-sdfproperty">
 <a href="#section-2.2.2" class="section-number selfRef">2.2.2. </a><a href="#name-sdfproperty" class="section-name selfRef">sdfProperty</a>
           </h4>
-<p id="section-2.2.2-1"><code>sdfProperty</code> is used to model elements of state within <code>sdfObject</code> instances.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-2">An instance of <code>sdfProperty</code> may be associated with some protocol
+<p id="section-2.2.2-1"><code>sdfProperty</code> is used to model elements of state within Things modeled
+by the enclosing <code>sdfObject</code>.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-2">An named definition entry in <code>sdfProperty</code> may be associated with some protocol
 affordance to enable the application to obtain the state variable and,
 optionally, modify the state variable.
 Additionally, some protocols provide for in-time reporting of state
@@ -2033,20 +2065,20 @@ changes.
 <code>writable</code>, and <code>observable</code> defined for an <code>sdfProperty</code>.)<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-3">Definitions in <code>sdfProperty</code> groups include the definitions from <code>sdfData</code> groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing Object.<a href="#section-2.2.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-4">For definitions in <code>sdfProperty</code> and <code>sdfData</code>, SDF provides qualities that can
-constrain the structure and values of data allowed in an instance of
-these data, as well as qualities that associate semantics to these
-data, for engineering units and unit scaling information.<a href="#section-2.2.2-4" class="pilcrow">¶</a></p>
+constrain the structure and values of data allowed in the interactions
+modeled by them, as well as qualities that associate semantics to these
+data, such as engineering units and unit scaling information.<a href="#section-2.2.2-4" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-5">For the data definition within <code>sdfProperty</code> or <code>sdfData</code>, SDF borrows
 some vocabulary proposed for the drafts 4 <span>[<a href="#JSO4" class="cite xref">JSO4</a>]</span> <span>[<a href="#JSO4V" class="cite xref">JSO4V</a>]</span> and 7
 <span>[<a href="#JSO7" class="cite xref">JSO7</a>]</span> <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span> of the json-schema.org "JSON Schema" format
 (collectively called JSO here), enhanced by qualities that are
 specific to SDF.
 Details about the JSO-inspired vocabulary are in <a href="#jso-inspired" class="auto internal xref">Appendix C</a>.
-For the current version of SDF, data are constrained to be of
+For base SDF, data are constrained to be of
 simple types (number, string, Boolean),
-JSON maps composed of named data ("objects"), and arrays of these types.
+JSON maps composed of named data, and arrays of these types.
 Syntax extension points are provided that can be used to provide
-richer types in future versions of this specification (possibly more
+richer types in a future extension of this specification (possibly more
 of which can be borrowed from json-schema.org).<a href="#section-2.2.2-5" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-6">Note that <code>sdfProperty</code> definitions (and <code>sdfData</code> definitions in
 general) are not intended to constrain the formats of data used for
@@ -2067,7 +2099,7 @@ cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.3-2">Actions may have data parameters; these are modeled as a single item of input
 data and output data, each.  (Where multiple parameters need to be
-modeled, an "object" type can be used to combine these parameters into one.)
+modeled, an <code>"object"</code> type can be used to combine these parameters into one.)
 
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
@@ -2075,11 +2107,22 @@ take place immediately as would be expected for an update to an
 results.
 Actions may also not always complete and may result in application
 errors, such as an item blocking the closing of an automatic door.<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-3">Actions may have (or lack) qualities of idempotency and side-effect safety.<a href="#section-2.2.3-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-4">The current version of SDF only provides data constraint modeling and semantics for the input and output data of definitions in <code>sdfAction</code> groups.
+<p id="section-2.2.3-3">One idiom for giving an action initiator status and control about the
+ongoing action is to provide a URI for an ephemeral "action resource"
+in the sdfAction output data, allowing the action to deliver
+immediate feedback (including errors that prevent the action from
+starting) and the action initiator to use the action resource
+for further observation or modification of the ongoing action
+(including canceling it).
+Base SDF does not provide any tailored support for describing such
+action resources; an extension for modeling links in more detail
+(for instance, <span>[<a href="#I-D.bormann-asdf-sdftype-link" class="cite xref">I-D.bormann-asdf-sdftype-link</a>]</span>) may be all that is needed to fully enable modeling
+them.<a href="#section-2.2.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.2.3-4">Actions may have (or lack) qualities of idempotency and side-effect safety.<a href="#section-2.2.3-4" class="pilcrow">¶</a></p>
+<p id="section-2.2.3-5">Base SDF only provides data constraint modeling and semantics for the input and output data of definitions in <code>sdfAction</code> groups.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
-part of the protocol binding.<a href="#section-2.2.3-4" class="pilcrow">¶</a></p>
+part of the protocol binding.<a href="#section-2.2.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdfevent-overview">
@@ -2088,9 +2131,9 @@ part of the protocol binding.<a href="#section-2.2.3-4" class="pilcrow">¶</a></
 <a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-sdfevent" class="section-name selfRef">sdfEvent</a>
           </h4>
 <p id="section-2.2.4-1">The <code>sdfEvent</code> group contains declarations of Events, which can model
-affordances that inform about "happenings" associated with an instance
-of an Object; these may result in a signal being stored or emitted as
-a result.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
+affordances that inform about "happenings" associated with a Thing
+modeled by the enclosing Object; these may result in a signal being
+stored or emitted as a result.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.4-2">Note that there is a trivial overlap with sdfProperty state changes,
 which may also be defined as events but are not generally required to
 be defined as such.
@@ -2101,7 +2144,7 @@ sdfProperty.
 For instance, while a state change may simply be superseded by another
 state change, some events are "precious" and need to be preserved even
 if further events follow.<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.4-3">The current version of SDF only provides data constraint modeling and
+<p id="section-2.2.4-3">Base SDF only provides data constraint modeling and
 semantics for the output data of Event affordances.
 Again, data definitions for payloads of protocol messages, and
 detailed protocol settings for invoking the action, are expected to be
@@ -2154,11 +2197,11 @@ is composed of: other definitions in <code>sdfThing</code> groups definitions in
         <h3 id="name-member-names-given-names-an">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-member-names-given-names-an" class="section-name selfRef">Member names: Given Names and Quality Names</a>
         </h3>
-<p id="section-2.3-1">SDF models are JSON objects (maps) that mostly employ JSON objects as
-member values, which in turn mostly employ JSON objects as their
+<p id="section-2.3-1">SDF documents are JSON maps that mostly employ JSON maps as
+member values, which in turn mostly employ JSON maps as their
 member values, and so on.
-This nested structure of JSON objects creates a tree, where the edges
-are the member names (map keys) used in these JSON objects.
+This nested structure of JSON maps creates a tree, where the edges
+are the member names (map keys) used in these JSON maps.
 (In certain cases, where member names are not needed, JSON arrays may
 be interspersed in this tree.)<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <div id="given-names-and-quality-names">
@@ -2166,33 +2209,35 @@ be interspersed in this tree.)<a href="#section-2.3-1" class="pilcrow">¶</a></p
           <h4 id="name-given-names-and-quality-nam">
 <a href="#section-2.3.1" class="section-number selfRef">2.3.1. </a><a href="#name-given-names-and-quality-nam" class="section-name selfRef">Given Names and Quality Names</a>
           </h4>
-<p id="section-2.3.1-1">For any particular JSON object in an SDF model, the set of member
+<p id="section-2.3.1-1">For any particular JSON map in an SDF document, the set of member
 names that are used is either of:<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2.3.1-2.1">A set of "<em>Quality Names</em>", where the entries in the object are
+<li class="normal" id="section-2.3.1-2.1">
+              <p id="section-2.3.1-2.1.1">A set of "<em>Quality Names</em>", where the entries in the map are
 Qualities.  Quality Names are defined by the present specification
 and its extensions, together with specific semantics to be
-associated with the member value given with a certain Quality Name.<a href="#section-2.3.1-2.1" class="pilcrow">¶</a>
+associated with the member value given with a certain Quality Name.<a href="#section-2.3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-2.3.1-2.2">A set of "<em>Given Names</em>", where the entries in the object are separate
+            <li class="normal" id="section-2.3.1-2.2">
+              <p id="section-2.3.1-2.2.1">A set of "<em>Given Names</em>", where the entries in the map are separate
 entities (definitions, declarations, etc.) that each have names that
-are chosen by the SDF model author in order that these names can be
-employed by a user of that model.<a href="#section-2.3.1-2.2" class="pilcrow">¶</a>
+are chosen by the SDF document author in order that these names can be
+employed by a user of that model.<a href="#section-2.3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-2.3.1-3">In a path from the root of the tree to any leaf, Quality Names and
 Given Names roughly alternate (with the information block,
 <a href="#information-block" class="auto internal xref">Section 3.1</a>, as a prominent exception).<a href="#section-2.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.3.1-4">The meaning of the JSON object that is the member value associated
+<p id="section-2.3.1-4">The meaning of the JSON map that is the member value associated
 with a Given Name is derived from the Quality Name that was used as
 the member name associated to the parent.
-In the CDDL grammar given in <a href="#syntax" class="auto internal xref">Appendix A</a>, JSON objects with member names that are
-Given Names are defined using the CDDL generic rule reference <code>named&lt;objectmembers&gt;</code>,
-where <code>objectmembers</code> is in turn the structure of the members of the
-JSON object that is the value of the member named by the Given Name.
-As quality-named objects and given-named objects roughly alternate in
-a path down the tree, <code>objectmembers</code> is usually an object built from
-Quality Names.<a href="#section-2.3.1-4" class="pilcrow">¶</a></p>
+In the CDDL grammar given in <a href="#syntax" class="auto internal xref">Appendix A</a>, JSON maps with member names that are
+Given Names are defined using the CDDL generic rule reference <code>named&lt;membervalues&gt;</code>,
+where <code>membervalues</code> is in turn the structure of the member values of the
+JSON map, i.e., the value of the member named by the Given Name.
+As quality-named maps and given-named maps roughly alternate in
+a path down the tree, <code>membervalues</code> is usually a map built from
+Quality Names as keys.<a href="#section-2.3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hierarchical-names">
@@ -2248,13 +2293,13 @@ Given Names are often sufficiently self-explanatory that they can be
 used in place of the <code>label</code> quality if that is not given.
 In turn, if a given name turns out too complicated, a more elaborate
 <code>label</code> can be given and the given name kept simple.
-The current version of SDF does not address internationalization of
+Base SDF does not address internationalization of
 given names.<a href="#section-2.3.3-4" class="pilcrow">¶</a></p>
 <p id="section-2.3.3-5">Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
 qualified names for Given Names.
 So, until that extension is defined, Given Names with (one or more)
-embedded colons are reserved and <span class="bcp14">MUST NOT</span> be used in an SDF model.<a href="#section-2.3.3-5" class="pilcrow">¶</a></p>
+embedded colons are reserved and <span class="bcp14">MUST NOT</span> be used in an SDF document.<a href="#section-2.3.3-5" class="pilcrow">¶</a></p>
 <p id="section-2.3.3-6">All names in SDF are case-sensitive.<a href="#section-2.3.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2267,20 +2312,24 @@ embedded colons are reserved and <span class="bcp14">MUST NOT</span> be used in 
       <h2 id="name-sdf-structure">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-sdf-structure" class="section-name selfRef">SDF structure</a>
       </h2>
-<p id="section-3-1">SDF definitions are contained in SDF files.  One or more SDF files can
-work together to provide the definitions and declarations that are the
-payload of the SDF format.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">An SDF definition file contains a single JSON map (JSON object).
-This object has three blocks: the information block, the namespaces block, and the definitions block.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-1">SDF definitions are contained in SDF documents, together with data
+about the SDF document itself (information block).
+Definitions and declarations from additional SDF documents can be
+referenced; together with the definitions and declarations in the
+referencing SDF document they build the SDF model expressed by that
+SDF document.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Each SDF document is represented as a single JSON map.
+This map has three blocks: the information block, the namespaces block, and the definitions block.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="information-block">
 <section id="section-3.1">
         <h3 id="name-information-block">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-information-block" class="section-name selfRef">Information block</a>
         </h3>
-<p id="section-3.1-1">The information block contains generic meta data for the file itself and all included definitions.
+<p id="section-3.1-1">The information block contains generic meta data for the SDF document
+itself and all included definitions.
 To enable tool integration, the information block is optional in the grammar
-of SDF; most processes for working with SDF files will have policies
-that only SDF models with an info block can be processed.
+of SDF; most processes for working with SDF documents will have policies
+that only SDF documents with an info block can be processed.
 It is therefore <span class="bcp14">RECOMMENDED</span> that SDF validator tools emit a warning
 when no information block is found.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The keyword (map key) that defines an information block is "info". Its
@@ -2346,11 +2395,14 @@ value is a JSON map in turn, with a set of entries that represent qualities that
           </tbody>
         </table>
 </div>
-<p id="section-3.1-5">The version quality is used to indicate version information about the set of definitions in the file.
+<p id="section-3.1-5">The version quality is used to indicate version information about the
+set of definitions in the SDF document.
 The version is <span class="bcp14">RECOMMENDED</span> to be lexicographically increasing over the life of a model: a newer model always has a version string that string-compares higher than all previous versions.
 This is easily achieved by following the convention to start the version with an <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> <code>date-time</code> or, if new versions are generated less frequently than once a day, just the <code>full-date</code> (i.e., YYYY-MM-DD); in many cases, that will be all that is needed (see <a href="#example1" class="auto internal xref">Figure 1</a> for an example).
 This specification does not give a strict definition for the format of the version string but each using system or organization should define internal structure and semantics to the level needed for their use.
-If no further details are provided, a <code>date-time</code> or <code>full-date</code> in this field can be assumed to indicate the latest update time of the definitions in the file.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+If no further details are provided, a <code>date-time</code> or <code>full-date</code> in
+this field can be assumed to indicate the latest update time of the
+definitions in the SDF document.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.1-6">The modified quality can be used with a value using <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> <code>date-time</code> (with <code>Z</code> for time-zone) or <code>full-date</code> format to express time of the latest revision of the definitions.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
 <p id="section-3.1-7">The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an <span>[<a href="#SPDX" class="cite xref">SPDX</a>]</span> license identifier.
 (For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)<a href="#section-3.1-7" class="pilcrow">¶</a></p>
@@ -2368,7 +2420,7 @@ Extension feature names will be specified in extension documents.<a href="#secti
 themselves.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">The defaultNamespace setting selects one of the entries in the
 namespace map by giving its short name.  The associated URI (value of
-this entry) becomes the default namespace for the SDF definition file.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+this entry) becomes the default namespace for the SDF document.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <span id="name-namespaces-block-2"></span><div id="nssec">
 <table class="center" id="table-2">
           <caption>
@@ -2413,7 +2465,7 @@ added, if needed, where the namespace entry is used.<a href="#section-3.2-5" cla
 "defaultNamespace": "cap"
 </pre><a href="#section-3.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-7">If no defaultNamespace setting is given, the SDF definition file does not
+<p id="section-3.2-7">If no defaultNamespace setting is given, the SDF document does not
 contribute to a global namespace (all definitions remain local to the
 model and are not accessible for re-use by other models).
 As the defaultNamespace is set by giving a
@@ -2429,7 +2481,7 @@ set up, and no defaultNamespace can be given.<a href="#section-3.2-8" class="pil
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-definitions-block" class="section-name selfRef">Definitions block</a>
         </h3>
 <p id="section-3.3-1">The Definitions block contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
-The value of each group is a JSON map (object), the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
+The value of each group is a JSON map, the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
 (In short, we speak of the map entries as "named sets of qualities".)<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">Each group may contain zero or more definitions.
 Each identifier defined creates a new type and term in the target namespace.
@@ -2457,7 +2509,16 @@ Declarations have a scope of the current definition block.<a href="#section-3.3-
 </div>
 <p id="section-3.3-6">This example defines an Object "foo" that is defined in the default namespace (full address: <code>#/sdfObject/foo</code>), containing a property that can be addressed as
 <code>#/sdfObject/foo/sdfProperty/bar</code>, with data of type boolean.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
-<p id="section-3.3-7">Some of the definitions are also declarations: the definition of the entry "bar" in the property "foo" means that each instance of a "foo" can have zero or one instance of a "bar".  Entries within <code>sdfProperty</code>, <code>sdfAction</code>, and <code>sdfEvent</code>, within <code>sdfObject</code> entries, are declarations.  Similarly, entries within an <code>sdfThing</code> describe instances of <code>sdfObject</code> (or nested <code>sdfThing</code>) that form part of instances of the Thing.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">Often, definitions are also declarations: the definition of the
+entry "bar" in the property "foo" means that data corresponding to the
+"foo" property in a property interaction offered by Thing can have zero or
+one components modeled by "bar".  Entries within <code>sdfProperty</code>,
+<code>sdfAction</code>, and <code>sdfEvent</code>, within <code>sdfObject</code> or <code>sdfThing</code> entries, are
+declarations; entries within <code>sdfData</code> are not.
+Similarly, <code>sdfObject</code> or <code>sdfThing</code> entries within an <code>sdfThing</code>
+definition specify that the
+interactions offered by a Thing modeled by this sdfThing include the
+interactions modeled by the nested <code>sdfObject</code> or <code>sdfThing</code>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2467,9 +2528,9 @@ Declarations have a scope of the current definition block.<a href="#section-3.3-
       <h2 id="name-names-and-namespaces">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-names-and-namespaces" class="section-name selfRef">Names and namespaces</a>
       </h2>
-<p id="section-4-1">SDF definition files may contribute to a global namespace, and may
+<p id="section-4-1">SDF documents may contribute to a global namespace, and may
 reference elements from that global namespace.
-(An SDF definition file that does not set a defaultNamespace does not
+(An SDF document that does not set a defaultNamespace does not
 contribute to a global namespace.)<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="structure">
 <section id="section-4.1">
@@ -2479,12 +2540,13 @@ contribute to a global namespace.)<a href="#section-4-1" class="pilcrow">¶</a><
 <p id="section-4.1-1">Global names look exactly like <code>https://</code> URIs with attached fragment identifiers.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">There is no intention to require that these URIs can be dereferenced.
 
-(However, as future versions of SDF might find a use for dereferencing
+(However, as future extensions of SDF might find a use for dereferencing
 global names, the URI should be chosen in such a way that this may
-become possible in the future.)<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+become possible in the future.
+See also <span>[<a href="#I-D.bormann-t2trg-deref-id-01" class="cite xref">I-D.bormann-t2trg-deref-id-01</a>]</span> for a discussion of dereferenceable identifiers.)<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1-3">The absolute URI of a global name should be a URI as per <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>, with a scheme of "https" and a path (<code>hier-part</code> in <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).
-For the present version of this specification, the query part should
-not be used (it might be used in later versions).<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+For base SDF, the query part should
+not be used (it might be used in extensions).<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.1-4">The fragment identifier is constructed as per <span><a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a> of [<a href="#RFC6901" class="cite xref">RFC6901</a>]</span>.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2494,22 +2556,26 @@ not be used (it might be used in later versions).<a href="#section-4.1-3" class=
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-contributing-global-names" class="section-name selfRef">Contributing global names</a>
         </h3>
 <p id="section-4.2-1">The fragment identifier part of a global name defined in an SDF
-definition file is constructed from a JSON pointer that selects the
-element defined for this name in the SDF definition file.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+document is constructed from a JSON pointer that selects the
+element defined for this name in the SDF document.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">The absolute URI part is a copy of the default namespace, i.e., the
 default namespace is always the target namespace for a name for which
 a definition is contributed.
 When emphasizing that name definitions are contributed to the default namespace,
-we therefore also call it the "target namespace" of the SDF definition file.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">E.g., in <a href="#example1" class="auto internal xref">Figure 1</a>, definitions for the following global names are contributed:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+we therefore also call it the "target namespace" of the SDF document.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">For instance, in <a href="#example1" class="auto internal xref">Figure 1</a>, definitions for the following global names are contributed:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.2-4.1">https://example.com/capability/cap#/sdfObject/Switch<a href="#section-4.2-4.1" class="pilcrow">¶</a>
+<li class="normal" id="section-4.2-4.1">
+            <p id="section-4.2-4.1.1">https://example.com/capability/cap#/sdfObject/Switch<a href="#section-4.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.2-4.2">https://example.com/capability/cap#/sdfObject/Switch/sdfProperty/value<a href="#section-4.2-4.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-4.2-4.2">
+            <p id="section-4.2-4.2.1">https://example.com/capability/cap#/sdfObject/Switch/sdfProperty/value<a href="#section-4.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.2-4.3">https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on<a href="#section-4.2-4.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-4.2-4.3">
+            <p id="section-4.2-4.3.1">https://example.com/capability/cap#/sdfObject/Switch/sdfAction/on<a href="#section-4.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.2-4.4">https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off<a href="#section-4.2-4.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-4.2-4.4">
+            <p id="section-4.2-4.4.1">https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off<a href="#section-4.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-4.2-5">Note the <code>#</code>, which separates the absolute-URI part (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>) from the fragment identifier part.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
@@ -2524,13 +2590,12 @@ we therefore also call it the "target namespace" of the SDF definition file.<a h
 <span>[<a href="#W3C.NOTE-curie-20101216" class="cite xref">W3C.NOTE-curie-20101216</a>]</span> (note that this excludes the production <code>safe-curie</code>),
 but also limiting the IRIs involved in that production to URIs as per <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>
 and the prefixes to ASCII characters <span>[<a href="#RFC0020" class="cite xref">RFC0020</a>]</span>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">A name that is contributed by the current SDF definition file can be
+<p id="section-4.3-2">A name that is contributed by the current SDF document can be
 referenced by a Same-Document Reference as per <span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.4" class="relref">Section 4.4</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.
-As there is little point in referencing the entire SDF definition
-file, this will be a <code>#</code> followed by a JSON pointer.
+As there is little point in referencing the entire SDF document, this will be a <code>#</code> followed by a JSON pointer.
 This is the only kind of name reference to itself that is possible in an SDF
-definition file that does not set a default namespace.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">Name references that point outside the current SDF definition file
+document that does not set a default namespace.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.3-3">Name references that point outside the current SDF document
 need to contain curie prefixes.  These then reference namespace
 declarations in the namespaces block.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.3-4">For example, if a namespace prefix is defined:<a href="#section-4.3-4" class="pilcrow">¶</a></p>
@@ -2558,9 +2623,11 @@ all references outside of the document need to go through the
 namespace map.<a href="#section-4.3-10" class="pilcrow">¶</a></p>
 <p id="section-4.3-11">Name references occur only in specific elements of the syntax of SDF:<a href="#section-4.3-11" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.3-12.1">copying elements via sdfRef values<a href="#section-4.3-12.1" class="pilcrow">¶</a>
+<li class="normal" id="section-4.3-12.1">
+            <p id="section-4.3-12.1.1">copying elements via sdfRef values<a href="#section-4.3-12.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.3-12.2">pointing to elements via sdfRequired value elements<a href="#section-4.3-12.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-4.3-12.2">
+            <p id="section-4.3-12.2.1">pointing to elements via sdfRequired value elements<a href="#section-4.3-12.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2590,25 +2657,30 @@ of the referenced map or to add new qualities or definitions.<a href="#section-4
 <p id="section-4.4-7">More formally, for a JSON map that contains an
 sdfRef member, the semantics is defined to be as if the following steps were performed:<a href="#section-4.4-7" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.4-8">
-<li id="section-4.4-8.1">The JSON map that contains the sdfRef member is copied into a
-variable named "patch".<a href="#section-4.4-8.1" class="pilcrow">¶</a>
+<li id="section-4.4-8.1">
+            <p id="section-4.4-8.1.1">The JSON map that contains the sdfRef member is copied into a
+variable named "patch".<a href="#section-4.4-8.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-4.4-8.2">The sdfRef member of the copy in "patch" is removed.<a href="#section-4.4-8.2" class="pilcrow">¶</a>
+          <li id="section-4.4-8.2">
+            <p id="section-4.4-8.2.1">The sdfRef member of the copy in "patch" is removed.<a href="#section-4.4-8.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-4.4-8.3">the JSON pointer that is the value of the sdfRef member is
-dereferenced and the result is copied into a variable named "original".<a href="#section-4.4-8.3" class="pilcrow">¶</a>
+          <li id="section-4.4-8.3">
+            <p id="section-4.4-8.3.1">the JSON pointer that is the value of the sdfRef member is
+dereferenced and the result is copied into a variable named "original".<a href="#section-4.4-8.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-4.4-8.4">The JSON Merge Patch algorithm <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is applied to patch
-the contents of "original" with the contents of "patch".<a href="#section-4.4-8.4" class="pilcrow">¶</a>
+          <li id="section-4.4-8.4">
+            <p id="section-4.4-8.4.1">The JSON Merge Patch algorithm <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is applied to patch
+the contents of "original" with the contents of "patch".<a href="#section-4.4-8.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-4.4-8.5">The result of the Merge Patch is used in place of the value of the
-original JSON map.<a href="#section-4.4-8.5" class="pilcrow">¶</a>
+          <li id="section-4.4-8.5">
+            <p id="section-4.4-8.5.1">The result of the Merge Patch is used in place of the value of the
+original JSON map.<a href="#section-4.4-8.5.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 <p id="section-4.4-9">Note that the formal syntaxes given in Appendices <a href="#syntax" class="auto internal xref">A</a> and <a href="#jso" class="auto internal xref">B</a>
 generally describe the <em>result</em> of applying a merge-patch; the notations
 are not powerful enough to describe, for instance, the effect of null
-values given with the sdfRef to remove members of JSON objects from
+values given with the sdfRef to remove members of JSON maps from
 the referenced target.  Nonetheless, the syntaxes also give the syntax
 of the sdfRef itself, which vanishes during the resolution; in many
 cases therefore even merge-patch inputs will validate with these
@@ -2725,8 +2797,8 @@ formal syntaxes.<a href="#section-4.4-9" class="pilcrow">¶</a></p>
 <a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-sdfrequired" class="section-name selfRef">sdfRequired</a>
         </h3>
 <p id="section-4.5-1">The keyword "sdfRequired" is provided to apply a constraint that
-defines for which declarations corresponding data are mandatory in an
-instance conforming the current definition.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+defines for which declarations the corresponding data are mandatory in a
+Thing modeled by the current definition.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
 <p id="section-4.5-2">The value of "sdfRequired" is an array of name references (JSON pointers), each
 indicating one declaration that is mandatory to be represented.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
 <p id="section-4.5-3">The example in <a href="#example-req" class="auto internal xref">Figure 4</a> shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".<a href="#section-4.5-3" class="pilcrow">¶</a></p>
@@ -2876,18 +2948,6 @@ present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">scaleMinimum</td>
-              <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">lower limit of value in units given by unit (note 2)</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">scaleMaximum</td>
-              <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">upper limit of value in units given by unit (note 2)</td>
-              <td class="text-left" rowspan="1" colspan="1">N/A</td>
-            </tr>
-            <tr>
               <td class="text-left" rowspan="1" colspan="1">nullable</td>
               <td class="text-left" rowspan="1" colspan="1">boolean</td>
               <td class="text-left" rowspan="1" colspan="1">indicates a null value is available for this type</td>
@@ -2896,7 +2956,7 @@ present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">contentFormat</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">content type (IANA media type string plus parameters), encoding (note 3)</td>
+              <td class="text-left" rowspan="1" colspan="1">content type (IANA media type string plus parameters), encoding (note 2)</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
             </tr>
             <tr>
@@ -2922,7 +2982,8 @@ present specification.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
 </div>
 <ol start="1" type="1" class="normal type-1" id="section-4.7-5">
 <li id="section-4.7-5.1">
-            <p id="section-4.7-5.1.1">Note that the quality <code>unit</code> was called <code>units</code> in SDF 1.0.
+            <p id="section-4.7-5.1.1">Note that the quality <code>unit</code> was called <code>units</code> in earlier drafts
+of SDF.
 The unit name <span class="bcp14">SHOULD</span> be as
 per the <a href="https://rfc-editor.org/rfc/rfc8428#senml-units" class="relref">SenML Units</a> Registry
 or the <a href="https://rfc-editor.org/rfc/rfc8798#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="cite xref">IANA.senml</a>]</span>
@@ -2933,26 +2994,22 @@ Exceptionally, if a registration in these registries cannot be
 obtained or would be inappropriate, the unit name can also be a URI
 that is pointing to a definition of the unit.  Note that SDF
 processors are not expected to (and normally <span class="bcp14">SHOULD NOT</span>)
-dereference these URIs; they may be useful to humans, though.
+dereference these URIs (see also <span>[<a href="#I-D.bormann-t2trg-deref-id-01" class="cite xref">I-D.bormann-t2trg-deref-id-01</a>]</span>); they may be useful to
+humans, though.
 A URI unit name is distinguished from a registered unit name by the
-presence of a colon; registered unit names that contain a colon (at
+presence of a colon; any registered unit names that contain a colon (at
 the time of writing, none) can therefore not be used in SDF.<a href="#section-4.7-5.1.2" class="pilcrow">¶</a></p>
 <p id="section-4.7-5.1.3">
 For use by translators into ecosystems that require URIs for unit
 names, the URN sub-namespace "urn:ietf:params:unit" is provided
 (<a href="#unit-urn" class="auto internal xref">Section 7.2</a>); URNs from this sub-namespace <span class="bcp14">MUST NOT</span> be used in a
-<code>unit</code> quality, in favor of simply notating the unit name (e.g.,
+<code>unit</code> quality, in favor of simply notating the unit name (such as
 <code>kg</code> instead of <code>urn:ietf:params:unit:kg</code>).<a href="#section-4.7-5.1.3" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-4.7-5.2">these qualities were included in SDF 1.0, but were not fully
- defined; they are not included in SDF 1.1.  In 1.next, they will
- be replaced by qualities to express scaling that are more aligned
- with the processes that combine ecosystem and instance specific
- information with an SDF model.<a href="#section-4.7-5.2" class="pilcrow">¶</a>
-</li>
-          <li id="section-4.7-5.3">The <code>contentFormat</code> quality follows the Content-Format-Spec as defined in
+          <li id="section-4.7-5.2">
+            <p id="section-4.7-5.2.1">The <code>contentFormat</code> quality follows the Content-Format-Spec as defined in
 <span><a href="https://rfc-editor.org/rfc/rfc9193#section-6" class="relref">Section 6</a> of [<a href="#RFC9193" class="cite xref">RFC9193</a>]</span>, allowing for expressing both numeric and string
-based Content-Formats.<a href="#section-4.7-5.3" class="pilcrow">¶</a>
+based Content-Formats.<a href="#section-4.7-5.2.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 <div id="sdftype">
@@ -2979,11 +3036,11 @@ representation of the type's values in JSON.<a href="#section-4.7.1-2" class="pi
 This table also gives a description of the semantics of the sdfType,
 the conventional value for <code>type</code> to be used with the <code>sdfType</code> value,
 and a conventional JSON representation for values of the type.<a href="#section-4.7.1-3" class="pilcrow">¶</a></p>
-<span id="name-values-defined-in-sdf-11-fo"></span><div id="sdftype1">
+<span id="name-values-defined-in-base-sdf-"></span><div id="sdftype1">
 <table class="center" id="table-5">
             <caption>
 <a href="#table-5" class="selfRef">Table 5</a>:
-<a href="#name-values-defined-in-sdf-11-fo" class="selfRef">Values defined in SDF 1.1 for sdfType quality</a>
+<a href="#name-values-defined-in-base-sdf-" class="selfRef">Values defined in base SDF for the sdfType quality</a>
             </caption>
 <thead>
               <tr>
@@ -3013,7 +3070,7 @@ and a conventional JSON representation for values of the type.<a href="#section-
 capability to represent points in time that fall on leap seconds.
 More date/time-related sdfTypes are likely to be added in the sdfType
 value registry.<a href="#section-4.7.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.7.1-6">In SDF 1.0, a similar concept was called <code>subtype</code>.<a href="#section-4.7.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.7.1-6">(In earlier drafts of this specification, a similar concept was called <code>subtype</code>.)<a href="#section-4.7.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdfchoice">
@@ -3022,9 +3079,10 @@ value registry.<a href="#section-4.7.1-5" class="pilcrow">¶</a></p>
 <a href="#section-4.7.2" class="section-number selfRef">4.7.2. </a><a href="#name-sdfchoice" class="section-name selfRef">sdfChoice</a>
           </h4>
 <p id="section-4.7.2-1">Data can be a choice of named alternatives, called <code>sdfChoice</code>.
-Each alternative is identified by a name (string, key in the JSON
-object used to represent the choice) and a set of dataqualities
-(object, the value in the JSON object used to represent the choice).
+Each alternative is identified by a name (string, key in the outer JSON
+map used to represent the overall choice) and a set of dataqualities
+(each in an inner JSON map, the value used to represent the
+individual alternative in the outer JSON map).
 Dataqualities that are specified at the same level as the sdfChoice
 apply to all choices in the sdfChoice, except those specific choices
 where the dataquality is overridden at the choice level.<a href="#section-4.7.2-1" class="pilcrow">¶</a></p>
@@ -3040,7 +3098,7 @@ What would have been<a href="#section-4.7.2-3.1.2" class="pilcrow">¶</a></p>
 </pre><a href="#section-4.7.2-3.1.3" class="pilcrow">¶</a>
 </div>
 <p id="section-4.7.2-3.1.4">
-in SDF 1.0, is often best represented as:<a href="#section-4.7.2-3.1.4" class="pilcrow">¶</a></p>
+in earlier drafts of this specification, is often best represented as:<a href="#section-4.7.2-3.1.4" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-3.1.5">
 <pre>
 "sdfChoice": {
@@ -3056,7 +3114,7 @@ This allows the placement of other dataqualities such as
 <code>description</code> in the example.<a href="#section-4.7.2-3.1.6" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-3.1.7">
 If an enum needs to use a data type different from text string,
-e.g. what would have been:<a href="#section-4.7.2-3.1.7" class="pilcrow">¶</a></p>
+what would for instance have been:<a href="#section-4.7.2-3.1.7" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-3.1.8">
 <pre>
 "type": "number",
@@ -3064,7 +3122,7 @@ e.g. what would have been:<a href="#section-4.7.2-3.1.7" class="pilcrow">¶</a><
 </pre><a href="#section-4.7.2-3.1.8" class="pilcrow">¶</a>
 </div>
 <p id="section-4.7.2-3.1.9">
-in SDF 1.0, is represented as:<a href="#section-4.7.2-3.1.9" class="pilcrow">¶</a></p>
+in earlier drafts of this specification, is represented as:<a href="#section-4.7.2-3.1.9" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-3.1.10">
 <pre>
 "type": "number",
@@ -3081,7 +3139,7 @@ descriptive for what these numbers actually stand for; sdfChoice
 also makes it easy to add number ranges into the mix.<a href="#section-4.7.2-3.1.11" class="pilcrow">¶</a></p>
 <p id="section-4.7.2-3.1.12">
 (Note that <code>const</code> can also be used for strings as in the previous
-example, e.g., if the actual string value is indeed a crucial
+example, for instance, if the actual string value is indeed a crucial
 element for the data model.)<a href="#section-4.7.2-3.1.12" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.7.2-3.2">
@@ -3117,7 +3175,7 @@ can be more descriptively notated in SDF as:<a href="#section-4.7.2-3.2.5" class
           </ul>
 <p id="section-4.7.2-4">Note that there is no need in SDF for the type intersection construct
 <code>allOf</code> or the peculiar type-xor construct <code>oneOf</code> found in <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span>.<a href="#section-4.7.2-4" class="pilcrow">¶</a></p>
-<p id="section-4.7.2-5">As a simplification for users of SDF specifications accustomed to
+<p id="section-4.7.2-5">As a simplification for users of SDF models who are accustomed to
 the JSO enum keyword, this is retained, but limited to a choice
 of text string values, such that<a href="#section-4.7.2-5" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.7.2-6">
@@ -3157,7 +3215,7 @@ All these definitions share some common qualities as discussed in <a href="#comm
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-sdfobject-2" class="section-name selfRef">sdfObject</a>
         </h3>
 <p id="section-5.1-1">The sdfObject keyword denotes a group of zero or more Object definitions.
-Object definitions may contain or include definitions of Properties, Actions, Events declared for the object, as well as data types (sdfData group) to be used in this or other Objects.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+Object definitions may contain or include definitions of Properties, Actions, Events declared for the Object, as well as data types (sdfData group) to be used in this or other Objects.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2">The qualities of an sdfObject include the common qualities, additional qualities are shown in <a href="#sdfobjqual" class="auto internal xref">Table 6</a>.
 None of these
 qualities are required or have default values that are assumed if the
@@ -3186,17 +3244,17 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfProperty</td>
               <td class="text-left" rowspan="1" colspan="1">property</td>
-              <td class="text-left" rowspan="1" colspan="1">zero or more named property definitions for this object</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named property definitions for this Object</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfAction</td>
               <td class="text-left" rowspan="1" colspan="1">action</td>
-              <td class="text-left" rowspan="1" colspan="1">zero or more named action definitions for this object</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named action definitions for this Object</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfEvent</td>
               <td class="text-left" rowspan="1" colspan="1">event</td>
-              <td class="text-left" rowspan="1" colspan="1">zero or more named event definitions for this object</td>
+              <td class="text-left" rowspan="1" colspan="1">zero or more named event definitions for this Object</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfData</td>
@@ -3206,12 +3264,12 @@ quality is absent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">minItems</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">(array) Minimum number of sdfObject instances in array</td>
+              <td class="text-left" rowspan="1" colspan="1">(array) Minimum number of multiplied affordances in array</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">maxItems</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">(array) Maximum number of sdfObject instances in array</td>
+              <td class="text-left" rowspan="1" colspan="1">(array) Maximum number of multiplied affordances in array</td>
             </tr>
           </tbody>
         </table>
@@ -3323,7 +3381,7 @@ thus the common qualities), see <a href="#data-qualities" class="auto internal x
 <p id="section-5.3-5"><code>sdfInputData</code> defines the input data of the action.  <code>sdfOutputData</code>
 defines the output data of the action.
 As discussed in <a href="#sdfaction-overview" class="auto internal xref">Section 2.2.3</a>, a set of data qualities with
-type "object" can be used to substructure either data item, with
+type <code>"object"</code> can be used to substructure either data item, with
 optionality indicated by the data quality <code>required</code>.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3371,7 +3429,7 @@ optionality indicated by the data quality <code>required</code>.<a href="#sectio
 </div>
 <p id="section-5.4-5"><code>sdfOutputData</code> defines the output data of the action.
 As discussed in <a href="#sdfevent-overview" class="auto internal xref">Section 2.2.4</a>, a set of data qualities with
-type "object" can be used to substructure the output data item, with
+type <code>"object"</code> can be used to substructure the output data item, with
 optionality indicated by the data quality <code>required</code>.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3398,15 +3456,21 @@ data items to be included in an affordance definition.<a href="#section-5.5-2" c
       </h2>
 <p id="section-6-1">The requirements for high level composition include the following:<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6-2.1">The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.<a href="#section-6-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6-2.1">
+          <p id="section-6-2.1.1">The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.<a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-6-2.2">The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer objects, while retaining the atomicity of the individual objects.<a href="#section-6-2.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-6-2.2">
+          <p id="section-6-2.2.1">The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer Objects, while retaining the atomicity of the individual Objects.<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-6-2.3">The ability to compose Objects and other definition blocks into a higher level thing that represents a product, while retaining the atomicity of objects.<a href="#section-6-2.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-6-2.3">
+          <p id="section-6-2.3.1">The ability to compose Objects and other definition blocks into a higher level sdfThing that represents a product, while retaining the atomicity of Objects.<a href="#section-6-2.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-6-2.4">The ability to enrich and refine a base definition to have product-specific qualities and quality values, e.g. unit, range, and scale settings.<a href="#section-6-2.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-6-2.4">
+          <p id="section-6-2.4.1">The ability to enrich and refine a base definition to have
+product-specific qualities and quality values, such as unit, range, and scale settings.<a href="#section-6-2.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-6-2.5">The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.<a href="#section-6-2.5" class="pilcrow">¶</a>
+        <li class="normal" id="section-6-2.5">
+          <p id="section-6-2.5.1">The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.<a href="#section-6-2.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="paths-in-the-model-namespaces">
@@ -3414,8 +3478,14 @@ data items to be included in an affordance definition.<a href="#section-5.5-2" c
         <h3 id="name-paths-in-the-model-namespac">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-paths-in-the-model-namespac" class="section-name selfRef">Paths in the model namespaces</a>
         </h3>
-<p id="section-6.1-1">The model namespace is organized according to terms that are defined in the definition files that are present in the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor. There is expected to be an SDF namespace for common SDF definitions used in OneDM.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">The structure of a path in a namespace is defined by the JSON Pointers to the definitions in the files in that namespace. For example, if there is a file defining an object "Switch" with an action "on", then the reference to the action would be "ns:/sdfObject/Switch/sdfAction/on" where <code>ns</code> is the namespace prefix (short name for the namespace).<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">The model namespace is organized according to terms that are defined
+in the SDF documents that contribute to the namespace. For example, definitions that originate from an organization or vendor are expected to be in a namespace that is specific to that organization or vendor.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The structure of a path in a namespace is defined by the JSON Pointers
+to the definitions in the SDF documents in that namespace.
+For example, if there is an SDF document defining an Object "Switch"
+with an action "on", then the reference to the action would be
+"ns:/sdfObject/Switch/sdfAction/on" where <code>ns</code> is the namespace prefix
+(short name for the namespace).<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="modular-composition">
@@ -3423,7 +3493,8 @@ data items to be included in an affordance definition.<a href="#section-5.5-2" c
         <h3 id="name-modular-composition">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-modular-composition" class="section-name selfRef">Modular Composition</a>
         </h3>
-<p id="section-6.2-1">Modular composition of definitions enables an existing definition (could be in the same file or another file) to become part of a new definition by including a reference to the existing definition within the model namespace.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">Modular composition of definitions enables an existing definition
+(could be in the same or another SDF document) to become part of a new definition by including a reference to the existing definition within the model namespace.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <div id="use-of-the-sdfref-keyword-to-re-use-a-definition">
 <section id="section-6.2.1">
           <h4 id="name-use-of-the-sdfref-keyword-t">
@@ -3432,10 +3503,12 @@ data items to be included in an affordance definition.<a href="#section-5.5-2" c
 <p id="section-6.2.1-1">An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword "sdfRef" as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-2">In the definition that uses "sdfRef", new qualities may be added
 and existing qualities from the referenced definition may be
-overridden.  (Note that JSON maps (objects) do not have a defined
+overridden.  (Note that JSON maps do not have a defined
 order, so the SDF processor may see these overrides before seeing the
 <code>sdfRef</code>.)<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.2.1-3">Note that if the referenced definition contains qualities or definitions that are not valid in the context where the sdfRef is used (e.g., if an sdfThing definition would be added in an sdfObject definition), the resulting model, when resolved, may be invalid.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-3">Note that if the referenced definition contains qualities or
+definitions that are not valid in the context where the sdfRef is used
+(for instance, if an sdfThing definition would be added in an sdfObject definition), the resulting model, when resolved, may be invalid.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-4">As a convention, overrides are intended to be used only for further restricting
 the set of data values, as shown in <a href="#exa-sdfref" class="auto internal xref">Figure 5</a>:  any value for a
 <code>cable-length</code> also is a valid value for a <code>length</code>, with the
@@ -3476,15 +3549,21 @@ consumption there is no conflict with the intended goal.<a href="#section-6.2.1-
         <h3 id="name-sdfthing-2">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-sdfthing-2" class="section-name selfRef">sdfThing</a>
         </h3>
-<p id="section-6.3-1">An sdfThing is a set of declarations and qualities that may be part of a more complex model. For example, the object declarations that make up the definition of a single socket of an outlet strip could be encapsulated in an sdfThing, and the socket-thing itself could be used in a declaration in the sdfThing definition for the outlet strip
-(see <a href="#exa-sdfthing-outlet-strip" class="auto internal xref">Figure 6</a> in {outlet-strip-example}} for an example SDF model).<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">An sdfThing is a set of declarations and qualities that may be part of
+a more complex model. For example, the sdfObject declarations that make
+up the definition of a single socket of an outlet strip could be
+encapsulated in an sdfThing, which itself could be used in a declaration in the sdfThing definition for the outlet strip
+(see <a href="#exa-sdfthing-outlet-strip" class="auto internal xref">Figure 6</a> in <a href="#outlet-strip-example" class="auto internal xref">Appendix D.1</a> for an example SDF model).<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
-An <code>sdfThing</code> can also contain Interaction Affordances and sdfData itself, such
+An sdfThing may be composed of sdfObjects and other sdfThings.
+It can also contain sdfData definitions, as well as declarations of interaction affordances itself, such
 as a status (on/off) for the refrigerator-freezer as a whole (see
 <a href="#exa-sdfthing-fridge-freezer" class="auto internal xref">Figure 7</a> in <a href="#fridge-freezer-example" class="auto internal xref">Appendix D.2</a> for an example SDF
 model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a></p>
-<p id="section-6.3-3">An sdfThing may be composed of sdfObjects and other sdfThings.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
-<p id="section-6.3-4">The qualities of sdfThing are shown in <a href="#sdfthingqual" class="auto internal xref">Table 10</a>.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
+<p id="section-6.3-3">The qualities of sdfThing are shown in <a href="#sdfthingqual" class="auto internal xref">Table 10</a>.
+Analogous to sdfObject, the presence of one or both of the optional
+qualities "<code>minItems</code>" and "<code>maxItems</code>" defines the sdfThing as an
+array.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-sdfthing"></span><div id="sdfthingqual">
 <table class="center" id="table-10">
           <caption>
@@ -3539,12 +3618,12 @@ model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a
             <tr>
               <td class="text-left" rowspan="1" colspan="1">minItems</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">(array) Minimum number of sdfThing instances in array</td>
+              <td class="text-left" rowspan="1" colspan="1">(array) Minimum number of multiplied affordances in array</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">maxItems</td>
               <td class="text-left" rowspan="1" colspan="1">number</td>
-              <td class="text-left" rowspan="1" colspan="1">(array) Maximum number of sdfThing instances in array</td>
+              <td class="text-left" rowspan="1" colspan="1">(array) Maximum number of multiplied affordances in array</td>
             </tr>
           </tbody>
         </table>
@@ -3629,7 +3708,8 @@ model illustrating these aspects).<a href="#section-6.3-2" class="pilcrow">¶</a
           <dd class="break"></dd>
 <dt id="section-7.1-3.17">Applications that use this media type:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-3.18">
-            <p id="section-7.1-3.18.1">Tools for data and interaction modeling in the Internet of Things<a href="#section-7.1-3.18.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-3.18.1">Tools for data and interaction modeling in the Internet of Things
+and related environments<a href="#section-7.1-3.18.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-7.1-3.19">Fragment identifier considerations:</dt>
@@ -3773,9 +3853,11 @@ roughly achieves the objectives for an IANA registry that support
 interoperability of SDF models employing these quality names,
 including:<a href="#section-7.3.1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-7.3.1-5.1">Stability, "stable and permanent";<a href="#section-7.3.1-5.1" class="pilcrow">¶</a>
+<li class="normal" id="section-7.3.1-5.1">
+              <p id="section-7.3.1-5.1.1">Stability, "stable and permanent";<a href="#section-7.3.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-7.3.1-5.2">Transparency, "readily available", "in sufficient detail" (<span><a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a> of [<a href="#RFC8126" class="cite xref">BCP26</a>]</span>).<a href="#section-7.3.1-5.2" class="pilcrow">¶</a>
+            <li class="normal" id="section-7.3.1-5.2">
+              <p id="section-7.3.1-5.2.1">Transparency, "readily available", "in sufficient detail" (<span><a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a> of [<a href="#RFC8126" class="cite xref">BCP26</a>]</span>).<a href="#section-7.3.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-7.3.1-6">The Expert will take into account that other organizations operate in
@@ -3886,6 +3968,7 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
       <h2 id="name-references">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
 <section id="section-9.1">
         <h3 id="name-normative-references">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -3973,6 +4056,8 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
+<div id="sec-informative-references">
 <section id="section-9.2">
         <h3 id="name-informative-references">
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
@@ -3989,6 +4074,14 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
 <dt id="I-D.bormann-asdf-sdf-mapping">[I-D.bormann-asdf-sdf-mapping]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-02</span>, <time datetime="2023-04-26" class="refDate">26 April 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-02">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.bormann-asdf-sdftype-link">[I-D.bormann-asdf-sdftype-link]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"An sdfType for Links"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdftype-link-01</span>, <time datetime="2023-06-03" class="refDate">3 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdftype-link-01">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdftype-link-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.bormann-t2trg-deref-id-01">[I-D.bormann-t2trg-deref-id-01]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">C. Amsüss</span>, <span class="refTitle">"The "dereferenceable identifier" pattern"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-t2trg-deref-id-01</span>, <time datetime="2023-05-09" class="refDate">9 May 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-01">https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-jsonpath-iregexp">[I-D.ietf-jsonpath-iregexp]</dt>
         <dd>
@@ -4040,6 +4133,7 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
 </section>
 <div id="syntax">
 <section id="appendix-A">
@@ -4059,9 +4153,6 @@ The validation syntax can be generated from the framework syntax by
 leaving out all lines containing the string <code>EXTENSION-POINT</code>; as this
 is trivial, the result is not shown here.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <p id="appendix-A-3">This appendix makes use of CDDL "features" as defined in <span><a href="https://rfc-editor.org/rfc/rfc9165#section-4" class="relref">Section 4</a> of [<a href="#RFC9165" class="cite xref">RFC9165</a>]</span>.
-A feature named "1.0" is used to indicate parts of the syntax being
-deprecated towards SDF 1.1, and a feature named "1.1" is used to
-indicate new syntax intended for SDF 1.1.
 Features whose names end in "-ext" indicate extension points for
 further evolution.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <div class="breakable lang-cddl sourcecode" id="appendix-A-4">
@@ -4124,8 +4215,8 @@ commonqualities = (
 )
 
 arraydefinitionqualities = (
- ? ("minItems" .feature "1.2") =&gt; uint
- ? ("maxItems" .feature "1.2") =&gt; uint
+ ? "minItems" =&gt; uint
+ ? "maxItems" =&gt; uint
 )
 
 paedataqualities = (
@@ -4151,7 +4242,7 @@ thingqualities = {
  EXTENSION-POINT&lt;"thing-ext"&gt;
 }
 
-; for single objects, or for arrays of objects (1.2)
+; for single objects, or for arrays of objects
 objectqualities = {
  commonqualities
  paedataqualities
@@ -4159,14 +4250,11 @@ objectqualities = {
  EXTENSION-POINT&lt;"object-ext"&gt;
 }
 
-parameter-list =
-  pointer-list .feature (["1.0", "pointerlist-as-parameter"]) /
-  dataqualities .feature (["1.1", "dataqualities-as-parameter"])
+parameter-list = dataqualities
 
 actionqualities = {
  commonqualities
  ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here
- ? ("sdfRequiredInputData" .feature "1.0") =&gt; pointer-list
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ; zero or more named data type definitions that might be used above
  ? sdfData: named&lt;dataqualities&gt;
@@ -4186,14 +4274,9 @@ sdftype-name = text .regexp "[a-z][-a-z0-9]*"       ; EXTENSION-POINT
 dataqualities = {
  commonqualities
  jsonschema
- ? ("units" .feature "1.0") =&gt; text
- ? ("unit" .feature "1.1") =&gt; text
- ? ("scaleMinimum" .feature "1.0") =&gt; number
- ? ("scaleMaximum" .feature "1.0") =&gt; number
+ ? "unit" =&gt; text
  ? nullable: bool
- ? ("subtype" .feature "1.0") =&gt; "byte-string" / "unix-time"
-            / (text .feature "subtype-ext")         ; EXTENSION-POINT
- ? ("sdfType" .feature "1.1") =&gt; "byte-string" / "unix-time"
+ ? "sdfType" =&gt; "byte-string" / "unix-time"
             / (sdftype-name .feature "sdftype-ext") ; EXTENSION-POINT
  ? contentFormat: text
  EXTENSION-POINT&lt;"data-ext"&gt;
@@ -4212,9 +4295,14 @@ allowed-types = number / text / bool / null
               / (any .feature "allowed-ext")        ; EXTENSION-POINT
 
 compound-type = (
-  "type" =&gt; ("object" .feature "1.1")
+  "type" =&gt; "object"
   ? required: [+text]
   ? properties: named&lt;dataqualities&gt;
+)
+
+optional-choice = (
+ ? (("sdfChoice" =&gt; named&lt;dataqualities&gt;)
+  // ("enum" =&gt; [+ text])) ; limited to text strings
 )
 
 jsonschema = (
@@ -4223,10 +4311,8 @@ jsonschema = (
     // (type: text .feature "type-ext")             ; EXTENSION-POINT
    )
  ; if present, all other qualities apply to all choices:
- ? ((("sdfChoice" .feature "1.1") =&gt; named&lt;dataqualities&gt;)
-  // ("enum" =&gt; [+ text])) ; limited to text strings in SDF 1.1
+ optional-choice
  ; the next three should validate against type:
- ? ("enum" .feature "1.0") =&gt; [+ allowed-types]
  ? const: allowed-types
  ? default: allowed-types
  ; number/integer constraints
@@ -4246,8 +4332,10 @@ jsonschema = (
  ? minItems: uint
  ? maxItems: uint
  ? uniqueItems: bool
- ? items: { ;;; ultimately, this will be mostly recursive, but,
-            ;;; for now let's find out what we actually need
+ ? items: jso-items
+)
+
+jso-items = {
      ? sdfRef: sdf-pointer ; import limited to subset allowed here...
      ? description: text   ; long text (no constraints)
      optional-comment
@@ -4259,8 +4347,7 @@ jsonschema = (
         // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
        )
      ; if present, all other qualities apply to all choices
-     ? ((("sdfChoice" .feature "1.1") =&gt; named&lt;dataqualities&gt;)
-     // ("enum" =&gt; [+ text])) ; limited to text strings in SDF 1.1
+     optional-choice
      ; jso subset
      ? minimum: number
      ? maximum: number
@@ -4269,7 +4356,6 @@ jsonschema = (
      ? maxLength: uint
      EXTENSION-POINT&lt;"items-ext"&gt;
    }
-)
 
 modified-date-time = text .abnf modified-dt-abnf
 modified-dt-abnf = "modified-dt" .det rfc3339z
@@ -4311,26 +4397,14 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 <div class="breakable lang-jso.json sourcecode" id="appendix-B-3">
 <pre>
  {
--  "title": "sdf-validation.cddl -- Generated: 2023-07-10T22:16:34Z",
-+  "title": "sdf-framework.cddl -- Generated: 2023-07-10T22:16:37Z",
+-  "title": "sdf-validation.cddl -- Generated: 2023-09-30T22:26:24Z",
++  "title": "sdf-framework.cddl -- Generated: 2023-09-30T22:26:41Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
      "sdf-syntax": {
        "type": "object",
        "properties": {
-         "sdfProperty": {
-           "$ref": "#/definitions/sdfProperty-"
-         },
-         "sdfAction": {
-           "$ref": "#/definitions/sdfAction-"
-         },
-         "sdfEvent": {
-           "$ref": "#/definitions/sdfEvent-"
-         },
-         "sdfData": {
-           "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-         },
          "info": {
            "$ref": "#/definitions/sdfinfo"
          },
@@ -4354,18 +4428,29 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
            "additionalProperties": {
              "$ref": "#/definitions/objectqualities"
            }
+         },
+         "sdfProperty": {
+           "$ref": "#/definitions/sdfProperty-"
+         },
+         "sdfAction": {
+           "$ref": "#/definitions/sdfAction-"
+         },
+         "sdfEvent": {
+           "$ref": "#/definitions/sdfEvent-"
+         },
+         "sdfData": {
+           "$ref": "#/definitions/sdfData-sdfChoice-properties-"
          }
        },
--      "additionalProperties": false
-+      "additionalProperties": {
-+      }
++      "patternProperties": {
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++        }
++      },
+       "additionalProperties": false
      },
      "sdfinfo": {
        "type": "object",
        "properties": {
-         "$comment": {
-           "type": "string"
-         },
          "title": {
            "type": "string"
          },
@@ -4385,11 +4470,16 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 -          "type": "array",
 -          "maxItems": 0
 +          "type": "array"
+         },
+         "$comment": {
+           "type": "string"
          }
        },
--      "additionalProperties": false
-+      "additionalProperties": {
-+      }
++      "patternProperties": {
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++        }
++      },
+       "additionalProperties": false
      },
      "modified-date-time": {
        "type": "string"
@@ -4397,31 +4487,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
      "thingqualities": {
        "type": "object",
        "properties": {
-         "minItems": {
-           "$ref": "#/definitions/uint"
-         },
-         "maxItems": {
-           "$ref": "#/definitions/uint"
-         },
-         "sdfProperty": {
-           "$ref": "#/definitions/sdfProperty-"
-         },
-         "sdfAction": {
-           "$ref": "#/definitions/sdfAction-"
-         },
-         "sdfEvent": {
-           "$ref": "#/definitions/sdfEvent-"
-         },
-         "sdfData": {
-           "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-         },
-         "$comment": {
-           "type": "string"
-         },
          "description": {
            "type": "string"
          },
          "label": {
+           "type": "string"
+         },
+         "$comment": {
            "type": "string"
          },
          "sdfRef": {
@@ -4441,29 +4513,6 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
            "additionalProperties": {
              "$ref": "#/definitions/thingqualities"
            }
-         }
-       },
--      "additionalProperties": false
-+      "additionalProperties": {
-+      }
-     },
-     "sdf-pointer": {
-       "type": "string"
-     },
-     "pointer-list": {
-       "type": "array",
-       "items": {
-         "$ref": "#/definitions/sdf-pointer"
-       }
-     },
-     "objectqualities": {
-       "type": "object",
-       "properties": {
-         "minItems": {
-           "$ref": "#/definitions/uint"
-         },
-         "maxItems": {
-           "$ref": "#/definitions/uint"
          },
          "sdfProperty": {
            "$ref": "#/definitions/sdfProperty-"
@@ -4477,13 +4526,38 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          "sdfData": {
            "$ref": "#/definitions/sdfData-sdfChoice-properties-"
          },
-         "$comment": {
-           "type": "string"
+         "minItems": {
+           "$ref": "#/definitions/uint"
          },
+         "maxItems": {
+           "$ref": "#/definitions/uint"
+         }
+       },
++      "patternProperties": {
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++        }
++      },
+       "additionalProperties": false
+     },
+     "sdf-pointer": {
+       "type": "string"
+     },
+     "pointer-list": {
+       "type": "array",
+       "items": {
+         "$ref": "#/definitions/sdf-pointer"
+       }
+     },
+     "objectqualities": {
+       "type": "object",
+       "properties": {
          "description": {
            "type": "string"
          },
          "label": {
+           "type": "string"
+         },
+         "$comment": {
            "type": "string"
          },
          "sdfRef": {
@@ -4491,839 +4565,70 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          },
          "sdfRequired": {
            "$ref": "#/definitions/pointer-list"
+         },
+         "sdfProperty": {
+           "$ref": "#/definitions/sdfProperty-"
+         },
+         "sdfAction": {
+           "$ref": "#/definitions/sdfAction-"
+         },
+         "sdfEvent": {
+           "$ref": "#/definitions/sdfEvent-"
+         },
+         "sdfData": {
+           "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+         },
+         "minItems": {
+           "$ref": "#/definitions/uint"
+         },
+         "maxItems": {
+           "$ref": "#/definitions/uint"
          }
        },
--      "additionalProperties": false
-+      "additionalProperties": {
-+      }
++      "patternProperties": {
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++        }
++      },
+       "additionalProperties": false
      },
      "propertyqualities": {
        "anyOf": [
          {
            "type": "object",
-           "properties": {
-             "sdfChoice": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "type": {
-               "$ref": "#/definitions/type-"
-             },
-+            "enum": {
-+              "$ref": "#/definitions/enum-"
-+            },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/items-"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-+            "units": {
-+              "type": "string"
-+            },
-             "unit": {
-               "type": "string"
-             },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-             "nullable": {
-               "type": "boolean"
-             },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             },
-             "observable": {
-               "type": "boolean"
-             },
-             "readable": {
-               "type": "boolean"
-             },
-             "writable": {
-               "type": "boolean"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
-         },
-         {
-           "type": "object",
-           "properties": {
-             "enum": {
--              "type": "array",
--              "items": {
--                "type": "string"
--              },
--              "minItems": 1
-+              "$ref": "#/definitions/enum-"
-             },
-             "type": {
-               "$ref": "#/definitions/type-"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/items-"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-+            "units": {
-+              "type": "string"
-+            },
-             "unit": {
-               "type": "string"
-             },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-             "nullable": {
-               "type": "boolean"
-             },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             },
-             "observable": {
-               "type": "boolean"
-             },
-             "readable": {
-               "type": "boolean"
-             },
-             "writable": {
-               "type": "boolean"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
-         },
-         {
-           "type": "object",
-           "properties": {
-             "sdfChoice": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "type": {
-               "type": "string",
-               "const": "object"
-             },
-             "required": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "properties": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-+            "enum": {
-+              "$ref": "#/definitions/enum-"
-+            },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/items-"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-+            "units": {
-+              "type": "string"
-+            },
-             "unit": {
-               "type": "string"
-             },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-             "nullable": {
-               "type": "boolean"
-             },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             },
-             "observable": {
-               "type": "boolean"
-             },
-             "readable": {
-               "type": "boolean"
-             },
-             "writable": {
-               "type": "boolean"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
-         },
-         {
-           "type": "object",
-           "properties": {
-             "enum": {
--              "type": "array",
--              "items": {
--                "type": "string"
--              },
--              "minItems": 1
-+              "$ref": "#/definitions/enum-"
-             },
-             "type": {
-               "type": "string",
-               "const": "object"
-             },
-             "required": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "properties": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/items-"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-+            "units": {
-+              "type": "string"
-+            },
-             "unit": {
-               "type": "string"
-             },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-             "nullable": {
-               "type": "boolean"
-             },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             },
-             "observable": {
-               "type": "boolean"
-             },
-             "readable": {
-               "type": "boolean"
-             },
-             "writable": {
-               "type": "boolean"
-             }
-           },
--          "additionalProperties": false
--        }
--      ]
--    },
--    "dataqualities": {
--      "anyOf": [
-+          "additionalProperties": {
-+          }
-+        },
-         {
-           "type": "object",
-           "properties": {
-             "sdfChoice": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "type": {
--              "$ref": "#/definitions/type-"
-+              "type": "string"
-+            },
-+            "enum": {
-+              "$ref": "#/definitions/enum-"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/items-"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-+            "units": {
-+              "type": "string"
-+            },
-             "unit": {
-               "type": "string"
-             },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-             "nullable": {
-               "type": "boolean"
-             },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
-         },
-         {
-           "type": "object",
-           "properties": {
-             "enum": {
--              "type": "array",
--              "items": {
--                "type": "string"
--              },
--              "minItems": 1
-+              "$ref": "#/definitions/enum-"
-             },
-             "type": {
--              "$ref": "#/definitions/type-"
-+              "type": "string"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/items-"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-+            "units": {
-+              "type": "string"
-+            },
-             "unit": {
-               "type": "string"
-             },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-             "nullable": {
-               "type": "boolean"
-             },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-             }
-           },
--          "additionalProperties": false
--        },
-+          "additionalProperties": {
-+          }
-+        }
-+      ]
-+    },
-+    "dataqualities": {
-+      "anyOf": [
-         {
-           "type": "object",
-           "properties": {
-             "sdfChoice": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "type": {
--              "type": "string",
--              "const": "object"
--            },
--            "required": {
--              "type": "array",
--              "items": {
--                "type": "string"
--              },
--              "minItems": 1
-+              "$ref": "#/definitions/type-"
-             },
--            "properties": {
--              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            "enum": {
-+              "$ref": "#/definitions/enum-"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/items-"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-+            "units": {
-+              "type": "string"
-+            },
-             "unit": {
-               "type": "string"
-             },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-             "nullable": {
-               "type": "boolean"
-             },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             }
-           },
--          "additionalProperties": false
-+          "additionalProperties": {
-+          }
-         },
-         {
-           "type": "object",
-           "properties": {
-             "enum": {
--              "type": "array",
--              "items": {
--                "type": "string"
--              },
--              "minItems": 1
-+              "$ref": "#/definitions/enum-"
-+            },
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
++          "properties": {
 +            "type": {
 +              "$ref": "#/definitions/type-"
++            },
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
 +            },
 +            "const": {
 +              "$ref": "#/definitions/allowed-types"
@@ -5368,40 +4673,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "boolean"
 +            },
 +            "items": {
-+              "$ref": "#/definitions/items-"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "units": {
-+              "type": "string"
++              "$ref": "#/definitions/jso-items"
 +            },
 +            "unit": {
 +              "type": "string"
 +            },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
 +            "nullable": {
 +              "type": "boolean"
-+            },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
 +            },
 +            "sdfType": {
 +              "$ref": "#/definitions/sdfType-"
@@ -5410,135 +4688,15 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "string"
 +            }
 +          },
-+          "additionalProperties": {
-+          }
++          "additionalProperties": false
 +        },
 +        {
 +          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
 +          "properties": {
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "type": {
-               "type": "string",
-               "const": "object"
-             },
-             "required": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "properties": {
-               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-+            "enum": {
-+              "$ref": "#/definitions/enum-"
-+            },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/items-"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-+            "units": {
-+              "type": "string"
-+            },
-             "unit": {
-               "type": "string"
-             },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-             "nullable": {
-               "type": "boolean"
-             },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             }
-           },
--          "additionalProperties": false
--        }
--      ]
--    },
--    "allowed-types": {
--      "anyOf": [
--        {
--          "type": "number"
-+          "additionalProperties": {
-+          }
-         },
-         {
--          "type": "string"
-+          "type": "object",
-+          "properties": {
-+            "enum": {
-+              "$ref": "#/definitions/enum-"
-+            },
 +            "type": {
 +              "type": "string",
 +              "const": "object"
@@ -5553,105 +4711,32 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +            "properties": {
 +              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
 +            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/items-"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "units": {
-+              "type": "string"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": {
-+          }
-+        },
-+        {
-+          "type": "object",
-+          "properties": {
 +            "sdfChoice": {
 +              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
 +            },
-+            "type": {
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
 +              "type": "string"
 +            },
-+            "enum": {
-+              "$ref": "#/definitions/enum-"
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
 +            },
 +            "const": {
 +              "$ref": "#/definitions/allowed-types"
@@ -5696,40 +4781,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "boolean"
 +            },
 +            "items": {
-+              "$ref": "#/definitions/items-"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "units": {
-+              "type": "string"
++              "$ref": "#/definitions/jso-items"
 +            },
 +            "unit": {
 +              "type": "string"
 +            },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
 +            "nullable": {
 +              "type": "boolean"
-+            },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
 +            },
 +            "sdfType": {
 +              "$ref": "#/definitions/sdfType-"
@@ -5738,17 +4796,44 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "string"
 +            }
 +          },
-+          "additionalProperties": {
-+          }
++          "additionalProperties": false
 +        },
 +        {
 +          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
 +          "properties": {
-+            "enum": {
-+              "$ref": "#/definitions/enum-"
-+            },
 +            "type": {
 +              "type": "string"
++            },
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
 +            },
 +            "const": {
 +              "$ref": "#/definitions/allowed-types"
@@ -5793,40 +4878,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "boolean"
 +            },
 +            "items": {
-+              "$ref": "#/definitions/items-"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "units": {
-+              "type": "string"
++              "$ref": "#/definitions/jso-items"
 +            },
 +            "unit": {
 +              "type": "string"
 +            },
-+            "scaleMinimum": {
-+              "type": "number"
-+            },
-+            "scaleMaximum": {
-+              "type": "number"
-+            },
 +            "nullable": {
 +              "type": "boolean"
-+            },
-+            "subtype": {
-+              "$ref": "#/definitions/subtype-"
 +            },
 +            "sdfType": {
 +              "$ref": "#/definitions/sdfType-"
@@ -5835,18 +4893,966 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +              "type": "string"
 +            }
 +          },
-+          "additionalProperties": {
-+          }
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+               "$ref": "#/definitions/type-"
+             },
+-            "sdfChoice": {
++            "enum": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
++            }
++          },
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
++          "properties": {
++            "type": {
++              "type": "string",
++              "const": "object"
++            },
++            "required": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "properties": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
++            "enum": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
+             "observable": {
+               "type": "boolean"
+             },
+             "readable": {
+               "type": "boolean"
+             },
+             "writable": {
+               "type": "boolean"
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+-              "type": "string",
+-              "const": "object"
++              "type": "string"
+             },
+-            "required": {
++            "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+-            "properties": {
+-              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+-            },
+-            "sdfChoice": {
+-              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+-            },
+             "observable": {
+               "type": "boolean"
+             },
+             "readable": {
+               "type": "boolean"
+             },
+             "writable": {
+               "type": "boolean"
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+-        },
 +        }
 +      ]
 +    },
-+    "allowed-types": {
++    "dataqualities": {
 +      "anyOf": [
-+        {
-+          "type": "number"
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+               "$ref": "#/definitions/type-"
+             },
+-            "enum": {
+-              "type": "array",
+-              "items": {
+-                "type": "string"
+-              },
+-              "minItems": 1
+-            },
+-            "observable": {
+-              "type": "boolean"
+-            },
+-            "readable": {
+-              "type": "boolean"
+-            },
+-            "writable": {
+-              "type": "boolean"
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+               "type": "string",
+               "const": "object"
+             },
+             "required": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "properties": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+-            "enum": {
+-              "type": "array",
+-              "items": {
+-                "type": "string"
+-              },
+-              "minItems": 1
+-            },
+-            "observable": {
+-              "type": "boolean"
+-            },
+-            "readable": {
+-              "type": "boolean"
+-            },
+-            "writable": {
+-              "type": "boolean"
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+-        }
+-      ]
+-    },
+-    "dataqualities": {
+-      "anyOf": [
 +        },
-+        {
-+          "type": "string"
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+-              "$ref": "#/definitions/type-"
++              "type": "string"
+             },
+             "sdfChoice": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+-              "type": "string",
+-              "const": "object"
++              "$ref": "#/definitions/type-"
+             },
+-            "required": {
++            "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+-            "properties": {
+-              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+-            },
+-            "sdfChoice": {
+-              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+-            },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+-              "$ref": "#/definitions/type-"
++              "type": "string",
++              "const": "object"
++            },
++            "required": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "properties": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+-              "type": "string",
+-              "const": "object"
+-            },
+-            "required": {
+-              "type": "array",
+-              "items": {
+-                "type": "string"
+-              },
+-              "minItems": 1
+-            },
+-            "properties": {
+-              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++              "type": "string"
+             },
+             "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+         }
+       ]
+     },
+     "allowed-types": {
+       "anyOf": [
+         {
+           "type": "number"
+         },
+         {
+           "type": "string"
          },
          {
            "type": "boolean"
@@ -5885,6 +5891,296 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
        "type": "integer",
        "minimum": 0
      },
+     "jso-items": {
+       "anyOf": [
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+               "type": "string",
+               "enum": [
+                 "number",
+                 "string",
+                 "boolean",
+                 "integer"
+               ]
+             },
+             "sdfChoice": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "description": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "format": {
+               "type": "string"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+               "type": "string",
+               "const": "object"
+             },
+             "required": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "properties": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "sdfChoice": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "description": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "format": {
+               "type": "string"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
++          "properties": {
++            "type": {
++              "type": "string"
++            },
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "description": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "format": {
++              "type": "string"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            }
++          },
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+               "type": "string",
+               "enum": [
+                 "number",
+                 "string",
+                 "boolean",
+                 "integer"
+               ]
+             },
+             "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "description": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "format": {
+               "type": "string"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
+           "properties": {
+             "type": {
+               "type": "string",
+               "const": "object"
+             },
+             "required": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "properties": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "description": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "format": {
+               "type": "string"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             }
+           },
+           "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
++          "properties": {
++            "type": {
++              "type": "string"
++            },
++            "enum": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "description": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "format": {
++              "type": "string"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            }
++          },
++          "additionalProperties": false
+         }
+       ]
+     },
 +    "sdftype-name": {
 +      "type": "string",
 +      "pattern": "^[a-z][\\-a-z0-9]*$"
@@ -5892,13 +6188,13 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
      "actionqualities": {
        "type": "object",
        "properties": {
-         "$comment": {
-           "type": "string"
-         },
          "description": {
            "type": "string"
          },
          "label": {
+           "type": "string"
+         },
+         "$comment": {
            "type": "string"
          },
          "sdfRef": {
@@ -5910,9 +6206,6 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          "sdfInputData": {
            "$ref": "#/definitions/parameter-list"
          },
-+        "sdfRequiredInputData": {
-+          "$ref": "#/definitions/pointer-list"
-+        },
          "sdfOutputData": {
            "$ref": "#/definitions/parameter-list"
          },
@@ -5920,31 +6213,25 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
            "$ref": "#/definitions/sdfData-sdfChoice-properties-"
          }
        },
--      "additionalProperties": false
-+      "additionalProperties": {
-+      }
++      "patternProperties": {
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++        }
++      },
+       "additionalProperties": false
      },
      "parameter-list": {
--      "$ref": "#/definitions/dataqualities"
-+      "anyOf": [
-+        {
-+          "$ref": "#/definitions/pointer-list"
-+        },
-+        {
-+          "$ref": "#/definitions/dataqualities"
-+        }
-+      ]
+       "$ref": "#/definitions/dataqualities"
      },
      "eventqualities": {
        "type": "object",
        "properties": {
-         "$comment": {
-           "type": "string"
-         },
          "description": {
            "type": "string"
          },
          "label": {
+           "type": "string"
+         },
+         "$comment": {
            "type": "string"
          },
          "sdfRef": {
@@ -5960,41 +6247,11 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
            "$ref": "#/definitions/sdfData-sdfChoice-properties-"
          }
        },
--      "additionalProperties": false
-+      "additionalProperties": {
-+      }
-     },
-     "items-": {
-       "type": "object",
-       "properties": {
-         "$comment": {
-           "type": "string"
-         },
-         "sdfRef": {
-           "$ref": "#/definitions/sdf-pointer"
-         },
-         "description": {
-           "type": "string"
-         },
-         "minimum": {
-           "type": "number"
-         },
-         "maximum": {
-           "type": "number"
-         },
-         "format": {
-           "type": "string"
-         },
-         "minLength": {
-           "$ref": "#/definitions/uint"
-         },
-         "maxLength": {
-           "$ref": "#/definitions/uint"
-         }
-       },
--      "additionalProperties": false
-+      "additionalProperties": {
-+      }
++      "patternProperties": {
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++        }
++      },
+       "additionalProperties": false
      },
      "format-": {
 -      "type": "string",
@@ -6033,8 +6290,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +        {
 +          "type": "string"
 +        }
-       ]
-     },
++      ]
++    },
 +    "sdfType-": {
 +      "anyOf": [
 +        {
@@ -6048,30 +6305,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +        {
 +          "$ref": "#/definitions/sdftype-name"
 +        }
-+      ]
-+    },
-+    "subtype-": {
-+      "anyOf": [
-+        {
-+          "type": "string",
-+          "const": "byte-string"
-+        },
-+        {
-+          "type": "string",
-+          "const": "unix-time"
-+        },
-+        {
-+          "type": "string"
-+        }
-+      ]
-+    },
-+    "enum-": {
-+      "type": "array",
-+      "items": {
-+        "$ref": "#/definitions/allowed-types"
-+      },
-+      "minItems": 1
-+    },
+       ]
+     },
      "sdfData-sdfChoice-properties-": {
        "type": "object",
        "additionalProperties": {
@@ -6088,22 +6323,26 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          "array"
        ]
      },
+-    "sdfAction-": {
++    "sdfProperty-": {
+       "type": "object",
+       "additionalProperties": {
+-        "$ref": "#/definitions/actionqualities"
++        "$ref": "#/definitions/propertyqualities"
+       }
+     },
      "sdfEvent-": {
        "type": "object",
        "additionalProperties": {
          "$ref": "#/definitions/eventqualities"
        }
      },
-     "sdfAction-": {
+-    "sdfProperty-": {
++    "sdfAction-": {
        "type": "object",
        "additionalProperties": {
-         "$ref": "#/definitions/actionqualities"
-       }
-     },
-     "sdfProperty-": {
-       "type": "object",
-       "additionalProperties": {
-         "$ref": "#/definitions/propertyqualities"
+-        "$ref": "#/definitions/propertyqualities"
++        "$ref": "#/definitions/actionqualities"
        }
 -    },
 -    "sdfType-": {
@@ -6143,7 +6382,7 @@ value (given as the value of the <code>const</code> quality).<a href="#appendix-
 be used in the absence of the data (given as the value of the <code>const</code>
 quality); this is mainly documentary and not very well-defined for SDF
 as no process is defined that would add default values to an instance
-of something.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+of some interaction data.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
 <div id="type-number-type-integer">
 <section id="appendix-C.1">
         <h3 id="name-type-number-type-integer">
@@ -6177,10 +6416,10 @@ they are available in JSON.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-2">The length (as measured in characters) can be constrained by the
 additional data qualities "<code>minLength</code>" and "<code>maxLength</code>", which are
 inclusive bounds.
-Note that the previous version of the present document explained
+Note that earlier drafts of this specification explained
 text string length values in bytes, which however is not meaningful
 unless bound to a specific encoding (which could be UTF-8, if this
-unusual behavior is to be restored).<a href="#appendix-C.2-2" class="pilcrow">¶</a></p>
+unusual behavior is to be provided in an extension).<a href="#appendix-C.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-3">The data quality "<code>pattern</code>" takes a string value that is interpreted
 as an <span>[<a href="#ECMA-262" class="cite xref">ECMA-262</a>]</span> regular expression in Unicode mode that constrain the
 string (note that these are not anchored by default, so unless <code>^</code> and
@@ -6189,18 +6428,24 @@ The JSO proposals acknowledge that regular expression support is
 rather diverse in various platforms, so the suggestion is to limit
 them to:<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C.2-4.1">characters;<a href="#appendix-C.2-4.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C.2-4.1">
+            <p id="appendix-C.2-4.1.1">characters;<a href="#appendix-C.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="compact" id="appendix-C.2-4.2">character classes in square brackets, including ranges; their complements;<a href="#appendix-C.2-4.2" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-4.2">
+            <p id="appendix-C.2-4.2.1">character classes in square brackets, including ranges; their complements;<a href="#appendix-C.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="compact" id="appendix-C.2-4.3">simple quantifiers <code>*</code>, <code>+</code>, <code>?</code>, and range quantifiers <code>{n}</code>,
-<code>{n,m}</code>, and <code>{n,}</code>;<a href="#appendix-C.2-4.3" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-4.3">
+            <p id="appendix-C.2-4.3.1">simple quantifiers <code>*</code>, <code>+</code>, <code>?</code>, and range quantifiers <code>{n}</code>,
+<code>{n,m}</code>, and <code>{n,}</code>;<a href="#appendix-C.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="compact" id="appendix-C.2-4.4">grouping parentheses;<a href="#appendix-C.2-4.4" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-4.4">
+            <p id="appendix-C.2-4.4.1">grouping parentheses;<a href="#appendix-C.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="compact" id="appendix-C.2-4.5">the choice operator <code>|</code>;<a href="#appendix-C.2-4.5" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-4.5">
+            <p id="appendix-C.2-4.5.1">the choice operator <code>|</code>;<a href="#appendix-C.2-4.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="compact" id="appendix-C.2-4.6">and anchors (beginning-of-input <code>^</code> and end-of-input <code>$</code>).<a href="#appendix-C.2-4.6" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-4.6">
+            <p id="appendix-C.2-4.6.1">and anchors (beginning-of-input <code>^</code> and end-of-input <code>$</code>).<a href="#appendix-C.2-4.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="appendix-C.2-5">Note that this subset is somewhat similar to the subset introduced by
@@ -6214,13 +6459,16 @@ the abstract meaning of the format given (i.e., the format "date-time"
 is less about the specific syntax employed in <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> than about the usage
 as an absolute point in civil time).<a href="#appendix-C.2-6" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C.2-7.1">"<code>date-time</code>", "<code>date</code>", "<code>time</code>":
-An <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> <code>date-time</code>, <code>full-date</code>, or <code>full-time</code>, respectively.<a href="#appendix-C.2-7.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C.2-7.1">
+            <p id="appendix-C.2-7.1.1">"<code>date-time</code>", "<code>date</code>", "<code>time</code>":
+An <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> <code>date-time</code>, <code>full-date</code>, or <code>full-time</code>, respectively.<a href="#appendix-C.2-7.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="compact" id="appendix-C.2-7.2">"<code>uri</code>", "<code>uri-reference</code>":
-An <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> URI or URI Reference, respectively.<a href="#appendix-C.2-7.2" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-7.2">
+            <p id="appendix-C.2-7.2.1">"<code>uri</code>", "<code>uri-reference</code>":
+An <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> URI or URI Reference, respectively.<a href="#appendix-C.2-7.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="compact" id="appendix-C.2-7.3">"<code>uuid</code>": An <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span> UUID.<a href="#appendix-C.2-7.3" class="pilcrow">¶</a>
+          <li class="compact" id="appendix-C.2-7.3">
+            <p id="appendix-C.2-7.3.1">"<code>uuid</code>": An <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span> UUID.<a href="#appendix-C.2-7.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -6255,12 +6503,12 @@ that, if true, requires the elements to be all different.<a href="#appendix-C.4-
 <a href="#appendix-C.5" class="section-number selfRef">C.5. </a><a href="#name-type-object" class="section-name selfRef">type "<code>object</code>"</a>
         </h3>
 <p id="appendix-C.5-1">The type "<code>object</code>" is associated with maps, from strings to values, as
-they are available in JSON ("objects").<a href="#appendix-C.5-1" class="pilcrow">¶</a></p>
+they are available in JSON.<a href="#appendix-C.5-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.5-2">The additional quality "<code>properties</code>" is a map the entries of which
-describe entries in the specified JSON object: The key gives an
-allowable map key for the specified JSON object, and the value is a
+describe entries in the specified JSON map: The key gives an
+allowable map key for the specified JSON map, and the value is a
 map with a named set of data qualities giving the type for the
-corresponding value in the specified JSON object.<a href="#appendix-C.5-2" class="pilcrow">¶</a></p>
+corresponding value in the specified JSON map.<a href="#appendix-C.5-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.5-3">All entries specified this way are optional, unless they are listed in
 the value of the additional quality "<code>required</code>", which is an array of
 string values that give the key names of required entries.<a href="#appendix-C.5-3" class="pilcrow">¶</a></p>
@@ -6275,7 +6523,7 @@ defining map entries is unrelated to sdfProperty.<a href="#appendix-C.5-4" class
         </h3>
 <p id="appendix-C.6-1">JSO-based keywords are also used in the specification techniques of a
 number of ecosystems, but some adjustments may be required.<a href="#appendix-C.6-1" class="pilcrow">¶</a></p>
-<p id="appendix-C.6-2">E.g., <span>[<a href="#OCF" class="cite xref">OCF</a>]</span> is based on Swagger 2.0 which appears to be based on
+<p id="appendix-C.6-2">For instance, <span>[<a href="#OCF" class="cite xref">OCF</a>]</span> is based on Swagger 2.0 which appears to be based on
 "draft-4" <span>[<a href="#JSO4" class="cite xref">JSO4</a>]</span><span>[<a href="#JSO4V" class="cite xref">JSO4V</a>]</span> (also called draft-5, but semantically intended to
 be equivalent to draft-4).
 The "<code>exclusiveMinimum</code>" and "<code>exclusiveMaximum</code>" keywords use the
@@ -6301,11 +6549,11 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
         </h3>
 <div id="exa-sdfthing-outlet-strip">
 <figure id="figure-6">
-          <div class="alignLeft art-text artwork" id="appendix-D.1-1.1">
+          <div class="lang-json sourcecode" id="appendix-D.1-1.1">
 <pre>
 {
   "sdfThing": {
-    "outlet-strip" : {
+    "outlet-strip": {
       "label": "Outlet strip",
       "description": "Contains a number of Sockets",
       "sdfObject": {
@@ -6331,11 +6579,11 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
         </h3>
 <div id="exa-sdfthing-fridge-freezer">
 <figure id="figure-7">
-          <div class="alignLeft art-text artwork" id="appendix-D.2-1.1">
+          <div class="lang-json sourcecode" id="appendix-D.2-1.1">
 <pre>
 {
   "sdfThing": {
-    "refrigerator-freezer" : {
+    "refrigerator-freezer": {
       "description": "A refrigerator combined with a freezer",
       "sdfProperty": {
         "status": {
@@ -6387,7 +6635,7 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-E-1">This draft is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the old
+<p id="appendix-E-1">This specification is based on <code>sdf.md</code> and <code>sdf-schema.json</code> in the old
 one-data-model <code>language</code> repository, as well as <span class="contact-name">Ari Keränen</span>'s
 "alt-schema" from the Ericsson Research <code>ipso-odm</code> repository (which
 is now under subdirectory <code>sdflint</code> in the one-data model <code>tools</code>
