@@ -173,8 +173,10 @@ jsonschema = (
  ? minItems: uint
  ? maxItems: uint
  ? uniqueItems: bool
- ? items: { ;;; ultimately, this will be mostly recursive, but,
-            ;;; for now let's find out what we actually need
+ ? items: jso-items
+)
+
+jso-items = {
      ? sdfRef: sdf-pointer ; import limited to subset allowed here...
      ? description: text   ; long text (no constraints)
      optional-comment
@@ -195,7 +197,6 @@ jsonschema = (
      ? maxLength: uint
      EXTENSION-POINT<"items-ext">
    }
-)
 
 modified-date-time = text .abnf modified-dt-abnf
 modified-dt-abnf = "modified-dt" .det rfc3339z
