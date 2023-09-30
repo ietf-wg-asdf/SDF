@@ -141,14 +141,18 @@ compound-type = (
   ? properties: named<dataqualities>
 )
 
+optional-choice = (
+ ? (("sdfChoice" => named<dataqualities>)
+  // ("enum" => [+ text])) ; limited to text strings
+)
+
 jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
     // (type: text .feature "type-ext")             ; EXTENSION-POINT
    )
  ; if present, all other qualities apply to all choices:
- ? (("sdfChoice" => named<dataqualities>)
-  // ("enum" => [+ text])) ; limited to text strings
+ optional-choice
  ; the next three should validate against type:
  ? const: allowed-types
  ? default: allowed-types
@@ -182,8 +186,7 @@ jsonschema = (
         // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
        )
      ; if present, all other qualities apply to all choices
-     ? (("sdfChoice" => named<dataqualities>)
-     // ("enum" => [+ text])) ; limited to text strings
+     optional-choice
      ; jso subset
      ? minimum: number
      ? maximum: number
