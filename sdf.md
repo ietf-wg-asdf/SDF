@@ -21,10 +21,10 @@ venue:
 
 author:
   - name: Michael Koster
-    org: PassiveLogic
-    street: 524 H Street
-    city: Antioch, CA
-    code: '94509'
+    org: KTC
+    street: 29415 Alderpoint Road
+    city: Blocksburg, CA
+    code: '95514'
     country: USA
     phone: "+1-707-502-5136"
     email: michaeljohnkoster@gmail.com
