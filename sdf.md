@@ -454,7 +454,7 @@ minimum constraints on that array.)
 `sdfProperty` is used to model elements of state within Things modeled
 by the enclosing `sdfObject`.
 
-An named definition entry in `sdfProperty` may be associated with some protocol
+A named definition entry in `sdfProperty` may be associated with some protocol
 affordance to enable the application to obtain the state variable and,
 optionally, modify the state variable.
 Additionally, some protocols provide for in-time reporting of state
