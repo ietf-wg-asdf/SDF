@@ -582,7 +582,7 @@ Therefore, they can be seen as a superset of `sdfObject` groups, additionally
 allowing for composition.
 
 A definition in an `sdfThing` group can refine the metadata of the definitions it
-is composed of: other definitions in `sdfThing` groups definitions in `sdfObject` groups.
+is composed of: other definitions in `sdfThing` groups or definitions in `sdfObject` groups.
 
 ## Member names: Given Names and Quality Names
 
