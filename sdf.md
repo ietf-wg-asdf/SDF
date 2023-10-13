@@ -1796,7 +1796,7 @@ Data qualities define data used in SDF affordances at an information
 model level.
 A popular way to describe JSON data at a data model level is proposed
 by a number of drafts on json-schema.org (which collectively are
-abbreviated JSO here)); for reference to a popular version we will
+abbreviated JSO here); for reference to a popular version we will
 point here to {{-jso}} and {{-jso7v}}.
 As the vocabulary used by JSO is familiar to many JSON modelers, the
 present specification borrows some of the terms and ports their
