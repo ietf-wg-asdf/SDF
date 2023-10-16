@@ -713,15 +713,16 @@ value is a JSON map in turn, with a set of entries that represent qualities that
 
 Qualities of the information block are shown in {{infoblockqual}}.
 
-| Quality   | Type             | Required | Description                                                 |
-|-----------|------------------|----------|-------------------------------------------------------------|
-| title     | string           | no       | A short summary to be displayed in search results, etc.     |
-| version   | string           | no       | The incremental version of the definition                   |
-| modified  | string           | no       | Time of the latest modification                             |
-| copyright | string           | no       | Link to text or embedded text containing a copyright notice |
-| license   | string           | no       | Link to text or embedded text containing license terms      |
-| features  | array of strings | no       | List of extension features used                             |
-| $comment  | string           | no       | Source code comments only, no semantics                     |
+| Quality     | Type             | Required | Description                                                 |
+|-------------|------------------|----------|-------------------------------------------------------------|
+| title       | string           | no       | A short summary to be displayed in search results, etc.     |
+| description | string           | no       | Long-form text description (no constraints)                 |
+| version     | string           | no       | The incremental version of the definition                   |
+| modified    | string           | no       | Time of the latest modification                             |
+| copyright   | string           | no       | Link to text or embedded text containing a copyright notice |
+| license     | string           | no       | Link to text or embedded text containing license terms      |
+| features    | array of strings | no       | List of extension features used                             |
+| $comment    | string           | no       | Source code comments only, no semantics                     |
 {: #infoblockqual title="Qualities of the Information Block"}
 
 The version quality is used to indicate version information about the
