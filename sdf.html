@@ -1221,7 +1221,7 @@ li > p:last-of-type:only-child {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster, et al.</td>
-<td class="center">Expires 3 April 2024</td>
+<td class="center">Expires 18 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1234,18 +1234,18 @@ li > p:last-of-type:only-child {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-10-01" class="published">1 October 2023</time>
+<time datetime="2023-10-16" class="published">16 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-04-03">3 April 2024</time></dd>
+<dd class="expires"><time datetime="2024-04-18">18 April 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">M. Koster, <span class="editor">Ed.</span>
 </div>
-<div class="org">PassiveLogic</div>
+<div class="org">KTC</div>
 </div>
 <div class="author">
       <div class="author-name">C. Bormann, <span class="editor">Ed.</span>
@@ -1307,7 +1307,7 @@ Call comments.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2056,7 +2056,7 @@ minimum constraints on that array.)<a href="#section-2.2.1-4" class="pilcrow">¶
           </h4>
 <p id="section-2.2.2-1"><code>sdfProperty</code> is used to model elements of state within Things modeled
 by the enclosing <code>sdfObject</code>.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-2">An named definition entry in <code>sdfProperty</code> may be associated with some protocol
+<p id="section-2.2.2-2">A named definition entry in <code>sdfProperty</code> may be associated with some protocol
 affordance to enable the application to obtain the state variable and,
 optionally, modify the state variable.
 Additionally, some protocols provide for in-time reporting of state
@@ -2187,7 +2187,7 @@ affordances, <code>sdfData</code>, as well as <code>minItems</code> and <code>ma
 Therefore, they can be seen as a superset of <code>sdfObject</code> groups, additionally
 allowing for composition.<a href="#section-2.2.6-1" class="pilcrow">¶</a></p>
 <p id="section-2.2.6-2">A definition in an <code>sdfThing</code> group can refine the metadata of the definitions it
-is composed of: other definitions in <code>sdfThing</code> groups definitions in <code>sdfObject</code> groups.<a href="#section-2.2.6-2" class="pilcrow">¶</a></p>
+is composed of: other definitions in <code>sdfThing</code> groups or definitions in <code>sdfObject</code> groups.<a href="#section-2.2.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2355,6 +2355,12 @@ value is a JSON map in turn, with a set of entries that represent qualities that
               <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">no</td>
               <td class="text-left" rowspan="1" colspan="1">A short summary to be displayed in search results, etc.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">description</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">no</td>
+              <td class="text-left" rowspan="1" colspan="1">Long-form text description (no constraints)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">version</td>
@@ -2876,17 +2882,17 @@ pointer to the definition can be used.<a href="#section-4.6-1" class="pilcrow">�
           <tbody>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">description</td>
-              <td class="text-left" rowspan="1" colspan="1">text</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">long text (no constraints)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">label</td>
-              <td class="text-left" rowspan="1" colspan="1">text</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">short text (no constraints)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">$comment</td>
-              <td class="text-left" rowspan="1" colspan="1">text</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">source code comments only, no semantics</td>
             </tr>
             <tr>
@@ -4083,10 +4089,6 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">C. Amsüss</span>, <span class="refTitle">"The "dereferenceable identifier" pattern"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-t2trg-deref-id-01</span>, <time datetime="2023-05-09" class="refDate">9 May 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-01">https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.ietf-jsonpath-iregexp">[I-D.ietf-jsonpath-iregexp]</dt>
-        <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">T. Bray</span>, <span class="refTitle">"I-Regexp: An Interoperable Regexp Format"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jsonpath-iregexp-08</span>, <time datetime="2023-06-29" class="refDate">29 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jsonpath-iregexp-08">https://datatracker.ietf.org/doc/html/draft-ietf-jsonpath-iregexp-08</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.irtf-t2trg-rest-iot">[I-D.irtf-t2trg-rest-iot]</dt>
         <dd>
 <span class="refAuthor">Keränen, A.</span>, <span class="refAuthor">Kovatsch, M.</span>, and <span class="refAuthor">K. Hartke</span>, <span class="refTitle">"Guidance on RESTful Design for Internet of Things Systems"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-t2trg-rest-iot-12</span>, <time datetime="2023-07-25" class="refDate">25 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-t2trg-rest-iot-12">https://datatracker.ietf.org/doc/html/draft-irtf-t2trg-rest-iot-12</a>&gt;</span>. </dd>
@@ -4126,6 +4128,10 @@ sdfTypes will not be confused with more generally applicable ones.<a href="#sect
 <dt id="RFC8576">[RFC8576]</dt>
         <dd>
 <span class="refAuthor">Garcia-Morchon, O.</span>, <span class="refAuthor">Kumar, S.</span>, and <span class="refAuthor">M. Sethi</span>, <span class="refTitle">"Internet of Things (IoT) Security: State of the Art and Challenges"</span>, <span class="seriesInfo">RFC 8576</span>, <span class="seriesInfo">DOI 10.17487/RFC8576</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8576">https://www.rfc-editor.org/rfc/rfc8576</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9485">[RFC9485]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">T. Bray</span>, <span class="refTitle">"I-Regexp: An Interoperable Regular Expression Format"</span>, <span class="seriesInfo">RFC 9485</span>, <span class="seriesInfo">DOI 10.17487/RFC9485</span>, <time datetime="2023-10" class="refDate">October 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9485">https://www.rfc-editor.org/rfc/rfc9485</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ZCL">[ZCL]</dt>
       <dd>
@@ -4176,6 +4182,7 @@ sdf-syntax = {
 
 sdfinfo = {
  ? title: text
+ ? description: text
  ? version: text
  ? copyright: text
  ? license: text
@@ -4397,8 +4404,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 <div class="breakable lang-jso.json sourcecode" id="appendix-B-3">
 <pre>
  {
--  "title": "sdf-validation.cddl -- Generated: 2023-09-30T22:26:24Z",
-+  "title": "sdf-framework.cddl -- Generated: 2023-09-30T22:26:41Z",
+-  "title": "sdf-validation.cddl -- Generated: 2023-10-16T13:38:45Z",
++  "title": "sdf-framework.cddl -- Generated: 2023-10-16T13:38:59Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
@@ -4452,6 +4459,9 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
        "type": "object",
        "properties": {
          "title": {
+           "type": "string"
+         },
+         "description": {
            "type": "string"
          },
          "version": {
@@ -6324,25 +6334,25 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
        ]
      },
 -    "sdfAction-": {
-+    "sdfProperty-": {
++    "sdfEvent-": {
        "type": "object",
        "additionalProperties": {
 -        "$ref": "#/definitions/actionqualities"
-+        "$ref": "#/definitions/propertyqualities"
++        "$ref": "#/definitions/eventqualities"
        }
      },
-     "sdfEvent-": {
-       "type": "object",
-       "additionalProperties": {
-         "$ref": "#/definitions/eventqualities"
-       }
-     },
--    "sdfProperty-": {
+-    "sdfEvent-": {
 +    "sdfAction-": {
        "type": "object",
        "additionalProperties": {
--        "$ref": "#/definitions/propertyqualities"
+-        "$ref": "#/definitions/eventqualities"
 +        "$ref": "#/definitions/actionqualities"
+       }
+     },
+     "sdfProperty-": {
+       "type": "object",
+       "additionalProperties": {
+         "$ref": "#/definitions/propertyqualities"
        }
 -    },
 -    "sdfType-": {
@@ -6367,7 +6377,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 model level.
 A popular way to describe JSON data at a data model level is proposed
 by a number of drafts on json-schema.org (which collectively are
-abbreviated JSO here)); for reference to a popular version we will
+abbreviated JSO here); for reference to a popular version we will
 point here to <span>[<a href="#JSO7" class="cite xref">JSO7</a>]</span> and <span>[<a href="#JSO7V" class="cite xref">JSO7V</a>]</span>.
 As the vocabulary used by JSO is familiar to many JSON modelers, the
 present specification borrows some of the terms and ports their
@@ -6449,7 +6459,7 @@ them to:<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="appendix-C.2-5">Note that this subset is somewhat similar to the subset introduced by
-iregexps <span>[<a href="#I-D.ietf-jsonpath-iregexp" class="cite xref">I-D.ietf-jsonpath-iregexp</a>]</span>, which however are anchored
+I-Regexps <span>[<a href="#RFC9485" class="cite xref">RFC9485</a>]</span>, which however are anchored
 regular expressions, and which include certain backslash escapes for
 characters and character classes.<a href="#appendix-C.2-5" class="pilcrow">¶</a></p>
 <p id="appendix-C.2-6">The additional data quality "<code>format</code>" can take one of the following
@@ -6675,10 +6685,10 @@ repository).<a href="#appendix-E-1" class="pilcrow">¶</a></p>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Michael Koster (<span class="role">editor</span>)</span></div>
-<div dir="auto" class="left"><span class="org">PassiveLogic</span></div>
-<div dir="auto" class="left"><span class="street-address">524 H Street</span></div>
+<div dir="auto" class="left"><span class="org">KTC</span></div>
+<div dir="auto" class="left"><span class="street-address">29415 Alderpoint Road</span></div>
 <div dir="auto" class="left">
-<span class="locality">Antioch, CA</span>,  <span class="postal-code">94509</span>
+<span class="locality">Blocksburg, CA</span>,  <span class="postal-code">95514</span>
 </div>
 <div dir="auto" class="left"><span class="country-name">United States of America</span></div>
 <div class="tel">

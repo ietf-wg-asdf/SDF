@@ -3,12 +3,12 @@
 
 
 ASDF                                                      M. Koster, Ed.
-Internet-Draft                                              PassiveLogic
+Internet-Draft                                                       KTC
 Intended status: Standards Track                         C. Bormann, Ed.
-Expires: 3 April 2024                             Universität Bremen TZI
+Expires: 18 April 2024                            Universität Bremen TZI
                                                               A. Keränen
                                                                 Ericsson
-                                                          1 October 2023
+                                                         16 October 2023
 
 
   Semantic Definition Format (SDF) for Data and Interactions of Things
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 1]
+Koster, et al.            Expires 18 April 2024                 [Page 1]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -68,7 +68,7 @@ Internet-Draft                  OneDM SDF                   October 2023
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 April 2024.
+   This Internet-Draft will expire on 18 April 2024.
 
 Copyright Notice
 
@@ -109,63 +109,63 @@ Table of Contents
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 2]
+Koster, et al.            Expires 18 April 2024                 [Page 2]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
-     4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  19
-     4.2.  Contributing global names . . . . . . . . . . . . . . . .  19
-     4.3.  Referencing global names  . . . . . . . . . . . . . . . .  20
-     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  21
-       4.4.1.  Resolved models . . . . . . . . . . . . . . . . . . .  23
-     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  24
-     4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  26
-     4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  26
-       4.7.1.  sdfType . . . . . . . . . . . . . . . . . . . . . . .  28
-       4.7.2.  sdfChoice . . . . . . . . . . . . . . . . . . . . . .  29
-   5.  Keywords for definition groups  . . . . . . . . . . . . . . .  31
-     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  31
-     5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  32
-     5.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . . . .  33
-     5.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . . . .  34
-     5.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . . . .  34
-   6.  High Level Composition  . . . . . . . . . . . . . . . . . . .  35
-     6.1.  Paths in the model namespaces . . . . . . . . . . . . . .  35
-     6.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  35
-       6.2.1.  Use of the "sdfRef" keyword to re-use a definition  .  36
-     6.3.  sdfThing  . . . . . . . . . . . . . . . . . . . . . . . .  37
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  38
-     7.1.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .  38
+     4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  20
+     4.2.  Contributing global names . . . . . . . . . . . . . . . .  20
+     4.3.  Referencing global names  . . . . . . . . . . . . . . . .  21
+     4.4.  sdfRef  . . . . . . . . . . . . . . . . . . . . . . . . .  22
+       4.4.1.  Resolved models . . . . . . . . . . . . . . . . . . .  24
+     4.5.  sdfRequired . . . . . . . . . . . . . . . . . . . . . . .  25
+     4.6.  Common Qualities  . . . . . . . . . . . . . . . . . . . .  27
+     4.7.  Data Qualities  . . . . . . . . . . . . . . . . . . . . .  27
+       4.7.1.  sdfType . . . . . . . . . . . . . . . . . . . . . . .  29
+       4.7.2.  sdfChoice . . . . . . . . . . . . . . . . . . . . . .  30
+   5.  Keywords for definition groups  . . . . . . . . . . . . . . .  32
+     5.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . . . .  32
+     5.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . . . .  33
+     5.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . . . .  34
+     5.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . . . .  35
+     5.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . . . .  35
+   6.  High Level Composition  . . . . . . . . . . . . . . . . . . .  36
+     6.1.  Paths in the model namespaces . . . . . . . . . . . . . .  36
+     6.2.  Modular Composition . . . . . . . . . . . . . . . . . . .  36
+       6.2.1.  Use of the "sdfRef" keyword to re-use a definition  .  37
+     6.3.  sdfThing  . . . . . . . . . . . . . . . . . . . . . . . .  38
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  39
+     7.1.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .  39
      7.2.  IETF URN Sub-namespace for Unit Names
-           (urn:ietf:params:unit)  . . . . . . . . . . . . . . . . .  39
-     7.3.  Registries  . . . . . . . . . . . . . . . . . . . . . . .  40
-       7.3.1.  Quality Name Prefixes . . . . . . . . . . . . . . . .  40
-       7.3.2.  sdfType Values  . . . . . . . . . . . . . . . . . . .  41
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  42
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  42
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  42
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .  44
-   Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  46
-   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  51
-   Appendix C.  Data Qualities inspired by json-schema.org . . . . .  92
-     C.1.  type "number", type "integer" . . . . . . . . . . . . . .  93
-     C.2.  type "string" . . . . . . . . . . . . . . . . . . . . . .  93
-     C.3.  type "boolean"  . . . . . . . . . . . . . . . . . . . . .  94
-     C.4.  type "array"  . . . . . . . . . . . . . . . . . . . . . .  94
-     C.5.  type "object" . . . . . . . . . . . . . . . . . . . . . .  95
-     C.6.  Implementation notes  . . . . . . . . . . . . . . . . . .  95
-   Appendix D.  Composition Examples . . . . . . . . . . . . . . . .  95
-     D.1.  Outlet Strip Example  . . . . . . . . . . . . . . . . . .  95
-     D.2.  Refrigerator-Freezer Example  . . . . . . . . . . . . . .  96
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  98
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  98
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  98
+           (urn:ietf:params:unit)  . . . . . . . . . . . . . . . . .  40
+     7.3.  Registries  . . . . . . . . . . . . . . . . . . . . . . .  41
+       7.3.1.  Quality Name Prefixes . . . . . . . . . . . . . . . .  41
+       7.3.2.  sdfType Values  . . . . . . . . . . . . . . . . . . .  42
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  43
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  43
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  43
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  45
+   Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  47
+   Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  52
+   Appendix C.  Data Qualities inspired by json-schema.org . . . . .  94
+     C.1.  type "number", type "integer" . . . . . . . . . . . . . .  94
+     C.2.  type "string" . . . . . . . . . . . . . . . . . . . . . .  94
+     C.3.  type "boolean"  . . . . . . . . . . . . . . . . . . . . .  95
+     C.4.  type "array"  . . . . . . . . . . . . . . . . . . . . . .  96
+     C.5.  type "object" . . . . . . . . . . . . . . . . . . . . . .  96
+     C.6.  Implementation notes  . . . . . . . . . . . . . . . . . .  96
+   Appendix D.  Composition Examples . . . . . . . . . . . . . . . .  97
+     D.1.  Outlet Strip Example  . . . . . . . . . . . . . . . . . .  97
+     D.2.  Refrigerator-Freezer Example  . . . . . . . . . . . . . .  97
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  99
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  99
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  99
 
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 3]
+Koster, et al.            Expires 18 April 2024                 [Page 3]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -221,7 +221,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 4]
+Koster, et al.            Expires 18 April 2024                 [Page 4]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -277,7 +277,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 5]
+Koster, et al.            Expires 18 April 2024                 [Page 5]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -333,7 +333,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 6]
+Koster, et al.            Expires 18 April 2024                 [Page 6]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -389,7 +389,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 7]
+Koster, et al.            Expires 18 April 2024                 [Page 7]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -445,7 +445,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 8]
+Koster, et al.            Expires 18 April 2024                 [Page 8]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -501,7 +501,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                  [Page 9]
+Koster, et al.            Expires 18 April 2024                 [Page 9]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -518,7 +518,7 @@ Internet-Draft                  OneDM SDF                   October 2023
    sdfProperty is used to model elements of state within Things modeled
    by the enclosing sdfObject.
 
-   An named definition entry in sdfProperty may be associated with some
+   A named definition entry in sdfProperty may be associated with some
    protocol affordance to enable the application to obtain the state
    variable and, optionally, modify the state variable.  Additionally,
    some protocols provide for in-time reporting of state changes.
@@ -557,7 +557,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 10]
+Koster, et al.            Expires 18 April 2024                [Page 10]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -613,7 +613,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 11]
+Koster, et al.            Expires 18 April 2024                [Page 11]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -661,7 +661,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
    A definition in an sdfThing group can refine the metadata of the
    definitions it is composed of: other definitions in sdfThing groups
-   definitions in sdfObject groups.
+   or definitions in sdfObject groups.
 
 
 
@@ -669,7 +669,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 12]
+Koster, et al.            Expires 18 April 2024                [Page 12]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -725,7 +725,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 13]
+Koster, et al.            Expires 18 April 2024                [Page 13]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -781,7 +781,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 14]
+Koster, et al.            Expires 18 April 2024                [Page 14]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -837,37 +837,66 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 15]
+Koster, et al.            Expires 18 April 2024                [Page 15]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
-   +===========+==========+==========+=================================+
-   | Quality   | Type     | Required | Description                     |
-   +===========+==========+==========+=================================+
-   | title     | string   | no       | A short summary to be displayed |
-   |           |          |          | in search results, etc.         |
-   +-----------+----------+----------+---------------------------------+
-   | version   | string   | no       | The incremental version of the  |
-   |           |          |          | definition                      |
-   +-----------+----------+----------+---------------------------------+
-   | modified  | string   | no       | Time of the latest modification |
-   +-----------+----------+----------+---------------------------------+
-   | copyright | string   | no       | Link to text or embedded text   |
-   |           |          |          | containing a copyright notice   |
-   +-----------+----------+----------+---------------------------------+
-   | license   | string   | no       | Link to text or embedded text   |
-   |           |          |          | containing license terms        |
-   +-----------+----------+----------+---------------------------------+
-   | features  | array    | no       | List of extension features used |
-   |           | of       |          |                                 |
-   |           | strings  |          |                                 |
-   +-----------+----------+----------+---------------------------------+
-   | $comment  | string   | no       | Source code comments only, no   |
-   |           |          |          | semantics                       |
-   +-----------+----------+----------+---------------------------------+
+      +=============+=========+==========+==========================+
+      | Quality     | Type    | Required | Description              |
+      +=============+=========+==========+==========================+
+      | title       | string  | no       | A short summary to be    |
+      |             |         |          | displayed in search      |
+      |             |         |          | results, etc.            |
+      +-------------+---------+----------+--------------------------+
+      | description | string  | no       | Long-form text           |
+      |             |         |          | description (no          |
+      |             |         |          | constraints)             |
+      +-------------+---------+----------+--------------------------+
+      | version     | string  | no       | The incremental version  |
+      |             |         |          | of the definition        |
+      +-------------+---------+----------+--------------------------+
+      | modified    | string  | no       | Time of the latest       |
+      |             |         |          | modification             |
+      +-------------+---------+----------+--------------------------+
+      | copyright   | string  | no       | Link to text or embedded |
+      |             |         |          | text containing a        |
+      |             |         |          | copyright notice         |
+      +-------------+---------+----------+--------------------------+
+      | license     | string  | no       | Link to text or embedded |
+      |             |         |          | text containing license  |
+      |             |         |          | terms                    |
+      +-------------+---------+----------+--------------------------+
+      | features    | array   | no       | List of extension        |
+      |             | of      |          | features used            |
+      |             | strings |          |                          |
+      +-------------+---------+----------+--------------------------+
+      | $comment    | string  | no       | Source code comments     |
+      |             |         |          | only, no semantics       |
+      +-------------+---------+----------+--------------------------+
 
                 Table 1: Qualities of the Information Block
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 16]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
 
    The version quality is used to indicate version information about the
    set of definitions in the SDF document.  The version is RECOMMENDED
@@ -888,15 +917,6 @@ Internet-Draft                  OneDM SDF                   October 2023
    The modified quality can be used with a value using [RFC3339] date-
    time (with Z for time-zone) or full-date format to express time of
    the latest revision of the definitions.
-
-
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 16]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
 
    The license string is preferably either a URI that points to a web
    page with an unambiguous definition of the license, or an [SPDX]
@@ -920,6 +940,20 @@ Internet-Draft                  OneDM SDF                   October 2023
    namespace map by giving its short name.  The associated URI (value of
    this entry) becomes the default namespace for the SDF document.
 
+
+
+
+
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 17]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
+
      +==================+========+==========+=======================+
      | Quality          | Type   | Required | Description           |
      +==================+========+==========+=======================+
@@ -942,17 +976,6 @@ Internet-Draft                  OneDM SDF                   October 2023
    map contain full URIs without a fragment identifier, and the fragment
    identifier is then added, if needed, where the namespace entry is
    used.
-
-
-
-
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 17]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
 
    "namespace": {
      "cap": "https://example.com/capability/cap",
@@ -979,6 +1002,14 @@ Internet-Draft                  OneDM SDF                   October 2023
    serve for naming the individual definitions in this group, and the
    corresponding values provide a set of qualities (name-value pairs)
    for the individual definition.  (In short, we speak of the map
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 18]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
+
    entries as "named sets of qualities".)
 
    Each group may contain zero or more definitions.  Each identifier
@@ -1002,14 +1033,6 @@ Internet-Draft                  OneDM SDF                   October 2023
      }
    }
 
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 18]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
-
                     Figure 3: Example Object definition
 
    This example defines an Object "foo" that is defined in the default
@@ -1032,6 +1055,16 @@ Internet-Draft                  OneDM SDF                   October 2023
    SDF documents may contribute to a global namespace, and may reference
    elements from that global namespace.  (An SDF document that does not
    set a defaultNamespace does not contribute to a global namespace.)
+
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 19]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
 
 4.1.  Structure
 
@@ -1058,14 +1091,6 @@ Internet-Draft                  OneDM SDF                   October 2023
    document is constructed from a JSON pointer that selects the element
    defined for this name in the SDF document.
 
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 19]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
-
    The absolute URI part is a copy of the default namespace, i.e., the
    default namespace is always the target namespace for a name for which
    a definition is contributed.  When emphasizing that name definitions
@@ -1086,6 +1111,16 @@ Internet-Draft                  OneDM SDF                   October 2023
 
    Note the #, which separates the absolute-URI part (Section 4.3 of
    [RFC3986]) from the fragment identifier part.
+
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 20]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
 
 4.3.  Referencing global names
 
@@ -1114,14 +1149,6 @@ Internet-Draft                  OneDM SDF                   October 2023
 
    Then this reference to that namespace:
 
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 20]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
-
    "sdfRef": "foo:#/sdfData/temperatureData"
 
    references the global name:
@@ -1137,6 +1164,19 @@ Internet-Draft                  OneDM SDF                   October 2023
    *  copying elements via sdfRef values
 
    *  pointing to elements via sdfRequired value elements
+
+
+
+
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 21]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
 
 4.4.  sdfRef
 
@@ -1171,13 +1211,6 @@ Internet-Draft                  OneDM SDF                   October 2023
 
    2.  The sdfRef member of the copy in "patch" is removed.
 
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 21]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
-
    3.  the JSON pointer that is the value of the sdfRef member is
        dereferenced and the result is copied into a variable named
        "original".
@@ -1193,6 +1226,14 @@ Internet-Draft                  OneDM SDF                   October 2023
    not powerful enough to describe, for instance, the effect of null
    values given with the sdfRef to remove members of JSON maps from the
    referenced target.  Nonetheless, the syntaxes also give the syntax of
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 22]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
+
    the sdfRef itself, which vanishes during the resolution; in many
    cases therefore even merge-patch inputs will validate with these
    formal syntaxes.
@@ -1229,7 +1270,22 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 22]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 23]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1285,7 +1341,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 23]
+Koster, et al.            Expires 18 April 2024                [Page 24]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1341,7 +1397,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 24]
+Koster, et al.            Expires 18 April 2024                [Page 25]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1397,7 +1453,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 25]
+Koster, et al.            Expires 18 April 2024                [Page 26]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1414,11 +1470,11 @@ Internet-Draft                  OneDM SDF                   October 2023
     +=============+==============+===================================+
     | Quality     | Type         | Description                       |
     +=============+==============+===================================+
-    | description | text         | long text (no constraints)        |
+    | description | string       | long text (no constraints)        |
     +-------------+--------------+-----------------------------------+
-    | label       | text         | short text (no constraints)       |
+    | label       | string       | short text (no constraints)       |
     +-------------+--------------+-----------------------------------+
-    | $comment    | text         | source code comments only, no     |
+    | $comment    | string       | source code comments only, no     |
     |             |              | semantics                         |
     +-------------+--------------+-----------------------------------+
     | sdfRef      | sdf-pointer  | (see Section 4.4)                 |
@@ -1453,7 +1509,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 26]
+Koster, et al.            Expires 18 April 2024                [Page 27]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1509,7 +1565,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 27]
+Koster, et al.            Expires 18 April 2024                [Page 28]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1565,7 +1621,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 28]
+Koster, et al.            Expires 18 April 2024                [Page 29]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1621,7 +1677,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 29]
+Koster, et al.            Expires 18 April 2024                [Page 30]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1677,7 +1733,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 30]
+Koster, et al.            Expires 18 April 2024                [Page 31]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1733,7 +1789,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 31]
+Koster, et al.            Expires 18 April 2024                [Page 32]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1789,7 +1845,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 32]
+Koster, et al.            Expires 18 April 2024                [Page 33]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1845,7 +1901,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 33]
+Koster, et al.            Expires 18 April 2024                [Page 34]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1901,7 +1957,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 34]
+Koster, et al.            Expires 18 April 2024                [Page 35]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -1957,7 +2013,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 35]
+Koster, et al.            Expires 18 April 2024                [Page 36]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2013,7 +2069,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 36]
+Koster, et al.            Expires 18 April 2024                [Page 37]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2069,7 +2125,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 37]
+Koster, et al.            Expires 18 April 2024                [Page 38]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2125,7 +2181,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 38]
+Koster, et al.            Expires 18 April 2024                [Page 39]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2181,7 +2237,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 39]
+Koster, et al.            Expires 18 April 2024                [Page 40]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2237,7 +2293,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 40]
+Koster, et al.            Expires 18 April 2024                [Page 41]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2293,7 +2349,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 41]
+Koster, et al.            Expires 18 April 2024                [Page 42]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2349,7 +2405,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 42]
+Koster, et al.            Expires 18 April 2024                [Page 43]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2405,7 +2461,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 43]
+Koster, et al.            Expires 18 April 2024                [Page 44]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2461,7 +2517,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 44]
+Koster, et al.            Expires 18 April 2024                [Page 45]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2472,13 +2528,6 @@ Internet-Draft                  OneDM SDF                   October 2023
               draft-bormann-t2trg-deref-id-01, 9 May 2023,
               <https://datatracker.ietf.org/doc/html/draft-bormann-
               t2trg-deref-id-01>.
-
-   [I-D.ietf-jsonpath-iregexp]
-              Bormann, C. and T. Bray, "I-Regexp: An Interoperable
-              Regexp Format", Work in Progress, Internet-Draft, draft-
-              ietf-jsonpath-iregexp-08, 29 June 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-
-              jsonpath-iregexp-08>.
 
    [I-D.irtf-t2trg-rest-iot]
               Keränen, A., Kovatsch, M., and K. Hartke, "Guidance on
@@ -2508,20 +2557,6 @@ Internet-Draft                  OneDM SDF                   October 2023
               json-schema-01>.  This is the base specification for json-
               schema.org "draft 7".
 
-
-
-
-
-
-
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 45]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
-
    [JSO7V]    Wright, A., Andrews, H., and G. Luff, "JSON Schema
               Validation: A Vocabulary for Structural Validation of
               JSON", Work in Progress, Internet-Draft, draft-handrews-
@@ -2533,6 +2568,15 @@ Internet-Draft                  OneDM SDF                   October 2023
    [KebabCase]
               "Kebab Case", August 2014,
               <http://wiki.c2.com/?KebabCase>.
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 46]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
 
    [OCF]      "OCF Resource Type Specification",
               <https://openconnectivity.org/specs/
@@ -2546,6 +2590,11 @@ Internet-Draft                  OneDM SDF                   October 2023
               Things (IoT) Security: State of the Art and Challenges",
               RFC 8576, DOI 10.17487/RFC8576, April 2019,
               <https://www.rfc-editor.org/rfc/rfc8576>.
+
+   [RFC9485]  Bormann, C. and T. Bray, "I-Regexp: An Interoperable
+              Regular Expression Format", RFC 9485,
+              DOI 10.17487/RFC9485, October 2023,
+              <https://www.rfc-editor.org/rfc/rfc9485>.
 
    [ZCL]      "The ZigBee Cluster Library", Elsevier, Zigbee Wireless
               Networking pp. 239-271,
@@ -2568,19 +2617,22 @@ Appendix A.  Formal Syntax of SDF
    syntax by leaving out all lines containing the string EXTENSION-
    POINT; as this is trivial, the result is not shown here.
 
-
-
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 46]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
-
    This appendix makes use of CDDL "features" as defined in Section 4 of
    [RFC9165].  Features whose names end in "-ext" indicate extension
    points for further evolution.
+
+
+
+
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 47]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
 
    start = sdf-syntax
 
@@ -2601,6 +2653,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
    sdfinfo = {
     ? title: text
+    ? description: text
     ? version: text
     ? copyright: text
     ? license: text
@@ -2626,17 +2679,16 @@ Internet-Draft                  OneDM SDF                   October 2023
    ; in odmobject-multiple_axis_joystick.sdf.json
    pointer-list = [* sdf-pointer]
 
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 47]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
-
    optional-comment = (
     ? $comment: text       ; source code comments only, no semantics
    )
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 48]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
 
    commonqualities = (
     ? description: text    ; long text (no constraints)
@@ -2683,16 +2735,17 @@ Internet-Draft                  OneDM SDF                   October 2023
     EXTENSION-POINT<"object-ext">
    }
 
+   parameter-list = dataqualities
+
+   actionqualities = {
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 48]
+
+Koster, et al.            Expires 18 April 2024                [Page 49]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
-   parameter-list = dataqualities
-
-   actionqualities = {
     commonqualities
     ? sdfInputData: parameter-list   ; sdfRequiredInputData applies here
     ? sdfOutputData: parameter-list  ; sdfRequired applies here
@@ -2738,17 +2791,17 @@ Internet-Draft                  OneDM SDF                   October 2023
      "type" => "object"
      ? required: [+text]
      ? properties: named<dataqualities>
+   )
+
+   optional-choice = (
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 49]
+Koster, et al.            Expires 18 April 2024                [Page 50]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
-   )
-
-   optional-choice = (
     ? (("sdfChoice" => named<dataqualities>)
      // ("enum" => [+ text])) ; limited to text strings
    )
@@ -2794,17 +2847,17 @@ Internet-Draft                  OneDM SDF                   October 2023
            // compound-type
            // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
           )
+        ; if present, all other qualities apply to all choices
+        optional-choice
+        ; jso subset
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 50]
+Koster, et al.            Expires 18 April 2024                [Page 51]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
-        ; if present, all other qualities apply to all choices
-        optional-choice
-        ; jso subset
         ? minimum: number
         ? maximum: number
         ? format: text
@@ -2853,14 +2906,17 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 51]
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 52]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
     {
-   -  "title": "sdf-validation.cddl -- Generated: 2023-09-30T22:26:24Z",
-   +  "title": "sdf-framework.cddl -- Generated: 2023-09-30T22:26:41Z",
+   -  "title": "sdf-validation.cddl -- Generated: 2023-10-16T13:38:45Z",
+   +  "title": "sdf-framework.cddl -- Generated: 2023-10-16T13:38:59Z",
       "$schema": "http://json-schema.org/draft-07/schema#",
       "$ref": "#/definitions/sdf-syntax",
       "definitions": {
@@ -2909,7 +2965,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 52]
+Koster, et al.            Expires 18 April 2024                [Page 53]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -2922,6 +2978,9 @@ Internet-Draft                  OneDM SDF                   October 2023
           "type": "object",
           "properties": {
             "title": {
+              "type": "string"
+            },
+            "description": {
               "type": "string"
             },
             "version": {
@@ -2959,17 +3018,17 @@ Internet-Draft                  OneDM SDF                   October 2023
           "properties": {
             "description": {
               "type": "string"
-            },
-            "label": {
-              "type": "string"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 53]
+Koster, et al.            Expires 18 April 2024                [Page 54]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+            },
+            "label": {
+              "type": "string"
             },
             "$comment": {
               "type": "string"
@@ -3015,17 +3074,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
    +        }
    +      },
-          "additionalProperties": false
-        },
-        "sdf-pointer": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 54]
+Koster, et al.            Expires 18 April 2024                [Page 55]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+          "additionalProperties": false
+        },
+        "sdf-pointer": {
           "type": "string"
         },
         "pointer-list": {
@@ -3071,17 +3130,17 @@ Internet-Draft                  OneDM SDF                   October 2023
               "$ref": "#/definitions/uint"
             }
           },
-   +      "patternProperties": {
-   +        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-   +        }
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 55]
+Koster, et al.            Expires 18 April 2024                [Page 56]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +      "patternProperties": {
+   +        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
+   +        }
    +      },
           "additionalProperties": false
         },
@@ -3127,17 +3186,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            "const": {
    +              "$ref": "#/definitions/allowed-types"
    +            },
-   +            "default": {
-   +              "$ref": "#/definitions/allowed-types"
-   +            },
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 56]
+Koster, et al.            Expires 18 April 2024                [Page 57]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            "default": {
+   +              "$ref": "#/definitions/allowed-types"
+   +            },
    +            "minimum": {
    +              "type": "number"
    +            },
@@ -3183,17 +3242,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            "nullable": {
    +              "type": "boolean"
    +            },
-   +            "sdfType": {
-   +              "$ref": "#/definitions/sdfType-"
-   +            },
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 57]
+Koster, et al.            Expires 18 April 2024                [Page 58]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            "sdfType": {
+   +              "$ref": "#/definitions/sdfType-"
+   +            },
    +            "contentFormat": {
    +              "type": "string"
    +            }
@@ -3239,17 +3298,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            "label": {
    +              "type": "string"
    +            },
-   +            "$comment": {
-   +              "type": "string"
-   +            },
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 58]
+Koster, et al.            Expires 18 April 2024                [Page 59]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            "$comment": {
+   +              "type": "string"
+   +            },
    +            "sdfRef": {
    +              "$ref": "#/definitions/sdf-pointer"
    +            },
@@ -3295,17 +3354,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            "maxItems": {
    +              "$ref": "#/definitions/uint"
    +            },
-   +            "uniqueItems": {
-   +              "type": "boolean"
-   +            },
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 59]
+Koster, et al.            Expires 18 April 2024                [Page 60]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            "uniqueItems": {
+   +              "type": "boolean"
+   +            },
    +            "items": {
    +              "$ref": "#/definitions/jso-items"
    +            },
@@ -3351,17 +3410,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            },
    +            "label": {
    +              "type": "string"
-   +            },
-   +            "$comment": {
-   +              "type": "string"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 60]
+Koster, et al.            Expires 18 April 2024                [Page 61]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            },
+   +            "$comment": {
+   +              "type": "string"
    +            },
    +            "sdfRef": {
    +              "$ref": "#/definitions/sdf-pointer"
@@ -3407,17 +3466,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            },
    +            "maxItems": {
    +              "$ref": "#/definitions/uint"
-   +            },
-   +            "uniqueItems": {
-   +              "type": "boolean"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 61]
+Koster, et al.            Expires 18 April 2024                [Page 62]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            },
+   +            "uniqueItems": {
+   +              "type": "boolean"
    +            },
    +            "items": {
    +              "$ref": "#/definitions/jso-items"
@@ -3463,17 +3522,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            },
    +            "writable": {
    +              "type": "boolean"
-   +            },
-   +            "description": {
-   +              "type": "string"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 62]
+Koster, et al.            Expires 18 April 2024                [Page 63]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            },
+   +            "description": {
+   +              "type": "string"
    +            },
    +            "label": {
    +              "type": "string"
@@ -3519,17 +3578,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            },
    +            "format": {
    +              "$ref": "#/definitions/format-"
-   +            },
-   +            "minItems": {
-   +              "$ref": "#/definitions/uint"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 63]
+Koster, et al.            Expires 18 April 2024                [Page 64]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            },
+   +            "minItems": {
+   +              "$ref": "#/definitions/uint"
    +            },
    +            "maxItems": {
    +              "$ref": "#/definitions/uint"
@@ -3575,17 +3634,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            },
    +            "properties": {
                   "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-                },
-   +            "enum": {
-   +              "type": "array",
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 64]
+Koster, et al.            Expires 18 April 2024                [Page 65]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+   +            "enum": {
+   +              "type": "array",
    +              "items": {
    +                "type": "string"
    +              },
@@ -3631,17 +3690,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                   "type": "number"
                 },
                 "exclusiveMaximum": {
-                  "type": "number"
-                },
-                "multipleOf": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 65]
+Koster, et al.            Expires 18 April 2024                [Page 66]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                  "type": "number"
+                },
+                "multipleOf": {
                   "type": "number"
                 },
                 "minLength": {
@@ -3687,17 +3746,17 @@ Internet-Draft                  OneDM SDF                   October 2023
               "type": "object",
    +          "patternProperties": {
    +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-   +            }
-   +          },
-              "properties": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 66]
+Koster, et al.            Expires 18 April 2024                [Page 67]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            }
+   +          },
+              "properties": {
                 "type": {
    -              "type": "string",
    -              "const": "object"
@@ -3743,17 +3802,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "const": {
                   "$ref": "#/definitions/allowed-types"
-                },
-                "default": {
-                  "$ref": "#/definitions/allowed-types"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 67]
+Koster, et al.            Expires 18 April 2024                [Page 68]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "default": {
+                  "$ref": "#/definitions/allowed-types"
                 },
                 "minimum": {
                   "type": "number"
@@ -3799,17 +3858,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "nullable": {
                   "type": "boolean"
-                },
-                "sdfType": {
-                  "$ref": "#/definitions/sdfType-"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 68]
+Koster, et al.            Expires 18 April 2024                [Page 69]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "sdfType": {
+                  "$ref": "#/definitions/sdfType-"
                 },
                 "contentFormat": {
                   "type": "string"
@@ -3855,17 +3914,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "label": {
                   "type": "string"
-                },
-                "$comment": {
-                  "type": "string"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 69]
+Koster, et al.            Expires 18 April 2024                [Page 70]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "$comment": {
+                  "type": "string"
                 },
                 "sdfRef": {
                   "$ref": "#/definitions/sdf-pointer"
@@ -3911,17 +3970,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "maxItems": {
                   "$ref": "#/definitions/uint"
-                },
-                "uniqueItems": {
-                  "type": "boolean"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 70]
+Koster, et al.            Expires 18 April 2024                [Page 71]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "uniqueItems": {
+                  "type": "boolean"
                 },
                 "items": {
                   "$ref": "#/definitions/jso-items"
@@ -3967,17 +4026,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    -              "items": {
    -                "type": "string"
    -              },
-   -              "minItems": 1
-   -            },
-   -            "observable": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 71]
+Koster, et al.            Expires 18 April 2024                [Page 72]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   -              "minItems": 1
+   -            },
+   -            "observable": {
    -              "type": "boolean"
    -            },
    -            "readable": {
@@ -4023,17 +4082,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "multipleOf": {
                   "type": "number"
-                },
-                "minLength": {
-                  "$ref": "#/definitions/uint"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 72]
+Koster, et al.            Expires 18 April 2024                [Page 73]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "minLength": {
+                  "$ref": "#/definitions/uint"
                 },
                 "maxLength": {
                   "$ref": "#/definitions/uint"
@@ -4079,17 +4138,17 @@ Internet-Draft                  OneDM SDF                   October 2023
             {
               "type": "object",
    +          "patternProperties": {
-   +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-   +            }
-   +          },
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 73]
+Koster, et al.            Expires 18 April 2024                [Page 74]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
+   +            }
+   +          },
               "properties": {
                 "type": {
    -              "$ref": "#/definitions/type-"
@@ -4135,17 +4194,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                   "type": "number"
                 },
                 "minLength": {
-                  "$ref": "#/definitions/uint"
-                },
-                "maxLength": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 74]
+Koster, et al.            Expires 18 April 2024                [Page 75]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                  "$ref": "#/definitions/uint"
+                },
+                "maxLength": {
                   "$ref": "#/definitions/uint"
                 },
                 "pattern": {
@@ -4191,17 +4250,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 "type": {
    -              "type": "string",
    -              "const": "object"
-   +              "$ref": "#/definitions/type-"
-                },
-   -            "required": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 75]
+Koster, et al.            Expires 18 April 2024                [Page 76]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +              "$ref": "#/definitions/type-"
+                },
+   -            "required": {
    +            "enum": {
                   "type": "array",
                   "items": {
@@ -4247,17 +4306,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "exclusiveMaximum": {
                   "type": "number"
-                },
-                "multipleOf": {
-                  "type": "number"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 76]
+Koster, et al.            Expires 18 April 2024                [Page 77]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "multipleOf": {
+                  "type": "number"
                 },
                 "minLength": {
                   "$ref": "#/definitions/uint"
@@ -4303,17 +4362,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +          "patternProperties": {
    +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
    +            }
-   +          },
-              "properties": {
-                "type": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 77]
+Koster, et al.            Expires 18 April 2024                [Page 78]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +          },
+              "properties": {
+                "type": {
    -              "$ref": "#/definitions/type-"
    +              "type": "string",
    +              "const": "object"
@@ -4359,17 +4418,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 "minimum": {
                   "type": "number"
                 },
-                "maximum": {
-                  "type": "number"
-                },
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 78]
+Koster, et al.            Expires 18 April 2024                [Page 79]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                "maximum": {
+                  "type": "number"
+                },
                 "exclusiveMinimum": {
                   "type": "number"
                 },
@@ -4415,17 +4474,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 "contentFormat": {
                   "type": "string"
                 }
-              },
-              "additionalProperties": false
-            },
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 79]
+Koster, et al.            Expires 18 April 2024                [Page 80]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+              },
+              "additionalProperties": false
+            },
             {
               "type": "object",
    +          "patternProperties": {
@@ -4471,17 +4530,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                   "$ref": "#/definitions/pointer-list"
                 },
                 "const": {
-                  "$ref": "#/definitions/allowed-types"
-                },
-                "default": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 80]
+Koster, et al.            Expires 18 April 2024                [Page 81]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                  "$ref": "#/definitions/allowed-types"
+                },
+                "default": {
                   "$ref": "#/definitions/allowed-types"
                 },
                 "minimum": {
@@ -4527,17 +4586,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                   "type": "string"
                 },
                 "nullable": {
-                  "type": "boolean"
-                },
-                "sdfType": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 81]
+Koster, et al.            Expires 18 April 2024                [Page 82]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                  "type": "boolean"
+                },
+                "sdfType": {
                   "$ref": "#/definitions/sdfType-"
                 },
                 "contentFormat": {
@@ -4583,17 +4642,17 @@ Internet-Draft                  OneDM SDF                   October 2023
             {
               "type": "object",
               "additionalProperties": {
-              }
-   +        },
-   +        {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 82]
+Koster, et al.            Expires 18 April 2024                [Page 83]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+              }
+   +        },
+   +        {
             }
           ]
         },
@@ -4639,17 +4698,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "format": {
                   "type": "string"
-                },
-                "minLength": {
-                  "$ref": "#/definitions/uint"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 83]
+Koster, et al.            Expires 18 April 2024                [Page 84]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "minLength": {
+                  "$ref": "#/definitions/uint"
                 },
                 "maxLength": {
                   "$ref": "#/definitions/uint"
@@ -4695,17 +4754,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "maximum": {
                   "type": "number"
-                },
-                "format": {
-                  "type": "string"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 84]
+Koster, et al.            Expires 18 April 2024                [Page 85]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "format": {
+                  "type": "string"
                 },
                 "minLength": {
                   "$ref": "#/definitions/uint"
@@ -4751,17 +4810,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +              "$ref": "#/definitions/uint"
    +            },
    +            "maxLength": {
-   +              "$ref": "#/definitions/uint"
-   +            }
-   +          },
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 85]
+Koster, et al.            Expires 18 April 2024                [Page 86]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +              "$ref": "#/definitions/uint"
+   +            }
+   +          },
    +          "additionalProperties": false
    +        },
    +        {
@@ -4807,17 +4866,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                 },
                 "minLength": {
                   "$ref": "#/definitions/uint"
-                },
-                "maxLength": {
-                  "$ref": "#/definitions/uint"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 86]
+Koster, et al.            Expires 18 April 2024                [Page 87]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                },
+                "maxLength": {
+                  "$ref": "#/definitions/uint"
                 }
               },
               "additionalProperties": false
@@ -4863,17 +4922,17 @@ Internet-Draft                  OneDM SDF                   October 2023
                   "type": "number"
                 },
                 "maximum": {
-                  "type": "number"
-                },
-                "format": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 87]
+Koster, et al.            Expires 18 April 2024                [Page 88]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+                  "type": "number"
+                },
+                "format": {
                   "type": "string"
                 },
                 "minLength": {
@@ -4919,17 +4978,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +            },
    +            "format": {
    +              "type": "string"
-   +            },
-   +            "minLength": {
-   +              "$ref": "#/definitions/uint"
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 88]
+Koster, et al.            Expires 18 April 2024                [Page 89]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +            },
+   +            "minLength": {
+   +              "$ref": "#/definitions/uint"
    +            },
    +            "maxLength": {
    +              "$ref": "#/definitions/uint"
@@ -4975,17 +5034,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
    +        }
    +      },
-          "additionalProperties": false
-        },
-        "parameter-list": {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 89]
+Koster, et al.            Expires 18 April 2024                [Page 90]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+          "additionalProperties": false
+        },
+        "parameter-list": {
           "$ref": "#/definitions/dataqualities"
         },
         "eventqualities": {
@@ -5031,17 +5090,17 @@ Internet-Draft                  OneDM SDF                   October 2023
    +      "anyOf": [
    +        {
    +          "type": "string",
-   +          "const": "date-time"
-   +        },
-   +        {
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 90]
+Koster, et al.            Expires 18 April 2024                [Page 91]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+   +          "const": "date-time"
+   +        },
+   +        {
    +          "type": "string",
    +          "const": "date"
    +        },
@@ -5087,17 +5146,17 @@ Internet-Draft                  OneDM SDF                   October 2023
             "$ref": "#/definitions/dataqualities"
           }
         },
-        "type-": {
-          "type": "string",
-          "enum": [
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 91]
+Koster, et al.            Expires 18 April 2024                [Page 92]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
 
+        "type-": {
+          "type": "string",
+          "enum": [
             "number",
             "string",
             "boolean",
@@ -5106,25 +5165,25 @@ Internet-Draft                  OneDM SDF                   October 2023
           ]
         },
    -    "sdfAction-": {
-   +    "sdfProperty-": {
+   +    "sdfEvent-": {
           "type": "object",
           "additionalProperties": {
    -        "$ref": "#/definitions/actionqualities"
-   +        "$ref": "#/definitions/propertyqualities"
+   +        "$ref": "#/definitions/eventqualities"
           }
         },
-        "sdfEvent-": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/eventqualities"
-          }
-        },
-   -    "sdfProperty-": {
+   -    "sdfEvent-": {
    +    "sdfAction-": {
           "type": "object",
           "additionalProperties": {
-   -        "$ref": "#/definitions/propertyqualities"
+   -        "$ref": "#/definitions/eventqualities"
    +        "$ref": "#/definitions/actionqualities"
+          }
+        },
+        "sdfProperty-": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/propertyqualities"
           }
    -    },
    -    "sdfType-": {
@@ -5137,23 +5196,29 @@ Internet-Draft                  OneDM SDF                   October 2023
       }
     }
 
+
+
+
+
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 93]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
+
 Appendix C.  Data Qualities inspired by json-schema.org
 
    Data qualities define data used in SDF affordances at an information
    model level.  A popular way to describe JSON data at a data model
    level is proposed by a number of drafts on json-schema.org (which
-   collectively are abbreviated JSO here)); for reference to a popular
+   collectively are abbreviated JSO here); for reference to a popular
    version we will point here to [JSO7] and [JSO7V].  As the vocabulary
    used by JSO is familiar to many JSON modelers, the present
    specification borrows some of the terms and ports their semantics to
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 92]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
-
    the information model level needed for SDF.
 
    The main data quality imported is the "type".  In SDF, this can take
@@ -5194,21 +5259,19 @@ C.2.  type "string"
    The type "string" is associated with Unicode text string values as
    they are available in JSON.
 
+
+
+Koster, et al.            Expires 18 April 2024                [Page 94]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
+
    The length (as measured in characters) can be constrained by the
    additional data qualities "minLength" and "maxLength", which are
    inclusive bounds.  Note that earlier drafts of this specification
    explained text string length values in bytes, which however is not
    meaningful unless bound to a specific encoding (which could be UTF-8,
    if this unusual behavior is to be provided in an extension).
-
-
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 93]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
 
    The data quality "pattern" takes a string value that is interpreted
    as an [ECMA-262] regular expression in Unicode mode that constrain
@@ -5228,9 +5291,9 @@ Internet-Draft                  OneDM SDF                   October 2023
    *  and anchors (beginning-of-input ^ and end-of-input $).
 
    Note that this subset is somewhat similar to the subset introduced by
-   iregexps [I-D.ietf-jsonpath-iregexp], which however are anchored
-   regular expressions, and which include certain backslash escapes for
-   characters and character classes.
+   I-Regexps [RFC9485], which however are anchored regular expressions,
+   and which include certain backslash escapes for characters and
+   character classes.
 
    The additional data quality "format" can take one of the following
    values.  Note that, at an information model level, the presence of
@@ -5249,6 +5312,16 @@ C.3.  type "boolean"
 
    The type "boolean" can take the values "true" or "false".
 
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 95]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
+
 C.4.  type "array"
 
    The type "array" is associated with arrays as they are available in
@@ -5256,15 +5329,6 @@ C.4.  type "array"
 
    The additional quality "items" gives the type that each of the
    elements of the array must match.
-
-
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 94]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
 
    The number of elements in the array can be constrained by the
    additional data qualities "minItems" and "maxItems", which are
@@ -5304,23 +5368,22 @@ C.6.  Implementation notes
    respective "minimum"/"maximum" keyword, which are themselves then
    removed; the reverse transformation applies on export.
 
+
+
+
+
+
+Koster, et al.            Expires 18 April 2024                [Page 96]
+
+Internet-Draft                  OneDM SDF                   October 2023
+
+
 Appendix D.  Composition Examples
 
    This appendix contains two examples illustrating different
    composition approaches using the sdfThing quality.
 
 D.1.  Outlet Strip Example
-
-
-
-
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 95]
-
-Internet-Draft                  OneDM SDF                   October 2023
-
 
    {
      "sdfThing": {
@@ -5366,14 +5429,7 @@ D.2.  Refrigerator-Freezer Example
 
 
 
-
-
-
-
-
-
-
-Koster, et al.            Expires 3 April 2024                 [Page 96]
+Koster, et al.            Expires 18 April 2024                [Page 97]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -5429,7 +5485,7 @@ Internet-Draft                  OneDM SDF                   October 2023
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 97]
+Koster, et al.            Expires 18 April 2024                [Page 98]
 
 Internet-Draft                  OneDM SDF                   October 2023
 
@@ -5460,9 +5516,9 @@ Contributors
 Authors' Addresses
 
    Michael Koster (editor)
-   PassiveLogic
-   524 H Street
-   Antioch, CA,  94509
+   KTC
+   29415 Alderpoint Road
+   Blocksburg, CA,  95514
    United States of America
    Phone: +1-707-502-5136
    Email: michaeljohnkoster@gmail.com
@@ -5485,4 +5541,4 @@ Authors' Addresses
 
 
 
-Koster, et al.            Expires 3 April 2024                 [Page 98]
+Koster, et al.            Expires 18 April 2024                [Page 99]
