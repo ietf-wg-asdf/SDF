@@ -145,7 +145,7 @@ entity:
     use in the creation and maintenance of data and interaction models
     that describe Things, i.e., physical objects that are available for interaction
     over a network. An SDF specification describes definitions of
-    SDF Objects and their associated interactions (Events, Actions,
+    SDF Objects/SDF Things and their associated interactions (Events, Actions,
     Properties), as well as the Data types for the information exchanged
     in those interactions. Tools convert this format to database formats
     and other serializations as needed.
@@ -184,7 +184,8 @@ Thing:
 : A physical item that is also available for interaction over a network.
 
 sdfThing:
-: A grouping of sdfObjects (Objects) and/or sdfThings.
+: A grouping of sdfObjects (Objects) and/or sdfThings, as well as
+  potentially Property, Action, and Event definitions.
 
 Affordance:
 : An element of an interface offered for interaction, for which
@@ -1754,11 +1755,7 @@ Some wider issues are discussed in {{-seccons}}.
 
 # Formal Syntax of SDF {#syntax}
 
-This appendix describes the syntax of SDF using CDDL {{-cddl}}.  Note
-that this appendix was derived from {{{Ari Keränen}}}'s "alt-schema" and
-{{{Michael Koster}}}'s "schema", with a view of covering the syntax that
-was in use at the time of writing in the One Data Model `playground`
-repository.
+This appendix describes the syntax of SDF using CDDL {{-cddl}}.
 
 This appendix shows the framework syntax only, i.e., a syntax with liberal extension points.
 Since this syntax is nearly useless in finding typos in an SDF
@@ -1843,18 +1840,22 @@ value 1, unless another "`multipleOf`" quality is present.)
 ## type "`string`"
 
 The type "`string`" is associated with Unicode text string values as
-they are available in JSON.
+they can be represented in JSON.
 
 The length (as measured in characters) can be constrained by the
 additional data qualities "`minLength`" and "`maxLength`", which are
 inclusive bounds.
+
+(More specifically, Unicode text strings as defined in this
+specification are sequences of Unicode scalar values, the number of
+which is taken as the length of such a text string.
 Note that earlier drafts of this specification explained
 text string length values in bytes, which however is not meaningful
-unless bound to a specific encoding (which could be UTF-8, if this
-unusual behavior is to be provided in an extension).
+unless bound to a specific encoding — which could be UTF-8, if this
+unusual behavior is to be provided in an extension.)
 
 The data quality "`pattern`" takes a string value that is interpreted
-as an [ECMA-262] regular expression in Unicode mode that constrain the
+as an [ECMA-262] regular expression in Unicode mode that constrains the
 string (note that these are not anchored by default, so unless `^` and
 `$` anchors are employed, ECMA-262 regular expressions match any string that *contains* a match).
 The JSO proposals acknowledge that regular expression support is
