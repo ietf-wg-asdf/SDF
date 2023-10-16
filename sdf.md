@@ -210,7 +210,8 @@ Block:
   specification; these entries together serve a specific function.
 
 Group:
-: An entry in the main SDF map and in certain nested definitions that
+: An entry in the main JSON map representing the SDF document, and in
+  certain nested definitions, that
   has a Class Name Keyword as its key and a map of named definition
   entries (Definition Group) as a value.
 
