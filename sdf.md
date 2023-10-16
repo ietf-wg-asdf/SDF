@@ -131,6 +131,7 @@ informative:
   I-D.bormann-asdf-sdftype-link: sdflink
   I-D.bormann-asdf-sdf-mapping:
   I-D.bormann-t2trg-deref-id-01: deref
+  RFC9485: iregexp
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -1870,7 +1871,7 @@ them to:
 * and anchors (beginning-of-input `^` and end-of-input `$`).
 
 Note that this subset is somewhat similar to the subset introduced by
-iregexps {{?I-D.ietf-jsonpath-iregexp}}, which however are anchored
+I-Regexps {{-iregexp}}, which however are anchored
 regular expressions, and which include certain backslash escapes for
 characters and character classes.
 
