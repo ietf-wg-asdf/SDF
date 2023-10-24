@@ -843,6 +843,15 @@ definition specify that the
 interactions offered by a Thing modeled by this sdfThing include the
 interactions modeled by the nested `sdfObject` or `sdfThing`.
 
+## Top-level Affordances and sdfData
+
+Besides their placement within an `sdfObject` or `sdfThing`, affordances
+(i.e., `sdfProperty`, `sdfAction`, and `sdfEvent`) as well as `sdfData` can
+also be placed at the top level of an SDF document.
+Since they are not associated with an `sdfObject` or `sdfThing`, these kinds of
+definitions are intended to be re-used via the `sdfRef` mechanism
+(see {{sdfref}}).
+
 # Names and namespaces
 
 SDF documents may contribute to a global namespace, and may
