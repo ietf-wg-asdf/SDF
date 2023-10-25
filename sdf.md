@@ -1639,7 +1639,7 @@ IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit) {#unit-urn}
 
 IANA is requested to register the following value in the "{{params-1
 (IETF URN Sub-namespace for Registered Protocol Parameter
-Identifiers)<IANA.params}}" registry, following the template in
+Identifiers)<IANA.params}}" registry in {{IANA.params}}, following the template in
 {{!RFC3553}}:
 
 Registry name:
