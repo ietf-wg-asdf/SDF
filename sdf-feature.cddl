@@ -39,9 +39,8 @@ quality-name = text .regexp "([a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*"
 
 sdf-pointer = global / same-object / true
 global = text .regexp ".*[:#].*" ; rough CURIE or JSON Pointer syntax
-; same-object = referenceable-name / {quality-name => referenceable-name}
+same-object = referenceable-name
 referenceable-name = text .regexp "[^:#]*"
-same-object = referenceable-name / [2* referenceable-name]
 
 ; per se no point in having an empty list, but used for sdfRequired
 ; in odmobject-multiple_axis_joystick.sdf.json
