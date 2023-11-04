@@ -1,6 +1,6 @@
  {
--  "title": "sdf-validation.cddl -- Generated: 2023-10-16T13:38:45Z",
-+  "title": "sdf-framework.cddl -- Generated: 2023-10-16T13:38:59Z",
+-  "title": "sdf-validation.cddl -- Generated: 2023-11-04T15:25:34Z",
++  "title": "sdf-framework.cddl -- Generated: 2023-11-04T15:25:46Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
@@ -145,7 +145,32 @@
        "additionalProperties": false
      },
      "sdf-pointer": {
-       "type": "string"
+       "anyOf": [
+         {
+           "$ref": "#/definitions/global"
+         },
+         {
+           "$ref": "#/definitions/same-object"
+         },
+         {
+           "$ref": "#/definitions/true"
+         }
+       ]
+     },
+     "global": {
+       "type": "string",
+       "pattern": "^[^\\n\\r]*[:#][^\\n\\r]*$"
+     },
+     "same-object": {
+       "$ref": "#/definitions/referenceable-name"
+     },
+     "referenceable-name": {
+       "type": "string",
+       "pattern": "^[^:#]*$"
+     },
+     "true": {
+       "type": "boolean",
+       "const": true
      },
      "pointer-list": {
        "type": "array",
@@ -204,432 +229,13 @@
 +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
 +            }
 +          },
-+          "properties": {
-+            "type": {
-+              "$ref": "#/definitions/type-"
-+            },
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/jso-items"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": false
-+        },
-+        {
-+          "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-+          "properties": {
-+            "type": {
-+              "type": "string",
-+              "const": "object"
-+            },
-+            "required": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
-+            "properties": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/jso-items"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": false
-+        },
-+        {
-+          "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-+          "properties": {
-+            "type": {
-+              "type": "string"
-+            },
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/jso-items"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": false
-+        },
-+        {
-+          "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
            "properties": {
              "type": {
                "$ref": "#/definitions/type-"
              },
--            "sdfChoice": {
-+            "enum": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/jso-items"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": false
-+        },
-+        {
-+          "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-+          "properties": {
-+            "type": {
-+              "type": "string",
-+              "const": "object"
-+            },
-+            "required": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
-+            "properties": {
+             "sdfChoice": {
                "$ref": "#/definitions/sdfData-sdfChoice-properties-"
              },
-+            "enum": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
              "observable": {
                "type": "boolean"
              },
@@ -716,6 +322,424 @@
          },
          {
            "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
++          "properties": {
++            "type": {
++              "type": "string",
++              "const": "object"
++            },
++            "required": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "properties": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
++            }
++          },
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
++          "properties": {
++            "type": {
++              "type": "string"
++            },
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
++            }
++          },
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
++          "properties": {
++            "type": {
++              "$ref": "#/definitions/type-"
++            },
++            "enum": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
++            }
++          },
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            }
++          },
++          "properties": {
++            "type": {
++              "type": "string",
++              "const": "object"
++            },
++            "required": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "properties": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "enum": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
++            }
++          },
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
 +          "patternProperties": {
 +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
 +            }
@@ -1936,18 +1960,20 @@
 +        "$ref": "#/definitions/eventqualities"
        }
      },
--    "sdfEvent-": {
+-    "sdfProperty-": {
 +    "sdfAction-": {
        "type": "object",
        "additionalProperties": {
--        "$ref": "#/definitions/eventqualities"
+-        "$ref": "#/definitions/propertyqualities"
 +        "$ref": "#/definitions/actionqualities"
        }
      },
-     "sdfProperty-": {
+-    "sdfEvent-": {
++    "sdfProperty-": {
        "type": "object",
        "additionalProperties": {
-         "$ref": "#/definitions/propertyqualities"
+-        "$ref": "#/definitions/eventqualities"
++        "$ref": "#/definitions/propertyqualities"
        }
 -    },
 -    "sdfType-": {
