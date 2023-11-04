@@ -1077,8 +1077,19 @@ The keyword "sdfRequired" is provided to apply a constraint that
 defines for which declarations the corresponding data are mandatory in a
 Thing modeled by the current definition.
 
-The value of "sdfRequired" is an array of name references (JSON pointers), each
-indicating one declaration that is mandatory to be represented.
+The value of "sdfRequired" is an array of references, each indicating
+one or more declarations that are mandatory to be represented.
+
+References in this array can be SDF names (JSON Pointers), or one of
+two abbreviated references:
+
+* a text string with an affordance name.
+All affordance declarations that are in the same sdfObject and that
+carry this name (there can be multiple ones, one per affordance type)
+are declared to be mandatory to be represented.
+* the Boolean value `true`.
+The affordance itself that carries the sdfRequired keyword is declared
+to be mandatory to be represented.
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
