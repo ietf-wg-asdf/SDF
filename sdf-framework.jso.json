@@ -1,5 +1,5 @@
 {
-  "title": "sdf-framework.cddl -- Generated: 2023-10-16T13:38:59Z",
+  "title": "sdf-framework.cddl -- Generated: 2023-11-04T12:21:47Z",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/sdf-syntax",
   "definitions": {
@@ -142,7 +142,43 @@
       "additionalProperties": false
     },
     "sdf-pointer": {
-      "type": "string"
+      "anyOf": [
+        {
+          "$ref": "#/definitions/global"
+        },
+        {
+          "$ref": "#/definitions/same-object"
+        },
+        {
+          "$ref": "#/definitions/true"
+        }
+      ]
+    },
+    "global": {
+      "type": "string",
+      "pattern": "^[^\\n\\r]*[:#][^\\n\\r]*$"
+    },
+    "same-object": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/referenceable-name"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/referenceable-name"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "referenceable-name": {
+      "type": "string",
+      "pattern": "^[^:#]*$"
+    },
+    "true": {
+      "type": "boolean",
+      "const": true
     },
     "pointer-list": {
       "type": "array",
