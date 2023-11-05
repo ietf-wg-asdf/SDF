@@ -471,7 +471,9 @@ changes.
 (These three aspects are described by the qualities `readable`,
 `writable`, and `observable` defined for an `sdfProperty`.)
 
-Definitions in `sdfProperty` groups include the definitions from `sdfData` groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing sdfObject.
+Definitions in `sdfProperty` groups include the definitions from
+`sdfData` groups, however, they actually also declare that a Property
+with the given qualities potentially is present in the containing sdfObject.
 
 For definitions in `sdfProperty` and `sdfData`, SDF provides qualities that can
 constrain the structure and values of data allowed in the interactions
