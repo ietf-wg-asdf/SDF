@@ -184,7 +184,7 @@ Thing:
 : A physical item that is also available for interaction over a network.
 
 Grouping:
-: An sdfThing or sdfObject (Object), i.e., (directly or indirectly) a combination of Affordances.
+: An sdfThing or sdfObject, i.e., (directly or indirectly) a combination of Affordances.
 
 sdfThing:
 : A grouping of Groupings as well as potentially Affordance
@@ -229,7 +229,7 @@ Class:
 
 Property:
 : An affordance that can potentially be used to read, write, and/or
-  observe state (current/stored information) on an Object.
+  observe state (current/stored information) on an sdfObject.
   (Note that Entries are often called
   properties in other environments; in this document, the term
   Property is specifically reserved for affordances, even if the map
@@ -237,19 +237,18 @@ Property:
   with the other semantics.)
 
 Action:
-: An affordance that can potentially be used to perform a named operation on an Object.
+: An affordance that can potentially be used to perform a named operation on an sdfObject.
 
 Event:
-: An affordance that can potentially be used to obtain information about what happened to an Object.
+: An affordance that can potentially be used to obtain information about what happened to an sdfObject.
 
 Object, sdfObject:
 : A grouping containing only Affordance declarations (Property, Action, and Event declarations); the main
   "atom" of reusable semantics for model construction. sdfObjects are
   similar to sdfThings but do not allow nesting, i.e., they cannot contain
-  other Groupings (Objects or sdfThings). (Note that
+  other Groupings (sdfObjects or sdfThings). (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
-  heritage; in this document, the
-  term Object, short for sdfObject, is specifically reserved for the
+  heritage; in the context of SDF, the term Object as the colloquial shorthand for sdfObject, is specifically reserved for the
   above grouping, even if
   the type name `"object"` is imported from a data definition
   language with the other semantics.)
@@ -313,7 +312,7 @@ Conventions:
 
 ## Example Definition
 
-We start with an example for the SDF definition of a simple Object called "Switch" ({{example1}}).
+We start with an example for the SDF definition of a simple sdfObject called "Switch" ({{example1}}).
 
 ~~~ json
 {
@@ -362,8 +361,8 @@ The state `value` declared in the `sdfProperty` group, represented by a Boolean,
 The actions `on` or `off` declared in the `sdfAction` group are redundant with setting the `value` and are in the example to illustrate that there are often different ways of achieving the same effect.
 The action `toggle` will invert the value of the sdfProperty value, so that 2-way switches can be created; having such action will avoid the need for first retrieving the current value and then applying/setting the inverted value.
 
-The `sdfObject` group lists the affordances of Things modeled by this Object.
-The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the Object.
+The `sdfObject` group lists the affordances of Things modeled by this sdfObject.
+The `sdfProperty` group lists the property affordances described by the model; these represent various perspectives on the state of the sdfObject.
 Properties can have additional qualities to describe the state more precisely.
 Properties can be annotated to be read, write or read/write; how this is actually done by the underlying transfer protocols is not described in the SDF model but left to companion protocol bindings.
 Properties are often used with RESTful paradigms {{-rest-iot}}, describing state.
@@ -427,7 +426,7 @@ The six main Class Name Keywords are discussed below.
 
 ### sdfObject
 
-Objects, the items listed in an `sdfObject` group, are the main "atom" of reusable semantics for model construction.
+sdfObjects, the items listed in an `sdfObject` group, are the main "atom" of reusable semantics for model construction.
 It aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks LwM2M
 Objects {{OMA}}, and
@@ -468,7 +467,7 @@ changes.
 (These three aspects are described by the qualities `readable`,
 `writable`, and `observable` defined for an `sdfProperty`.)
 
-Definitions in `sdfProperty` groups include the definitions from `sdfData` groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing Object.
+Definitions in `sdfProperty` groups include the definitions from `sdfData` groups, however, they actually also declare a Property with the given qualities to be potentially present in the containing sdfObject.
 
 For definitions in `sdfProperty` and `sdfData`, SDF provides qualities that can
 constrain the structure and values of data allowed in the interactions
@@ -536,7 +535,7 @@ part of the protocol binding.
 
 The `sdfEvent` group contains declarations of Events, which can model
 affordances that inform about "happenings" associated with a Thing
-modeled by the enclosing Object; these may result in a signal being
+modeled by the enclosing sdfObject; these may result in a signal being
 stored or emitted as a result.
 
 Note that there is a trivial overlap with sdfProperty state changes,
@@ -802,7 +801,7 @@ Declarations have a scope of the current definition block. <!-- what exactly doe
 
 A definition may in turn contain other definitions. Each definition is a named set of qualities, i.e., it consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained definitions.
 
-An example for an Object definition is given in {{exobject}}:
+An example for an sdfObject definition is given in {{exobject}}:
 
 ~~~ json
 "sdfObject": {
@@ -815,9 +814,9 @@ An example for an Object definition is given in {{exobject}}:
   }
 }
 ~~~
-{: #exobject title="Example Object definition"}
+{: #exobject title="Example sdfObject definition"}
 
-This example defines an Object "foo" that is defined in the default namespace (full address: `#/sdfObject/foo`), containing a property that can be addressed as
+This example defines an sdfObject "foo" that is defined in the default namespace (full address: `#/sdfObject/foo`), containing a property that can be addressed as
 `#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
 <!-- we could define a URN-style namespace that looks exactly that way -->
 
@@ -1384,8 +1383,8 @@ All these definitions share some common qualities as discussed in {{common-quali
 
 ## sdfObject
 
-The sdfObject keyword denotes a group of zero or more Object definitions.
-Object definitions may contain or include definitions of Properties, Actions, Events declared for the Object, as well as data types (sdfData group) to be used in this or other Objects.
+The sdfObject keyword denotes a group of zero or more sdfObject definitions.
+sdfObject definitions may contain or include definitions of Properties, Actions, Events declared for the sdfObject, as well as data types (sdfData group) to be used in this or other sdfObjects.
 
 The qualities of an sdfObject include the common qualities, additional qualities are shown in {{sdfobjqual}}.
 None of these
@@ -1395,9 +1394,9 @@ quality is absent.
 | Quality     | Type      | Description                                                              |
 |-------------+-----------+--------------------------------------------------------------------------|
 | (common)    |           | {{common-qualities}}                                                     |
-| sdfProperty | property  | zero or more named property definitions for this Object                  |
-| sdfAction   | action    | zero or more named action definitions for this Object                    |
-| sdfEvent    | event     | zero or more named event definitions for this Object                     |
+| sdfProperty | property  | zero or more named property definitions for this sdfObject               |
+| sdfAction   | action    | zero or more named action definitions for this sdfObject                 |
+| sdfEvent    | event     | zero or more named event definitions for this sdfObject                  |
 | sdfData     | named-sdq | zero or more named data type definitions that might be used in the above |
 | minItems    | number    | (array) Minimum number of multiplied affordances in array |
 | maxItems    | number    | (array) Maximum number of multiplied affordances in array    |
@@ -1479,11 +1478,11 @@ The qualities of sdfData include the data qualities (and thus the common qualiti
 
 The requirements for high level composition include the following:
 
-- The ability to represent products, standardized product types, and modular products while maintaining the atomicity of Objects.
+- The ability to represent products, standardized product types, and modular products while maintaining the atomicity of sdfObjects.
 
-- The ability to compose a reusable definition block from Objects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer Objects, while retaining the atomicity of the individual Objects.
+- The ability to compose a reusable definition block from sdfObjects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer sdfObjects, while retaining the atomicity of the individual sdfObjects.
 
-- The ability to compose Objects and other definition blocks into a higher level sdfThing that represents a product, while retaining the atomicity of Objects.
+- The ability to compose sdfObjects and other definition blocks into a higher level sdfThing that represents a product, while retaining the atomicity of sdfObjects.
 
 - The ability to enrich and refine a base definition to have
   product-specific qualities and quality values, such as unit, range, and scale settings.
@@ -1497,7 +1496,7 @@ in the SDF documents that contribute to the namespace. For example, definitions 
 
 The structure of a path in a namespace is defined by the JSON Pointers
 to the definitions in the SDF documents in that namespace.
-For example, if there is an SDF document defining an Object "Switch"
+For example, if there is an SDF document defining an sdfObject "Switch"
 with an action "on", then the reference to the action would be
 "ns:/sdfObject/Switch/sdfAction/on" where `ns` is the namespace prefix
 (short name for the namespace).
