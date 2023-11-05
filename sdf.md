@@ -585,7 +585,7 @@ and requirements.
 
 ### sdfThing
 
-Back at the top level, the `sdfThing` groups enables definition of models for
+Back at the top level, the `sdfThing` group enables definition of models for
 complex devices that will use one or more `sdfObject` definitions.
 `sdfThing` groups, however, also allow for including interaction
 affordances, `sdfData`, as well as `minItems` and `maxItems` qualities.
