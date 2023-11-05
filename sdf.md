@@ -461,7 +461,7 @@ minimum constraints on that array.)
 ### sdfProperty
 
 `sdfProperty` is used to model elements of state within Things modeled
-by the enclosing `sdfObject`.
+by the enclosing grouping.
 
 A named definition entry in `sdfProperty` may be associated with some protocol
 affordance to enable the application to obtain the state variable and,
