@@ -1084,7 +1084,7 @@ The value of "sdfRequired" is an array of references, each indicating
 one or more declarations that are mandatory to be represented.
 
 References in this array can be SDF names (JSON Pointers), or one of
-two abbreviated references:
+two abbreviated reference formats:
 
 * a text string with an affordance name or grouping name.
 All affordance declarations that are in the same grouping and that
