@@ -105,7 +105,7 @@ Table of Contents
      3.1.  Information block . . . . . . . . . . . . . . . . . . . .  16
      3.2.  Namespaces block  . . . . . . . . . . . . . . . . . . . .  18
      3.3.  Definitions block . . . . . . . . . . . . . . . . . . . .  19
-   4.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .  20
+     3.4.  Top-level Affordances and sdfData . . . . . . . . . . . .  20
 
 
 
@@ -114,6 +114,7 @@ Koster, et al.             Expires 8 May 2024                   [Page 2]
 Internet-Draft      SDF (Semantic Definition Format)       November 2023
 
 
+   4.  Names and namespaces  . . . . . . . . . . . . . . . . . . . .  21
      4.1.  Structure . . . . . . . . . . . . . . . . . . . . . . . .  21
      4.2.  Contributing global names . . . . . . . . . . . . . . . .  21
      4.3.  Referencing global names  . . . . . . . . . . . . . . . .  22
@@ -161,7 +162,6 @@ Internet-Draft      SDF (Semantic Definition Format)       November 2023
      D.2.  Refrigerator-Freezer Example  . . . . . . . . . . . . . . 100
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . . 102
    Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . . 102
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 102
 
 
 
@@ -169,6 +169,8 @@ Koster, et al.             Expires 8 May 2024                   [Page 3]
 
 Internet-Draft      SDF (Semantic Definition Format)       November 2023
 
+
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 102
 
 1.  Introduction
 
@@ -216,8 +218,6 @@ Internet-Draft      SDF (Semantic Definition Format)       November 2023
       displays.
 
    Quality:  A metadata item in a definition or declaration which says
-
-
 
 
 
@@ -1106,14 +1106,14 @@ Internet-Draft      SDF (Semantic Definition Format)       November 2023
    interactions offered by a Thing modeled by this sdfThing include the
    interactions modeled by the nested sdfObject or sdfThing.
 
-4.  Names and namespaces
+3.4.  Top-level Affordances and sdfData
 
-   SDF documents may contribute to a global namespace, and may reference
-   elements from that global namespace.  (An SDF document that does not
-   set a defaultNamespace does not contribute to a global namespace.)
-
-
-
+   Besides their placement within an sdfObject or sdfThing, affordances
+   (i.e., sdfProperty, sdfAction, and sdfEvent) as well as sdfData can
+   also be placed at the top level of an SDF model.  Since they are not
+   associated with an sdfObject or sdfThing, these kinds of definitions
+   are intended to be re-used via the sdfRef mechanism (see
+   Section 4.4).
 
 
 
@@ -1121,6 +1121,12 @@ Koster, et al.             Expires 8 May 2024                  [Page 20]
 
 Internet-Draft      SDF (Semantic Definition Format)       November 2023
 
+
+4.  Names and namespaces
+
+   SDF documents may contribute to a global namespace, and may reference
+   elements from that global namespace.  (An SDF document that does not
+   set a defaultNamespace does not contribute to a global namespace.)
 
 4.1.  Structure
 
@@ -1165,18 +1171,15 @@ Internet-Draft      SDF (Semantic Definition Format)       November 2023
 
    *  https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
-   Note the #, which separates the absolute-URI part (Section 4.3 of
-   [RFC3986]) from the fragment identifier part.
-
-
-
-
 
 
 Koster, et al.             Expires 8 May 2024                  [Page 21]
 
 Internet-Draft      SDF (Semantic Definition Format)       November 2023
 
+
+   Note the #, which separates the absolute-URI part (Section 4.3 of
+   [RFC3986]) from the fragment identifier part.
 
 4.3.  Referencing global names
 
@@ -1220,9 +1223,6 @@ Internet-Draft      SDF (Semantic Definition Format)       November 2023
    *  copying elements via sdfRef values
 
    *  pointing to elements via sdfRequired value elements
-
-
-
 
 
 
