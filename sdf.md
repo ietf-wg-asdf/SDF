@@ -429,8 +429,9 @@ The six main Class Name Keywords are discussed below.
 
 ### sdfObject
 
-sdfObjects, the items listed in an `sdfObject` group, are the main "atom" of reusable semantics for model construction.
-It aligns in scope with common definition items from many IoT modeling
+sdfObjects, the items listed in an `sdfObject` definition group, are
+the main "atom" of reusable semantics for model construction.
+The concept aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks LwM2M
 Objects {{OMA}}, and
 OCF Resource Types {{OCF}}.
