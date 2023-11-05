@@ -183,9 +183,12 @@ their own evolution, see {{information-block}}).
 Thing:
 : A physical item that is also available for interaction over a network.
 
+Grouping:
+: An sdfThing or sdfObject (Object), i.e., (directly or indirectly) a combination of Affordances.
+
 sdfThing:
-: A grouping of sdfObjects (Objects) and/or sdfThings, as well as
-  potentially Property, Action, and Event definitions.
+: A grouping of Groupings as well as potentially Affordance
+  declarations (Property, Action, and Event declarations).
 
 Affordance:
 : An element of an interface offered for interaction, for which
@@ -240,10 +243,10 @@ Event:
 : An affordance that can potentially be used to obtain information about what happened to an Object.
 
 Object, sdfObject:
-: A grouping of Property, Action, and Event definitions; the main
+: A grouping containing only Affordance declarations (Property, Action, and Event declarations); the main
   "atom" of reusable semantics for model construction. sdfObjects are
   similar to sdfThings but do not allow nesting, i.e., they cannot contain
-  other Objects or sdfThings. (Note that
+  other Groupings (Objects or sdfThings). (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object, short for sdfObject, is specifically reserved for the
