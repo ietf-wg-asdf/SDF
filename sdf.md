@@ -1135,6 +1135,22 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
 ~~~
 {: #example-req title="Using sdfRequired"}
 
+In {{example-req}}, the same sdfRequired can also be represented in
+short form:
+
+~~~ json
+    "sdfRequired": ["currentTemperature", "overTemperatureEvent"]
+~~~
+
+Or, for instance "overTemperatureEvent" could carry
+
+~~~ json
+      "overTemperatureEvent": {
+        "sdfRequired": [true],
+        "...": "..."
+      }
+~~~
+
 ## Common Qualities
 
 Definitions in SDF share a number of qualities that provide metadata for
