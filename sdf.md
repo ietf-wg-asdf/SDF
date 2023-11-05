@@ -1086,12 +1086,13 @@ one or more declarations that are mandatory to be represented.
 References in this array can be SDF names (JSON Pointers), or one of
 two abbreviated references:
 
-* a text string with an affordance name.
-All affordance declarations that are in the same sdfObject and that
+* a text string with an affordance name or grouping name.
+All affordance declarations that are in the same grouping and that
 carry this name (there can be multiple ones, one per affordance type)
-are declared to be mandatory to be represented.
+are declared to be mandatory to be represented; analogously for
+groupings made mandatory within groupings containing them.
 * the Boolean value `true`.
-The affordance itself that carries the sdfRequired keyword is declared
+The affordance/grouping itself that carries the sdfRequired keyword is declared
 to be mandatory to be represented.
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
@@ -1144,13 +1145,13 @@ If a label is required for an application and no label is given in the SDF model
 last part (`reference-token`, {{Section 3 of -pointer}}) of the JSON
 pointer to the definition can be used.
 
-| Quality     | Type         | Description                                                     |
-|-------------|--------------|-----------------------------------------------------------------|
-| description | string       | long text (no constraints)                                      |
-| label       | string       | short text (no constraints)                                     |
-| $comment    | string       | source code comments only, no semantics                         |
-| sdfRef      | sdf-pointer  | (see {{sdfref}})                                                   |
-| sdfRequired | pointer-list | (see {{sdfrequired}}, applies to qualities of properties, of data) |
+| Quality     | Type         | Description                                          |
+|-------------|--------------|------------------------------------------------------|
+| description | string       | long text (no constraints)                           |
+| label       | string       | short text (no constraints)                          |
+| $comment    | string       | source code comments only, no semantics              |
+| sdfRef      | sdf-pointer  | (see {{sdfref}})                                        |
+| sdfRequired | pointer-list | (see {{sdfrequired}}, used in affordances or groupings) |
 {: #tbl-common-qualities title="Common Qualities"}
 
 ## Data Qualities
