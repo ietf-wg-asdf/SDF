@@ -4,7 +4,7 @@ coding: utf-8
 
 title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
-abbrev: OneDM SDF
+abbrev: SDF (Semantic Definition Format)
 docname: draft-ietf-asdf-sdf-latest
 category: std
 consensus: true
@@ -315,7 +315,7 @@ We start with an example for the SDF definition of a simple Object called "Switc
 ~~~ json
 {
   "info": {
-    "title": "Example document for OneDM Semantic Definition Format",
+    "title": "Example document for SDF (Semantic Definition Format)",
     "version": "2019-04-24",
     "copyright": "Copyright 2019 Example Corp. All rights reserved.",
     "license": "https://example.com/license"
@@ -739,7 +739,8 @@ definitions in the SDF document.
 The modified quality can be used with a value using {{RFC3339}} `date-time` (with `Z` for time-zone) or `full-date` format to express time of the latest revision of the definitions.
 
 The license string is preferably either a URI that points to a web page with an unambiguous definition of the license, or an {{SPDX}} license identifier.
-(For models to be handled by the One Data Model liaison group, this will typically be "BSD-3-Clause".)
+(As an example, for models to be handled by the One Data Model liaison
+group, this license identifier will typically be "BSD-3-Clause".)
 
 The `features` quality can be used to list names of critical (i.e., cannot be safely ignored) SDF extension features that need to be understood for the definitions to be properly processed.
 Extension feature names will be specified in extension documents.
