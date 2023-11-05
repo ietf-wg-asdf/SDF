@@ -670,7 +670,7 @@ sub-registry in the "SDF Parameters" registry ({{qnp}}); they are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
-Given Names are not restricted by the current formal SDF syntax.
+Given Names are not restricted by the formal SDF syntax.
 To enable non-surprising name translations in tools, combinations of
 ASCII alphanumeric characters and `-` (ASCII hyphen/minus) are preferred,
 typically employing KebabCase for names constructed out of multiple
@@ -800,7 +800,8 @@ The value of each group is a JSON map, the keys of which serve for naming the in
 
 Each group may contain zero or more definitions.
 Each identifier defined creates a new type and term in the target namespace.
-Declarations have a scope of the current definition block. <!-- what exactly does this mean? -->
+Declarations have a scope of the definition block they are
+directly contained in.
 
 A definition may in turn contain other definitions. Each definition is a named set of qualities, i.e., it consists of the newly defined identifier and a set of key-value pairs that represent the defined qualities and contained definitions.
 
