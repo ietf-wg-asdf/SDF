@@ -183,9 +183,12 @@ their own evolution, see {{information-block}}).
 Thing:
 : A physical item that is also available for interaction over a network.
 
+Grouping:
+: An sdfThing or sdfObject (Object), i.e., (directly or indirectly) a combination of Affordances.
+
 sdfThing:
-: A grouping of sdfObjects (Objects) and/or sdfThings, as well as
-  potentially Property, Action, and Event definitions.
+: A grouping of Groupings as well as potentially Affordance
+  declarations (Property, Action, and Event declarations).
 
 Affordance:
 : An element of an interface offered for interaction, for which
@@ -240,10 +243,10 @@ Event:
 : An affordance that can potentially be used to obtain information about what happened to an Object.
 
 Object, sdfObject:
-: A grouping of Property, Action, and Event definitions; the main
+: A grouping containing only Affordance declarations (Property, Action, and Event declarations); the main
   "atom" of reusable semantics for model construction. sdfObjects are
   similar to sdfThings but do not allow nesting, i.e., they cannot contain
-  other Objects or sdfThings. (Note that
+  other Groupings (Objects or sdfThings). (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in this document, the
   term Object, short for sdfObject, is specifically reserved for the
@@ -1078,8 +1081,20 @@ The keyword "sdfRequired" is provided to apply a constraint that
 defines for which declarations the corresponding data are mandatory in a
 Thing modeled by the current definition.
 
-The value of "sdfRequired" is an array of name references (JSON pointers), each
-indicating one declaration that is mandatory to be represented.
+The value of "sdfRequired" is an array of references, each indicating
+one or more declarations that are mandatory to be represented.
+
+References in this array can be SDF names (JSON Pointers), or one of
+two abbreviated reference formats:
+
+* a text string with an affordance name or grouping name.
+All affordance declarations that are directly (i.e., not nested further in another grouping) in the same grouping and that
+carry this name (there can be multiple ones, one per affordance type)
+are declared to be mandatory to be represented. The same applies for
+groupings made mandatory within groupings containing them.
+* the Boolean value `true`.
+The affordance/grouping itself that carries the sdfRequired keyword is declared
+to be mandatory to be represented.
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
@@ -1121,6 +1136,22 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
 ~~~
 {: #example-req title="Using sdfRequired"}
 
+In {{example-req}}, the same sdfRequired can also be represented in
+short form:
+
+~~~ json
+    "sdfRequired": ["currentTemperature", "overTemperatureEvent"]
+~~~
+
+Or, for instance "overTemperatureEvent" could carry
+
+~~~ json
+      "overTemperatureEvent": {
+        "sdfRequired": [true],
+        "...": "..."
+      }
+~~~
+
 ## Common Qualities
 
 Definitions in SDF share a number of qualities that provide metadata for
@@ -1131,13 +1162,13 @@ If a label is required for an application and no label is given in the SDF model
 last part (`reference-token`, {{Section 3 of -pointer}}) of the JSON
 pointer to the definition can be used.
 
-| Quality     | Type         | Description                                                     |
-|-------------|--------------|-----------------------------------------------------------------|
-| description | string       | long text (no constraints)                                      |
-| label       | string       | short text (no constraints)                                     |
-| $comment    | string       | source code comments only, no semantics                         |
-| sdfRef      | sdf-pointer  | (see {{sdfref}})                                                   |
-| sdfRequired | pointer-list | (see {{sdfrequired}}, applies to qualities of properties, of data) |
+| Quality     | Type         | Description                                          |
+|-------------|--------------|------------------------------------------------------|
+| description | string       | long text (no constraints)                           |
+| label       | string       | short text (no constraints)                          |
+| $comment    | string       | source code comments only, no semantics              |
+| sdfRef      | sdf-pointer  | (see {{sdfref}})                                        |
+| sdfRequired | pointer-list | (see {{sdfrequired}}, used in affordances or groupings) |
 {: #tbl-common-qualities title="Common Qualities"}
 
 ## Data Qualities

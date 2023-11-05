@@ -1,5 +1,5 @@
 {
-  "title": "sdf-validation.cddl -- Generated: 2023-10-16T13:38:45Z",
+  "title": "sdf-validation.cddl -- Generated: 2023-11-04T15:25:34Z",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/sdf-syntax",
   "definitions": {
@@ -131,7 +131,32 @@
       "additionalProperties": false
     },
     "sdf-pointer": {
-      "type": "string"
+      "anyOf": [
+        {
+          "$ref": "#/definitions/global"
+        },
+        {
+          "$ref": "#/definitions/same-object"
+        },
+        {
+          "$ref": "#/definitions/true"
+        }
+      ]
+    },
+    "global": {
+      "type": "string",
+      "pattern": "^[^\\n\\r]*[:#][^\\n\\r]*$"
+    },
+    "same-object": {
+      "$ref": "#/definitions/referenceable-name"
+    },
+    "referenceable-name": {
+      "type": "string",
+      "pattern": "^[^:#]*$"
+    },
+    "true": {
+      "type": "boolean",
+      "const": true
     },
     "pointer-list": {
       "type": "array",
@@ -1280,16 +1305,16 @@
         "$ref": "#/definitions/actionqualities"
       }
     },
-    "sdfEvent-": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/eventqualities"
-      }
-    },
     "sdfProperty-": {
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/propertyqualities"
+      }
+    },
+    "sdfEvent-": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/eventqualities"
       }
     },
     "sdfType-": {
