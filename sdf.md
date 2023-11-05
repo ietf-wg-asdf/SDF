@@ -1634,6 +1634,22 @@ Author/Change controller:
 Provisional registration:
 : no
 
+Content-Format
+--------------
+
+This document adds the following Content-Format to the "CoAP Content-Formats",
+within the "Constrained RESTful Environments (CoRE) Parameters"
+registry, where TBD1 comes from the "IETF Review" 256-999 range.
+
+| Content Type         | Content Coding | ID   | Reference |
+| application/sdf+json | -              | TBD1 | RFC XXXX  |
+{: align="left" title="SDF Content-format Registration"}
+
+// RFC Ed.: please replace TBD1 with the assigned ID, remove the
+requested range, and remove this note.\\
+// RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
+
+
 
 IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit) {#unit-urn}
 -------------------------------------
