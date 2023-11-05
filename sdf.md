@@ -1089,7 +1089,7 @@ two abbreviated reference formats:
 * a text string with an affordance name or grouping name.
 All affordance declarations that are directly (i.e., not nested further in another grouping) in the same grouping and that
 carry this name (there can be multiple ones, one per affordance type)
-are declared to be mandatory to be represented; analogously for
+are declared to be mandatory to be represented. The same applies for
 groupings made mandatory within groupings containing them.
 * the Boolean value `true`.
 The affordance/grouping itself that carries the sdfRequired keyword is declared
