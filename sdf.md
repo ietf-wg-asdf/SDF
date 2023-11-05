@@ -592,7 +592,7 @@ affordances, `sdfData`, as well as `minItems` and `maxItems` qualities.
 Therefore, they can be seen as a superset of `sdfObject` groups, additionally
 allowing for composition.
 
-Therefore, an `sdfThing` directly or indirectly contains a set of `sdfProperty`, `sdfAction`, and
+As a result, an `sdfThing` directly or indirectly contains a set of `sdfProperty`, `sdfAction`, and
 `sdfEvent` definitions that describe the interaction affordances
 associated with some scope of functionality.
 
