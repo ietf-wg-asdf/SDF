@@ -1827,8 +1827,8 @@ to SDF.
 
 The security considerations of underlying building blocks such as
 those detailed in {{Section 10 of -utf8}} apply.
-SDF uses JSON as a representation language; {{-json}} for a number of
-cases indicates that implementation behavior for certain constructs
+SDF uses JSON as a representation language; for a number of
+cases {{-json}} indicates that implementation behavior for certain constructs
 allowed by the JSON grammar is unpredictable.
 Implementations need to be robust against invalid or unpredictable
 cases on input, preferably by rejecting input that is invalid or
@@ -1840,12 +1840,12 @@ performance-related availability issues when the attacker can control
 the input, see {{Section 4.1 of -jsonpath}} for a brief discussion.
 
 SDF may be used in two processes that are often security relevant:
-*validation* of data that is intended to be described by SDF models, and
-*augmentation* of these data with information obtained from the SDF
+model-based *validation* of data that is intended to be described by SDF models, and
+model-based *augmentation* of these data with information obtained from the SDF
 models that apply.
 
 Implementations need to ascertain the provenance and applicability of
-the SDF models they employ operationally in these ways.
+the SDF models they employ operationally in such security relevant ways.
 Implementations that make use of the composition mechanisms defined in this
 document need to do this for each of the components they combine
 into the SDF models they employ.
@@ -1854,10 +1854,11 @@ as any other introduction of source code into a build environment; the
 possibility of supply-chain attacks on the modules imported needs to
 be considered.
 
-Specifically, implementations that rely on model-based input
+Specifically, implementations might rely on model-based input
 validation for enforcing certain properties of the data structure
 ingested (which, if not validated, could lead to malfunctions such as
-crashes and remote code execution) need to be particularly careful
+crashes and remote code execution).
+These implementations need to be particularly careful
 about the data models they apply, including their provenance and
 potential changes of these properties that upgrades to the referenced
 modules may (inadvertently or as part of an attack) cause.
