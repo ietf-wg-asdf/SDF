@@ -152,8 +152,8 @@ entity:
 
 [^status]
 
-[^status]: The present revision (-16) addresses the Working Group Last
-    Call comments.
+[^status]: The present revision (-17) addresses additional Working
+    Group Last Call comments that came in during a grace period added.
 
 --- middle
 
