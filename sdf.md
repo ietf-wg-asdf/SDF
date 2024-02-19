@@ -643,13 +643,36 @@ Quality Names as keys.
 ### Hierarchical Names
 
 From the outside of a specification, Given Names are usually used as
-part of a hierarchical name that looks like a JSON pointer {{RFC6901}},
+part of a hierarchical name that looks like a JSON pointer {{-pointer}},
 itself generally rooted in (used as the fragment identifier in) an
 outer namespace that looks like an `https://` URL (see {{names-and-namespaces}}).
 
 As Quality Names and Given Names roughly alternate in a path into the
 model, the JSON pointer part of the hierarchical name also alternates
 between Quality Names and Given Names.
+
+Note that the actual Given Names may need to be encoded when specified
+via the JSON pointer fragment identifier syntax, and that there are
+two layers of such encoding: tilde encoding of `~` and `/` as per
+{{Section 3 of -pointer}}, and then percent encoding of the
+tilde-encoded name into a valid URI fragment as per {{Section 6 of
+-pointer}}.
+For example, when a model is using the Given Name
+
+~~~
+   warning/danger alarm
+~~~
+
+ (with an embedded slash and a space) for an
+sdfObject, that sdfObject may need to be referenced as
+
+~~~
+   #/sdfObject/warning~1danger%20alarm
+~~~
+
+To sidestep potential interoperability problems, it is probably wise
+to avoid characters in Given Names that need such encoding (Quality
+Names are already defined in such a way that they never do).
 
 ### Extensibility of Given Names and Quality Names {#gnqn}
 
@@ -1115,6 +1138,15 @@ groupings made mandatory within groupings containing them.
 * the Boolean value `true`.
 The affordance/grouping itself that carries the sdfRequired keyword is declared
 to be mandatory to be represented.
+
+Note that text strings with a bare affordance or grouping name are not
+subject to JSON pointer encoding as discussed in {{hierarchical-names}}.
+To ensure that they are reliably distinguished from JSON pointers,
+these text strings cannot contain ":" or "#" characters.
+(If these characters are contained in such a name, a JSON pointer
+needs to be formed instead, potentially requiring further path
+elements as well as JSON pointer encoding, the need for which is best
+avoided by choosing a Given Name without these characters.)
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
