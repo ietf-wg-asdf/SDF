@@ -2087,13 +2087,9 @@ using the `sdfThing` quality.
 {: #exa-sdfthing-fridge-freezer}
 
 # Acknowledgements
-{: numbered="no"}
+{:unnumbered}
 
-This specification is based on `sdf.md` and `sdf-schema.json` in the old
-one-data-model `language` repository, as well as {{{Ari Keränen}}}'s
-"alt-schema" from the Ericsson Research `ipso-odm` repository (which
-is now under subdirectory `sdflint` in the one-data model `tools`
-repository).
+This specification is based on work by the One Data Model group.
 
 <!--  LocalWords:  SDF namespace defaultNamespace instantiation OMA
  -->
