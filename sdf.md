@@ -1130,7 +1130,7 @@ one or more declarations that are mandatory to be represented.
 References in this array can be SDF names (JSON Pointers), or one of
 two abbreviated reference formats:
 
-* a text string with an affordance name or grouping name.
+* a text string with a "referenceable-name", i.e., an affordance name or grouping name.
 All affordance declarations that are directly (i.e., not nested further in another grouping) in the same grouping and that
 carry this name (there can be multiple ones, one per affordance type)
 are declared to be mandatory to be represented. The same applies for
@@ -1139,14 +1139,16 @@ groupings made mandatory within groupings containing them.
 The affordance/grouping itself that carries the sdfRequired keyword is declared
 to be mandatory to be represented.
 
-Note that text strings with a bare affordance or grouping name are not
-subject to JSON pointer encoding as discussed in {{hierarchical-names}}.
-To ensure that they are reliably distinguished from JSON pointers,
-these text strings cannot contain ":" or "#" characters.
-(If these characters are contained in such a name, a JSON pointer
-needs to be formed instead, potentially requiring further path
-elements as well as JSON pointer encoding, the need for which is best
-avoided by choosing a Given Name without these characters.)
+Note that referenceable-names are not
+subject to the encoding JSON pointers require as discussed in {{hierarchical-names}}.
+To ensure that referenceable-names are reliably distinguished from JSON pointers,
+they are defined such that they cannot contain ":" or
+"#" characters (see rule `referenceable-name` in {{syntax}}).
+(If these characters are indeed contained in a Given Name, a JSON
+pointer needs to be formed instead in order to reference it in "sdfRequired",
+potentially requiring further path elements as well as JSON pointer
+encoding.  The need for this is best avoided by choosing Given Names
+without these characters.)
 
 The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
 
