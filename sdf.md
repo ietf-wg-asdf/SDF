@@ -68,6 +68,8 @@ normative:
   RFC4122: uuid
   RFC6901: pointer
   RFC7396: merge-patch
+  RFC3629: utf8
+  RFC8259: json
   RFC8610: cddl
   RFC8949: cbor
   RFC9193: data-ct
@@ -129,9 +131,10 @@ informative:
     title: Kebab Case
     date: '2014-08-29'
   I-D.bormann-asdf-sdftype-link: sdflink
-  I-D.bormann-asdf-sdf-mapping:
-  I-D.bormann-t2trg-deref-id-01: deref
+  I-D.bormann-asdf-sdf-mapping: mapping
+  I-D.bormann-t2trg-deref-id: deref
   RFC9485: iregexp
+  I-D.ietf-jsonpath-base: jsonpath
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -152,8 +155,7 @@ entity:
 
 [^status]
 
-[^status]: The present revision (-17) addresses additional Working
-    Group Last Call comments that came in during a grace period added.
+[^status]: The present revision (-18) adds security considerations.
 
 --- middle
 
@@ -171,7 +173,7 @@ In addition, SDF extensions can be defined, some of which may make use
 of extension points specifically defined for this in base SDF.
 One area for such extensions would be refinements of SDF's abstract
 interaction models into protocol bindings for specific ecosystems
-(e.g., {{I-D.bormann-asdf-sdf-mapping}}).
+(e.g., {{-mapping}}).
 For other extensions, it may be necessary to indicate in the SDF
 document that a specific extension is in effect; see
 {{information-block}} for details of the `features` quality that can be
@@ -300,7 +302,7 @@ Augmentation Mechanism:
   a specific ecosystem or with a specific protocol ("Protocol Binding").
   No specific Augmentation Mechanisms are defined in base SDF.
   A simple mechanism for such augmentations has been discussed as a
-  "mapping file" {{I-D.bormann-asdf-sdf-mapping}}.
+  "mapping file" {{-mapping}}.
 
 The term "byte" is used in its now-customary sense as a synonym for
 "octet".
@@ -1816,10 +1818,73 @@ The initial set of registrations is described in {{sdftype-r}}.
 Security Considerations {#seccons}
 =======================
 
-Some wider issues are discussed in {{-seccons}}.
+Some wider security considerations applicable to Things are discussed
+in {{-seccons}}.
+{{Section 5 of -cddl}} gives an overview over security considerations
+that arise when formal description techniques are used to govern
+interoperability; analogs of these security considerations can apply
+to SDF.
 
-(Specifics: TBD.)
+The security considerations of underlying building blocks such as
+those detailed in {{Section 10 of -utf8}} apply.
+SDF uses JSON as a representation language; for a number of
+cases {{-json}} indicates that implementation behavior for certain constructs
+allowed by the JSON grammar is unpredictable.
+Implementations need to be robust against invalid or unpredictable
+cases on input, preferably by rejecting input that is invalid or
+that would lead to unpredictable behavior, and need to avoid generating
+these cases on output.
 
+Implementations of model languages may also exhibit
+performance-related availability issues when the attacker can control
+the input, see {{Section 4.1 of -jsonpath}} for a brief discussion.
+
+SDF may be used in two processes that are often security relevant:
+model-based *validation* of data that is intended to be described by SDF models, and
+model-based *augmentation* of these data with information obtained from the SDF
+models that apply.
+
+Implementations need to ascertain the provenance and applicability of
+the SDF models they employ operationally in such security relevant ways.
+Implementations that make use of the composition mechanisms defined in this
+document need to do this for each of the components they combine
+into the SDF models they employ.
+Essentially, this process needs to undergo the same care and scrutiny
+as any other introduction of source code into a build environment; the
+possibility of supply-chain attacks on the modules imported needs to
+be considered.
+
+Specifically, implementations might rely on model-based input
+validation for enforcing certain properties of the data structure
+ingested (which, if not validated, could lead to malfunctions such as
+crashes and remote code execution).
+These implementations need to be particularly careful
+about the data models they apply, including their provenance and
+potential changes of these properties that upgrades to the referenced
+modules may (inadvertently or as part of an attack) cause.
+More generally speaking, implementations should strive to be robust
+against expected and unexpected limitations of the model-based input
+validation mechanisms and their implementations.
+
+Similarly, implementations that rely on model-based augmentation may
+generate false data from their inputs; this is an integrity violation
+in any case but also can possibly be exploited for further attacks.
+
+In applications that dynamically acquire models and obtain modules
+from module references in these, the security considerations of
+dereferenceable identifiers apply (see {{-deref}} for a more extensive
+discussion of dereferenceable identifiers).
+
+There may be confidentiality requirements on SDF models, both on their
+content and on the fact that a specific model is used in a particular
+Thing or environment.
+The present specification does not discuss model discovery or define
+an access control model for SDF models, nor does it define a way to
+obtain selective disclosure where that may be required.
+It is likely that these definitions require additional context from
+underlying ecosystems and the characteristics of the protocols
+employed there; this is therefore left as future work (e.g., for
+documents such as {{-mapping}}).
 
 --- back
 
