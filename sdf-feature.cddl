@@ -12,6 +12,7 @@ sdf-syntax = {
  ? sdfObject: named<objectqualities>
  ; Includes Properties, Actions, and Events as well as sdfData
  paedataqualities
+ * $$SDF-EXTENSION-TOP
  EXTENSION-POINT<"top-ext">
 }
 
@@ -26,6 +27,7 @@ sdfinfo = {
                * (any .feature "feature-name") ; EXTENSION-POINT
              ]
  optional-comment
+ * $$SDF-EXTENSION-INFO
  EXTENSION-POINT<"info-ext">
 }
 
@@ -84,6 +86,7 @@ thingqualities = {
  ? sdfThing: named<thingqualities>
  paedataqualities
  arraydefinitionqualities
+ * $$SDF-EXTENSION-THING
  EXTENSION-POINT<"thing-ext">
 }
 
@@ -92,6 +95,7 @@ objectqualities = {
  commonqualities
  paedataqualities
  arraydefinitionqualities
+ * $$SDF-EXTENSION-OBJECT
  EXTENSION-POINT<"object-ext">
 }
 
@@ -103,6 +107,7 @@ actionqualities = {
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ; zero or more named data type definitions that might be used above
  ? sdfData: named<dataqualities>
+ * $$SDF-EXTENSION-ACTION
  EXTENSION-POINT<"action-ext">
 }
 
@@ -111,6 +116,7 @@ eventqualities = {
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ; zero or more named data type definitions that might be used above
  ? sdfData: named<dataqualities>
+ * $$SDF-EXTENSION-EVENT
  EXTENSION-POINT<"event-ext">
 }
 
@@ -122,8 +128,10 @@ dataqualities = {
  ? "unit" => text
  ? nullable: bool
  ? "sdfType" => "byte-string" / "unix-time"
+            / $SDF-EXTENSION-SDFTYPE .within sdftype-name
             / (sdftype-name .feature "sdftype-ext") ; EXTENSION-POINT
  ? contentFormat: text
+ * $$SDF-EXTENSION-DATA
  EXTENSION-POINT<"data-ext">
 }
 
@@ -137,6 +145,7 @@ propertyqualities = {
 allowed-types = number / text / bool / null
               / [* number] / [* text] / [* bool]
               / {* text => any}
+              / $SDF-EXTENSION-ALLOWED
               / (any .feature "allowed-ext")        ; EXTENSION-POINT
 
 compound-type = (
@@ -153,6 +162,7 @@ optional-choice = (
 jsonschema = (
  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
+    // $$SDF-EXTENSION-TYPE
     // (type: text .feature "type-ext")             ; EXTENSION-POINT
    )
  ; if present, all other qualities apply to all choices:
@@ -172,6 +182,7 @@ jsonschema = (
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
+           / $SDF-EXTENSION-FORMAT .within text
            / (text .feature "format-ext")           ; EXTENSION-POINT
  ; array constraints
  ? minItems: uint
@@ -189,6 +200,7 @@ jso-items = {
      ; no further nesting: no "array"
      ? ((type: "number" / "string" / "boolean" / "integer")
         // compound-type
+        // $$SDF-EXTENSION-ITEMTYPE
         // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
        )
      ; if present, all other qualities apply to all choices
@@ -199,6 +211,7 @@ jso-items = {
      ? format: text
      ? minLength: uint
      ? maxLength: uint
+     * $$SDF-EXTENSION-ITEMS
      EXTENSION-POINT<"items-ext">
    }
 
