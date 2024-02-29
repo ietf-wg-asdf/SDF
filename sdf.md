@@ -155,7 +155,9 @@ entity:
 
 [^status]
 
-[^status]: The present revision (-18) adds security considerations.
+[^status]: The present revision (-18) adds security considerations, a
+    few editorial cleanups, discusses JSON pointer encodings, and adds
+    sockets to the CDDL for easier future extension.
 
 --- middle
 
