@@ -21,7 +21,7 @@ venue:
 
 author:
   - name: Michael Koster
-    org: KTC
+    org: KTC Control AB
     street: 29415 Alderpoint Road
     city: Blocksburg, CA
     code: '95514'
