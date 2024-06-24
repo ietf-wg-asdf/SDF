@@ -1255,9 +1255,7 @@ present specification.
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfData"}
 
 
-1. Note that the quality `unit` was called `units` in earlier drafts
-   of SDF.
-   The unit name SHOULD be as
+1. The unit name SHOULD be as
    per the {{senml-units (SenML Units)<RFC8428}} Registry
    or the {{secondary-units (Secondary Units)<RFC8798}} Registry in {{-units}}
    as specified by
@@ -1319,7 +1317,6 @@ capability to represent points in time that fall on leap seconds.
 More date/time-related sdfTypes are likely to be added in the sdfType
 value registry.
 
-(In earlier drafts of this specification, a similar concept was called `subtype`.)
 
 ### sdfChoice
 
@@ -1336,20 +1333,20 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
 
 * `enum`
 
-  What would have been
+  What could be expressed as
 
   ~~~ json
   "enum": ["foo", "bar", "baz"]
   ~~~
 
-  in earlier drafts of this specification, is often best represented as:
+  in JSO, is often best represented as:
 
   ~~~ json
   "sdfChoice": {
     "foo": { "description": "This is a foonly"},
     "bar": { "description":
-  "As defined in the second world congress"},
-    "baz": { "description": "From zigbee foobaz"}
+             "As defined in the second world congress"},
+    "baz": { "description": "From bigzee foobaz"}
   }
   ~~~
 
@@ -1364,7 +1361,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   "enum": [1, 2, 3]
   ~~~
 
-  in earlier drafts of this specification, is represented as:
+  in JSO, is represented as:
 
   ~~~ json
   "type": "number",
@@ -2021,10 +2018,6 @@ inclusive bounds.
 (More specifically, Unicode text strings as defined in this
 specification are sequences of Unicode scalar values, the number of
 which is taken as the length of such a text string.
-Note that earlier drafts of this specification explained
-text string length values in bytes, which however is not meaningful
-unless bound to a specific encoding — which could be UTF-8, if this
-unusual behavior is to be provided in an extension.)
 
 The data quality "`pattern`" takes a string value that is interpreted
 as an [ECMA-262] regular expression in Unicode mode that constrains the
@@ -2187,6 +2180,34 @@ using the `sdfThing` quality.
 ~~~
 {: sourcecode-name="example-sdfthing-refrigerator-freezer.sdf.json"}
 {: #exa-sdfthing-fridge-freezer}
+
+# Some Changes From Earlier Drafts {#earlier}
+
+[XXX add a pointer to this to new 1.1 intro once PR#158 is merged, as
+in:\\
+Finally, {{earlier}} provides some information that can be useful in
+upgrading earlier, pre-standard models and implementations to SDF base.]
+
+This appendix is informative.
+
+The present document provides the SDF base definition.
+Previous revisions of SDF have been in use for several years, and both
+significant collections of older SDF models and older SDF conversion
+tools are available today.
+This appendix provides a brief checklist that can aid in upgrading
+these to the standard.
+
+* The quality `unit` was previously called `units`.
+* `sdfType` was developed out of a concept previously called `subtype`.
+* `sdfChoice` is the preferred way to represent JSO `enum` (only a
+  limited form of which is retained), and also the way to represent
+  JSO `anyOf`.
+* the length of text strings (as used with `minLength`/`maxLength`
+  constraints) was previously defined in bytes.
+  It now is defined as the number of characters (Unicode scalar
+  values, to be exact): a length in bytes is not meaningful unless
+  bound to a specific encoding, which might differ from UTF-8 in some
+  ecosystem mappings and protocol bindings.
 
 # Acknowledgements
 {:unnumbered}
