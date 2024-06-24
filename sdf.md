@@ -1788,8 +1788,11 @@ Contact:
 : A contact point for the organization that assigns quality names with
   this prefix.
 
+Reference:
+: A pointer to additional information, if available.
+
 Quality Name Prefixes are intended to be registered by organizations
-that intend to define quality names constructed with an
+that plan to define quality names constructed with an
 organization-specifix prefix ({{gnqn}}).
 
 The registration policy is Expert Review as per {{Section 4.5 of -reg}}.
