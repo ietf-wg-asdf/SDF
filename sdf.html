@@ -21,25 +21,25 @@ and other serializations as needed.
 few editorial cleanups, discusses JSON pointer encodings, and adds
 sockets to the CDDL for easier future extension. 
     " name="description">
-<meta content="xml2rfc 3.20.0" name="generator">
+<meta content="xml2rfc 3.21.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.0
-    Python 3.11.6
-    ConfigArgParse 1.5.3
+  xml2rfc 3.21.0
+    Python 3.11.9
+    ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.2
-    platformdirs 3.10.0
-    pycountry 22.3.5
-    PyYAML 6.0
-    requests 2.28.2
-    setuptools 68.2.2
+    Jinja2 3.1.3
+    lxml 4.9.4
+    platformdirs 4.2.0
+    pycountry 23.12.11
+    PyYAML 6.0.1
+    requests 2.20.0
+    setuptools 69.2.0
     six 1.16.0
-    wcwidth 0.2.6
-    weasyprint 59.0
+    wcwidth 0.2.13
+    weasyprint 61.2
 -->
 <link href="sdf.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -324,6 +324,9 @@ cite {
   display: block;
   text-align: right;
   font-style: italic;
+}
+.xref {
+  overflow-wrap: normal;
 }
 
 /* tables */
@@ -1221,11 +1224,11 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SDF (Semantic Definition Format)</td>
-<td class="right">February 2024</td>
+<td class="right">May 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster, et al.</td>
-<td class="center">Expires 1 September 2024</td>
+<td class="center">Expires 29 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1238,12 +1241,12 @@ li > p:last-of-type:only-child {
 <dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-02-29" class="published">29 February 2024</time>
+<time datetime="2024-05-28" class="published">28 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-01">1 September 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-29">29 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1312,7 +1315,7 @@ sockets to the CDDL for easier future extension.</span><a href="#section-abstrac
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -3930,7 +3933,7 @@ requested range, and remove this note.<br>
         <h3 id="name-ietf-urn-sub-namespace-for-">
 <a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-ietf-urn-sub-namespace-for-" class="section-name selfRef">IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit)</a>
         </h3>
-<p id="section-7.3-1">IANA is requested to register the following value in the "<a href="https://www.iana.org/assignments/params#params-1" class="relref">IETF URN Sub-namespace for Registered Protocol Parameter Identifiers</a>" registry in <span>[<a href="#IANA.params" class="cite xref">IANA.params</a>]</span>, following the template in
+<p id="section-7.3-1">IANA is requested to register the following value in the "<a href="http://www.iana.org/assignments/params#params-1" class="relref">IETF URN Sub-namespace for Registered Protocol Parameter Identifiers</a>" registry in <span>[<a href="#IANA.params" class="cite xref">IANA.params</a>]</span>, following the template in
 <span>[<a href="#RFC3553" class="cite xref">RFC3553</a>]</span>:<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-7.3-2">
           <dt id="section-7.3-2.1">Registry name:</dt>
@@ -3945,7 +3948,7 @@ requested range, and remove this note.<br>
           <dd class="break"></dd>
 <dt id="section-7.3-2.5">Repository:</dt>
           <dd style="margin-left: 1.5em" id="section-7.3-2.6">
-            <p id="section-7.3-2.6.1">combining the symbol values from the <a href="https://www.iana.org/assignments/senml#senml-units" class="relref">SenML Units</a> Registry and the <a href="https://www.iana.org/assignments/senml#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="cite xref">IANA.senml</a>]</span> as specified by Sections <a href="https://rfc-editor.org/rfc/rfc8428#section-4.5.1" class="relref">4.5.1</a> and <a href="https://rfc-editor.org/rfc/rfc8428#section-12.1" class="relref">12.1</a> of <span>[<a href="#RFC8428" class="cite xref">RFC8428</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8798#section-3" class="relref">Section 3</a> of [<a href="#RFC8798" class="cite xref">RFC8798</a>]</span>,
+            <p id="section-7.3-2.6.1">combining the symbol values from the <a href="http://www.iana.org/assignments/senml#senml-units" class="relref">SenML Units</a> Registry and the <a href="http://www.iana.org/assignments/senml#secondary-units" class="relref">Secondary Units</a> Registry in <span>[<a href="#IANA.senml" class="cite xref">IANA.senml</a>]</span> as specified by Sections <a href="https://rfc-editor.org/rfc/rfc8428#section-4.5.1" class="relref">4.5.1</a> and <a href="https://rfc-editor.org/rfc/rfc8428#section-12.1" class="relref">12.1</a> of <span>[<a href="#RFC8428" class="cite xref">RFC8428</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8798#section-3" class="relref">Section 3</a> of [<a href="#RFC8798" class="cite xref">RFC8798</a>]</span>,
 respectively (which by the registration policy are guaranteed to be
 non-overlapping).<a href="#section-7.3-2.6.1" class="pilcrow">¶</a></p>
 </dd>
@@ -4128,7 +4131,8 @@ the input, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-j
 model-based <em>validation</em> of data that is intended to be described by SDF models, and
 model-based <em>augmentation</em> of these data with information obtained from the SDF
 models that apply.<a href="#section-8-4" class="pilcrow">¶</a></p>
-<p id="section-8-5">Implementations need to ascertain the provenance and applicability of
+<p id="section-8-5">Implementations need to ascertain the provenance (and thus
+authenticity and integrity) and applicability of
 the SDF models they employ operationally in such security relevant ways.
 Implementations that make use of the composition mechanisms defined in this
 document need to do this for each of the components they combine
@@ -4183,11 +4187,11 @@ documents such as <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xre
 <dd class="break"></dd>
 <dt id="IANA.params">[IANA.params]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Uniform Resource Name (URN) Namespace for IETF Use"</span>, <span>&lt;<a href="https://www.iana.org/assignments/params">https://www.iana.org/assignments/params</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Uniform Resource Name (URN) Namespace for IETF Use"</span>, <span>&lt;<a href="http://www.iana.org/assignments/params">http://www.iana.org/assignments/params</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.senml">[IANA.senml]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Sensor Measurement Lists (SenML)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/senml">https://www.iana.org/assignments/senml</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Sensor Measurement Lists (SenML)"</span>, <span>&lt;<a href="http://www.iana.org/assignments/senml">http://www.iana.org/assignments/senml</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC0020">[RFC0020]</dt>
         <dd>
@@ -4292,7 +4296,7 @@ documents such as <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xre
 <dd class="break"></dd>
 <dt id="I-D.bormann-t2trg-deref-id">[I-D.bormann-t2trg-deref-id]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">C. Amsüss</span>, <span class="refTitle">"The "dereferenceable identifier" pattern"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-t2trg-deref-id-02</span>, <time datetime="2023-12-19" class="refDate">19 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-02">https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">C. Amsüss</span>, <span class="refTitle">"The "dereferenceable identifier" pattern"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-t2trg-deref-id-03</span>, <time datetime="2024-03-02" class="refDate">2 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-03">https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-jsonpath-base">[I-D.ietf-jsonpath-base]</dt>
         <dd>
@@ -4344,7 +4348,7 @@ documents such as <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xre
 <dd class="break"></dd>
 <dt id="ZCL">[ZCL]</dt>
       <dd>
-<span class="refTitle">"The ZigBee Cluster Library"</span>, <span class="refContent">Elsevier</span>, <span class="seriesInfo">Zigbee Wireless Networking pp. 239-271</span>, <span class="seriesInfo">DOI 10.1016/b978-0-7506-8597-9.00006-9</span>, <time datetime="2008" class="refDate">2008</time>, <span>&lt;<a href="https://doi.org/10.1016/b978-0-7506-8597-9.00006-9">https://doi.org/10.1016/b978-0-7506-8597-9.00006-9</a>&gt;</span>. </dd>
+<span class="refTitle">"The ZigBee Cluster Library"</span>, <span class="refContent">Elsevier</span>, <span class="seriesInfo">Zigbee Wireless Networking pp. 239-271</span>, <span class="seriesInfo">DOI 10.1016/b978-0-7506-8597-9.00006-9</span>, <span class="seriesInfo">ISBN ["9780750685979"]</span>, <time datetime="2008" class="refDate">2008</time>, <span>&lt;<a href="https://doi.org/10.1016/b978-0-7506-8597-9.00006-9">https://doi.org/10.1016/b978-0-7506-8597-9.00006-9</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

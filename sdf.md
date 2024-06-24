@@ -1880,7 +1880,8 @@ model-based *validation* of data that is intended to be described by SDF models,
 model-based *augmentation* of these data with information obtained from the SDF
 models that apply.
 
-Implementations need to ascertain the provenance and applicability of
+Implementations need to ascertain the provenance (and thus
+authenticity and integrity) and applicability of
 the SDF models they employ operationally in such security relevant ways.
 Implementations that make use of the composition mechanisms defined in this
 document need to do this for each of the components they combine
