@@ -47,8 +47,9 @@ author:
     email: ari.keranen@ericsson.com
 contributor:
   - name: Jan Romann
-    org: Universität Bremen
-    email: jan.romann@uni-bremen.de
+    org: Hochschule Emden/Leer
+    email: jan.romann@hs-emden-leer.de
+    country: Germany
   - name: Wouter | van der Beek
     org: Cascoda Ltd.
     street:
@@ -184,6 +185,30 @@ With extension points and feature indications available,
 base SDF does not define a "version" concept for the SDF format itself
 (as opposed to version indications within SDF documents indicating
 their own evolution, see {{information-block}}).
+
+## Structure of This Document
+
+After introductory material and an overview ({{overview}}) over the
+elements of the model and over the different kinds of names used,
+{{sdf-structure}} introduces the main components of an SDF model.
+{{names-and-namespaces}} revisits names and structures them into
+namespaces.
+{{kw-defgroups}} discusses the inner structure of the Objects defined by
+SDF, the sdfObjects, in further detail.
+{{high-level-composition}} discusses how SDF supports composition.
+Conventional Sections ({{<<iana}}, {{<<seccons}},
+{{<<sec-normative-references}}, and {{<<sec-informative-references}})
+follow.
+The normative {{syntax}} defines the syntax of SDF in
+terms of its JSON structures, employing the Concise Data Definition
+Language (CDDL) {{-cddl}}.
+This is followed by the informative {{jso}}, a rendition of the SDF
+syntax in a "JSON Schema" format as they are defined by
+`json-schema.org` (collectively called JSO).
+The normative {{jso-inspired}} defines certain terms ("data qualities")
+used at the SDF data model level that were inspired by JSO.
+Finally, the informative {{composition-examples}} provides a few
+examples for the use of composition in SDF.
 
 ## Terminology and Conventions
 
@@ -452,7 +477,7 @@ definitions for on/off control, dimming, and color control affordances
 will enable interoperable functionality to be configured for diverse
 product types.
 An sdfObject definition for a common on/off control may be used to
-control may different kinds of Things that require on/off control.
+control many different kinds of Things that require on/off control.
 
 The presence of one or both of the optional qualities "`minItems`" and
 "`maxItems`" defines the sdfObject as an array, i.e., all the
@@ -562,7 +587,7 @@ if further events follow.
 Base SDF only provides data constraint modeling and
 semantics for the output data of Event affordances.
 Again, data definitions for payloads of protocol messages, and
-detailed protocol settings for invoking the action, are expected to be
+detailed protocol settings for soliciting the event, are expected to be
 part of the protocol binding.
 
 
@@ -1270,9 +1295,7 @@ versions of the json-schema.org proposal they were imported from.
 {: #sdfdataqual2 title="SDF-defined Qualities of sdfData and sdfProperty"}
 
 
-1. Note that the quality `unit` was called `units` in earlier drafts
-   of SDF.
-   The unit name SHOULD be as
+1. The unit name SHOULD be as
    per the {{senml-units (SenML Units)<RFC8428}} Registry
    or the {{secondary-units (Secondary Units)<RFC8798}} Registry in {{-units}}
    as specified by
@@ -1323,18 +1346,17 @@ This table also gives a description of the semantics of the sdfType,
 the conventional value for `type` to be used with the sdfType value,
 and a conventional JSON representation for values of the type.
 
-| sdfType     | Description                      | type   | JSON Representation                                        |
-|-------------|----------------------------------|--------|------------------------------------------------------------|
-| byte-string | A sequence of zero or more bytes | string | base64url without padding ({{Section 3.4.5.2 of RFC8949}}) |
-| unix-time   | A point in civil time (note 1)   | number | POSIX time ({{Section 3.4.2 of RFC8949}})                  |
-{: #sdftype1 title="Values defined in base SDF for the sdfType quality"}
+| Name        | Description                      | type   | JSON Representation       | Reference                    |
+|-------------|----------------------------------|--------|---------------------------|------------------------------|
+| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949}} |
+| unix-time   | A point in civil time (note 1)   | number | POSIX time                | {{Section 3.4.2 of RFC8949}}   |
+{: #sdftype1 title="Values Defined in Base SDF for the sdfType Quality"}
 
 (1) Note that the definition of `unix-time` does not imply the
 capability to represent points in time that fall on leap seconds.
 More date/time-related sdfTypes are likely to be added in the sdfType
 value registry.
 
-(In earlier drafts of this specification, a similar concept was called `subtype`.)
 
 ### sdfChoice
 
@@ -1351,20 +1373,20 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
 
 * `enum`
 
-  What would have been
+  What could be expressed as
 
   ~~~ json
   "enum": ["foo", "bar", "baz"]
   ~~~
 
-  in earlier drafts of this specification, is often best represented as:
+  in JSO, is often best represented as:
 
   ~~~ json
   "sdfChoice": {
     "foo": { "description": "This is a foonly"},
     "bar": { "description":
-  "As defined in the second world congress"},
-    "baz": { "description": "From zigbee foobaz"}
+             "As defined in the second world congress"},
+    "baz": { "description": "From bigzee foobaz"}
   }
   ~~~
 
@@ -1379,7 +1401,7 @@ sdfChoice merges the functions of two constructs found in {{-jso7v}}:
   "enum": [1, 2, 3]
   ~~~
 
-  in earlier drafts of this specification, is represented as:
+  in JSO, is represented as:
 
   ~~~ json
   "type": "number",
@@ -1450,7 +1472,7 @@ In a single definition, the keyword `enum` cannot be used at the same
 time as the keyword `sdfChoice`, as the former is just syntactic
 sugar for the latter.
 
-# Keywords for definition groups
+# Keywords for definition groups {#kw-defgroups}
 
 The following SDF keywords are used to create definition groups in the target namespace.
 All these definitions share some common qualities as discussed in {{common-qualities}}.
@@ -1621,7 +1643,7 @@ consumption there is no conflict with the intended goal.
     "description": "Cables must be at least 5 cm."
   }
 ~~~
-{: #exa-sdfref}
+{: #exa-sdfref title="Using an Override to Further Restrict the Set of Data Values"}
 
 ## sdfThing
 
@@ -1804,8 +1826,11 @@ Contact:
 : A contact point for the organization that assigns quality names with
   this prefix.
 
+Reference:
+: A pointer to additional information, if available.
+
 Quality Name Prefixes are intended to be registered by organizations
-that intend to define quality names constructed with an
+that plan to define quality names constructed with an
 organization-specifix prefix ({{gnqn}}).
 
 The registration policy is Expert Review as per {{Section 4.5 of -reg}}.
@@ -1859,13 +1884,7 @@ between implementations of the sdfType being registered, and that
 names are chosen with enough specificity that ecosystem-specific
 sdfTypes will not be confused with more generally applicable ones.
 
-The initial set of registrations is described in {{sdftype-r}}.
-
-| Name        | Description                      | type   | JSON Representation       | Reference                    |
-|-------------+----------------------------------+--------+---------------------------+------------------------------|
-| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949}} |
-| unix-time   | A point in civil time            | number | POSIX time                | {{Section 3.4.2 of RFC8949}}   |
-{: #sdftype-r title="Initial set of sdfType values"}
+The initial set of registrations is described in {{sdftype1}}.
 
 Security Considerations {#seccons}
 =======================
@@ -1943,7 +1962,7 @@ documents such as {{-mapping}}).
 
 # Formal Syntax of SDF {#syntax}
 
-This appendix describes the syntax of SDF using CDDL {{-cddl}}.
+This normative appendix describes the syntax of SDF using CDDL {{-cddl}}.
 
 This appendix shows the framework syntax only, i.e., a syntax with liberal extension points.
 Since this syntax is nearly useless in finding typos in an SDF
@@ -1964,7 +1983,7 @@ further evolution.
 
 # json-schema.org Rendition of SDF Syntax {#jso}
 
-This appendix describes the syntax of SDF defined in {{syntax}}, but
+This informative appendix describes the syntax of SDF defined in {{syntax}}, but
 using a version of the description techniques advertised on
 json-schema.org {{-jso}} {{-jso7v}}.
 
@@ -1977,6 +1996,8 @@ Lines leading with a `-` are part of the validation syntax, and lines leading wi
 ~~~
 
 # Data Qualities inspired by json-schema.org {#jso-inspired}
+
+This appendix is normative.
 
 Data qualities define data used in SDF affordances at an information
 model level.
@@ -2037,10 +2058,6 @@ inclusive bounds.
 (More specifically, Unicode text strings as defined in this
 specification are sequences of Unicode scalar values, the number of
 which is taken as the length of such a text string.
-Note that earlier drafts of this specification explained
-text string length values in bytes, which however is not meaningful
-unless bound to a specific encoding — which could be UTF-8, if this
-unusual behavior is to be provided in an extension.)
 
 The data quality "`pattern`" takes a string value that is interpreted
 as an [ECMA-262] regular expression in Unicode mode that constrains the
@@ -2131,7 +2148,7 @@ applies on export.
 
 # Composition Examples {#composition-examples}
 
-This appendix contains two examples illustrating different composition approaches
+This informative appendix contains two examples illustrating different composition approaches
 using the `sdfThing` quality.
 
 ## Outlet Strip Example {#outlet-strip-example}
@@ -2154,6 +2171,7 @@ using the `sdfThing` quality.
 }
 ~~~
 {: sourcecode-name="example-sdfthing-outlet-strip.sdf.json"}
+{: title="Outlet Strip Example"}
 {: #exa-sdfthing-outlet-strip}
 
 ## Refrigerator-Freezer Example {#fridge-freezer-example}
@@ -2202,7 +2220,36 @@ using the `sdfThing` quality.
 }
 ~~~
 {: sourcecode-name="example-sdfthing-refrigerator-freezer.sdf.json"}
+{: title="Refrigerator-Freezer Example"}
 {: #exa-sdfthing-fridge-freezer}
+
+# Some Changes From Earlier Drafts {#earlier}
+
+[XXX add a pointer to this to new 1.1 intro once PR#158 is merged, as
+in:\\
+Finally, {{earlier}} provides some information that can be useful in
+upgrading earlier, pre-standard models and implementations to SDF base.]
+
+This appendix is informative.
+
+The present document provides the SDF base definition.
+Previous revisions of SDF have been in use for several years, and both
+significant collections of older SDF models and older SDF conversion
+tools are available today.
+This appendix provides a brief checklist that can aid in upgrading
+these to the standard.
+
+* The quality `unit` was previously called `units`.
+* `sdfType` was developed out of a concept previously called `subtype`.
+* `sdfChoice` is the preferred way to represent JSO `enum` (only a
+  limited form of which is retained), and also the way to represent
+  JSO `anyOf`.
+* the length of text strings (as used with `minLength`/`maxLength`
+  constraints) was previously defined in bytes.
+  It now is defined as the number of characters (Unicode scalar
+  values, to be exact); a length in bytes is not meaningful unless
+  bound to a specific encoding, which might differ from UTF-8 in some
+  ecosystem mappings and protocol bindings.
 
 # Acknowledgements
 {:unnumbered}
