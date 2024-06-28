@@ -47,8 +47,9 @@ author:
     email: ari.keranen@ericsson.com
 contributor:
   - name: Jan Romann
-    org: Universität Bremen
-    email: jan.romann@uni-bremen.de
+    org: Hochschule Emden/Leer
+    email: jan.romann@hs-emden-leer.de
+    country: Germany
   - name: Wouter | van der Beek
     org: Cascoda Ltd.
     street:
