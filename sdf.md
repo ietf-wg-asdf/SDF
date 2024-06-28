@@ -477,7 +477,7 @@ definitions for on/off control, dimming, and color control affordances
 will enable interoperable functionality to be configured for diverse
 product types.
 An sdfObject definition for a common on/off control may be used to
-control may different kinds of Things that require on/off control.
+control many different kinds of Things that require on/off control.
 
 The presence of one or both of the optional qualities "`minItems`" and
 "`maxItems`" defines the sdfObject as an array, i.e., all the
@@ -587,7 +587,7 @@ if further events follow.
 Base SDF only provides data constraint modeling and
 semantics for the output data of Event affordances.
 Again, data definitions for payloads of protocol messages, and
-detailed protocol settings for invoking the action, are expected to be
+detailed protocol settings for soliciting the event, are expected to be
 part of the protocol binding.
 
 
@@ -1333,11 +1333,11 @@ This table also gives a description of the semantics of the sdfType,
 the conventional value for `type` to be used with the sdfType value,
 and a conventional JSON representation for values of the type.
 
-| sdfType     | Description                      | type   | JSON Representation                                        |
-|-------------|----------------------------------|--------|------------------------------------------------------------|
-| byte-string | A sequence of zero or more bytes | string | base64url without padding ({{Section 3.4.5.2 of RFC8949}}) |
-| unix-time   | A point in civil time (note 1)   | number | POSIX time ({{Section 3.4.2 of RFC8949}})                  |
-{: #sdftype1 title="Values defined in base SDF for the sdfType quality"}
+| Name        | Description                      | type   | JSON Representation       | Reference                    |
+|-------------|----------------------------------|--------|---------------------------|------------------------------|
+| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949}} |
+| unix-time   | A point in civil time (note 1)   | number | POSIX time                | {{Section 3.4.2 of RFC8949}}   |
+{: #sdftype1 title="Values Defined in Base SDF for the sdfType Quality"}
 
 (1) Note that the definition of `unix-time` does not imply the
 capability to represent points in time that fall on leap seconds.
@@ -1630,7 +1630,7 @@ consumption there is no conflict with the intended goal.
     "description": "Cables must be at least 5 cm."
   }
 ~~~
-{: #exa-sdfref}
+{: #exa-sdfref title="Using an Override to Further Restrict the Set of Data Values"}
 
 ## sdfThing
 
@@ -1813,8 +1813,11 @@ Contact:
 : A contact point for the organization that assigns quality names with
   this prefix.
 
+Reference:
+: A pointer to additional information, if available.
+
 Quality Name Prefixes are intended to be registered by organizations
-that intend to define quality names constructed with an
+that plan to define quality names constructed with an
 organization-specifix prefix ({{gnqn}}).
 
 The registration policy is Expert Review as per {{Section 4.5 of -reg}}.
@@ -1868,13 +1871,7 @@ between implementations of the sdfType being registered, and that
 names are chosen with enough specificity that ecosystem-specific
 sdfTypes will not be confused with more generally applicable ones.
 
-The initial set of registrations is described in {{sdftype-r}}.
-
-| Name        | Description                      | type   | JSON Representation       | Reference                    |
-|-------------+----------------------------------+--------+---------------------------+------------------------------|
-| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949}} |
-| unix-time   | A point in civil time            | number | POSIX time                | {{Section 3.4.2 of RFC8949}}   |
-{: #sdftype-r title="Initial set of sdfType values"}
+The initial set of registrations is described in {{sdftype1}}.
 
 Security Considerations {#seccons}
 =======================
@@ -2165,6 +2162,7 @@ using the `sdfThing` quality.
 }
 ~~~
 {: sourcecode-name="example-sdfthing-outlet-strip.sdf.json"}
+{: title="Outlet Strip Example"}
 {: #exa-sdfthing-outlet-strip}
 
 ## Refrigerator-Freezer Example {#fridge-freezer-example}
@@ -2213,6 +2211,7 @@ using the `sdfThing` quality.
 }
 ~~~
 {: sourcecode-name="example-sdfthing-refrigerator-freezer.sdf.json"}
+{: title="Refrigerator-Freezer Example"}
 {: #exa-sdfthing-fridge-freezer}
 
 # Acknowledgements
