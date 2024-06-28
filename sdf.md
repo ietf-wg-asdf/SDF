@@ -1605,7 +1605,7 @@ consumption there is no conflict with the intended goal.
     "description": "Cables must be at least 5 cm."
   }
 ~~~
-{: #exa-sdfref title="Using an Override to Further Restrict the Set Of Data Values"}
+{: #exa-sdfref title="Using an Override to Further Restrict the Set of Data Values"}
 
 ## sdfThing
 
