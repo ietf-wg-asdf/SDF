@@ -2231,7 +2231,7 @@ these to the standard.
 * the length of text strings (as used with `minLength`/`maxLength`
   constraints) was previously defined in bytes.
   It now is defined as the number of characters (Unicode scalar
-  values, to be exact): a length in bytes is not meaningful unless
+  values, to be exact); a length in bytes is not meaningful unless
   bound to a specific encoding, which might differ from UTF-8 in some
   ecosystem mappings and protocol bindings.
 
