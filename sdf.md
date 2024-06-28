@@ -47,8 +47,9 @@ author:
     email: ari.keranen@ericsson.com
 contributor:
   - name: Jan Romann
-    org: Universität Bremen
-    email: jan.romann@uni-bremen.de
+    org: Hochschule Emden/Leer
+    email: jan.romann@hs-emden-leer.de
+    country: Germany
   - name: Wouter | van der Beek
     org: Cascoda Ltd.
     street:
@@ -184,6 +185,30 @@ With extension points and feature indications available,
 base SDF does not define a "version" concept for the SDF format itself
 (as opposed to version indications within SDF documents indicating
 their own evolution, see {{information-block}}).
+
+## Structure of This Document
+
+After introductory material and an overview ({{overview}}) over the
+elements of the model and over the different kinds of names used,
+{{sdf-structure}} introduces the main components of an SDF model.
+{{names-and-namespaces}} revisits names and structures them into
+namespaces.
+{{kw-defgroups}} discusses the inner structure of the Objects defined by
+SDF, the sdfObjects, in further detail.
+{{high-level-composition}} discusses how SDF supports composition.
+Conventional Sections ({{<<iana}}, {{<<seccons}},
+{{<<sec-normative-references}}, and {{<<sec-informative-references}})
+follow.
+The normative {{syntax}} defines the syntax of SDF in
+terms of its JSON structures, employing the Concise Data Definition
+Language (CDDL) {{-cddl}}.
+This is followed by the informative {{jso}}, a rendition of the SDF
+syntax in a "JSON Schema" format as they are defined by
+`json-schema.org` (collectively called JSO).
+The normative {{jso-inspired}} defines certain terms ("data qualities")
+used at the SDF data model level that were inspired by JSO.
+Finally, the informative {{composition-examples}} provides a few
+examples for the use of composition in SDF.
 
 ## Terminology and Conventions
 
@@ -1435,7 +1460,7 @@ In a single definition, the keyword `enum` cannot be used at the same
 time as the keyword `sdfChoice`, as the former is just syntactic
 sugar for the latter.
 
-# Keywords for definition groups
+# Keywords for definition groups {#kw-defgroups}
 
 The following SDF keywords are used to create definition groups in the target namespace.
 All these definitions share some common qualities as discussed in {{common-qualities}}.
@@ -1924,7 +1949,7 @@ documents such as {{-mapping}}).
 
 # Formal Syntax of SDF {#syntax}
 
-This appendix describes the syntax of SDF using CDDL {{-cddl}}.
+This normative appendix describes the syntax of SDF using CDDL {{-cddl}}.
 
 This appendix shows the framework syntax only, i.e., a syntax with liberal extension points.
 Since this syntax is nearly useless in finding typos in an SDF
@@ -1945,7 +1970,7 @@ further evolution.
 
 # json-schema.org Rendition of SDF Syntax {#jso}
 
-This appendix describes the syntax of SDF defined in {{syntax}}, but
+This informative appendix describes the syntax of SDF defined in {{syntax}}, but
 using a version of the description techniques advertised on
 json-schema.org {{-jso}} {{-jso7v}}.
 
@@ -1958,6 +1983,8 @@ Lines leading with a `-` are part of the validation syntax, and lines leading wi
 ~~~
 
 # Data Qualities inspired by json-schema.org {#jso-inspired}
+
+This appendix is normative.
 
 Data qualities define data used in SDF affordances at an information
 model level.
@@ -2112,7 +2139,7 @@ applies on export.
 
 # Composition Examples {#composition-examples}
 
-This appendix contains two examples illustrating different composition approaches
+This informative appendix contains two examples illustrating different composition approaches
 using the `sdfThing` quality.
 
 ## Outlet Strip Example {#outlet-strip-example}
