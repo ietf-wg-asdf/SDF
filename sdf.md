@@ -218,16 +218,12 @@ Thing:
 Grouping:
 : An sdfThing or sdfObject, i.e., (directly or indirectly) a combination of Affordances.
 
-sdfThing:
-: A grouping of Groupings as well as potentially Affordance
-  declarations (Property, Action, and Event declarations).
-
 Affordance:
 : An element of an interface offered for interaction, for which
   information is available (directly or indirectly) that indicates how
   it can or should be used.
   The term is used here for the digital (network-directed) interfaces
-  of a Thing only; it
+  of a Thing only; the Thing
   might also have physical affordances such as buttons, dials, and
   displays.
 
@@ -240,13 +236,18 @@ Quality:
 Entry:
 : A key-value pair in a map. (In JSON maps, sometimes also called "member".)
 
+Element:
+: A part or an aspect of something abstract; used here in its usual English definition.
+  (Occasionally, also used specifically for the elements of JSON arrays.)
+
 Block:
 : One or more entries in a JSON map that is part of an SDF
   specification; these entries together serve a specific function.
 
 Group:
 : An entry in the main JSON map representing the SDF document, and in
-  certain nested definitions, that
+  certain nested definitions.
+  A group
   has a Class Name Keyword as its key and a map of named definition
   entries (Definition Group) as a value.
 
@@ -261,7 +262,7 @@ Class:
 
 Property:
 : An affordance that can potentially be used to read, write, and/or
-  observe state (current/stored information) on an sdfObject.
+  observe state (current/stored information) on a Grouping.
   (Note that Entries are often called
   properties in other environments; in this document, the term
   Property is specifically reserved for affordances, even if the map
@@ -269,10 +270,10 @@ Property:
   with the other semantics.)
 
 Action:
-: An affordance that can potentially be used to perform a named operation on an sdfObject.
+: An affordance that can potentially be used to perform a named operation on a Grouping.
 
 Event:
-: An affordance that can potentially be used to obtain information about what happened to an sdfObject.
+: An affordance that can potentially be used to obtain information about what happened to a Grouping.
 
 Object, sdfObject:
 : A grouping containing only Affordance declarations (Property, Action, and Event declarations); the main
@@ -285,9 +286,13 @@ Object, sdfObject:
   the type name `"object"` is imported from a data definition
   language with the other semantics.)
 
-Element:
-: A part or an aspect of something abstract; used here in its usual English definition.
-  (Occasionally, also used specifically for the elements of JSON arrays.)
+sdfThing:
+: A Grouping that can contain nested Groupings (sdfThings and sdfObjects).
+  Like sdfObject, it can also contain Affordance
+  declarations (Property, Action, and Event declarations).
+  (Note that "Thing" has a different meaning from sdfThing and
+  therefore is not available as a colloquial shorthand of
+  sdfThing.)
 
 Definition:
 : An entry in a Definition Group; the entry creates a new semantic
@@ -311,7 +316,7 @@ SDF Document:
 SDF Model:
 : Definitions and declarations that model the digital interaction
   opportunities offered by one or more kinds of Things, represented
-  by sdfObjects and sdfThings.
+  by Groupings (sdfObjects and sdfThings).
   An SDF Model can be fully contained in a single SDF Document, or it
   can be built from an SDF Document that references definitions and
   declarations from additional SDF documents.
@@ -600,7 +605,7 @@ sdfProperty groups to enable common
 modeling patterns, data constraints, and semantic anchor concepts to
 be factored out for data items that make up sdfProperty items and
 serve as input and output data for sdfAction and sdfEvent items.
-The sdfData definitions only spring to life by being referenced in
+The data types defined in sdfData definitions only spring to life by being referenced in
 one of these contexts (directly or indirectly via some other sdfData
 definitions).
 
@@ -1480,7 +1485,7 @@ All these definitions share some common qualities as discussed in {{common-quali
 ## sdfObject
 
 The `sdfObject` keyword denotes a group of zero or more sdfObject definitions.
-sdfObject definitions may contain or include definitions of Properties, Actions, Events declared for the sdfObject, as well as data types (sdfData group) to be used in this or other sdfObjects.
+sdfObject definitions may contain or include definitions of named Properties, Actions, Events declared for the sdfObject, as well as named data types (sdfData group) to be used in this or other sdfObjects.
 
 The qualities of an sdfObject include the common qualities;
 additional qualities are shown in {{sdfobjqual}}.
