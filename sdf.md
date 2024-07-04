@@ -173,15 +173,16 @@ entity:
 [^status]
 
 SDF is designed to be an extensible format.
-The present document constitutes the base specification for SDF; we
+The present document constitutes the base specification for SDF: we
 speak of "base SDF" for short.
 In addition, SDF extensions can be defined, some of which may make use
 of extension points specifically defined for this in base SDF.
 One area for such extensions would be refinements of SDF's abstract
 interaction models into protocol bindings for specific ecosystems
 (e.g., {{-mapping}}).
-For other extensions, it may be necessary to indicate in the SDF
-document that a specific extension is in effect; see
+For the use of certain other extensions, it may be necessary to
+indicate in the SDF
+document using them that a specific extension is in effect; see
 {{information-block}} for details of the `features` quality that can be
 used for such indications.
 With extension points and feature indications available,
