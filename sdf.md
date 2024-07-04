@@ -768,7 +768,14 @@ referencing SDF document they build the SDF model expressed by that
 SDF document.
 
 Each SDF document is represented as a single JSON map.
-This map has three blocks: the information block, the namespaces block, and the definitions block.
+This map can be thought of as having three blocks: the information
+block, the namespaces block, and the definitions block.
+These blocks contain zero or more JSON name/value pairs, the names of
+which are quality names and the values of which mostly are (nested)
+maps (the exception defined in SDF base is the defaultNamespace
+quality, the value of which is a text string).
+An empty nested map of this kind is equivalent to not having the
+quality included at all.
 
 ## Information block
 
@@ -783,18 +790,20 @@ when no information block is found.
 The keyword (map key) that defines an information block is "info". Its
 value is a JSON map in turn, with a set of entries that represent qualities that apply to the included definition.
 
-Qualities of the information block are shown in {{infoblockqual}}.
+Qualities of this map are shown in {{infoblockqual}}.
+None of these qualities are required or have default values that are
+assumed if the quality is absent.
 
-| Quality     | Type             | Required | Description                                                 |
-|-------------|------------------|----------|-------------------------------------------------------------|
-| title       | string           | no       | A short summary to be displayed in search results, etc.     |
-| description | string           | no       | Long-form text description (no constraints)                 |
-| version     | string           | no       | The incremental version of the definition                   |
-| modified    | string           | no       | Time of the latest modification                             |
-| copyright   | string           | no       | Link to text or embedded text containing a copyright notice |
-| license     | string           | no       | Link to text or embedded text containing license terms      |
-| features    | array of strings | no       | List of extension features used                             |
-| $comment    | string           | no       | Source code comments only, no semantics                     |
+| Quality     | Type             | Description                                                 |
+|-------------|------------------|-------------------------------------------------------------|
+| title       | string           | A short summary to be displayed in search results, etc.     |
+| description | string           | Long-form text description (no constraints)                 |
+| version     | string           | The incremental version of the definition                   |
+| modified    | string           | Time of the latest modification                             |
+| copyright   | string           | Link to text or embedded text containing a copyright notice |
+| license     | string           | Link to text or embedded text containing license terms      |
+| features    | array of strings | List of extension features used                             |
+| $comment    | string           | Source code comments only, no semantics                     |
 {: #infoblockqual title="Qualities of the Information Block"}
 
 The version quality is used to indicate version information about the
@@ -817,7 +826,9 @@ Extension feature names will be specified in extension documents.
 
 ## Namespaces block
 
-The namespaces block contains the `namespace` map and the `defaultNamespace` setting.
+The namespaces block contains the `namespace` map and the
+`defaultNamespace` setting; none of these qualities are required or
+have default values that are assumed if the quality is absent.
 
 The namespace map is a map from short names for URIs to the namespace URIs
 themselves.
@@ -826,10 +837,10 @@ The defaultNamespace setting selects one of the entries in the
 namespace map by giving its short name.  The associated URI (value of
 this entry) becomes the default namespace for the SDF document.
 
-| Quality          | Type   | Required | Description                                                                                          |
-|------------------|--------|----------|------------------------------------------------------------------------------------------------------|
-| namespace        | map    | no       | Defines short names mapped to namespace URIs, to be used as identifier prefixes                      |
-| defaultNamespace | string | no       | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
+| Quality          | Type   | Description                                                                                          |
+|------------------|--------|------------------------------------------------------------------------------------------------------|
+| namespace        | map    | Defines short names mapped to namespace URIs, to be used as identifier prefixes                      |
+| defaultNamespace | string | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
 {: #nssec title="Namespaces Block"}
 
 The following example declares a set of namespaces and defines `cap`
@@ -1246,9 +1257,10 @@ Definitions in SDF share a number of qualities that provide metadata for
 them.  These are listed in {{tbl-common-qualities}}.  None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
-If a label is required for an application and no label is given in the SDF model, the
-last part (`reference-token`, {{Section 3 of -pointer}}) of the JSON
-pointer to the definition can be used.
+If a short textual description is required for an application and no
+label is given in the SDF model, in its place applications could use
+the last part (the last `reference-token`, {{Section 3 of -pointer}}) of
+the JSON pointer to the definition.
 
 | Quality     | Type         | Description                                          |
 |-------------|--------------|------------------------------------------------------|
@@ -1264,14 +1276,17 @@ pointer to the definition can be used.
 Data qualities are used in sdfData and sdfProperty definitions,
 which are named sets of data qualities (abbreviated as `named-sdq`).
 
+These qualities include the common qualities, JSO-inspired qualities
+(see below), and data qualities defined specifically for the present
+specification; the latter are shown in {{sdfdataqual2}}.
+None of these qualities are required or have default values that are
+assumed if the quality is absent.
+
 {{jso-inspired}} lists data qualities inspired by the various
 proposals at json-schema.org; the
 intention is that these (information model level) qualities are
 compatible with the (data model) semantics from the
 versions of the json-schema.org proposal they were imported from.
-
-{{sdfdataqual2}} lists data qualities defined specifically for the
-present specification.
 
 | Quality       | Type                                        | Description                                                              | Default |
 |---------------+---------------------------------------------+--------------------------------------------------------------------------+---------|
@@ -1282,7 +1297,7 @@ present specification.
 | sdfType       | string ({{sdftype}})                        | sdfType enumeration (extensible)                                         | N/A     |
 | sdfChoice     | named set of data qualities ({{sdfchoice}}) | named alternatives                                                       | N/A     |
 | enum          | array of strings                            | abbreviation for string-valued named alternatives                        | N/A     |
-{: #sdfdataqual2 title="SDF-defined Qualities of sdfData"}
+{: #sdfdataqual2 title="SDF-defined Qualities of sdfData and sdfProperty"}
 
 
 1. The unit name SHOULD be as
@@ -1472,7 +1487,8 @@ All these definitions share some common qualities as discussed in {{common-quali
 The `sdfObject` keyword denotes a group of zero or more sdfObject definitions.
 sdfObject definitions may contain or include definitions of named Properties, Actions, Events declared for the sdfObject, as well as named data types (sdfData group) to be used in this or other sdfObjects.
 
-The qualities of an sdfObject include the common qualities, additional qualities are shown in {{sdfobjqual}}.
+The qualities of an sdfObject include the common qualities;
+additional qualities are shown in {{sdfobjqual}}.
 None of these
 qualities are required or have default values that are assumed if the
 quality is absent.
