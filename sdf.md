@@ -145,10 +145,13 @@ entity:
 [^intro-]
 
 [^intro-]:
-    The Semantic Definition Format (SDF) is a format for domain experts to
+    The Semantic Definition Format (SDF) is concerned with Things,
+    namely physical objects that are available for interaction over a
+    network.
+    SDF is a format for domain experts to
     use in the creation and maintenance of data and interaction models
-    that describe Things, i.e., physical objects that are available for interaction
-    over a network. An SDF specification describes definitions of
+    that describe Things.
+    An SDF specification describes definitions of
     SDF Objects/SDF Things and their associated interactions (Events, Actions,
     Properties), as well as the Data types for the information exchanged
     in those interactions. Tools convert this format to database formats
@@ -156,9 +159,9 @@ entity:
 
 [^status]
 
-[^status]: The present revision (-18) adds security considerations, a
-    few editorial cleanups, discusses JSON pointer encodings, and adds
-    sockets to the CDDL for easier future extension.
+[^status]: (This note will be removed by the RFC editor:)
+    The present revision (–19) addresses comments from the AD review
+    and from the IESG directorate reviews.
 
 --- middle
 
