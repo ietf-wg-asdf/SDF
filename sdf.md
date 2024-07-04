@@ -207,8 +207,11 @@ syntax in a "JSON Schema" format as they are defined by
 `json-schema.org` (collectively called JSO).
 The normative {{jso-inspired}} defines certain terms ("data qualities")
 used at the SDF data model level that were inspired by JSO.
-Finally, the informative {{composition-examples}} provides a few
+The informative {{composition-examples}} provides a few
 examples for the use of composition in SDF.
+Finally, {{earlier}} provides some historical information that can be
+useful in upgrading earlier, pre-standard SDF models and
+implementations to SDF base.
 
 ## Terminology and Conventions
 
@@ -2229,11 +2232,6 @@ using the `sdfThing` quality.
 {: #exa-sdfthing-fridge-freezer}
 
 # Some Changes From Earlier Drafts {#earlier}
-
-[XXX add a pointer to this to new 1.1 intro once PR#158 is merged, as
-in:\\
-Finally, {{earlier}} provides some information that can be useful in
-upgrading earlier, pre-standard models and implementations to SDF base.]
 
 This appendix is informative.
 
