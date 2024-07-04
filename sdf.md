@@ -774,8 +774,8 @@ These blocks contain zero or more JSON name/value pairs, the names of
 which are quality names and the values of which mostly are (nested)
 maps (the exception defined in SDF base is the defaultNamespace
 quality, the value of which is a text string).
-An empty nested map of this kind is equivalent to the absence of the
-name/value pair it is the value of.
+An empty nested map of this kind is equivalent to not having the
+quality included at all.
 
 ## Information block
 
