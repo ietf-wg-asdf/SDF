@@ -230,13 +230,14 @@ Element:
   (Occasionally, also used explicitly for the elements of JSON arrays.)
 
 Affordance:
-: An element of an interface offered for interaction, for which
-  information is available (directly or indirectly) that indicates how
-  it can or should be used.
-  The term is used here for the digital (network-directed) interfaces
-  of a Thing only; the Thing
-  might also have physical affordances such as buttons, dials, and
-  displays.
+: An element of an interface offered for interaction.
+  Such an element becomes an Affordance when information is available
+  (directly or indirectly) that indicates how it can or should be
+  used.
+  In the present document, the term is used for the digital
+  (network-directed) interfaces of a Thing only; as it is a physical
+  object as well, the Thing might also have physical affordances such
+  as buttons, dials, and displays.
 
 Property:
 : An affordance that can potentially be used to read, write, and/or
