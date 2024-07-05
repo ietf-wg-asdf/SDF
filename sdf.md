@@ -350,15 +350,17 @@ sdfThing:
   sdfThing.)
 
 Protocol Binding:
-: A companion document to an SDF Model that defines how to map
-  the abstract concepts in the model into the protocols in use
-  in a specific ecosystem.  Might supply URL components, numeric IDs,
-  and similar details.  Protocol Bindings are one case of an
-  Augmentation Mechanism.
+: A companion document to an SDF Model that defines how to map the
+  abstract concepts in the model into the protocols in use in a
+  specific ecosystem.
+  The protocol binding might supply URL components, numeric IDs, and
+  similar details.
+  Protocol Bindings are one case of an Augmentation Mechanism.
 
 Augmentation Mechanism:
 : A companion document to a base SDF Model that provides additional
-  information ("augments" the base specification), possibly for use in
+  information ("augments" the base specification).
+  The information may be for use in
   a specific ecosystem or with a specific protocol ("Protocol Binding").
   No specific Augmentation Mechanisms are defined in base SDF.
   A simple mechanism for such augmentations has been discussed as a
