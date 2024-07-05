@@ -319,7 +319,7 @@ Declaration:
 : A definition within an enclosing
   definition that is intended to create a component item within that
   enclosing definition.  Every declaration can also be used as a
-  definition for reference in a different place.
+  definition for reference elsewhere.
 
 Grouping:
 : An sdfThing or sdfObject, i.e., (directly or indirectly) a
