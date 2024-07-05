@@ -543,9 +543,10 @@ Definitions in `sdfProperty` groups look like the definitions in
 However, they actually also declare that a Property
 with the given qualities potentially is present in the containing sdfObject.
 
-For definitions in `sdfProperty` and `sdfData`, SDF provides qualities that can
-constrain the structure and values of data allowed in the interactions
-modeled by them, as well as qualities that associate semantics to these
+For definitions in `sdfProperty` and `sdfData`, SDF provides qualities
+that can constrain the structure and values of data allowed in the
+interactions modeled by them.
+It also provides qualities that associate semantics to these
 data, such as engineering units and unit scaling information.
 
 For the data definition within `sdfProperty` or `sdfData`, SDF borrows
