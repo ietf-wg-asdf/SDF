@@ -241,12 +241,12 @@ Affordance:
 
 Property:
 : An affordance that can potentially be used to read, write, and/or
-  observe state (current/stored information) on a Grouping.
-  (Note that Entries [see below] are often called
-  properties in other environments; in this document, the term
-  Property is specifically reserved for affordances, even if the map
-  key "properties" might be imported from a data definition language
-  with the other semantics.)
+  observe state (current/stored information) on a Grouping.\\
+  (Note that other environments often use the term "property" for a
+  JSON concept that we call "entry" [see below].
+  In this document, the term Property is specifically reserved for
+  affordances, even if the map key "properties" might be imported with
+  the JSON-level semantics from a data definition language.)
 
 Action:
 : An affordance that can potentially be used to perform a named operation on a Grouping.
@@ -325,7 +325,8 @@ Object, sdfObject:
 : A Grouping containing only Affordance declarations (Property, Action, and Event declarations); the main
   "atom" of reusable semantics for model construction. sdfObjects are
   similar to sdfThings but do not allow nesting, i.e., they cannot contain
-  other Groupings (sdfObjects or sdfThings). (Note that
+  other Groupings (sdfObjects or sdfThings).\\
+  (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in the context of SDF, the term Object as the colloquial shorthand for sdfObject, is specifically reserved for the
   above Grouping, even if
