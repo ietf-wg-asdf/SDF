@@ -576,10 +576,12 @@ state, often resulting in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.
 
-Actions may have data parameters; these are modeled as a single item of input
-data and output data, each.  (Where multiple parameters need to be
-modeled, an `"object"` type can be used to combine these parameters into one.)
-<!-- (using `sdfData` definitions, i.e., the same entries as for `sdfProperty` declarations). -->
+Actions may have data parameters: these are modeled as a single item of input
+data and output data, each.  Where multiple parameters need to be
+modeled, an `"object"` type can be used to combine these parameters into one.
+<!-- (using `sdfData` definitions, i.e., the same entries as for -->
+<!-- `sdfProperty` declarations). -->
+
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
 sdfProperty; the effects may play out over time and emit action
