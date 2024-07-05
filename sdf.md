@@ -226,8 +226,10 @@ Thing:
 : A physical item that is also available for interaction over a network.
 
 Element:
-: A part or an aspect of something abstract; used here in its usual English definition.
-  (Occasionally, also used explicitly for the elements of JSON arrays.)
+: A part or an aspect of something abstract; i.e., the term is used
+  here in its usual English definition.
+  (Exceptionally, in {{jso-inspired}}, used explicitly for its meaning in the JSON
+  ecosystem, i.e., the elements of JSON arrays.)
 
 Affordance:
 : An element of an interface offered for interaction.
