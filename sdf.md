@@ -307,11 +307,13 @@ Quality:
   "Property", already has a different meaning.)
 
 Definition:
-: An entry in a Definition Group; the entry creates a new semantic
-  term for use in SDF models and associates it with a set of
-  qualities.
-  Unless it is also a Declaration, a definition just defines a term,
-  it does not create a component item within the enclosing definition.
+: An entry in a Definition Group.
+  The entry creates a new semantic term for use in SDF models and
+  associates it with a set of qualities.
+  Unless the Class Name Keyword of the Group also makes it a
+  Declaration (see {{definitions-block}}), a definition just defines a
+  term, it does not create a component item within the enclosing
+  definition.
 
 Declaration:
 : A definition within an enclosing
