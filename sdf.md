@@ -245,7 +245,7 @@ Property:
   (Note that other environments often use the term "property" for a
   JSON concept that we call "entry" [see below].
   In this document, the term Property is specifically reserved for
-  affordances, even if the map key "properties" might be imported with
+  affordances, even if the map key `"properties"` might be imported with
   the JSON-level semantics from a data definition language.)
 
 Action:
@@ -301,8 +301,8 @@ Quality:
   about that definition or declaration.  A quality is represented in
   SDF as an entry in a JSON map (JSON object) that serves as a definition
   or declaration.
-  (The term "Quality"" is used as "Property" already has a different
-  meaning.)
+  (The term "Quality" is used because another popular term,
+  "Property", already has a different meaning.)
 
 Definition:
 : An entry in a Definition Group; the entry creates a new semantic
@@ -322,10 +322,14 @@ Grouping:
   description for a combination of Affordances.
 
 Object, sdfObject:
-: A Grouping containing only Affordance declarations (Property, Action, and Event declarations); the main
-  "atom" of reusable semantics for model construction. sdfObjects are
-  similar to sdfThings but do not allow nesting, i.e., they cannot contain
-  other Groupings (sdfObjects or sdfThings).\\
+: A Grouping that contains Affordance declarations (Property, Action,
+  and Event declarations) only.
+  It serves as the main "atom" of reusable semantics for model
+  construction, representing the interaction model for a Thing that is
+  simple enough to not require nested structure.
+  sdfObjects are therefore similar to sdfThings but do not allow
+  nesting, i.e., they cannot contain other Groupings (sdfObjects or
+  sdfThings).\\
   (Note that
   JSON maps are often called JSON objects due to JSON's JavaScript
   heritage; in the context of SDF, the term Object as the colloquial shorthand for sdfObject, is specifically reserved for the
