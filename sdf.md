@@ -228,7 +228,7 @@ Thing:
 Element:
 : A part or an aspect of something abstract; i.e., the term is used
   here in its usual English definition.
-  (Exceptionally, in {{jso-inspired}}, used explicitly for its meaning in the JSON
+  (Exceptionally, in {{jso-inspired}}, used explicitly in accordance with its meaning in the JSON
   ecosystem, i.e., the elements of JSON arrays.)
 
 Affordance:
