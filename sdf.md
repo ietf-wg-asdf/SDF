@@ -1198,7 +1198,7 @@ potentially requiring further path elements as well as JSON pointer
 encoding.  The need for this is best avoided by choosing Given Names
 without these characters.)
 
-The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
+The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition for the sdfProperty "currentTemperature" and for the sdfOutputData produced by the sdfEvent "overTemperatureEvent".
 
 ~~~ json
 "sdfObject": {
@@ -1214,22 +1214,14 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
     },
     "sdfProperty": {
       "currentTemperature": {
-"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData",
+      "writable": false
       }
     },
     "sdfEvent": {
       "overTemperatureEvent": {
        "sdfOutputData": {
-          "type": "object",
-          "properties": {
-            "alarmType": {
-              "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
-              "const": "OverTemperatureAlarm"
-            },
-            "temperature": {
 "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
-            }
-          }
         }
       }
     }
@@ -2139,6 +2131,27 @@ string values that give the key names of required entries.
 
 Note that the term "properties" as an additional quality for
 defining map entries is unrelated to sdfProperty.
+
+For example, to include information about the type of the event in the
+"overTemperatureEvent" of {{example-req}}, the sdfOutputData there could
+be defined as follows:
+
+~~~ json
+
+       "sdfOutputData": {
+          "type": "object",
+          "properties": {
+            "alarmType": {
+              "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
+              "const": "OverTemperatureAlarm"
+            },
+            "temperature": {
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+            }
+          }
+        }
+~~~
+{: #example-obj-type title="Using object type with sdfOutputData "}
 
 ## Implementation notes
 
