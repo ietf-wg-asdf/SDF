@@ -2137,19 +2137,18 @@ For example, to include information about the type of the event in the
 be defined as follows:
 
 ~~~ json
-
-       "sdfOutputData": {
-          "type": "object",
-          "properties": {
-            "alarmType": {
-              "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
-              "const": "OverTemperatureAlarm"
-            },
-            "temperature": {
+    "sdfOutputData": {
+      "type": "object",
+      "properties": {
+        "alarmType": {
+          "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
+          "const": "OverTemperatureAlarm"
+        },
+        "temperature": {
 "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
-            }
-          }
         }
+      }
+    }
 ~~~
 {: #example-obj-type title="Using object type with sdfOutputData "}
 
