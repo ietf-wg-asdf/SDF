@@ -222,6 +222,10 @@ implementations to SDF base.
 ### Conceptual Terms
 {:unnumbered}
 
+The terms introduced in this section are capitalized when used in this
+section; to maintain readability, this is not always done when they
+are used in the body of this document.
+
 Thing:
 : A physical item that is also available for interaction over a network.
 
@@ -242,7 +246,7 @@ Affordance:
   as buttons, dials, and displays.
 
 Property:
-: An affordance that can potentially be used to read, write, and/or
+: An Affordance that can potentially be used to read, write, and/or
   observe state (current/stored information) on a Grouping.\\
   (Note that other environments often use the term "property" for a
   JSON concept that we call "entry" [see below].
@@ -251,10 +255,10 @@ Property:
   the JSON-level semantics from a data definition language.)
 
 Action:
-: An affordance that can potentially be used to perform a named operation on a Grouping.
+: An Affordance that can potentially be used to perform a named operation on a Grouping.
 
 Event:
-: An affordance that can potentially be used to obtain information
+: An Affordance that can potentially be used to obtain information
   about what happened to a Grouping.
 
 ### Specification Language Terms
@@ -353,7 +357,7 @@ Protocol Binding:
 : A companion document to an SDF Model that defines how to map the
   abstract concepts in the model into the protocols in use in a
   specific ecosystem.
-  The protocol binding might supply URL components, numeric IDs, and
+  The Protocol Binding might supply URL components, numeric IDs, and
   similar details.
   Protocol Bindings are one case of an Augmentation Mechanism.
 
