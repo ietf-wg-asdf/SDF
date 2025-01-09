@@ -145,10 +145,13 @@ entity:
 [^intro-]
 
 [^intro-]:
-    The Semantic Definition Format (SDF) is a format for domain experts to
+    The Semantic Definition Format (SDF) is concerned with Things,
+    namely physical objects that are available for interaction over a
+    network.
+    SDF is a format for domain experts to
     use in the creation and maintenance of data and interaction models
-    that describe Things, i.e., physical objects that are available for interaction
-    over a network. An SDF specification describes definitions of
+    that describe Things.
+    An SDF specification describes definitions of
     SDF Objects/SDF Things and their associated interactions (Events, Actions,
     Properties), as well as the Data types for the information exchanged
     in those interactions. Tools convert this format to database formats
@@ -156,9 +159,9 @@ entity:
 
 [^status]
 
-[^status]: The present revision (-18) adds security considerations, a
-    few editorial cleanups, discusses JSON pointer encodings, and adds
-    sockets to the CDDL for easier future extension.
+[^status]: (This note will be removed by the RFC editor:)
+    The present revision (–19) addresses comments from the AD review
+    and from the IESG directorate reviews.
 
 --- middle
 
@@ -170,15 +173,16 @@ entity:
 [^status]
 
 SDF is designed to be an extensible format.
-The present document constitutes the base specification for SDF; we
+The present document constitutes the base specification for SDF: we
 speak of "base SDF" for short.
 In addition, SDF extensions can be defined, some of which may make use
 of extension points specifically defined for this in base SDF.
 One area for such extensions would be refinements of SDF's abstract
 interaction models into protocol bindings for specific ecosystems
 (e.g., {{-mapping}}).
-For other extensions, it may be necessary to indicate in the SDF
-document that a specific extension is in effect; see
+For the use of certain other extensions, it may be necessary to
+indicate in the SDF
+document using them that a specific extension is in effect; see
 {{information-block}} for details of the `features` quality that can be
 used for such indications.
 With extension points and feature indications available,
@@ -215,100 +219,50 @@ implementations to SDF base.
 
 ## Terminology and Conventions
 
+### Conceptual Terms
+{:unnumbered}
+
+The terms introduced in this section are capitalized when used in this
+section; to maintain readability, this is not always done when they
+are used in the body of this document.
+
 Thing:
 : A physical item that is also available for interaction over a network.
 
-Grouping:
-: An sdfThing or sdfObject, i.e., (directly or indirectly) a combination of Affordances.
+Element:
+: A part or an aspect of something abstract; i.e., the term is used
+  here in its usual English definition.
+  (Exceptionally, in {{jso-inspired}}, used explicitly in accordance with its meaning in the JSON
+  ecosystem, i.e., the elements of JSON arrays.)
 
 Affordance:
-: An element of an interface offered for interaction, for which
-  information is available (directly or indirectly) that indicates how
-  it can or should be used.
-  The term is used here for the digital (network-directed) interfaces
-  of a Thing only; the Thing
-  might also have physical affordances such as buttons, dials, and
-  displays.
-
-Quality:
-: A metadata item in a definition or declaration which says something
-  about that definition or declaration.  A quality is represented in
-  SDF as an entry in a JSON map (JSON object) that serves as a definition
-  or declaration.
-
-Entry:
-: A key-value pair in a map. (In JSON maps, sometimes also called "member".)
-
-Element:
-: A part or an aspect of something abstract; used here in its usual English definition.
-  (Occasionally, also used specifically for the elements of JSON arrays.)
-
-Block:
-: One or more entries in a JSON map that is part of an SDF
-  specification; these entries together serve a specific function.
-
-Group:
-: An entry in the main JSON map representing the SDF document, and in
-  certain nested definitions.
-  A group
-  has a Class Name Keyword as its key and a map of named definition
-  entries (Definition Group) as a value.
-
-Class Name Keyword:
-: One of `sdfThing`, `sdfObject`, `sdfProperty`, `sdfAction`,
-  `sdfEvent`, or `sdfData`; the Classes for these type keywords are
-  capitalized and prefixed with `sdf`.
-
-Class:
-: Abstract term for the information that is contained in groups
-  identified by a Class Name Keyword.
+: An element of an interface offered for interaction.
+  Such an element becomes an Affordance when information is available
+  (directly or indirectly) that indicates how it can or should be
+  used.
+  In the present document, the term is used for the digital
+  (network-directed) interfaces of a Thing only; as it is a physical
+  object as well, the Thing might also have physical affordances such
+  as buttons, dials, and displays.
 
 Property:
-: An affordance that can potentially be used to read, write, and/or
-  observe state (current/stored information) on a Grouping.
-  (Note that Entries are often called
-  properties in other environments; in this document, the term
-  Property is specifically reserved for affordances, even if the map
-  key "properties" might be imported from a data definition language
-  with the other semantics.)
+: An Affordance that can potentially be used to read, write, and/or
+  observe state (current/stored information) on a Grouping.\\
+  (Note that other environments often use the term "property" for a
+  JSON concept that we call "entry" [see below].
+  In this document, the term Property is specifically reserved for
+  affordances, even if the map key `"properties"` might be imported with
+  the JSON-level semantics from a data definition language.)
 
 Action:
-: An affordance that can potentially be used to perform a named operation on a Grouping.
+: An Affordance that can potentially be used to perform a named operation on a Grouping.
 
 Event:
-: An affordance that can potentially be used to obtain information about what happened to a Grouping.
+: An Affordance that can potentially be used to obtain information
+  about what happened to a Grouping.
 
-Object, sdfObject:
-: A grouping containing only Affordance declarations (Property, Action, and Event declarations); the main
-  "atom" of reusable semantics for model construction. sdfObjects are
-  similar to sdfThings but do not allow nesting, i.e., they cannot contain
-  other Groupings (sdfObjects or sdfThings). (Note that
-  JSON maps are often called JSON objects due to JSON's JavaScript
-  heritage; in the context of SDF, the term Object as the colloquial shorthand for sdfObject, is specifically reserved for the
-  above grouping, even if
-  the type name `"object"` is imported from a data definition
-  language with the other semantics.)
-
-sdfThing:
-: A Grouping that can contain nested Groupings (sdfThings and sdfObjects).
-  Like sdfObject, it can also contain Affordance
-  declarations (Property, Action, and Event declarations).
-  (Note that "Thing" has a different meaning from sdfThing and
-  therefore is not available as a colloquial shorthand of
-  sdfThing.)
-
-Definition:
-: An entry in a Definition Group; the entry creates a new semantic
-  term for use in SDF models and associates it with a set of
-  qualities.
-  Unless it is also a Declaration, a definition just defines a term,
-  it does not create a component item within the enclosing definition.
-
-Declaration:
-: A definition within an enclosing
-  definition, intended to create a component item within that
-  enclosing definition.  Every declaration can also be used as a
-  definition for reference in a different place.
+### Specification Language Terms
+{:unnumbered}
 
 SDF Document:
 : Container for SDF Definitions, together with data
@@ -324,20 +278,100 @@ SDF Model:
   can be built from an SDF Document that references definitions and
   declarations from additional SDF documents.
 
+Entry:
+: A key-value pair in a map. (In JSON maps, sometimes also called "member".)
+
+Block:
+: One or more entries in a JSON map that is part of an SDF
+  specification; these entries can be described as a Block to
+  emphasize that they together serve a specific function.
+
+Group:
+: An entry in the main JSON map that represents the SDF document, and in
+  certain nested definitions.
+  A group
+  has a Class Name Keyword as its key and a map of named definition
+  entries (Definition Group) as a value.
+
+Class Name Keyword:
+: One of `sdfThing`, `sdfObject`, `sdfProperty`, `sdfAction`,
+  `sdfEvent`, or `sdfData`; the Classes for these type keywords are
+  capitalized and prefixed with `sdf`.
+
+Class:
+: Abstract term for the information that is contained in groups
+  identified by a Class Name Keyword.
+
+Quality:
+: A metadata item in a definition or declaration which says something
+  about that definition or declaration.  A quality is represented in
+  SDF as an entry in a JSON map (JSON object) that serves as a definition
+  or declaration.
+  (The term "Quality" is used because another popular term,
+  "Property", already has a different meaning.)
+
+Definition:
+: An entry in a Definition Group.
+  The entry creates a new semantic term for use in SDF models and
+  associates it with a set of qualities.
+  Unless the Class Name Keyword of the Group also makes it a
+  Declaration (see {{definitions-block}}), a definition just defines a
+  term, it does not create a component item within the enclosing
+  definition.
+
+Declaration:
+: A definition within an enclosing
+  definition that is intended to create a component item within that
+  enclosing definition.  Every declaration can also be used as a
+  definition for reference elsewhere.
+
+Grouping:
+: An sdfThing or sdfObject, i.e., (directly or indirectly) a
+  description for a combination of Affordances.
+
+Object, sdfObject:
+: A Grouping that contains Affordance declarations (Property, Action,
+  and Event declarations) only.
+  It serves as the main "atom" of reusable semantics for model
+  construction, representing the interaction model for a Thing that is
+  simple enough to not require nested structure.
+  sdfObjects are therefore similar to sdfThings but do not allow
+  nesting, i.e., they cannot contain other Groupings (sdfObjects or
+  sdfThings).\\
+  (Note that
+  JSON maps are often called JSON objects due to JSON's JavaScript
+  heritage; in the context of SDF, the term Object as the colloquial shorthand for sdfObject, is specifically reserved for the
+  above Grouping, even if
+  the type name `"object"` is imported from a data definition
+  language with the other semantics.)
+
+sdfThing:
+: A Grouping that can contain nested Groupings (sdfThings and sdfObjects).
+  Like sdfObject, it can also contain Affordance
+  declarations (Property, Action, and Event declarations).
+  (Note that "Thing" has a different meaning from sdfThing and
+  therefore is not available as a colloquial shorthand of
+  sdfThing.)
+
 Protocol Binding:
-: A companion document to an SDF Model that defines how to map
-  the abstract concepts in the model into the protocols in use
-  in a specific ecosystem.  Might supply URL components, numeric IDs,
-  and similar details.  Protocol Bindings are one case of an
-  Augmentation Mechanism.
+: A companion document to an SDF Model that defines how to map the
+  abstract concepts in the model into the protocols in use in a
+  specific ecosystem.
+  The Protocol Binding might supply URL components, numeric IDs, and
+  similar details.
+  Protocol Bindings are one case of an Augmentation Mechanism.
 
 Augmentation Mechanism:
 : A companion document to a base SDF Model that provides additional
-  information ("augments" the base specification), possibly for use in
+  information ("augments" the base specification).
+  The information may be for use in
   a specific ecosystem or with a specific protocol ("Protocol Binding").
   No specific Augmentation Mechanisms are defined in base SDF.
   A simple mechanism for such augmentations has been discussed as a
   "mapping file" {{-mapping}}.
+
+### Other Terms and Conventions
+{:unnumbered}
 
 The term "byte" is used in its now-customary sense as a synonym for
 "octet".
@@ -508,13 +542,15 @@ changes.
 (These three aspects are described by the qualities `readable`,
 `writable`, and `observable` defined for an sdfProperty.)
 
-Definitions in `sdfProperty` groups include the definitions from
-`sdfData` groups, however, they actually also declare that a Property
+Definitions in `sdfProperty` groups look like the definitions in
+`sdfData` groups.
+However, they actually also declare that a Property
 with the given qualities potentially is present in the containing sdfObject.
 
-For definitions in `sdfProperty` and `sdfData`, SDF provides qualities that can
-constrain the structure and values of data allowed in the interactions
-modeled by them, as well as qualities that associate semantics to these
+For definitions in `sdfProperty` and `sdfData`, SDF provides qualities
+that can constrain the structure and values of data allowed in the
+interactions modeled by them.
+It also provides qualities that associate semantics to these
 data, such as engineering units and unit scaling information.
 
 For the data definition within `sdfProperty` or `sdfData`, SDF borrows
@@ -544,10 +580,12 @@ state, often resulting in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.
 
-Actions may have data parameters; these are modeled as a single item of input
-data and output data, each.  (Where multiple parameters need to be
-modeled, an `"object"` type can be used to combine these parameters into one.)
-<!-- (using `sdfData` definitions, i.e., the same entries as for `sdfProperty` declarations). -->
+Actions may have data parameters: these are modeled as a single item of input
+data and output data, each.  Where multiple parameters need to be
+modeled, an `"object"` type can be used to combine these parameters into one.
+<!-- (using `sdfData` definitions, i.e., the same entries as for -->
+<!-- `sdfProperty` declarations). -->
+
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
 sdfProperty; the effects may play out over time and emit action
