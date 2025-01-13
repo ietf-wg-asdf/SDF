@@ -1063,6 +1063,9 @@ In a JSON map establishing a definition, the keyword `sdfRef` is used
 to copy all of the qualities and enclosed definitions of the referenced definition, indicated
 by the included name reference, into the newly formed definition.
 (This can be compared to the processing of the `$ref` keyword in {{-jso}}.)
+The referenced definition should be such that the new SDF definition is also
+valid SDF (e.g., all copied qualities and definitions are valid in the context
+of the new definition).
 
 For example, this reference:
 
