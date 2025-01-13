@@ -898,6 +898,9 @@ added, if needed, where the namespace entry is used.
 "defaultNamespace": "cap"
 ~~~
 
+Multiple SDF documents can contribute to the same namespace by using
+the same namespace URI for the default namespace across the documents.
+
 If no defaultNamespace setting is given, the SDF document does not
 contribute to a global namespace (all definitions remain local to the
 model and are not accessible for re-use by other models).
