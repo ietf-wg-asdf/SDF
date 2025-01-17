@@ -1828,13 +1828,14 @@ Content-Format
 This document adds the following Content-Format to the "CoAP
 Content-Formats" registry,
 within the "Constrained RESTful Environments (CoRE) Parameters"
-registry group, where TBD1 comes from the "IETF Review" 256-999 range.
+registry group, where 434 comes from the "IETF Review" 256-999 range.
 
-| Content Type         | Content Coding | ID   | Reference |
-| application/sdf+json | -              | TBD1 | RFC XXXX  |
+| Content Type         | Content Coding |  ID | Reference |
+| application/sdf+json | -              | 434 | RFC XXXX  |
 {: align="left" title="SDF Content-format Registration"}
 
-// RFC Ed.: please replace TBD1 with the assigned ID, remove the
+// RFC Ed.: 434 was earmarked in <https://mailarchive.ietf.org/arch/msg/core-parameters/iLDsdxk80YO9IsLMXMAgcx5S8Ak/>;
+please replace 434 with the assigned ID, remove the
 requested range, and remove this note.\\
 // RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
 
