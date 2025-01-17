@@ -772,7 +772,7 @@ names.
 A qualified Quality Name is composed of a Quality Name Prefix, a `:`
 (colon) character, and a nonqualified Quality Name.
 Quality Name Prefixes are registered in the "Quality Name Prefixes"
-sub-registry in the "SDF Parameters" registry ({{qnp}}); they are
+registry in the "SDF Parameters" registry group ({{qnp}}); they are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
@@ -1342,8 +1342,8 @@ versions of the json-schema.org proposal they were imported from.
 
 
 1. The unit name SHOULD be as
-   per the {{senml-units (SenML Units)<RFC8428}} Registry
-   or the {{secondary-units (Secondary Units)<RFC8798}} Registry in {{-units}}
+   per the {{senml-units (SenML Units)<RFC8428}} registry
+   or the {{secondary-units (Secondary Units)<RFC8798}} registry in {{-units}}
    as specified by
    {{Sections 4.5.1 and 12.1 of -senml}} and {{Section 3 of
    -senml-units-2}}, respectively.
@@ -1373,7 +1373,7 @@ versions of the json-schema.org proposal they were imported from.
 SDF defines a number of basic types beyond those provided by JSON or
 JSO.  These types are identified by the `sdfType` quality, which
 is a text string from a set of type names defined by the  "sdfType
-values" sub-registry in the "SDF Parameters" registry
+values" registry in the "SDF Parameters" registry group
 ({{sdftype-values}}).
 The sdfType name is composed of lower case ASCII letters, digits,
 and `-` (ASCII hyphen/minus) characters, starting
@@ -1811,9 +1811,10 @@ Provisional registration:
 Content-Format
 --------------
 
-This document adds the following Content-Format to the "CoAP Content-Formats",
+This document adds the following Content-Format to the "CoAP
+Content-Formats" registry,
 within the "Constrained RESTful Environments (CoRE) Parameters"
-registry, where TBD1 comes from the "IETF Review" 256-999 range.
+registry group, where TBD1 comes from the "IETF Review" 256-999 range.
 
 | Content Type         | Content Coding | ID   | Reference |
 | application/sdf+json | -              | TBD1 | RFC XXXX  |
@@ -1841,8 +1842,8 @@ Specification:
 
 Repository:
 :  combining the symbol values from the {{senml-units (SenML
-   Units)<IANA.senml}} Registry and the {{secondary-units (Secondary
-   Units)<IANA.senml}} Registry in {{-units}} as specified by {{Sections
+   Units)<IANA.senml}} registry and the {{secondary-units (Secondary
+   Units)<IANA.senml}} registry in {{-units}} as specified by {{Sections
    4.5.1 and 12.1 of -senml}} and {{Section 3 of -senml-units-2}},
    respectively (which by the registration policy are guaranteed to be
    non-overlapping).
@@ -1856,13 +1857,13 @@ Index value:
 Registries
 ----------
 
-IANA is requested to create an "SDF Parameters" registry, with the
-sub-registries defined in this Section.
+IANA is requested to create an "SDF Parameters" registry group, with the
+registries defined in this Section.
 
 ### Quality Name Prefixes {#qnp}
 
-IANA is requested to create a "Quality Name Prefixes" sub-registry in
-the "SDF Parameters" registry, with the following template:
+IANA is requested to create a "Quality Name Prefixes" registry in
+the "SDF Parameters" registry group, with the following template:
 
 Prefix:
 : A name composed of lower case ASCII letters and digits, starting
@@ -1895,12 +1896,12 @@ different ways than the IETF, and that as a result some of these
 overall objectives will be achieved in a different way and to a
 different level of comfort.
 
-The "Quality Name Prefixes" sub-registry starts out empty.
+The "Quality Name Prefixes" registry starts out empty.
 
 ### sdfType Values
 
-IANA is requested to create a "sdfType values" sub-registry in
-the "SDF Parameters" registry, with the following template:
+IANA is requested to create a "sdfType values" registry in
+the "SDF Parameters" registry group, with the following template:
 
 Name:
 : A name composed of lower case ASCII letters, digits and `-` (ASCII
