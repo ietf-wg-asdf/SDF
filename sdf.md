@@ -144,6 +144,7 @@ informative:
   I-D.bormann-t2trg-deref-id: deref
   RFC9485: iregexp
   RFC9535: jsonpath
+  BCP100:
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -1872,6 +1873,87 @@ Registries
 
 IANA is requested to create an "SDF Parameters" registry group, with the
 registries defined in this Section.
+
+### Quality Names {#qn}
+
+IANA is requested to create a "Quality Name Prefixes" registry in
+the "SDF Parameters" registry group, with the following template:
+
+Name:
+: A name composed of ASCII letters, digits, and dollar signs, starting
+  with a lower case ASCII letter or a dollar sign (i.e., using a
+  pattern of "⁠`[a-z$][A-Za-z$0-9]*`").
+
+Brief Description:
+: A brief description.
+
+Reference:
+: A pointer to a specification.
+
+Change Controller:
+: (see {{Section 2.3 of RFC8126@-reg}})
+
+Quality Names in this registry are intended to be registered in
+conjunction with RFCs and activities of the IETF.
+
+The registration policy is Specification Required as per {{Section 4.6
+of RFC8126@-reg}}.
+(Note that the policy is not "RFC Required" or "IETF Review" {{Sections
+4.7 and 4.8 of RFC8126@-reg}} so that registrations can be made earlier
+in the process, even earlier than foreseen in {{BCP100}}.)
+
+The instructions to the Experts are:
+* to ascertain that the specification is available in an immutable
+  reference and has achieved a good level of review in conjunction with
+  RFCs or activities of the IETF, and
+* to be frugal in the allocation of quality names that are suggestive
+  of generally applicable semantics, keeping them in reserve for
+  qualities that are likely to enjoy wide use and can make good use of
+  their conciseness.
+
+The "Quality Name Prefixes" registry starts out as in
+{{tab-quality-names}}; all references for these initial entries are to
+RFC XXXX and all change controllers are given as "IETF"".
+
+| Name                 | Brief Description                                                 |
+|----------------------|-------------------------------------------------------------------|
+| $comment             | source code comments only, no semantics                           |
+| const                | constant value                                                    |
+| contentFormat        | content format                                                    |
+| default              | default value                                                     |
+| description          | long description text                                             |
+| enum                 | sdfChoice limited to text strings                                 |
+| exclusiveMaximum     | exclusive maximum for a number                                    |
+| exclusiveMinimum     | exclusive minimum for a number                                    |
+| format               | specific format for a text string                                 |
+| items                | items of an array                                                 |
+| label                | short text (no constraints); defaults to key                      |
+| maxItems             | maximum number of items in an array                               |
+| maxLength            | maximum length (in characters) for a text string                  |
+| maximum              | maximum for a number                                              |
+| minItems             | minimum number of items in an array                               |
+| minLength            | minimum length (in characters) for a text string                  |
+| minimum              | minimum for a number                                              |
+| multipleOf           | step size of number                                               |
+| nullable             | boolean: can the item be left out?                                |
+| observable           | boolean: can the item be observed?                                |
+| pattern              | regular expression pattern for a text string                      |
+| properties           | named dataqualities for type="object"                             |
+| readable             | boolean: can the item be read?                                    |
+| required             | which data items are required?                                    |
+| sdfChoice            | named dataqualities for a choice                                  |
+| sdfData              | named dataqualities for an independent data type definition       |
+| sdfInputData         | input data to an action                                           |
+| sdfOutputData        | output data of an action or event (sdfRequired applies here)      |
+| sdfRef               | sdf-pointer to definition being referenced                        |
+| sdfRequired          | pointer-list to declarations of required components               |
+| sdfRequiredInputData | pointer-list to declarations of required input data for an action |
+| sdfType              | more detailed information about the type of a string              |
+| type                 | general category of data type                                     |
+| uniqueItems          | boolean: do the items of the array need to be all different?      |
+| unit                 | engineering unit and scale (per SenML registry)                   |
+| writable             | boolean: can the item be written to?                              |
+{: #tab-quality-names title="Initial Content of Quality Names Registry"}
 
 ### Quality Name Prefixes {#qnp}
 
