@@ -1876,7 +1876,7 @@ registries defined in this Section.
 
 ### Quality Names {#qn}
 
-IANA is requested to create a "Quality Name Prefixes" registry in
+IANA is requested to create a "Quality Names" registry in
 the "SDF Parameters" registry group, with the following template:
 
 Name:
