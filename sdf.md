@@ -376,6 +376,11 @@ Augmentation Mechanism:
 The term "byte" is used in its now-customary sense as a synonym for
 "octet".
 
+Regular expressions that are used in the text as a "pattern" for some
+string are interpreted as per {{-iregexp}}.
+(Note that a form of regular expressions is also used as values of the
+quality `pattern`; see {{type-string}}.)
+
 Conventions:
 
 - The singular form is chosen as the preferred one for the keywords defined here.
