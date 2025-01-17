@@ -1,6 +1,7 @@
 ---
 v: 3
 coding: utf-8
+# svg-id-cleanup: true
 
 title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
@@ -65,20 +66,27 @@ normative:
   RFC3339: dt
   RFC8428: senml
   RFC8798: senml-units-2
-  RFC3986: uri
-  RFC4122: uuid
+  STD66: uri
+# RFC3986
+  RFC9562: uuid
+# was RFC4122
   RFC6901: pointer
   RFC7396: merge-patch
-  RFC3629: utf8
-  RFC8259: json
+  STD63: utf8
+# RFC3629:
+  STD90: json
+# RFC8259
   RFC8610: cddl
-  RFC8949: cbor
+  STD94: cbor
+# RFC8949
   RFC9193: data-ct
-  RFC8126:
-    -: reg
-    display: BCP26
+  BCP26: reg
+# RFC8126:
+  BCP73: urn-param
+# RFC3553
   W3C.NOTE-curie-20101216: curie
-  RFC0020: ascii
+  STD80: ascii
+# RFC0020:
   SPDX:
     title: SPDX License List
     target: https://spdx.org/licenses/
@@ -135,7 +143,7 @@ informative:
   I-D.bormann-asdf-sdf-mapping: mapping
   I-D.bormann-t2trg-deref-id: deref
   RFC9485: iregexp
-  I-D.ietf-jsonpath-base: jsonpath
+  RFC9535: jsonpath
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -385,7 +393,7 @@ Conventions:
 
 - The singular form is chosen as the preferred one for the keywords defined here.
 
-{::boilerplate bcp14-tagged}
+{::boilerplate bcp14-tagged-bcp14}
 
 # Overview
 
@@ -985,7 +993,7 @@ become possible in the future.
 See also {{-deref}} for a discussion of dereferenceable identifiers.)
 
 The absolute URI of a global name should be a URI as per {{Section 3 of
--uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
+RFC3986@-uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
 For base SDF, the query part should
 not be used (it might be used in extensions).
 
@@ -1012,7 +1020,7 @@ For instance, in {{example1}}, definitions for the following global names are co
 * https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
 Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
--uri}}) from the fragment identifier part.
+RFC3986@-uri}}) from the fragment identifier part.
 
 ## Referencing global names
 
@@ -1023,7 +1031,7 @@ and the prefixes to ASCII characters {{-ascii}}.
 
 A name that is contributed by the current SDF document can be
 referenced by a Same-Document Reference as per {{Section 4.4 of
--uri}}.
+RFC3986@-uri}}.
 As there is little point in referencing the entire SDF document, this will be a `#` followed by a JSON pointer.
 This is the only kind of name reference to itself that is possible in an SDF
 document that does not set a default namespace.
@@ -1399,8 +1407,8 @@ and a conventional JSON representation for values of the type.
 
 | Name        | Description                      | type   | JSON Representation       | Reference                    |
 |-------------|----------------------------------|--------|---------------------------|------------------------------|
-| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949}} |
-| unix-time   | A point in civil time (note 1)   | number | POSIX time                | {{Section 3.4.2 of RFC8949}}   |
+| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949@-cbor}} |
+| unix-time   | A point in civil time (note 1)   | number | POSIX time                | {{Section 3.4.2 of RFC8949@-cbor}} |
 {: #sdftype1 title="Values Defined in Base SDF for the sdfType Quality"}
 
 (1) Note that the definition of `unix-time` does not imply the
@@ -1837,7 +1845,7 @@ IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit) {#unit-urn}
 IANA is requested to register the following value in the "{{params-1
 (IETF URN Sub-namespace for Registered Protocol Parameter
 Identifiers)<IANA.params}}" registry in {{IANA.params}}, following the template in
-{{!RFC3553}}:
+{{BCP73}}:
 
 Registry name:
 : unit
@@ -1854,9 +1862,9 @@ Repository:
    non-overlapping).
 
 Index value:
-: Percent-encoding ({{Section 2.1 of -uri}}) is required of
+: Percent-encoding ({{Section 2.1 of RFC3986@-uri}}) is required of
   any characters in unit names as required by ABNF rule "pchar" in
-  {{Section 3.3 of -uri}}, specifically at the time of writing for the
+  {{Section 3.3 of RFC3986@-uri}}, specifically at the time of writing for the
   unit names "%" (deprecated in favor of "/"), "%RH", "%EL".
 
 Registries
@@ -1885,7 +1893,7 @@ Quality Name Prefixes are intended to be registered by organizations
 that plan to define quality names constructed with an
 organization-specifix prefix ({{gnqn}}).
 
-The registration policy is Expert Review as per {{Section 4.5 of -reg}}.
+The registration policy is Expert Review as per {{Section 4.5 of RFC8126@-reg}}.
 The instructions to the Expert are to ascertain that the organization
 will handle quality names constructed using their prefix in a way that
 roughly achieves the objectives for an IANA registry that support
@@ -1894,7 +1902,7 @@ including:
 
 * Stability, "stable and permanent";
 * Transparency, "readily available", "in sufficient detail" ({{Section
-  4.6 of -reg}}).
+  4.6 of RFC8126@-reg}}).
 
 The Expert will take into account that other organizations operate in
 different ways than the IETF, and that as a result some of these
@@ -1930,7 +1938,7 @@ sdfType values are intended to be registered to enable modeling additional
 SDF-specific types (see {{sdftype}}).
 
 The registration policy is Specification Required as per {{Section 4.6 of
--reg}}.  The instructions to the Expert are to ascertain that the
+RFC8126@-reg}}.  The instructions to the Expert are to ascertain that the
 specification provides enough detail to enable interoperability
 between implementations of the sdfType being registered, and that
 names are chosen with enough specificity that ecosystem-specific
@@ -1949,7 +1957,7 @@ interoperability; analogs of these security considerations can apply
 to SDF.
 
 The security considerations of underlying building blocks such as
-those detailed in {{Section 10 of -utf8}} apply.
+those detailed in {{Section 10 of RFC3629@-utf8}} apply.
 SDF uses JSON as a representation language; for a number of
 cases {{-json}} indicates that implementation behavior for certain constructs
 allowed by the JSON grammar is unpredictable.
@@ -2144,8 +2152,8 @@ as an absolute point in civil time).
 * "`date-time`", "`date`", "`time`":
   An {{RFC3339}} `date-time`, `full-date`, or `full-time`, respectively.
 * "`uri`", "`uri-reference`":
-  An {{RFC3986}} URI or URI Reference, respectively.
-* "`uuid`": An {{RFC4122}} UUID.
+  An {{-uri}} URI or URI Reference, respectively.
+* "`uuid`": An {{-uuid}} UUID.
 
 ## type "`boolean`"
 
