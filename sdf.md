@@ -1880,7 +1880,7 @@ IANA is requested to create a "Quality Names" registry in
 the "SDF Parameters" registry group, with the following template:
 
 Name:
-: A name composed of ASCII letters, digits, and dollar signs, starting
+: A quality name composed of ASCII letters, digits, and dollar signs, starting
   with a lower case ASCII letter or a dollar sign (i.e., using a
   pattern of "⁠`[a-z$][A-Za-z$0-9]*`").
 
@@ -1961,7 +1961,7 @@ IANA is requested to create a "Quality Name Prefixes" registry in
 the "SDF Parameters" registry group, with the following template:
 
 Prefix:
-: A name composed of lower case ASCII letters and digits, starting
+: A quality name prefix composed of lower case ASCII letters and digits, starting
   with a lower case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
 Contact:
