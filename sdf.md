@@ -1243,14 +1243,21 @@ one or more declarations that are mandatory to be represented.
 References in this array can be SDF names (JSON Pointers), or one of
 two abbreviated reference formats:
 
-* a text string with a "referenceable-name", i.e., an affordance name or grouping name.
-All affordance declarations that are directly (i.e., not nested further in another grouping) in the same grouping and that
-carry this name (there can be multiple ones, one per affordance type)
-are declared to be mandatory to be represented. The same applies for
-groupings made mandatory within groupings containing them.
+* a text string with a "referenceable-name", namely an affordance name
+  or a grouping name:
+
+  * All affordance declarations that are directly in the same grouping
+    (i.e., not nested further in another grouping) and that carry this
+    name are declared to be mandatory to be represented.
+    Note that there can be multiple such affordance declarations, one
+    per affordance type.
+
+  * The same applies for groupings made mandatory within groupings
+    containing them.
+
 * the Boolean value `true`.
-The affordance/grouping itself that carries the `sdfRequired` keyword is declared
-to be mandatory to be represented.
+  The affordance/grouping itself that carries the `sdfRequired`
+  keyword is declared to be mandatory to be represented.
 
 Note that referenceable-names are not
 subject to the encoding JSON pointers require as discussed in {{hierarchical-names}}.
