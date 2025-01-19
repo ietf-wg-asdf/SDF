@@ -1120,10 +1120,11 @@ sdfRef member, the semantics is defined to be as if the following steps were per
    original JSON map.
 
 Note that the formal syntaxes given in Appendices {{<syntax}} and {{<jso}}
-generally describe the _result_ of applying a merge-patch; the notations
-are not powerful enough to describe, for instance, the effect of null
-values given with the sdfRef to remove members of JSON maps from
-the referenced target.  Nonetheless, the syntaxes also give the syntax
+generally describe the _result_ of applying a merge-patch: the notations
+are not powerful enough to describe, for instance, how the merge-patch
+algorithm causes null values within the sdfRef to remove members of JSON
+maps from the referenced target.
+Nonetheless, the syntaxes also give the syntax
 of the sdfRef itself, which vanishes during the resolution; in many
 cases therefore even merge-patch inputs will validate with these
 formal syntaxes.
