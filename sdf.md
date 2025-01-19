@@ -874,7 +874,13 @@ set up, and no defaultNamespace can be given.
 
 ## Definitions block
 
-The Definitions block contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
+The Definitions block contains one or more groups, each identified by
+a Class Name Keyword.
+There can only be one group per keyword; the actual grouping is just a
+shortcut for identifying the class name keyword that applies to each
+of the individual definitions in the group, without repeating it for
+each definition.
+
 The value of each group is a JSON map, the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
 (In short, we speak of the map entries as "named sets of qualities".)
 
