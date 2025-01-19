@@ -1686,7 +1686,8 @@ Modular composition of definitions enables an existing definition
 
 ### Use of the "sdfRef" keyword to re-use a definition
 
-An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword `sdfRef` as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template.
+An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition.
+This pattern uses the keyword `sdfRef` as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template.
 
 In the definition that uses `sdfRef`, new qualities may be added
 and existing qualities from the referenced definition may be
@@ -1694,20 +1695,26 @@ overridden.  (Note that JSON maps do not have a defined
 order, so the SDF processor may see these overrides before seeing the
 `sdfRef`.)
 
-Note that if the referenced definition contains qualities or
-definitions that are not valid in the context where the sdfRef is used
-(for instance, if an sdfThing definition would be added in an sdfObject definition), the resulting model, when resolved, may be invalid.
+Note that the definition referenced by `sdfRef` might contain
+qualities or definitions that are not valid in the context where the
+`sdfRef` is used.
+In this case, the resulting model, when resolved, may be invalid.
+Example: an sdfRef adds an sdfThing definition in an sdfObject
+definition.
 
-As a convention, overrides are intended to be used only for further restricting
-the set of data values, as shown in {{exa-sdfref}}:  any value for a
-`cable-length` also is a valid value for a `length`, with the
+As a convention, overrides are intended to be used only for further
+restricting the allowable set of data values.
+Such a usage is shown in {{exa-sdfref}}:  any value allowable for a
+`cable-length` also is an allowable value for a `length`, with the
 additional restriction that the length cannot be smaller than 5 cm.
 (This is labeled as a convention as it cannot be checked in the
-general case; a quality of implementation consideration for a tool
+general case.
+A quality of implementation consideration for a tool
 might be to provide at least some form of checking.)
-Note that a description is provided that overrides the description of
-the referenced definition; as this quality is intended for human
-consumption there is no conflict with the intended goal.
+Note that the example provides a `description` that overrides the
+`description` of the referenced definition; as this quality is
+intended for human consumption there is no conflict with the intended
+goal.
 
 ~~~
 "sdfData":
