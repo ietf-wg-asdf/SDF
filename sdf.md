@@ -1036,10 +1036,11 @@ RFC3986@-uri}}) from the fragment identifier part.
 
 ## Referencing global names
 
-A name reference takes the form of the production `curie` in
-{{-curie}} (note that this excludes the production `safe-curie`),
-but also limiting the IRIs involved in that production to URIs as per {{-uri}}
-and the prefixes to ASCII characters {{-ascii}}.
+A name reference takes the form of the production `curie` in Section 3
+of {{-curie}}, but limiting the IRIs involved in that grammar to URIs as
+per {{-uri}} and the prefixes to ASCII characters {{-ascii}}.
+(Note that this definition does not make use of the production
+`safe-curie` in {{-curie}}.)
 
 A name that is contributed by the current SDF document can be
 referenced by a Same-Document Reference as per {{Section 4.4 of
