@@ -582,9 +582,8 @@ might be considered to be roughly analogous to method calls.
 
 Actions may have data parameters: these are modeled as a single item of input
 data and output data, each.  Where multiple parameters need to be
-modeled, an `"object"` type can be used to combine these parameters into one.
-<!-- (using `sdfData` definitions, i.e., the same entries as for -->
-<!-- `sdfProperty` declarations). -->
+modeled, an `"object"` type can be used to combine these parameters
+into one; for an example see {{example-obj-type}} in {{type-object}}.
 
 Actions may be long-running, that is to say that the effects may not
 take place immediately as would be expected for an update to an
@@ -1236,7 +1235,7 @@ potentially requiring further path elements as well as JSON pointer
 encoding.  The need for this is best avoided by choosing Given Names
 without these characters.)
 
-The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition in this definition, for the "alarmType" data (sdfOutputData) produced by the sdfEvent "overTemperatureEvent".
+The example in {{example-req}} shows two required elements in the sdfObject definition for "temperatureWithAlarm", the sdfProperty "currentTemperature", and the sdfEvent "overTemperatureEvent". The example also shows the use of JSON pointer with "sdfRef" to use a pre-existing definition for the sdfProperty "currentTemperature" and for the sdfOutputData produced by the sdfEvent "overTemperatureEvent".
 
 ~~~ json
 "sdfObject": {
@@ -1252,22 +1251,14 @@ The example in {{example-req}} shows two required elements in the sdfObject defi
     },
     "sdfProperty": {
       "currentTemperature": {
-"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData",
+      "writable": false
       }
     },
     "sdfEvent": {
       "overTemperatureEvent": {
        "sdfOutputData": {
-          "type": "object",
-          "properties": {
-            "alarmType": {
-              "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
-              "const": "OverTemperatureAlarm"
-            },
-            "temperature": {
 "sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
-            }
-          }
         }
       }
     }
@@ -2177,6 +2168,26 @@ string values that give the key names of required entries.
 
 Note that the term "properties" as an additional quality for
 defining map entries is unrelated to sdfProperty.
+
+For example, to include information about the type of the event in the
+"overTemperatureEvent" of {{example-req}}, the sdfOutputData there could
+be defined as follows:
+
+~~~ json
+    "sdfOutputData": {
+      "type": "object",
+      "properties": {
+        "alarmType": {
+          "sdfRef": "cap:#/sdfData/alarmTypes/quantityAlarms",
+          "const": "OverTemperatureAlarm"
+        },
+        "temperature": {
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+        }
+      }
+    }
+~~~
+{: #example-obj-type title="Using object type with sdfOutputData "}
 
 ## Implementation notes
 
