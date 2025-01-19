@@ -746,7 +746,7 @@ typically employing kebab-case for names constructed out of multiple
 words {{KebabCase}}.  ASCII hyphen/minus can then unambiguously be
 translated to an ASCII `_` underscore character and back depending on
 the programming environment.
-Some styles also allow a dot `.` in given names.
+Some styles also allow a dot ("`.`") in given names.
 Given Names are often sufficiently self-explanatory that they can be
 used in place of the `label` quality if that is not given.
 In turn, if a given name turns out too complicated, a more elaborate
