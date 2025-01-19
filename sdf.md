@@ -1,6 +1,7 @@
 ---
 v: 3
 coding: utf-8
+# svg-id-cleanup: true
 
 title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
@@ -65,20 +66,27 @@ normative:
   RFC3339: dt
   RFC8428: senml
   RFC8798: senml-units-2
-  RFC3986: uri
-  RFC4122: uuid
+  STD66: uri
+# RFC3986
+  RFC9562: uuid
+# was RFC4122
   RFC6901: pointer
   RFC7396: merge-patch
-  RFC3629: utf8
-  RFC8259: json
+  STD63: utf8
+# RFC3629:
+  STD90: json
+# RFC8259
   RFC8610: cddl
-  RFC8949: cbor
+  STD94: cbor
+# RFC8949
   RFC9193: data-ct
-  RFC8126:
-    -: reg
-    display: BCP26
+  BCP26: reg
+# RFC8126:
+  BCP73: urn-param
+# RFC3553
   W3C.NOTE-curie-20101216: curie
-  RFC0020: ascii
+  STD80: ascii
+# RFC0020:
   SPDX:
     title: SPDX License List
     target: https://spdx.org/licenses/
@@ -135,7 +143,8 @@ informative:
   I-D.bormann-asdf-sdf-mapping: mapping
   I-D.bormann-t2trg-deref-id: deref
   RFC9485: iregexp
-  I-D.ietf-jsonpath-base: jsonpath
+  RFC9535: jsonpath
+  BCP100:
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -376,11 +385,16 @@ Augmentation Mechanism:
 The term "byte" is used in its now-customary sense as a synonym for
 "octet".
 
+Regular expressions that are used in the text as a "pattern" for some
+string are interpreted as per {{-iregexp}}.
+(Note that a form of regular expressions is also used as values of the
+quality `pattern`; see {{type-string}}.)
+
 Conventions:
 
 - The singular form is chosen as the preferred one for the keywords defined here.
 
-{::boilerplate bcp14-tagged}
+{::boilerplate bcp14-tagged-bcp14}
 
 # Overview
 
@@ -771,7 +785,7 @@ names.
 A qualified Quality Name is composed of a Quality Name Prefix, a `:`
 (colon) character, and a nonqualified Quality Name.
 Quality Name Prefixes are registered in the "Quality Name Prefixes"
-sub-registry in the "SDF Parameters" registry ({{qnp}}); they are
+registry in the "SDF Parameters" registry group ({{qnp}}); they are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
@@ -979,7 +993,7 @@ become possible in the future.
 See also {{-deref}} for a discussion of dereferenceable identifiers.)
 
 The absolute URI of a global name should be a URI as per {{Section 3 of
--uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
+RFC3986@-uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
 For base SDF, the query part should
 not be used (it might be used in extensions).
 
@@ -1006,7 +1020,7 @@ For instance, in {{example1}}, definitions for the following global names are co
 * https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
 Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
--uri}}) from the fragment identifier part.
+RFC3986@-uri}}) from the fragment identifier part.
 
 ## Referencing global names
 
@@ -1017,7 +1031,7 @@ and the prefixes to ASCII characters {{-ascii}}.
 
 A name that is contributed by the current SDF document can be
 referenced by a Same-Document Reference as per {{Section 4.4 of
--uri}}.
+RFC3986@-uri}}.
 As there is little point in referencing the entire SDF document, this will be a `#` followed by a JSON pointer.
 This is the only kind of name reference to itself that is possible in an SDF
 document that does not set a default namespace.
@@ -1333,8 +1347,8 @@ versions of the json-schema.org proposal they were imported from.
 
 
 1. The unit name SHOULD be as
-   per the {{senml-units (SenML Units)<RFC8428}} Registry
-   or the {{secondary-units (Secondary Units)<RFC8798}} Registry in {{-units}}
+   per the {{senml-units (SenML Units)<RFC8428}} registry
+   or the {{secondary-units (Secondary Units)<RFC8798}} registry in {{-units}}
    as specified by
    {{Sections 4.5.1 and 12.1 of -senml}} and {{Section 3 of
    -senml-units-2}}, respectively.
@@ -1364,7 +1378,7 @@ versions of the json-schema.org proposal they were imported from.
 SDF defines a number of basic types beyond those provided by JSON or
 JSO.  These types are identified by the `sdfType` quality, which
 is a text string from a set of type names defined by the  "sdfType
-values" sub-registry in the "SDF Parameters" registry
+values" registry in the "SDF Parameters" registry group
 ({{sdftype-values}}).
 The sdfType name is composed of lower case ASCII letters, digits,
 and `-` (ASCII hyphen/minus) characters, starting
@@ -1385,8 +1399,8 @@ and a conventional JSON representation for values of the type.
 
 | Name        | Description                      | type   | JSON Representation       | Reference                    |
 |-------------|----------------------------------|--------|---------------------------|------------------------------|
-| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949}} |
-| unix-time   | A point in civil time (note 1)   | number | POSIX time                | {{Section 3.4.2 of RFC8949}}   |
+| byte-string | A sequence of zero or more bytes | string | base64url without padding | {{Section 3.4.5.2 of RFC8949@-cbor}} |
+| unix-time   | A point in civil time (note 1)   | number | POSIX time                | {{Section 3.4.2 of RFC8949@-cbor}} |
 {: #sdftype1 title="Values Defined in Base SDF for the sdfType Quality"}
 
 (1) Note that the definition of `unix-time` does not imply the
@@ -1802,15 +1816,17 @@ Provisional registration:
 Content-Format
 --------------
 
-This document adds the following Content-Format to the "CoAP Content-Formats",
+This document adds the following Content-Format to the "CoAP
+Content-Formats" registry,
 within the "Constrained RESTful Environments (CoRE) Parameters"
-registry, where TBD1 comes from the "IETF Review" 256-999 range.
+registry group, where 434 comes from the "IETF Review" 256-999 range.
 
-| Content Type         | Content Coding | ID   | Reference |
-| application/sdf+json | -              | TBD1 | RFC XXXX  |
+| Content Type         | Content Coding |  ID | Reference |
+| application/sdf+json | -              | 434 | RFC XXXX  |
 {: align="left" title="SDF Content-format Registration"}
 
-// RFC Ed.: please replace TBD1 with the assigned ID, remove the
+// RFC Ed.: 434 was earmarked in <https://mailarchive.ietf.org/arch/msg/core-parameters/iLDsdxk80YO9IsLMXMAgcx5S8Ak/>;
+please replace 434 with the assigned ID, remove the
 requested range, and remove this note.\\
 // RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
 
@@ -1822,7 +1838,7 @@ IETF URN Sub-namespace for Unit Names (urn:ietf:params:unit) {#unit-urn}
 IANA is requested to register the following value in the "{{params-1
 (IETF URN Sub-namespace for Registered Protocol Parameter
 Identifiers)<IANA.params}}" registry in {{IANA.params}}, following the template in
-{{!RFC3553}}:
+{{BCP73}}:
 
 Registry name:
 : unit
@@ -1832,31 +1848,112 @@ Specification:
 
 Repository:
 :  combining the symbol values from the {{senml-units (SenML
-   Units)<IANA.senml}} Registry and the {{secondary-units (Secondary
-   Units)<IANA.senml}} Registry in {{-units}} as specified by {{Sections
+   Units)<IANA.senml}} registry and the {{secondary-units (Secondary
+   Units)<IANA.senml}} registry in {{-units}} as specified by {{Sections
    4.5.1 and 12.1 of -senml}} and {{Section 3 of -senml-units-2}},
    respectively (which by the registration policy are guaranteed to be
    non-overlapping).
 
 Index value:
-: Percent-encoding ({{Section 2.1 of -uri}}) is required of
+: Percent-encoding ({{Section 2.1 of RFC3986@-uri}}) is required of
   any characters in unit names as required by ABNF rule "pchar" in
-  {{Section 3.3 of -uri}}, specifically at the time of writing for the
+  {{Section 3.3 of RFC3986@-uri}}, specifically at the time of writing for the
   unit names "%" (deprecated in favor of "/"), "%RH", "%EL".
 
 Registries
 ----------
 
-IANA is requested to create an "SDF Parameters" registry, with the
-sub-registries defined in this Section.
+IANA is requested to create an "SDF Parameters" registry group, with the
+registries defined in this Section.
+
+### Quality Names {#qn}
+
+IANA is requested to create a "Quality Names" registry in
+the "SDF Parameters" registry group, with the following template:
+
+Name:
+: A quality name composed of ASCII letters, digits, and dollar signs, starting
+  with a lower case ASCII letter or a dollar sign (i.e., using a
+  pattern of "⁠`[a-z$][A-Za-z$0-9]*`").
+
+Brief Description:
+: A brief description.
+
+Reference:
+: A pointer to a specification.
+
+Change Controller:
+: (see {{Section 2.3 of RFC8126@-reg}})
+
+Quality Names in this registry are intended to be registered in
+conjunction with RFCs and activities of the IETF.
+
+The registration policy is Specification Required as per {{Section 4.6
+of RFC8126@-reg}}.
+(Note that the policy is not "RFC Required" or "IETF Review" {{Sections
+4.7 and 4.8 of RFC8126@-reg}} so that registrations can be made earlier
+in the process, even earlier than foreseen in {{BCP100}}.)
+
+The instructions to the Experts are:
+* to ascertain that the specification is available in an immutable
+  reference and has achieved a good level of review in conjunction with
+  RFCs or activities of the IETF, and
+* to be frugal in the allocation of quality names that are suggestive
+  of generally applicable semantics, keeping them in reserve for
+  qualities that are likely to enjoy wide use and can make good use of
+  their conciseness.
+
+The "Quality Name Prefixes" registry starts out as in
+{{tab-quality-names}}; all references for these initial entries are to
+RFC XXXX and all change controllers are given as "IETF"".
+
+| Name                 | Brief Description                                                 |
+|----------------------|-------------------------------------------------------------------|
+| $comment             | source code comments only, no semantics                           |
+| const                | constant value                                                    |
+| contentFormat        | content format                                                    |
+| default              | default value                                                     |
+| description          | long description text                                             |
+| enum                 | sdfChoice limited to text strings                                 |
+| exclusiveMaximum     | exclusive maximum for a number                                    |
+| exclusiveMinimum     | exclusive minimum for a number                                    |
+| format               | specific format for a text string                                 |
+| items                | items of an array                                                 |
+| label                | short text (no constraints); defaults to key                      |
+| maxItems             | maximum number of items in an array                               |
+| maxLength            | maximum length (in characters) for a text string                  |
+| maximum              | maximum for a number                                              |
+| minItems             | minimum number of items in an array                               |
+| minLength            | minimum length (in characters) for a text string                  |
+| minimum              | minimum for a number                                              |
+| multipleOf           | step size of number                                               |
+| nullable             | boolean: can the item be left out?                                |
+| observable           | boolean: can the item be observed?                                |
+| pattern              | regular expression pattern for a text string                      |
+| properties           | named dataqualities for type="object"                             |
+| readable             | boolean: can the item be read?                                    |
+| required             | which data items are required?                                    |
+| sdfChoice            | named dataqualities for a choice                                  |
+| sdfData              | named dataqualities for an independent data type definition       |
+| sdfInputData         | input data to an action                                           |
+| sdfOutputData        | output data of an action or event (sdfRequired applies here)      |
+| sdfRef               | sdf-pointer to definition being referenced                        |
+| sdfRequired          | pointer-list to declarations of required components               |
+| sdfRequiredInputData | pointer-list to declarations of required input data for an action |
+| sdfType              | more detailed information about the type of a string              |
+| type                 | general category of data type                                     |
+| uniqueItems          | boolean: do the items of the array need to be all different?      |
+| unit                 | engineering unit and scale (per SenML registry)                   |
+| writable             | boolean: can the item be written to?                              |
+{: #tab-quality-names title="Initial Content of Quality Names Registry"}
 
 ### Quality Name Prefixes {#qnp}
 
-IANA is requested to create a "Quality Name Prefixes" sub-registry in
-the "SDF Parameters" registry, with the following template:
+IANA is requested to create a "Quality Name Prefixes" registry in
+the "SDF Parameters" registry group, with the following template:
 
 Prefix:
-: A name composed of lower case ASCII letters and digits, starting
+: A quality name prefix composed of lower case ASCII letters and digits, starting
   with a lower case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
 Contact:
@@ -1870,7 +1967,7 @@ Quality Name Prefixes are intended to be registered by organizations
 that plan to define quality names constructed with an
 organization-specifix prefix ({{gnqn}}).
 
-The registration policy is Expert Review as per {{Section 4.5 of -reg}}.
+The registration policy is Expert Review as per {{Section 4.5 of RFC8126@-reg}}.
 The instructions to the Expert are to ascertain that the organization
 will handle quality names constructed using their prefix in a way that
 roughly achieves the objectives for an IANA registry that support
@@ -1879,19 +1976,19 @@ including:
 
 * Stability, "stable and permanent";
 * Transparency, "readily available", "in sufficient detail" ({{Section
-  4.6 of -reg}}).
+  4.6 of RFC8126@-reg}}).
 
 The Expert will take into account that other organizations operate in
 different ways than the IETF, and that as a result some of these
 overall objectives will be achieved in a different way and to a
 different level of comfort.
 
-The "Quality Name Prefixes" sub-registry starts out empty.
+The "Quality Name Prefixes" registry starts out empty.
 
 ### sdfType Values
 
-IANA is requested to create a "sdfType values" sub-registry in
-the "SDF Parameters" registry, with the following template:
+IANA is requested to create a "sdfType values" registry in
+the "SDF Parameters" registry group, with the following template:
 
 Name:
 : A name composed of lower case ASCII letters, digits and `-` (ASCII
@@ -1915,7 +2012,7 @@ sdfType values are intended to be registered to enable modeling additional
 SDF-specific types (see {{sdftype}}).
 
 The registration policy is Specification Required as per {{Section 4.6 of
--reg}}.  The instructions to the Expert are to ascertain that the
+RFC8126@-reg}}.  The instructions to the Expert are to ascertain that the
 specification provides enough detail to enable interoperability
 between implementations of the sdfType being registered, and that
 names are chosen with enough specificity that ecosystem-specific
@@ -1934,7 +2031,7 @@ interoperability; analogs of these security considerations can apply
 to SDF.
 
 The security considerations of underlying building blocks such as
-those detailed in {{Section 10 of -utf8}} apply.
+those detailed in {{Section 10 of RFC3629@-utf8}} apply.
 SDF uses JSON as a representation language; for a number of
 cases {{-json}} indicates that implementation behavior for certain constructs
 allowed by the JSON grammar is unpredictable.
@@ -2129,8 +2226,8 @@ as an absolute point in civil time).
 * "`date-time`", "`date`", "`time`":
   An {{RFC3339}} `date-time`, `full-date`, or `full-time`, respectively.
 * "`uri`", "`uri-reference`":
-  An {{RFC3986}} URI or URI Reference, respectively.
-* "`uuid`": An {{RFC4122}} UUID.
+  An {{-uri}} URI or URI Reference, respectively.
+* "`uuid`": An {{-uuid}} UUID.
 
 ## type "`boolean`"
 
