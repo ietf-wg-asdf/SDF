@@ -1641,7 +1641,7 @@ definitions (named-sdq).
 
 An sdfData definition provides a reusable semantic identifier for a
 type of data item and describes the constraints on the defined type.
-It is not itself a declaration, i.e., it does not cause any of these
+sdfData is not itself a declaration, so it does not cause any of these
 data items to be included in an affordance definition.
 
 The qualities of sdfData include the data qualities (and thus the common qualities), see {{data-qualities}}.
