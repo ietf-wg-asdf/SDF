@@ -1378,8 +1378,11 @@ versions of the json-schema.org proposal they were imported from.
    obtained or would be inappropriate, the unit name can also be a URI
    that is pointing to a definition of the unit.  Note that SDF
    processors are not expected to (and normally SHOULD NOT)
-   dereference these URIs (see also {{-deref}}); they may be useful to
+   dereference these URIs; the definition pointed to may be useful to
    humans, though.
+   (See {{-deref}} for a more extensive discussion of dereferenceable
+   identifiers).
+
    A URI unit name is distinguished from a registered unit name by the
    presence of a colon; any registered unit names that contain a colon (at
    the time of writing, none) can therefore not be used in SDF.
