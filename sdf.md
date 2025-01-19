@@ -677,8 +677,8 @@ and requirements.
 
 Back at the top level, the `sdfThing` group enables definition of models for
 complex devices that will use one or more sdfObject definitions.
-Like sdfObject, sdfThing groups also allow for including interaction
-affordances, sdfData, as well as "`minItems`" and "`maxItems`" qualities.
+Like sdfObject, sdfThing groups allow for the inclusion of interaction
+affordances, sdfData, as well as "`minItems`" and "maxItems" qualities.
 Therefore, they can be seen as a superset of sdfObject groups, additionally
 allowing for composition.
 
@@ -787,7 +787,8 @@ names.
 A qualified Quality Name is composed of a Quality Name Prefix, a `:`
 (colon) character, and a nonqualified Quality Name.
 Quality Name Prefixes are registered in the "Quality Name Prefixes"
-registry in the "SDF Parameters" registry group ({{qnp}}); they are
+registry in the "SDF Parameters" registry group ({{qnp}}).
+They are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
@@ -798,7 +799,7 @@ typically employing kebab-case for names constructed out of multiple
 words {{KebabCase}}.  ASCII hyphen/minus can then unambiguously be
 translated to an ASCII `_` underscore character and back depending on
 the programming environment.
-Some styles also allow a dot `.` in given names.
+Some styles also allow a dot ("`.`") in given names.
 Given Names are often sufficiently self-explanatory that they can be
 used in place of the `label` quality if that is not given.
 In turn, if a given name turns out too complicated, a more elaborate
@@ -926,7 +927,13 @@ set up, and no defaultNamespace can be given.
 
 ## Definitions block
 
-The Definitions block contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
+The Definitions block contains one or more groups, each identified by
+a Class Name Keyword.
+There can only be one group per keyword; the actual grouping is just a
+shortcut for identifying the class name keyword that applies to each
+of the individual definitions in the group, without repeating it for
+each definition.
+
 The value of each group is a JSON map, the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
 (In short, we speak of the map entries as "named sets of qualities".)
 
@@ -959,9 +966,10 @@ This example defines an sdfObject "foo" that is defined in the default namespace
 Often, definitions are also declarations: the definition of the
 entry "bar" in the property "foo" means that data corresponding to the
 "foo" property in a property interaction offered by Thing can have zero or
-one components modeled by "bar".  Entries within `sdfProperty`,
-`sdfAction`, and `sdfEvent`, in turn within `sdfObject` or `sdfThing` entries, are
-declarations; entries within `sdfData` are not.
+one components modeled by "bar".
+Entries within `sdfProperty`, `sdfAction`, and `sdfEvent` that are in
+turn within `sdfObject` or `sdfThing` entries, are also declarations;
+entries within `sdfData` are not.
 Similarly, `sdfObject` or `sdfThing` entries within an sdfThing
 definition specify that the
 interactions offered by a Thing modeled by this sdfThing include the
