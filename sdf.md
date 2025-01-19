@@ -917,7 +917,7 @@ added, if needed, where the namespace entry is used.
 If no defaultNamespace setting is given, the SDF document does not
 contribute to a global namespace (all definitions remain local to the
 model and are not accessible for re-use by other models).
-As the defaultNamespace is set by giving a
+As the defaultNamespace is set by supplying a
 namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.
 
@@ -1015,12 +1015,14 @@ The fragment identifier is constructed as per {{Section 6 of
 The fragment identifier part of a global name defined in an SDF
 document is constructed from a JSON pointer that selects the
 element defined for this name in the SDF document.
+The absolute URI part is a copy of the default namespace.
 
-The absolute URI part is a copy of the default namespace, i.e., the
+As a result, the
 default namespace is always the target namespace for a name for which
 a definition is contributed.
-When emphasizing that name definitions are contributed to the default namespace,
-we therefore also call it the "target namespace" of the SDF document.
+When we want to emphasize that name definitions are contributed to the
+default namespace, we therefore also call it the "target namespace" of
+the SDF document.
 
 For instance, in {{example1}}, definitions for the following global names are contributed:
 
