@@ -1652,14 +1652,20 @@ The requirements for high level composition include the following:
 
 - The ability to represent products, standardized product types, and modular products while maintaining the atomicity of sdfObjects.
 
-- The ability to compose a reusable definition block from sdfObjects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer sdfObjects, while retaining the atomicity of the individual sdfObjects.
+- The ability to compose a reusable definition block from sdfObjects.
+  Example: a single plug unit of an outlet strip with sdfObjects
+  for on/off control, energy monitor, and optional dimmer, while
+  retaining the atomicity of the individual sdfObjects.
 
 - The ability to compose sdfObjects and other definition blocks into a higher level sdfThing that represents a product, while retaining the atomicity of sdfObjects.
 
 - The ability to enrich and refine a base definition to have
   product-specific qualities and quality values, such as unit, range, and scale settings.
 
-- The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.
+- The ability to reference items in one part of a complex definition
+  from another part of the same definition.
+  Example: summarizing the energy readings from all plugs in an outlet
+  strip.
 
 ## Paths in the model namespaces
 
