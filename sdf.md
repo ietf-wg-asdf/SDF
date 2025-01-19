@@ -734,7 +734,8 @@ names.
 A qualified Quality Name is composed of a Quality Name Prefix, a `:`
 (colon) character, and a nonqualified Quality Name.
 Quality Name Prefixes are registered in the "Quality Name Prefixes"
-sub-registry in the "SDF Parameters" registry ({{qnp}}); they are
+sub-registry in the "SDF Parameters" registry ({{qnp}}).
+They are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
