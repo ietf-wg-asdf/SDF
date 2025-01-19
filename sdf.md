@@ -2064,6 +2064,7 @@ Security Considerations {#seccons}
 
 Some wider security considerations applicable to Things are discussed
 in {{-seccons}}.
+
 {{Section 5 of -cddl}} gives an overview over security considerations
 that arise when formal description techniques are used to govern
 interoperability; analogs of these security considerations can apply
@@ -2071,9 +2072,12 @@ to SDF.
 
 The security considerations of underlying building blocks such as
 those detailed in {{Section 10 of RFC3629@-utf8}} apply.
-SDF uses JSON as a representation language; for a number of
+
+SDF uses JSON as a representation language.
+For a number of
 cases {{-json}} indicates that implementation behavior for certain constructs
 allowed by the JSON grammar is unpredictable.
+
 Implementations need to be robust against invalid or unpredictable
 cases on input, preferably by rejecting input that is invalid or
 that would lead to unpredictable behavior, and need to avoid generating
@@ -2081,7 +2085,9 @@ these cases on output.
 
 Implementations of model languages may also exhibit
 performance-related availability issues when the attacker can control
-the input, see {{Section 4.1 of -jsonpath}} for a brief discussion.
+the input, see {{Section 4.1 of -jsonpath}} for a brief discussion and
+{{Section 8 of -iregexp}} for considerations specifically about the use
+of `pattern`.
 
 SDF may be used in two processes that are often security relevant:
 model-based *validation* of data that is intended to be described by SDF models, and
