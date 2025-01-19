@@ -1572,7 +1572,12 @@ thus the common qualities), see {{data-qualities}}, additional qualities are sho
 
 The `sdfAction` keyword denotes a group of zero or more Action definitions.
 
-Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.
+Actions are used to model commands and methods which are invoked.
+Actions may have parameter data that are supplied upon invocation and
+output data that is provided as a direct result of the invocation of
+the action (note that "action objects" may also be created to furnish
+ongoing information during a long-running action; these would be
+pointed to by the output data).
 
 The qualities of an Action definition include the common qualities, additional qualities are shown in {{sdfactqual}}.
 
