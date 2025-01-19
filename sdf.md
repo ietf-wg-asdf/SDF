@@ -913,9 +913,10 @@ This example defines an sdfObject "foo" that is defined in the default namespace
 Often, definitions are also declarations: the definition of the
 entry "bar" in the property "foo" means that data corresponding to the
 "foo" property in a property interaction offered by Thing can have zero or
-one components modeled by "bar".  Entries within `sdfProperty`,
-`sdfAction`, and `sdfEvent`, in turn within `sdfObject` or `sdfThing` entries, are
-declarations; entries within `sdfData` are not.
+one components modeled by "bar".
+Entries within `sdfProperty`, `sdfAction`, and `sdfEvent` that are in
+turn within `sdfObject` or `sdfThing` entries, are also declarations;
+entries within `sdfData` are not.
 Similarly, `sdfObject` or `sdfThing` entries within an sdfThing
 definition specify that the
 interactions offered by a Thing modeled by this sdfThing include the
