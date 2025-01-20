@@ -228,6 +228,10 @@ implementations to SDF base.
 
 ## Terminology and Conventions
 
+Terms introduced in this section are capitalized when used in this
+section; to maintain readability, capitalization is only done when
+needed where they are used in the body of this document.
+
 ### Programming Platform Terms
 {:unnumbered}
 
@@ -270,10 +274,6 @@ Property:
 
 ### Conceptual Terms
 {:unnumbered}
-
-The terms introduced in this section are capitalized when used in this
-section; to maintain readability, this is not always done when they
-are used in the body of this document.
 
 Thing:
 : A physical item that is also available for interaction over a network.
