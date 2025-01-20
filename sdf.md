@@ -1077,7 +1077,7 @@ to copy the qualities and enclosed definitions of the referenced
 definition, indicated by the included name reference, into the newly
 formed definition.
 (This can be compared to the processing of the `$ref` keyword in {{-jso}}.)
-The referenced definition should be such that, after that copying and
+The referenced definition should be such that, after copying and
 applying the additional qualities in the referencing definition, the
 newly built definition is also valid SDF (e.g., the copied qualities
 and definitions are valid in the context of the new definition).
