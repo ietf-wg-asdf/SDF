@@ -1044,7 +1044,8 @@ For instance, in {{example1}}, definitions for the following global names are co
 * https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
 Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
-RFC3986@-uri}}) from the fragment identifier part.
+RFC3986@-uri}}) from the fragment identifier part (including the `#`, a
+JSON Pointer as in {{Section 6 of -pointer}}).
 
 ## Referencing global names
 
