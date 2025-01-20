@@ -484,13 +484,18 @@ The example `toggle` is an Action that
 changes the state based on the current state of the Property named `value`.
 (The third type of affordance is Events, which are not described in this example.)
 
-In the JSON representation, note how (with the exception of the `info`
-group) maps that have keys taken from the SDF vocabulary (`info`,
-`namespace`, `sdfObject`) alternate in nesting with maps that have keys
-that are freely defined by the model writer (`Switch`, `value`, `on`,
-etc.); the latter usually use the `named<>` production in the [formal
-syntax of SDF](#syntax), while the former SDF-defined vocabulary items
-are often, but not always, called *qualities*.
+In the JSON representation, the `info` group is an exception in that
+this group's map has keys taken from the SDF vocabulary.
+All other groups (such as `namespace`, `sdfObject`) have maps with
+keys that are freely defined by the model writer (`Switch`, `value`,
+`on`, etc.); we speak of *given names*.
+The groups made up of entries with given names as keys usually use the
+`named<>` production in the [formal syntax of SDF](#syntax).
+Where the values of these entries are maps, these again use SDF
+vocabulary keys, and so on, generally alternating in further nesting.
+The SDF-defined vocabulary items used in the hierarchy of such groups
+are often, but not always, called *quality names* or *qualities*.
+See {{member-names}} for more information about naming in SDF.
 
 ## Elements of an SDF model
 
@@ -713,7 +718,7 @@ associated with some scope of functionality.
 A definition in an sdfThing group can refine the metadata of the definitions it
 is composed of: other definitions in sdfThing groups or definitions in sdfObject groups.
 
-## Member names: Given Names and Quality Names
+## Member names: Given Names and Quality Names {#member-names}
 
 SDF documents are JSON maps that mostly employ JSON maps as
 member values, which in turn mostly employ JSON maps as their
