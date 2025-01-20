@@ -1387,7 +1387,7 @@ versions of the json-schema.org proposal they were imported from.
    Exceptionally, if a registration in these registries cannot be
    obtained or would be inappropriate, the unit name can also be a URI
    that is pointing to a definition of the unit.  Note that SDF
-   processors are not expected to (and normally SHOULD NOT)
+   processors are not expected to, and normally SHOULD NOT,
    dereference these URIs (see also {{-deref}}); they may be useful to
    humans, though.
    A URI unit name is distinguished from a registered unit name by the
