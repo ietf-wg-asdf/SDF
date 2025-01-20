@@ -272,6 +272,11 @@ Property:
   imported with JSON-related semantics from a data definition
   language.
 
+Byte:
+: This document uses the term "byte" in its now-customary sense as a
+  synonym for "octet".
+
+
 ### Conceptual Terms
 {:unnumbered}
 
@@ -403,20 +408,16 @@ Protocol Binding:
   similar details.
   Protocol Bindings are one case of an Augmentation Mechanism.
 
-### Other Terms and Conventions
+### Conventions
 {:unnumbered}
-
-The term "byte" is used in its now-customary sense as a synonym for
-"octet".
 
 Regular expressions that are used in the text as a "pattern" for some
 string are interpreted as per {{-iregexp}}.
 (Note that a form of regular expressions is also used as values of the
 quality `pattern`; see {{type-string}}.)
 
-Conventions:
-
-- The singular form is chosen as the preferred one for the keywords defined here.
+The singular form is chosen as the preferred one for the keywords
+defined in this specification.
 
 {::boilerplate bcp14-tagged-bcp14}
 
