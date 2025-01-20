@@ -228,6 +228,46 @@ implementations to SDF base.
 
 ## Terminology and Conventions
 
+### Programming Platform Terms
+{:unnumbered}
+
+The following definitions mention terms that are used with specific
+meanings in various programming platforms, but often have an
+independent definition for this document, which can be found further
+below in this section.
+
+Element:
+: A generic term used here in its English sense.
+  Exceptionally, in {{jso-inspired}}, used explicitly in accordance with
+  its meaning in the JSON ecosystem, i.e., the elements of JSON
+  arrays.
+
+Entry:
+: A key-value pair in a map. (In JSON maps, sometimes also called "member".)
+
+Map:
+: A collection of entries (key-value pairs), where there are no two
+  entries with equivalent keys.
+  (Also known as associative array, dictionary, or symbol table.)
+
+Object:
+: An otherwise very generic term that JavaScript (and thus JSON) uses
+  for the kind of maps that were part of the original languages from
+  the outset.
+  In this document, Object is used exclusively in its general English
+  meaning or as the colloquial shorthand for sdfObject, even if the
+  type name `"object"` is imported with JSON-related semantics from a
+  data definition language.
+
+Property:
+: Certain environments use the term "property" for a JSON concept that
+  JSON calls "member" and we call "entry", or sometimes just for the
+  map key of these.
+  In this document, the term Property is specifically reserved for a
+  certain kind of Affordance, even if the map key `"properties"` is
+  imported with JSON-related semantics from a data definition
+  language.
+
 ### Conceptual Terms
 {:unnumbered}
 
@@ -241,8 +281,6 @@ Thing:
 Element:
 : A part or an aspect of something abstract; i.e., the term is used
   here in its usual English definition.
-  (Exceptionally, in {{jso-inspired}}, used explicitly in accordance with its meaning in the JSON
-  ecosystem, i.e., the elements of JSON arrays.)
 
 Affordance:
 : An element of an interface offered for interaction.
@@ -256,12 +294,7 @@ Affordance:
 
 Property:
 : An Affordance that can potentially be used to read, write, and/or
-  observe state (current/stored information) on a Grouping.\\
-  (Note that other environments often use the term "property" for a
-  JSON concept that we call "entry" [see below].
-  In this document, the term Property is specifically reserved for
-  affordances, even if the map key `"properties"` might be imported with
-  the JSON-level semantics from a data definition language.)
+  observe state (current/stored information) on a Grouping.
 
 Action:
 : An Affordance that can potentially be used to perform a named operation on a Grouping.
@@ -286,9 +319,6 @@ SDF Model:
   An SDF Model can be fully contained in a single SDF Document, or it
   can be built from an SDF Document that references definitions and
   declarations from additional SDF documents.
-
-Entry:
-: A key-value pair in a map. (In JSON maps, sometimes also called "member".)
 
 Block:
 : One or more entries in a JSON map that is part of an SDF
@@ -346,13 +376,7 @@ Object, sdfObject:
   simple enough to not require nested structure.
   sdfObjects are therefore similar to sdfThings but do not allow
   nesting, i.e., they cannot contain other Groupings (sdfObjects or
-  sdfThings).\\
-  (Note that
-  JSON maps are often called JSON objects due to JSON's JavaScript
-  heritage; in the context of SDF, the term Object as the colloquial shorthand for sdfObject, is specifically reserved for the
-  above Grouping, even if
-  the type name `"object"` is imported from a data definition
-  language with the other semantics.)
+  sdfThings).
 
 sdfThing:
 : A Grouping that can contain nested Groupings (sdfThings and sdfObjects).
