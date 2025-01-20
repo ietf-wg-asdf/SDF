@@ -1266,8 +1266,8 @@ carry this name (there can be multiple ones, one per affordance type)
 are declared to be mandatory to be represented. The same applies for
 groupings made mandatory within groupings containing them.
 * the Boolean value `true`.
-The affordance/grouping itself that carries the `sdfRequired` keyword is declared
-to be mandatory to be represented.
+  The affordance or grouping itself that carries the `sdfRequired`
+  keyword is declared to be mandatory to be represented.
 
 Note that referenceable-names are not
 subject to the encoding JSON pointers require as discussed in {{hierarchical-names}}.
