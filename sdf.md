@@ -1235,7 +1235,7 @@ After resolving the definitions would look as follows:
 
 The keyword `sdfRequired` is provided to apply a constraint that
 defines for which declarations the corresponding data are mandatory in a
-Thing modeled by the current definition.
+grouping (sdfThing or sdfObject) modeled by the current definition.
 
 The value of `sdfRequired` is an array of references, each indicating
 one or more declarations that are mandatory to be represented.
