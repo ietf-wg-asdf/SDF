@@ -837,7 +837,7 @@ given names.
 Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
 qualified names for Given Names.
-So, until that extension is defined, Given Names with (one or more)
+So, until that extension is defined, Given Names with one or more
 embedded colons are reserved and MUST NOT be used in an SDF document.
 
 All names in SDF are case-sensitive.
