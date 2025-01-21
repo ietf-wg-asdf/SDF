@@ -2114,7 +2114,7 @@ those detailed in {{Section 10 of RFC3629@-utf8}} apply.
 
 SDF uses JSON as a representation language.
 For a number of
-cases {{-json}} indicates that implementation behavior for certain constructs
+cases, {{-json}} indicates that implementation behavior for certain constructs
 allowed by the JSON grammar is unpredictable.
 
 Implementations need to be robust against invalid or unpredictable
