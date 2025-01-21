@@ -1412,7 +1412,7 @@ versions of the json-schema.org proposal they were imported from.
    obtained or would be inappropriate, the unit name can also be a URI
    that is pointing to a definition of the unit.  Note that SDF
    processors are not expected to, and normally SHOULD NOT,
-   dereference these URIs (see also {{-deref}}); the definition pointed to may be useful to
+   dereference these URIs; the definition pointed to may be useful to
    humans, though.
    (See {{-deref}} for a more extensive discussion of dereferenceable
    identifiers).
