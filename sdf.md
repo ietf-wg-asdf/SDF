@@ -1286,7 +1286,7 @@ two abbreviated reference formats:
     Note that there can be multiple such affordance declarations, one
     per affordance type.
 
-  * The same applies for groupings made mandatory within groupings
+  * The same applies to groupings made mandatory within groupings
     containing them.
 
 * the Boolean value `true`.
