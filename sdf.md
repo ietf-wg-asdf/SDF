@@ -229,12 +229,57 @@ implementations to SDF base.
 
 ## Terminology and Conventions
 
-### Conceptual Terms
+Terms introduced in this section are capitalized when used in this
+section; to maintain readability, capitalization is only done when
+needed where they are used in the body of this document.
+
+### Programming Platform Terms
 {:unnumbered}
 
-The terms introduced in this section are capitalized when used in this
-section; to maintain readability, this is not always done when they
-are used in the body of this document.
+The following definitions mention terms that are used with specific
+meanings in various programming platforms, but often have an
+independent definition for this document, which can be found further
+below in this section.
+
+Element:
+: A generic term used here in its English sense.
+  Exceptionally, in {{jso-inspired}}, used explicitly in accordance with
+  its meaning in the JSON ecosystem, i.e., the elements of JSON
+  arrays.
+
+Entry:
+: A key-value pair in a map. (In JSON maps, sometimes also called "member".)
+
+Map:
+: A collection of entries (key-value pairs), where there are no two
+  entries with equivalent keys.
+  (Also known as associative array, dictionary, or symbol table.)
+
+Object:
+: An otherwise very generic term that JavaScript (and thus JSON) uses
+  for the kind of maps that were part of the original languages from
+  the outset.
+  In this document, Object is used exclusively in its general English
+  meaning or as the colloquial shorthand for sdfObject, even if the
+  type name `"object"` is imported with JSON-related semantics from a
+  data definition language.
+
+Property:
+: Certain environments use the term "property" for a JSON concept that
+  JSON calls "member" and we call "entry", or sometimes just for the
+  map key of these.
+  In this document, the term Property is specifically reserved for a
+  certain kind of Affordance, even if the map key `"properties"` is
+  imported with JSON-related semantics from a data definition
+  language.
+
+Byte:
+: This document uses the term "byte" in its now-customary sense as a
+  synonym for "octet".
+
+
+### Conceptual Terms
+{:unnumbered}
 
 Thing:
 : A physical item that is also available for interaction over a network.
@@ -242,8 +287,6 @@ Thing:
 Element:
 : A part or an aspect of something abstract; i.e., the term is used
   here in its usual English definition.
-  (Exceptionally, in {{jso-inspired}}, used explicitly in accordance with its meaning in the JSON
-  ecosystem, i.e., the elements of JSON arrays.)
 
 Affordance:
 : An element of an interface offered for interaction.
@@ -257,12 +300,7 @@ Affordance:
 
 Property:
 : An Affordance that can potentially be used to read, write, and/or
-  observe state (current/stored information) on a Grouping.\\
-  (Note that other environments often use the term "property" for a
-  JSON concept that we call "entry" [see below].
-  In this document, the term Property is specifically reserved for
-  affordances, even if the map key `"properties"` might be imported with
-  the JSON-level semantics from a data definition language.)
+  observe state (current/stored information) on a Grouping.
 
 Action:
 : An Affordance that can potentially be used to perform a named operation on a Grouping.
@@ -287,9 +325,6 @@ SDF Model:
   An SDF Model can be fully contained in a single SDF Document, or it
   can be built from an SDF Document that references definitions and
   declarations from additional SDF documents.
-
-Entry:
-: A key-value pair in a map. (In JSON maps, sometimes also called "member".)
 
 Block:
 : One or more entries in a JSON map that is part of an SDF
@@ -347,13 +382,7 @@ Object, sdfObject:
   simple enough to not require nested structure.
   sdfObjects are therefore similar to sdfThings but do not allow
   nesting, i.e., they cannot contain other Groupings (sdfObjects or
-  sdfThings).\\
-  (Note that
-  JSON maps are often called JSON objects due to JSON's JavaScript
-  heritage; in the context of SDF, the term Object as the colloquial shorthand for sdfObject, is specifically reserved for the
-  above Grouping, even if
-  the type name `"object"` is imported from a data definition
-  language with the other semantics.)
+  sdfThings).
 
 sdfThing:
 : A Grouping that can contain nested Groupings (sdfThings and sdfObjects).
@@ -362,14 +391,6 @@ sdfThing:
   (Note that "Thing" has a different meaning from sdfThing and
   therefore is not available as a colloquial shorthand of
   sdfThing.)
-
-Protocol Binding:
-: A companion document to an SDF Model that defines how to map the
-  abstract concepts in the model into the protocols in use in a
-  specific ecosystem.
-  The Protocol Binding might supply URL components, numeric IDs, and
-  similar details.
-  Protocol Bindings are one case of an Augmentation Mechanism.
 
 Augmentation Mechanism:
 : A companion document to a base SDF Model that provides additional
@@ -380,20 +401,24 @@ Augmentation Mechanism:
   A simple mechanism for such augmentations has been discussed as a
   "mapping file" {{-mapping}}.
 
-### Other Terms and Conventions
-{:unnumbered}
+Protocol Binding:
+: A companion document to an SDF Model that defines how to map the
+  abstract concepts in the model into the protocols in use in a
+  specific ecosystem.
+  The Protocol Binding might supply URL components, numeric IDs, and
+  similar details.
+  Protocol Bindings are one case of an Augmentation Mechanism.
 
-The term "byte" is used in its now-customary sense as a synonym for
-"octet".
+### Conventions
+{:unnumbered}
 
 Regular expressions that are used in the text as a "pattern" for some
 string are interpreted as per {{-iregexp}}.
 (Note that a form of regular expressions is also used as values of the
 quality `pattern`; see {{type-string}}.)
 
-Conventions:
-
-- The singular form is chosen as the preferred one for the keywords defined here.
+The singular form is chosen as the preferred one for the keywords
+defined in this specification.
 
 {::boilerplate bcp14-tagged-bcp14}
 
@@ -460,13 +485,18 @@ The example `toggle` is an Action that
 changes the state based on the current state of the Property named `value`.
 (The third type of affordance is Events, which are not described in this example.)
 
-In the JSON representation, note how (with the exception of the `info`
-group) maps that have keys taken from the SDF vocabulary (`info`,
-`namespace`, `sdfObject`) alternate in nesting with maps that have keys
-that are freely defined by the model writer (`Switch`, `value`, `on`,
-etc.); the latter usually use the `named<>` production in the [formal
-syntax of SDF](#syntax), while the former SDF-defined vocabulary items
-are often, but not always, called *qualities*.
+In the JSON representation, the `info` group is an exception in that
+this group's map has keys taken from the SDF vocabulary.
+All other groups (such as `namespace`, `sdfObject`) have maps with
+keys that are freely defined by the model writer (`Switch`, `value`,
+`on`, etc.); we speak of *given names*.
+The groups made up of entries with given names as keys usually use the
+`named<>` production in the [formal syntax of SDF](#syntax).
+Where the values of these entries are maps, these again use SDF
+vocabulary keys, and so on, generally alternating in further nesting.
+The SDF-defined vocabulary items used in the hierarchy of such groups
+are often, but not always, called *quality names* or *qualities*.
+See {{member-names}} for more information about naming in SDF.
 
 ## Elements of an SDF model
 
@@ -690,7 +720,7 @@ associated with some scope of functionality.
 A definition in an sdfThing group can refine the metadata of the definitions it
 is composed of: other definitions in sdfThing groups or definitions in sdfObject groups.
 
-## Member names: Given Names and Quality Names
+## Member names: Given Names and Quality Names {#member-names}
 
 SDF documents are JSON maps that mostly employ JSON maps as
 member values, which in turn mostly employ JSON maps as their
@@ -810,7 +840,7 @@ given names.
 Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
 qualified names for Given Names.
-So, until that extension is defined, Given Names with (one or more)
+So, until that extension is defined, Given Names with one or more
 embedded colons are reserved and MUST NOT be used in an SDF document.
 
 All names in SDF are case-sensitive.
@@ -913,6 +943,9 @@ added, if needed, where the namespace entry is used.
 },
 "defaultNamespace": "cap"
 ~~~
+
+Multiple SDF documents can contribute to the same namespace by using
+the same namespace URI for the default namespace across the documents.
 
 If no defaultNamespace setting is given, the SDF document does not
 contribute to a global namespace (all definitions remain local to the
@@ -1032,7 +1065,8 @@ For instance, in {{example1}}, definitions for the following global names are co
 * https://example.com/capability/cap#/sdfObject/Switch/sdfAction/off
 
 Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
-RFC3986@-uri}}) from the fragment identifier part.
+RFC3986@-uri}}) from the fragment identifier part (including the `#`, a
+JSON Pointer as in {{Section 6 of -pointer}}).
 
 ## Referencing global names
 
@@ -1256,7 +1290,7 @@ two abbreviated reference formats:
     containing them.
 
 * the Boolean value `true`.
-  The affordance/grouping itself that carries the `sdfRequired`
+  The affordance or grouping itself that carries the `sdfRequired`
   keyword is declared to be mandatory to be represented.
 
 Note that referenceable-names are not
@@ -1377,8 +1411,8 @@ versions of the json-schema.org proposal they were imported from.
    Exceptionally, if a registration in these registries cannot be
    obtained or would be inappropriate, the unit name can also be a URI
    that is pointing to a definition of the unit.  Note that SDF
-   processors are not expected to (and normally SHOULD NOT)
-   dereference these URIs; the definition pointed to may be useful to
+   processors are not expected to, and normally SHOULD NOT,
+   dereference these URIs (see also {{-deref}}); the definition pointed to may be useful to
    humans, though.
    (See {{-deref}} for a more extensive discussion of dereferenceable
    identifiers).
@@ -1596,7 +1630,12 @@ thus the common qualities), see {{data-qualities}}, additional qualities are sho
 
 The `sdfAction` keyword denotes a group of zero or more Action definitions.
 
-Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.
+Actions are used to model commands and methods which are invoked.
+Actions may have parameter data that are supplied upon invocation and
+output data that is provided as a direct result of the invocation of
+the action (note that "action objects" may also be created to furnish
+ongoing information during a long-running action; these would be
+pointed to by the output data).
 
 The qualities of an Action definition include the common qualities, additional qualities are shown in {{sdfactqual}}.
 
