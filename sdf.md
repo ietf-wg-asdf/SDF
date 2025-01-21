@@ -2125,7 +2125,7 @@ these cases on output.
 Implementations of model languages may also exhibit
 performance-related availability issues when the attacker can control
 the input, see {{Section 4.1 of -jsonpath}} for a brief discussion and
-{{Section 8 of -iregexp}} for considerations specifically about the use
+{{Section 8 of -iregexp}} for considerations specific to the use
 of `pattern`.
 
 SDF may be used in two processes that are often security relevant:
