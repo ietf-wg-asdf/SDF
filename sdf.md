@@ -941,6 +941,9 @@ added, if needed, where the namespace entry is used.
 "defaultNamespace": "cap"
 ~~~
 
+Multiple SDF documents can contribute to the same namespace by using
+the same namespace URI for the default namespace across the documents.
+
 If no defaultNamespace setting is given, the SDF document does not
 contribute to a global namespace (all definitions remain local to the
 model and are not accessible for re-use by other models).
@@ -1603,7 +1606,12 @@ thus the common qualities), see {{data-qualities}}, additional qualities are sho
 
 The `sdfAction` keyword denotes a group of zero or more Action definitions.
 
-Actions are used to model commands and methods which are invoked. Actions have parameter data that are supplied upon invocation.
+Actions are used to model commands and methods which are invoked.
+Actions may have parameter data that are supplied upon invocation and
+output data that is provided as a direct result of the invocation of
+the action (note that "action objects" may also be created to furnish
+ongoing information during a long-running action; these would be
+pointed to by the output data).
 
 The qualities of an Action definition include the common qualities, additional qualities are shown in {{sdfactqual}}.
 
