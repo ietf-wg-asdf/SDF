@@ -1,0 +1,26 @@
+"sdfObject": {
+  "temperatureWithAlarm": {
+    "sdfRequired": [
+"#/sdfObject/temperatureWithAlarm/sdfProperty/currentTemperature",
+"#/sdfObject/temperatureWithAlarm/sdfEvent/overTemperatureEvent"
+    ],
+    "sdfData":{
+       "temperatureData": {
+        "type": "number"
+      }
+    },
+    "sdfProperty": {
+      "currentTemperature": {
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData",
+      "writable": false
+      }
+    },
+    "sdfEvent": {
+      "overTemperatureEvent": {
+       "sdfOutputData": {
+"sdfRef": "#/sdfObject/temperatureWithAlarm/sdfData/temperatureData"
+        }
+      }
+    }
+  }
+}
