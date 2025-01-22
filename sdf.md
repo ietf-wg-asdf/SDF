@@ -144,6 +144,7 @@ informative:
   I-D.bormann-t2trg-deref-id: deref
   RFC9485: iregexp
   RFC9535: jsonpath
+  STD97: http
   BCP100:
 
 entity:
@@ -648,7 +649,8 @@ action resources; an extension for modeling links in more detail
 (for instance, {{-sdflink}}) may be all that is needed to fully enable modeling
 them.
 
-Actions may have (or lack) qualities of idempotence and side-effect safety.
+Actions may have (or lack) qualities of idempotence and side-effect
+safety (see {{Section 9.2 of RFC9110@-http}} for more on these terms).
 
 Base SDF only provides data constraint modeling and semantics for the input and output data of definitions in `sdfAction` groups.
 Again, data definitions for payloads of protocol messages, and
@@ -705,7 +707,7 @@ and requirements.
 
 Back at the top level, the `sdfThing` group enables definition of models for
 complex devices that will use one or more sdfObject definitions.
-Like sdfObject, sdfThing groups also allow for including interaction
+Like sdfObject, sdfThing groups allow for the inclusion of interaction
 affordances, sdfData, as well as "`minItems`" and "`maxItems`" qualities.
 Therefore, they can be seen as a superset of sdfObject groups, additionally
 allowing for composition.
@@ -815,7 +817,8 @@ names.
 A qualified Quality Name is composed of a Quality Name Prefix, a `:`
 (colon) character, and a nonqualified Quality Name.
 Quality Name Prefixes are registered in the "Quality Name Prefixes"
-registry in the "SDF Parameters" registry group ({{qnp}}); they are
+registry in the "SDF Parameters" registry group ({{qnp}}).
+They are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
 
@@ -826,7 +829,7 @@ typically employing kebab-case for names constructed out of multiple
 words {{KebabCase}}.  ASCII hyphen/minus can then unambiguously be
 translated to an ASCII `_` underscore character and back depending on
 the programming environment.
-Some styles also allow a dot `.` in given names.
+Some styles also allow a dot ("`.`") in given names.
 Given Names are often sufficiently self-explanatory that they can be
 used in place of the `label` quality if that is not given.
 In turn, if a given name turns out too complicated, a more elaborate
@@ -947,7 +950,7 @@ the same namespace URI for the default namespace across the documents.
 If no defaultNamespace setting is given, the SDF document does not
 contribute to a global namespace (all definitions remain local to the
 model and are not accessible for re-use by other models).
-As the defaultNamespace is set by giving a
+As the defaultNamespace is set by supplying a
 namespace short name, its presence requires a namespace map that contains a
 mapping for that namespace short name.
 
@@ -957,7 +960,13 @@ set up, and no defaultNamespace can be given.
 
 ## Definitions block
 
-The Definitions block contains one or more groups, each identified by a Class Name Keyword (there can only be one group per keyword; the actual grouping is just a shortcut and does not carry any specific semantics).
+The Definitions block contains one or more groups, each identified by
+a Class Name Keyword such as `sdfObject` or `sdfProperty`.
+There can only be one group per keyword at this level; putting all the
+individual definitions in the group under that keyword is just a
+shortcut for identifying the class name keyword that applies to each
+of them, without repeating it for each definition.
+
 The value of each group is a JSON map, the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
 (In short, we speak of the map entries as "named sets of qualities".)
 
@@ -990,9 +999,10 @@ This example defines an sdfObject "foo" that is defined in the default namespace
 Often, definitions are also declarations: the definition of the
 entry "bar" in the property "foo" means that data corresponding to the
 "foo" property in a property interaction offered by Thing can have zero or
-one components modeled by "bar".  Entries within `sdfProperty`,
-`sdfAction`, and `sdfEvent`, in turn within `sdfObject` or `sdfThing` entries, are
-declarations; entries within `sdfData` are not.
+one components modeled by "bar".
+Entries within `sdfProperty`, `sdfAction`, and `sdfEvent` that are in
+turn within `sdfObject` or `sdfThing` entries, are also declarations;
+entries within `sdfData` are not.
 Similarly, `sdfObject` or `sdfThing` entries within an sdfThing
 definition specify that the
 interactions offered by a Thing modeled by this sdfThing include the
@@ -1038,12 +1048,14 @@ The fragment identifier is constructed as per {{Section 6 of
 The fragment identifier part of a global name defined in an SDF
 document is constructed from a JSON pointer that selects the
 element defined for this name in the SDF document.
+The absolute URI part is a copy of the default namespace.
 
-The absolute URI part is a copy of the default namespace, i.e., the
+As a result, the
 default namespace is always the target namespace for a name for which
 a definition is contributed.
-When emphasizing that name definitions are contributed to the default namespace,
-we therefore also call it the "target namespace" of the SDF document.
+When we want to emphasize that name definitions are contributed to the
+default namespace, we therefore also call it the "target namespace" of
+the SDF document.
 
 For instance, in {{example1}}, definitions for the following global names are contributed:
 
@@ -1058,10 +1070,11 @@ JSON Pointer as in {{Section 6 of -pointer}}).
 
 ## Referencing global names
 
-A name reference takes the form of the production `curie` in
-{{-curie}} (note that this excludes the production `safe-curie`),
-but also limiting the IRIs involved in that production to URIs as per {{-uri}}
-and the prefixes to ASCII characters {{-ascii}}.
+A name reference takes the form of the production `curie` in Section 3
+of {{-curie}}, but limiting the IRIs involved in that grammar to URIs as
+per {{-uri}} and the prefixes to ASCII characters {{-ascii}}.
+(Note that this definition does not make use of the production
+`safe-curie` in {{-curie}}.)
 
 A name that is contributed by the current SDF document can be
 referenced by a Same-Document Reference as per {{Section 4.4 of
@@ -1146,10 +1159,11 @@ sdfRef member, the semantics is defined to be as if the following steps were per
    original JSON map.
 
 Note that the formal syntaxes given in Appendices {{<syntax}} and {{<jso}}
-generally describe the _result_ of applying a merge-patch; the notations
-are not powerful enough to describe, for instance, the effect of null
-values given with the sdfRef to remove members of JSON maps from
-the referenced target.  Nonetheless, the syntaxes also give the syntax
+generally describe the _result_ of applying a merge-patch: the notations
+are not powerful enough to describe, for instance, how the merge-patch
+algorithm causes null values within the sdfRef to remove members of JSON
+maps from the referenced target.
+Nonetheless, the syntaxes also give the syntax
 of the sdfRef itself, which vanishes during the resolution; in many
 cases therefore even merge-patch inputs will validate with these
 formal syntaxes.
@@ -1260,7 +1274,7 @@ After resolving the definitions would look as follows:
 
 The keyword `sdfRequired` is provided to apply a constraint that
 defines for which declarations the corresponding data are mandatory in a
-Thing modeled by the current definition.
+grouping (sdfThing or sdfObject) modeled by the current definition.
 
 The value of `sdfRequired` is an array of references, each indicating
 one or more declarations that are mandatory to be represented.
@@ -1268,11 +1282,18 @@ one or more declarations that are mandatory to be represented.
 References in this array can be SDF names (JSON Pointers), or one of
 two abbreviated reference formats:
 
-* a text string with a "referenceable-name", i.e., an affordance name or grouping name.
-All affordance declarations that are directly (i.e., not nested further in another grouping) in the same grouping and that
-carry this name (there can be multiple ones, one per affordance type)
-are declared to be mandatory to be represented. The same applies for
-groupings made mandatory within groupings containing them.
+* a text string with a "referenceable-name", namely an affordance name
+  or a grouping name:
+
+  * All affordance declarations that are directly in the same grouping
+    (i.e., not nested further in another grouping) and that carry this
+    name are declared to be mandatory to be represented.
+    Note that there can be multiple such affordance declarations, one
+    per affordance type.
+
+  * The same applies to groupings made mandatory within groupings
+    containing them.
+
 * the Boolean value `true`.
   The affordance or grouping itself that carries the `sdfRequired`
   keyword is declared to be mandatory to be represented.
@@ -1396,8 +1417,11 @@ versions of the json-schema.org proposal they were imported from.
    obtained or would be inappropriate, the unit name can also be a URI
    that is pointing to a definition of the unit.  Note that SDF
    processors are not expected to, and normally SHOULD NOT,
-   dereference these URIs (see also {{-deref}}); they may be useful to
+   dereference these URIs; the definition pointed to may be useful to
    humans, though.
+   (See {{-deref}} for a more extensive discussion of dereferenceable
+   identifiers).
+
    A URI unit name is distinguished from a registered unit name by the
    presence of a colon; any registered unit names that contain a colon (at
    the time of writing, none) can therefore not be used in SDF.
@@ -1661,7 +1685,7 @@ definitions (named-sdq).
 
 An sdfData definition provides a reusable semantic identifier for a
 type of data item and describes the constraints on the defined type.
-It is not itself a declaration, i.e., it does not cause any of these
+sdfData is not itself a declaration, so it does not cause any of these
 data items to be included in an affordance definition.
 
 The qualities of sdfData include the data qualities (and thus the common qualities), see {{data-qualities}}.
@@ -1672,14 +1696,20 @@ The requirements for high level composition include the following:
 
 - The ability to represent products, standardized product types, and modular products while maintaining the atomicity of sdfObjects.
 
-- The ability to compose a reusable definition block from sdfObjects, for example a single plug unit of an outlet strip with on/off control, energy monitor, and optional dimmer sdfObjects, while retaining the atomicity of the individual sdfObjects.
+- The ability to compose a reusable definition block from sdfObjects.
+  Example: a single plug unit of an outlet strip with sdfObjects
+  for on/off control, energy monitor, and optional dimmer, while
+  retaining the atomicity of the individual sdfObjects.
 
 - The ability to compose sdfObjects and other definition blocks into a higher level sdfThing that represents a product, while retaining the atomicity of sdfObjects.
 
 - The ability to enrich and refine a base definition to have
   product-specific qualities and quality values, such as unit, range, and scale settings.
 
-- The ability to reference items in one part of a complex definition from another part of the same definition, for example to summarize the energy readings from all plugs in an outlet strip.
+- The ability to reference items in one part of a complex definition
+  from another part of the same definition.
+  Example: summarizing the energy readings from all plugs in an outlet
+  strip.
 
 ## Paths in the model namespaces
 
@@ -1700,7 +1730,8 @@ Modular composition of definitions enables an existing definition
 
 ### Use of the "sdfRef" keyword to re-use a definition
 
-An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition. This pattern will use the keyword `sdfRef` as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template.
+An existing definition may be used as a template for a new definition, that is, a new definition is created in the target namespace which uses the defined qualities of some existing definition.
+This pattern uses the keyword `sdfRef` as a quality of a new definition with a value consisting of a reference to the existing definition that is to be used as a template.
 
 In the definition that uses `sdfRef`, new qualities may be added
 and existing qualities from the referenced definition may be
@@ -1708,20 +1739,26 @@ overridden.  (Note that JSON maps do not have a defined
 order, so the SDF processor may see these overrides before seeing the
 `sdfRef`.)
 
-Note that if the referenced definition contains qualities or
-definitions that are not valid in the context where the sdfRef is used
-(for instance, if an sdfThing definition would be added in an sdfObject definition), the resulting model, when resolved, may be invalid.
+Note that the definition referenced by `sdfRef` might contain
+qualities or definitions that are not valid in the context where the
+`sdfRef` is used.
+In this case, the resulting model, when resolved, may be invalid.
+Example: an sdfRef adds an sdfThing definition in an sdfObject
+definition.
 
-As a convention, overrides are intended to be used only for further restricting
-the set of data values, as shown in {{exa-sdfref}}:  any value for a
-`cable-length` also is a valid value for a `length`, with the
+As a convention, overrides are intended to be used only for further
+restricting the allowable set of data values.
+Such a usage is shown in {{exa-sdfref}}:  any value allowable for a
+`cable-length` also is an allowable value for a `length`, with the
 additional restriction that the length cannot be smaller than 5 cm.
 (This is labeled as a convention as it cannot be checked in the
-general case; a quality of implementation consideration for a tool
+general case.
+A quality of implementation consideration for a tool
 might be to provide at least some form of checking.)
-Note that a description is provided that overrides the description of
-the referenced definition; as this quality is intended for human
-consumption there is no conflict with the intended goal.
+Note that the example provides a `description` that overrides the
+`description` of the referenced definition; as this quality is
+intended for human consumption there is no conflict with the intended
+goal.
 
 ~~~
 "sdfData":
@@ -1743,10 +1780,12 @@ consumption there is no conflict with the intended goal.
 ## sdfThing
 
 An sdfThing is a set of declarations and qualities that may be part of
-a more complex model. For example, the sdfObject declarations that make
+a more complex model.
+For example, the sdfObject declarations that make
 up the definition of a single socket of an outlet strip could be
-encapsulated in an sdfThing, which itself could be used in a declaration in the sdfThing definition for the outlet strip
-(see {{exa-sdfthing-outlet-strip}} in {{outlet-strip-example}} for an example SDF model).
+encapsulated in an sdfThing, which itself could be used in a declaration in the sdfThing definition for the outlet strip.
+(See {{exa-sdfthing-outlet-strip}} in {{outlet-strip-example}} for parts
+of an SDF model for this example).
 
 sdfThing definitions carry semantic meaning, such as a defined refrigerator compartment and a defined freezer compartment, making up a combination refrigerator-freezer product.
 An sdfThing may be composed of sdfObjects and other sdfThings.
@@ -2069,6 +2108,7 @@ Security Considerations {#seccons}
 
 Some wider security considerations applicable to Things are discussed
 in {{-seccons}}.
+
 {{Section 5 of -cddl}} gives an overview over security considerations
 that arise when formal description techniques are used to govern
 interoperability; analogs of these security considerations can apply
@@ -2076,9 +2116,12 @@ to SDF.
 
 The security considerations of underlying building blocks such as
 those detailed in {{Section 10 of RFC3629@-utf8}} apply.
-SDF uses JSON as a representation language; for a number of
-cases {{-json}} indicates that implementation behavior for certain constructs
+
+SDF uses JSON as a representation language.
+For a number of
+cases, {{-json}} indicates that implementation behavior for certain constructs
 allowed by the JSON grammar is unpredictable.
+
 Implementations need to be robust against invalid or unpredictable
 cases on input, preferably by rejecting input that is invalid or
 that would lead to unpredictable behavior, and need to avoid generating
@@ -2086,7 +2129,9 @@ these cases on output.
 
 Implementations of model languages may also exhibit
 performance-related availability issues when the attacker can control
-the input, see {{Section 4.1 of -jsonpath}} for a brief discussion.
+the input, see {{Section 4.1 of -jsonpath}} for a brief discussion and
+{{Section 8 of -iregexp}} for considerations specific to the use
+of `pattern`.
 
 SDF may be used in two processes that are often security relevant:
 model-based *validation* of data that is intended to be described by SDF models, and
