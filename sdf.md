@@ -170,7 +170,7 @@ entity:
 [^status]
 
 [^status]: (This note will be removed by the RFC editor:)
-    The present revision (–19) addresses comments from the AD review
+    The present revision (-20) fixes a clerical error in (–19), which addresses comments from the AD review
     and from the IESG directorate reviews.
 
 --- middle
@@ -1986,7 +1986,7 @@ The instructions to the Experts are:
   qualities that are likely to enjoy wide use and can make good use of
   their conciseness.
 
-The "Quality Name Prefixes" registry starts out as in
+The "Quality Names" registry starts out as in
 {{tab-quality-names}}; all references for these initial entries are to
 RFC XXXX and all change controllers are given as "IETF"".
 
