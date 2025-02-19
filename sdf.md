@@ -619,9 +619,11 @@ expected to be part of the protocol binding.
 
 ### sdfAction {#sdfaction-overview}
 
-The `sdfAction` group contains declarations of Actions, model affordances that, when triggered,
+The `sdfAction` group contains declarations of Actions, which
+model affordances that, when triggered,
 have more effect than just reading, updating, or observing Thing
-state, often resulting in some outward physical effect (which, itself,
+state.
+Actions often result in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
 might be considered to be roughly analogous to method calls.
 
@@ -659,7 +661,7 @@ part of the protocol binding.
 
 ### sdfEvent {#sdfevent-overview}
 
-The `sdfEvent` group contains declarations of Events, which can model
+The `sdfEvent` group contains declarations of Events, which model
 affordances that inform about "happenings" associated with a Thing
 modeled by the enclosing sdfObject; these may result in a signal being
 stored or emitted as a result.
