@@ -170,7 +170,7 @@ entity:
 [^status]
 
 [^status]: (This note will be removed by the RFC editor:)
-    The present revision (-20) fixes a clerical error in (–19), which addresses comments from the AD review
+    The present revision (-21) fixes a clerical error in (–20), which addresses comments from the AD review
     and from the IESG directorate reviews.
 
 --- middle
