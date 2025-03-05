@@ -1461,6 +1461,9 @@ Values for sdfType that are defined in this specification are shown in
 This table also gives a description of the semantics of the sdfType,
 the conventional value for `type` to be used with the sdfType value,
 and a conventional JSON representation for values of the type.
+The `type` and the JSON representation are chosen to be consistent
+with each other; this MUST be true for additionally registered sdfType
+values as well.
 
 | Name        | Description                      | type   | JSON Representation       | Reference                    |
 |-------------|----------------------------------|--------|---------------------------|------------------------------|
@@ -2088,7 +2091,7 @@ type:
 
 JSON Representation
 : A short description of a JSON representation that can be used for
-  this sdfType.  This MUST be consistent with the type.
+  this sdfType.  As per {{sdftype}}, this MUST be consistent with the type.
 
 Reference:
 : A more detailed specification of meaning and use of sdfType.
