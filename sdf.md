@@ -1852,7 +1852,7 @@ Security considerations:
 : {{seccons}} of RFC XXXX
 
 Interoperability considerations:
-: N/A
+: none
 
 Published specification:
 : {{media-type}} of RFC XXXX
@@ -1890,7 +1890,7 @@ Intended usage:
 : COMMON
 
 Restrictions on usage:
-: N/A
+: none
 
 Author/Change controller:
 : IETF
