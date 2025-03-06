@@ -1840,10 +1840,10 @@ Subtype name:
 : sdf+json
 
 Required parameters:
-: none
+: N/A
 
 Optional parameters:
-: none
+: N/A
 
 Encoding considerations:
 : binary (JSON is UTF-8-encoded text)
@@ -1852,7 +1852,7 @@ Security considerations:
 : {{seccons}} of RFC XXXX
 
 Interoperability considerations:
-: none
+: N/A
 
 Published specification:
 : {{media-type}} of RFC XXXX
@@ -1890,7 +1890,7 @@ Intended usage:
 : COMMON
 
 Restrictions on usage:
-: none
+: N/A
 
 Author/Change controller:
 : IETF
