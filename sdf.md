@@ -167,20 +167,12 @@ entity:
     in those interactions. Tools convert this format to database formats
     and other serializations as needed.
 
-[^status]
-
-[^status]: (This note will be removed by the RFC editor:)
-    The present revision (-20) fixes a clerical error in (–19), which addresses comments from the AD review
-    and from the IESG directorate reviews.
-
 --- middle
 
 
 # Introduction
 
 [^intro-]
-
-[^status]
 
 SDF is designed to be an extensible format.
 The present document constitutes the base specification for SDF: we
