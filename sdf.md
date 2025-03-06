@@ -2253,7 +2253,7 @@ as no process is defined that would add default values to an instance
 of some interaction data.
 
 Other qualities that are inspired by JSO are "`$comment`" and
-"`description`", both of which are also available in Information blocks.
+"`description`", both of which are also available in the information block.
 
 ## type "`number`", type "`integer`"
 
