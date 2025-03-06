@@ -1830,7 +1830,7 @@ IANA is requested to add the following Media-Type to the "Media Types" registry.
 
 | Name     | Template             | Reference                 |
 | sdf+json | application/sdf+json | RFC XXXX, {{media-type}}  |
-{: align="left" title="Media Type Registration for SDF"}
+{: #mediatypereg align="left" title="Media Type Registration for SDF"}
 
 {:compact}
 Type name:
@@ -1908,7 +1908,7 @@ registry group, where 434 comes from the "IETF Review" 256-999 range.
 
 | Content Type         | Content Coding |  ID | Reference |
 | application/sdf+json | -              | 434 | RFC XXXX  |
-{: align="left" title="SDF Content-format Registration"}
+{: #contentformatreg align="left" title="SDF Content-format Registration"}
 
 // RFC Ed.: 434 was earmarked in <https://mailarchive.ietf.org/arch/msg/core-parameters/iLDsdxk80YO9IsLMXMAgcx5S8Ak/>;
 please replace 434 with the assigned ID, remove the
@@ -2490,6 +2490,8 @@ these to the standard.
   values, to be exact); a length in bytes is not meaningful unless
   bound to a specific encoding, which might differ from UTF-8 in some
   ecosystem mappings and protocol bindings.
+
+{::include-all lists.md}
 
 # Acknowledgements
 {:unnumbered}
