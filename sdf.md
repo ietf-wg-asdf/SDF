@@ -1463,6 +1463,9 @@ Values for sdfType that are defined in this specification are shown in
 This table also gives a description of the semantics of the sdfType,
 the conventional value for `type` to be used with the sdfType value,
 and a conventional JSON representation for values of the type.
+The `type` and the JSON representation are chosen to be consistent
+with each other; this MUST be true for additionally registered sdfType
+values as well.
 
 | Name        | Description                      | type   | JSON Representation       | Reference                    |
 |-------------|----------------------------------|--------|---------------------------|------------------------------|
@@ -1983,6 +1986,7 @@ of RFC8126@-reg}}.
 in the process, even earlier than foreseen in {{BCP100}}.)
 
 The instructions to the Experts are:
+
 * to ascertain that the specification is available in an immutable
   reference and has achieved a good level of review in conjunction with
   RFCs or activities of the IETF, and
@@ -2091,7 +2095,7 @@ type:
 
 JSON Representation
 : A short description of a JSON representation that can be used for
-  this sdfType.  This MUST be consistent with the type.
+  this sdfType.  As per {{sdftype}}, this MUST be consistent with the type.
 
 Reference:
 : A more detailed specification of meaning and use of sdfType.
@@ -2251,6 +2255,8 @@ quality); this is mainly documentary and not very well-defined for SDF
 as no process is defined that would add default values to an instance
 of some interaction data.
 
+Other qualities that are inspired by JSO are "`$comment`" and
+"`description`", both of which are also available in the information block.
 
 ## type "`number`", type "`integer`"
 
