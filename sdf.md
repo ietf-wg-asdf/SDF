@@ -994,7 +994,6 @@ An example for an sdfObject definition is given in {{exobject}}:
 
 This example defines an sdfObject "foo" that is defined in the default namespace (full address: `#/sdfObject/foo`), containing a property that can be addressed as
 `#/sdfObject/foo/sdfProperty/bar`, with data of type boolean.
-<!-- we could define a URN-style namespace that looks exactly that way -->
 
 Often, definitions are also declarations: the definition of the
 entry "bar" in the property "foo" means that data corresponding to the
@@ -1029,7 +1028,6 @@ contribute to a global namespace.)
 Global names look exactly like `https://` URIs with attached fragment identifiers.
 
 There is no intention to require that these URIs can be dereferenced.
-<!-- Looking things up there is a convenience -->
 (However, as future extensions of SDF might find a use for dereferencing
 global names, the URI should be chosen in such a way that this may
 become possible in the future.
@@ -2502,16 +2500,3 @@ these to the standard.
 {:unnumbered}
 
 This specification is based on work by the One Data Model group.
-
-<!--  LocalWords:  SDF namespace defaultNamespace instantiation OMA
- -->
-<!--  LocalWords:  affordances ZigBee LWM OCF sdfObject sdfThing
- -->
-<!--  LocalWords:  Thingness sdfProperty sdfEvent sdfRef
- -->
-<!--  LocalWords:  namespaces sdfRequired Optionality sdfAction
- -->
-<!--  LocalWords:  dereferenced dereferencing atomicity
- -->
-<!--  LocalWords:  interworking
- -->
