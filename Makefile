@@ -1,6 +1,6 @@
 lists.md: sdf.xml
 	kramdown-rfc-extract-figures-tables -trfc $< >$@.new
-	mv $@.new $@
+	if cmp $@.new $@; then rm -v $@.new; else mv -v $@.new $@; fi
 
 render: sdf-framework.cddl sdf.jso.json-unidiff sdf.md
 	kdrfc sdf.md
