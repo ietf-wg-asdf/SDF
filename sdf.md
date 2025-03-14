@@ -838,8 +838,11 @@ Given Names are often sufficiently self-explanatory that they can be
 used in place of the `label` quality if that is not given.
 In turn, if a given name turns out too complicated, a more elaborate
 `label` can be given and the given name kept simple.
-Base SDF does not address internationalization of
-given names.
+As given names are "programmers' names", base SDF does not address
+internationalization of given names.
+(More likely qualities to receive localizable equivalents by
+exercising the quality name extension point are `label` and
+`description`).
 
 Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
