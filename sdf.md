@@ -63,6 +63,8 @@ contributor:
 normative:
   IANA.senml: units
   IANA.params: params
+  IANA.media-types:
+  IANA.core-parameters:
   RFC3339: dt
   RFC8428: senml
   RFC8798: senml-units-2
@@ -170,7 +172,7 @@ entity:
 [^status]
 
 [^status]: (This note will be removed by the RFC editor:)
-    The present revision (-20) fixes a clerical error in (–19), which addresses comments from the AD review
+    The present revision (-21) fixes a clerical error in (–20), which addresses comments from the AD review
     and from the IESG directorate reviews.
 
 --- middle
@@ -1826,7 +1828,8 @@ IANA Considerations {#iana}
 Media Type
 -----------
 
-IANA is requested to add the following Media-Type to the "Media Types" registry.
+IANA is requested to add the following Media-Type to the "Media Types"
+registry {{IANA.media-types}}.
 
 | Name     | Template             | Reference                 |
 | sdf+json | application/sdf+json | RFC XXXX, {{media-type}}  |
@@ -1904,7 +1907,7 @@ Content-Format
 This document adds the following Content-Format to the "CoAP
 Content-Formats" registry,
 within the "Constrained RESTful Environments (CoRE) Parameters"
-registry group, where 434 comes from the "IETF Review" 256-999 range.
+registry group {{IANA.core-parameters}}, where 434 comes from the "IETF Review" 256-999 range.
 
 | Content Type         | Content Coding |  ID | Reference |
 | application/sdf+json | -              | 434 | RFC XXXX  |
