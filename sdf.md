@@ -178,8 +178,8 @@ entity:
 [^intro-]
 
 SDF is designed to be an extensible format.
-The present document constitutes the base specification for SDF: we
-speak of "base SDF" for short.
+The present document constitutes the base specification for SDF:
+"base SDF" for short.
 In addition, SDF extensions can be defined, some of which may make use
 of extension points specifically defined for this in base SDF.
 One area for such extensions would be refinements of SDF's abstract
@@ -261,7 +261,7 @@ Object:
 
 Property:
 : Certain environments use the term "property" for a JSON concept that
-  JSON calls "member" and we call "entry", or sometimes just for the
+  JSON calls "member" and is called "entry" here, or sometimes just for the
   map key of these.
   In this document, the term Property is specifically reserved for a
   certain kind of Affordance, even if the map key `"properties"` is
@@ -421,7 +421,7 @@ defined in this specification.
 
 ## Example Definition
 
-We start with an example for the SDF definition of a simple sdfObject called "Switch" ({{example1}}).
+The overview starts with an example for the SDF definition of a simple sdfObject called "Switch" ({{example1}}).
 
 ~~~ json
 {
@@ -484,7 +484,7 @@ In the JSON representation, the `info` group is an exception in that
 this group's map has keys taken from the SDF vocabulary.
 All other groups (such as `namespace`, `sdfObject`) have maps with
 keys that are freely defined by the model writer (`Switch`, `value`,
-`on`, etc.); we speak of *given names*.
+`on`, etc.); these map keys are therefore called *given names*.
 The groups made up of entries with given names as keys usually use the
 `named<>` production in the [formal syntax of SDF](#syntax).
 Where the values of these entries are maps, these again use SDF
@@ -968,7 +968,7 @@ shortcut for identifying the class name keyword that applies to each
 of them, without repeating it for each definition.
 
 The value of each group is a JSON map, the keys of which serve for naming the individual definitions in this group, and the corresponding values provide a set of qualities (name-value pairs) for the individual definition.
-(In short, we speak of the map entries as "named sets of qualities".)
+(In short, these map entries are also termed "named sets of qualities".)
 
 Each group may contain zero or more definitions.
 Each identifier defined creates a new type and term in the target namespace.
@@ -1051,8 +1051,8 @@ The absolute URI part is a copy of the default namespace.
 As a result, the
 default namespace is always the target namespace for a name for which
 a definition is contributed.
-When we want to emphasize that name definitions are contributed to the
-default namespace, we therefore also call it the "target namespace" of
+In order to emphasize that name definitions are contributed to the
+default namespace, this namespace is also termed the "target namespace" of
 the SDF document.
 
 For instance, in {{example1}}, definitions for the following global names are contributed:
@@ -2229,8 +2229,8 @@ Data qualities define data used in SDF affordances at an information
 model level.
 A popular way to describe JSON data at a data model level is proposed
 by a number of drafts on json-schema.org (which collectively are
-abbreviated JSO here); for reference to a popular version we will
-point here to {{-jso}} and {{-jso7v}}.
+abbreviated JSO here); for reference to a popular version this appendix
+points to {{-jso}} and {{-jso7v}}.
 As the vocabulary used by JSO is familiar to many JSON modelers, the
 present specification borrows some of the terms and ports their
 semantics to the information model level needed for SDF.
