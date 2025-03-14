@@ -5,14 +5,14 @@
 ASDF                                                      M. Koster, Ed.
 Internet-Draft                                            KTC Control AB
 Intended status: Standards Track                         C. Bormann, Ed.
-Expires: 26 July 2025                             Universität Bremen TZI
+Expires: 15 September 2025                        Universität Bremen TZI
                                                               A. Keränen
                                                                 Ericsson
-                                                         22 January 2025
+                                                           14 March 2025
 
 
   Semantic Definition Format (SDF) for Data and Interactions of Things
-                         draft-ietf-asdf-sdf-19
+                         draft-ietf-asdf-sdf-22
 
 Abstract
 
@@ -25,11 +25,6 @@ Abstract
    as the Data types for the information exchanged in those
    interactions.  Tools convert this format to database formats and
    other serializations as needed.
-
-
-   // (This note will be removed by the RFC editor:) The present
-   // revision (–19) addresses comments from the AD review and from the
-   // IESG directorate reviews.
 
 About This Document
 
@@ -47,21 +42,21 @@ About This Document
    Source for this draft and an issue tracker can be found at
    https://github.com/ietf-wg-asdf/SDF.
 
-
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 1]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
+
+
+
+
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 1]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
 
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
@@ -73,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 July 2025.
+   This Internet-Draft will expire on 15 September 2025.
 
 Copyright Notice
 
@@ -92,33 +87,33 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   4
-     1.1.  Structure of This Document  . . . . . . . . . . . . . . .   5
+     1.1.  Structure of This Document  . . . . . . . . . . . . . . .   4
      1.2.  Terminology and Conventions . . . . . . . . . . . . . . .   5
        Programming Platform Terms  . . . . . . . . . . . . . . . . .   5
        Conceptual Terms  . . . . . . . . . . . . . . . . . . . . . .   6
        Specification Language Terms  . . . . . . . . . . . . . . . .   6
        Conventions . . . . . . . . . . . . . . . . . . . . . . . . .   8
    2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   9
+     2.1.  Example Definition  . . . . . . . . . . . . . . . . . . .   8
      2.2.  Elements of an SDF model  . . . . . . . . . . . . . . . .  10
        2.2.1.  sdfObject . . . . . . . . . . . . . . . . . . . . . .  11
        2.2.2.  sdfProperty . . . . . . . . . . . . . . . . . . . . .  12
        2.2.3.  sdfAction . . . . . . . . . . . . . . . . . . . . . .  13
        2.2.4.  sdfEvent  . . . . . . . . . . . . . . . . . . . . . .  13
        2.2.5.  sdfData . . . . . . . . . . . . . . . . . . . . . . .  14
-
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 2]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
        2.2.6.  sdfThing  . . . . . . . . . . . . . . . . . . . . . .  14
      2.3.  Member names: Given Names and Quality Names . . . . . . .  15
        2.3.1.  Given Names and Quality Names . . . . . . . . . . . .  15
        2.3.2.  Hierarchical Names  . . . . . . . . . . . . . . . . .  16
        2.3.3.  Extensibility of Given Names and Quality Names  . . .  16
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 2]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    3.  SDF structure . . . . . . . . . . . . . . . . . . . . . . . .  17
      3.1.  Information block . . . . . . . . . . . . . . . . . . . .  18
      3.2.  Namespaces block  . . . . . . . . . . . . . . . . . . . .  19
@@ -152,7 +147,7 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
      7.3.  IETF URN Sub-namespace for Unit Names
            (urn:ietf:params:unit)  . . . . . . . . . . . . . . . . .  44
      7.4.  Registries  . . . . . . . . . . . . . . . . . . . . . . .  44
-       7.4.1.  Quality Names . . . . . . . . . . . . . . . . . . . .  44
+       7.4.1.  Quality Names . . . . . . . . . . . . . . . . . . . .  45
        7.4.2.  Quality Name Prefixes . . . . . . . . . . . . . . . .  47
        7.4.3.  sdfType Values  . . . . . . . . . . . . . . . . . . .  48
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  49
@@ -161,28 +156,30 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
      9.2.  Informative References  . . . . . . . . . . . . . . . . .  53
    Appendix A.  Formal Syntax of SDF . . . . . . . . . . . . . . . .  56
    Appendix B.  json-schema.org Rendition of SDF Syntax  . . . . . .  61
-   Appendix C.  Data Qualities inspired by json-schema.org . . . . . 102
-
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 3]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
+   Appendix C.  Data Qualities inspired by json-schema.org . . . . . 103
      C.1.  type "number", type "integer" . . . . . . . . . . . . . . 103
-     C.2.  type "string" . . . . . . . . . . . . . . . . . . . . . . 103
-     C.3.  type "boolean"  . . . . . . . . . . . . . . . . . . . . . 104
+     C.2.  type "string" . . . . . . . . . . . . . . . . . . . . . . 104
+     C.3.  type "boolean"  . . . . . . . . . . . . . . . . . . . . . 105
      C.4.  type "array"  . . . . . . . . . . . . . . . . . . . . . . 105
      C.5.  type "object" . . . . . . . . . . . . . . . . . . . . . . 105
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 3]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
      C.6.  Implementation notes  . . . . . . . . . . . . . . . . . . 106
    Appendix D.  Composition Examples . . . . . . . . . . . . . . . . 106
      D.1.  Outlet Strip Example  . . . . . . . . . . . . . . . . . . 106
      D.2.  Refrigerator-Freezer Example  . . . . . . . . . . . . . . 107
    Appendix E.  Some Changes From Earlier Drafts . . . . . . . . . . 108
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . . 109
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . . 109
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 109
+   List of Figures . . . . . . . . . . . . . . . . . . . . . . . . . 109
+   List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . . 109
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . . 110
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . . 110
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 110
 
 1.  Introduction
 
@@ -195,11 +192,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    as the Data types for the information exchanged in those
    interactions.  Tools convert this format to database formats and
    other serializations as needed.
-
-
-   // (This note will be removed by the RFC editor:) The present
-   // revision (–19) addresses comments from the AD review and from the
-   // IESG directorate reviews.
 
    SDF is designed to be an extensible format.  The present document
    constitutes the base specification for SDF: we speak of "base SDF"
@@ -216,16 +208,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    format itself (as opposed to version indications within SDF documents
    indicating their own evolution, see Section 3.1).
 
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 4]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
 1.1.  Structure of This Document
 
    After introductory material and an overview (Section 2) over the
@@ -236,6 +218,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    sdfObjects, in further detail.  Section 6 discusses how SDF supports
    composition.  Conventional Sections (IANA Considerations, Security
    Considerations, Normative References, and Informative References)
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 4]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    follow.  The normative Appendix A defines the syntax of SDF in terms
    of its JSON structures, employing the Concise Data Definition
    Language (CDDL) [RFC8610].  This is followed by the informative
@@ -274,14 +264,6 @@ Programming Platform Terms
       array, dictionary, or symbol table.)
 
    Object:  An otherwise very generic term that JavaScript (and thus
-
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 5]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
       JSON) uses for the kind of maps that were part of the original
       languages from the outset.  In this document, Object is used
       exclusively in its general English meaning or as the colloquial
@@ -290,6 +272,16 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
       language.
 
    Property:  Certain environments use the term "property" for a JSON
+
+
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 5]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
       concept that JSON calls "member" and we call "entry", or sometimes
       just for the map key of these.  In this document, the term
       Property is specifically reserved for a certain kind of
@@ -331,19 +323,20 @@ Specification Language Terms
       a JSON text representing a single JSON map, which is built from
       nested maps.
 
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 6]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    SDF Model:  Definitions and declarations that model the digital
       interaction opportunities offered by one or more kinds of Things,
       represented by Groupings (sdfObjects and sdfThings).  An SDF Model
       can be fully contained in a single SDF Document, or it can be
       built from an SDF Document that references definitions and
       declarations from additional SDF documents.
+
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 6]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
 
    Block:  One or more entries in a JSON map that is part of an SDF
       specification; these entries can be described as a Block to
@@ -384,16 +377,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
       description for a combination of Affordances.
 
    Object, sdfObject:  A Grouping that contains Affordance declarations
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 7]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
       (Property, Action, and Event declarations) only.  It serves as the
       main "atom" of reusable semantics for model construction,
       representing the interaction model for a Thing that is simple
@@ -402,6 +385,15 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
       contain other Groupings (sdfObjects or sdfThings).
 
    sdfThing:  A Grouping that can contain nested Groupings (sdfThings
+
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 7]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
       and sdfObjects).  Like sdfObject, it can also contain Affordance
       declarations (Property, Action, and Event declarations).  (Note
       that "Thing" has a different meaning from sdfThing and therefore
@@ -439,21 +431,24 @@ Conventions
 
 2.  Overview
 
-
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 8]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
 2.1.  Example Definition
 
    We start with an example for the SDF definition of a simple sdfObject
    called "Switch" (Figure 1).
+
+
+
+
+
+
+
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 8]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
 
    {
      "info": {
@@ -495,17 +490,25 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
                Figure 1: A simple example of an SDF document
 
+
+
+
+
+
+
+
+
+
+
+
+Koster, et al.          Expires 15 September 2025               [Page 9]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    This is a model of a switch.  The state value declared in the
    sdfProperty group, represented by a Boolean, will be true for "on"
    and will be false for "off".  The actions on or off declared in the
-
-
-
-Koster, et al.            Expires 26 July 2025                  [Page 9]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    sdfAction group are redundant with setting the value and are in the
    example to illustrate that there are often different ways of
    achieving the same effect.  The action toggle will invert the value
@@ -554,12 +557,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 10]
+Koster, et al.          Expires 15 September 2025              [Page 10]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
                      ,--------.
@@ -613,9 +613,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 11]
+Koster, et al.          Expires 15 September 2025              [Page 11]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    The presence of one or both of the optional qualities "minItems" and
@@ -669,19 +669,19 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 12]
+Koster, et al.          Expires 15 September 2025              [Page 12]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
 2.2.3.  sdfAction
 
-   The sdfAction group contains declarations of Actions, model
+   The sdfAction group contains declarations of Actions, which model
    affordances that, when triggered, have more effect than just reading,
-   updating, or observing Thing state, often resulting in some outward
-   physical effect (which, itself, cannot be modeled in SDF).  From a
-   programmer's perspective, they might be considered to be roughly
-   analogous to method calls.
+   updating, or observing Thing state.  Actions often result in some
+   outward physical effect (which, itself, cannot be modeled in SDF).
+   From a programmer's perspective, they might be considered to be
+   roughly analogous to method calls.
 
    Actions may have data parameters: these are modeled as a single item
    of input data and output data, each.  Where multiple parameters need
@@ -717,7 +717,7 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 2.2.4.  sdfEvent
 
-   The sdfEvent group contains declarations of Events, which can model
+   The sdfEvent group contains declarations of Events, which model
    affordances that inform about "happenings" associated with a Thing
    modeled by the enclosing sdfObject; these may result in a signal
    being stored or emitted as a result.
@@ -725,9 +725,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 13]
+Koster, et al.          Expires 15 September 2025              [Page 13]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    Note that there is a trivial overlap with sdfProperty state changes,
@@ -781,9 +781,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 14]
+Koster, et al.          Expires 15 September 2025              [Page 14]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    A definition in an sdfThing group can refine the metadata of the
@@ -837,9 +837,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 15]
+Koster, et al.          Expires 15 September 2025              [Page 15]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
 2.3.2.  Hierarchical Names
@@ -893,17 +893,18 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 16]
+Koster, et al.          Expires 15 September 2025              [Page 16]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    A qualified Quality Name is composed of a Quality Name Prefix, a :
    (colon) character, and a nonqualified Quality Name.  Quality Name
    Prefixes are registered in the "Quality Name Prefixes" registry in
-   the "SDF Parameters" registry group (Section 7.4.2).  They are
-   composed of lower case ASCII letters and digits, starting with a
-   lower case ASCII letter (i.e., using a pattern of "[a-z][a-z0-9]*").
+   the "Semantic Definition Format (SDF)" registry group
+   (Section 7.4.2).  They are composed of lower case ASCII letters and
+   digits, starting with a lower case ASCII letter (i.e., using a
+   pattern of "[a-z][a-z0-9]*").
 
    Given Names are not restricted by the formal SDF syntax.  To enable
    non-surprising name translations in tools, combinations of ASCII
@@ -915,8 +916,11 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    given names.  Given Names are often sufficiently self-explanatory
    that they can be used in place of the label quality if that is not
    given.  In turn, if a given name turns out too complicated, a more
-   elaborate label can be given and the given name kept simple.  Base
-   SDF does not address internationalization of given names.
+   elaborate label can be given and the given name kept simple.  As
+   given names are "programmers' names", base SDF does not address
+   internationalization of given names.  (More likely qualities to
+   receive localizable equivalents by exercising the quality name
+   extension point are label and description).
 
    Further, to enable Given Names to have a more powerful role in
    building global hierarchical names, an extension is planned that
@@ -945,13 +949,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 17]
+Koster, et al.          Expires 15 September 2025              [Page 17]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
 3.1.  Information block
@@ -1005,9 +1005,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 18]
+Koster, et al.          Expires 15 September 2025              [Page 18]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    The version quality is used to indicate version information about the
@@ -1061,9 +1061,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 19]
+Koster, et al.          Expires 15 September 2025              [Page 19]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
      +==================+========+===================================+
@@ -1117,9 +1117,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 20]
+Koster, et al.          Expires 15 September 2025              [Page 20]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    The value of each group is a JSON map, the keys of which serve for
@@ -1173,9 +1173,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 21]
+Koster, et al.          Expires 15 September 2025              [Page 21]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
 3.4.  Top-level Affordances and sdfData
@@ -1229,9 +1229,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 22]
+Koster, et al.          Expires 15 September 2025              [Page 22]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    For instance, in Figure 1, definitions for the following global names
@@ -1285,9 +1285,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 23]
+Koster, et al.          Expires 15 September 2025              [Page 23]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    Note that there is no way to provide a URI scheme name in a curie, so
@@ -1341,9 +1341,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 24]
+Koster, et al.          Expires 15 September 2025              [Page 24]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    3.  the JSON pointer that is the value of the sdfRef member is
@@ -1397,9 +1397,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 25]
+Koster, et al.          Expires 15 September 2025              [Page 25]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    {
@@ -1453,9 +1453,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 26]
+Koster, et al.          Expires 15 September 2025              [Page 26]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    "sdfData": {
@@ -1509,9 +1509,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 27]
+Koster, et al.          Expires 15 September 2025              [Page 27]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
       -  All affordance declarations that are directly in the same
@@ -1565,9 +1565,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 28]
+Koster, et al.          Expires 15 September 2025              [Page 28]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    "sdfObject": {
@@ -1621,9 +1621,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 29]
+Koster, et al.          Expires 15 September 2025              [Page 29]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
 4.6.  Common Qualities
@@ -1677,9 +1677,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 30]
+Koster, et al.          Expires 15 September 2025              [Page 30]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
      +===============+================+====================+=========+
@@ -1733,9 +1733,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 31]
+Koster, et al.          Expires 15 September 2025              [Page 31]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
        A URI unit name is distinguished from a registered unit name by
@@ -1758,12 +1758,12 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    SDF defines a number of basic types beyond those provided by JSON or
    JSO.  These types are identified by the sdfType quality, which is a
    text string from a set of type names defined by the "sdfType values"
-   registry in the "SDF Parameters" registry group (Section 7.4.3).  The
-   sdfType name is composed of lower case ASCII letters, digits, and -
-   (ASCII hyphen/minus) characters, starting with a lower case ASCII
-   letter (i.e., using a pattern of "[a-z][-a-z0-9]*"), typically
-   employing kebab-case for names constructed out of multiple words
-   [KebabCase].
+   registry in the "Semantic Definition Format (SDF)" registry group
+   (Section 7.4.3).  The sdfType name is composed of lower case ASCII
+   letters, digits, and - (ASCII hyphen/minus) characters, starting with
+   a lower case ASCII letter (i.e., using a pattern of
+   "[a-z][-a-z0-9]*"), typically employing kebab-case for names
+   constructed out of multiple words [KebabCase].
 
    To aid interworking with JSO implementations, it is RECOMMENDED that
    sdfType is always used in conjunction with the type quality inherited
@@ -1774,7 +1774,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    in Table 5.  This table also gives a description of the semantics of
    the sdfType, the conventional value for type to be used with the
    sdfType value, and a conventional JSON representation for values of
-   the type.
+   the type.  The type and the JSON representation are chosen to be
+   consistent with each other; this MUST be true for additionally
+   registered sdfType values as well.
 
 
 
@@ -1787,11 +1789,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 32]
+Koster, et al.          Expires 15 September 2025              [Page 32]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    +=============+=============+========+================+============+
@@ -1845,9 +1845,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 33]
+Koster, et al.          Expires 15 September 2025              [Page 33]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
       "sdfChoice": {
@@ -1901,9 +1901,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 34]
+Koster, et al.          Expires 15 September 2025              [Page 34]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
       "sdfChoice": {
@@ -1957,9 +1957,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 35]
+Koster, et al.          Expires 15 September 2025              [Page 35]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
        +=============+===========+================================+
@@ -2013,9 +2013,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 36]
+Koster, et al.          Expires 15 September 2025              [Page 36]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
     +============+=========+===============================+=========+
@@ -2069,9 +2069,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 37]
+Koster, et al.          Expires 15 September 2025              [Page 37]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    sdfInputData defines the input data of the action.  sdfOutputData
@@ -2125,9 +2125,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 38]
+Koster, et al.          Expires 15 September 2025              [Page 38]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    The qualities of sdfData include the data qualities (and thus the
@@ -2181,9 +2181,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 39]
+Koster, et al.          Expires 15 September 2025              [Page 39]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
 6.2.  Modular Composition
@@ -2237,9 +2237,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 40]
+Koster, et al.          Expires 15 September 2025              [Page 40]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    "sdfData":
@@ -2293,9 +2293,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 41]
+Koster, et al.          Expires 15 September 2025              [Page 41]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
          +=============+===========+=============================+
@@ -2340,7 +2340,7 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 7.1.  Media Type
 
    IANA is requested to add the following Media-Type to the "Media
-   Types" registry.
+   Types" registry [IANA.media-types].
 
 
 
@@ -2349,9 +2349,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 42]
+Koster, et al.          Expires 15 September 2025              [Page 42]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    +==========+======================+=======================+
@@ -2364,8 +2364,8 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
    Type name:  application
    Subtype name:  sdf+json
-   Required parameters:  none
-   Optional parameters:  none
+   Required parameters:  N/A
+   Optional parameters:  N/A
    Encoding considerations:  binary (JSON is UTF-8-encoded text)
    Security considerations:  Section 8 of RFC XXXX
    Interoperability considerations:  none
@@ -2399,15 +2399,15 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
    This document adds the following Content-Format to the "CoAP Content-
    Formats" registry, within the "Constrained RESTful Environments
-   (CoRE) Parameters" registry group, where 434 comes from the "IETF
-   Review" 256-999 range.
+   (CoRE) Parameters" registry group [IANA.core-parameters], where 434
+   comes from the "IETF Review" 256-999 range.
 
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 43]
+Koster, et al.          Expires 15 September 2025              [Page 43]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    +======================+================+=====+===========+
@@ -2451,20 +2451,26 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 7.4.  Registries
 
-   IANA is requested to create an "SDF Parameters" registry group, with
-   the registries defined in this Section.
+   IANA is requested to create a "Semantic Definition Format (SDF)"
+   registry group, with the registries defined in this Section.
+
+
+
+
+
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 44]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
 
 7.4.1.  Quality Names
 
-   IANA is requested to create a "Quality Names" registry in the "SDF
-   Parameters" registry group, with the following template:
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 44]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
+   IANA is requested to create a "Quality Names" registry in the
+   "Semantic Definition Format (SDF)" registry group, with the following
+   template:
 
    Name:  A quality name composed of ASCII letters, digits, and dollar
       signs, starting with a lower case ASCII letter or a dollar sign
@@ -2485,15 +2491,18 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    registrations can be made earlier in the process, even earlier than
    foreseen in [BCP100].)
 
-   The instructions to the Experts are: * to ascertain that the
-   specification is available in an immutable reference and has achieved
-   a good level of review in conjunction with RFCs or activities of the
-   IETF, and * to be frugal in the allocation of quality names that are
-   suggestive of generally applicable semantics, keeping them in reserve
-   for qualities that are likely to enjoy wide use and can make good use
-   of their conciseness.
+   The instructions to the Experts are:
 
-   The "Quality Name Prefixes" registry starts out as in Table 13; all
+   *  to ascertain that the specification is available in an immutable
+      reference and has achieved a good level of review in conjunction
+      with RFCs or activities of the IETF, and
+
+   *  to be frugal in the allocation of quality names that are
+      suggestive of generally applicable semantics, keeping them in
+      reserve for qualities that are likely to enjoy wide use and can
+      make good use of their conciseness.
+
+   The "Quality Names" registry starts out as in Table 13; all
    references for these initial entries are to RFC XXXX and all change
    controllers are given as "IETF"".
 
@@ -2505,6 +2514,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     | const                | constant value                          |
     +----------------------+-----------------------------------------+
     | contentFormat        | content format                          |
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 45]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
     +----------------------+-----------------------------------------+
     | default              | default value                           |
     +----------------------+-----------------------------------------+
@@ -2514,14 +2531,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     +----------------------+-----------------------------------------+
     | exclusiveMaximum     | exclusive maximum for a number          |
     +----------------------+-----------------------------------------+
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 45]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
     | exclusiveMinimum     | exclusive minimum for a number          |
     +----------------------+-----------------------------------------+
     | format               | specific format for a text string       |
@@ -2561,6 +2570,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     | required             | which data items are required?          |
     +----------------------+-----------------------------------------+
     | sdfChoice            | named dataqualities for a choice        |
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 46]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
     +----------------------+-----------------------------------------+
     | sdfData              | named dataqualities for an independent  |
     |                      | data type definition                    |
@@ -2570,14 +2587,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     | sdfOutputData        | output data of an action or event       |
     |                      | (sdfRequired applies here)              |
     +----------------------+-----------------------------------------+
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 46]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
     | sdfRef               | sdf-pointer to definition being         |
     |                      | referenced                              |
     +----------------------+-----------------------------------------+
@@ -2606,7 +2615,8 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 7.4.2.  Quality Name Prefixes
 
    IANA is requested to create a "Quality Name Prefixes" registry in the
-   "SDF Parameters" registry group, with the following template:
+   "Semantic Definition Format (SDF)" registry group, with the following
+   template:
 
    Prefix:  A quality name prefix composed of lower case ASCII letters
       and digits, starting with a lower case ASCII letter (i.e., using a
@@ -2617,22 +2627,16 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
    Reference:  A pointer to additional information, if available.
 
+
+
+Koster, et al.          Expires 15 September 2025              [Page 47]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    Quality Name Prefixes are intended to be registered by organizations
    that plan to define quality names constructed with an organization-
    specifix prefix (Section 2.3.3).
-
-
-
-
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 47]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
    The registration policy is Expert Review as per Section 4.5 of RFC
    8126 [BCP26].  The instructions to the Expert are to ascertain that
@@ -2655,8 +2659,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 7.4.3.  sdfType Values
 
-   IANA is requested to create a "sdfType values" registry in the "SDF
-   Parameters" registry group, with the following template:
+   IANA is requested to create a "sdfType values" registry in the
+   "Semantic Definition Format (SDF)" registry group, with the following
+   template:
 
    Name:  A name composed of lower case ASCII letters, digits and -
       (ASCII hyphen/minus) characters, starting with a lower case ASCII
@@ -2668,8 +2673,8 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    type:  The value of the quality "type" to be used with this sdfType
 
    JSON Representation  A short description of a JSON representation
-      that can be used for this sdfType.  This MUST be consistent with
-      the type.
+      that can be used for this sdfType.  As per Section 4.7.1, this
+      MUST be consistent with the type.
 
    Reference:  A more detailed specification of meaning and use of
       sdfType.
@@ -2680,14 +2685,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 48]
+Koster, et al.          Expires 15 September 2025              [Page 48]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    The registration policy is Specification Required as per Section 4.6
@@ -2741,9 +2741,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 49]
+Koster, et al.          Expires 15 September 2025              [Page 49]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    same care and scrutiny as any other introduction of source code into
@@ -2797,9 +2797,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-Koster, et al.            Expires 26 July 2025                 [Page 50]
+Koster, et al.          Expires 15 September 2025              [Page 50]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
               Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
@@ -2824,6 +2824,15 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               Parameters", BCP 73, RFC 3553, DOI 10.17487/RFC3553, June
               2003, <https://www.rfc-editor.org/info/rfc3553>.
 
+   [IANA.core-parameters]
+              IANA, "Constrained RESTful Environments (CoRE)
+              Parameters",
+              <https://www.iana.org/assignments/core-parameters>.
+
+   [IANA.media-types]
+              IANA, "Media Types",
+              <https://www.iana.org/assignments/media-types>.
+
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
               Use", <https://www.iana.org/assignments/params>.
@@ -2841,6 +2850,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               DOI 10.17487/RFC6901, April 2013,
               <https://www.rfc-editor.org/rfc/rfc6901>.
 
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 51]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    [RFC7396]  Hoffman, P. and J. Snell, "JSON Merge Patch", RFC 7396,
               DOI 10.17487/RFC7396, October 2014,
               <https://www.rfc-editor.org/rfc/rfc7396>.
@@ -2849,14 +2866,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               Bormann, "Sensor Measurement Lists (SenML)", RFC 8428,
               DOI 10.17487/RFC8428, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8428>.
-
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 51]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
@@ -2896,6 +2905,15 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               <https://www.rfc-editor.org/info/std66>.
               At the time of writing, this STD comprises the following:
 
+
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 52]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
               Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
@@ -2904,15 +2922,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    [STD80]    Internet Standard 80,
               <https://www.rfc-editor.org/info/std80>.
               At the time of writing, this STD comprises the following:
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 52]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
               Cerf, V., "ASCII format for network interchange", STD 80,
               RFC 20, DOI 10.17487/RFC0020, October 1969,
@@ -2952,6 +2961,15 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               Points", BCP 100, RFC 7120, DOI 10.17487/RFC7120, January
               2014, <https://www.rfc-editor.org/info/rfc7120>.
 
+
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 53]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    [CamelCase]
               "Camel Case", December 2014,
               <http://wiki.c2.com/?CamelCase>.
@@ -2960,15 +2978,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               Specification", ECMA Standard ECMA-262, 11th Edition, June
               2020, <https://www.ecma-international.org/wp-
               content/uploads/ECMA-262.pdf>.
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 53]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
    [I-D.bormann-asdf-sdf-mapping]
               Bormann, C. and J. Romann, "Semantic Definition Format
@@ -2986,9 +2995,9 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    [I-D.bormann-t2trg-deref-id]
               Bormann, C. and C. Amsüss, "The "dereferenceable
               identifier" pattern", Work in Progress, Internet-Draft,
-              draft-bormann-t2trg-deref-id-04, 1 September 2024,
+              draft-bormann-t2trg-deref-id-05, 3 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-bormann-
-              t2trg-deref-id-04>.
+              t2trg-deref-id-05>.
 
    [I-D.irtf-t2trg-rest-iot]
               Keränen, A., Kovatsch, M., and K. Hartke, "Guidance on
@@ -3004,6 +3013,19 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               schema-04>.  This is the base specification for json-
               schema.org "draft 4".
 
+
+
+
+
+
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 54]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    [JSO4V]    Zyp, K. and G. Court, "JSON Schema: interactive and non
               interactive validation", Work in Progress, Internet-Draft,
               draft-fge-json-schema-validation-00, 31 January 2013,
@@ -3017,14 +3039,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               <https://datatracker.ietf.org/doc/html/draft-handrews-
               json-schema-01>.  This is the base specification for json-
               schema.org "draft 7".
-
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 54]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
    [JSO7V]    Wright, A., Andrews, H., and G. Luff, "JSON Schema
               Validation: A Vocabulary for Structural Validation of
@@ -3061,6 +3075,13 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               DOI 10.17487/RFC9535, February 2024,
               <https://www.rfc-editor.org/rfc/rfc9535>.
 
+
+
+Koster, et al.          Expires 15 September 2025              [Page 55]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    [STD97]    Internet Standard 97,
               <https://www.rfc-editor.org/info/std97>.
               At the time of writing, this STD comprises the following:
@@ -3069,18 +3090,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               Ed., "HTTP Semantics", STD 97, RFC 9110,
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/info/rfc9110>.
-
-
-
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 55]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
    [ZCL]      "The ZigBee Cluster Library", Elsevier, Zigbee Wireless
               Networking pp. 239-271,
@@ -3122,6 +3131,13 @@ Appendix A.  Formal Syntax of SDF
     EXTENSION-POINT<"top-ext">
    }
 
+
+
+Koster, et al.          Expires 15 September 2025              [Page 56]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    sdfinfo = {
     ? title: text
     ? description: text
@@ -3130,14 +3146,6 @@ Appendix A.  Formal Syntax of SDF
     ? license: text
     ? modified: modified-date-time
     ? features: [
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 56]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   * (any .feature "feature-name") ; EXTENSION-POINT
                 ]
     optional-comment
@@ -3179,6 +3187,13 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     ? "maxItems" => uint
    )
 
+
+
+Koster, et al.          Expires 15 September 2025              [Page 57]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    paedataqualities = (
     ; Property represents the state of an instance of an object
     ? sdfProperty: named<propertyqualities>
@@ -3186,14 +3201,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     ? sdfAction: named<actionqualities>
     ; Event represents an occurrence of event associated with an object
     ? sdfEvent: named<eventqualities>
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 57]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
     ; Data represents a piece of information that can be the state of a
     ; property or a parameter to an action or a signal in an event
     ? sdfData: named<dataqualities>
@@ -3235,6 +3242,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     ; zero or more named data type definitions that might be used above
     ? sdfData: named<dataqualities>
     EXTENSION-POINT<"event-ext">
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 58]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    }
 
    sdftype-name = text .regexp "[a-z][-a-z0-9]*"       ; EXTENSION-POINT
@@ -3242,14 +3257,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    dataqualities = {
     commonqualities
     jsonschema
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 58]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
     ? "unit" => text
     ? nullable: bool
     ? "sdfType" => "byte-string" / "unix-time"
@@ -3291,6 +3298,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     ; the next three should validate against type:
     ? const: allowed-types
     ? default: allowed-types
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 59]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
     ; number/integer constraints
     ? minimum: number
     ? maximum: number
@@ -3298,14 +3313,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
     ? exclusiveMaximum: number
     ? multipleOf: number
     ; text string constraints
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 59]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
     ? minLength: uint
     ? maxLength: uint
     ? pattern: text                ; regexp
@@ -3347,6 +3354,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    ; RFC 3339 sans time-numoffset, slightly condensed
    rfc3339z = '
       date-fullyear   = 4DIGIT
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 60]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
       date-month      = 2DIGIT  ; 01-12
       date-mday       = 2DIGIT  ; 01-28, 01-29, 01-30, 01-31 based on
                                 ; month/year
@@ -3354,14 +3369,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
       time-minute     = 2DIGIT  ; 00-59
       time-second     = 2DIGIT  ; 00-58, 00-59, 00-60 based on leap sec
                                 ; rules
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 60]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
       time-secfrac    = "." 1*DIGIT
       DIGIT           =  %x30-39 ; 0-9
 
@@ -3403,6 +3410,14 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
               }
             },
             "defaultNamespace": {
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 61]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
               "type": "string"
             },
             "sdfThing": {
@@ -3410,14 +3425,6 @@ Appendix B.  json-schema.org Rendition of SDF Syntax
               "additionalProperties": {
                 "$ref": "#/definitions/thingqualities"
               }
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 61]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
             },
             "sdfObject": {
               "type": "object",
@@ -3459,6 +3466,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
             "copyright": {
               "type": "string"
             },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 62]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
             "license": {
               "type": "string"
             },
@@ -3466,14 +3481,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               "$ref": "#/definitions/modified-date-time"
             },
             "features": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 62]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    -          "type": "array",
    -          "maxItems": 0
    +          "type": "array"
@@ -3515,6 +3522,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "$ref": "#/definitions/objectqualities"
               }
             },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 63]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
             "sdfThing": {
               "type": "object",
               "additionalProperties": {
@@ -3522,14 +3537,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               }
             },
             "sdfProperty": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 63]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
               "$ref": "#/definitions/sdfProperty-"
             },
             "sdfAction": {
@@ -3571,6 +3578,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
           "type": "string",
           "pattern": "^[^\\n\\r]*[:#][^\\n\\r]*$"
         },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 64]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
         "same-object": {
           "$ref": "#/definitions/referenceable-name"
         },
@@ -3578,14 +3593,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
           "type": "string",
           "pattern": "^[^:#]*$"
         },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 64]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
         "true": {
           "type": "boolean",
           "const": true
@@ -3627,6 +3634,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
             },
             "minItems": {
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 65]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
               "$ref": "#/definitions/uint"
             },
             "maxItems": {
@@ -3634,14 +3649,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
             }
           },
    +      "patternProperties": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 65]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
    +        }
    +      },
@@ -3683,6 +3690,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "sdfRef": {
                   "$ref": "#/definitions/sdf-pointer"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 66]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "sdfRequired": {
                   "$ref": "#/definitions/pointer-list"
                 },
@@ -3690,14 +3705,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "$ref": "#/definitions/allowed-types"
                 },
                 "default": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 66]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "$ref": "#/definitions/allowed-types"
                 },
                 "minimum": {
@@ -3739,6 +3746,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "items": {
                   "$ref": "#/definitions/jso-items"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 67]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "unit": {
                   "type": "string"
                 },
@@ -3746,14 +3761,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "type": "boolean"
                 },
                 "sdfType": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 67]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "$ref": "#/definitions/sdfType-"
                 },
                 "contentFormat": {
@@ -3795,6 +3802,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "writable": {
    +              "type": "boolean"
    +            },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 68]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            "description": {
    +              "type": "string"
    +            },
@@ -3802,14 +3817,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +              "type": "string"
    +            },
    +            "$comment": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 68]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +              "type": "string"
    +            },
    +            "sdfRef": {
@@ -3851,6 +3858,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "format": {
    +              "$ref": "#/definitions/format-"
    +            },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 69]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            "minItems": {
    +              "$ref": "#/definitions/uint"
    +            },
@@ -3858,14 +3873,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +              "$ref": "#/definitions/uint"
    +            },
    +            "uniqueItems": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 69]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +              "type": "boolean"
    +            },
    +            "items": {
@@ -3907,6 +3914,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            },
    +            "writable": {
    +              "type": "boolean"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 70]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            },
    +            "description": {
    +              "type": "string"
@@ -3914,14 +3929,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "label": {
    +              "type": "string"
    +            },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 70]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +            "$comment": {
    +              "type": "string"
    +            },
@@ -3963,6 +3970,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            },
    +            "format": {
    +              "$ref": "#/definitions/format-"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 71]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            },
    +            "minItems": {
    +              "$ref": "#/definitions/uint"
@@ -3970,14 +3985,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "maxItems": {
    +              "$ref": "#/definitions/uint"
    +            },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 71]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +            "uniqueItems": {
    +              "type": "boolean"
    +            },
@@ -4019,6 +4026,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "observable": {
    +              "type": "boolean"
    +            },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 72]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            "readable": {
    +              "type": "boolean"
    +            },
@@ -4026,14 +4041,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +              "type": "boolean"
    +            },
    +            "description": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 72]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +              "type": "string"
    +            },
    +            "label": {
@@ -4075,6 +4082,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "maxLength": {
    +              "$ref": "#/definitions/uint"
    +            },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 73]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            "pattern": {
    +              "type": "string"
    +            },
@@ -4082,14 +4097,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +              "$ref": "#/definitions/format-"
    +            },
    +            "minItems": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 73]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +              "$ref": "#/definitions/uint"
    +            },
    +            "maxItems": {
@@ -4131,6 +4138,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +              "type": "array",
    +              "items": {
    +                "type": "string"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 74]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +              },
    +              "minItems": 1
    +            },
@@ -4138,14 +4153,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
    +            },
    +            "enum": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 74]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +              "type": "array",
    +              "items": {
    +                "type": "string"
@@ -4187,6 +4194,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            },
    +            "maximum": {
    +              "type": "number"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 75]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            },
    +            "exclusiveMinimum": {
    +              "type": "number"
@@ -4194,14 +4209,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "exclusiveMaximum": {
    +              "type": "number"
    +            },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 75]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +            "multipleOf": {
    +              "type": "number"
    +            },
@@ -4243,6 +4250,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            }
    +          },
    +          "additionalProperties": false
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 76]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +        },
    +        {
    +          "type": "object",
@@ -4250,14 +4265,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
    +            }
    +          },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 76]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
               "properties": {
                 "type": {
    -              "type": "string",
@@ -4299,6 +4306,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "sdfRef": {
                   "$ref": "#/definitions/sdf-pointer"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 77]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "sdfRequired": {
                   "$ref": "#/definitions/pointer-list"
                 },
@@ -4306,14 +4321,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "$ref": "#/definitions/allowed-types"
                 },
                 "default": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 77]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "$ref": "#/definitions/allowed-types"
                 },
                 "minimum": {
@@ -4355,6 +4362,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "items": {
                   "$ref": "#/definitions/jso-items"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 78]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "unit": {
                   "type": "string"
                 },
@@ -4362,14 +4377,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "type": "boolean"
                 },
                 "sdfType": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 78]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "$ref": "#/definitions/sdfType-"
                 },
                 "contentFormat": {
@@ -4411,6 +4418,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "sdfChoice": {
    +              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 79]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "description": {
                   "type": "string"
                 },
@@ -4418,14 +4433,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "type": "string"
                 },
                 "$comment": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 79]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "type": "string"
                 },
                 "sdfRef": {
@@ -4467,6 +4474,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "format": {
                   "$ref": "#/definitions/format-"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 80]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "minItems": {
                   "$ref": "#/definitions/uint"
                 },
@@ -4474,14 +4489,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "$ref": "#/definitions/uint"
                 },
                 "uniqueItems": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 80]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "type": "boolean"
                 },
                 "items": {
@@ -4523,6 +4530,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "properties": {
                   "$ref": "#/definitions/sdfData-sdfChoice-properties-"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 81]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    -            "enum": {
    -              "type": "array",
    -              "items": {
@@ -4530,14 +4545,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    -              },
    -              "minItems": 1
    -            },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 81]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    -            "observable": {
    -              "type": "boolean"
    -            },
@@ -4579,6 +4586,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "exclusiveMinimum": {
                   "type": "number"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 82]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "exclusiveMaximum": {
                   "type": "number"
                 },
@@ -4586,14 +4601,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "type": "number"
                 },
                 "minLength": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 82]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "$ref": "#/definitions/uint"
                 },
                 "maxLength": {
@@ -4635,6 +4642,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    -      ]
    -    },
    -    "dataqualities": {
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 83]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    -      "anyOf": [
    +        },
             {
@@ -4642,14 +4657,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +          "patternProperties": {
    +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
    +            }
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 83]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +          },
               "properties": {
                 "type": {
@@ -4691,6 +4698,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 },
                 "exclusiveMaximum": {
                   "type": "number"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 84]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 },
                 "multipleOf": {
                   "type": "number"
@@ -4698,14 +4713,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "minLength": {
                   "$ref": "#/definitions/uint"
                 },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 84]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                 "maxLength": {
                   "$ref": "#/definitions/uint"
                 },
@@ -4747,6 +4754,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +          "patternProperties": {
    +            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
    +            }
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 85]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +          },
               "properties": {
                 "type": {
@@ -4754,14 +4769,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    -              "const": "object"
    +              "$ref": "#/definitions/type-"
                 },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 85]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    -            "required": {
    +            "enum": {
                   "type": "array",
@@ -4803,6 +4810,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "maximum": {
                   "type": "number"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 86]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "exclusiveMinimum": {
                   "type": "number"
                 },
@@ -4810,14 +4825,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "type": "number"
                 },
                 "multipleOf": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 86]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "type": "number"
                 },
                 "minLength": {
@@ -4859,6 +4866,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               },
               "additionalProperties": false
             },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 87]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
             {
               "type": "object",
    +          "patternProperties": {
@@ -4866,14 +4881,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            }
    +          },
               "properties": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 87]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                 "type": {
    -              "$ref": "#/definitions/type-"
    +              "type": "string",
@@ -4915,6 +4922,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "$ref": "#/definitions/allowed-types"
                 },
                 "default": {
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 88]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                   "$ref": "#/definitions/allowed-types"
                 },
                 "minimum": {
@@ -4922,14 +4937,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 },
                 "maximum": {
                   "type": "number"
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 88]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                 },
                 "exclusiveMinimum": {
                   "type": "number"
@@ -4971,6 +4978,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "type": "boolean"
                 },
                 "sdfType": {
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 89]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                   "$ref": "#/definitions/sdfType-"
                 },
                 "contentFormat": {
@@ -4978,14 +4993,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 }
               },
               "additionalProperties": false
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 89]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
             },
             {
               "type": "object",
@@ -5027,6 +5034,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 },
                 "sdfRef": {
                   "$ref": "#/definitions/sdf-pointer"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 90]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 },
                 "sdfRequired": {
                   "$ref": "#/definitions/pointer-list"
@@ -5034,14 +5049,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "const": {
                   "$ref": "#/definitions/allowed-types"
                 },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 90]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                 "default": {
                   "$ref": "#/definitions/allowed-types"
                 },
@@ -5083,6 +5090,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 },
                 "items": {
                   "$ref": "#/definitions/jso-items"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 91]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 },
                 "unit": {
                   "type": "string"
@@ -5090,14 +5105,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "nullable": {
                   "type": "boolean"
                 },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 91]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                 "sdfType": {
                   "$ref": "#/definitions/sdfType-"
                 },
@@ -5139,6 +5146,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               "type": "array",
               "items": {
                 "type": "boolean"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 92]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
               }
             },
             {
@@ -5146,14 +5161,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
               "additionalProperties": {
               }
    +        },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 92]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +        {
             }
           ]
@@ -5195,6 +5202,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "minimum": {
                   "type": "number"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 93]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "maximum": {
                   "type": "number"
                 },
@@ -5202,14 +5217,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "type": "string"
                 },
                 "minLength": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 93]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "$ref": "#/definitions/uint"
                 },
                 "maxLength": {
@@ -5251,6 +5258,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "$comment": {
                   "type": "string"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 94]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "minimum": {
                   "type": "number"
                 },
@@ -5258,14 +5273,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "type": "number"
                 },
                 "format": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 94]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "type": "string"
                 },
                 "minLength": {
@@ -5307,6 +5314,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            },
    +            "format": {
    +              "type": "string"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 95]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            },
    +            "minLength": {
    +              "$ref": "#/definitions/uint"
@@ -5314,14 +5329,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "maxLength": {
    +              "$ref": "#/definitions/uint"
    +            }
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 95]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +          },
    +          "additionalProperties": false
    +        },
@@ -5363,6 +5370,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "maximum": {
                   "type": "number"
                 },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 96]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 "format": {
                   "type": "string"
                 },
@@ -5370,14 +5385,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                   "$ref": "#/definitions/uint"
                 },
                 "maxLength": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 96]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                   "$ref": "#/definitions/uint"
                 }
               },
@@ -5419,6 +5426,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 },
                 "$comment": {
                   "type": "string"
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 97]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
                 },
                 "minimum": {
                   "type": "number"
@@ -5426,14 +5441,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
                 "maximum": {
                   "type": "number"
                 },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 97]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
                 "format": {
                   "type": "string"
                 },
@@ -5475,6 +5482,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +            "minimum": {
    +              "type": "number"
    +            },
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 98]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    +            "maximum": {
    +              "type": "number"
    +            },
@@ -5482,14 +5497,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +              "type": "string"
    +            },
    +            "minLength": {
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 98]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +              "$ref": "#/definitions/uint"
    +            },
    +            "maxLength": {
@@ -5531,6 +5538,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
             "sdfData": {
               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
             }
+
+
+
+Koster, et al.          Expires 15 September 2025              [Page 99]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
           },
    +      "patternProperties": {
    +        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
@@ -5538,14 +5553,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +      },
           "additionalProperties": false
         },
-
-
-
-Koster, et al.            Expires 26 July 2025                 [Page 99]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
         "parameter-list": {
           "$ref": "#/definitions/dataqualities"
         },
@@ -5587,6 +5594,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    -        "date",
    -        "time",
    -        "uri",
+
+
+
+Koster, et al.          Expires 15 September 2025             [Page 100]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    -        "uri-reference",
    -        "uuid"
    +      "anyOf": [
@@ -5594,14 +5609,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    +          "type": "string",
    +          "const": "date-time"
    +        },
-
-
-
-Koster, et al.            Expires 26 July 2025                [Page 100]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
    +        {
    +          "type": "string",
    +          "const": "date"
@@ -5643,6 +5650,14 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
           ]
         },
         "sdfData-sdfChoice-properties-": {
+
+
+
+Koster, et al.          Expires 15 September 2025             [Page 101]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/dataqualities"
@@ -5650,14 +5665,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
         },
         "type-": {
           "type": "string",
-
-
-
-Koster, et al.            Expires 26 July 2025                [Page 101]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
-
           "enum": [
             "number",
             "string",
@@ -5700,19 +5707,16 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
       }
     }
 
+
+
+Koster, et al.          Expires 15 September 2025             [Page 102]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
 Appendix C.  Data Qualities inspired by json-schema.org
 
    This appendix is normative.
-
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                [Page 102]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
    Data qualities define data used in SDF affordances at an information
    model level.  A popular way to describe JSON data at a data model
@@ -5737,6 +5741,10 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    SDF as no process is defined that would add default values to an
    instance of some interaction data.
 
+   Other qualities that are inspired by JSO are "$comment" and
+   "description", both of which are also available in the information
+   block.
+
 C.1.  type "number", type "integer"
 
    The types "number" and "integer" are associated with floating point
@@ -5751,6 +5759,17 @@ C.1.  type "number", type "integer"
    (Note that the Boolean form of "exclusiveMinimum"/"exclusiveMaximum"
    found in earlier JSO drafts [JSO4V] is not used.)
 
+
+
+
+
+
+
+Koster, et al.          Expires 15 September 2025             [Page 103]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    The data quality "multipleOf" gives a positive number that constrains
    the data value to be an integer multiple of the number given.  (Type
    "integer" can also be expressed as a "multipleOf" quality of value 1,
@@ -5760,15 +5779,6 @@ C.2.  type "string"
 
    The type "string" is associated with Unicode text string values as
    they can be represented in JSON.
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                [Page 103]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
    The length (as measured in characters) can be constrained by the
    additional data qualities "minLength" and "maxLength", which are
@@ -5807,6 +5817,15 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
    time" is less about the specific syntax employed in [RFC3339] than
    about the usage as an absolute point in civil time).
 
+
+
+
+
+Koster, et al.          Expires 15 September 2025             [Page 104]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
    *  "date-time", "date", "time": An [RFC3339] date-time, full-date, or
       full-time, respectively.
    *  "uri", "uri-reference": An [STD66] URI or URI Reference,
@@ -5816,15 +5835,6 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 C.3.  type "boolean"
 
    The type "boolean" can take the values "true" or "false".
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                [Page 104]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
 C.4.  type "array"
 
@@ -5867,19 +5877,9 @@ C.5.  type "object"
 
 
 
-
-
-
-
-
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                [Page 105]
+Koster, et al.          Expires 15 September 2025             [Page 105]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
        "sdfOutputData": {
@@ -5933,9 +5933,9 @@ D.1.  Outlet Strip Example
 
 
 
-Koster, et al.            Expires 26 July 2025                [Page 106]
+Koster, et al.          Expires 15 September 2025             [Page 106]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    {
@@ -5989,9 +5989,9 @@ D.2.  Refrigerator-Freezer Example
 
 
 
-Koster, et al.            Expires 26 July 2025                [Page 107]
+Koster, et al.          Expires 15 September 2025             [Page 107]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    {
@@ -6045,9 +6045,9 @@ Appendix E.  Some Changes From Earlier Drafts
 
 
 
-Koster, et al.            Expires 26 July 2025                [Page 108]
+Koster, et al.          Expires 15 September 2025             [Page 108]
 
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
 
 
    The present document provides the SDF base definition.  Previous
@@ -6071,6 +6071,41 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
       encoding, which might differ from UTF-8 in some ecosystem mappings
       and protocol bindings.
 
+List of Figures
+
+   Figure 1:  A simple example of an SDF document
+   Figure 2:  Main classes used in SDF models
+   Figure 3:  Example sdfObject definition
+   Figure 4:  Using sdfRequired
+   Figure 5:  Using an Override to Further Restrict the Set of Data
+              Values
+   Figure 6:  Using object type with sdfOutputData
+   Figure 7:  Outlet Strip Example
+   Figure 8:  Refrigerator-Freezer Example
+
+List of Tables
+
+   Table 1:   Qualities of the Information Block
+   Table 2:   Namespaces Block
+   Table 3:   Common Qualities
+   Table 4:   SDF-defined Qualities of sdfData and sdfProperty
+   Table 5:   Values Defined in Base SDF for the sdfType Quality
+   Table 6:   Qualities of sdfObject
+   Table 7:   Qualities of sdfProperty
+   Table 8:   Qualities of sdfAction
+   Table 9:   Qualities of sdfEvent
+   Table 10:  Qualities of sdfThing
+   Table 11:  Media Type Registration for SDF
+   Table 12:  SDF Content-format Registration
+   Table 13:  Initial Content of Quality Names Registry
+
+
+
+Koster, et al.          Expires 15 September 2025             [Page 109]
+
+Internet-Draft      SDF (Semantic Definition Format)          March 2025
+
+
 Acknowledgements
 
    This specification is based on work by the One Data Model group.
@@ -6093,18 +6128,6 @@ Contributors
 
 
 Authors' Addresses
-
-
-
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                [Page 109]
-
-Internet-Draft      SDF (Semantic Definition Format)        January 2025
-
 
    Michael Koster (editor)
    KTC Control AB
@@ -6134,27 +6157,4 @@ Internet-Draft      SDF (Semantic Definition Format)        January 2025
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Koster, et al.            Expires 26 July 2025                [Page 110]
+Koster, et al.          Expires 15 September 2025             [Page 110]
