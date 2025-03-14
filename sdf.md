@@ -63,6 +63,8 @@ contributor:
 normative:
   IANA.senml: units
   IANA.params: params
+  IANA.media-types:
+  IANA.core-parameters:
   RFC3339: dt
   RFC8428: senml
   RFC8798: senml-units-2
@@ -166,6 +168,7 @@ entity:
     Properties), as well as the Data types for the information exchanged
     in those interactions. Tools convert this format to database formats
     and other serializations as needed.
+
 
 --- middle
 
@@ -811,7 +814,7 @@ names.
 A qualified Quality Name is composed of a Quality Name Prefix, a `:`
 (colon) character, and a nonqualified Quality Name.
 Quality Name Prefixes are registered in the "Quality Name Prefixes"
-registry in the "SDF Parameters" registry group ({{qnp}}).
+registry in the "Semantic Definition Format (SDF)" registry group ({{qnp}}).
 They are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
@@ -828,8 +831,11 @@ Given Names are often sufficiently self-explanatory that they can be
 used in place of the `label` quality if that is not given.
 In turn, if a given name turns out too complicated, a more elaborate
 `label` can be given and the given name kept simple.
-Base SDF does not address internationalization of
-given names.
+As given names are "programmers' names", base SDF does not address
+internationalization of given names.
+(More likely qualities to receive localizable equivalents by
+exercising the quality name extension point are `label` and
+`description`).
 
 Further, to enable Given Names to have a more powerful role in building
 global hierarchical names, an extension is planned that makes use of
@@ -1435,7 +1441,7 @@ versions of the json-schema.org proposal they were imported from.
 SDF defines a number of basic types beyond those provided by JSON or
 JSO.  These types are identified by the `sdfType` quality, which
 is a text string from a set of type names defined by the  "sdfType
-values" registry in the "SDF Parameters" registry group
+values" registry in the "Semantic Definition Format (SDF)" registry group
 ({{sdftype-values}}).
 The sdfType name is composed of lower case ASCII letters, digits,
 and `-` (ASCII hyphen/minus) characters, starting
@@ -1453,6 +1459,9 @@ Values for sdfType that are defined in this specification are shown in
 This table also gives a description of the semantics of the sdfType,
 the conventional value for `type` to be used with the sdfType value,
 and a conventional JSON representation for values of the type.
+The `type` and the JSON representation are chosen to be consistent
+with each other; this MUST be true for additionally registered sdfType
+values as well.
 
 | Name        | Description                      | type   | JSON Representation       | Reference                    |
 |-------------|----------------------------------|--------|---------------------------|------------------------------|
@@ -1818,7 +1827,8 @@ IANA Considerations {#iana}
 Media Type
 -----------
 
-IANA is requested to add the following Media-Type to the "Media Types" registry.
+IANA is requested to add the following Media-Type to the "Media Types"
+registry {{IANA.media-types}}.
 
 | Name     | Template             | Reference                 |
 | sdf+json | application/sdf+json | RFC XXXX, {{media-type}}  |
@@ -1832,10 +1842,10 @@ Subtype name:
 : sdf+json
 
 Required parameters:
-: none
+: N/A
 
 Optional parameters:
-: none
+: N/A
 
 Encoding considerations:
 : binary (JSON is UTF-8-encoded text)
@@ -1896,7 +1906,7 @@ Content-Format
 This document adds the following Content-Format to the "CoAP
 Content-Formats" registry,
 within the "Constrained RESTful Environments (CoRE) Parameters"
-registry group, where 434 comes from the "IETF Review" 256-999 range.
+registry group {{IANA.core-parameters}}, where 434 comes from the "IETF Review" 256-999 range.
 
 | Content Type         | Content Coding |  ID | Reference |
 | application/sdf+json | -              | 434 | RFC XXXX  |
@@ -1940,13 +1950,13 @@ Index value:
 Registries
 ----------
 
-IANA is requested to create an "SDF Parameters" registry group, with the
+IANA is requested to create a "Semantic Definition Format (SDF)" registry group, with the
 registries defined in this Section.
 
 ### Quality Names {#qn}
 
 IANA is requested to create a "Quality Names" registry in
-the "SDF Parameters" registry group, with the following template:
+the "Semantic Definition Format (SDF)" registry group, with the following template:
 
 Name:
 : A quality name composed of ASCII letters, digits, and dollar signs, starting
@@ -1972,6 +1982,7 @@ of RFC8126@-reg}}.
 in the process, even earlier than foreseen in {{BCP100}}.)
 
 The instructions to the Experts are:
+
 * to ascertain that the specification is available in an immutable
   reference and has achieved a good level of review in conjunction with
   RFCs or activities of the IETF, and
@@ -2027,7 +2038,7 @@ RFC XXXX and all change controllers are given as "IETF"".
 ### Quality Name Prefixes {#qnp}
 
 IANA is requested to create a "Quality Name Prefixes" registry in
-the "SDF Parameters" registry group, with the following template:
+the "Semantic Definition Format (SDF)" registry group, with the following template:
 
 Prefix:
 : A quality name prefix composed of lower case ASCII letters and digits, starting
@@ -2065,7 +2076,7 @@ The "Quality Name Prefixes" registry starts out empty.
 ### sdfType Values
 
 IANA is requested to create a "sdfType values" registry in
-the "SDF Parameters" registry group, with the following template:
+the "Semantic Definition Format (SDF)" registry group, with the following template:
 
 Name:
 : A name composed of lower case ASCII letters, digits and `-` (ASCII
@@ -2080,7 +2091,7 @@ type:
 
 JSON Representation
 : A short description of a JSON representation that can be used for
-  this sdfType.  This MUST be consistent with the type.
+  this sdfType.  As per {{sdftype}}, this MUST be consistent with the type.
 
 Reference:
 : A more detailed specification of meaning and use of sdfType.
@@ -2240,6 +2251,8 @@ quality); this is mainly documentary and not very well-defined for SDF
 as no process is defined that would add default values to an instance
 of some interaction data.
 
+Other qualities that are inspired by JSO are "`$comment`" and
+"`description`", both of which are also available in the information block.
 
 ## type "`number`", type "`integer`"
 
