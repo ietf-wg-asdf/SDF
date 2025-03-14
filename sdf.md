@@ -169,11 +169,6 @@ entity:
     in those interactions. Tools convert this format to database formats
     and other serializations as needed.
 
-[^status]
-
-[^status]: (This note will be removed by the RFC editor:)
-    The present revision (-21) fixes a clerical error in (–20), which addresses comments from the AD review
-    and from the IESG directorate reviews.
 
 --- middle
 
@@ -181,8 +176,6 @@ entity:
 # Introduction
 
 [^intro-]
-
-[^status]
 
 SDF is designed to be an extensible format.
 The present document constitutes the base specification for SDF: we
@@ -1839,7 +1832,7 @@ registry {{IANA.media-types}}.
 
 | Name     | Template             | Reference                 |
 | sdf+json | application/sdf+json | RFC XXXX, {{media-type}}  |
-{: align="left" title="Media Type Registration for SDF"}
+{: #mediatypereg align="left" title="Media Type Registration for SDF"}
 
 {:compact}
 Type name:
@@ -1917,7 +1910,7 @@ registry group {{IANA.core-parameters}}, where 434 comes from the "IETF Review" 
 
 | Content Type         | Content Coding |  ID | Reference |
 | application/sdf+json | -              | 434 | RFC XXXX  |
-{: align="left" title="SDF Content-format Registration"}
+{: #contentformatreg align="left" title="SDF Content-format Registration"}
 
 // RFC Ed.: 434 was earmarked in <https://mailarchive.ietf.org/arch/msg/core-parameters/iLDsdxk80YO9IsLMXMAgcx5S8Ak/>;
 please replace 434 with the assigned ID, remove the
@@ -2502,6 +2495,8 @@ these to the standard.
   values, to be exact); a length in bytes is not meaningful unless
   bound to a specific encoding, which might differ from UTF-8 in some
   ecosystem mappings and protocol bindings.
+
+{::include-all lists.md}
 
 # Acknowledgements
 {:unnumbered}

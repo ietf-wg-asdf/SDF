@@ -1,3 +1,7 @@
+lists.md: sdf.xml
+	kramdown-rfc-extract-figures-tables -trfc $< >$@.new
+	mv $@.new $@
+
 render: sdf-framework.cddl sdf.jso.json-unidiff sdf.md
 	kdrfc sdf.md
 
