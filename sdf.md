@@ -821,7 +821,7 @@ names.
 A qualified Quality Name is composed of a Quality Name Prefix, a `:`
 (colon) character, and a nonqualified Quality Name.
 Quality Name Prefixes are registered in the "Quality Name Prefixes"
-registry in the "SDF Parameters" registry group ({{qnp}}).
+registry in the "Semantic Definition Format (SDF)" registry group ({{qnp}}).
 They are
 composed of lower case ASCII letters and digits, starting with a lower
 case ASCII letter (i.e., using a pattern of "⁠`[a-z][a-z0-9]*`").
@@ -1445,7 +1445,7 @@ versions of the json-schema.org proposal they were imported from.
 SDF defines a number of basic types beyond those provided by JSON or
 JSO.  These types are identified by the `sdfType` quality, which
 is a text string from a set of type names defined by the  "sdfType
-values" registry in the "SDF Parameters" registry group
+values" registry in the "Semantic Definition Format (SDF)" registry group
 ({{sdftype-values}}).
 The sdfType name is composed of lower case ASCII letters, digits,
 and `-` (ASCII hyphen/minus) characters, starting
@@ -1951,13 +1951,13 @@ Index value:
 Registries
 ----------
 
-IANA is requested to create an "SDF Parameters" registry group, with the
+IANA is requested to create a "Semantic Definition Format (SDF)" registry group, with the
 registries defined in this Section.
 
 ### Quality Names {#qn}
 
 IANA is requested to create a "Quality Names" registry in
-the "SDF Parameters" registry group, with the following template:
+the "Semantic Definition Format (SDF)" registry group, with the following template:
 
 Name:
 : A quality name composed of ASCII letters, digits, and dollar signs, starting
@@ -2038,7 +2038,7 @@ RFC XXXX and all change controllers are given as "IETF"".
 ### Quality Name Prefixes {#qnp}
 
 IANA is requested to create a "Quality Name Prefixes" registry in
-the "SDF Parameters" registry group, with the following template:
+the "Semantic Definition Format (SDF)" registry group, with the following template:
 
 Prefix:
 : A quality name prefix composed of lower case ASCII letters and digits, starting
@@ -2076,7 +2076,7 @@ The "Quality Name Prefixes" registry starts out empty.
 ### sdfType Values
 
 IANA is requested to create a "sdfType values" registry in
-the "SDF Parameters" registry group, with the following template:
+the "Semantic Definition Format (SDF)" registry group, with the following template:
 
 Name:
 : A name composed of lower case ASCII letters, digits and `-` (ASCII
