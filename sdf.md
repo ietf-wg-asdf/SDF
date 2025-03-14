@@ -1846,10 +1846,10 @@ Subtype name:
 : sdf+json
 
 Required parameters:
-: none
+: N/A
 
 Optional parameters:
-: none
+: N/A
 
 Encoding considerations:
 : binary (JSON is UTF-8-encoded text)
