@@ -1980,10 +1980,11 @@ Repository:
    non-overlapping).
 
 Index value:
-: Percent-encoding ({{Section 2.1 of RFC3986@-uri}}) is required of
-  any characters in unit names as required by ABNF rule "pchar" in
-  {{Section 3.3 of RFC3986@-uri}}, specifically at the time of writing for the
-  unit names "%" (deprecated in favor of "/"), "%RH", "%EL".
+: Percent-encoding ({{Section 2.1 of RFC3986@-uri}}) is required of any
+  characters in unit names except for the set "`unreserved`" ({{Section
+  2.3 of RFC3986@-uri}}), the set "`sub-delims`" ({{Section 2.3 of
+  RFC3986@-uri}}), "`:`" or "`@`" (i.e., the result must match the ABNF
+  rule "`pchar`" in {{Section 3.3 of RFC3986@-uri}}).
 
 Registries
 ----------
