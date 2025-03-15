@@ -688,7 +688,7 @@ action resources; an extension for modeling links in more detail
 (for instance, {{-sdflink}}) may be all that is needed to fully enable modeling
 them.
 
-Actions may have (or lack) qualities of idempotence and side-effect
+Actions may have (or lack) the characteristics of idempotence and side-effect
 safety (see {{Section 9.2 of RFC9110@-http}} for more on these terms).
 
 Base SDF only provides data constraint modeling and semantics for the input and output data of definitions in `sdfAction` groups.
