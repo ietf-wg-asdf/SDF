@@ -148,6 +148,16 @@ informative:
   RFC9535: jsonpath
   STD97: http
   BCP100:
+  WoT: # too old: W3C.WD-wot-thing-description11-20201124
+    target: https://www.w3.org/TR/wot-thing-description11/
+    title: Web of Things (WoT) Thing Description 1.1
+    author:
+      - name: Sebastian Kaebisch
+      - name: Michael McCool
+      - name: Ege Korkan
+    date: 2023-12-05
+    seriesinfo:
+      W3C: Recommendation # TR/wot-thing-description11
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -575,8 +585,7 @@ sdfObjects, the items listed in an `sdfObject` definition group, are
 the main "atom" of reusable semantics for model construction.
 The concept aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks LwM2M
-Objects {{OMA}}, and
-OCF Resource Types {{OCF}}.
+Objects {{OMA}}, OCF Resource Types {{OCF}}, and W3C Web of Things {{WoT}}.
 
 An sdfObject definition contains a set of `sdfProperty`, `sdfAction`, and
 `sdfEvent` definitions that describe the interaction affordances
