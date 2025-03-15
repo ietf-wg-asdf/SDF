@@ -658,7 +658,7 @@ expected to be part of the protocol binding.
 
 The `sdfAction` group contains declarations of Actions, which
 model affordances that, when triggered,
-have more effect than just reading, updating, or observing Thing
+have an effect that can go beyond just reading, updating, or observing Thing
 state.
 Actions often result in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
