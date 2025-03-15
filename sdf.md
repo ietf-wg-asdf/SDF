@@ -3,6 +3,9 @@ v: 3
 coding: utf-8
 # svg-id-cleanup: true
 
+v3xml2rfc:
+  table_borders: light
+
 title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
 abbrev: SDF (Semantic Definition Format)
@@ -2076,10 +2079,10 @@ RFC XXXX and all change controllers are given as "IETF"".
 | items                | items of an array                                                 |
 | label                | short text (no constraints); defaults to key                      |
 | maxItems             | maximum number of items in an array                               |
-| maxLength            | maximum length (in characters) for a text string                  |
+| maxLength | maximum length for a text string (in characters, i.e., Unicode scalar values) |
 | maximum              | maximum for a number                                              |
 | minItems             | minimum number of items in an array                               |
-| minLength            | minimum length (in characters) for a text string                  |
+| minLength | minimum length for a text string (in characters, i.e., Unicode scalar values) |
 | minimum              | minimum for a number                                              |
 | multipleOf           | step size of number                                               |
 | nullable             | boolean: can the item be left out?                                |
@@ -2381,7 +2384,8 @@ value 1, unless another "`multipleOf`" quality is present.)
 The type "`string`" is associated with Unicode text string values as
 they can be represented in JSON.
 
-The length (as measured in characters) can be constrained by the
+The length (as measured in characters, specifically Unicode scalar
+values) can be constrained by the
 additional data qualities "`minLength`" and "`maxLength`", which are
 inclusive bounds.
 
