@@ -950,6 +950,14 @@ group, this license identifier will typically be "BSD-3-Clause".)
 
 The `features` quality can be used to list names of critical (i.e., cannot be safely ignored) SDF extension features that need to be understood for the definitions to be properly processed.
 Extension feature names will be specified in extension documents.
+They can either be registered (see {{fn}} for specifics, which make sure
+that a registered feature name does not contain a colon) or be a URI
+(which always contain a colon).
+Note that SDF processors are not expected to, and normally SHOULD NOT,
+dereference URIs used as feature names; any representation retrievable
+under such a URI could be useful to humans, though.
+(See {{-deref}} for a more extensive discussion of dereferenceable
+identifiers).
 
 ## Namespaces block
 
@@ -2146,6 +2154,39 @@ names are chosen with enough specificity that ecosystem-specific
 sdfTypes will not be confused with more generally applicable ones.
 
 The initial set of registrations is described in {{sdftype1}}.
+
+### Feature Names {#fn}
+
+IANA is requested to create a "Feature Names" registry in the "Semantic
+Definition Format (SDF)" registry group, with the following template:
+
+Name:
+: A feature name composed of ASCII letters, digits, and dollar signs, starting
+  with a lower case ASCII letter or a dollar sign (i.e., using a
+  pattern of "⁠`[a-z$][A-Za-z$0-9]*`").
+
+Brief Description:
+: A brief description.
+
+Reference:
+: A pointer to a specification.
+
+Change Controller:
+: (see {{Section 2.3 of RFC8126@-reg}})
+
+The registration policy is Specification Required as per {{Section 4.6
+of RFC8126@-reg}}.
+
+The instructions to the Experts are:
+
+* to ascertain that the specification is available in an immutable
+  reference and has achieved a good level of review, and
+* to be frugal in the allocation of feature names that are suggestive
+  of generally applicable semantics, keeping them in reserve for
+  features that are likely to enjoy wide use and can make good use of
+  their conciseness.
+
+The "Feature Names" registry starts out empty.
 
 Security Considerations {#seccons}
 =======================
