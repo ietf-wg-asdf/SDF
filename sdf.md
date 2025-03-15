@@ -302,6 +302,8 @@ Affordance:
   (network-directed) interfaces of a Thing only; as it is a physical
   object as well, the Thing might also have physical affordances such
   as buttons, dials, and displays.
+  The specification language offers certain ways to create sets of
+  related Affordances and combine them into "Groupings" (see below).
 
 Property:
 : An Affordance that can potentially be used to read, write, and/or
