@@ -1775,7 +1775,7 @@ The structure of a path in a namespace is defined by the JSON Pointers
 to the definitions in the SDF documents in that namespace.
 For example, if there is an SDF document defining an sdfObject "`Switch`"
 with an action "`on`", then the reference to the action would be
-"`ns:/sdfObject/Switch/sdfAction/on`" where `ns` is the namespace prefix
+"`ns:#/sdfObject/Switch/sdfAction/on`" where `ns` is the namespace prefix
 (short name for the namespace).
 
 ## Modular Composition
