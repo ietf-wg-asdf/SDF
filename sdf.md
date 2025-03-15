@@ -1468,15 +1468,19 @@ versions of the json-schema.org proposal they were imported from.
    (See {{-deref}} for a more extensive discussion of dereferenceable
    identifiers).
 
+   {:#cannot-colon}
    A URI unit name is distinguished from a registered unit name by the
    presence of a colon; any registered unit names that contain a colon (at
-   the time of writing, none) can therefore not be used in SDF.
+   the time of writing, none) can therefore not be directly used in SDF.
 
    For use by translators into ecosystems that require URIs for unit
    names, the URN sub-namespace "urn:ietf:params:unit" is provided
-   ({{unit-urn}}); URNs from this sub-namespace MUST NOT be used in a
+   ({{unit-urn}}).
+   URNs from this sub-namespace MUST NOT be used in a
    `unit` quality, in favor of simply notating the unit name (such as
-   `kg` instead of `urn:ietf:params:unit:kg`).
+   `kg` instead of `urn:ietf:params:unit:kg`), except where the
+   unit name contains a colon and can therefore not be directly used
+   in SDF.
 
 2. The `contentFormat` quality follows the Content-Format-Spec as defined in
    {{Section 6 of RFC9193}}, allowing for expressing both numeric and string
@@ -1993,6 +1997,20 @@ Index value:
   2.3 of RFC3986@-uri}}), the set "`sub-delims`" ({{Section 2.3 of
   RFC3986@-uri}}), "`:`" or "`@`" (i.e., the result must match the ABNF
   rule "`pchar`" in {{Section 3.3 of RFC3986@-uri}}).
+
+
+SenML registry group {#unit-colonrn}
+-------------------------------------
+
+IANA is requested to add the following note to the SenML registry group {{-units}}:
+
+{:quote}
+> In SDF \[RFC XXXX], a URI unit name is distinguished from a registered unit name
+  by the presence of a colon; any registered unit name that contains
+  a colon can therefore not be directly used in SDF.
+
+
+
 
 Registries
 ----------
