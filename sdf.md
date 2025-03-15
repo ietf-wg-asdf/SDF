@@ -820,7 +820,7 @@ For example, when a model is using the Given Name
    warning/danger alarm
 ~~~
 
- (with an embedded slash and a space) for an
+(with an embedded slash and a space) for an
 sdfObject, that sdfObject may need to be referenced as
 
 ~~~
