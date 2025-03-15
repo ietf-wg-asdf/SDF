@@ -496,9 +496,11 @@ See {{member-names}} for more information about naming in SDF.
 ## Elements of an SDF model
 
 The SDF language uses six predefined Class Name Keywords for modeling connected
-Things which are illustrated in {{fig-class-2}}.
+Things which are illustrated in {{fig-class-2}} (limited rendition in
+the plaintext form of this document, please use typographic forms for
+full information).
 
-~~~ plantuml-utxt
+~~~ plantuml-ascii-art
 sdfThing --> "0+" sdfObject : hasObject
 sdfThing --> "0+" sdfThing : hasThing
 sdfThing --> "0+" sdfProperty : hasProperty
@@ -533,6 +535,35 @@ class sdfEvent {
 
 class sdfData {
 }
+~~~ ascii-art
+                  ,--------.
+                  |sdfThing|------.
+   ,--------------|--------|      | hasThing
+   |              |--------|<-----'
+   |              `--------'
+   |                |   | |
+   |      hasObject |   |  \
+   |                v   |   \
+   |        ,---------. |    \
+   |        |sdfObject| |     \
+   |        |---------| |      \
+   ,--------|---------|---------.
+   |        `---------' |       |
+has|Property     | hasAction    | hasEvent
+   v             v      v       v
+,-----------.  ,---------.   ,--------.
+|sdfProperty|  |sdfAction|   |sdfEvent|
+|-----------|  |---------|   |--------|
+|-----------|  |---------|   |--------|
+`-----------'  `---------'   `--------'
+   |      hasInput|   |hasOutput    |
+   |          Data|   |Data         |
+   |              v   v             |
+   |            ,-------.           |
+   | isInst     |sdfData|  hasOutp  |
+   `----------->|-------|<----------'
+     anceOf     |-------|  utData
+                `-------'
 ~~~
 {: #fig-class-2 title="Main classes used in SDF models"}
 
