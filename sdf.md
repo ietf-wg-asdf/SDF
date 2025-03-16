@@ -3,6 +3,9 @@ v: 3
 coding: utf-8
 # svg-id-cleanup: true
 
+v3xml2rfc:
+  table_borders: light
+
 title: >
   Semantic Definition Format (SDF) for Data and Interactions of Things
 abbrev: SDF (Semantic Definition Format)
@@ -148,6 +151,16 @@ informative:
   RFC9535: jsonpath
   STD97: http
   BCP100:
+  WoT: # too old: W3C.WD-wot-thing-description11-20201124
+    target: https://www.w3.org/TR/wot-thing-description11/
+    title: Web of Things (WoT) Thing Description 1.1
+    author:
+      - name: Sebastian Kaebisch
+      - name: Michael McCool
+      - name: Ege Korkan
+    date: 2023-12-05
+    seriesinfo:
+      W3C: Recommendation # TR/wot-thing-description11
 
 entity:
         SELF: "[RFC-XXXX]"
@@ -292,6 +305,8 @@ Affordance:
   (network-directed) interfaces of a Thing only; as it is a physical
   object as well, the Thing might also have physical affordances such
   as buttons, dials, and displays.
+  The specification language offers certain ways to create sets of
+  related Affordances and combine them into "Groupings" (see below).
 
 Property:
 : An Affordance that can potentially be used to read, write, and/or
@@ -411,6 +426,22 @@ Regular expressions that are used in the text as a "pattern" for some
 string are interpreted as per {{-iregexp}}.
 (Note that a form of regular expressions is also used as values of the
 quality `pattern`; see {{type-string}}.)
+
+The term "URI" in this document always refers to "full" URIs ("`URI`" in
+{{Section 3 of RFC3986@-uri}}), never to relative URI references
+("`relative-ref`" in {{Section 4.1 of RFC3986@-uri}}), so the term "URI"
+does *NOT* serve as the colloquial abbreviation of "URI-Reference" it is
+often used for.
+Therefore, the "reference resolution" process defined in {{Section 5 of
+RFC3986@-uri}} is *NOT* used in this specification.
+Where necessary, full URIs are assembled out of substrings by simple
+concatenation, e.g. when CURIEs are expanded ({{ref-global}}), or when a
+global name is formed out of a namespace `absolute-URI` ({{Section 5 of
+RFC3986@-uri}}) and a fragment identifier part ({{name-structure}}).
+Note also that URIs are not only used to construct the SDF models,
+they are also the *subject* of SDF models where they are used as data
+in actual interactions (and could even be represented as relative
+references there); these two usages are entirely separate.
 
 The singular form is chosen as the preferred one for the keywords
 defined in this specification.
@@ -575,8 +606,7 @@ sdfObjects, the items listed in an `sdfObject` definition group, are
 the main "atom" of reusable semantics for model construction.
 The concept aligns in scope with common definition items from many IoT modeling
 systems, for example ZigBee Clusters {{ZCL}}, OMA SpecWorks LwM2M
-Objects {{OMA}}, and
-OCF Resource Types {{OCF}}.
+Objects {{OMA}}, OCF Resource Types {{OCF}}, and W3C Web of Things {{WoT}}.
 
 An sdfObject definition contains a set of `sdfProperty`, `sdfAction`, and
 `sdfEvent` definitions that describe the interaction affordances
@@ -647,7 +677,7 @@ expected to be part of the protocol binding.
 
 The `sdfAction` group contains declarations of Actions, which
 model affordances that, when triggered,
-have more effect than just reading, updating, or observing Thing
+have an effect that can go beyond just reading, updating, or observing Thing
 state.
 Actions often result in some outward physical effect (which, itself,
 cannot be modeled in SDF).  From a programmer's perspective, they
@@ -677,7 +707,7 @@ action resources; an extension for modeling links in more detail
 (for instance, {{-sdflink}}) may be all that is needed to fully enable modeling
 them.
 
-Actions may have (or lack) qualities of idempotence and side-effect
+Actions may have (or lack) the characteristics of idempotence and side-effect
 safety (see {{Section 9.2 of RFC9110@-http}} for more on these terms).
 
 Base SDF only provides data constraint modeling and semantics for the input and output data of definitions in `sdfAction` groups.
@@ -811,7 +841,7 @@ For example, when a model is using the Given Name
    warning/danger alarm
 ~~~
 
- (with an embedded slash and a space) for an
+(with an embedded slash and a space) for an
 sdfObject, that sdfObject may need to be referenced as
 
 ~~~
@@ -941,6 +971,14 @@ group, this license identifier will typically be "BSD-3-Clause".)
 
 The `features` quality can be used to list names of critical (i.e., cannot be safely ignored) SDF extension features that need to be understood for the definitions to be properly processed.
 Extension feature names will be specified in extension documents.
+They can either be registered (see {{fn}} for specifics, which make sure
+that a registered feature name does not contain a colon) or be a URI
+(which always contain a colon).
+Note that SDF processors are not expected to, and normally SHOULD NOT,
+dereference URIs used as feature names; any representation retrievable
+under such a URI could be useful to humans, though.
+(See {{-deref}} for a more extensive discussion of dereferenceable
+identifiers).
 
 ## Namespaces block
 
@@ -1054,7 +1092,7 @@ reference elements from that global namespace.
 (An SDF document that does not set a defaultNamespace does not
 contribute to a global namespace.)
 
-## Structure
+## Structure {#name-structure}
 
 Global names look exactly like `https://` URIs with attached fragment identifiers.
 
@@ -1064,7 +1102,7 @@ global names, the URI should be chosen in such a way that this may
 become possible in the future.
 See also {{-deref}} for a discussion of dereferenceable identifiers.)
 
-The absolute URI of a global name should be a URI as per {{Section 3 of
+The absolute-URI of a global name should be a URI as per {{Section 3 of
 RFC3986@-uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
 For base SDF, the query part should
 not be used (it might be used in extensions).
@@ -1077,7 +1115,7 @@ The fragment identifier is constructed as per {{Section 6 of
 The fragment identifier part of a global name defined in an SDF
 document is constructed from a JSON pointer that selects the
 element defined for this name in the SDF document.
-The absolute URI part is a copy of the default namespace.
+The absolute-URI part is a copy of the default namespace.
 
 As a result, the
 default namespace is always the target namespace for a name for which
@@ -1097,7 +1135,7 @@ Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
 RFC3986@-uri}}) from the fragment identifier part (including the `#`, a
 JSON Pointer as in {{Section 6 of -pointer}}).
 
-## Referencing global names
+## Referencing global names {#ref-global}
 
 A name reference takes the form of the production `curie` in Section 3
 of {{-curie}}, but limiting the IRIs involved in that grammar to URIs as
@@ -1451,15 +1489,19 @@ versions of the json-schema.org proposal they were imported from.
    (See {{-deref}} for a more extensive discussion of dereferenceable
    identifiers).
 
+   {:#cannot-colon}
    A URI unit name is distinguished from a registered unit name by the
    presence of a colon; any registered unit names that contain a colon (at
-   the time of writing, none) can therefore not be used in SDF.
+   the time of writing, none) can therefore not be directly used in SDF.
 
    For use by translators into ecosystems that require URIs for unit
    names, the URN sub-namespace "urn:ietf:params:unit" is provided
-   ({{unit-urn}}); URNs from this sub-namespace MUST NOT be used in a
+   ({{unit-urn}}).
+   URNs from this sub-namespace MUST NOT be used in a
    `unit` quality, in favor of simply notating the unit name (such as
-   `kg` instead of `urn:ietf:params:unit:kg`).
+   `kg` instead of `urn:ietf:params:unit:kg`), except where the
+   unit name contains a colon and can therefore not be directly used
+   in SDF.
 
 2. The `contentFormat` quality follows the Content-Format-Spec as defined in
    {{Section 6 of RFC9193}}, allowing for expressing both numeric and string
@@ -1752,7 +1794,7 @@ The structure of a path in a namespace is defined by the JSON Pointers
 to the definitions in the SDF documents in that namespace.
 For example, if there is an SDF document defining an sdfObject "`Switch`"
 with an action "`on`", then the reference to the action would be
-"`ns:/sdfObject/Switch/sdfAction/on`" where `ns` is the namespace prefix
+"`ns:#/sdfObject/Switch/sdfAction/on`" where `ns` is the namespace prefix
 (short name for the namespace).
 
 ## Modular Composition
@@ -1971,10 +2013,25 @@ Repository:
    non-overlapping).
 
 Index value:
-: Percent-encoding ({{Section 2.1 of RFC3986@-uri}}) is required of
-  any characters in unit names as required by ABNF rule "pchar" in
-  {{Section 3.3 of RFC3986@-uri}}, specifically at the time of writing for the
-  unit names "%" (deprecated in favor of "/"), "%RH", "%EL".
+: Percent-encoding ({{Section 2.1 of RFC3986@-uri}}) is required of any
+  characters in unit names except for the set "`unreserved`" ({{Section
+  2.3 of RFC3986@-uri}}), the set "`sub-delims`" ({{Section 2.3 of
+  RFC3986@-uri}}), "`:`" or "`@`" (i.e., the result must match the ABNF
+  rule "`pchar`" in {{Section 3.3 of RFC3986@-uri}}).
+
+
+SenML registry group {#unit-colonrn}
+-------------------------------------
+
+IANA is requested to add the following note to the SenML registry group {{-units}}:
+
+{:quote}
+> In SDF \[RFC XXXX], a URI unit name is distinguished from a registered unit name
+  by the presence of a colon; any registered unit name that contains
+  a colon can therefore not be directly used in SDF.
+
+
+
 
 Registries
 ----------
@@ -2038,10 +2095,10 @@ RFC XXXX and all change controllers are given as "IETF"".
 | items                | items of an array                                                 |
 | label                | short text (no constraints); defaults to key                      |
 | maxItems             | maximum number of items in an array                               |
-| maxLength            | maximum length (in characters) for a text string                  |
+| maxLength | maximum length for a text string (in characters, i.e., Unicode scalar values) |
 | maximum              | maximum for a number                                              |
 | minItems             | minimum number of items in an array                               |
-| minLength            | minimum length (in characters) for a text string                  |
+| minLength | minimum length for a text string (in characters, i.e., Unicode scalar values) |
 | minimum              | minimum for a number                                              |
 | multipleOf           | step size of number                                               |
 | nullable             | boolean: can the item be left out?                                |
@@ -2136,6 +2193,39 @@ names are chosen with enough specificity that ecosystem-specific
 sdfTypes will not be confused with more generally applicable ones.
 
 The initial set of registrations is described in {{sdftype1}}.
+
+### Feature Names {#fn}
+
+IANA is requested to create a "Feature Names" registry in the "Semantic
+Definition Format (SDF)" registry group, with the following template:
+
+Name:
+: A feature name composed of ASCII letters, digits, and dollar signs, starting
+  with a lower case ASCII letter or a dollar sign (i.e., using a
+  pattern of "⁠`[a-z$][A-Za-z$0-9]*`").
+
+Brief Description:
+: A brief description.
+
+Reference:
+: A pointer to a specification.
+
+Change Controller:
+: (see {{Section 2.3 of RFC8126@-reg}})
+
+The registration policy is Specification Required as per {{Section 4.6
+of RFC8126@-reg}}.
+
+The instructions to the Experts are:
+
+* to ascertain that the specification is available in an immutable
+  reference and has achieved a good level of review, and
+* to be frugal in the allocation of feature names that are suggestive
+  of generally applicable semantics, keeping them in reserve for
+  features that are likely to enjoy wide use and can make good use of
+  their conciseness.
+
+The "Feature Names" registry starts out empty.
 
 Security Considerations {#seccons}
 =======================
@@ -2310,7 +2400,8 @@ value 1, unless another "`multipleOf`" quality is present.)
 The type "`string`" is associated with Unicode text string values as
 they can be represented in JSON.
 
-The length (as measured in characters) can be constrained by the
+The length (as measured in characters, specifically Unicode scalar
+values) can be constrained by the
 additional data qualities "`minLength`" and "`maxLength`", which are
 inclusive bounds.
 
