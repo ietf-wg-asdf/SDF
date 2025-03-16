@@ -437,7 +437,7 @@ RFC3986@-uri}} is *NOT* used in this specification.
 Where necessary, full URIs are assembled out of substrings by simple
 concatenation, e.g. when CURIEs are expanded ({{ref-global}}), or when a
 global name is formed out of a namespace `absolute-URI` ({{Section 5 of
-RFC3986@-uri}}) and a fragment identifier part ({{name-structure}}).
+RFC3986@-uri}}) and a fragment identifier part ({{names-structure}}).
 Note also that URIs are not only used to construct the SDF models,
 they are also the *subject* of SDF models where they are used as data
 in actual interactions (and could even be represented as relative
@@ -1092,7 +1092,7 @@ reference elements from that global namespace.
 (An SDF document that does not set a defaultNamespace does not
 contribute to a global namespace.)
 
-## Structure {#name-structure}
+## Structure {#names-structure}
 
 Global names look exactly like `https://` URIs with attached fragment identifiers.
 
