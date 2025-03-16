@@ -427,6 +427,22 @@ string are interpreted as per {{-iregexp}}.
 (Note that a form of regular expressions is also used as values of the
 quality `pattern`; see {{type-string}}.)
 
+The term "URI" in this document always refers to "full" URIs ("`URI`" in
+{{Section 3 of RFC3986@-uri}}), never to relative URI references
+("`relative-ref`" in {{Section 4.1 of RFC3986@-uri}}), so the term "URI"
+does *NOT* serve as the colloquial abbreviation of "URI-Reference" it is
+often used for.
+Therefore, the "reference resolution" process defined in {{Section 5 of
+RFC3986@-uri}} is *NOT* used in this specification.
+Where necessary, full URIs are assembled out of substrings by simple
+concatenation, e.g. when CURIEs are expanded ({{ref-global}}), or when a
+global name is formed out of a namespace `absolute-URI` ({{Section 5 of
+RFC3986@-uri}}) and a fragment identifier part ({{name-structure}}).
+Note also that URIs are not only used to construct the SDF models,
+they are also the *subject* of SDF models where they are used as data
+in actual interactions (and could even be represented as relative
+references there); these two usages are entirely separate.
+
 The singular form is chosen as the preferred one for the keywords
 defined in this specification.
 
@@ -1076,7 +1092,7 @@ reference elements from that global namespace.
 (An SDF document that does not set a defaultNamespace does not
 contribute to a global namespace.)
 
-## Structure
+## Structure {#name-structure}
 
 Global names look exactly like `https://` URIs with attached fragment identifiers.
 
@@ -1086,7 +1102,7 @@ global names, the URI should be chosen in such a way that this may
 become possible in the future.
 See also {{-deref}} for a discussion of dereferenceable identifiers.)
 
-The absolute URI of a global name should be a URI as per {{Section 3 of
+The absolute-URI of a global name should be a URI as per {{Section 3 of
 RFC3986@-uri}}, with a scheme of "https" and a path (`hier-part` in {{-uri}}).
 For base SDF, the query part should
 not be used (it might be used in extensions).
@@ -1099,7 +1115,7 @@ The fragment identifier is constructed as per {{Section 6 of
 The fragment identifier part of a global name defined in an SDF
 document is constructed from a JSON pointer that selects the
 element defined for this name in the SDF document.
-The absolute URI part is a copy of the default namespace.
+The absolute-URI part is a copy of the default namespace.
 
 As a result, the
 default namespace is always the target namespace for a name for which
@@ -1119,7 +1135,7 @@ Note the `#`, which separates the absolute-URI part ({{Section 4.3 of
 RFC3986@-uri}}) from the fragment identifier part (including the `#`, a
 JSON Pointer as in {{Section 6 of -pointer}}).
 
-## Referencing global names
+## Referencing global names {#ref-global}
 
 A name reference takes the form of the production `curie` in Section 3
 of {{-curie}}, but limiting the IRIs involved in that grammar to URIs as
