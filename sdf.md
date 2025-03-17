@@ -596,7 +596,7 @@ has|Property     | hasAction    | hasEvent
      anceOf     |-------|  utData
                 `-------'
 ~~~
-{: #fig-class-2 title="Main classes used in SDF models"}
+{: #fig-class-2 title="Main classes used in SDF models" artwork-align="center"}
 
 The six main Class Name Keywords are discussed below.
 
