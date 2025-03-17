@@ -596,7 +596,7 @@ has|Property     | hasAction    | hasEvent
      anceOf     |-------|  utData
                 `-------'
 ~~~
-{: #fig-class-2 title="Main classes used in SDF models"}
+{: #fig-class-2 title="Main classes used in SDF models" artwork-align="center"}
 
 The six main Class Name Keywords are discussed below.
 
@@ -2151,11 +2151,6 @@ including:
 * Stability, "stable and permanent";
 * Transparency, "readily available", "in sufficient detail" ({{Section
   4.6 of RFC8126@-reg}}).
-
-The Expert will take into account that other organizations operate in
-different ways than the IETF, and that as a result some of these
-overall objectives will be achieved in a different way and to a
-different level of comfort.
 
 The "Quality Name Prefixes" registry starts out empty.
 
