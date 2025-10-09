@@ -1,0 +1,101 @@
+--- sdf.v2v3-23.xml	2025-03-17 20:04:32.000000000 +0100
++++ sdf.v2v3-23-fixed.xml	2025-06-18 10:21:09.000000000 +0200
+@@ -3438,6 +3438,7 @@
+  ? sdfObject: named<objectqualities>
+  ; Includes Properties, Actions, and Events as well as sdfData
+  paedataqualities
++ * $$SDF-EXTENSION-TOP
+  EXTENSION-POINT<"top-ext">
+ }
+ 
+@@ -3452,6 +3453,7 @@
+                * (any .feature "feature-name") ; EXTENSION-POINT
+              ]
+  optional-comment
++ * $$SDF-EXTENSION-INFO
+  EXTENSION-POINT<"info-ext">
+ }
+ 
+@@ -3510,6 +3512,7 @@
+  ? sdfThing: named<thingqualities>
+  paedataqualities
+  arraydefinitionqualities
++ * $$SDF-EXTENSION-THING
+  EXTENSION-POINT<"thing-ext">
+ }
+ 
+@@ -3518,6 +3521,7 @@
+  commonqualities
+  paedataqualities
+  arraydefinitionqualities
++ * $$SDF-EXTENSION-OBJECT
+  EXTENSION-POINT<"object-ext">
+ }
+ 
+@@ -3529,6 +3533,7 @@
+  ? sdfOutputData: parameter-list  ; sdfRequired applies here
+  ; zero or more named data type definitions that might be used above
+  ? sdfData: named<dataqualities>
++ * $$SDF-EXTENSION-ACTION
+  EXTENSION-POINT<"action-ext">
+ }
+ 
+@@ -3537,6 +3542,7 @@
+  ? sdfOutputData: parameter-list  ; sdfRequired applies here
+  ; zero or more named data type definitions that might be used above
+  ? sdfData: named<dataqualities>
++ * $$SDF-EXTENSION-EVENT
+  EXTENSION-POINT<"event-ext">
+ }
+ 
+@@ -3548,8 +3554,10 @@
+  ? "unit" => text
+  ? nullable: bool
+  ? "sdfType" => "byte-string" / "unix-time"
++            / $SDF-EXTENSION-SDFTYPE .within sdftype-name
+             / (sdftype-name .feature "sdftype-ext") ; EXTENSION-POINT
+  ? contentFormat: text
++ * $$SDF-EXTENSION-DATA
+  EXTENSION-POINT<"data-ext">
+ }
+ 
+@@ -3563,6 +3571,7 @@
+ allowed-types = number / text / bool / null
+               / [* number] / [* text] / [* bool]
+               / {* text => any}
++              / $SDF-EXTENSION-ALLOWED
+               / (any .feature "allowed-ext")        ; EXTENSION-POINT
+ 
+ compound-type = (
+@@ -3579,6 +3588,7 @@
+ jsonschema = (
+  ? (("type" => "number" / "string" / "boolean" / "integer" / "array")
+     // compound-type
++    // $$SDF-EXTENSION-TYPE
+     // (type: text .feature "type-ext")             ; EXTENSION-POINT
+    )
+  ; if present, all other qualities apply to all choices:
+@@ -3598,6 +3608,7 @@
+  ? pattern: text                ; regexp
+  ? format: "date-time" / "date" / "time"
+            / "uri" / "uri-reference" / "uuid"
++           / $SDF-EXTENSION-FORMAT .within text
+            / (text .feature "format-ext")           ; EXTENSION-POINT
+  ; array constraints
+  ? minItems: uint
+@@ -3615,6 +3626,7 @@
+      ; no further nesting: no "array"
+      ? ((type: "number" / "string" / "boolean" / "integer")
+         // compound-type
++        // $$SDF-EXTENSION-ITEMTYPE
+         // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
+        )
+      ; if present, all other qualities apply to all choices
+@@ -3625,6 +3637,7 @@
+      ? format: text
+      ? minLength: uint
+      ? maxLength: uint
++     * $$SDF-EXTENSION-ITEMS
+      EXTENSION-POINT<"items-ext">
+    }
+ 

@@ -2319,7 +2319,7 @@ Features whose names end in "-ext" indicate extension points for
 further evolution.
 
 ~~~ cddl
-{::include sdf-framework.cddl}
+{::include sdf-feature.cddl}
 ~~~
 
 
