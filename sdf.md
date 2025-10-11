@@ -2558,7 +2558,7 @@ using the `sdfThing` quality.
           "description": "A refrigerator compartment",
           "sdfProperty": {
             "temperature": {
-              "sdfRef": "#/sdfProproperty/temperature",
+              "sdfRef": "#/sdfProperty/temperature",
               "maximum": 8
             }
           }
@@ -2567,7 +2567,7 @@ using the `sdfThing` quality.
           "label": "A freezer compartment",
           "sdfProperty": {
             "temperature": {
-              "sdfRef": "#/sdfProproperty/temperature",
+              "sdfRef": "#/sdfProperty/temperature",
               "maximum": -6
             }
           }
