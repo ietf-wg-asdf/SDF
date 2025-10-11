@@ -2360,7 +2360,7 @@ The additional quality "`const`" restricts the data to one specific
 value (given as the value of the `const` quality).
 
 Similarly, the additional quality "`default`" provides data that can
-be used in the absence of the data (given as the value of the `const`
+be used in the absence of the data (given as the value of the `default`
 quality); this is mainly documentary and not very well-defined for SDF
 as no process is defined that would add default values to an instance
 of some interaction data.
