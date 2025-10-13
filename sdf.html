@@ -21,11 +21,11 @@ Properties), as well as the Data types for the information exchanged
 in those interactions. Tools convert this format to database formats
 and other serializations as needed. 
     " name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.30.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
-<meta content="draft-ietf-asdf-sdf-22" name="ietf.draft">
+<meta content="draft-ietf-asdf-sdf-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
+  xml2rfc 3.30.1
     Python 3.11.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
@@ -38,7 +38,7 @@ and other serializations as needed.
     requests 2.20.0
     setuptools 70.3.0
     wcwidth 0.2.13
-    weasyprint 64.1
+    weasyprint 65.0
 -->
 <link href="sdf.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -171,6 +171,12 @@ div {
 }
 svg {
   display: block;
+}
+@media print {
+  svg {
+    max-height: 850px;
+    max-width: 660px;
+  }
 }
 svg[font-family~="serif" i], svg [font-family~="serif" i] {
   font-family: var(--font-serif);
@@ -1194,6 +1200,7 @@ dl > dd > dl {
 /* This should match the element list in writer.text.TextWriter.render_dl() */
 dd > div.artwork:first-child,
 dd > aside:first-child,
+dd > blockquote:first-child,
 dd > figure:first-child,
 dd > ol:first-child,
 dd > div.sourcecode:first-child,
@@ -1218,16 +1225,15 @@ li > p:last-of-type:only-child {
 <script type="application/javascript">async function addMetadata(){try{const e=document.styleSheets[0].cssRules;for(let t=0;t<e.length;t++)if(/#identifiers/.exec(e[t].selectorText)){const a=e[t].cssText.replace("#identifiers","#external-updates");document.styleSheets[0].insertRule(a,document.styleSheets[0].cssRules.length)}}catch(e){console.log(e)}const e=document.getElementById("external-metadata");if(e)try{var t,a="",o=function(e){const t=document.getElementsByTagName("meta");for(let a=0;a<t.length;a++)if(t[a].getAttribute("name")===e)return t[a].getAttribute("content");return""}("rfc.number");if(o){t="https://www.rfc-editor.org/rfc/rfc"+o+".json";try{const e=await fetch(t);a=await e.json()}catch(e){t=document.URL.indexOf("html")>=0?document.URL.replace(/html$/,"json"):document.URL+".json";const o=await fetch(t);a=await o.json()}}if(!a)return;e.style.display="block";const s="",d="https://datatracker.ietf.org/doc",n="https://datatracker.ietf.org/ipr/search",c="https://www.rfc-editor.org/info",l=a.doc_id.toLowerCase(),i=a.doc_id.slice(0,3).toLowerCase(),f=a.doc_id.slice(3).replace(/^0+/,""),u={status:"Status",obsoletes:"Obsoletes",obsoleted_by:"Obsoleted By",updates:"Updates",updated_by:"Updated By",see_also:"See Also",errata_url:"Errata"};let h="<dl style='overflow:hidden' id='external-updates'>";["status","obsoletes","obsoleted_by","updates","updated_by","see_also","errata_url"].forEach(e=>{if("status"==e){a[e]=a[e].toLowerCase();var t=a[e].split(" "),o=t.length,w="",p=1;for(let e=0;e<o;e++)p<o?w=w+r(t[e])+" ":w+=r(t[e]),p++;a[e]=w}else if("obsoletes"==e||"obsoleted_by"==e||"updates"==e||"updated_by"==e){var g,m="",b=1;g=a[e].length;for(let t=0;t<g;t++)a[e][t]&&(a[e][t]=String(a[e][t]).toLowerCase(),m=b<g?m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>, ":m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>",b++);a[e]=m}else if("see_also"==e){var y,L="",C=1;y=a[e].length;for(let t=0;t<y;t++)if(a[e][t]){a[e][t]=String(a[e][t]);var _=a[e][t].slice(0,3),v=a[e][t].slice(3).replace(/^0+/,"");L=C<y?"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>, ":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>, ":"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>",C++}a[e]=L}else if("errata_url"==e){var R="";R=a[e]?R+"<a href='"+a[e]+"'>Errata exist</a> | <a href='"+d+"/"+l+"'>Datatracker</a>| <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>":"<a href='"+d+"/"+l+"'>Datatracker</a> | <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>",a[e]=R}""!=a[e]?"Errata"==u[e]?h+=`<dt>More info:</dt><dd>${a[e]}</dd>`:h+=`<dt>${u[e]}:</dt><dd>${a[e]}</dd>`:"Errata"==u[e]&&(h+=`<dt>More info:</dt><dd>${a[e]}</dd>`)}),h+="</dl>",e.innerHTML=h}catch(e){console.log(e)}else console.log("Could not locate metadata <div> element");function r(e){return e.charAt(0).toUpperCase()+e.slice(1)}}window.removeEventListener("load",addMetadata),window.addEventListener("load",addMetadata);</script>
 </head>
 <body class="xml2rfc">
-<script src="metadata.min.js"></script>
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SDF (Semantic Definition Format)</td>
-<td class="right">March 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Koster, et al.</td>
-<td class="center">Expires 17 September 2025</td>
+<td class="center">Expires 14 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1237,15 +1243,15 @@ li > p:last-of-type:only-child {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">ASDF</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-asdf-sdf-22</dd>
+<dd class="internet-draft">draft-ietf-asdf-sdf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-16" class="published">16 March 2025</time>
+<time datetime="2025-10-11" class="published">11 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-17">17 September 2025</time></dd>
+<dd class="expires"><time datetime="2026-04-14">14 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1314,7 +1320,7 @@ and other serializations as needed.<a href="#section-abstract-1" class="pilcrow"
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2067,7 +2073,7 @@ full information).<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <span id="name-main-classes-used-in-sdf-mo"></span><div id="fig-class-2">
 <figure id="figure-2">
           <div id="section-2.2-2.1">
-            <div class="alignLeft art-svg artwork" id="section-2.2-2.1.1">
+            <div class="alignCenter art-svg artwork" id="section-2.2-2.1.1">
 <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" height="437px" preserveAspectRatio="none" version="1.1" viewBox="0 0 542 437" width="542px">
                 <defs></defs>
                 <g>
@@ -4498,11 +4504,7 @@ including:<a href="#section-7.5.2-4" class="pilcrow">¶</a></p>
               <p id="section-7.5.2-5.2.1">Transparency, "readily available", "in sufficient detail" (Section <a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">4.6</a> of RFC 8126 <span>[<a href="#BCP26" class="cite xref">BCP26</a>]</span>).<a href="#section-7.5.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.5.2-6">The Expert will take into account that other organizations operate in
-different ways than the IETF, and that as a result some of these
-overall objectives will be achieved in a different way and to a
-different level of comfort.<a href="#section-7.5.2-6" class="pilcrow">¶</a></p>
-<p id="section-7.5.2-7">The "Quality Name Prefixes" registry starts out empty.<a href="#section-7.5.2-7" class="pilcrow">¶</a></p>
+<p id="section-7.5.2-6">The "Quality Name Prefixes" registry starts out empty.<a href="#section-7.5.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sdftype-values">
@@ -4838,7 +4840,7 @@ documents such as <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xre
 <dd class="break"></dd>
 <dt id="I-D.bormann-asdf-sdf-mapping">[I-D.bormann-asdf-sdf-mapping]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-05</span>, <time datetime="2024-12-06" class="refDate">6 December 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-05">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-07</span>, <time datetime="2025-07-20" class="refDate">20 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-07">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.bormann-asdf-sdftype-link">[I-D.bormann-asdf-sdftype-link]</dt>
         <dd>
@@ -4846,11 +4848,11 @@ documents such as <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xre
 <dd class="break"></dd>
 <dt id="I-D.bormann-t2trg-deref-id">[I-D.bormann-t2trg-deref-id]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">C. Amsüss</span>, <span class="refTitle">"The "dereferenceable identifier" pattern"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-t2trg-deref-id-05</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-05">https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">C. Amsüss</span>, <span class="refTitle">"The "dereferenceable identifier" pattern"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-t2trg-deref-id-06</span>, <time datetime="2025-08-30" class="refDate">30 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-06">https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-deref-id-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.irtf-t2trg-rest-iot">[I-D.irtf-t2trg-rest-iot]</dt>
         <dd>
-<span class="refAuthor">Keränen, A.</span>, <span class="refAuthor">Kovatsch, M.</span>, and <span class="refAuthor">K. Hartke</span>, <span class="refTitle">"Guidance on RESTful Design for Internet of Things Systems"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-t2trg-rest-iot-15</span>, <time datetime="2024-10-21" class="refDate">21 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-t2trg-rest-iot-15">https://datatracker.ietf.org/doc/html/draft-irtf-t2trg-rest-iot-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Keränen, A.</span>, <span class="refAuthor">Kovatsch, M.</span>, and <span class="refAuthor">K. Hartke</span>, <span class="refTitle">"Guidance on RESTful Design for Internet of Things Systems"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-t2trg-rest-iot-16</span>, <time datetime="2025-04-23" class="refDate">23 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-t2trg-rest-iot-16">https://datatracker.ietf.org/doc/html/draft-irtf-t2trg-rest-iot-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="JSO4">[JSO4]</dt>
         <dd>
@@ -4949,6 +4951,7 @@ sdf-syntax = {
  ? sdfObject: named&lt;objectqualities&gt;
  ; Includes Properties, Actions, and Events as well as sdfData
  paedataqualities
+ * $$SDF-EXTENSION-TOP
  EXTENSION-POINT&lt;"top-ext"&gt;
 }
 
@@ -4963,6 +4966,7 @@ sdfinfo = {
                * (any .feature "feature-name") ; EXTENSION-POINT
              ]
  optional-comment
+ * $$SDF-EXTENSION-INFO
  EXTENSION-POINT&lt;"info-ext"&gt;
 }
 
@@ -5021,6 +5025,7 @@ thingqualities = {
  ? sdfThing: named&lt;thingqualities&gt;
  paedataqualities
  arraydefinitionqualities
+ * $$SDF-EXTENSION-THING
  EXTENSION-POINT&lt;"thing-ext"&gt;
 }
 
@@ -5029,6 +5034,7 @@ objectqualities = {
  commonqualities
  paedataqualities
  arraydefinitionqualities
+ * $$SDF-EXTENSION-OBJECT
  EXTENSION-POINT&lt;"object-ext"&gt;
 }
 
@@ -5040,6 +5046,7 @@ actionqualities = {
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ; zero or more named data type definitions that might be used above
  ? sdfData: named&lt;dataqualities&gt;
+ * $$SDF-EXTENSION-ACTION
  EXTENSION-POINT&lt;"action-ext"&gt;
 }
 
@@ -5048,6 +5055,7 @@ eventqualities = {
  ? sdfOutputData: parameter-list  ; sdfRequired applies here
  ; zero or more named data type definitions that might be used above
  ? sdfData: named&lt;dataqualities&gt;
+ * $$SDF-EXTENSION-EVENT
  EXTENSION-POINT&lt;"event-ext"&gt;
 }
 
@@ -5059,8 +5067,10 @@ dataqualities = {
  ? "unit" =&gt; text
  ? nullable: bool
  ? "sdfType" =&gt; "byte-string" / "unix-time"
+            / $SDF-EXTENSION-SDFTYPE .within sdftype-name
             / (sdftype-name .feature "sdftype-ext") ; EXTENSION-POINT
  ? contentFormat: text
+ * $$SDF-EXTENSION-DATA
  EXTENSION-POINT&lt;"data-ext"&gt;
 }
 
@@ -5068,12 +5078,14 @@ propertyqualities = {
  ? observable: bool
  ? readable: bool
  ? writable: bool
+ * $$SDF-EXTENSION-PROPERTY
  ~dataqualities
 }
 
 allowed-types = number / text / bool / null
               / [* number] / [* text] / [* bool]
               / {* text =&gt; any}
+              / $SDF-EXTENSION-ALLOWED
               / (any .feature "allowed-ext")        ; EXTENSION-POINT
 
 compound-type = (
@@ -5090,6 +5102,7 @@ optional-choice = (
 jsonschema = (
  ? (("type" =&gt; "number" / "string" / "boolean" / "integer" / "array")
     // compound-type
+    // $$SDF-EXTENSION-TYPE
     // (type: text .feature "type-ext")             ; EXTENSION-POINT
    )
  ; if present, all other qualities apply to all choices:
@@ -5109,6 +5122,7 @@ jsonschema = (
  ? pattern: text                ; regexp
  ? format: "date-time" / "date" / "time"
            / "uri" / "uri-reference" / "uuid"
+           / $SDF-EXTENSION-FORMAT .within text
            / (text .feature "format-ext")           ; EXTENSION-POINT
  ; array constraints
  ? minItems: uint
@@ -5126,6 +5140,7 @@ jso-items = {
      ; no further nesting: no "array"
      ? ((type: "number" / "string" / "boolean" / "integer")
         // compound-type
+        // $$SDF-EXTENSION-ITEMTYPE
         // (type: text .feature "itemtype-ext")     ; EXTENSION-POINT
        )
      ; if present, all other qualities apply to all choices
@@ -5136,6 +5151,7 @@ jso-items = {
      ? format: text
      ? minLength: uint
      ? maxLength: uint
+     * $$SDF-EXTENSION-ITEMS
      EXTENSION-POINT&lt;"items-ext"&gt;
    }
 
@@ -5179,8 +5195,8 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 <div class="breakable lang-jso.json sourcecode" id="appendix-B-3">
 <pre>
  {
--  "title": "sdf-validation.cddl -- Generated: 2024-02-29T07:42:35Z",
-+  "title": "sdf-framework.cddl -- Generated: 2024-02-29T07:42:52Z",
+-  "title": "sdf-validation.cddl -- Generated: 2025-10-11T16:56:37Z",
++  "title": "sdf-framework.cddl -- Generated: 2025-10-11T16:56:48Z",
    "$schema": "http://json-schema.org/draft-07/schema#",
    "$ref": "#/definitions/sdf-syntax",
    "definitions": {
@@ -5225,8 +5241,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          }
        },
 +      "patternProperties": {
-+        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+        }
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +      },
        "additionalProperties": false
      },
@@ -5261,8 +5276,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          }
        },
 +      "patternProperties": {
-+        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+        }
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +      },
        "additionalProperties": false
      },
@@ -5319,8 +5333,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          }
        },
 +      "patternProperties": {
-+        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+        }
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +      },
        "additionalProperties": false
      },
@@ -5396,8 +5409,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          }
        },
 +      "patternProperties": {
-+        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+        }
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +      },
        "additionalProperties": false
      },
@@ -5406,8 +5418,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
@@ -5503,644 +5514,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-+          "properties": {
-+            "type": {
-+              "type": "string",
-+              "const": "object"
-+            },
-+            "required": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
-+            "properties": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/jso-items"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": false
-+        },
-+        {
-+          "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-+          "properties": {
-+            "type": {
-+              "type": "string"
-+            },
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/jso-items"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": false
-+        },
-+        {
-+          "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-+          "properties": {
-+            "type": {
-+              "$ref": "#/definitions/type-"
-+            },
-+            "enum": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/jso-items"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": false
-+        },
-+        {
-+          "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-+          "properties": {
-+            "type": {
-+              "type": "string",
-+              "const": "object"
-+            },
-+            "required": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
-+            "properties": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+            },
-+            "enum": {
-+              "type": "array",
-+              "items": {
-+                "type": "string"
-+              },
-+              "minItems": 1
-+            },
-+            "observable": {
-+              "type": "boolean"
-+            },
-+            "readable": {
-+              "type": "boolean"
-+            },
-+            "writable": {
-+              "type": "boolean"
-+            },
-+            "description": {
-+              "type": "string"
-+            },
-+            "label": {
-+              "type": "string"
-+            },
-+            "$comment": {
-+              "type": "string"
-+            },
-+            "sdfRef": {
-+              "$ref": "#/definitions/sdf-pointer"
-+            },
-+            "sdfRequired": {
-+              "$ref": "#/definitions/pointer-list"
-+            },
-+            "const": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "default": {
-+              "$ref": "#/definitions/allowed-types"
-+            },
-+            "minimum": {
-+              "type": "number"
-+            },
-+            "maximum": {
-+              "type": "number"
-+            },
-+            "exclusiveMinimum": {
-+              "type": "number"
-+            },
-+            "exclusiveMaximum": {
-+              "type": "number"
-+            },
-+            "multipleOf": {
-+              "type": "number"
-+            },
-+            "minLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxLength": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "pattern": {
-+              "type": "string"
-+            },
-+            "format": {
-+              "$ref": "#/definitions/format-"
-+            },
-+            "minItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "maxItems": {
-+              "$ref": "#/definitions/uint"
-+            },
-+            "uniqueItems": {
-+              "type": "boolean"
-+            },
-+            "items": {
-+              "$ref": "#/definitions/jso-items"
-+            },
-+            "unit": {
-+              "type": "string"
-+            },
-+            "nullable": {
-+              "type": "boolean"
-+            },
-+            "sdfType": {
-+              "$ref": "#/definitions/sdfType-"
-+            },
-+            "contentFormat": {
-+              "type": "string"
-+            }
-+          },
-+          "additionalProperties": false
-+        },
-+        {
-+          "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-           "properties": {
-             "type": {
--              "type": "string",
--              "const": "object"
-+              "type": "string"
-             },
--            "required": {
-+            "enum": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
--            "properties": {
--              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
--            },
--            "sdfChoice": {
--              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
--            },
-             "observable": {
-               "type": "boolean"
-             },
-             "readable": {
-               "type": "boolean"
-             },
-             "writable": {
-               "type": "boolean"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/jso-items"
-             },
-             "unit": {
-               "type": "string"
-             },
-             "nullable": {
-               "type": "boolean"
-             },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             }
-           },
-           "additionalProperties": false
--        },
-+        }
-+      ]
-+    },
-+    "dataqualities": {
-+      "anyOf": [
-         {
-           "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
-+          },
-           "properties": {
-             "type": {
-               "$ref": "#/definitions/type-"
-             },
--            "enum": {
--              "type": "array",
--              "items": {
--                "type": "string"
--              },
--              "minItems": 1
--            },
--            "observable": {
--              "type": "boolean"
--            },
--            "readable": {
--              "type": "boolean"
--            },
--            "writable": {
--              "type": "boolean"
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/jso-items"
-             },
-             "unit": {
-               "type": "string"
-             },
-             "nullable": {
-               "type": "boolean"
-             },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             }
-           },
-           "additionalProperties": false
-         },
-         {
-           "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
@@ -6157,23 +5531,17 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              "properties": {
                "$ref": "#/definitions/sdfData-sdfChoice-properties-"
              },
--            "enum": {
--              "type": "array",
--              "items": {
--                "type": "string"
--              },
--              "minItems": 1
--            },
--            "observable": {
--              "type": "boolean"
--            },
--            "readable": {
--              "type": "boolean"
--            },
--            "writable": {
--              "type": "boolean"
-+            "sdfChoice": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             "sdfChoice": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "observable": {
+               "type": "boolean"
+             },
+             "readable": {
+               "type": "boolean"
+             },
+             "writable": {
+               "type": "boolean"
              },
              "description": {
                "type": "string"
@@ -6249,22 +5617,426 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
              }
            },
            "additionalProperties": false
--        }
--      ]
--    },
--    "dataqualities": {
--      "anyOf": [
-+        },
+         },
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
++          },
++          "properties": {
++            "type": {
++              "type": "string"
++            },
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
 +            }
++          },
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
--              "$ref": "#/definitions/type-"
+               "$ref": "#/definitions/type-"
+             },
+             "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "observable": {
+               "type": "boolean"
+             },
+             "readable": {
+               "type": "boolean"
+             },
+             "writable": {
+               "type": "boolean"
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
++          },
+           "properties": {
+             "type": {
+               "type": "string",
+               "const": "object"
+             },
+             "required": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "properties": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "observable": {
+               "type": "boolean"
+             },
+             "readable": {
+               "type": "boolean"
+             },
+             "writable": {
+               "type": "boolean"
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
++          },
++          "properties": {
++            "type": {
 +              "type": "string"
++            },
++            "enum": {
++              "type": "array",
++              "items": {
++                "type": "string"
++              },
++              "minItems": 1
++            },
++            "observable": {
++              "type": "boolean"
++            },
++            "readable": {
++              "type": "boolean"
++            },
++            "writable": {
++              "type": "boolean"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
++            }
++          },
++          "additionalProperties": false
+         }
+       ]
+     },
+     "dataqualities": {
+       "anyOf": [
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
++          },
+           "properties": {
+             "type": {
+               "$ref": "#/definitions/type-"
              },
              "sdfChoice": {
                "$ref": "#/definitions/sdfData-sdfChoice-properties-"
@@ -6347,29 +6119,26 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
--              "type": "string",
--              "const": "object"
-+              "$ref": "#/definitions/type-"
+               "type": "string",
+               "const": "object"
              },
--            "required": {
-+            "enum": {
+             "required": {
                "type": "array",
                "items": {
                  "type": "string"
                },
                "minItems": 1
              },
--            "properties": {
--              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
--            },
--            "sdfChoice": {
--              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
--            },
+             "properties": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "sdfChoice": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
              "description": {
                "type": "string"
              },
@@ -6448,210 +6217,373 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
++          },
++          "properties": {
++            "type": {
++              "type": "string"
++            },
++            "sdfChoice": {
++              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
++            },
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
 +            }
++          },
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
--              "$ref": "#/definitions/type-"
-+              "type": "string",
-+              "const": "object"
+               "$ref": "#/definitions/type-"
+             },
+             "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
+         },
+         {
+           "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
++          },
+           "properties": {
+             "type": {
+               "type": "string",
+               "const": "object"
+             },
+             "required": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "properties": {
+               "$ref": "#/definitions/sdfData-sdfChoice-properties-"
+             },
+             "enum": {
+               "type": "array",
+               "items": {
+                 "type": "string"
+               },
+               "minItems": 1
+             },
+             "description": {
+               "type": "string"
+             },
+             "label": {
+               "type": "string"
+             },
+             "$comment": {
+               "type": "string"
+             },
+             "sdfRef": {
+               "$ref": "#/definitions/sdf-pointer"
+             },
+             "sdfRequired": {
+               "$ref": "#/definitions/pointer-list"
+             },
+             "const": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "default": {
+               "$ref": "#/definitions/allowed-types"
+             },
+             "minimum": {
+               "type": "number"
+             },
+             "maximum": {
+               "type": "number"
+             },
+             "exclusiveMinimum": {
+               "type": "number"
+             },
+             "exclusiveMaximum": {
+               "type": "number"
+             },
+             "multipleOf": {
+               "type": "number"
+             },
+             "minLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxLength": {
+               "$ref": "#/definitions/uint"
+             },
+             "pattern": {
+               "type": "string"
+             },
+             "format": {
+               "$ref": "#/definitions/format-"
+             },
+             "minItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "maxItems": {
+               "$ref": "#/definitions/uint"
+             },
+             "uniqueItems": {
+               "type": "boolean"
+             },
+             "items": {
+               "$ref": "#/definitions/jso-items"
+             },
+             "unit": {
+               "type": "string"
+             },
+             "nullable": {
+               "type": "boolean"
+             },
+             "sdfType": {
+               "$ref": "#/definitions/sdfType-"
+             },
+             "contentFormat": {
+               "type": "string"
+             }
+           },
+           "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "patternProperties": {
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
++          },
++          "properties": {
++            "type": {
++              "type": "string"
 +            },
-+            "required": {
++            "enum": {
 +              "type": "array",
 +              "items": {
 +                "type": "string"
 +              },
 +              "minItems": 1
 +            },
-+            "properties": {
-+              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-             },
-             "enum": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/jso-items"
-             },
-             "unit": {
-               "type": "string"
-             },
-             "nullable": {
-               "type": "boolean"
-             },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             }
-           },
-           "additionalProperties": false
-         },
-         {
-           "type": "object",
-+          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
++            "description": {
++              "type": "string"
++            },
++            "label": {
++              "type": "string"
++            },
++            "$comment": {
++              "type": "string"
++            },
++            "sdfRef": {
++              "$ref": "#/definitions/sdf-pointer"
++            },
++            "sdfRequired": {
++              "$ref": "#/definitions/pointer-list"
++            },
++            "const": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "default": {
++              "$ref": "#/definitions/allowed-types"
++            },
++            "minimum": {
++              "type": "number"
++            },
++            "maximum": {
++              "type": "number"
++            },
++            "exclusiveMinimum": {
++              "type": "number"
++            },
++            "exclusiveMaximum": {
++              "type": "number"
++            },
++            "multipleOf": {
++              "type": "number"
++            },
++            "minLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxLength": {
++              "$ref": "#/definitions/uint"
++            },
++            "pattern": {
++              "type": "string"
++            },
++            "format": {
++              "$ref": "#/definitions/format-"
++            },
++            "minItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "maxItems": {
++              "$ref": "#/definitions/uint"
++            },
++            "uniqueItems": {
++              "type": "boolean"
++            },
++            "items": {
++              "$ref": "#/definitions/jso-items"
++            },
++            "unit": {
++              "type": "string"
++            },
++            "nullable": {
++              "type": "boolean"
++            },
++            "sdfType": {
++              "$ref": "#/definitions/sdfType-"
++            },
++            "contentFormat": {
++              "type": "string"
 +            }
 +          },
-           "properties": {
-             "type": {
--              "type": "string",
--              "const": "object"
--            },
--            "required": {
--              "type": "array",
--              "items": {
--                "type": "string"
--              },
--              "minItems": 1
--            },
--            "properties": {
--              "$ref": "#/definitions/sdfData-sdfChoice-properties-"
-+              "type": "string"
-             },
-             "enum": {
-               "type": "array",
-               "items": {
-                 "type": "string"
-               },
-               "minItems": 1
-             },
-             "description": {
-               "type": "string"
-             },
-             "label": {
-               "type": "string"
-             },
-             "$comment": {
-               "type": "string"
-             },
-             "sdfRef": {
-               "$ref": "#/definitions/sdf-pointer"
-             },
-             "sdfRequired": {
-               "$ref": "#/definitions/pointer-list"
-             },
-             "const": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "default": {
-               "$ref": "#/definitions/allowed-types"
-             },
-             "minimum": {
-               "type": "number"
-             },
-             "maximum": {
-               "type": "number"
-             },
-             "exclusiveMinimum": {
-               "type": "number"
-             },
-             "exclusiveMaximum": {
-               "type": "number"
-             },
-             "multipleOf": {
-               "type": "number"
-             },
-             "minLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxLength": {
-               "$ref": "#/definitions/uint"
-             },
-             "pattern": {
-               "type": "string"
-             },
-             "format": {
-               "$ref": "#/definitions/format-"
-             },
-             "minItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "maxItems": {
-               "$ref": "#/definitions/uint"
-             },
-             "uniqueItems": {
-               "type": "boolean"
-             },
-             "items": {
-               "$ref": "#/definitions/jso-items"
-             },
-             "unit": {
-               "type": "string"
-             },
-             "nullable": {
-               "type": "boolean"
-             },
-             "sdfType": {
-               "$ref": "#/definitions/sdfType-"
-             },
-             "contentFormat": {
-               "type": "string"
-             }
-           },
-           "additionalProperties": false
++          "additionalProperties": false
          }
        ]
      },
@@ -6689,11 +6621,10 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          },
          {
            "type": "object",
-           "additionalProperties": {
-           }
+           "additionalProperties": {}
+-        }
 +        },
-+        {
-         }
++        {}
        ]
      },
      "uint": {
@@ -6705,8 +6636,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
@@ -6751,8 +6681,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
@@ -6802,8 +6731,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
 +          "properties": {
 +            "type": {
@@ -6842,8 +6770,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +        {
 +          "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
@@ -6892,8 +6819,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          {
            "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
            "properties": {
              "type": {
@@ -6947,8 +6873,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
 +        {
 +          "type": "object",
 +          "patternProperties": {
-+            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+            }
++            "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +          },
 +          "properties": {
 +            "type": {
@@ -7023,8 +6948,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          }
        },
 +      "patternProperties": {
-+        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+        }
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +      },
        "additionalProperties": false
      },
@@ -7057,8 +6981,7 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          }
        },
 +      "patternProperties": {
-+        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {
-+        }
++        "^(?:[a-z][a-z0-9]*:)?[a-z$][A-Za-z$0-9]*$": {}
 +      },
        "additionalProperties": false
      },
@@ -7132,28 +7055,26 @@ Lines leading with a <code>-</code> are part of the validation syntax, and lines
          "array"
        ]
      },
--    "sdfAction-": {
-+    "sdfEvent-": {
-       "type": "object",
-       "additionalProperties": {
--        "$ref": "#/definitions/actionqualities"
-+        "$ref": "#/definitions/eventqualities"
-       }
-     },
--    "sdfProperty-": {
-+    "sdfAction-": {
-       "type": "object",
-       "additionalProperties": {
--        "$ref": "#/definitions/propertyqualities"
-+        "$ref": "#/definitions/actionqualities"
-       }
-     },
 -    "sdfEvent-": {
 +    "sdfProperty-": {
        "type": "object",
        "additionalProperties": {
 -        "$ref": "#/definitions/eventqualities"
 +        "$ref": "#/definitions/propertyqualities"
+       }
+     },
+     "sdfAction-": {
+       "type": "object",
+       "additionalProperties": {
+         "$ref": "#/definitions/actionqualities"
+       }
+     },
+-    "sdfProperty-": {
++    "sdfEvent-": {
+       "type": "object",
+       "additionalProperties": {
+-        "$ref": "#/definitions/propertyqualities"
++        "$ref": "#/definitions/eventqualities"
        }
 -    },
 -    "sdfType-": {
@@ -7191,7 +7112,7 @@ discussed in the following subsections (note that the JSO type
 <p id="appendix-C-4">The additional quality "<code>const</code>" restricts the data to one specific
 value (given as the value of the <code>const</code> quality).<a href="#appendix-C-4" class="pilcrow">¶</a></p>
 <p id="appendix-C-5">Similarly, the additional quality "<code>default</code>" provides data that can
-be used in the absence of the data (given as the value of the <code>const</code>
+be used in the absence of the data (given as the value of the <code>default</code>
 quality); this is mainly documentary and not very well-defined for SDF
 as no process is defined that would add default values to an instance
 of some interaction data.<a href="#appendix-C-5" class="pilcrow">¶</a></p>
@@ -7438,7 +7359,7 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
           "description": "A refrigerator compartment",
           "sdfProperty": {
             "temperature": {
-              "sdfRef": "#/sdfProproperty/temperature",
+              "sdfRef": "#/sdfProperty/temperature",
               "maximum": 8
             }
           }
@@ -7447,7 +7368,7 @@ using the <code>sdfThing</code> quality.<a href="#appendix-D-1" class="pilcrow">
           "label": "A freezer compartment",
           "sdfProperty": {
             "temperature": {
-              "sdfRef": "#/sdfProproperty/temperature",
+              "sdfRef": "#/sdfProperty/temperature",
               "maximum": -6
             }
           }
