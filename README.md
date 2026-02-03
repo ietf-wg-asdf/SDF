@@ -1,5 +1,7 @@
 # sdf
-Internet-Draft for the One Data Model Simple Definition Format (SDF)
+This repository was created to support developing the Internet-Draft for the [IETF Base SDF] RFC based on the original One Data Model Simple Definition Format (SDF), which see.
+
+[IETF Base SDF]: https://www.rfc-editor.org/rfc/rfc9880
 
 [View the generated HTML of the current editors' version][sdf.html]
 
